@@ -1,0 +1,691 @@
+\documentclass[12pt]{article}
+
+% \usepackage{./arxiv}
+
+\title{The Inverse Galois Problem over $\bbC(t)$}
+\author{Swayam Chube}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrN}{\mathscr N}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrR}{\mathscr R}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\scrO}{\mathscr{O}}
+\newcommand{\scrM}{\mathscr{M}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\scshape}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+    This is an attempt to present a self-contained proof of the Inverse Galois Problem over $\bbC(t)$. The only result used without proof is Riemann's Existence Theorem (\thref{thm:riemann-existence}).
+\end{abstract}
+
+\section{Riemann Surfaces and Holomorphic Maps}
+
+\begin{definition}
+    Let $X$ be a two-dimensional manifold. A \define{complex chart} on $X$ is a homeomorphism $\varphi: U\to V$ of an open subset $U\subseteq X$ onto an open subset $V\subseteq\bbC$.
+
+    Two complex charts $\varphi_i: U_i\to V_i$, $i = 1,2$ are said to be \define{holomorphically compatible} if the map 
+    \begin{equation*}
+        \varphi_2\circ\varphi_1^{-1}: \varphi_1(U_1\cap U_2)\to\varphi_2(U_1\cap U_2)
+    \end{equation*}
+    is biholomorphic.
+
+    A \define{complex atlas} on $X$ is a system $\frakA = \{\varphi_i: U_i\to V_i\mid i\in I\}$ of charts which are holomorhpically compatible and which cover $X$. Two complex atlases $\frakA$ and $\frakA'$ on $X$ are said to be \define{analytically equivalent} if every chart of $\frakA$ is holomorphically compatible with every chart of $\frakA'$.
+
+    A \define{complex structure} on a two-dimensional manifold $X$ is an equivalence class of analytically equivalent atlases on $X$.
+
+    A \define{Riemann surface} is a pair $(X,\Sigma)$ where $X$ is a connected two-dimensional manifold and $\Sigma$ is a complex structure on $X$.
+\end{definition}
+
+\begin{example}
+    Consider $\bbP^1 := \bbC\cup\{\infty\}$, the one-point compactification of $\bbC$. Let $U_1 = \bbC\subseteq\bbP^1$ and $U_2 = \bbC^\ast\cup\{\infty\}$. Consider the charts $\varphi_1: U_1\to\bbC$, the identity map, and $\varphi_2: U_2\to\bbC$ given by 
+    \begin{equation*}
+        \varphi(z) = 
+        \begin{cases}
+            \frac{1}{z} & z\in\bbC^\ast\\
+            0 & z = \infty.
+        \end{cases}
+    \end{equation*}
+    These are compatible charts since the transition function is $z\mapsto\frac{1}{z}$ on $\bbC^\ast$.
+\end{example}
+
+\begin{example}
+    If $X$ is a Riemann surface and $Y\subseteq X$ is a connected open set, then every chart of $X$ restricts to a chart on $Y$ (by restriction of the domain) and these are still holomorphically comptible. Thus, $Y$ inherits a natural Riemann surface structure from $X$. In particular, every open subset of $\bbC$ is a Riemann surface.
+\end{example}
+
+\begin{definition}
+    A map $f: X\to Y$ of Riemann surfaces is said to be \define{holomorphic} if for every pair of charts $\psi_1: U_1\to V_1$ on $X$ and $\psi_2: U_2\to V_2$ on $Y$ with $f(U_1)\subseteq U_2$, the mapping $\psi_2\circ f\circ\psi_1^{-1}: V_1\to V_2$ is holomorphic.
+
+    A holomorphic function on $X$ means a holomorphic function $f: X\to\bbC$. These form a ring denoted by $\scrO(X)$.
+\end{definition}
+
+\begin{theorem}[Riemann's Removable Singularities Theorem]
+    Let $X$ be a Riemann surface and $f\in\scrO(X\setminus\{a\})$. If $f$ is bounded in a neighborhood of $a$, then $f$ can be extended to a holomorphic function $\wt f\in\scrO(X)$.
+\end{theorem}
+\begin{proof}
+    Follows from the analogous statement in elementary complex analysis.
+\end{proof}
+
+\begin{theorem}[Identity Theorem]
+    Let $X$ and $Y$ be Riemann surfaces and $f_1, f_2: X\to Y$ be two holomorphic mappings which coincide on a set $A\subseteq X$ having a limit point $a\in X$. Then $f_1 = f_2$.
+\end{theorem}
+\begin{proof}
+    Let 
+    \begin{equation*}
+        B = \{x\in X\colon\text{there is a neighborhood } W\text{ of } x\text{ such that } f_1|_W = f_2|_W\}.
+    \end{equation*}
+    By definition, $B$ is open. By continuity, note that $a\in A$. Considering charts centered at $a$ and $f_1(a) = f_2(a)$, and using the identity theorem from elementary complex analysis, it is not hard to see that $a\in B$, that is, $B\ne\emptyset$. Finally, suppose $b_n\to b\in X$. Then, by continuity, $y = f_1(b) = f_2(b)$. Consider charts centered at $b$ and $y$. Note that $b_n$ lies in the chart centred at $b$ for sufficiently large $n$ and hence, it would follow that $b\in B$. Thus, $B$ is a clopen nonempty subset of $X$. Owing to the connectedness of $X$, $B = X$. This completes the proof.
+\end{proof}
+
+\begin{definition}
+    A \define{meromorphic function} on a Riemann surface $X$ is a holomorphic function $f: X'\to\bbC$, where $X'\subseteq X$ is an open subset, such that the following hold:
+    \begin{enumerate}[label=(\alph*)]
+        \item $X\setminus X'$ is discrete. 
+        \item For every $p\in X\setminus X'$, 
+        \begin{equation*}
+            \lim_{x\to p}|f(x)| = \infty.
+        \end{equation*}
+    \end{enumerate}
+    The points of $X\setminus X'$ are called the \define{poles} of $f$. The set of all meromorphic functions on $X$ is denoted by $\scrM(X)$.
+\end{definition}
+
+\begin{proposition}
+    There is a canonical correspondence between $\scrM(X)$ and the set of holomorphic functions $X\to\bbP^1$.
+\end{proposition}
+\begin{proof}
+    Straightforward.
+\end{proof}
+
+\begin{corollary}
+    $\scrM(X)$ is a field.
+\end{corollary}
+
+\subsection{Local Normal Form}
+
+\begin{theorem}\thlabel{thm:local-normal-form}
+    Let $X$ and $Y$ be Riemann surfaces and $f: X\to Y$ a non-constant holomorphic map. Suppose $a\in X$ and $b = f(a)\in Y$. Then, there exists an integer $k\ge 1$ and charts $\varphi: U\to V$ on $X$ and $\psi: U'\to V'$ on $Y$ with the following properties: 
+    \begin{enumerate}[label=(\roman*)]
+        \item $a\in U$, $\varphi(a) = 0$, $b\in U'$ and $\psi'(b) = 0$.
+        \item $f(U)\subseteq U'$.
+        \item The diagram
+        \begin{equation*}
+            \xymatrix {
+                U\ar[r]\ar[d]_{\varphi} & U'\ar[d]^\psi\\
+                V\ar[r]_-{z\mapsto z^k} & V'
+            }
+        \end{equation*}
+        commutes. The number $k$ is called the \define{multiplicity} of $f$ at $a$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Begin with two charts $\varphi_1: U\to V_1$ and $\psi_1: U'\to V_1'$ satisfying (i) and (ii). The induced map $V_1\to V_1'$ takes $0$ to $0$ and hence, is of the form $z^kg(z)$ for some $k\ge 1$ and holomorphic $g: V_1\to V_1'$ with $g(0)\ne 0$. Shrinking all the open sets if necessary, we may suppose that $g(z) = h(z)^k$ for some holomorphic function $h: V_1\to\bbC$. Note that $zh(z)$ must be injective and non-constant on $V_1$ whence maps $V_1$ biholomorphically onto some $V\subseteq\bbC$. We obtain the following commutative diagram 
+    \begin{equation*}
+    \xymatrix{
+        U\ar[r]^f\ar[d]_{\varphi_1} & U'\ar[d]^{\psi_1}\\
+        V_1\ar[r]^{(zh(z))^k}\ar[d]_{zh(z)} & V_1'\\
+        V\ar[ru]_{z\mapsto z^k}
+    }
+    \end{equation*}
+    thereby completing the proof.
+\end{proof}
+
+\begin{theorem}[Open Mapping Theorem]\thlabel{thm:open-mapping}
+    A non-constant holomorphic map between Riemann surfaces is open.
+\end{theorem}
+\begin{proof}
+    Since being open is a local property, this follows immediately from \thref{thm:local-normal-form}.
+\end{proof}
+
+\begin{corollary}
+    Let $f: X\to Y$ be an injective holomorphic map of Riemann surfaces. Then $f$ is a biholomorphic mapping of $X$ onto $Z = f(X)$.
+\end{corollary}
+\begin{proof}
+    Due to \thref{thm:open-mapping}, $Z\subseteq Y$ is open. Since $f$ is injective, it follows from \thref{thm:local-normal-form} that $k = 1$ at each point of $X$. In particular, $f$ is a local homeomorphism onto $Z$. The conclusion follows.
+\end{proof}
+
+\begin{theorem}
+    If $X$ is a compact Riemann surface and $f: X\to Y$ a non-constant holomorphic map of Riemann surfaces, then $f$ is surjective.
+\end{theorem}
+\begin{proof}
+    The image of $f$ is both open and closed in $Y$.
+\end{proof}
+\begin{corollary}
+    If $X$ is a compact Riemann surface, then $\scrO(X)$ consists of only constant functions.
+\end{corollary}
+
+\subsection{Branched and Unbranched Coverings}
+
+\begin{definition}
+    Let $p: Y\to X$ be a non-constant holomorphic map of Riemann surfaces. A point $y\in Y$ is said to be a \define{branch point} or \define{ramification point} of $p$, if there is no neighborhood $V$ of $y$ such that $p|_V$ is injective. The map $p$ is called an \define{unbranched holomorphic map} if it has no branch points.
+\end{definition}
+
+\begin{theorem}
+    A non-constant holomorphic map $p: Y\to X$ is unbranched if and only if $p$ is a local homeomorphism, i.e., every point $y\in Y$ has an open neighborhood $V$ which is mapped homeomorphically by $p$ onto an open set $U$ in $X$.
+\end{theorem}
+\begin{proof}
+    Immediate from the definition since an injective map of Riemann surfaces is a biholomorphism onto its image.
+\end{proof}
+
+\begin{theorem}
+    Let $X$ be a Riemann surface, $Y$ a connected Hausdorff topological space, and $p: Y\to X$ a local homeomorphism. Then there is a unique complex structure on $Y$ such that $p$ is holomorphic.
+\end{theorem}
+\begin{proof}
+    Suppose $\varphi_1: U_1\to V_1\subseteq\bbC$ is a chart of the complex structure of $X$ such that there is an open subset $U\subseteq Y$ with $p|_U: U\to U_1$ a homeomorphism. Then, $\varphi:= \varphi\circ p: U\to V$ is a complex chart on $Y$. Let $\frakA$ be the set of all complex charts on $Y$ obtained in this way. It is easy to see that the charts of $\frakA$ cover $Y$ and are holomorphically compatible. Thus, we have defined a complex structure on $Y$ and it follows that $p$ is a holomorphic map when $Y$ is equipped with this structure.  
+
+    Suppose $(Y,\Sigma)$ and $(Y,\Sigma')$ are two complex charts such that $p$ is holomorphic, then $\id: (Y,\Sigma)\to (Y,\Sigma')$ is a bijective holomorphic map, whence a biholomorphism. This shows uniqueness.
+\end{proof}
+
+\begin{theorem}
+    Let $X,Y,Z$ be Riemann surfaces, $p: Y\to X$ an unbranched holomorphic map and $f: Z\to X$ any holomorphic map. Then, every continuous lift $g: Z\to Y$ of $f$ is holomorphic.
+\end{theorem}
+\begin{proof}
+    Let $z\in Z$, $x = f(z)$, and $y = g(z)$. There is a neighborhood $V$ of $y$ in $Y$ such that $p|_V$ is injective. Let $U = p(V)\subseteq X$, which is open and biholomorphic to $V$ through $p$. If $W = g^{-1}(V)$, then $g|_W = p|_V^{-1}\circ f|_W$ whence $g$ is holomorphic.
+\end{proof}
+
+\begin{definition}
+    A continuous map $f: X\to Y$ of topological spaces is said to be \define{proper} if $f^{-1}(K)$ is compact in $X$ for every compact subset $K$ of $Y$. The map $f$ is said to be \define{discrete} if every fiber is discrete in $X$.
+\end{definition}
+
+\begin{lemma}
+    A proper map between locally compact Hausdorff spaces is closed.
+\end{lemma}
+\begin{proof}
+    Follows from the fact that a subset of an LCH space is closed if and only if its intersection with every compact subset is closed.
+\end{proof}
+\begin{corollary}
+    A proper holomorphic map between Riemann surfaces is surjective.
+\end{corollary}
+\begin{proof}
+    The image is both closed and open.
+\end{proof}
+
+\begin{lemma}\thlabel{lem:properties-of-proper-maps}
+    Let $X$ and $Y$ be locally compact Hausdorff. If $p: Y\to X$ is a proper, discrete map then:
+    \begin{enumerate}[label=(\alph*)]
+        \item for every $x\in X$, the set $p^{-1}(x)$ is finite. 
+        \item if $x\in X$ and $V$ is a neighborhood of $p^{-1}(x)$, then there is a neighborhood $U$ of $x$ with $p^{-1}(U)\subseteq V$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Compact discrete sets must be finite. 
+    \item Since $Y\setminus V$ is closed, due to the preceding lemma, $A = p(Y\setminus V)$ is closed in $X$ and $x\notin A$. Hence, $U = X\setminus A$ is an open neighborhood of $x$ such that $p^{-1}(U)\subseteq V$.        \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    Let $X$ and $Y$ be locally compact Hausdorff spaces and $p: Y\to X$ a proper local homeomorphism. Then $p$ is a covering map.
+\end{theorem}
+\begin{proof}
+    Choose any $x\in X$ and let $p^{-1}(x) = \{y_1,\dots, y_n\}$. Since $p$ is a local homeomorphism, we can inductively choose disjoint neighborhoods $W_i$ of $y_i$ and a neighborhood $V$ of $x$ such that the restriction $p|_{W_i}: W_i\to V$ is a homeomorphism. It follows that $p$ is a covering map.
+\end{proof}
+
+\begin{proposition}
+    The set of branch points of a non-constant holomorphic map between Riemann surfaces is a discrete closed set.
+\end{proposition}
+\begin{proof}
+    Let $f: X\to Y$ be a non-constant holomorphic map. Let $a\in X$ be a branch point and $b = f(a)$. Then due to \thref{thm:local-normal-form}, there are charts $\varphi: U\to V$ and $\varphi': U'\to V'$ centered at $a$ and $b$ respectively such that the induced map $V\to V'$ is $z\mapsto z^k$ for some positive integer $k\ge 2$ (since $a$ is a branch point). But for any $0\ne z\in V'$, the map $V\to V'$ is a local homeomorphism and hence, the set of branch points forms a discrete set.
+
+    To see that it is closed, let $a\in X$ not be a branch point. Then, there is a neighborhood $V$ of $a$ on which $f$ is injective and hence, none of the points in $V$ are branch points. This shows that the set of branch points is also closed.
+\end{proof}
+
+\begin{definition}
+    Let $f: X\to Y$ be a proper holomorphic map. As we have seen earlier, $f$ is surjective. Let $A\subseteq X$ be the set of branch points of $f$. Since $f$ is proper, the set $B = f(A)\subseteq Y$ is closed and discrete (use the Local Normal Form). One calls $B$ the set of \define{critical values} of $f$.
+\end{definition}
+
+With notation as above, let $Y' = Y\setminus B$ and $X' = f^{-1}(Y')\subseteq X\setminus A$. The restriction $f: X'\to Y'$ is a proper unbranched holomorphic covering map since it is a local homeomorphism (owing to the fact that all branch points have been removed). It has a well-defined finite number of sheets, say $n$. Thus, every value $c\in Y'$ is taken precisely $n$ times. We would like to extend this notion to critical values. 
+
+For $x\in X$, denote by $V(f, x)$, the multiplicity of $f$ at $x$ in the sense of \thref{thm:local-normal-form}. We say that $f$ takes the value $c\in Y$, counting multiplicities, $m$ times on $X$, if 
+\begin{equation*}
+    m = \sum_{x\in f^{-1}(c)}v(f, x).
+\end{equation*}
+
+\begin{theorem}
+    Let $f: X\to Y$ be a proper non-constant holomorphic map between Riemann surfaces. Then there exists a natural number $n$ such that $f$ atkes every value $c\in Y$, counting multiplicities, $n$ times.
+\end{theorem}
+\begin{proof}
+    Using the notation as in the preceding paragraph, let $n$ be the number of sheets of the unbranched covering $f: X'\to Y'$. Suppose $b\in B$ is a critical value, $p^{-1}(b) = \{x_1,\dots, x_r\}$ and $k_i = v(f, x_i)$. Due to \thref{thm:local-normal-form}, there are disjoint neighborhoods $U_j$ of $x_j$ and $V_j$ of $b$ such that for every $c\in V_j\setminus\{b\}$ the set $p^{-1}(c)\cap U_j$ consists of exactly $k_j$ points. Due to \thref{lem:properties-of-proper-maps}, we can find a neighborhood $V\subseteq V_1\cap\dots\cap V_r$ of $b$ such that $p^{-1}(V)\subseteq U_1\cup\dots\cup U_r$. Then for every point $c\in V\cap Y'$, we have that $p^{-1}(c)$ consists of $k_1 + \dots + k_r$ points. On the other hand, the cardinality of $p^{-1}(c)$ must be the number of sheets, $n$ and hence, $n = k_1 + \dots + k_r$, thereby completing the proof. 
+\end{proof}
+
+\begin{remark}
+    A proper non-constant holomorphic map between Riemann surfaces will be called an \define{$n$-sheeted holomorphic covering map}, where $n$ is the integer found in the above result. Note that holomorphic covering maps are allowed to have branch points. 
+\end{remark}
+
+Let $D$ denote the unit disk in $\bbC$ and $D^\ast = D\setminus\{0\}$.
+
+\begin{theorem}\thlabel{thm:covering-of-punctured-disk}
+    Let $f: X\to D^\ast$ be an unbranched holomorphic covering map. Then one of the following holds:
+    \begin{enumerate}[label=(\alph*)]
+        \item If the covering has an infinite number of sheets, then there exists a biholomorphic mapping $\varphi: X\to H$ of $X$ onto the left half plane such that
+        \begin{equation*}
+            \xymatrix{
+                X\ar[rr]^\varphi_{\sim}\ar[rd]_-f & & H\ar[ld]^-{\exp}\\
+                & D^\ast &
+            }
+        \end{equation*}
+        commutes.
+
+        \item If the covering is $k$-sheeted with $k < \infty$, then there exists a biholomorphic mapping $\varphi: X\to D^\ast$ such that 
+        \begin{equation*}
+            \xymatrix {
+                X\ar[rr]^\varphi_{\sim}\ar[rd]_-f & & D^\ast\ar[ld]^-{z\mapsto z^k}\\
+                & D^\ast & 
+            }
+        \end{equation*}
+        commutes.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Follows from the Galois theory of covers and the fact that $H$ is the universal cover of $D^\ast$ and 
+    \begin{equation*}
+        \operatorname{Deck}(H/D^\ast) = \{\tau_n\colon n\in\Z\},
+    \end{equation*}
+    where $\tau_n(z) = z + 2n\pi i$.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:covering-of-disk}
+    Let $f: X\to D$ be a proper non-constant holomorphic map which is unbranched over $D^\ast = D\setminus\{0\}$. Then there is a natural number $k\ge 1$ and a biholomorphic map $\varphi: X\to D$ such that 
+    \begin{equation*}
+        \xymatrix {
+            X\ar[rr]^\varphi_{\sim}\ar[rd]_-f & & D\ar[ld]^-{z\mapsto z^k}\\
+            & D & 
+        }
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    The preceding theorem furnishes a $k\ge 1$ making 
+    \begin{equation*}
+        \xymatrix {
+            X\ar[rr]^\varphi_{\sim}\ar[rd]_-f & & D^\ast\ar[ld]^-{z\mapsto z^k}\\
+            & D^\ast & 
+        }
+    \end{equation*}
+    commute. Let $p_k: D\to D$ denote the map $z\mapsto z^k$. If we show that $f^{-1}(0)$ is a singleton, then we would be done since we could extend $\varphi: X\to D$ making the required diagram commute.
+
+    Suppose $f^{-1}(0)$ consists of $n$ points $b_1,\dots, b_n$, where $n\ge 1$. Then due to \thref{lem:properties-of-proper-maps} there are disjoint open neighborhoods $V_i$ of $b_i$ and a disk $D(r) = \{z\in\bbC\colon |z| < r\}$, $0 < r\le 1$ such that 
+    \begin{equation*}
+        f^{-1}(D(r))\subseteq V_1\cup\dots\cup V_n.
+    \end{equation*}
+    Let $D^\ast(r) = D(r)\setminus\{0\}$. Since $f^{-1}(D^\ast(r))$ is homeomorphic to $p_k^{-1}(D^\ast(r)) = D^\ast(\sqrt[k]{r})$, it is connected. Since every point $b_i$ is in the closure of $f^{-1}(D^\ast(r))$, $f^{-1}(D(r))$ is also connected. Hence, $n = 1$. This completes the proof.
+\end{proof}
+
+\section{Algebraic Functions}
+
+\begin{definition}
+    Let $\pi: Y\to X$ be an $n$-sheeted \emph{unbranched} holomorphic covering of Riemann surfaces and $f\in\scrM(Y)$. Every point $x\in X$ has an open neighborhood $U$ such that $\pi^{-1}(U)$ is the disjoint union of open sets $V_1,\dots, V_n$ and $\pi: V_v\to U$ is biholomorphic for $v = 1,\dots, n$. Let $\tau_v: U\to V_v$ denote the inverse of the restricted map $\pi: V_v\to U$ and let $f_v = \tau_v^\ast f := f\circ\tau_v\in\scrM(U)$.
+
+    Define the \define{elementary symmetric functions} $c_1,\dots, c_n\in\scrM(U)$ as 
+    \begin{equation*}
+        c_v = (-1)^v\sigma_v\left(f_1,\dots, f_n\right),
+    \end{equation*}
+    where $\sigma_v$ is the $v$-th elementary symmetric polynomial in $n$ indeterminates. 
+
+    This same construction can be carried out about every point in $X$ and it is hard to not see that the the elementary symmetric functions glue to global meromorphic functions in $\scrM(X)$. These are known as the \define{elementary symmetric functions corresponding to $f$}.
+\end{definition}
+
+\begin{theorem}
+    Let $\pi: Y\to X$ be an $n$-sheeted branched holomorphic covering map. Suppose $A\subseteq X$ is a closed discrete subset containing all the critical values of $\pi$ and let $B = \pi^{-1}(A)$. Suppose $f$ is a holomorphic (resp. meromorphic) function on $Y\setminus B$ and $c_1,\dots, c_n\in\scrO(X\setminus A)$ (resp. $\in\scrM(X\setminus A)$) are the elementary symmetric functions of $f$. Then $f$ may be continued holomorphically (resp. meromorphically) to $Y$ precisely if all the $c_v$ may be continued holomorphically (resp. meromorphically) to $X$.
+\end{theorem}
+\begin{proof}
+    Suppose $a\in A$ and $b_1,\dots, b_m$ are the preimages of $a$. Suppose $(U, z)$ is a relatively compact coordinate neighborhood centered at $a$ and $U\cap A = \{a\}$. Note that $V\subseteq\overline V\subseteq\pi^{-1}(\overline U)$, which is compact since $\pi$ is proper. It follows that $V$ is relatively compact and contains all the $b_\mu$'s.
+
+    \begin{description}
+    \item[Case 1.] Suppose $f\in\scrO(Y\setminus B)$
+    \begin{enumerate}[label=(\alph*)]
+        \item Suppose $f$ can be continued holomorphically to all the points $b_\mu$. Then $f$ is bounded on $V$ and hence, on $V\setminus\{b_1,\dots,b_m\}$. This implies that all the $c_v$'s are bounded on $U\setminus\{a\}$. Thus by Riemann's theorem on removable singularities, they may all be continued holomorphically to $a$.
+
+        \item Suppose all the $c_v$ can be continued holomorphically to $a$; then they are all bounded on $U\setminus\{a\}$. Note that for any $y\in V\setminus\{b_1,\dots, b_m\}$, if $x = \pi(y)$, then $f(y)$ is a root of the polynomial 
+        \begin{equation*}
+            T^n + c_1(x)T^{n - 1} + \dots + c_n(x),
+        \end{equation*}
+        whose coefficients are uniformly bounded, whence $f$ is bounded in a neighborhood of every $b_\mu$ and hence, can be continued there.
+    \end{enumerate}
+
+    \item[Case 2.] Now suppose $f\in\scrM(Y\setminus B)$.
+    \begin{enumerate}[label=(\alph*)]
+        \item Assume first that $f$ can be continued meromorphically to all points $b_\mu$. The function $\varphi = \pi^\ast z = z\circ\pi\in\scrO(V)$ vanishes at all the points $b_\mu$. Thus, $\varphi^kf$ may be continued holomorphically to all the points $b_\mu$ if $k$ is sufficiently large. The elementary symmetric functions of $\varphi^kf$ are $z^{kv}c_v$ and by the first part of the proof, they may be continued holomorphically to $a$. Thus, all the $c_v$ may be continued meromorphically to $a$.
+
+        \item Suppose now that all the $c_v$ can be continued meromorphically to $a$. There is a sufficiently large $k$ such that all the $z^{kv}c_v$ can be continued holomorphically to $a$. Thus due to the first case, $\varphi^k f$ admits a holomorphic continuation to all the points $b_\mu$. This completes the proof. \qedhere
+    \end{enumerate}
+    \end{description}
+\end{proof}
+
+\begin{theorem}\thlabel{thm:degree-of-meromorphic-extension}
+    Let $\pi: Y\to X$ be a branched holomorphic $n$-sheeted covering map. If $f\in\scrM(Y)$ and $c_1,\dots, c_n\in\scrM(X)$ are the elementary symmetric functions of $f$, then 
+    \begin{equation*}
+        f^n + (\pi^\ast c_1)f^{n - 1} + \dots + (\pi^\ast c_{n - 1})f + \pi^{\ast}c_n = 0.
+    \end{equation*}
+    \begin{itemize}
+        \item The morphism $\pi^\ast:\scrM(X)\into\scrM(Y)$ is an algebraic field extension of degree $\le n$.
+        \item Moreover, if there exists an $f\in\scrM(X)$ and an $x\in X$ with preimages $y_1,\dots, y_n\in Y$ such that the values $f(y_v)$ for $v = 1,\dots, n$ are all distinct, then the field extension $\pi^{\ast}:\scrM(X)\into\scrM(Y)$ has degree $n$.
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    The fact that $f$ solves the equation follows immediately from the definition of the elementary symmetric functions. Let $L = \scrM(Y)$ and $K = \scrM(X)$. Choose $f_0\in L$ maximizing $n_0 = [K(f_0) : K]\le n$. Let $f\in L$ be arbitrary. Then, $K(f_0, f)$ is a finite extension of $K$ and hence, is of the form $K(g_0)$ due to the Primitive Element Theorem. But then 
+    \begin{equation*}
+        n_0\ge [K(g_0) : K] = [K(f_0, f): K]\ge [K(f_0) : K] = n_0,
+    \end{equation*}
+    whence $f\in K(f_0)$, that is, $K(f_0) = L$ and hence, $[L : K] = n_0\le n$.
+
+    Now, consider $f$ as in the second part of the theorem and suppose its minimal polynomial over $K$ looks like 
+    \begin{equation*}
+        f^m + (\pi^\ast d_1)f^{m - 1} + \dots + (\pi^\ast d_m) = 0,
+    \end{equation*}
+    where $d_1,\dots, d_m\in K$. Under $\pi$, $y_1,\dots, y_n$ map to $x$ and hence, 
+    \begin{equation*}
+        f(y_i)^m + d_1(x)f(y_i)^{m - 1} + \dots + d_m(x) = 0,
+    \end{equation*}
+    but since the $f(y_i)$'s are distinct, we must have $m\ge n$, and hence, $m = n$. This completes the proof.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:extending-coverings}
+    Suppose $X$ is a Riemann surface, $A\subseteq X$ is a closed discrete subset and let $X'= X\setminus A$. Suppose $Y'$ is another Riemann surface and $\pi': Y'\to X'$ a proper \emph{unbranched} holomorphic covering. Then $\pi'$ extends to a branched covering of $X$, i.e., there exists a Riemann surface $Y$, a proper holomorphic mapping $\pi: Y\to X$ and a biholomorphic mapping $\varphi: Y\setminus\pi^{-1}(A)\to Y'$ making the diagram 
+    \begin{equation*}
+        \xymatrix {
+            Y\setminus\pi^{-1}(A)\ar[rr]^\varphi_\sim\ar[rd]_\pi & & Y'\ar[ld]^-{\pi'}\\
+            & X\setminus A
+        }
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    For every $a\in A$, choose a coordinate neighborhood $(U_a, z_a)$ on $X$ such that $z_a(a) = 0$, $z_a(U_a)$ is the unit disk in $\bbC$ and $U_a\cap U_a' = \emptyset$ if $a\ne a'$. Let $U_a^\ast = U_a\setminus\{a\}$. Since $\pi': Y'\to X'$ is proper, $\pi'^{-1}(U_a^\ast)$ consists of a finite number of connected components $V^\ast_{av}$, $v = 1,\dots, n(a)$. 
+    
+    For every $v$, the restricted mapping $\pi': V^\ast_{av}\to U_a^\ast$ is an unbranched covering. Let its covering number be $k_{av}$. Due to \thref{thm:covering-of-punctured-disk} there are biholomorphic maps $\zeta_{av}: V^\ast_{av}\to D^\ast$ such that 
+    \begin{equation*}
+        \xymatrix {
+        V^\ast_{av}\ar[r]^{\zeta_{av}}\ar[d]_{\pi'} & D^\ast\ar[d]^{\pi_{av}}\\
+        U_a^\ast\ar[r]_{z_a} & D^\ast
+        }
+    \end{equation*}
+    commutes.
+
+    Next, let $p_{av}$ for $a\in A$ and $v = 1,\dots, n(a)$ be fresh points disjoint from $Y'$ and set 
+    \begin{equation*}
+        Y = Y'\cup\{p_{av}\colon a\in A,~v = 1,\dots, n(a)\}.
+    \end{equation*}
+    We now topologize $Y$. If $W_i$, $i\in I$ is a neighborhood basis of $a$, then $\{p_{av}\}\cup\left(\pi'^{-1}(W_i)\cap V^\ast_{av}\right)$, $i\in I$ is set as a neighborhood basis of $p_{av}$ along with the fact that $Y'$ retains its topology as a subspace of $Y$. Define $\pi: Y\to X$ by $\pi(y) = \pi'(y)$ if $y\in Y'$ and $\pi(p_{av}) = a$. 
+
+    Next, we make $Y$ a Riemann surface. Add to the charts of the complex structure of $Y'$ the following charts. Let $V_{av} = V^\ast_{av}\cup\{p_{av}\}$ and let $\zeta_{av}: V_{av}\to D$ be the continuation of the aforementioned $\zeta_{av}$ obtained by setting $\zeta_{av}(p_{av}) = 0$. These charts are holomorphically compatible and everything works out nicely.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:isomorphism-of-deck}
+    Let $\pi: Y\to X$ and $\tau: Z\to X$ be proper holomorphic covering maps. Let $A\subseteq X$ be a closed discrete set and $X' = X\setminus A$, $Y' = \pi^{-1}(X')$ and $Z' = \tau^{-1}(X')$. Then every biholomorphic mapping $\sigma': Y'\to Z'$ making 
+    \begin{equation*}
+        \xymatrix {
+            Y'\ar[rr]^{\sigma'}\ar[rd]_{\pi} & & Z'\ar[ld]^{\tau}\\
+            & X' &
+        }
+    \end{equation*}
+    commute can be extended to a biholomorphic mapping $\sigma: Y\to Z$ making 
+    \begin{equation*}
+        \xymatrix {
+            Y\ar[rr]^{\sigma}\ar[rd]_{\pi} & & Z\ar[ld]^{\tau}\\
+            & X &
+        }
+    \end{equation*}
+    commute. In particular, $\operatorname{Deck}(Y/X)\cong\operatorname{Deck}(Y'/X')$ via this extension.
+\end{theorem}
+\begin{proof}
+    Suppose $a\in A$ and $(U, z)$ is a coordinate neighborhood of $a$ such that $z(a) = 0$ and $z(U)$ is the unit disk. Let $U^\ast = U\setminus\{a\}$. We may also assume that $U$ is so small that $\pi$ and $\tau$ are unbranched over $U^\ast$. Let $V_1,\dots, V_n$ (resp. $W_1,\dots, W_m$) be the connected components of $\pi^{-1}(U)$ (resp. $\tau^{-1}(U)$). Then $V^\ast_v = V_v\setminus\pi^{-1}(a)$ (resp. $W_\mu^\ast$) are the connected components of $\pi^{-1}(U^\ast)$ (resp. $\tau^{-1}(U^\ast)$).
+
+    Since $\sigma': \pi^{-1}(U^\ast)\to\tau^{-1}(U^\ast)$ is biholomorphic, $n = m$ and one may renumber so that $\sigma'(V^\ast_v) = W^\ast_v$. The restriction $\pi: V_v^\ast\to U^\ast$ is a finite sheeted unbranched covering of something biholomorphic to the punctured unit disk. It follows from \thref{thm:covering-of-disk} that $V_v\cap\pi^{-1}(a)$ (resp. $W_v\cap\tau^{-1}(a)$) consists of only one point $b_v$ (resp. $c_v$). Hence, $\sigma': \pi^{-1}(U^\ast)\to\tau^{-1}(U^\ast)$ can be continued to a bijection $\pi^{-1}(U)\to\tau^{-1}(U)$. This continuation is a homeomorphism. Also recall that the $V_v$ and $W_v$'s are biholomorphic to the unit disk and hence, by Riemann's Removable Singularities Theorem, this extension is biholomorphic. If one applies this construction to every exceptional point $a\in A$, then one gets the desired continuation $\sigma: Y\to Z$.
+
+    Note that there is a canonical restriction map $\operatorname{Deck}(Y/X)\to\operatorname{Deck}(Y'/X')$ which is surjective because of what we have proved above. The injectivity is a trivial consequence of the identity theorem.
+\end{proof}
+
+\section{The Inverse Galois Problem over \texorpdfstring{$\bbC(t)$}{C(t)}}
+
+\begin{theorem}[Riemann Existence Theorem]\thlabel{thm:riemann-existence}
+    Meromorphic functions on a compact Riemann surface separate points.
+\end{theorem}
+
+\begin{theorem}
+    Every finite group can be realised as the Galois group of a field extension of $\bbC(t)$.
+\end{theorem}
+\begin{proof}
+    Let $G$ be a finite group having $n$ elements. There is a surjection $\mathfrak F_n\onto G$, where $\mathfrak F_n$ is the free group on $n$ elements. Recall that $\pi_1\left(\bbP^1\setminus\{x_0,\dots, x_{n + 1}\right)\cong\mathfrak F_n$ whence due to the Galois theory of covering spaces for manifolds, there is a topological $n$-sheeted covering $\pi: Y'\to\bbP^1\setminus\{x_0,\dots, x_{n + 1}\}$. Note that this covering endows $Y'$ with a unique Riemann surface structure. Since the covering has finitely many sheets, $Y$ is compact. Due to \thref{thm:extending-coverings}, $\pi$ can be extended to a branched covering $\pi: Y\to\bbP^1$. 
+
+    For any $\sigma\in\operatorname{Deck}(Y/\bbP^1)$, the induced map $\sigma^\ast$ on $\scrM(Y)$ is an element of $\Aut(\scrM(Y)/\scrM(\bbP^1))$. This gives a natural group homomorphism:
+    \begin{equation*}
+        \operatorname{Deck}(Y/\bbP^1)\longrightarrow\Aut(\scrM(Y)/\scrM(\bbP^1)),\quad\sigma\mapsto\sigma^\ast.
+    \end{equation*}
+    We contend that this map is injective. Indeed, suppose $\sigma^\ast$ is the identity map for some $\sigma\ne 1$. This is equivalent to stating that $f = f\circ\sigma$ for every $f\in\scrM(Y)$, which is impossible due to \thref{thm:riemann-existence}.
+
+    Due to \thref{thm:isomorphism-of-deck}, the cardinality of $\operatorname{Deck}(Y/\bbP^1)$ is precisely the cardinality of $\operatorname{Deck}(Y'/\bbP^1\setminus\{x_0,\dots, x_{n + 1}\})$, which is equal to $n$. Further, using \thref{thm:riemann-existence} and \thref{thm:degree-of-meromorphic-extension}, note that $[\scrM(Y) : \scrM(\bbP^1)] = n$. Injectivity of the aforementioned map forces the cardinality of $\Aut(\scrM(Y)/\scrM(\bbP^1))$ to be $n$ whence the extension is Galois and the map is an isomorphism. This gives $\Aut(\scrM(Y)/\scrM(\bbP^1))\cong G$, thereby completing the proof.
+\end{proof}
+\end{document}

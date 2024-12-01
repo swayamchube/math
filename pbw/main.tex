@@ -1,0 +1,502 @@
+\documentclass[12pt]{article}
+
+% \usepackage{./arxiv}
+
+\title{The Universal Enveloping Algebra and The Poincar\'e-Birkhoff-Witt Theorem}
+\author{Swayam Chube}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+\newcommand{\frakT}{\mathfrak{T}}
+\newcommand{\frakF}{\mathfrak{F}}
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrN}{\mathscr N}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrR}{\mathscr R}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\ind}{\operatorname{ind}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\scshape}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+    In this article, we define and construct the universal enveloping algebra of a Lie algebra, then, state and prove the Poincar\'e-Birkhoff-Witt Theorem.
+\end{abstract}
+
+\section{The Universal Enveloping Algebra}
+
+\begin{definition}
+    Let $\frakg$ be a Lie algebra over $k$. A \define{universal enveloping algebra} is a pair $(\frakU, i)$ where $\frakU$ is an associative algebra (over $k$, with identity) and $i: \frakg\to\frakU$ is a homomorphism of Lie algebras such that for any associative algebra $\frakA$ (over $k$, with identity) and any Lie algebra homomorphism $\varphi:\frakg\to\frakA$, there is a unique $k$-algebra homomorphism $\wt\varphi:\frakU\to\frakA$ making the following diagram commute.
+    \begin{equation*}
+        \xymatrix {
+            \frakg\ar[r]\ar[d]_{i}\ar[r]^{\varphi} & \frakA\\
+            \frakU\ar@{-->}[ru]_{\exists!~\wt\varphi}
+        }
+    \end{equation*}
+\end{definition}
+
+\subsection{Construction}
+
+Let $\frakT$ denote the \define{tensor algebra} over $\frakg$, that is, 
+\begin{equation*}
+    \frakT = \bigoplus_{n\ge 0}\frakg^{\otimes n}.
+\end{equation*}
+
+There is a map $\mu:\frakg^{\otimes n}\times\frakg^{\otimes m}\to\frakg^{\otimes m + n}$ given by 
+\begin{equation*}
+    \mu(x_1\otimes\dots\otimes x_n, y_1\otimes\dots\otimes y_m) = x_1\otimes\dots x_n\otimes y_1\otimes\dots\otimes y_m
+\end{equation*}
+and extending linearly. This gives $\frakT$ the structure of a $k$-algebra. 
+
+Let $\frakK$ denote the ideal in $\frakT$ generated by all elements of the form 
+\begin{equation*}
+    [x, y] - x\otimes y + y\otimes x
+\end{equation*}
+for $x,y\in\frakg$. Set $\frakU = \frakT/\frakK$ and let $\iota: \frakg\to\frakU$ be the composition
+\begin{equation*}
+    \frakg\longrightarrow\frakT\stackrel{\pi}{\longrightarrow}\frakU.
+\end{equation*}
+
+\begin{theorem}
+    $(\frakU, \iota)$ is a universal enveloping algebra for $\frakg$.
+\end{theorem}
+\begin{proof}
+    Let $\varphi:\frakg\to\frakA$ be a homomorphism of Lie algebras where $\frakA$ is an associative $k$-algebra. The universal property of the tensor algebra extends this to a $k$-algebra homomorphism $\wt\varphi:\frakT\to\frakA$. 
+
+    Note that 
+    \begin{equation*}
+        \wt\varphi(x\otimes y - y\otimes x) = \wt\varphi(x\otimes y) - \wt\varphi(y\otimes x) = \varphi(x)\varphi(y) - \varphi(y)\varphi(x) = \varphi([x, y]),
+    \end{equation*}
+    whence $\wt\varphi$ vanishes on $\frakK$, thereby inducing a unique (due to the universal property of the kernel) map $\wt{\wt\varphi}:\frakU\to\frakA$, thereby completing the proof.
+\end{proof}
+
+
+\section{The Poincar\'e-Birkhoff-Witt Theorem}
+
+Let $u_1,\dots,u_n$ be a $k$-basis of $\frakg$. A \define{monomial} in $\frakT$ is an element of the form 
+\begin{equation*}
+    u_{i_1}\otimes\dots\otimes u_{i_n}
+\end{equation*}
+for $n\ge 1$. The number $n$ is said to be the \define{degree} of the monomial. The \define{index} of the monomial is given by 
+\begin{equation*}
+    \ind(u_{i_1}\otimes\dots\otimes u_{i_n}) = \sum_{j < k}\eta_{jk}
+\end{equation*}
+where 
+\begin{equation*}
+    \eta_{jk} = 
+    \begin{cases}
+        0 & i_j \le i_k\\
+        1 & i_j > i_k
+    \end{cases}
+\end{equation*}
+A monomial is said to be \define{standard} if its index is $0$. Let $\frakg_n$ denote the vector space spanned by monomials of degree $n$ and let $\frakg_{n, i}$ denote the subspace of $\frakg_n$ spanned by monomials of degree $n$ and index $\le i$.
+
+\begin{lemma}
+    Every element of $\frakT$ is congruent modulo $\frakK$ to a $k$-linear combination of $1$ and standard monomials.
+\end{lemma}
+\begin{proof}
+    Straightforward induction on the index and degree of standard monomials.
+\end{proof}
+
+Let $\frakP$ denote the vector space spanned by $u_{i_1}\dots u_{i_n}$ where $i_1\le \dots \le i_n$. These are to be interpreted as formal symbols without meaning.
+
+\begin{lemma}
+    There is a $k$-linear map $\sigma:\frakT\to\frakP$ such that 
+    \begin{equation*}
+        \sigma(1) = 1\quad\text{ and }\quad\sigma(u_{i_1}\otimes\dots\otimes u_{i_n}) = u_{i_1}\dots u_{i_n}.
+    \end{equation*}
+    if $i_1\le \dots \le i_n$. Further, 
+    \begin{equation*}
+        \sigma(u_{j_1}\otimes\dots\otimes[u_{j_k}, u_{j_{k + 1}}]\otimes\dots\otimes u_{j_n}) = \sigma(u_{j_1}\otimes\dots\otimes u_{j_n} - u_{j_1}\otimes\dots u_{j_{k + 1}}\otimes u_{j_k}\otimes\dots u_{j_n}).
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    We induct on degree and index, in that order. Suppose a linear map $\sigma$ has been defined on $k\oplus\frakg_1\oplus\dots\oplus\frakg_{n - 1}$. It is easy to extend this to $k\oplus\dots\oplus\frakg_{n, 0}$ by setting 
+    \begin{equation*}
+        \sigma(u_{i_1}\otimes\dots u_{i_n}) = u_{i_1}\dots u_{i_n}.
+    \end{equation*}
+    Now, suppose $\sigma$ has already been defined for $k\oplus\dots\frakg_{n, i - 1}$. Suppose $j_k > j_{k + 1}$. Then, define 
+    \begin{equation*}
+        \sigma(u_{j_1}\otimes\dots\otimes u_{j_n}) = \sigma(u_{j_1}\otimes\dots\otimes u_{j_{k + 1}}\otimes u_{j_k}\otimes\dots\otimes u_{j_n}) + \sigma(u_{j_1}\otimes\dots\otimes[u_{j_k}, u_{j_{k + 1}}]\otimes\dots\otimes u_{j_n}).
+    \end{equation*}
+    The right hand side is well-defined because the first term on the right has index at most $i - 1$ and the second term on the right is a linear combination of monomials of smaller degree.
+
+    We must show that this is a well-defined assignment of $\sigma$, that is the right hand choice is independent of the pair of inversion chosen. To this end, let $j_l > j_{l + 1}$. We must consider two cases. 
+
+    \begin{description}
+    \item[Case 1: $l > k + 1$.] Set $u_{j_k} = u$, $u_{j_{k + 1}} = v$, $u_{j_l} = w$, $u_{j_{l + 1}} = x$.
+
+    We would like to show 
+    \begin{align*}
+        &\sigma(\dots v\otimes u\otimes\dots\otimes w\otimes x\dots) + \sigma(\dots\otimes[u,v]\otimes\dots\otimes w\otimes x\dots)\\
+        &= \\
+        &\sigma(\dots u\otimes v\otimes\dots x\otimes w\dots) + \sigma(\dots u\otimes v\otimes\dots\otimes [x, w]\otimes\dots).
+    \end{align*}
+    We can expand the left hand side of the above equality using the induction hypothesis as 
+    \begin{align*}
+        &\sigma(\dots v\otimes u\otimes \dots \otimes x\otimes w\dots) + \sigma(v\otimes u\otimes \dots \otimes [x, w]\otimes\dots)\\
+        &+ \sigma(\dots\otimes [u,v]\otimes\dots\otimes x\otimes w\dots) + \sigma(\dots\otimes [u, v]\otimes\dots\otimes [w,x]\otimes\dots).
+    \end{align*}
+
+    The right hand side can be written as 
+    \begin{align*}
+        &\sigma(\dots v\otimes u\otimes\dots\otimes x\otimes w\dots) + \sigma(\dots\otimes[u,v]\otimes\dots\otimes x\otimes w\dots)\\
+        &+ \sigma(\dots v\otimes u\otimes\dots\otimes [x, w]\otimes\dots) + \sigma(\dots\otimes [u,v]\otimes\dots\otimes[x, w]\otimes\dots).
+    \end{align*}
+    This completes the proof in this case. 
+
+    \item[Case 2: $l = k + 1$.] We write $u_{j_k} = u$, $u_{j_{k + 1}} = v = u_{j_l}$ and $u_{j_{l + 1}} = w$. We want to show the equality
+    \begin{equation*}
+        \sigma(\dots v\otimes u\otimes w\dots) + \sigma(\dots[u, v]\otimes w\dots) = \sigma(\dots u\otimes w\otimes v\dots) + \sigma(\dots u\otimes[v, w]\dots).
+    \end{equation*}
+
+    The left hand side can be expanded further as 
+    \begin{align*}
+        &\sigma(\dots v\otimes w\otimes u\dots) + \sigma(\dots v\otimes [u, w]\dots) + \sigma(\dots [u, v]\otimes w\dots)\\
+        &= \sigma(\dots w\otimes v\otimes u\dots) + \sigma(\dots[v, w]\otimes u\dots) + \sigma(\dots v\otimes [u, w]\dots) + \sigma(\dots [u, v]\otimes w\dots).
+    \end{align*}
+
+    Similarly, the right hand side can be expanded as 
+    \begin{align*}
+        &\sigma(\dots w\otimes u\otimes v\dots) + \sigma(\dots[u, w]\otimes v\dots) + \sigma(\dots u\otimes[v, w]\dots)\\
+        &= \sigma(\dots w\otimes v\otimes u\dots) + \sigma(\dots w\otimes [u, w]\dots) + \sigma(\dots[u, w]\otimes v\dots) + \sigma(u\otimes [v,w]\dots).
+    \end{align*}
+
+    It remains to show the equality: 
+    \begin{align*}
+        &\sigma(\dots[v, w]\otimes u\dots) + \sigma(\dots v\otimes [u, w]\dots) + \sigma(\dots [u, v]\otimes w\dots)\\
+        &= \sigma(\dots w\otimes [u, w]\dots) + \sigma(\dots[u, w]\otimes v\dots) + \sigma(u\otimes [v,w]\dots),
+    \end{align*}
+    which reduces to 
+    \begin{equation*}
+        \sigma(\dots[[v, w], u]\dots) + \sigma(\dots[v,[u,w]]\dots) + \sigma(\dots[[u,v],w]\dots) = 0,
+    \end{equation*}
+    which follows from Jacobi's Identity. This completes the proof in this case.
+    \end{description}
+
+    Now that $\sigma$ is well-defined for monomials, we can extend it linearly to $\frakg_{n, i}$, thereby completing the induction.
+\end{proof}
+
+\begin{theorem}[Poincar\'e-Birkhoff-Witt Theorem]
+    The cosets of $1$ and the standard monomials form a basis for $\frakU = \frakT/\frakK$.
+\end{theorem}
+\begin{proof}
+    We have shown that the standard monomials and $1$ span $\frakU$. It remains to show linear independence. This follows from the preceding lemma, since the $u_{i_1}\dots u_{i_n}$'s are linearly independent in $\frakP$.
+\end{proof}
+
+\section{Properties of the Universal Enveloping Algebra}
+
+\begin{definition}
+    A ring $R$ is said to be \define{filtered} if it is equipped with an increasing sequence $\mathscr R = \{R_i\}_{i\ge 0}$ of abelian subgroups such that 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\displaystyle\bigcup_{i\ge 0} R_i = R$. 
+        \item For all $i,j\ge 0$, $R_iR_j\subseteq R_{i + j}$.
+    \end{enumerate}
+
+    Each filtration of a ring gives rise to an \define{associated graded ring}, 
+    \begin{equation*}
+        \Gr_{\mathscr R}(R) = \bigoplus_{i\ge 0} R_i/R_{i - 1},
+    \end{equation*}
+    with the convention that $R_{i - 1} = 0.$
+
+    For any $a\in R$, there is a non-negative integer $n$ such that $a\in R_n$ but $a\notin R_{n - 1}$. The homogeneous element $\overline b = b + R_{n - 1}\in\Gr_{\mathscr R}(R)$ is called the \define{leading term} of $b$. If $b = 0$, we take its leading term to be $0$.
+\end{definition}
+
+\begin{lemma}\thlabel{lem:domain-left-noetherian}
+    Let $R$ be a filtered ring with an increasing filtration $\{R_i\}_{i\ge 0}$ and let $G$ denote the corresponding associated graded.
+    \begin{enumerate}[label=(\alph*)]
+        \item If $G$ is a domain, then so is $R$.
+        \item If $G$ is left (resp. right) noetherian, then so is $R$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Suppose $a,b\in R\setminus\{0\}$ such that $ab = 0$ in $R$. Let $\overline a, \overline b$ denote the leading terms of $a$ and $b$ respectively. Then, $\overline a\overline b = 0$, a contradiction.
+
+    \item Let $I$ be a left-ideal in $R$. We shall show that $I$ is finitely generated. Let $\overline I$ denote the abelian group generated by the leading terms of elements of $I$. It is easy to see that $\overline I$ is a left ideal in $G$ (whence, is a homogeneous left ideal). Since $G$ is left noetherian, there are $b_1,\dots,b_n\in I$ such that $\overline b_1,\dots,\overline b_n$ generate $\overline I$ as a left ideal in $G$ where $\overline b_i$ is the leading term of $b_i$.
+
+    We contend that the $b_i$'s generate $I$. Let $b\in I$. Then, $\overline b$, the leading term of $b$ is a linear combination of the form 
+    \begin{equation*}
+        \overline b = \sum_{i} \overline a_i\overline b_i
+    \end{equation*}
+    where $\overline a_i\in G$. Since the left hand side is homogeneous, we may choose the $a_i$'s to be homogeneous in $G$, consequently, the $\overline a_i$'s are leading terms of some $a_i\in R$. 
+
+    From the above equality, we deduce that $\overline b$ is the leading term of $\sum_i a_ib_i$ whence, $b - \sum_{i} a_ib_i$ has leading term of homogeneous degree smaller than that of $\overline b$. An induction argument finishes the proof.\qedhere
+\end{enumerate}
+\end{proof}
+
+If $\frakg$ is a finite-dimensional Lie algebra over $k$ (no restriction), then its universal enveloping algebra $\frakU$ is equipped with a canonical filtration: 
+\begin{equation*}
+    \frakU^{(n)} = k\oplus\frakg\oplus\frakg^2\oplus\dots\oplus\frakg^{n}.
+\end{equation*}
+Using the Poincar\'e-Birkhoff-Witt theorem, it is not hard to see that the associated graded corresponding to the above filtration is isomorphic to $k[X_1,\dots,X_n]$ where $n = \dim_k\frakg$.
+
+\begin{theorem}
+    The universal enveloping algebra of a finite-dimensional Lie algebra over $k$ is a left (and right) Noetherian domain.
+\end{theorem}
+\begin{proof}
+    Follows from \thref{lem:domain-left-noetherian} and the discussion above.
+\end{proof}
+
+\section{Free Lie Algebras}
+
+\begin{definition}
+    Let $X$ be a set. A \define{free algebra over $k$} on $X$ is a pair $(\frakL(X), \iota)$ where $\iota: X\to\frakL(X)$ is such that for any map of sets $\varphi: X\to\frakg$ where $\frakg$ is a Lie algebra over $k$, there is a unique Lie algebra homomorphism $\wt\varphi:\frakL(X)\to\frakg$ satisfying 
+    \begin{equation*}
+        \xymatrix {
+            X\ar[r]^{\varphi}\ar[d] & \frakg\\
+            \frakL(X)\ar@{-->}[ru]_{\exists!\wt\varphi}
+        }
+    \end{equation*}
+\end{definition}
+
+\subsection{Construction}
+
+Let $\mathfrak F(X)$ denote the free $k$-algebra generated by $X$. Then, $\frakF(X)$ has the structure of a Lie algebra. Let $\frakL(X)$ denote the Lie subalgebra of $\frakF(X)$ generated by $X$. We contend that $X\into\frakL(X)$ is the free algebra on $X$.
+
+Let $\varphi: X\to\frakg$ be a map of sets where $\frakg$ is a Lie algebra over $k$. Then, we have the following commutative diagram. 
+\begin{equation*}
+    \xymatrix {
+        X\ar[r]^\varphi\ar[d] & \frakg\ar[d]\\
+        \frakF(X)\ar@{-->}[r]_{\exists!\wt\varphi} & \frakU(\frakg)
+    }
+\end{equation*}
+Where $\wt\varphi$ restricts to $\varphi$ on $X\subseteq\frakF(X)$. Note that $\varphi$ is also a Lie algebra homomorphism. Therefore, $\wt\varphi^{-1}\frakg$ is a Lie subalgebra of $\frakF(X)$ containing $X$ and hence, $\frakL(X)\subseteq\wt\varphi^{-1}\frakg$. It follows that $\wt\varphi$ restricts to a Lie algebra homomorphism $\wt\varphi: \frakL(X)\to\frakg$. The uniqueness follows since $X$ generates $\frakL(X)$. This completes the proof of existence. 
+
+The above discussion also shows: 
+\begin{proposition}
+    $\frakF(X)$ is the universal enveloping algebra of $\frakL(X)$.
+\end{proposition}
+
+
+\end{document}

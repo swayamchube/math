@@ -1,0 +1,321 @@
+\documentclass[12pt]{article}
+
+% \usepackage{./arxiv}
+
+\title{Theorems of Levi and Ado-Iwasawa}
+\author{Swayam Chube}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrN}{\mathscr N}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrR}{\mathscr R}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\scshape}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+\begin{document}
+\maketitle
+\begin{abstract}
+    It is known that every Euclidean Domain (ED) is a Principal Ideal Domain (PID). We present two exammples of PIDs that are not EDs, namely, $\R[X, Y]/(X^2 + Y^2 + 1)$ and $\Z\left[\frac{1 + \sqrt{-19}}{2}\right]$.
+\end{abstract}
+
+\section{\texorpdfstring{$\R[X, Y]/(X^2 + Y^2 + 1)$}{}}
+
+We first begin with two important lemmas.
+
+\begin{lemma}\thlabel{lem:prime-principal-pir}
+    Let $A$ be a commutative ring in which every prime ideal is principal. Then, $A$ is a principal ring.
+\end{lemma}
+\begin{proof}
+    Suppose not and let $\Sigma$ denote the poset of all proper ideals that are not principal. Let $\mathscr C$ denote a chain in $\Sigma$ and let $\fraka = \bigcup\mathscr C$. If $\fraka = (a)$ is principal, then there is an ideal $\frakb\in\mathscr C$ that contains $a$, consequently, $\frakb = (a)$, a contradiction. Thus, $\fraka\in\Sigma$ and is an upper bound for $\mathscr C$. Due to Zorn's Lemma, $\Sigma$ contains a maximal element, say $\frakp$.
+
+    We contend that $\frakp$ is prime. Suppose not. Then, there are $a,b\notin\frakp$ with $ab\in\frakp$. Note that $(\frakp : b)$ is an ideal properly containing $\frakp$ (since it also contains $a$) and hence, must be principal, say $(c)$. Next, $\frakp + (b)$ properly contains $\frakp$ and hence, must be principal, say $(d)$. Clearly, $\frakp\supseteq(\frakp : b)(\frakp + (b)) = (cd)$. On the other hand, if $x\in\frakp$, then $x = \alpha d$ for some $\alpha\in A$. Since $\alpha d\in\frakp$, we have $\alpha\in (\frakp : b) = (c)$. Thus, $\frakp\subseteq(\frakp : b)(\frakp + (b))$ and $\frakp = (cd)$ is principal, a contradiction. Hence, $\frakp$ is prime, and must be principal, again, a contradiction. This completes the proof.
+\end{proof}
+
+\begin{lemma}\thlabel{lem:group-surjection}
+    Let $A$ be a Euclidean Domain with Euclidean function $\delta: A\backslash\{0\}\to\N_0$. Then, there is a non-zero prime $p\in A$ such that $\pi: A\twoheadrightarrow A/p$ restricts to a surjective group homomorphism $\pi: A^\times\to (A/p)^\times$.
+\end{lemma}
+\begin{proof}
+    Let $p\in A$ be a non-zero element in $A\backslash A^\times$ that minimizes $\delta$. Then, $p$ must be irreducible, for if $p = ab$ with $a$ non-unit, then 
+    \begin{equation*}
+        \delta(p) = \delta(ab)\ge\delta(a)\ge\delta(p),
+    \end{equation*}
+    consequently, $\delta(a) = \delta(ab)$ whence $b$ must be a unit. This shows that $p$ is prime. 
+
+    Now, let $\overline a\in A/p$ be invertible. Then, there is a non-zero $a\in A$ with $\pi(a) = \overline a$. Thus, there are $q$ and $r$ with $a = pq + r$. Since $r\ne 0$, we must have $\delta(r) < \delta(p)$, whereby, $r\in A^\times$. Note that $\pi(r) = \pi(a) = \overline a$ and hence, the restriction of $\pi$ to $A^\times\to (A/p)^\times$ is surjective.
+\end{proof}
+
+We are now ready to prove the main of this section. Let $A = R[X, Y]/(X^2 + Y^2 + 1)$ and let $x$ and $y$ denote the images of $X$ and $Y$ in $A$.
+
+\begin{proposition}\thlabel{prop:primes-in-A}
+    Every non-zero prime ideal in $A$ is of the form $(ax + by + c)$ where $(a,b)\ne 0$.
+\end{proposition}
+\begin{proof}
+    Let $\frakp$ be a non-zero prime ideal of $A$. Note first that 
+    \begin{equation*}
+        \dim A = \dim R[X, Y] - \operatorname{ht}((X^2 + Y^2 + 1)) = 1,
+    \end{equation*}
+    whence $\frakp$ is maximal. Further, $A/\frakp$ is a finitely generated $\R$-algebra and also a field, and due to Zariski's Lemma, must be a finite extension of $\R$. Thus, $[A/\frakp : \R]\le 2$. Let $\overline x, \overline y$ denote the images of $x$ and $y$ in $A/\frakp$. Since $1,\overline x,\overline y$ cannot be linearly independent over $\R$, we must have a non-trivial linear combination $a\overline x + b\overline y + c = 0$ in $A/\frakp$. Hence, $ax + by + c\in\frakp$. If $(a,b) = 0$, then $\frakp$ would contain a unit which is impossible.
+
+    Note that $(aX + bY + c)$ was a maximal ideal in $R[X, Y]$. Hence, $(ax + by + c)$ is a maximal ideal in $A$. Further, the quotient $A/(ax + by + c)$ strictly contains $\R$ and due to Zariski's Lemma, must be a finite extension of it, whence is isomorphic to $\bbC$. This shows that $\frakp = (ax + by + c)$ and $A/\frakp\cong\bbC$ thereby completing the proof.
+\end{proof}
+
+\begin{proposition}
+    $A$ is a PID but not an ED.
+\end{proposition}
+\begin{proof}
+    Due to \thref{prop:primes-in-A} and \thref{lem:prime-principal-pir}, $A$ is a PID. Suppose $A$ were an ED. According to \thref{lem:group-surjection}, there is a non-zero prime $p\in A$ and a group surjection $\pi: A^\times\to (A/p)^\times$. Note that $A^\times\cong\R^\times$ and $(A/p)^\times\cong\bbC^\times$. But there is no surjective group homomorphism $\R^\times\twoheadrightarrow\bbC^\times$, a contradiction.
+\end{proof}
+
+\section{\texorpdfstring{$\Z\left[\frac{1 + \sqrt{-19}}{2}\right]$}{}}
+Let $K = \Q[\sqrt{-19}]$ be a number field and let $\mathcal O_K$ denote the ring of integers in $K$. It is well known that $\mathcal O_K = \Z\left[\frac{1 + \sqrt{-19}}{2}\right]$ and that it has class number $1$. Hence, every fractional ideal over $\mathcal O_K$ is principal. In particular, every integral ideal of $\mathcal O_K$ is principal and $\mathcal O_K$ is a PID.
+
+We shall now argue that $\calO_K$ is not an ED. Suppose $\delta:\calO_K\backslash\{0\}\to\N_0$ is a Euclidean function and let $p\in\mathcal O_K$ be a non-zero, non-invertible element that minimizes $\delta$. Consider the canonical projection $\pi: \calO_K\twoheadrightarrow\calO_K/(p)$. 
+
+If $0\ne\overline a\in\calO_K/(p)$, then there is an $a\in\calO_K$ that maps to it under $\pi$. We may write $a = pq + r$ where $q\in\calO_K$, $0\ne r$ and $\delta(r) < \delta(p)$. Due to the minimality of $\delta(p)$, we must have that $r$ is a unit. Note that the only units in $\calO_K$ are $\pm 1$. Indeed, if $x\in\calO_K$ is a unit, then there are integers $m$ and $n$ such that 
+\begin{equation*}
+    x = m + n\left(\frac{1 + \sqrt{-19}}{2}\right) = \frac{(2m + n) + n\sqrt{-19}}{2}.
+\end{equation*}
+Since $x$ is a unit, we have $N_{K/\Q}(x) = \pm 1$, that is, 
+\begin{equation*}
+    (2m + n)^2 + 19 n^2 = 4.
+\end{equation*}
+It is not hard to see, from the above equation, that the only solutions are $x = \pm 1$.
+
+Hence, $r\in\{\pm 1\}$, in particular, $\calO_K/(p)$ can have atmost $3$ elements and at least $2$ elements. Thus, the \emph{ideal norm} of $(p)$ is either $2$ or $3$. Hence, $N_{K/\Q}(p)\in\{2, 3\}$.
+
+We may suppose $p = m + n\frac{1 + \sqrt{-19}}{2}$. The equation involving norm gives us 
+\begin{equation*}
+    (2m + n)^2 + 19n^2\in\{8, 12\}.
+\end{equation*}
+Due to size reasons, $n = 0$. And we are left with $m^2\in\{2,3\}$, which is impossible. Thus, $\calO_K$ cannot be an ED. This completes the proof.
+\end{document}

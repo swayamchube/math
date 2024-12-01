@@ -1,0 +1,427 @@
+\documentclass[12pt]{article}
+
+% \usepackage{./arxiv}
+
+\title{Picard's Theorems}
+\author{Swayam Chube}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrN}{\mathscr N}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrR}{\mathscr R}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bbD}{\mathbb{D}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\scshape}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+\begin{document}
+\maketitle
+\begin{abstract}
+    Taming the big bad wolves of $\bbC$omplex Analysis by nuking it.
+\end{abstract}
+
+\section{Analytic Covering Maps}
+
+Recall first the definiton of a covering map in a general topological space. 
+\begin{definition}[Abstract Covering Map]
+    A map $\pi: E\to B$ is said to be a \emph{covering map} if there is an open cover $\{U_\alpha\}$ of $B$ such that $\pi^{-1}(U_\alpha)$ is homeomorphic to $U_\alpha\times D_\alpha$ where $D_\alpha$ is a topological space with the discrete topology.
+\end{definition}
+
+\begin{definition}[Analytic Covering Map]
+    Let $\Omega,G\subseteq\bbC$ be open sets. An abstract covering map $\pi: \Omega\to G$ is said to be \emph{analytic} if $\pi$ is a holomorphic map.
+\end{definition}
+
+\begin{proposition}
+    Let $\pi: \Omega\to G$ be an analytic covering map and $f: H\to G$ a holomorphic map. If there is a continuous map $\wt f: H\to\Omega$ such that $\pi\circ\wt f = f$, then $\wt f$ is holomorphic.
+\end{proposition}
+\begin{proof}
+    Let $z_0\in H$. Then, there is a neighborhood $U$ of $f(z_0)$ in $G$ and a neighborhood $V$ of $\wt f(z_0)$ such that $\pi$ is a biholomorphism from $V$ to $U$. Let $W$ be a neighborhood of $z_0$ that maps into $V$ under $\wt f$. Then, on $W$, we have $\wt f = \pi^{-1}\circ f$, which is holomorphic.
+\end{proof}
+
+\section{Modular Function}
+
+\begin{definition}[Modular Transformation]
+    A \emph{modular transformation} is a M\"obius transformation 
+    \begin{equation*}
+        M(z) = \frac{az + b}{cz + d}
+    \end{equation*}
+    such that $\begin{pmatrix}a & b\\ c & d\end{pmatrix}\in\operatorname{SL}_2(\Z)$. The set of all modular transformations form a group, known as the \emph{modular group}. We often identify this group with $\operatorname{SL}_2(\Z)$.
+\end{definition}
+
+\begin{definition}
+    Let $\Gamma$ denote the subgroup of $\SL_2(\Z)$ generated by 
+    \begin{equation*}
+        \tau = 
+        \begin{pmatrix}
+            1 & 2\\
+            0 & 1
+        \end{pmatrix}
+        \text{ and }
+        \sigma = 
+        \begin{pmatrix}
+            1 & 0\\
+            2 & 1
+        \end{pmatrix}.
+    \end{equation*}
+    This group will be of particular interest during the construction of a modular function. It is customary to denote this group by $\Gamma(2)$ but we drop the ``(2)'' for brevity.
+\end{definition}
+
+\begin{definition}
+    Let $G$ denote the region 
+    \begin{equation*}
+        \{z = x + iy \in\bbH\colon -1\le x < 1,~|2z - 1| > 1\text{ and }|2z + 1|\ge 1\}.
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}
+    Let $G$ and $\Gamma$ be as defined above. Then, 
+    \begin{enumerate}
+        \item $\varphi_1(G)\cap\varphi_2(G) = \emptyset$ whenever $\varphi_1\ne\varphi_2$ in $\Gamma$.
+        \item $\bbH = \bigsqcup_{\varphi\in\Gamma}\varphi(G)$.
+        \item   
+        \begin{equation*}
+            \Gamma = \left\{
+            \begin{pmatrix}
+                a & b\\
+                c & d
+            \end{pmatrix}\in\SL_2(\Z)
+            \Bigg\vert~a,d\equiv1\pmod 2\text{ and } b,c\equiv0\pmod 2
+            \right\}.
+        \end{equation*}
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\begin{theorem}
+    Let $G$ and $\Gamma$ be as defined above. Then, there is a holomorphic function $\lambda: \bbH\to\bbC$ having the following properties: 
+    \begin{enumerate}
+        \item $\lambda\circ\varphi = \lambda$ for all $\varphi\in\Gamma$.
+        \item $\lambda$ is injective on $G$.
+        \item $\lambda(\bbH) = \bbC\backslash\{0,1\}$.
+        \item $\lambda:\bbH\to\bbC\backslash\{0,1\}$ is a covering map.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Let 
+    \begin{equation*}
+        G_0 = \{z = x + iy\in\bbH\colon 0 < x < 1\text{ and }|2z - 1| > 1\}.
+    \end{equation*}
+    Note that $G_0$ is simply connected and thus, there is a conformal equivalence $f_0: G_0\to\bbH$. Then, there is an extension of $f$ to a homeomorphism $f:\overline G_0\to\overline\bbH$ that maps $\partial G_0\to\partial\bbH$. Upon composing with a suitable M\"obius transformation, we may suppose that $f(0) = 0$, $f(1) = 1$ and $f(\infty) = \infty$. 
+
+    Consider the following three pieces of $\partial G_0$, 
+    \begin{align*}
+        L_1 &= \{z\in\overline\bbH\colon \Re(z) = 0\}\\
+        L_2 &= \{z\in\overline\bbH\colon |2z - 1| = 1\}\\
+        L_3 &= \{z\in\overline\bbH\colon \Re z = 1\}.
+    \end{align*}
+    First, note that $f$ is a bijection $L_1\cup L_2\cup L_3\to\partial\bbH = \R$. Further, $L_1$ and $L_3$ must map to half lines with $0$ and $1$ mapping to themselves. Therefore, $L_1$ must map to $(-\infty, 1]$, $L_2$ to $[0,1]$ and $L_3$ to $[1,\infty)$. Next, note that $f(L_1)\subseteq\R$ and hence, due to the Schwarz Reflection Principle, there is an extension of $f$ to all of $G$, defined by $f(-x + iy) = \overline{f(x + iy)}$. Note that this gives $f(G) = \bbC\backslash\{0,1\}$ and $f(\operatorname{int}G) = \bbC\backslash[0,\infty)$. Finally, define $\lambda:\bbH\to\bbC$ by 
+    \begin{equation*}
+        \lambda(z) = \lambda(\varphi^{-1}(z))\text{ when }z\in\varphi(G).
+    \end{equation*}
+    We contend that the $\lambda$ defined above is holomorphic. Consider the set $\Delta = G\cup\sigma^{-1}(G)\cup\tau^{-1}(G)$, whose interior contains $G$. It is not hard to argue, from the definition of $\lambda$ that it is continuous on $\Delta$ and holomorphic on the interiors of the aforementioned three sets that form it. Therefore, $\lambda$ is holomorphic on the interior of $\Delta$, in particular, on $G$.
+
+    Lastly, we show that $\lambda$ is a covering map. To do this, we shall show that every point in $\bbC\backslash\{0,1\}$ has an evenly covered neighborhood. First, suppose $\zeta\in\bbC\backslash[0,\infty)$ and choose $\delta > 0$ small enough so that $B_0 = B(\zeta,\delta)\subseteq\bbC\backslash[0,\infty)$ and $U = f^{-1}(B_0)\subseteq G$. Obviously, $\lambda^{-1}(B_0) = \bigsqcup_{\varphi\in\Gamma}\varphi(U)$. Thus $B_0$ is an evenly covered neighborhood of $\zeta$.
+
+    Next, suppose $t\in(0,1)$ and choose $\delta > 0$ small enough so that $B_0 = B(t,\delta)\subseteq\bbC\backslash\{0,1\}$. From the explicit definition of $f$, note that $f^{-1}(t)$ contains two points, $\{z_+, z_-\}$ and $f^{-1}(B_0)$ contains two components $U_+$ and $U_-$ containing $z_+$ and $z_-$ respectively, such that $f^{-1}(B\cap\pm\overline\bbH) = U_{\pm}$. The transformation $\sigma$ defined previously maps $|2z + 1| = 1$ to $|2z - 1| = 1$, $z_-$ to $z_+$ and hence, maps $U_-$ to $U_+$. Consequently, $U_0 = U_+\cup\sigma(U_-)$ is a neighborhood of $z_+$ such that $\lambda(U_0) = \lambda(U_+)\cup\lambda(\sigma(U_-)) = B_0$. Consequently, the components of $\lambda^{-1}(B_0)$ that are biholomorphically mapped to $B_0$ are $\varphi(U_0)$ where $\varphi\in\Gamma$.
+
+    Finally, suppose $t\in(1,\infty)$. Recall that $L_3$ is mapped to $[1,\infty)$ under $f$, which was initially defined on $\overline G_0$. Arguing as in the previous paragraph, we see that there are two points $z_{\pm}$ with neighborhoods $U_{\pm}$ that are mapped to one another under $\tau$. Thus, it follow again, that $t$ has an evenly covered neighborhood. This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    There is a covering map $\mu:\bbD\to\bbC\backslash\{0,1\}$
+\end{corollary}
+
+\section{Normal Families}
+
+\begin{theorem}[Montel-Carath\'eodory]\thlabel{thm:montel-caratheodory}
+    Let $\Omega\subseteq\bbC$ be a region and 
+    \begin{equation*}
+        \mathscr F = \{f:\Omega\to\bbC\mid f\text{ is holomorphic and } f(\Omega)\subseteq\bbC\backslash\{0,1\}\}.
+    \end{equation*}
+    Then, $\mathscr F$ is a normal family in $C(\Omega,\wh\bbC)$.
+\end{theorem}
+\begin{proof}
+    To prove that $\mathscr F$ is normal, it suffices to show that for every disk $D$ in $\Omega$, the restriction of $\mathscr F$ to $D$ is normal. Hence, we may suppose without loss of generality that $\Omega = \bbD$. To show normality, we shall show that every sequence of functions in $\mathscr F$ has a subsequence that is uniformly bounded on compact subsets of $\bbD$ or has a subsequence that converges uniformly to $\infty$ on compact subsets of $\bbD$.
+
+    Let $\{f_n\}$ be a sequence of functions in $\mathscr F$. Then, there is a point $\alpha\in\wh C$ such that a subsequence $\{f_{n_k}\}$ of $\{f_n(0)\}$ converges to $\alpha$. Replace $\{f_n\}$ by $\{f_{n_k}\}$.
+
+    \noindent\textbf{Case 1:} $\alpha\in\bbC\backslash\{0,1\}$.
+
+    Consider the analytic covering map $\mu:\bbD\to\bbC\backslash\{0,1\}$ and let $U$ be an evenly covered neighborhood of $\alpha$. Pick a component $V$ of $\mu^{-1}(U)$. Since $\bbD$ is simply connected, there are holomorphic lifts $\wt f_n: \bbD\to\bbD$ such that $\mu\circ\wt f_n = f_n$ and $\wt f_n(0)\in V$ for sufficiently large $n$. This is a sequence of functions that is uniformly bounded on compact subsets of $\bbD$ and hence, has a subsequence $\{\wt f_{n_k}\}$ that converges to a holomorphic function $f:\bbD\to\bbC$. Note that $|f(z)|\le 1$ for all $z\in\bbD$ and if $|f(z)| = 1$ for some $z\in\bbD$, then $f$ must be a constant function $\beta$ due to the Maximum Modulus Principle. In particular, this means that $\wt f_{n_k}(0)\to\beta$. Note that $\mu|_V$ is a biholomorphism and hence, admits a holomorphic (in particular, continuous) inverse. Then, we have 
+    \begin{equation*}
+        (\mu|_V)^{-1}(\alpha) = \lim_{k\to\infty}(\mu|_V)^{-1}(f_{n_k}(0)) = \beta,
+    \end{equation*}
+    which is absurd, since $\beta\notin\bbD$. Hence, $|f(z)| < 1$ for all $z\in\bbD$.
+
+    We shall now show that $\{f_{n_k}\}$ is uniformly bounded on compact subsets of $\bbD$, whence we would be done by Montel's Theorem. Let $K\subseteq\bbD$ be a compact set. Then, there is an $M < 1$ such that $|f(z)|\le M$ on $K$. Choose $M < r < 1$. Then, for sufficiently large $k$, we have $|f(z) - \wt f_{n_k}(z)| < r - M$. Thus, for all such $k$, we have $|\wt f_{n_k}(z)| < r$. Note that $\mu$ is bounded on $\overline B(0, r)$ and hence, $f_{n_k} = \mu\circ\wt f_{n_k}$ is uniformly bounded on $K$.
+
+    \textbf{Case 2:} $\alpha = 1$.
+
+    Since $\bbD$ is simply connected and $f_n$ never vanishes on $\bbD$ for all $n$, there is a ``square root'' $g_n: \bbD\to\bbC$. Replacing $g_n$ by $-g_n$ if necessary, we may suppose that $g_n(0)\to -1$ as $n\to\infty$. Further, note that the $g_n$'s have image contained in $\bbC\backslash\{0,1\}$. From our analysis in \textbf{Case 1}, there is a subsequence $\{g_{n_k}\}$ that converges uniformly on compact subsets of $\bbD$. Since $f_{n_k} = g_{n_k}^2$, we are done by once again invoking Montel's Theorem.
+
+    \textbf{Case 3:} $\alpha = 0$.
+    Simply replace $f_n$ by $1 - f_n$. This brings us to \textbf{Case 2}.
+
+    \textbf{Case 4:} $\alpha = \infty$.
+
+    Let $g_n = 1/f_n$, which are holomorphic on $\bbD$ since $f_n$'s never vanish on $\bbD$ for all $n$. Since the images of the $g_n$'s are contained in $\bbC\backslash\{0,1\}$, invoking the analysis of the previous cases, there must be a subsequence $\{g_{n_k}\}$ that converges uniformly on compact subsets of $\bbD$ to a holomorphic function $g:\bbD\to\bbC$. Note that $g(0) = 0$ but the $g_n$'s have no zeros and hence, due to Hurwitz's Theorem, $g$ must identically be $0$. It follows that $f_{n_k}(z)\to\infty$ uniformly on compact subsets of $\bbD$.
+\end{proof}
+
+\section{Picard's Theorems}
+
+\begin{theorem}[Little Picard]
+    Let $f$ be an entire function. If there are two distinct complex numbers that are not in the image of $f$, then $f$ must be constant.
+\end{theorem}
+\begin{proof}
+    Without loss of generality, suppose $f$ misses $0$ and $1$. Recall the analytic covering map $\mu:\bbD\to\bbC\backslash\{0,1\}$. There is a holomorphic lift $\wt f: \bbC\to\bbD$ of $f$. Due to Liouville, $\wt f$ must be constant and hence, so must $f$.
+\end{proof}
+
+\begin{theorem}[Great Picard]
+    Let $f:\Omega\to\bbC$ have an essential singularity at $0\in\Omega$. Then, there is an $\alpha\in\bbC$ such that for all $\zeta\ne\alpha$, the equation $f(z) = \zeta$ has infinitely many solutions in any punctured neighborhood of $0$ that is contained in $\Omega$.
+\end{theorem}
+\begin{proof}
+    Suppose there is an $R > 0$ such that $B(0,R)\subseteq\Omega$ and $f(B(0, R))$ misses atleast two points in $\bbC$. We may suppose without loss of generality that $0$ and $1$ are missed. Note that we may also choose $R < 1/2$.
+
+    Since $0$ is not a pole, the limit $|f(z)|$ as $z\to 0$ does not tend to $\infty$. Consequently, there is a positive constant $P > 0$ such that for all $R > \delta > 0$, there is a $z\in B(0,\delta)$ with $|f(z)|\le P$. Begin with $\delta = R$ and choose such a $z_1$. Next, set $\delta = z_1$ and pick a corresponding $z_2$ and continue in this fashion. The sequence $\{z_i\}$ is bounded and hence, has a convergent subsequence, say $\{z_{n_k}\}$. Call this sequence $\{\alpha_k\}$.
+    
+    Define $f_n:\Omega\to\bbC$ by $f_n(z) = f(2\alpha_n z/R)$. Then, due to \thref{thm:montel-caratheodory} $\{f_n\}$ is a normal family and hence, admits a subsequence $\{f_{n_k}\}$ that either converges uniformly on compact subsets of $\Omega$ to either a holomorphic function $g:\Omega\to\bbC$ or to the identically $\infty$ function on $\Omega$.
+
+    Suppose the former case and let $M = \max\{|g(z)|\colon |z| = R/2\}$. Due to uniform convergence on compact subsets of $\Omega$, there is a $k_0$ such that for all $k\ge k_0$, we have $|f_{n_k}(z) - g(z)|\le M$ whenever $|z| = R/2$ and hence, $|f(\alpha_{n_k} z)| = |f_{n_k}(z)|\le 2M$ whenever $|z| = R/2$. Due to the Maximum Modulus Principle, $f(z)$ is bounded by $2M$ on the annulus $|\alpha_{n_k}| < |z| < R/2$. Since $|\alpha_{n_k}|$ grows arbitrarily small, we see that $f(z)$ Is bounded by $2M$ on the annulus $0 < |z| < R/2$. This would mean that $z = 0$ is a removable singularity, a contradiction.
+
+    Consider the latter case, $g\equiv\infty$. But this is obviously not possible since for sufficiently large $n$, $f_n(R/2)$ converges to a finite limit. This completes the proof.
+\end{proof}
+
+\end{document}

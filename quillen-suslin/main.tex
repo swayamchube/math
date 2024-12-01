@@ -1,0 +1,634 @@
+\documentclass[12pt]{article}
+
+% \usepackage{./arxiv}
+
+\title{The Quillen-Suslin Theorem}
+\author{Swayam Chube}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\frakM}{\mathfrak{M}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbI}{\mathbb{I}}
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\scshape}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+\begin{document}
+\maketitle
+
+\section{Finite Free Resolutions}
+
+\begin{definition}
+    A module $E$ is said to be \define{stably free} if there exists a finite free module $F$ of such that $E\oplus F$ is finite free.
+
+    $E$ is said to have a \define{finite free resolution} if there is a resolution 
+    \begin{equation*}
+        0\to E_n\to\cdots\to E_0\to E\to 0
+    \end{equation*}
+    such that each $E_i$ is a finite free module.
+\end{definition}
+
+\begin{proposition}
+    Let $M$ be projective. Then $M$ is stably free if and only if $M$ admits a finite free resolution.
+\end{proposition}
+\begin{proof}
+    Suppose first that $M$ is stably free. Then, there is a finite free $F$ such that $E = M\oplus F$ is finite free. Thus, $0\to F\to E\to M\to 0$ is a finite free resolution of $M$.
+
+    On the other hand, suppose $M$ admits a finite free resolution, 
+    \begin{equation*}
+        0\to E_n\to\cdots\to E_0\to M\to 0,
+    \end{equation*}
+    where $n$ is the smallest such. We shall induct on this $n$. The base case with $n = 0$ is trivial since $M$ is free. Let $M_1 = \ker\left(E_0\to M\right)$. Then, $M_1$ has a finite free resolution 
+    \begin{equation*}
+        0\to E_n\to\cdots\to E_1\to M_1\to 0
+    \end{equation*}
+    of length $n - 1$ whence the induction hypothesis applies and there is a finite free $F$ such that $M_1\oplus F$ is finite free. Using the fact that $M$ is projective, we have 
+    \begin{equation*}
+        M\oplus\left(M_1\oplus F\right)\cong \left(M\oplus M_1\right)\oplus F\cong E\oplus F,
+    \end{equation*}
+    and hence, $M$ is stably free.
+\end{proof}
+
+\begin{definition}
+    A resolution 
+    \begin{equation*}
+        0\to E_n\to\cdots\to E_0\to M\to 0
+    \end{equation*}
+    is said to be \define{stably free} if each $E_i$ is stably free for $0\le i\le n$.
+\end{definition}
+
+\begin{proposition}\thlabel{prop:free-iff-stable-free-res}
+    $M$ has a finite free resolution of length $n\ge 1$ if and only if it has a stably free resolution of length $n$.
+\end{proposition}
+\begin{proof}
+    Obviously every finite free resolution is stably free. Suppose now that $M$ has a stably free resolution of length $n$: 
+    \begin{equation*}
+        0\to E_n\to\cdots\to E_0\to M\to 0
+    \end{equation*}
+    Choose any index $0\le i < i + 1\le n$. There are finite free modules $F_i, F_{i + 1}$ corresponding to $E_i, E_{i + 1}$ respectively. Set $F = F_i\oplus F_{i + 1}$. Then, we have a stably free resolution:
+    \begin{equation*}
+        0\to E_n\to\cdots\to E_{i + 1}\oplus F\to E_i\oplus F\to E_{i - 1}\to\cdots\to E_0\to M\to 0,
+    \end{equation*}
+    with the modified map being $\left(E_{i + 1}\to E_i, \id_{F}\right)$. 
+
+    Applying the above construction successively to pairs $(E_0, E_1)$, $(E_1, E_2)$ and so on, we end up with a finite free resolution of $M$.
+\end{proof}
+
+\begin{definition}
+    $M_1$ and $M_2$ are said to be \define{stably isomorphic} if there exist finite free modules $F_1$ and $F_2$ such that $M_1\oplus F_1\cong M_2\oplus F_2$.
+\end{definition}
+
+\begin{lemma}[Schanuel]\thlabel{lem:schanuel}
+    Let $0\to K\to P\to M\to 0$ and $0\to K'\to P'\to M\to 0$ be exact sequences where $P$ and $P'$ are projective. Then $K\oplus P'\cong K'\oplus P$.
+\end{lemma}
+\begin{proof}
+    Treat $K$ and $K'$ as submodules of $P$ and $P'$ respectively. The projectivity of $P$ and $P'$ gives a commutative diagram 
+    \begin{equation*}
+        \xymatrix {
+            0\ar[r] & K\ar[r]\ar[d]^u & P\ar[r]\ar[d]^w & M\ar[r]\ar@{=}[d]^{\id} & 0\\
+            0\ar[r] & K'\ar[r] & P'\ar[r] & M\ar[r] & 0
+        }
+    \end{equation*}
+    where $u$ is the restriction of $w$ to $K$. Consider the sequence $0\to K\xrightarrow{f} P\oplus K'\xrightarrow{g} P'\to 0$ where 
+    \begin{equation*}
+        f(x) = (x, u(x))\quad\text{and}\quad g(y, z) = w(y) - z.
+    \end{equation*}
+    We contend that this is exact. 
+    \begin{itemize}
+        \item Exactness at $K$ is trivial. 
+        \item It is easy to see that $g\circ f = 0$. Suppose $(y, z)\in\ker g$, that is, $w(y) = z$. Since $z\in K'$, we must have that $y\in K$ whence $u(y) = z$, which proves exactness at $P\oplus K'$.
+        \item Choose some $x'\in P'$. We can choose an $x\in P$ such that the images of $x$ and $x'$ in $M$ are the same. Thus, $x' - w(x)\in K'$ whence exactness at $P'$ follows.
+    \end{itemize}
+    Finally, since $P'$ is projective, the sequence splits, giving us the desired conclusion.
+\end{proof}
+
+\begin{lemma}\thlabel{lem:lifting-stable-iso}
+    Suppose $M_1$ and $M_2$ are stably isomorphic. Let 
+    \begin{equation*}
+        0\to N_1\to E_1\to M_1\to 0\quad\text{and}\quad 0\to N_2\to E_2\to M_2\to 0
+    \end{equation*}
+    be exact sequences where $E_1$ and $E_2$ are stably free. Then $N_1$ is stably isomorphic to $N_2$.
+\end{lemma}
+\begin{proof}
+    There are finite free modules $F_1, F_2$ such that $M_1\oplus F_1\cong M_2\oplus F_2$. We may modify the above short exact sequences to obtain 
+    \begin{equation*}
+        0\to N_1\to E_1\oplus F_1\to M_1\oplus F_1\to 0\quad\text{and}\quad 0\to N_2\to E_2\oplus F_2\to M_2\oplus F_2\to 0.
+    \end{equation*}
+    Invoking \thref{lem:schanuel}, 
+    \begin{equation*}
+        N_1\oplus E_2\oplus F_2\cong N_2\oplus E_1\oplus F_1.
+    \end{equation*}
+    Since both $E_1, E_2$ are stably free, there is a finite free module $F$ such that both $E_1\oplus F$ and $E_2\oplus F$ are finite free. Thus, 
+    \begin{equation*}
+        N_1\oplus\left(E_2\oplus F\oplus F_2\right)\cong N_2\oplus\left(E_1\oplus F\oplus F_1\right)
+    \end{equation*}
+    and the conclusion follows.
+\end{proof}
+
+\begin{definition}
+    The minimal length of a stably free resolution of a module is called its \define{stably free dimension}.
+\end{definition}
+
+\begin{theorem}\thlabel{thm:completing-stably-free-resolutions}
+    Let $M$ be a module admitting a stably free resolution 
+    \begin{equation*}
+        0\to E_n\to\cdots\to E_0\to M\to 0
+    \end{equation*}
+    of length $n$. Let 
+    \begin{equation*}
+        F_m\to\cdots\to F_0\to M
+    \end{equation*}
+    be an exact sequence with $F_i$ stably free for $0\le i\le m$. 
+    \begin{enumerate}[label=(\alph*)]
+        \item If $m < n - 1$, then there exists a stably free module $F_{m + 1}$ such that the above sequence can be continued exactly to 
+        \begin{equation*}
+            F_{m + 1}\to F_m\to\cdots\to F_0\to M
+        \end{equation*}
+        \item If $m = n - 1$ and $F_n = \ker\left(F_{n - 1}\to F_{n - 2}\right)$. Then $F_n$ is stably free.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    For $0\le i\le n$, define $K_i = \ker(E_i\to E_{i - 1})$ with the convention that $E_{-1} = M$. Similarly, define $K_i' = \ker(F_{i}\to F_{i - 1})$. Using \thref{lem:lifting-stable-iso}, repeatedly along with the exact sequences 
+    \begin{equation*}
+        0\to K_i\to E_i\to E_{i - 1}\to 0\quad\text{and}\quad 0\to K_i'\to F_i\to K_{i - 1}'\to 0,
+    \end{equation*}
+    we conclude that $K_m$ and $K_m'$ are stably isomorphic. Thus, there exist finite free modules $F, F'$ such that $K_m\oplus F\cong K_m'\oplus F'$.
+
+    \begin{enumerate}[label=(\alph*)]
+    \item $m < n - 1 : $ We have 
+    \begin{equation*}
+        E_{m + 1}\oplus F\onto K_m\oplus F\cong K_m'\oplus F'\to K_m'\to 0.
+    \end{equation*}
+    Set $F_{m + 1} = E_{m + 1}\oplus F$ which is easily seen to be stably free.
+
+    \item $m = n - 1:$ We can choose $K_m = E_n$. Then, $E_n\oplus F$ is stably free, whence so is $K_m'\oplus F'$, in particular, so is $K_m'$. This completes the proof. \qedhere
+    \end{enumerate}
+\end{proof}
+
+\begin{corollary}\thlabel{cor:stable-free-dim-reduces}
+    If $0\to M_1\to E\to M\to 0$ is exact, $M$ has stably free dimension $\le n$, and $E$ is stably free, then $M_1$ has stably free dimension $\le n - 1$.
+\end{corollary}
+\begin{proof}
+    Let $0\to E_n\to\cdots\to E_0\to M\to 0$. We have an incomplete stably free resolution $E\to M\to 0$. We may now invoke \thref{thm:completing-stably-free-resolutions} with $F_0 = E$ to obtain a resolution 
+    \begin{equation*}
+        0\to F_n\to\cdots\to F_0 = E\to M\to 0.
+    \end{equation*}
+    But note that $M_1 = \ker(E\to M)$ and hence, there is a stably free resolution 
+    \begin{equation*}
+        0\to F_n\to\cdots\to F_1\to M_1\to 0,
+    \end{equation*}
+    and the conclusion follows.
+\end{proof}
+
+\begin{remark}\thlabel{rem:exact-diagram}
+    Let $0\to M'\to M\to M''\to 0$ be a short exact sequence of finitely generated modules. Then, there are surjections $\varphi: R^m\to M'$ and $\psi: R^n\to M''$, where $R$ is the base ring. There is also the canonical injection $\iota: R^m\to R^m\oplus R^n$ and the canonical surjection $\pi: R^m\oplus R^n\to R^n$. Define the map $\Phi: R^m\oplus R^n\to M$ given by $\Phi(x, y) = f(\varphi(x)) + \wt\psi(y)$, where $\wt\psi: R^n\to M$ is a lift of the map $\psi: R^n\to M''$. 
+
+    We contend that $\Phi$ is surjective. Indeed, let $m\in M$ then there is a $y\in R^n$ such that $\psi(y) = g(m)$. It is easy to see that $m - \wt\psi(y)\in\ker g = \im f$ and hence, there is an $x\in R^m$ such that $f\circ\varphi(x) = m - \wt\psi(y)$. It follows that $\Phi(x, y) = m$. Finally, the Snake Lemma gives a nice exact diagram.
+    \begin{equation*}
+        \xymatrix {
+            & 0\ar[d] & 0\ar[d] & 0\ar[d] & \\
+            0\ar[r] & M_1'\ar[r]\ar[d] & M_1\ar[r]\ar[d] & M_1''\ar[r]\ar[d] & 0\\
+            0\ar[r] & R^m\ar[r]^\iota\ar[d]_{\varphi} & R^m\oplus R^n\ar[r]^\pi\ar[d]_{\Phi} & R^n\ar[r]\ar[d]^{\psi}\ar@{-->}[ld]_{\wt\psi} & 0\\
+            0\ar[r] & M'\ar[r]_f\ar[d] & M\ar[r]_g\ar[d] & M''\ar[r]\ar[d] & 0\\
+            & 0 & 0 & 0 &
+        }
+    \end{equation*}
+\end{remark}
+
+\begin{lemma}
+    Let $M''$ be finitely presented and $M$ finitely generated. If $M'$ is the kernel of a surjection $M\onto M''$, then $M'$ is finitely generated.
+\end{lemma}
+\begin{proof}
+    We first prove this when $M$ is finite free. Since $M''$ is finitely presented, there is an exact sequence $0\to K\to F\to M''\to 0$, where $F$ is a finite free module and $K$ is finitely generated. Due to \thref{lem:schanuel}, $M'\oplus F\cong K\oplus M$, whence $M'$ is finitely generated.
+
+    Now, suppose $M$ is just finitely generated. It can be written as the quotient of a free module $F\onto M$. This gives a commutative diagram 
+    \begin{equation*}
+        \xymatrix {
+            0\ar[r] & K\ar[r]\ar[d] & F\ar[rd]\ar[d] &  &\\
+            0\ar[r] & M'\ar[r]\ar[d] & M\ar[r]\ar[d] & M''\ar[r] & 0\\
+            & 0 & 0 &  &
+        }
+    \end{equation*}
+    whence $M'$ is finitely generated.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:ses-finite-resolution}
+    Let $0\to M'\to M\to M''\to 0$ be an exact sequence. If any two of these modules have a finite free resolution, then so does the third.
+\end{theorem}
+\begin{proof}
+    There are three possible cases. We shall tacitly use \thref{prop:free-iff-stable-free-res} throughout this proof.
+    \begin{description}
+        \item[$M'$ and $M$:] We induct on the stable free dimension of $M$. For the base case with the stable free dimension $0$, $M$ is stable free and the conclusion follows since $M'$ too has a finite free resolution. Next, suppose the stable free dimension of $M$ is $n\ge 1$. Due to \thref{rem:exact-diagram} and \thref{cor:stable-free-dim-reduces}, the stable free dimension of $M_1$ is at most $n - 1$ whence the induction hypothesis applies and $M_1''$ has a finite free resolution and the conclusion follows.
+
+        \item[$M'$ and $M''$:] Induct on the maximum of the stable free dimension of $M'$ and $M''$. The base case occurs when both $M'$ and $M''$ have stably free dimension $0$, that is, both are stably free, consequently, projective. It follows that $M\cong M'\oplus M''$ is stably free. 
+
+        Next, for the induction step, using \thref{rem:exact-diagram} and \thref{cor:stable-free-dim-reduces} we see that the maximum of the stably free dimension of $M_1'$ and $M_1''$ is at most $n - 1$, whereby the induction hypothesis applies and the conclusion follows.
+
+        \item[$M$ and $M''$:] We induct on the stably free dimension of $M''$. In the base case, $M''$ is stably free, in particular, projective, and hence, $M'\oplus M''\cong M$, whence $M'$ is also stably free.
+
+        As for the inductive step, again use \thref{rem:exact-diagram} and \thref{cor:stable-free-dim-reduces} to conclude. \qedhere
+    \end{description}
+\end{proof}
+
+\section{Serre's Theorem}
+
+\begin{theorem}
+    Let $R$ be a Noetherian ring. If every finite $R$-module has a finite free resolution, then every finite $R[X]$-module has a finite free resolution.
+\end{theorem}
+\begin{proof}
+    Let $M$ be a finite $R[X]$-module. There is a filtration 
+    \begin{equation*}
+        M = M_0\supsetneq M_1\supsetneq\cdots\supsetneq M_n = 0,
+    \end{equation*}
+    where $M_i/M_{i + 1}\cong R[X]/\frakP_i$ for some prime $\frakP_i$. In light of \thref{thm:ses-finite-resolution}, it suffices to prove the theorem in the case $M = R[X]/\frakP$ for some prime $\frakP$.
+
+    Suppose the theorem is false. Let $\Sigma$ be the collection of all primes $\frakP$ such that $R[X]/\frakP$ does not admit a finite free resolution. Choose $\frakP$ in $\Sigma$ that maximizes $\frakp = \frakP\cap R$.
+
+    Let $R_0 = R/\frakp$, $K_0$ its quotient field, $\frakP_0 = \frakP/\frakp R[X]$ and $M = R[X]/\frakP$. We may view $M$ as an $R_0[X]$-module, equal to $R_0[X]/\frakP_0$. Let $f_1,\dots,f_n$ be a finite set of generators for $\frakP_0$, and let $f$ be a polynomial of minimal degree in $\frakP_0$. 
+
+    We c an write $f_i = q_if + r_i$ for $1\le i\le n$ with $q_i, r_i\in K_0[X]$ and $\deg r_i < \deg f$ or $r_i = 0$. Let $d_0$ be a common denominator for all coefficients of all $q_i, r_i$. Then, $d_0\ne 0$ and 
+    \begin{equation*}
+        d_0f_i = q_i'f + r_i',
+    \end{equation*}
+    where $q_i' = d_0q_i, r_i' = d_0r_i\in R_0[X]$ Since $\deg f$ is minimal in $\frakP_0$, it follows that $r_i' = 0$ for all $i$, so $d_0\frakP_0\subseteq(f)$.
+
+    Let $N_0 = \frakP_0/(f)$, so that $N_0$ is a module over $R_0[X]$, and hence, $N_0$ can also be viewed as an $R[X]$-module. When so viewed, we denote $N_0$ by $N$. Let $d\in R$ be any element reducing to $d_0\mod\frakp$. Since $d_0\ne 0$, $d\notin\frakp$.
+
+    The module $N_0$ has a filtration such that each successive quotient is isomorphic to $R_0[X]/\frakQ_0$ where $\frakQ_0$ is an associated prime of $N_0$. Let $\frakQ$ be the pullback of $\frakQ_0$ to $R[X]$. It is easy to argue that these prime ideals $\frakQ$ are precisely the associated primes of $N$ in $R[X]$. Since $d_0$ kills $N_0$, $d$ must kill $N$ and hence, $d$ lies in every associated prime of $N$. 
+    
+    Note that each associated prime $\frakQ$ of $N$ contains $\frakP$ and due to the preceding paragraph, $\frakQ\cap R\supsetneq\frakP\cap R$. Due to the maximality involved in the choice of $\frakP$, every successive quotient in the filtration of $N$ has a finite free resolution, whence $N$ has a finite free resolution.
+
+    By assumption, $\frakp$ has a finite free resolution as an $R$-module, say 
+    \begin{equation*}
+        0\to E_n\to\cdots\to E_0\to\frakp\to 0.
+    \end{equation*}
+    Then 
+    \begin{equation*}
+        0\to E_n[X]\to\cdots\to E_0[X]\to\frakp[X]\to 0
+    \end{equation*}
+    is a finite free resolution of $\frakp[X]\subseteq R[X]$ as an $R[X]$-module. From the exact sequence 
+    \begin{equation*}
+        0\to\frakp[X]\to R[X]\to R_0[X]\to 0,
+    \end{equation*}
+    it follows that $R_0[X]$ has a finite free resolution as an $R[X]$-module.
+
+    There is a surjective $R[X]$-linear map $\mu_f: R_0[X]\to (f)$, which is just multiplication by $f$. The kernel of this map is trivial since $R_0[X]$ is an integral domain. It follows that $(f)$ too has a finite free resolution as an $R[X]$-module. 
+
+    From the exact sequence of $R[X]$-modules
+    \begin{equation*}
+        0\to (f)\to\frakP_0\to N\to 0,
+    \end{equation*}
+    we conclude that $\frakP_0$ has a finite free resolution as an $R[X]$-module. Next, from another exact sequence of $R[X]$-modules
+    \begin{equation*}
+        0\to\frakp R[X]\to\frakP\to\frakP_0\to 0,
+    \end{equation*}
+    it follows that $\frakP$ has a finite free resolution as an $R[X]$-module. Finally from 
+    \begin{equation*}
+        0\to\frakP\to R[X]\to R[X]/\frakP\to 0,
+    \end{equation*}
+    we conclude that $R[X]/\frakP$ admits a finite free resolution as an $R[X]$-module, a contradiction. This completes the proof.
+\end{proof}
+
+\begin{theorem}[Serre]\thlabel{thm:serre}
+    Let $k$ be a field. Every finite projective module over $k[X_1,\dots, X_n]$ admits a finite free resolution. Equivalently, is stably free.
+\end{theorem}
+
+\section{Unimodular Polynomial Vectors}
+
+\begin{definition}
+    Let $A$ be a commutative ring. An $n$-tuple $(f_1,\dots,f_n)\in A^n$ is said to be \define{unimodular} if they generate the unit ideal in $A$. A unimodular vector is said to have the \define{unimodular extension property} if there exists a matrix in $\GL_n(A)$ with $(f_1,\dots, f_n)^\top$ as the first column.
+\end{definition}
+
+\begin{remark}
+    Note that a unimodular column vector $(f_1,\dots, f_n)^\top$ has the unimodular extension property if and only if some column vector obtained after a series of row and column operations has that property.
+\end{remark}
+
+\begin{theorem}[Horrocks]\thlabel{thm:horrocks}
+    Let $(\frako,\frakm, k)$ be a local ring and  $A = \frako[X]$. Let $f$ be a unimodular column vector in $A^{(n)}$ such that some component in $f$ has leading coefficient $1$. Then $f$ has the unimodular extension property.
+\end{theorem}
+\begin{proof}
+    If $n = 1$, then there is nothing to prove. Next, if $n = 2$, then $(f_1, f_2) = (1)$ and hence, there are $g_1, g_2\in A$ such that $f_1g_1 + f_2g_2 = 1$, whence 
+    \begin{equation*}
+        \det
+        \begin{pmatrix}
+            f_1 & -g_2\\
+            f_2 & g_1
+        \end{pmatrix}
+        = 1.
+    \end{equation*}
+
+    Now, assume $n\ge 3$ and induct on the smallest degree $d$ of a component of $f$ with leading coefficient $1$. The base case with $d = 0$ is trivial. Suppose now that $d\ge 1$. Using row operations, we may suppose that $\deg f_i < d$ for $i\ne 1$. Since there is a linear combination $\sum_{i = 1}^n g_if_i = 1$, not all coefficients of $f_2,\dots, f_n$ can lie in $\frakm$, for if they did, then $g_1f_1\equiv 1\pmod\frakm[X]$, which is absurd, since $f_1$ is not a unit modulo $\frakm[X]$.
+
+    Without loss of generality, suppose that some coefficient of $f_2$ does not lie in $\frakm$. Write 
+    \begin{align*}
+        f_1(X) = X^{d} + a_{d - 1}X^{d - 1} + \cdots + a_0\quad a_i\in\frako\\
+        f_2(X) = b_sX^{s} + \cdots + b_0\quad b_i\in\frako,~s\le d - 1
+    \end{align*}
+    such that some $b_i$ is a unit. Lt $\fraka$ be the ideal generated by all leading coefficients of polynomials of the form $g_1f_1 + g_2f_2$ of degree $\le d - 1$. We claim that $\fraka$ contains all the $b_i$. This can be seen inductively. First, $b_s$ lies in $\fraka$ because of $X^{d - s}f_2(X)$. Next, $b_{s - 1}$ is realised as $X^{d - s}f_2(X) - b_sf_1(X)$ has leading coefficient $b_{s - 1} - b_sa_{d - 1}$. But since $\fraka$ already contains $b_s$, it must also contain $b_{s - 1}$. Continue this way. Recall that one of the $b_i$'s is a unit and hence, $\fraka$ is the unit ideal.
+
+    Thus, there is a linear combination $h = g_1f_1 + g_2f_2$ having degree $\le d - 1$ and leading coefficient $1$. If $\deg f_3 < \deg h$, then $h + f_3$ has leading coefficient $1$ and degree $\le d - 1$. Now suppose $\deg f_3 = \deg h$. If the leading coefficient of $f_3$ is a unit, then multiply by its inverse to make the leading coefficient $1$. If, on the other hand, it is not a unit, then the leading coefficient of $h + f_3$ is a unit and hence, can be made $1$ after multiplying by its inverse. Now, the induction hypothesis applies, thereby completing the proof.
+\end{proof}
+
+\begin{definition}
+    Let $A$ be a commutative ring. For two column vectors $f, g\in A^{(n)}$, we write $f\sim g$ to mean that there exists $M\in\GL_n(A)$ such that $f = Mg$, and we say that $f$ is \define{equivalent} to $g$ over $A$.
+\end{definition}
+
+\begin{proposition}\thlabel{prop:vector-equiv-to-evaluation-at-zero}
+    Let $(\frako,\frakm, k)$ be a local ring. Let $f$ be a unimodular vector in $\frako[X]^{(n)}$ such that some component has leading coefficient $1$. Then $f\sim f(0)$ over $\frako[X]$.
+\end{proposition}
+\begin{proof}
+    Note that $f(0)\in\frako^{(n)}$ has at least one component which is a unit, for if not, then the constant term of any linear combination would always lie in $\frakm$. Hence, it follows that $f(0)\sim \mathbf{e}_1$. On the the other hand, due to \thref{thm:horrocks}, $f\sim\mathbf{e}_1$, thereby completing the proof.
+\end{proof}
+
+\begin{lemma}\thlabel{lem:technical}
+    Let $R$ be an integral domain, and $S\subseteq R$ a multiplicatively closed subset containing $1$. Let $X$ and $Y$ be independent variables. If $f(X)\sim f(0)$ over $S^{-1}R[X]$, then there is a $c\in S$ such that $f(X + cY)\sim f(X)$ over $R[X, Y]$.
+\end{lemma}
+\begin{proof}
+    Let $M\in\GL_n(S^{-1}R[X])$ be such that $f(X) = M(X)f(0)$. That is, $M(X)^{-1}f(X) = f(0)$. The right hand side is independent of $X$ and hence, $M(X + Y)^{-1}f(X + Y) = f(0)$ when viewed over $S^{-1}R[X, Y]$. Set $G(X, Y) = M(X)M(X + Y)^{-1}\in S^{-1}R[X, Y]$, then $G(X, Y)f(X + Y) = f(X)$.
+
+    By construction, we have $G(X, 0) = I$, the identity matrix and hence, we can write $G(X, Y) = I + YH(X, Y)$ for some matrix $H(X, Y)$ with entries in $S^{-1}R[X, Y]$. There is some $c\in S$ such that $cH$ has entries in $R[X, Y]$. Then, $G(X, cY)$ has entries in $R[X, Y]$. Now, since $\deg M(X)$ is invertible in $S^{-1}R[X]$, it must be an element of $S^{-1}R$. Further, since $\deg M(X + cY) = \det M(X)$, we have $\det G(X, cY) = 1$, thereby completing the proof.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:equivalent-to-value-at-zero}
+    Let $R$ be an integral domain, and let $f$ be a unimodular vector in $R[X]^{(n)}$, such that one component has leading coefficient $1$. Then $f(X)\sim f(0)$ over $R[X]$.
+\end{theorem}
+\begin{proof}
+    Let $J$ be the set of elements $c\in R$ such that $f(X + cY)$ is equivalent to $f(X)$ over $R[X, Y]$. We claim that $J$ is an ideal. 
+    \begin{itemize}
+        \item Let $c\in J$ and $a\in R$. Then, $f(X + caY) = f(X + c(aY))$ is equivalent to $f(X)$ over $R[X, aY]$, which is a subring of $R[X, Y]$, whence the equivalence holds over the latter too. 
+        \item Let $c, c'\in J$. Then $f(X + (c - c')Y)$ is equivalent to $f(X)$ over $R[X, (c - c')Y]$, which is again a subring of $R[X,Y]$, whence the equivalence holds over the latter too.
+    \end{itemize}
+    We next contend that $J$ is the unit ideal. Suppose not, then we can choose a maximal ideal $\frakm$ containing $J$. Due to \thref{prop:vector-equiv-to-evaluation-at-zero}, $f(X)$ is equivalent to $f(0)$ over $R_\frakm[X]$, consequently, using \thref{lem:technical}, there is a $c\in R\setminus\frakm$ such that $f(X + cY)$ is equivalent to $f(X)$ over $R[X, Y]$, a contradiction to the fact that $J\subseteq\frakm$. Thus, $J$ is the unit ideal in $R$ and there exists an $M(X, Y)\in\GL_n(R[X, Y])$ such that $f(X + Y) = M(X, Y)f(X)$. Substituting $X = 0$, we get $f(Y) = M(0, Y)f(X)$ where $M(0, Y)$ is also invertible and the conclusion follows.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:poly-ring-is-unimodular}
+    Let $k$ be a field and $f$ a unimodular vector in $k[X_1,\dots,X_n]^{(n)}$. Then $f$ has the unimodular extension property.
+\end{theorem}
+\begin{proof}
+    The proof of this is quite similar to that of Noether Normalization. We induct on $r$. Suppose first that $r\ge 2$. Let $Y_r = X_r$ and $X_i = Y_i + Y_r^{N_i}$ for some suitable choice of $N_i$'s such that at least one component of $g(Y_1,\dots,Y_r) = f(X_1,\dots,X_r)$ has leading coefficient equal to $1$.
+
+    Due to \thref{thm:equivalent-to-value-at-zero}, using the fact that $k[y_1,\dots,Y_{r - 1}]$ is an integral domain, we have that 
+    \begin{equation*}
+        g(Y_1,\dots, Y_r) = M(Y_1,\dots,Y_r)g(Y_1,\dots,Y_{r - 1}, 0)
+    \end{equation*}
+    where $M\in\GL_n\left(k[Y_1,\dots,Y_r]\right)$. Note that $g(Y_1,\dots,Y_{r - 1}, 0)$ is unimodular over $k[Y_1,\dots,Y_{r - 1}]$ and hence, has the unimodular extension property, whence so does $g(Y_1,\dots,Y_r)$. This completes the induction step.
+
+    Finally, we must handle the base case of $k[X]$, which is a PID. This is straightforward for if $f = (f_1,\dots,f_n)^\top$, then making repeated use of the Euclidean algorithm, we can make one of the components a unit, since $\gcd(f_1,\dots,f_n) = 1$. This completes the proof.
+\end{proof}
+
+\begin{definition}
+    A (commutative) ring $A$ is said to have the \define{unimodular extension property} if for every $n\ge 1$, every unimodular vector $f\in A^{(n)}$ has the property.the property.
+\end{definition}
+
+\begin{lemma}\thlabel{lem:stably-free-unimod-is-free}
+    Let $A$ have the unimodular extension property. If $E$ is a stably free $A$-module, then $E$ is free.
+\end{lemma}
+\begin{proof}
+    Let $F$ be a finite free module of rank $m$ such that $E\oplus F$ is finite free. We first show that $E$ is free when $m = 1$. That is, $E\oplus A\cong A^{(n)}$ for some positive integer $n$. We may treat both $E$ and $A$ as submodules of $A^{(n)}$ and let $u^1 = (a_{11},\dots, a_{n1})^\top$ be a basis for the submodule $A$ as an $A$-module. Consider the canonical projection $A^{(n)}\to A$. This map sends $u^1$ to $1$ and being $A$-linear, it is of the form 
+    \begin{equation*}
+        (x_1,\dots,x_n)^\top\mapsto \alpha_1x_1 + \dots + \alpha_nx_n
+    \end{equation*}
+    for some $\alpha_1,\dots,\alpha_n\in A$. Thus, $u^1$ is unimodular.
+
+    The unimodular extension property furnishes an 
+    \begin{equation*}
+        M = (u^1,\dots, u^n) = \begin{pmatrix}
+            a_{11} & \cdots & a_{1n}\\
+            \vdots & \ddots & \vdots\\
+            a_{n1} & \cdots & a_{nn}
+        \end{pmatrix}
+        \in\GL_n(A).
+    \end{equation*}
+    Using column operations, on $M$, one can make sure that $u^2,\dots, u^n\in E$ while maintaining $M\in\GL_n(A)$. Since $u^1,\dots,u^n$ form a basis for $A^{(n)}$, we see that $u^2,\dots,u^n$ must span $E$, whence $E$ is free.
+
+    Finally, if $F$ has rank $m\ge 2$, then write $F = F'\oplus A$ and use the first half of the proof to induct downwards.
+\end{proof}
+
+\begin{theorem}[Quillen-Suslin]
+    Let $k$ be a field. Every finite projective module over $k[X_1,\dots,X_n]$ is free.
+\end{theorem}
+\begin{proof}
+    Let $P$ be a projective module over $k[X_1,\dots,X_n]$. Due to \thref{thm:serre}, $P$ is stably free. Next, due to \thref{thm:poly-ring-is-unimodular} and \thref{lem:stably-free-unimod-is-free}, $P$ must be free.
+\end{proof}
+
+\end{document}

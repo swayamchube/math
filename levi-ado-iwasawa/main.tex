@@ -1,0 +1,616 @@
+\documentclass[12pt]{article}
+
+% \usepackage{./arxiv}
+
+\title{Theorems of Levi and Ado-Iwasawa}
+\author{Swayam Chube}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrN}{\mathscr N}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrR}{\mathscr R}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\scshape}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+    In this article, we (attempt to) present a self-contained proof of the Ado-Iwasawa theorem. The exposition closely follows \cite{jacobson-lie}, a copy of which was kindly lent to me by Prof. Jugal Verma.
+
+    Throughout this article, $k$ denotes a field and all Lie algebras are taken over $k$ unless specified otherwise.
+\end{abstract}
+
+\section{Preliminaries}
+Most of this section is taken from \cite{fulton-harris}.
+
+\begin{lemma}
+    Let $\chr k = 0$ and $\rho:\frakg\to\gl(V)$ be a finite-dimensional representation. Then, every element of $\rho([\frakg,\frakg]\cap\fraks)$ is nilpotent.
+\end{lemma}
+\begin{proof}
+    Induct on the dimension of $V$. We reduce to the case that $V$ is irreducible, for if $W$ were a subrepresentation, then so is $V/W$. If an operator is nilpotent on $W$ and $V/W$, it must be nilpotent on $V$.
+
+    Replacing $\frakg$ with its image, we may suppose that $\rho$ is injective. Therefore, we must show that $[\frakg, \frakg]\cap\fraks = 0$. This is equivalent to showing that $[\frakg, \frakg]\cap\fraka = 0$ for every abelian ideal $\fraka$ of $\frakg$.
+
+    Note that $[\frakg, \fraka] = 0$, for if $x\in\frakg$, $y\in\fraka$ and $z = [x,y]\in\fraka$, then $y$ and $z$ commute, and hence, $y$ commutes with $z^n$ for every positive integer $n$. Now, 
+    \begin{equation*}
+        \tr([x,y]z^{n - 1}) = \tr(xyz^{n - 1} - yxz^{n - 1}) = \tr(xz^{n - 1}y - yxz^{n - 1}) = 0.
+    \end{equation*}
+    Therefore, $\tr(z^n) = 0$ for every positive integer $n$. This shows that $z = 0$, that is, $[\frakg, \fraka] = 0$.
+
+    Finally, we show that $[\frakg,\frakg]\cap\fraka = 0$. Indeed, if $x,y\in\frakg$ and $[x,y]\in\fraka$, then $[y, [x, y]] = 0$ due to the preceding paragraph. Hence, $y$ commutes with all powers of $[x,y]$, and the same argument shows that $[x,y] = 0$. This completes the proof.
+\end{proof}
+
+\begin{lemma}
+    If $\chr k = 0$, then $[\frakg, \fraks]$ is nilpotent.
+\end{lemma}
+\begin{proof}
+    Let $\overline\frakg$ and $\overline\fraks$ denote the images of $\frakg$ and $\fraks$ under the adjoint representation. By the preceding lemma, $[\overline\frakg,\overline\fraks]\subseteq[\overline\frakg,\overline\frakg]\cap\fraks$, and hence, consists of nilpotent elements, whence is nilpotent due to Engel's Theorem.
+
+    Since the kernel of the adjoint representation is $\frakz = Z(\frakg)$, we see that $[\frakg,\fraks]/Z([\frakg, \fraks])$ is nilpotent whence, the conclusion follows.
+\end{proof}
+
+\begin{lemma}\thlabel{lem:derivation-maps-solvable-into-nilpotent}
+    Let $\chr k = 0$. If $\delta$ is a derivation of $\frakg$, then $\delta(\fraks)\subseteq\frakn$.
+\end{lemma}
+\begin{proof}
+    Construct the Lie algebra $\frakg' = \frakg\oplus k$ with the bracket 
+    \begin{equation*}
+        [(x, a), (y, b)] = \left([x,y] + a\delta(y) - b\delta(x), 0\right).
+    \end{equation*}
+    It follows that $\frakg\oplus 0$ is an ideal in $\frakg'$. Let $\xi = (0, 1)\in\frakg'$. It is easy to verify that $\delta = [\xi,\cdot]$ on $\frakg\unlhd\frakg'$. 
+
+    Let $\fraks'$ denote the radical of $\frakg'$. Obviously, $\fraks\subseteq\fraks'$. Then, 
+    \begin{equation*}
+        \delta(\fraks) = [\xi, \fraks]\subseteq[\frakg', \fraks']\cap\frakg.
+    \end{equation*}
+    We have seen that $[\frakg', \fraks']$ is a nilpotent ideal in $\frakg'$ and hence, its intersection with $\frakg$ is also nilpotent. This completes the proof.
+\end{proof}
+
+\begin{lemma}
+    Let $\chr k = 0$ and $\frakg_1$ an ideal of $\frakg$. If $\frakn_1,\fraks_1$ denote the nilradical and solvable radical of $\frakg_1$, then $\frakn_1 = \frakn\cap\frakg_1$ and $\fraks_1 = \fraks\cap\frakg_1$.
+\end{lemma}
+\begin{proof}
+    Obviously, $\frakg_1\cap\fraks\subseteq\fraks_1$. Then, $\fraks_1/\frakg_1\cap\fraks$ is a solvable ideal in $\frakg_1/\frakg_1\cap\fraks$. On the other hand, $\frakg_1/\frakg_1\cap\fraks\cong (\frakg_1 + \fraks)/\fraks$, which is an ideal in $\frakg/\fraks$. The latter is semisimple whence so is the former. As a result, $\fraks_1 = \frakg_1\cap\fraks$.
+
+    Now, if $a\in\frakg$, then $\ad a$ is a derivation of $\frakg_1$. Thus, $\ad a(\frakn_1)\subseteq\frakn_1$ due to \thref{lem:derivation-maps-solvable-into-nilpotent}, whence $\frakn_1$ is an ideal in $\frakg$, consequently, $\frakn_1\subseteq\frakn\cap\frakg_1$. This completes the proof.
+\end{proof}
+
+\section{Levi's Theorem}
+
+Throughout this section, $\chr k = 0$.
+
+\begin{lemma}[Whitehead's First Lemma]\thlabel{lem:whitehead-first}
+    Let $\frakg$ be a semisimple Lie algebra over $k$ and $M$ a $\frakg$-module. Let $f: \frakg\to M$ be a $k$-linear map satisfying 
+    \begin{equation*}
+        f([x, y]) = xf(y) - yf(x).
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Let $\rho: \frakg\to\gl(M)$ be the representation and let $\frak K = \ker\varphi$. We have a decomposition into ideals, $\frakg = \frakK\oplus\frakh$ as Lie algebras. The restriction of the representation $\frakh\to\gl(M)$ is injective and hence, the trace form $(\cdot,\cdot):\frakh\times\frakh\to k$ given by 
+    \begin{equation*}
+        (x, y) = \tr\left(\varphi(x)\varphi(y)\right)
+    \end{equation*}
+    is a nondegenerate symmetric bilinear form. Let $u_1,\dots,u_n$ be a basis of $\frakh$ and $u^1,\dots,u^n$ be the dual basis with respect to $(\cdot,\cdot)$.
+
+    The \caution{Casimir operator} is given by 
+    \begin{equation*}
+        \Gamma(\cdot) = \sum_{i = 1}^n u^i\left(u_i\cdot)\right),
+    \end{equation*}
+    and it is easy to check that this defines a $\frakg$-linear map $\Gamma: M\to M$. Further, we note that $\tr\Gamma = \dim\frakh$.
+
+    We now prove the statement of the lemma by induction on $\dim M$. Using the Fitting Decomposition with respect to $\Gamma$, we can write $M = M_0\oplus M_1$ where $\Gamma$ is nilpotent on $M_0$ and an isomorphism on $M_1$. It is also easy to check that both $M_0$ and $M_1$ are $\frakg$-submodules of $M$.
+
+    Let $\pi_i: M\to M_i$ denote the canonical projection and $f_i = \pi_i\circ f$. If both $M_0$ and $M_1$ are proper submodules, then we are done by induction. Else, we need to examine two cases.
+
+    First, suppose $M = M_0$, that is, $\Gamma$ is nilpotent on $M$, whence $\dim\frakh = \tr\Gamma = 0$, that is, $\varphi$ is a trivial representation, and hence, $f\equiv 0$. In this case, the choice of $m = 0$ works.
+
+    Now, suppose $M = M_1$, that is, $\Gamma$ is invertible. Set 
+    \begin{equation*}
+        y = \sum_{i = 1}^m u_if(u_i)\in M.
+    \end{equation*}
+    A small computation gives us 
+    \begin{equation*}
+        ay = \Gamma f(a)\quad\forall~a\in\frakg.
+    \end{equation*}
+    Thus, $f(a) = a\cdot(\Gamma^{-1}y)$, thereby completing the proof.
+\end{proof}
+
+\begin{lemma}[Whitehead's Second Lemma]\thlabel{lem:whitehead-second}
+    Let $\frakg$ be a semisimple Lie algebra over $k$, $M$ a finite-dimensional $\frakg$-module and $g:\frakg\times\frakg\to M$ a bilinear map such that 
+    \begin{enumerate}[label=(\alph*)]
+        \item $g(x, x) = 0$ for all $x\in\frakg$.
+        \item For $x_1,x_2,x_3\in\frakg$, 
+        \begin{equation*}
+            \sum_{i = 1}^3 g(x_{i}, [x_{i + 1}, x_{i + 2}]) + x_ig(x_{i + 1}, x_{i + 2}) = 0.
+        \end{equation*}
+    \end{enumerate}
+    Then, there is a $k$-linear map $\rho: \frakg\to M$ satisfying 
+    \begin{equation*}
+        g(x_1, x_2) = x_2\rho(x_1) - x_1\rho(x_2) - \rho[x_1,x_2].
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    First, note that condition (a), is equivalent to stating that $g$ is skew-symmetric. Let $\frakK,\frakh,u_i,u^i,\Gamma$ be as in the proof of \thref{lem:whitehead-first}. Set $x_3 = u_i$ in (b), multiply by $u^i$ and sum over all $i$ to obtain 
+    \begin{align*}
+        0 &= \sum_{i} u^ig(u_i, [x_1, x_2]) + \Gamma g(x_1, x_2) + \sum_{i} u^ig(x_1, [x_2, u_i]) + \sum_{i} u^i\left(x_1g(x_2, u_i)\right)\\
+        &+ \sum_{i} u^ig(x_2, [u_i, x_1]) + \sum_{i} u^i\left(x_2 g(u_i, x_1)\right)\\
+        &= \Gamma g(x_1, x_2) + \sum_i u^ig(u_i, [x_1, x_2]) + \sum_i u^i g(x_1, [x_2, u_i]) + \sum_i [u^i, x_1]g(x_2, u_i)\\
+        &+ \sum_i x_1\left(u^i g(x_2, u_i)\right) + \sum_i u^ig(x_2, [u_i,x_1]) + \sum_i [u^i, x_2]g(u_i, x_1) + \sum_i x_2\left(u^ig(u_i, x_1)\right).
+    \end{align*}
+
+    Recall that if $[u_i, x] = \sum \alpha_{ij} u_j$ and $[u^i, x] = \sum \beta_{ij} u^j$, then $\alpha_{ij} + \beta_{ji} = 0$. Using this, we get 
+    \begin{align*}
+        &\sum_i [u^i, x_1]g(x_2, u_i) = \sum_i\sum_j\beta_{ij} u^jg(x_2, u_i)  = -\sum_{i}\sum_{j} \alpha_{ji}u^jg(x_2, u_i) = \sum_{j} u^j g(x_2, [x_1, u_j])\\
+        &\sum_i [u^i, x_2]g(u_i, x_1) = \sum_i u^i g([x_2, u_i], x_1)
+    \end{align*}
+
+    Substituting this back, we have canceled four terms to obtain,
+    \begin{equation*}
+        0 = \Gamma g(x_1, x_2) + \sum_i u^ig(u_i, [x_1, x_2]) + \sum_i x_1\left(u^ig(x_2, u_i)\right) + \sum_i x_2\left(u^ig(u_i, x_1)\right).
+    \end{equation*}
+
+    If $\Gamma$ is invertible, then define 
+    \begin{equation*}
+        \rho(x) = \Gamma^{-1}\sum_{i} u^ig(u_i, x).
+    \end{equation*}
+
+    Now, suppose $\Gamma$ is nilpotent. As we saw in \thref{lem:whitehead-first}, the representation must be the zero representation and hence, condition (b) reduces to
+    \begin{equation*}
+        g(x_1, [x_2,x_3]) + g(x_2, [x_3, x_1]) + g(x_3, [x_1, x_2]) = 0.
+    \end{equation*}
+
+    Let $\frakX$ denote the $k$-vector space of linear maps $\frakg\to M$. This can be given a $\frakg$-module structure by defining, for $A\in\frakX$, $x,y\in\frakg$, 
+    \begin{equation*}
+        (xA)(y) = - A([x, y])
+    \end{equation*}
+    Note that this is just the standard $\frakg$-module structure on $\Hom_k(\frakg, M)$ where $\frakg$ is a $\frakg$-module through the adjoint representation.
+
+    For each $y\in\frakg$, let $A_y\in\frakX$ be the mapping $x\mapsto -g(x,y)$. Then, $\Phi:\frakg\to\frakX$ given by $y\mapsto A_y$ is $k$-linear. We contend that $\Phi$ satisfies the hypothesis of \thref{lem:whitehead-first}.
+
+    Indeed, 
+    \begin{align*}
+        A_{[x_1, x_2]}(y) = -g(y, [x_1, x_2])\\
+        (x_2A_{x_1})(y) = - A_{x_1}([x_2, y]) = g([x_2, y], x_1)\\
+        (x_1A_{x_2})(y) = - A_{x_2}([x_1, y]) = g([x_1, y], x_2).
+    \end{align*}
+
+    Then, 
+    \begin{align*}
+        \left(x_1 A_{x_2} - x_2 A_{x_1}\right)(y) &= g([x_1, y], x_2) - g([x_2, y], x_1) \\
+        &= -g(x_2, [x_1, y]) - g(x_1, [y, x_2])\\
+        &= g(y, [x_2, x_1]) = -g(y, [x_1, x_2])\\
+        &= -A_{[x_1, x_2]}(y).
+    \end{align*}
+
+    As a result, there is a $\rho\in\frakX$ such that $A_y = y\rho$. In other words, we have a linear map $\rho:\frakg\to M$ such that 
+    \begin{equation*}
+        -g(x,y) = A_y(x) = (y\rho)(x) = - \rho([y, x]) = \rho([x, y]).
+    \end{equation*}
+    And since $M$ is a zero representation, we have our desired conclusion in the case that $\Gamma$ is nilpotent.
+
+
+    Finally, if $\Gamma$ is neither invertible nor nilpotent, we use the Fitting decomposition to write $M = M_0\oplus M_1$ just as in the proof of \thref{lem:whitehead-first} and use an induction argument to complete the proof.
+\end{proof}
+
+\begin{proposition}\thlabel{prop:technical-levi}
+    Let $\frakg$ be a Lie algebra over $k$, $\fraks$ an abelian ideal in $\frakg$. Set $\overline\frakg = \frakg/\fraks$. Then, $\overline\frakg$ acts on $\fraks$ through the ``adjoint'', that is, $\overline x\cdot s = [x, s]$. Let $\sigma$ be a linear section of the projection $\frakg\onto\overline\frakg$. Define the skew-symmetric bilinear map $g:\overline\frakg\times\overline\frakg\to\fraks$ by 
+    \begin{equation*}
+        g(\overline x_1, \overline x_2) = [\sigma\overline x_1, \sigma\overline x_2] - \sigma[\overline x_1, \overline x_2].
+    \end{equation*}
+
+    Then, $\fraks$ has a complementary subspace which is also a subalgebra if and only if there is a linear map $\rho:\overline\frakg\to\fraks$ such that 
+    \begin{equation*}
+        g(\overline x_1, \overline x_2) = \overline x_2\rho(\overline x_1) - \overline x_1\rho(\overline x_2) - \rho[\overline x_1,\overline x_2].
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Suppose $\tau:\overline\frakg\to\frakg$ is a linear section such that $\tau\overline\frakg$ is a subalgebra of $\frakg$. Let $\rho = \tau - \sigma$. Then, 
+    \begin{equation*}
+        \pi(\rho\overline x) = \pi(\sigma\overline x) - \pi(\tau\overline x) = \overline x - \overline x = 0.
+    \end{equation*}
+    Hence, the image of $\rho$ is in $\fraks$. We have 
+    \begin{align*}
+        g(\overline x_1, \overline x_2) &= [\tau\overline x_1 - \rho\overline x_1, \tau\overline x_2 - \rho\overline x_2] + \rho[\overline x_1,\overline x_2] - \tau[\overline x_1,\overline x_2]\\
+        &= -[\tau\overline x_1, \rho\overline x_2] - [\rho\overline x_1, \tau\overline x_2] + [\rho\overline x_1,\rho\overline x_2] - \rho[\overline x_1,\overline x_2]\\
+        &= -[\tau\overline x_1,\rho\overline x_2] - [\rho\overline x_1, \tau\overline x_2] - \rho[\overline x_1,\overline x_2]\\
+        &= [\tau\overline x_2,\rho\overline x_1] - [\tau\overline x_1, \rho\overline x_2] - \rho[\overline x_1,\overline x_2]\\
+        &= \overline x_2\rho(\overline x_1) - x_1\rho(\overline x_2) - \rho[\overline x_1,\overline x_2].
+    \end{align*}
+    This proves one direction of the proposition. The other direction follows by simply retracing the steps we did above.
+\end{proof}
+
+\begin{theorem}[Levi]\thlabel{thm:levi}
+    Let $\frakg$ be a Lie algebra over $k$ and $\fraks$ its solvable radical. Then, $\fraks$ has a complementary subalgebra in $\frakg$.
+\end{theorem}
+\begin{proof}
+    We first reduce to the case $[\fraks,\fraks] = 0$. Suppose $\frakt = [\fraks,\fraks]\ne 0$. Let $\overline\frakg = \frakg/\frakt$. Since $\dim\overline\frakg < \dim\frakg$, we can use an inductive argument to find a complementary subalgebra $\overline\frakh$ to $\overline\fraks$ in $\overline\frakg$. Note that $\overline\frakh = \frakh/\frakt$ for some subalgebra $\frakh$ of $\frakg$ containing $\frakt$. Hence, $\frakh\cap\fraks = \frakt$ and $\dim\frakh < \dim\frakg$.
+
+    The inuction hypothesis applies to $\frakh$ and we can isolate a subalgebra $\frakL$ of $\frakh$ that is complementary to $\frakt$. It is easy to see that $\frakL$ is the required complement of $\fraks$ using a dimension argument.
+
+    Finally, we come to the case when $[\fraks,\fraks] = 0$, that is, $\fraks$ is abelian. Set $\overline\frakg = \frakg/\fraks$. Then, $\overline\frakg$ acts on $\fraks$ as $\overline x\cdot s = [x, s]$. Let $\sigma:\overline\frakg\to\frakg$ be a linear section of the projection $\frakg\onto\overline\frakg$.
+
+    Consider the map $g: \overline\frakg\times\overline\frakg\to\fraks$ by 
+    \begin{equation*}
+        g(\overline x_1,\overline x_2) = [\sigma\overline x_1, \sigma\overline x_2] - \sigma[\overline x_1,\overline x_2].
+    \end{equation*}
+    It is easy to check that this satisfies the hypothesis of \thref{lem:whitehead-second}. The conclusion of \thref{lem:whitehead-second} along with \thref{prop:technical-levi} completes the proof of the theorem.
+\end{proof}
+
+\section{The \texorpdfstring{$\chr 0$}{char 0} case}
+
+Throughout this section, $k$ denotes a field of characteristic $0$ (it may not be algebraically closed).
+
+\begin{lemma}\thlabel{lem:finite-codimension-ideal}
+    Let $\frakg$ be a finite-dimensional solvable Lie algebra, $\frakn$ its nilradical, $\frakU$ the universal enveloping algebra of $\frakg$. Suppose $\frakX$ is an ideal of $\frakU$ of finite co-dimension such that every element of $\frakn$ is nilpotent modulo $\frakX$. Then, there exists an ideal $\frakI$ in $\frakU$ such that: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\frakI\subseteq\frakX$,
+        \item $\frakI$ is of finite co-dimension, 
+        \item every element of $\frakn$ is nilpotent modulo $\frakI$.
+        \item $\delta\frakI\subseteq\frakI$ for every derivation $\delta$ of $\frakg$ (extended to $\frakU$),
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Let $\frakM$ denote the ideal in $\frakU$ generated by $\frakX$ and $\frakn$. We first show that there is a positive integer $k$ such that $\frakM^k\subseteq\frakX$. Consider the map $f:\frakn\to\gl(\frakU/\frakX)$ given by $x\mapsto\ell_x$ where $\ell_x$ denotes left multiplication by $x$. Since $\frakn$ is nilpotent, its image in $\gl(\frakU/\frakX)$ is a nilpotent Lie algebra. As a consequence of Engel's Theorem, there is a positive integer $k$ such that the product of any $k$ elements in the image is $0$. Thus, $\ell_x = 0$ whenever $x$ is a product of $k$ elements in $\frakn$. 
+
+    Thus, $\frakn^k\subseteq\frakX$. Now (work in $\frakU$), for any $x\in\frakn$ and $y\in\frakg$, $xy = [x, y] + yx$ and $[x, y]\in\frakn$. Now consider any element in $\frakU$ of the form $a_1\cdots a_n$ where $n\ge k$ and at least $k$ of the $a_i$'s are from $\frakn$. Using the commutator relations one can move all $k$ elements of $\frakn$ to the left of the product, and it would follow that $a_1\cdots a_n\in\frakX$. Thus, $\frakM^k\subseteq\frakX$.
+
+    Let $\frakI = \frakM^k$. It is easy to verify conditions (a), (b) and (c). Let $\delta$ be a derivation of $\frakg$. Since $\frakg$ is solvable, $\delta\frakg\subseteq\frakn$.  Therefore, $\delta\frakU\subseteq\frakM$. In particular, $\delta\frakM\subseteq\frakM$. Which means 
+    \begin{equation*}
+        \delta\frakI = \delta\frakM^k\subseteq\frakM^k = \frakI.
+    \end{equation*}
+    This completes the proof.
+\end{proof} 
+
+
+\begin{lemma}[Extension Lemma]\thlabel{lem:extension-lemma}
+    Let $\frakg = \fraks\oplus\frakh$ as vector spaces, where $\fraks$ is a solvable ideal and $\frakh$ is a subalgebra of $\frakg$. Suppose $\varphi:\fraks\to\gl(V)$ is a finite dimensional representation such that $\varphi(z)$ is nilpotent for every $z\in\frakn$, the nilradical of $\fraks$. Then, there is a finite-dimensional representation $\psi$ of $\frakg$ such that: 
+    \begin{enumerate}[label=(\alph*)]
+        \item if $\psi(x) = 0$ for some $x\in S$, then $\varphi(x) = 0$.
+        \item $\psi(y)$ is nilpotent for every $y$ of the form $z + u$ where $z\in\frakn$ and $u\in\frakh$ is such that $\ad_\fraks u$ is nilpotent.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    The representation induces a map $\wt\varphi: \frakU = U(\fraks)\to\gl(V)$, whose kernel $\frakX$ is of finite co-dimension. This puts us in the situation of \thref{lem:finite-codimension-ideal}. Let $\frakI\unlhd\frakU$ denote the ideal in the conclusion of \thref{lem:finite-codimension-ideal}.
+
+    For $s\in\fraks$, let $\psi(s):\frakU\to\frakU$ be right multiplication by $s\in\frakU$. For $h\in\frakh$, let $\psi(h)$ denote the derivation on $\frakU$ extending the derivation $s\mapsto[s, h]$ on $\fraks$. Using the fact that $\frakg = \fraks\oplus\frakh$, extend $\psi$ to all of $\frakg$. We shall show that $\psi$ is a representation (may not be finite-dimensional) of $\frakg$. 
+    
+    To show this, it suffices to show that $\psi([s, h]) = [\psi(s), \psi(h)]$. Note that $[s,h]\in\fraks$ and hence, $\psi([s,h])$ is right multiplication by $[s, h]\in\frakU$. But since $\psi(h)$ is a derivation of $\frakU$, and $\psi(s)$ is right multiplication, it is easy to check that $[\psi(s), \psi(h)]$ is right multiplication by $\psi(h)(s) = [s, h]$. This verifies that $\psi$ is a representation. 
+
+    Since $\frakI$ is an ideal, it is invariant under $\psi(s)$ for all $s\in\fraks$ and since $\psi(h)$ is a derivation, $\frakI$ must be invariant under it due to \thref{lem:finite-codimension-ideal}. As a result, $\frakI$ is invariant under $\psi(g)$ for every $g\in\frakg$, consequently, $\psi$ induces a finite dimensional representation of $\frakg$ on $\frakU/\frakI$, which, by abuse of notation, we shall denote by $\psi$.
+
+    Let $x\in\fraks$ be such that $\psi(s) = 0$, that is, $\frakU s\subseteq\frakI$, in particular, $s\in\frakI\subseteq\frakX = \ker\wt\varphi$, whence $\varphi(s) = 0$.
+
+    Let $z\in\frakn$ and $u\in\frakh$ be such that $\ad_\fraks u$ is nilpotent. Due to \thref{lem:finite-codimension-ideal}, $z$ is nilpotent modulo $\frakI$. Next, since $\ad_\fraks u$ is nilpotent, $\fraks$ generates $\frakU$ and $\frakU/\frakI$ is finite-dimensional, $\psi(u)$ is nilpotent on $\frakU/\frakI$.
+
+    Now, $\psi(\fraks)$ is a nilpotent subalgebra of $\gl(W)$. Thus, there is a basis of $W$ with respect to which, every element of $\psi(\fraks)$ is strictly upper triangular. As a result, there exists an $n\gg 0$, such that the product of any $n$ elements of $\psi(\fraks)$ is $0$. Recall that $\psi(y) = \psi(z) + \psi(u)$. We have $\psi(u)\psi(z) = \psi(z)\psi(u) + \psi([u, z])$. Note that $\psi([u, z])\in\psi(\fraks)$.
+
+    If $m$ is the nilpotency class of $\psi(u)$, consider 
+    \begin{equation*}
+        \psi(y)^{mn} = \left(\psi(z) + \psi(u)\right)^{mn}.
+    \end{equation*}
+    It is easy to see that this must be equal to $0$. 
+\end{proof}
+
+\begin{theorem}[Ado's Theorem in char $0$]
+    Every finite-dimensional Lie algebra $\frakg$ over $k$ has a faithful finite-dimensional representation.
+\end{theorem}
+\begin{proof}
+     The adjoint representation has kernel $\frakz = \frakz(\frakg)$, the center of $\frakg$. Thus, it suffices to find a representation that is faithful on $\frakz$. 
+     
+     We first begin with a faithful representation of $\frakz$, which is obvious to construct since $\frakz$ is abelian. Indeed, if $\dim\frakz = c$, then in a $c + 1$-dimensional vector space, there is a nilpotent linear transformation $z$ such that $z^c \ne 0$. Then, $\frakz$ is isomorphic to the Lie algebra with basis $(z, z^2,\dots, z^c)$.
+     
+     We have the inclusion $\frakz\subseteq\frakn\subseteq\fraks$. We can also find a filtration 
+     \begin{equation*}
+         \frakz = \frakn_1\subseteq\dots\subseteq\frakn_k = \frakn
+     \end{equation*}
+     where $\dim\frakn_{i + 1}/\frakn_i = 1$ for all $i$ and each $\frakn_i$ is an ideal in $\frakn_{i + 1}$. As vector spaces, we can write $\frakn_{i + 1} = \frakn_i\oplus ku_{i + 1}$ where $ku_{i + 1}$ is a subalgebra. Since each $\frakn_{i + 1}$ is a solvable ideal, \thref{lem:extension-lemma} applies at each stage. This furnishes a representation of $\frakn$ by nilpotent linear transformations that is faithful on $\frakz$.
+
+     Now, consider another filtration 
+     \begin{equation*}
+         \frakn = \fraks_1\subseteq\dots\subseteq\fraks_r = \fraks.
+     \end{equation*}
+     where each $\fraks_i$ is an ideal in $\fraks_{i + 1}$ and $\dim\fraks_{i + 1}/\fraks_i = 1$. Since $\frakn$ is the nilradical of each $\fraks_i$, we can again use \thref{lem:extension-lemma} to obtain a representation of $\fraks$, faithful on $\frakz$ and consisting of nilpotent linear transformations on $\frakn$.
+
+     Finally, \thref{thm:levi} decomposes $\frakg = \fraks\oplus\frakh$ for some subalgebra $\frakh$. Invoking \thref{lem:extension-lemma}, we have completed the proof.
+\end{proof}
+
+\section{The \texorpdfstring{$\chr p > 0$}{char p > 0} case}
+
+\begin{lemma}\thlabel{lem:p-polynomial}
+    Let $\chr k = p > 0$ and $0\ne f(X)\in k[X]$. Then, there is a polynomial of the form 
+    \begin{equation*}
+        X^{p^{m}} + a_{m - 1} X^{p^{m - 1}} + \dots + a_0X\in k[X]
+    \end{equation*}
+    that is divisible by $f(X)$. Such a polynomial is called a \define{$p$-polynomial}.
+\end{lemma}
+\begin{proof}
+    If $f$ is a constant polynomial, then there is nothing to prove. Suppose now that $f$ is not constant. For each $i\ge 0$, we can write 
+    \begin{equation*}
+        X^{p^i} = q_i(X)f(X) + r_i(X),
+    \end{equation*}
+    where $\deg r_i < \deg f$. Therefore, the $r_i$'s span a vector subspace of dimension at most $\deg f$. Let $m = \deg f$. Then, $r_0,\dots,r_m$ must be linearly dependent. The conclusion follows by just adding up the above equations with suitable weights.
+\end{proof}
+
+\begin{lemma}\thlabel{lem:polynomial-central}
+    Let $\frakg$ be a finite-dimensional Lie algebra over $k$ with $\chr k = p > 0$ and let $\frakU = \frakU(\frakg)$. Then, for every $a\in\frakg$, there is a polynomial $m_a(X)\in k[X]$ such that $m_a(a)$ is in the center of $\frakU$.
+\end{lemma}
+\begin{proof}
+    Note that $\ad a: \frakg\to\frakg$ is a linear transformation on a finite-dimensional $k$-vector space and hence, has a minimal polynomial $f(X)\in k[X]$. Using \thref{lem:p-polynomial}, there is a $p$-polynomial $p(X)\in k[X]$ such that $p(\ad a) = 0$. But since $(\ad a)^p = \ad a^p$, we have that $\ad p(a) = 0$ on $\frakg$. This completes the proof.
+\end{proof}
+
+\begin{lemma}\thlabel{lem:technical-lemma-ado-p}
+    Let $\frakg$ be a finite-dimensional Lie algebra over $k$ with basis $\{u_i\}$ and let $\frakU = \frakU(\frakg)$. Let 
+    \begin{equation*}
+        \frakU^{(k)} = k\oplus\frakg\oplus\frakg^2\oplus\dots\oplus\frakg^k.
+    \end{equation*}
+    Suppose for each $u_i$, there is a positive integer $n_i$ and an element $z_i$ in the center of $\frakU$ such that $v_i = u_i^{n_i} - z_i$ is in $\frakU^{(n_i - 1)}$.
+
+    Then, the elements of the form 
+    \begin{equation*}
+        z_{i_1}^{h_1}\dots z_{i_r}^{h_r}u_{i_1}^{\lambda_1}u_{i_2}^{\lambda_2}\dots u_{i_r}^{\lambda_r}
+    \end{equation*}
+    such that $i_1 < \dots < i_r$, $h_j\ge 0$, $0\le\lambda_j < n_{i_j}$ form a basis for $\frakU$.
+\end{lemma}
+\begin{proof}
+    We first show that the elements of the above form span $\frakU$, for which it suffices to show that every element of the form $u_{i_1}^{k_1}\dots u_{i_r}^{k_r}$ is a linear combination of elements of the above form. If all the $k_j$'s are less than $n_{i_j}$, then there is nothing to prove. Hence, suppose that $k_j\ge n_{i_j}$ for some index $j$.
+
+    Replacing $u_{i_j}^{n_{i_j}}$ by $v_{i_j} + z_{i_j}$, we obtain 
+    \begin{equation*}
+        u_{i_1}^{k_1}\dots u_{i_r}^{k_r} = z_{i_j}u_{i_1}^{k_1}\dots u_{i_j}^{k_j - n_{i_j}}\dots u_{i_r}^{k_r} + u_{i_1}^{k_1}\dots u_{i_j}^{k_j - n_{i_j}}v_{i_j}\dots u_{i_r}^{k_r}
+    \end{equation*}
+    Using an induction argument, it is clear that the above sum can be written as a linear combination of elements in the desired form.
+
+    It remains to show that those elements are linearly independent. Indeed, 
+    \begin{align*}
+        z_{i_1}^{h_1}\dots z_{i_r}^{h_r}u_{i_1}^{\lambda_1}\dots u_{i_r}^{\lambda_r} &= (u_{i_1}^{n_{i_1}} - v_{i_1})^{h_1}u_{i_1}^{\lambda_1}\dots (u_{i_r}^{n_{i_r}} - v_{i_r})^{h_r}u_{i_r}^{\lambda_r}\\
+        &\equiv u_{i_1}^{h_1n_{i_1} + \lambda_1}\dots u_{i_r}^{h_rn_{i_r} + \lambda_r}\mod\frakU^{(k - 1)}.
+    \end{align*}
+    where $k = \displaystyle\sum_{j = 1}^r (h_jn_{i_j} + \lambda_j)$. Recall that elements of $\frakU^{(k - 1)}$ are linear combinations of standard monomials of degree at most $k - 1$.
+
+    Supppose there were a linear relation between elements of the aforementioned form, with maximum ``degree'' $k$. Then, using the above congruence, we would obtain a linear combination of standard monomials elements of ``degree`` $k$. Note that every element of the aforementioned form contributes at most one standard monomial of ``degree'' $k$. Using the linear independence of standard monomials, and the fact that there is only one element of the aforementioned form contributing a certain residue class modulo $\frakU^{(k - 1)}$, we have completed the proof.
+\end{proof}
+
+\begin{theorem}[Iwasawa]\thlabel{thm:iwasawa}
+    Every finite-dimensional Lie algebra over a field $k$ of characteristic $p > 0$ admits a faithful finite-dimensional representation.
+\end{theorem}
+\begin{proof}
+    Let $u_1,\dots,u_n$ be a $k$-basis for $\frakg$. Using \thref{lem:polynomial-central}, there is a $p$-polynomial $m_i(X)\in k[X]$ such that $m_i(u_i)$ is in the center of $\frakU$. Let $\deg m_i = p^{m_i}$. Then, $z_i = u_i^{p^{m_i}} + v_i$ where $v_i\in\frakU^{p^{m_i} - 1}$. Then, due to \thref{lem:technical-lemma-ado-p}, we have an explicit generating set for $\frakU$.
+
+    Let $\frakI$ denote the two-sided ideal in $\frakU$ generated by the $z_i$'s. Consider $\frakU/\frakI$. This is spanned by $u_1^{\lambda_1}\dots u_n^{\lambda_n}$ with $0\le\lambda_i < p^{m_i}$. Further, it is easy to see that these are linearly independent and hence, constitute a basis of $\frakU/\frakI$. The canonical surjection $\frakU\to\frakU/\frakI$ restricts to an isomorphism on $\frakg$, consequently, we have obtained a faithful finite-dimensional representation of $\frakg$. This completes the proof.
+\end{proof}
+
+\newpage
+\bibliographystyle{alpha}
+\bibliography{references}
+\end{document}

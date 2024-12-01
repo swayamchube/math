@@ -1,0 +1,544 @@
+\documentclass[12pt]{article}
+
+% \usepackage{./arxiv}
+
+\title{Lebesgue Differentiation}
+\author{Swayam Chube}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\frakM}{\mathfrak{M}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbI}{\mathbb{I}}
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrN}{\mathscr N}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrR}{\mathscr R}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\scshape}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+\begin{document}
+\maketitle
+
+Throughout this article, we work in a fixed Euclidean space $\R^k$ equipped with the standard Lebesgue measure $m = m_k$.
+
+\section{The Lebesgue Differentiation Theorem}
+
+\begin{definition}
+    Let $\mu$ be a complex Borel measure on $\R^k$. For $x\in\R^k$ and $r > 0$, let 
+    \begin{equation*}
+        (Q_r\mu)(x) = \frac{\mu(B(x, r))}{m(B(x, r))}.
+    \end{equation*}
+    Define the \define{symmetric derivative} of $\mu$ at $x$ as 
+    \begin{equation*}
+        (D\mu)(x) = \lim_{r\to 0^+} (Q_r\mu)(x)
+    \end{equation*}
+    whenever this limit exists. Further, if $\mu\ge 0$, define the \define{maximal function} $M\mu:\R^k\to[0,\infty]$ as 
+    \begin{equation*}
+        (M\mu)(x) = \sup_{r > 0}(Q_r\mu)(x).
+    \end{equation*}
+    For an arbitrary complex Borel measure $\mu$ on $\R^k$, \emph{define} $M\mu := M|\mu|$.
+\end{definition}
+
+\begin{proposition}
+    The maximal function $M\mu$ is lower semicontinuous, in particular, is measurable.
+\end{proposition}
+\begin{proof}
+    We may assume that $\mu\ge 0$. Let $\lambda > 0$ and set $U = \{x\in \R^k\colon (M\mu)(x) > \lambda\}$. Let $x\in U$. Then, there is an $r > 0$ such that 
+    \begin{equation*}
+        t = \frac{\mu(B(x, r))}{m(B(x, r))} > r.
+    \end{equation*}
+    Choose $\delta > 0$ such that 
+    \begin{equation*}
+        r^k < (r + \delta)^k < \frac{r^k t}{\lambda}.
+    \end{equation*}
+    If $|y - x| < \delta$, then $B(y, r + \delta)\supseteq B(x, r)$ whence 
+    \begin{equation*}
+        \frac{\mu(B(y , r + \delta))}{m(B(y, r + \delta))}\ge\frac{\mu(B(x, r))}{m(B(x, r))}\frac{m(B(x, r))}{m(B(y, r + \delta))} = t\frac{r^k}{(r + \delta)^k} > \lambda,
+    \end{equation*}
+    according to our choice of $\delta$. Thus, $B(x, \delta)\subseteq U$ and the latter is open.
+\end{proof}
+
+\begin{lemma}[Vitali]\thlabel{lem:vitali}
+    Let $\displaystyle W = \bigcup_{i = 1}^N B(x_i, r_i)$ where $x_i\in\R^k$ and $r_i > 0$ for $1\le i\le N$. Then, there is a subset $S\subseteq\{1,\dots, N\}$ such that 
+    \begin{enumerate}[label=(\alph*)]
+        \item The balls $B(x_i, r_i)$ are pairwise disjoint for $i\in S$,
+        \item $\displaystyle W\subseteq\bigcup_{i\in S} B(x_i, 3r_i)$, and hence
+        \item $\displaystyle m(W)\le 3^k\sum_{i\in S} m(B(x_i, r_i))$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Without loss of generality, suppose $r_1\ge\cdots\ge r_N$. Begin by setting $i_1 =1$. Remove all balls $B(x_i, r_i)$ that intersect $B(x_{i_1}, r_{i_1})$. Note that if $B(x_i, r_i)\cap B(x_{i_1}, r_{i_1})\ne\emptyset$, then choosing some $y$ in the intersection, we have that for any $z\in B(x_i, r_i)$, 
+    \begin{equation*}
+        |z- x_{i_1}|\le |z - y| + |y - x_{i_1}| < 2r_i + r_{i_1}\le 3r_{i_1}
+    \end{equation*}
+    since $i > i_1$. That is, $B(x_i, r_i)\subseteq B(x_{i_1}, 3r_{i_1})$. Next, choose $i_2$ to be the smallest index larger than $i_1$ that hasn't been deleted and repeat this procedure. It is easy to see that the balls that remain satisfy the required conditions.
+\end{proof}
+
+Henceforth, we use the shorthand $\{f >\lambda\}$ to denote the set $\{x\in\R^k\colon f(x) > \lambda\}$.
+
+\begin{theorem}\thlabel{thm:measure-maximal}
+    Let $\mu$ be a complex Borel measure on $\R^k$. For $\lambda > 0$, 
+    \begin{equation*}
+        m\{M\mu > \lambda\}\le 3^k\lambda^{-1}\|\mu\|.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Let $U = \{M\mu > \lambda\}$ and let $K\subseteq U$ be a compact set. For each $x\in K$, there is an $r_x > 0$ such that $(Q_{r_x}\mu)(x) > \lambda$. Since $K$ is compact, we can choose a finite subcover 
+    \begin{equation*}
+        K\subseteq \bigcup_{i = 1}^N B(x_i, r_i),
+    \end{equation*}
+    where $r_i$ is shorthand for $r_{x_i}$. Using \thref{lem:vitali}, there is a subcollection $S\subseteq\{1,\dots, N\}$ such that $\displaystyle K\subseteq\bigcup_{i\in S} B(x_i, 3r_i)$ and the balls $B(x_i, r_i)$ are pairwise disjoint. Thus, 
+    \begin{equation*}
+        m(K)\le 3^k\sum_{i\in S}m(B(x_i, r_i)) < 3^k\lambda^{-1}\sum_{i\in S}\mu(B(x_i, r_i)) = 3^k\lambda^{-1}\mu\left(\bigcup_{i\in S} B(x_i, r_i)\right)\le 3^k\lambda^{-1}\|\mu\|,
+    \end{equation*}
+    thereby completing the proof.
+\end{proof}
+
+\begin{definition}
+    Let $f\in L^1(\R^k)$ and let $\mu$ be the complex Borel measure on $\R^k$ given by $d\mu = f~dm$. Define the \define{maximal function} of $f$ as $(Mf)(x) = (M\mu)(x)$. Then, 
+    \begin{equation*}
+        (Mf)(x) = \sup_{r > 0}\frac{1}{m(B(x, r))}\int_{B(x, r)}|f(y)|~dm(y).
+    \end{equation*}
+\end{definition}
+
+\begin{definition}
+    Let $f\in L^1(\R^k)$. A point $x\in\R^k$ is said to be a \define{Lebesgue point} of $f$ if 
+    \begin{equation*}
+        \lim_{r\to 0^+}\frac{1}{m(B(x, r))}\int_{B(x, r)}|f(y) - f(x)|~dm(y) = 0.
+    \end{equation*}
+\end{definition}
+
+Henceforth, we also use the shorthand $m(B_r)$ to denote $m(B(x, r))$ for any $x\in\R^k$, since the Lebesgue measure is translation invariant.
+\begin{theorem}[Lebesgue]
+    If $f\in L^1(\R^k)$, then almost every $x\in\R^k$ is a Lebesgue point of $f$.
+\end{theorem}
+\begin{proof}
+    Define 
+    \begin{equation*}
+        (T_rf)(x) = \frac{1}{m(B_r)}\int_{B(x, r)} |f(y) - f(x)|~dm(y),
+    \end{equation*}
+    and 
+    \begin{equation*}
+        (Tf)(x) = \limsup_{r\to 0^+} (T_rf)(x).
+    \end{equation*}
+    It suffices to show that $Tf = 0$ a.e. on $\R^k$.
+
+    Fix a positive integer $n$ and choose $g\in C_c(\R^k)$ with $\|f - g\|_1 < \frac{1}{n}$. Set $h = f - g$. We have 
+    \begin{align*}
+        (T_rh)(x) &= \frac{1}{m(B_r)}\int_{B(x, r)}|h(y) - h(x)|~dm(y)\\
+        &\le\frac{1}{m(B_r)}\int_{B(x, r)}|h(y)|~dm(y) + h(x).
+    \end{align*}
+    Taking $\limsup$ with $r\to 0^+$, we have 
+    \begin{equation*}
+        (Th)(x)\le (Mh)(x) + |h(x)|.
+    \end{equation*}
+    
+    Since $f = g + h$, we have 
+    \begin{equation*}
+        T_rf\le T_rg + T_rh\implies Tf\le Tg + Th.
+    \end{equation*}
+    Recall that $g$ is continuous, and hence, $Tg = 0$. This gives us 
+    \begin{equation*}
+        Tf\le Mh + |h|.
+    \end{equation*}
+
+    Let $y > 0$ be arbitrary. We have the obvious inclusion
+    \begin{equation*}
+        \{Tf > 2y\}\subseteq\{Mh > y\}\cup\{|h| > y\} =: E(y, n).
+    \end{equation*}
+    Using \thref{thm:measure-maximal}, we have 
+    \begin{equation*}
+        m\left\{Tf > 2y\right\}\le\frac{3^n}{y}|h| + \frac{1}{y}|h|\le\frac{3^n + 1}{yn}.
+    \end{equation*}
+    Since the inequality on the right holds for all positive integers $n$, we have that $m\{Tf > 2y\} = 0$ for all $y > 0$. It follows that $m\{Tf > 0\} = 0$, thereby completing the proof.
+\end{proof}
+
+\begin{remark}
+    If $x\in\R^k$ is a Lebesgue point of $f$, then it is easy to see that 
+    \begin{equation*}
+        f(x) = \lim_{r\to0^+}\frac{1}{m(B_r)}\int_{B(x, r)}f(y)~dm(y)
+    \end{equation*}
+\end{remark}
+
+\begin{theorem}
+    Suppose $\mu$ is a complex Borel measure on $\R^k$, and $\mu\ll m$. Let $f$ be the Radon-Nikodym derivative of $\mu$ with respect to $m$. Then, $D\mu = f$ a.e. on $\R^k$, and hence, 
+    \begin{equation*}
+        \mu(E) = \int_E (D\mu)~dm,
+    \end{equation*}
+    for all Borel sets $E\subseteq\R^k$.
+\end{theorem}
+\begin{proof}
+    At any Lebesgue point $x\in\R^k$ of $f$, 
+    \begin{equation*}
+        f(x) = \lim_{r\to 0^+}\frac{1}{m(B_r)}\int_{B(x, r)}f(y)~dm(y) = \lim_{r\to 0^+}\frac{\mu(B(x, r))}{m(B(x, r))} = (D\mu)(x).
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{definition}
+    Let $x\in\R^k$. A sequence $(E_i)_{i\ge 1}$ of Borel sets in $\R^k$ is said to \define{shrink to $x$ nicely} if there is a number $\alpha > 0$ and a sequence of balls $B(x, r_i)$ with $\displaystyle\lim_{i\to\infty}r_i = 0$ such that $E_i\subseteq B(x, r_i)$ and $m(E_i)\ge\alpha m(B(x, r_i))$.
+\end{definition}
+
+\begin{theorem}
+    Associate to each $x\in\R^k$ a sequence $(E_i(x))_{i\ge 1}$ that shrinks to $x$ nicely, and let $f\in L^1(\R^k)$. Then 
+    \begin{equation*}
+        f(x) = \lim_{i\to\infty}\frac{1}{m(E_i(x))}\int_{E_i(x)}f(y)~dm(y)
+    \end{equation*}
+    at every Lebesgue point $x$ of $f$, and hence, a.e. on $\R^k$.
+\end{theorem}
+\begin{proof}
+    If $x\in\R^k$ is a Lebesgue point of $f$, and $\alpha(x) > 0$ be such that $m(E_i(x))\ge\alpha(x)m(B(x, r_i))$. Then 
+    \begin{equation*}
+        0\le\frac{1}{m(E_i(x))}\int_{E_i(x)}|f(y) - f(x)|~dm(x)\le\frac{1}{\alpha(x)B(x, r_i)}\int_{B(x, r_i)}|f(y) - f(x)|~dm(y).
+    \end{equation*}
+    As $i\to\infty$, the right hand side goes to $0$ and hence, so does the left. This completes the proof.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:easy-direction-ftc}
+    Let $f\in L^1(\R)$ and define $F:\R\to\R$ by 
+    \begin{equation*}
+        F(x) = \int_{-\infty}^x f(y)~dm(y).
+    \end{equation*}
+    Then $F'(x) = f(x)$ at every Lebesgue point of $f$, and hence, a.e. on $\R$.
+\end{theorem}
+\begin{proof}
+    Let $x\in\R$ be a Lebesgue point. If $(\delta_i)_{i\ge 1}$ is a sequence of positive reals converging to $0$, then set $E_i = (x, x+ \delta_i)$. Due to the preceding result, we have 
+    \begin{equation*}
+        f(x) = \lim_{i\to\infty}\frac{1}{m(E_i)}\int_{E_i}f(y)~dm(y) = \lim_{i\to\infty}\frac{F(x + \delta_i) - F(x)}{\delta_i}.
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\section{The Fundamental Theorem of Calculus}
+
+\begin{definition}
+    A function $f: I= [a,b]\to\bbC$ is said to be \define{absolutely continuous} on $I$, if for every $\varepsilon > 0$, there is a $\delta > 0$ such that 
+    \begin{equation*}
+        \sum_{i = 1}^n |f(\beta_i) - f(\alpha_i)| < \varepsilon
+    \end{equation*}
+    for any disjoint collection of segments $(\alpha_1,\beta_1),\dots,(\alpha_n,\beta_n)$ in $I$ provided 
+    \begin{equation*}
+        \sum_{i = 1}^n\beta_i - \alpha_i < \delta.
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}\thlabel{thm:equivalent-conditions-ac-increasing}
+    Let $f: I = [a,b]\to\R$ be a continuous, increasing function. The following are equivalent: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $f$ is AC on $I$.
+        \item $f$ maps sets of measure $0$ to sets of measure $0$. 
+        \item $f$ is differentiable a.e. on $I$, $f'\in L^1$, and 
+        \begin{equation*}
+            f(x) - f(a) = \int_a^x f'(x)~dm(x).
+        \end{equation*}
+        for all $a\le x\le b$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+Let $\frakM$ denote the $\sigma$-algebra of Lebesgue measurable sets in $\R$. 
+
+\noindent$\underline{(a)\implies(b)}$ Let $E\subseteq I$ be such that $m(E) = 0$. We must show that $f(E)\in\frakM$ and $m(f(E)) = 0$. We may suppose, without loss of generality, that $a,b\notin E$.
+
+Let $\varepsilon > 0$. Since $f$ is AC on $I$, there is a $\delta$ corresponding to this $\varepsilon$ as in the definition of absolute continuity. There is an open set $V$ such that $E\subseteq V\subseteq I$ and $m(V) < \delta$. We can write $V = \bigcup_i (\alpha_i, \beta_i)$ with $\sum_i (\beta_i - \alpha_i) < \delta$. For any finite collection $J$ of the indexing set over which $i$ runs, 
+\begin{equation*}
+    \sum_{j\in J}|f(\beta_j) - f(\alpha_j)| < \varepsilon\implies\sum_i|f(\beta_i) - f(\alpha_i)|\le\varepsilon.
+\end{equation*}
+Hence, $m(E)\le m(f(V))\le\varepsilon$. Since this inequality holds for all $\varepsilon > 0$, $m(E) = 0$.
+
+\noindent$\underline{(b)\implies(c)}$ Let $g: I\to\R$ be given by $g(x) = f(x) + x$. This is a strictly increasing function of $x$. We claim that $g$ maps measure $0$ sets to measure $0$ sets. Suppose $E\subseteq I$ has measure $0$. We would like to show that $g(E)$ has measure $0$. We may assume further that $a,b\notin E$. Let $\varepsilon > 0$. There is an open set $V$ containing $f(E)$ such that $m(V) < \varepsilon$. Note that $f^{-1}(V)$ is an open subset of $I$ containing $E$. There is an open set $U$ containing $E$ and contained in $V$ such that $m(U) < \varepsilon$. 
+
+Being an open set, $U$ is a disjoint union of (countably many) disjoint intervals. Since $f$ is an increasing function, the image of disjoint intervals is either disjoint or they have at most one point in common. If $f$ maps an interval of length $\eta$ to an interval of length $\eta'$, then $g$ maps the aforementioned interval to one of length $\eta + \eta'$. Now, the sum of the lengths of the images of the intervals that constitute $U$ under $f$ is at most $\varepsilon$, and hence, the measure of $g(U)$ is at most $\varepsilon + m(U) < 2\varepsilon$. Consequently, $m(g(E))\le 2\varepsilon$. Since this inequality holds for all $\varepsilon > 0$, we see that $m(g(E)) = 0$.
+
+We come back to our original line of proof. Let $E\subseteq I$ be measurable. Then, we can write $E = E_1\cup E_0$, where $m(E_0) = 0$ and $E_1$ is an $F_\sigma$-set. Thus, $E_1$ is a countable union of compact sets and because $g$ is continuous, so is $g(E_1)$. Since $g$ maps measure $0$ sets to measure $0$, $m(g(E_0)) = 0$ and finally, since $g(E) = g(E_0)\cup g(E_1)$, we conclude that $g(E)\in\frakM$.
+
+Define a measure $\mu(E) = m(g(E))$ on $I$. It is also easy to see that $\mu$ is a nonnegative complex Borel measure on $\R$ that is absolutely continuous with respect to $m$. Let $h: I\to\R$ denote the Radon-Nikodym derivative, where $h\in L^1(I)$. We shall show that our required derivative of $f$ is $h - 1$.
+
+If $E = [a, x]$, then $g(E) = [g(a), g(x)]$, since the image must be a compact interval. Thus, 
+\begin{equation*}
+    g(x) - g(a) = m(g(E)) = \mu(E) = \int_a^x h(y)~dm(y),
+\end{equation*}
+whence 
+\begin{equation*}
+    h(x) - h(a) = \int_a^x h(y) - 1~dm(y).
+\end{equation*}
+Due to \thref{thm:easy-direction-ftc}, $f'(x) = h(x) - 1$ a.e. on $I$.
+
+\noindent$\underline{(c)\implies(a)}$ Since $f'\in L^1$, for every $\varepsilon > 0$, there is a $\delta > 0$ such that $\left|\int_E f~dm\right|< \varepsilon$ whenever $m(E) < \delta$. The conclusion is immediate now.
+\end{proof}
+
+\begin{definition}
+    A function $f: I = [a,b]\to\R$ is said to be of \define{bounded variation} if the \define{total variation}, defined as
+    \begin{equation*}
+        \sup\sum_{i = 1}^N |f(t_i) - f(t_{i - 1})|
+    \end{equation*}
+    where the supremum is taken over all partitions 
+    \begin{equation*}
+        a = t_0 < t_1 < \dots < t_N = x,
+    \end{equation*}
+    is finite.
+\end{definition}
+
+\begin{theorem}
+    Let $f: I = [a,b]\to\R$ be AC. For $a\le x\le b$, let $F(x)$ denote the total variation of $f$ on $[a, x]$. Then the functions $F, F + f, F - f$ are AC and increasing on $I$.
+\end{theorem}
+\begin{proof}
+    The increasing assertion is immediate from the inequality 
+    \begin{equation*}
+        F(y)\ge F(x) + |f(y) - f(x)|
+    \end{equation*}
+    for all $a\le x\le y\le b$.
+
+    As for the assertion about absolute continuity, it suffices to show that $F$ is AC. Let $\varepsilon > 0$, then there is a corresponding $\delta$ according to the definition of absolute continuity. Let $(\alpha_1,\beta_1),\dots,(\alpha_n,\beta_n)$ be disjoint intervals with $\displaystyle\sum_{i = 1}^n (\beta_i - \alpha_i) < \delta$. Then, 
+    \begin{equation*}
+        \sum_{i = 1}^n F(\beta_i) - F(\alpha_i) = \sup \sum_{i, j}|f(t^i_j) - f(t^i_{j - 1})|,
+    \end{equation*}
+    where the supremum is taken over partitions of the intervals 
+    \begin{equation*}
+        \alpha_i = t^i_0 < \dots < t^i_{n_i} = \beta_i
+    \end{equation*}
+    for $1\le i\le n$. But since 
+    \begin{equation*}
+        \sum_{i, j}t^i_j - t^i_{j - 1} < \delta,
+    \end{equation*}
+    we have that $\sum_{i = 1}^n F(\beta_i) - F(\alpha_i)\le\varepsilon$. Thus, $F$ is absolutely continuous on $I$.
+\end{proof}
+
+\begin{theorem}[Fundamental Theorem of Calculus]
+    If $f$ is a complex-valued function that is AC on $I = [a,b]$, then $f$ is differentiable almost everywhere on $I$, $f'\in L^1$, and 
+    \begin{equation*}
+        f(x) - f(a) = \int_a^x f'(t)~dm(t)
+    \end{equation*}
+    for all $a\le x\le b$.
+\end{theorem}
+\begin{proof}
+    It suffices to prove this for real-valued $f$. Let $F$ denote its ``total variation function''. Define 
+    \begin{equation*}
+        g = \frac{F + f}{2}\quad\text{and}\quad h = \frac{F - f}{2}.
+    \end{equation*}
+    Due to the preceding result, both $g$ and $h$ are AC and increasing on $I$. Applying \thref{thm:equivalent-conditions-ac-increasing}, and noting that $f = g - h$, we have the desired conclusion.
+\end{proof}
+
+\end{document}

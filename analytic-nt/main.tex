@@ -1,0 +1,1460 @@
+\documentclass[12pt]{article}
+
+% \usepackage{./arxiv}
+
+\title{Analytic Number Theory}
+\author{Swayam Chube}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrN}{\mathscr N}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrR}{\mathscr R}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\scshape}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+\begin{document}
+\maketitle
+
+% \part{The Elementary Theory}
+
+\section{Some Background on Sequences and Series}
+\begin{theorem}[Summation By Parts]\thlabel{thm:summation-by-parts}
+    Let $(a_n)$ and $(b_n)$ be two sequences. Put 
+    \begin{equation*}
+        A_{m,n} = \sum_{k = m}^n a_k\quad\text{ and }\quad S_{m,n} = \sum_{k = m}^n a_kb_k.
+    \end{equation*}
+    Then, for $m < n$, 
+    \begin{equation*}
+        S_{m,n} = \sum_{k = m}^{n - 1} A_{m,k}(b_k - b_{k + 1}) + A_{m,n}b_n.
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}[Partial Summation Formula]\thlabel{thm:partial-summation-formula}
+    Let $(a_n)_{n = 1}^\infty$ be a sequence of complex numbers and $f: [1, x]\to\bbC$ a continuously differentiable function. Set 
+    \begin{equation*}
+        A(t) = \sum_{1\le n\le t} a_n.
+    \end{equation*}
+    Then, 
+    \begin{equation*}
+        \sum_{1\le n\le x} a_nf(n) = A(x)f(x) - \int_1^x A(t)f'(t)~dt.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Suppose $x$ is a natural number. 
+    \begin{align*}
+        \sum_{1\le n\le x} a_nf(n) &= \sum_{1\le n\le x}\left(A(n) - A(n - 1)\right)f(n)\\
+        &= \sum_{1\le n\le x} A(n)f(n) - \sum_{0\le n\le x - 1} A(n)f(n + 1)\\
+        &= A(x)f(x) - \sum_{0\le n\le x - 1} A(n)\int_{n}^{n + 1}f'(t)~dt\\
+        &= A(x)f(x) - \sum_{0\le n\le x - 1} \int_n^{n + 1} A(t)f'(t)~dt\\
+        &= A(x)f(x) - \int_0^x A(t)f'(t)\\
+        &= A(x)f(x) - \int_1^x A(t)f'(t)~dt.
+    \end{align*}
+    If $x$ is not a natural number, note the equality 
+    \begin{equation*}
+        A(x)\left(f(x) - f(\floor{x})\right) = \int_{\floor x}^x A(t)f'(t)~dt. \qedhere
+    \end{equation*}
+\end{proof}
+
+\begin{corollary}[Partial Sums of Dirichlet Series]
+    Take $f(t) = 1/t^s$ to obtain (for $x\ge 1$)
+    \begin{equation*}
+        \sum_{1\le n\le x}\frac{a_n}{n^s} = \frac{A(x)}{x^s} + s\int_1^x\frac{A(t)}{t^{s + 1}}~ds.
+    \end{equation*}
+    This is often called \define{Abel's Summation Formula}.
+\end{corollary}
+
+\begin{example}
+    In Abel's formula, set $a_n = 1$ for all $n$ and $s = 1$. Then, 
+    \begin{equation*}
+        \sum_{1\le n\le x} = \frac{\floor x}{x} + \int_1^x \frac{\floor t}{t^2}~dt.
+    \end{equation*}
+    The integral is bounded by 
+    \begin{equation*}
+        \int_1^x\frac{1}{t}~dt = \log x.
+    \end{equation*}
+    It follows that 
+    \begin{equation*}
+        \sum_{1\le n\le x}\frac{1}{n} = \log x + O(1).
+    \end{equation*}
+\end{example}
+
+\begin{example}
+    As a consequence of the above example, 
+    \begin{equation*}
+        \sum_{\le n\le x} d(n) = \sum_{1\le n\le x}\floor{\frac{x}{n}} = x\sum_{1\le n\le x}\frac{1}{n} + O(x) = x\log x + O(x).
+    \end{equation*}
+\end{example}
+
+Next, we elucidate \define{Dirichlet's Hyperbola Method} using a theorem due to Dirichlet.
+
+\begin{theorem}[Dirichlet]
+    \begin{equation*}
+        \sum_{1\le n\le x} d(n) = x\log x + (2\gamma - 1)x + O(\sqrt x).
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    \todo{Add in}
+\end{proof}
+
+\section{Elementary Results on Prime Numbers}
+
+\begin{definition}
+    The two \define{Chebyshev functions} are defined as 
+    \begin{equation*}
+        \psi(x) = \sum_{p\le x} \Lambda(x)\quad\text{and}\quad\vartheta(x) = \sum_{p\le x}\log p,
+    \end{equation*}
+    for $x > 0$.
+\end{definition}
+
+\begin{proposition}
+    \begin{equation*}
+        \Lambda(x) = \sum_{m = 1}^\infty\vartheta(x^{1/m}) = \sum_{m\le\log_2 x}\vartheta(x^{1/m}).
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    We have 
+    \begin{equation*}
+        \psi(x) = \sum_{n\le x}\Lambda(n) = \sum_{m = 1}^\infty\sum_{p^m\le x}\log p = \sum_{m = 1}^\infty\sum_{p\le x^{1/m}}\log p = \sum_{m = 1}^\infty\vartheta(x^{1/m}).\qedhere
+    \end{equation*}
+\end{proof}
+
+\begin{proposition}\thlabel{prop:chebyshev-two-functions}
+    \begin{equation*}
+        0\le\frac{\psi(x) - \vartheta(x)}{x}\le\frac{(\log x)^2}{2\sqrt x\log 2}.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    We have 
+    \begin{equation*}
+        \frac{\psi(x) - \vartheta(x)}{x}\le\frac{1}{x}\sum_{2\le m\le\log_2 x}\vartheta(x^{1/m})\le\frac{1}{x}\sum_{2\le m\le\log_2 x}x^{1/m}\log x^{1/m}\le\frac{(\log x)^2}{2\sqrt{x}\log 2}.\qedhere
+    \end{equation*}
+\end{proof}
+
+\begin{lemma}
+    For $x\ge 2$, we have 
+    \begin{equation*}
+        \vartheta(x) = \pi(x)\log x - \int_2^x\frac{\pi(t)}{t}~dt,
+    \end{equation*}
+    and 
+    \begin{equation*}
+        \pi(x) = \frac{\vartheta(x)}{\log x} + \int_{2}^x\frac{\vartheta(t)}{t\log^2 t}~dt.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Both follow from \thref{thm:partial-summation-formula}.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:equivalents-of-pnt}
+    The following are equivalent: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\displaystyle\lim_{x\to\infty}\frac{\pi(x)\log x}{x} = 1,$
+        \item $\displaystyle\lim_{x\to\infty}\frac{\vartheta(x)}{x} = 1,$
+        \item $\displaystyle\lim_{x\to\infty}\frac{\psi(x)}{x} = 1.$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Suppose $(a)$ holds. Using the preceding lemma, we have 
+    \begin{equation*}
+        \frac{\vartheta(x)}{x} = \frac{\pi(x)\log x}{x} - \frac{1}{x}\int_2^x\frac{\pi(t)}{t}~dt.
+    \end{equation*}
+    But $(a)$ implies $\pi(x) = O\left(\frac{x}{\log x}\right)$, i.e. there is an $M > 0$ such that $\pi(x)\le\frac{Mx}{\log x}$. Hence, 
+    \begin{equation*}
+        \frac{1}{x}\int_2^x\frac{\pi(t)}{t}~dt = M\frac{1}{x}\int_2^x\frac{dt}{\log t} = \frac{M}{x}\left(\int_2^{\sqrt x}\frac{dt}{\log t} + \int_{\sqrt x}^x\frac{dt}{\log t}\right)\le\frac{M}{x}\left(\frac{\sqrt x - 2}{\log\sqrt x} + \frac{x - \sqrt x}{\log x}\right)\to 0
+    \end{equation*}
+    as $x\to\infty$.
+
+    Conversely, suppose $(b)$ holds. Using the preceding lemma, we have 
+    \begin{equation*}
+        \frac{\pi(x)\log x}{x} = \frac{\vartheta(x)}{x} - \frac{\log x}{x}\int_2^x\frac{\vartheta(t)}{t\log^2 t}~dt.
+    \end{equation*}
+    But $(a)$ implies the existence of a constant $M > 0$ such that $\vartheta(x)\le Mx$. Hence, 
+    \begin{align*}
+        \frac{\log x}{x}\int_2^x\frac{\vartheta(t)}{\log^2 t}~dt\le\frac{M\log x}{x}\int_2^x\frac{dt}{\log^2 t} = \frac{M\log x}{x}\left(\int_2^{\sqrt x}\frac{dt}{\log^2 t} + \int_{\sqrt x}^x\frac{dt}{\log^2 t}\right)\le\frac{M\log x}{x}\left(\frac{\sqrt x - 2}{\log^2\sqrt x} + \frac{x - \sqrt x}{\log^2 x}\right),
+    \end{align*}
+    and the conclusion follows.
+
+    Finally, the equivalence of $(b)$ and $(c)$ follows from \thref{prop:chebyshev-two-functions}.
+\end{proof}
+
+\section{Dirichlet Characters and Gauss Sums}
+
+\begin{definition}
+    A \define{Dirichlet character modulo $n$} is a group homomorphism $\chi:\left(\Z/n\Z\right)^\times\to\bbC^\times$ which is extended by $0$ to $\Z/n\Z$ and extended periodically to all of $\Z$.
+\end{definition}
+
+\begin{definition}
+    Let $\chi$ be a Dirichlet character modulo $n$. Define its \define{Gauss sums} as
+    \begin{equation*}
+        G(m,\chi) = \sum_{r\mod n}\chi(r)\exp\left(\frac{2\pi im}{n}r\right).
+    \end{equation*}
+\end{definition}
+
+\begin{lemma}
+    If $\chi$ is any Dirichlet character modulo $n$, then 
+    \begin{equation*}
+        G(m,\chi) = \overline\chi(m)G(1,\chi),
+    \end{equation*}
+    whenever $(m,n) = 1$.
+\end{lemma}
+\begin{proof}
+    We have 
+    \begin{align*}
+        G(m,\chi) &= \sum_{r\mod n}\overline\chi(m)\chi(m)\chi(r)\exp\left(\frac{2\pi im}{n}r\right)\\
+        &= \overline\chi(m)\sum_{r\mod n}\chi(mr)\exp\left(\frac{2\pi i mr}{n}\right)\\
+        &= \overline\chi(m)G(1,\chi),
+    \end{align*}
+    where the last equality follows from the fact that $(m,n) = 1$.
+\end{proof}
+
+\begin{definition}
+    The Gauss sum $G(m,\chi)$ is said to be \define{separable} if 
+    \begin{equation*}
+        G(m,\chi) = \overline\chi(m)G(1,\chi).
+    \end{equation*}
+\end{definition}
+
+We have seen that $G(m,\chi)$ is separable when $(m,n) = 1$.
+
+\begin{proposition}
+    Let $\chi$ be a Dirichlet character modulo $n$. Then, the Gauss sum $G(m,\chi)$ is separable for every $m$ if and only if $G(m,\chi) = 0$ whenever $(m,n) > 1$.
+\end{proposition}
+\begin{proof}
+    Immediate from the definition.
+\end{proof}
+
+\begin{theorem}
+    Let $\chi$ be a Dirichlet character modulo $n$. If $G(m,\chi)$ is separable for every $m$, then 
+    \begin{equation*}
+        |G(1,\chi)|^2 = n,
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    We have 
+    \begin{align*}
+        |G(1,\chi)|^2 &= G(1,\chi)\overline{G(1,\chi)} = \sum_{m = 1}^n G(1,\chi)\overline\chi(m)\exp\left(-\frac{2\pi i}{n}m\right)\\
+        &= \sum_{m = 1}^n G(m,\chi)\exp\left(-\frac{2\pi i m}{n}\right)\\
+        &= \sum_{m = 1}^n \sum_{k = 1}^n \chi(k)\exp\left(\frac{2\pi i m}{n}k\right)\exp\left(-\frac{2\pi i m}{n}\right)\\
+        &= \sum_{k = 1}^n\chi(k)\sum_{m = 1}^n \exp\left(\frac{2\pi i (k - 1)}{n}m\right)\\
+        &= n\chi(1) = n. 
+    \end{align*}
+\end{proof}
+
+\begin{lemma}
+    Let $\chi$ be a Dirichlet character modulo $n$ and suppose $G(m,\chi)\ne 0$ for some $m$ with $(m,n) > 1$. Then, $\chi$ is not primitive.
+\end{lemma}
+\begin{proof}
+    Let $q = (m,n)$ and set $d = n/q$. Choose any $a$ satisfying $(a,n) = 1$ and $a\equiv 1\mod d$. We have 
+    \begin{align*}
+        G(m,\chi) = \sum_{r\mod n}\chi(r)e_n(mr) = \sum_{r\mod n}\chi(ar)e_n(amr) = \chi(a)\sum_{r\mod n}\chi(r)e_n(amr)
+    \end{align*}
+
+    Note that $a = 1 + bd$ for some integer $b$. Hence, 
+    \begin{equation*}
+        \frac{amr}{n} = \frac{mr + mrbd}{n} = \frac{mr}{n}\mod 1.
+    \end{equation*}
+    
+    Consequently, 
+    \begin{equation*}
+        G(m,\chi) = \chi(a)G(m,\chi).
+    \end{equation*}
+    This shows that $\chi(a) = 1$. We have shown that for any $a$ satisfying $a\equiv 1\mod d$ and $(a,n) = 1$, $\chi(a) = 1$ and since $d < n$, $\chi$ cannot be primitive.
+\end{proof}
+
+\begin{theorem}
+    Let $\chi$ be a primitive Dirichlet character modulo $n$. Then, we have 
+    \begin{enumerate}[label=(\alph*)]
+        \item $G(m,\chi) = 0$ whenever $(m, n) > 1$. 
+        \item $G(m,\chi)$ is separable for every $m$. 
+        \item $|G(m,\chi)|^2 = n$.
+    \end{enumerate}
+\end{theorem}
+
+\subsection{Quadratic Reciprocity using Gauss Sums}
+
+If $p$ is a prime, there is a unique non-principal quadratic character modulo $p$, which is given by 
+\begin{equation*}
+    \chi(r) = \left(\frac{r}{p}\right).
+\end{equation*}
+
+\begin{theorem}
+    If $p$ is an odd prime and $\chi$ is the unique non-principal quadratic character modulo $p$, then 
+    \begin{equation*}
+        G(1,\chi)^2 = \left(\frac{-1}{p}\right)p.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    We have 
+    \begin{align*}
+        G(1,\chi)^2 &= \sum_{r = 1}^{p - 1}\sum_{s = 1}^{p - 1} \chi(r)\chi(s)e_p(r + s).
+    \end{align*}
+    For each pair $(r, s)$, there is a unique $t$ modulo $p$ satisfying $tr\equiv s\mod p$. Therefore, we can write the sum as 
+    \begin{equation*}
+        \sum_{t = 1}^{p - 1}\sum_{r = 1}^{p - 1}\chi(t)e_p(r(1 + t)) = \sum_{t = 1}^{p - 1}\chi(t)\sum_{r = 1}^{p - 1}e_p(r(1 + t)) = -\sum_{t = 1}^{p - 2}\chi(t) + (p - 1)\chi(p - 1).
+    \end{equation*}
+    Since 
+    \begin{equation*}
+        \sum_{t = 1}^{p - 1}\chi(t) = 0,
+    \end{equation*}
+    the proof is complete.
+\end{proof}
+
+Let $p$ and $q$ be distinct odd primes. From the above theorem, we have 
+\begin{equation*}
+    G(1,\chi)^{q - 1}\equiv\left(\frac{-1}{p}\right)^{\frac{q - 1}{2}}\left(\frac{p}{q}\right)\mod q\equiv(-1)^{\frac{p - 1}{2}\frac{q - 1}{2}}\left(\frac{p}{q}\right)\mod q.
+\end{equation*}
+
+\begin{theorem}
+    Let $p$ and $q$ be distinct odd primes and $\chi$ the non-principal quadratic character modulo $p$, then 
+    \begin{equation*}
+        G(1,\chi)^{q - 1} = \left(\frac{q}{p}\right)\substack{\displaystyle\sum_{r_1}\cdots\sum_{r_q}\\r_1 + \dots + r_q\equiv q\mod p}\left(\frac{r_1\cdots r_q}{p}\right).
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    The Gauss sum $G(n,\chi)$ is periodic with period $p$ and hence, has a finite Fourier expansion, 
+    \begin{equation*}
+        G(n,\chi)^q = \sum_{m = 1}^{p} a_q(m)e_p(mn),
+    \end{equation*}
+    where the coefficients can be recovered as 
+    \begin{equation*}
+        a_q(m) = \frac{1}{p}\sum_{n = 1}^p G(n,\chi)^qe_p(-mn).
+    \end{equation*}
+
+    From the definition, we have 
+    \begin{equation*}
+        G(n,\chi)^q = \left(\sum_{r\mod p}\chi(r)e_p(nr)\right)^q = \sum_{r_1\mod p}\cdots\sum_{r_q\mod p}\chi(r_1\cdots r_q)e_p(n(r_1 + \dots + r_q)).
+    \end{equation*}
+    Hence, 
+    \begin{align*}
+        a_q(m) = \frac{1}{p}\sum_{r_1\mod p}\dots\sum_{r_q\mod p}\chi(r_1\dots r_q)\sum_{n = 1}^p e_p(n(r_1 + \dots + r_q - m)).
+    \end{align*}
+    The innermost sum takes a non-zero value if and only if $r_1 + \dots + r_q\equiv m\mod p$. As a result, we have 
+    \begin{equation*}
+        a_q(m) = \mathop{\displaystyle\sum_{r_1}\cdots\sum_{r_q}}_{r_1 + \dots + r_q\equiv m\mod p}\chi(r_1\dots r_q).
+    \end{equation*}
+
+    On the other hand, $G(n,\chi)$ is separable and hence, we have 
+    \begin{align*}
+        a_q(M) &= \frac{1}{p}G(1,\chi)^{q}\sum_{n = 1}^p \chi(n)^q e_p(-mn) = \frac{1}{p}G(1,\chi)^q\sum_{n = 1}^p \chi(n)e_p(-mn)\\
+        &= \frac{1}{p}G(1,\chi)^q G(-m,\chi) = \frac{1}{p}G(1,\chi)^q\chi(m)G(-1,\chi)\\
+        &= \frac{1}{p}G(1,\chi)^q\chi(m)\overline{G(1,\chi)} = \chi(m)G(1,\chi)^{q - 1}.
+    \end{align*}
+
+    Therefore, 
+    \begin{equation*}
+        G(1,\chi)^{q - 1} = \chi(m)\mathop{\sum_{r_1}\dots\sum_{r_q}}_{r_1 + \dots + r_q\equiv m\mod p}\chi(r_1\dots r_q).
+    \end{equation*}
+    Taking $m = q$, we have the desired conclusion.
+\end{proof}
+
+\begin{proof}[\textsc{Proof of Quadratic Reciprocity}]
+    Putting together the last two theorems, 
+    \begin{equation*}
+        (-1)^{\frac{p - 1}{2}\frac{q - 1}{2}}\left(\frac{p}{q}\right) \equiv \left(\frac{q}{p}\right)\mathop{\sum_{r_1}\dots\sum_{r_q}}_{r_1 + \dots + r_q\equiv q\mod p}\left(\frac{r_1\dots r_q}{p}\right)(\mod q)
+    \end{equation*}
+    We can break the sum on the right into equivalence classes corresponding to multisets $(r_1,\dots,r_q)$. If all the $r_i$'s are not equal, then the number of distinct permutations of this multiset is divisible by $q$ and hence, the only term that survives on the right is when all the $r_i$'s are equal to $1$. This gives the desired conclusion.
+\end{proof}
+
+\newpage
+
+% \part{The Analytic Theory}
+
+\section{Dirichlet Series}
+
+A \define{Dirichlet series} is a ``formal sum'' of the form 
+\begin{equation*}
+    \sum_{n = 1}^\infty \frac{f(n)}{n^s}
+\end{equation*}
+where $s\in\bbC$ and $f:\N\to\bbC$ is an arithmetic function. The first thing to study is its convergence. As is customary, we shall write $s = \sigma + it$.
+
+\begin{theorem}
+    Suppose the series $\sum|f(n)n^{-s}|$ does not converge for all $s$ or diverge for all $s$. Then there is a real number $\sigma_a$ called the \define{abscissa of absolute convergence} such that the series $\sum f(n)n^{-s}$ converges absolutely if $\sigma > \sigma_a$ but does not converge absolutely if $\sigma < \sigma_a$.
+\end{theorem}
+\begin{proof}
+    Omitted on account of its obviousness.
+\end{proof}
+\begin{remark}
+    If the Dirichlet series converges absolutely everywhere, we set $\sigma_a = -\infty$ and if it converges absolutely nowhere, we set $\sigma_a = \infty$.
+\end{remark}
+
+We set 
+\begin{equation*}
+    F(s) = \sum_{n = 1}^\infty \frac{f(n)}{n^s},
+\end{equation*}
+which is a well defined function on the half plane $\sigma > \sigma_a$.
+
+\begin{lemma}
+    If $N\ge 1$ and $\sigma\ge c > \sigma_a$, 
+    \begin{equation*}
+        \left|\sum_{n = N}^\infty f(n)n^{-s}\right|\le N^{-(\sigma - c)}\sum_{n = N}^\infty |f(n)|n^{-c}.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Indeed, 
+    \begin{align*}
+        \left|\sum_{n = N}^\infty f(n)n^{-s}\right| &\le \sum_{n = N}^\infty |f(n)|n^{-\sigma}\\
+        &\le\sum_{n = N}^\infty |f(n)|n^{-c} N^{-(\sigma - c)}.
+    \end{align*}
+\end{proof}
+
+\begin{proposition}
+    \begin{equation*}
+        \lim_{\sigma\to\infty} F(\sigma + it) = f(1)
+    \end{equation*}
+    uniformly for $t\in\R$.
+\end{proposition}
+\begin{proof}
+    Immediate from the above lemma.
+\end{proof}
+
+\begin{theorem}[Uniqueness Theorem for Dirichlet Series]
+    Given two Dirichlet series 
+    \begin{equation*}
+        F(s) = \sum_{n = 1}^\infty\frac{f(n)}{n^s}\quad\text{and}\quad G(s) = \sum_{n = 1}^\infty\frac{g(n)}{n^s},
+    \end{equation*}
+    both absolutely convergent for $\sigma > \sigma_a$. If $F(s) = G(s)$ for an infinite sequence $\{s_k\}$ with $\sigma_k\to\infty$. Then, $f(n) = g(n)$ for every $n$.
+\end{theorem}
+\begin{proof}
+    Set $h(n) = f(n) - g(n)$ and $H(s) = F(s) - G(s)$. Then, $H(s_k) = 0$ for each $k$ and $\sigma_k\to\infty$ as $k\to\infty$. Suppose $h$ is not identically $0$ and let $N$ be the smallest positive integer for which $h(n)\ne 0$. Then, 
+    \begin{equation*}
+        H(s) = \frac{h(N)}{N^s} + \sum_{n = N + 1}^\infty \frac{h(n)}{n^s}.
+    \end{equation*}
+    Thus, 
+    \begin{equation*}
+        h(N) = N^sH(s) - N^{s}\sum_{n = N + 1}^\infty\frac{h(n)}{n^s}.
+    \end{equation*}
+    Put $s = s_k$ to obtain 
+    \begin{equation*}
+        h(N) = - N^{s_k}\sum_{n = N + 1}^\infty\frac{h(n)}{n^{s_k}}.
+    \end{equation*}
+    Choose some $c > \sigma_a$. Then, for sufficiently large $k$, $\sigma_k > c > \sigma_a$. Then, 
+    \begin{equation*}
+        |h(N)| = N^{\sigma_k} (N + 1)^{-(\sigma_k - c)}\sum_{n = N + 1}^\infty |h(n)|n^{-c}.
+    \end{equation*}
+    It follows by taking $k\to\infty$ that $h(N) = 0$.
+\end{proof}
+
+\begin{corollary}
+    Let $F(s) = \sum_{n = 1}^\infty f(n)n^{-s}$ and suppose $F(s)\ne 0$ for some $s$ with $\sigma > \sigma_a$. Then, there is a constant $c\ge\sigma_a$ such that $F(s)$ does not vanish for $\sigma > c$.
+\end{corollary}
+\begin{proof}
+    Converse to the previous theorem.
+\end{proof}
+
+\begin{theorem}
+    Consider two Dirichlet series 
+    \begin{equation*}
+        F(s) = \sum_{n = 1}^\infty\frac{f(n)}{n^s}\quad\text{and}\quad G(s) = \sum_{n = 1}^\infty\frac{g(n)}{n^s},
+    \end{equation*}
+    which are absolutely convergent for $\sigma > a$ and $\sigma > b$ respectively. Then, in the half-plane where both series converge absolutely, 
+    \begin{equation*}
+        F(s)G(s) = \sum_{n = 1}^\infty\frac{(f\ast g)(n)}{n^s},
+    \end{equation*}
+    and converges absolutely. Conversely, if $F(s)G(s) = \sum\alpha(n)n^{-s}$ for a sequence $\{s_k\}$ with $\sigma_k\to\infty$ as $k\to\infty$, then $\alpha = f\ast g$.
+\end{theorem}
+\begin{proof}
+    The first statement follows from the fact that absolutely convergent series can be rearranged. The second statement follows from the uniqueness theorem.
+\end{proof}
+
+\begin{example}
+    The zeta function is the Dirichlet series corresponding to $f\equiv\mathbbm 1$. Let $G(s)$ denote the function defined by the Dirichlet series 
+    \begin{equation*}
+        G(s) = \sum_{n = 1}^\infty\frac{\mu(n)}{n^s},
+    \end{equation*}
+    which is absolutely convergent in the right half plane $\sigma > 1$. Then, 
+    \begin{equation*}
+        \zeta(s)G(s) = \sum_{n = 1}^\infty\frac{(\mathbbm{1}\ast\mu)(n)}{n^s} = 1,
+    \end{equation*}
+    for $\sigma > 1$. This, in turn, shows that $\zeta$ does not vanish in the right half plane $\sigma > 1$.
+\end{example}
+
+\begin{example}
+    In the spirit of the previous example, let $f: \N\to\bbC$ be a completely multiplicative arithmetic function. Then, its Dirichlet inverse is given by $f^{-1}(n) = \mu(n)f(n)$. If $\sigma_a$ denotes the abscissa of absolute convergence for the Dirichlet series corresponding to $f$, then the Dirichlet series corresponding to $f^{-1}$ converges absolutely in the half plane $\sigma > \sigma_a$. 
+
+    Consequently, for $\sigma > \sigma_a$, we have 
+    \begin{equation*}
+        \frac{1}{F(s)} = \sum_{n = 1}^\infty\frac{\mu(n)f(n)}{n^s},
+    \end{equation*}
+    therefore, $F(s)\ne 0$ in the right half plane $\sigma > \sigma_a$. 
+
+    In particular, for a Dirichlet character $\chi$ (modulo $N$), we have 
+    \begin{equation*}
+        \sum_{n = 1}^\infty \frac{\mu(n)\chi(n)}{n^s} = \frac{1}{L(s,\chi)}\quad\text{for }\sigma > 1.
+    \end{equation*}
+\end{example}
+
+\begin{example}
+    Taking $f\equiv\mathbbm{1}$ and $g = \lambda$, Liouville's function, we get, for $\sigma > 1$, 
+    \begin{equation*}
+        \zeta(s)\sum_{n = 1}^\infty\frac{\lambda(n)}{n^s} = \sum_{n = 1}^\infty\frac{1}{(n^2)^s} = \zeta(2s).
+    \end{equation*}
+    That is, 
+    \begin{equation*}
+        \sum_{n = 1}^\infty\frac{\lambda(n)}{n^s} = \frac{\zeta(2s)}{\zeta(s)}\quad\text{for }\sigma > 1.
+    \end{equation*}
+\end{example}
+
+\begin{proposition}
+    Let $f: \N\to\bbC$ be a multiplicative arithmetic function such that the series $\sum_{n\ge 1} f(n)$ is absolutely convergent. Then, 
+    \begin{equation*}
+        \sum_{n = 1}^\infty f(n) = \prod_{p\text{ prime}}\left\{1 + f(p) + f(p^2) + \cdots\right\},
+    \end{equation*}
+    where the product is absolutely convergent. If $f$ is completely multiplicative, 
+    \begin{equation*}
+        \sum_{n = 1}^\infty = \prod_{p\text{ prime}}\frac{1}{1 - f(p)}.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Straightforward. Note that \caution{absolute convergence} is necessary.
+\end{proof}
+
+\begin{theorem}[Euler Product]
+    Suppose the Dirichlet series $\sum_{n\ge 1} f(n)n^{-s}$ converges absolutely for $\sigma > \sigma_a$. If $f$ is multiplicative, we have 
+    \begin{equation*}
+        \sum_{n = 1}^\infty\frac{f(n)}{n^s} = \prod_{p\text{ prime}}\left\{1 + \frac{f(p)}{p^s} + \frac{f(p^2)}{p^{2s}} + \cdots\right\}\quad\text{for }\sigma > \sigma_a,
+    \end{equation*}
+    and if $f$ is completely multiplicative, we have 
+    \begin{equation*}
+        \sum_{n = 1}^\infty\frac{f(n)}{n^s} = \prod_{p\text{ prime}}\frac{1}{1 - f(p)p^{-s}}.
+    \end{equation*}
+\end{theorem}
+
+\begin{example}
+    Let $\chi$ be a Dirichlet character (modulo $N$), then 
+    \begin{equation*}
+        L(s,\chi) = \prod_{p \text{ prime}}\frac{1}{1 - \chi(p)p^{-s}}.
+    \end{equation*}
+\end{example}
+
+
+\begin{lemma}\thlabel{lem:convergence-lemma}
+    Let $s_0 = \sigma_0 + it_0$ and assume that the Dirichlet series $\sum_{n\ge 1} f(n)n^{-s_0}$ has bounded partial sums, say 
+    \begin{equation*}
+        \left|\sum_{n\le x} f(n)n^{-s_0}\right|\le M,
+    \end{equation*}
+    for all $x\ge 1$. Then, for each $s$ with $\sigma > \sigma_0$< we have 
+    \begin{equation*}
+        \left|\sum_{a < n \le b}f(n)n^{-s}\right|\le 2M a^{\sigma_0 - \sigma}\left(1 + \frac{|s - s_0|}{\sigma - \sigma_0}\right)
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    \todo{Abel summation}
+\end{proof}
+
+\begin{corollary}
+    If the Dirichlet series $\sum_{n\ge 1}f(n)n^{-s}$ converges for $s_0 = \sigma_0 + it_0$, then it also converges for all $s$ with $\sigma > \sigma_0$. If, on the other hand, it diverges for $s_0 = \sigma_0 + it_0$, then it diverges for all $s$ with $\sigma < \sigma_0$.
+\end{corollary}
+\begin{proof}
+    The second statement follows from the first. To see the first statement, choose any $s$ with $\sigma > \sigma_0$. The preceding lemma shows that there is a constant $C > 0$ such that 
+    \begin{equation*}
+        \left|\sum_{a < n\le b}f(n)n^{-s}\right|\le Ca^{\sigma_0 - \sigma},
+    \end{equation*}
+    where $C$ does not depend on $a$. Now, since $a^{\sigma_0 - \sigma}\to 0$ as $a\to\infty$, the partial sums form a Cauchy sequence and we are done.
+\end{proof}
+
+\begin{theorem}
+    If the Dirichlet series $\sum_{n\ge 1} f(n)n^{-s}$ does not converge everywhere or diverge everywhere, then there exists a real number $\sigma_c$ called the \define{abscissa of convergence}, such that the series converges for all $s$ in the half plane $\sigma > \sigma_c$ and diverges for all $s$ in the half plane $\sigma < \sigma_c$.
+\end{theorem}
+\begin{proof}
+    Omitted on account of its obviousness.
+\end{proof}
+
+\begin{theorem}
+    For any Dirichlet series with $\sigma_c$ finite, we have 
+    \begin{equation*}
+        0\le \sigma_a - \sigma_c \le 1.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Obviously, $\sigma_c\le \sigma_a$. Now, if $\sigma > \sigma_c + 1$, then there is an $\varepsilon > 0$ such that $\sigma - \sigma_c > 1 + \varepsilon$. We can then write 
+    \begin{equation*}
+        \sum_{n\ge 1}\frac{|f(n)|}{n^\sigma} = \sum_{n\ge 1}\frac{|f(n)|}{n^{\sigma_c + \varepsilon}}\frac{1}{n^{\sigma - \sigma_c - \varepsilon}}.
+    \end{equation*}
+    Since the series 
+    \begin{equation*}
+        \sum_{n\ge 1}\frac{f(n)}{n^{\sigma_c + \varepsilon}}
+    \end{equation*}
+    converges, the individual terms are bounded in absolute value, say by $M > 0$. Then, we have 
+    \begin{equation*}
+        \sum_{n\ge 1}\frac{|f(n)|}{n^\sigma}\le M\sum_{n\ge 1}\frac{1}{n^{\sigma - \sigma_c - \varepsilon}} < \infty.
+    \end{equation*}
+    Thus, $\sigma_c\le \sigma_c\le\sigma$. Since this inequality holds for all $\sigma > \sigma_c + 1$, we have the desired inequality.
+\end{proof}
+
+\begin{proposition}
+    Let $f:\N\to\bbC$ such that 
+    \begin{equation*}
+        \left|\sum_{n = 1}^N f(n)\right| = O(N^{\sigma_0}),
+    \end{equation*}
+    then $\sigma_c\le\sigma_0$.
+\end{proposition}
+\begin{proof}
+    Let $s = \sigma\in\R$ with $\sigma > \sigma_0$. Set 
+    \begin{equation*}
+        A_{m,n} = \sum_{k = m}^n f(k)
+    \end{equation*}
+    and 
+    \begin{equation*}
+        S_{m,n} = \sum_{k = m}^{n}\frac{f(k)}{k^s}.
+    \end{equation*}
+
+    Using \thref{thm:summation-by-parts}, 
+    \begin{equation*}
+        S_{m,n} = \sum_{k = m}^{n - 1}A_{m,k}\left(\frac{1}{k^s} - \frac{1}{(k + 1)^s}\right) + A_{m,n}\frac{1}{n^s},
+    \end{equation*}
+    thus, 
+    \begin{equation*}
+        |S_{m,n}|\le\sum_{k = m}^{n - 1}|A_{m,k}|\left|\frac{1}{k^s} - \frac{1}{(k + 1)^s}\right| + |A_{m,n}|\frac{1}{n^\sigma}.
+    \end{equation*}
+
+    According to our hypothesis, there is a constant $M > 0$ such that $A_{m,k}\le Mk^{\sigma_0}$. Using the Mean Value Theorem, 
+    \begin{equation*}
+        \left|\frac{1}{k^\sigma} - \frac{1}{(k + 1)^\sigma}\right| = \frac{|\sigma|}{(k + c)^{\sigma + 1}}\le\frac{|\sigma|}{k^{\sigma + 1}}.
+    \end{equation*}
+    Substituting this back, we have 
+    \begin{equation*}
+        |S_{m,n}|\le M|\sigma|\sum_{k = m}^{n - 1}\frac{1}{k^{\sigma + 1 - \sigma_0}} + \frac{1}{n^{\sigma - \sigma_0}}.
+    \end{equation*}
+    It is easy to see that this sequence is Cauchy and hence, it converges. It follows that $\sigma_c\le\sigma_0$.
+\end{proof}
+
+\subsection{Analytic Properties of Dirichlet series}
+
+\begin{theorem}
+    A Dirichlet series $\sum_{n\ge 1} f(n)n^{-s}$ converges uniformly on every compact subset lying in the interior of the right half plane $\sigma > \sigma_c$ and hence, defines a holomorphic function on the aforementioned right half plane.
+\end{theorem}
+\begin{proof}
+    It suffices to show uniform convergence on every compact rectangle of the form $[\alpha,\beta]\times[c,d]$ with $\alpha > \sigma_c$. First, choose a $\sigma_0$ with $\sigma_c < \sigma_0 < \alpha$. Then, using \thref{lem:convergence-lemma}, 
+    \begin{equation*}
+        \left|\sum_{a < n\le b} f(n)n^{-s}\right|\le 2M a^{\sigma_0 - \sigma}\left(1 + \frac{|s - \sigma_0|}{\sigma - \sigma_0}\right).
+    \end{equation*}
+
+    There is a constant $C > 0$ such that $|s - \sigma_0| < C$ whenever $s$ lies in the rectangle. Consequently, 
+    \begin{equation*}
+        \left|\sum_{a < n\le b}f(n)n^{-s}\right|\le 2Ma^{\sigma_0 - \alpha}\left(1 + \frac{C}{\alpha - \sigma_0}\right),
+    \end{equation*}
+    for all $a\in\mathbb N$. This shows that the partial sums are uniformly Cauchy on the rectangle and hence, converge uniformly. This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    The function $F(s) := \sum_{n\ge 1}f(n)n^{-s}$ is analytic in the half plane $\sigma > \sigma_c$, and its derivative in the aforementioned half plane is given by 
+    \begin{equation*}
+        F'(s) = -\sum_{n = 1}^\infty\frac{f(n)\log n}{n^s}.
+    \end{equation*}
+\end{corollary}
+
+\begin{example}
+    For $\sigma > 1$, we have 
+    \begin{equation*}
+        \zeta'(s) = \sum_{n = 1}^\infty\frac{\log n}{n^s},
+    \end{equation*}
+    where the sum is also absolutely convergent. On the other hand, recall that 
+    \begin{equation*}
+        \frac{1}{\zeta(s)} = \sum_{n = 1}^\infty\frac{\mu(n)}{n^s},
+    \end{equation*}
+
+    Consequently, for $\sigma > 1$, 
+    \begin{equation*}
+        \frac{\zeta'(s)}{\zeta(s)} = \sum_{n = 1}^\infty\frac{(\mu\ast\log)(n)}{n^s} = \sum_{n = 1}^\infty\frac{\Lambda(n)}{n^s}.
+    \end{equation*}
+\end{example}
+
+\begin{theorem}
+    Let $F$ be a holomorphic function which is represented in the half plane $\sigma > c $ by the Dirichlet series 
+    \begin{equation*}
+        F(s) = \sum_{n = 1}^\infty\frac{f(n)}{n^s}
+    \end{equation*}
+    where $c$ is finite. Further, suppose there is a positive integer $n_0$ such that $f(n)\ge 0$ for all $n\ge n_0$. If $F$ is holomorphic in a neighborhood of $c$, then there is an $\varepsilon > 0$ such that the Dirichlet series converges in the half plane $\sigma > c - \varepsilon$, in other words, $\sigma_c\le c -\varepsilon$.
+\end{theorem}
+\begin{proof}
+    Let $a = 1 + c$. Since $F$ is analytic at $a$, it can be represented by an absolutely convergent power series about $a$, 
+    \begin{equation*}
+        F(s) = \sum_{k = 0}^\infty\frac{F^{(k)}(a)}{k!}(s - a)^k,
+    \end{equation*}
+    whose radius of convergence is greater than $1$ and hence, there is an $\varepsilon > 0$ such that $c - \varepsilon$ lies within the open disk of convergence of the aforementioned power series about $a$. But, 
+    \begin{equation*}
+        F^{(k)}(a) = (-1)^k \sum_{n = 1}^\infty\frac{f(n)\log^k n}{n^a}.
+    \end{equation*}
+    Therefore, 
+    \begin{equation*}
+        F(s) = \sum_{k = 0}^\infty\sum_{n = 1}^\infty\frac{(a - s)^k}{k!}\frac{f(n)\log^k n}{n^a}.
+    \end{equation*}
+    In particular, this equality holds for $s = c - \varepsilon$. Hence, 
+    \begin{equation*}
+        F(c - \varepsilon) = \sum_{k = 0}^\infty\sum_{n = 1}^\infty\frac{(1 + \varepsilon)^k}{k!}\frac{f(n)\log^k n}{n^a}.
+    \end{equation*}
+    The double series has \caution{nonnegative} terms for $n\ge n_0$ and hence, we can interchange the order of summation. 
+    \begin{equation*}
+        F(c - \varepsilon) = \sum_{n = 1}^\infty\frac{f(n)}{n^a}\sum_{k = 0}^\infty\frac{(1 + \varepsilon)^k \log^k n}{k!} = \sum_{n = 1}^\infty\frac{f(n)}{n^a} n^{1 + \varepsilon} = \sum_{n = 1}^\infty\frac{f(n)}{n^{c - \varepsilon}}.
+    \end{equation*}
+    Thus, the Dirichlet series converges for $s = c - \varepsilon$.
+\end{proof}
+
+\begin{theorem}
+    Let the Dirichlet series $F(s) = \sum_{n\ge 1} f(n)n^{-s}$ be absolutely convergent for $\sigma > \sigma_a$ and assume that $f(1)\ne 0$. If $F(s)\ne 0$ for $\sigma > \sigma_0\ge\sigma_a$, then for $\sigma > \sigma_0$, we have $F(s) = \exp(G(s))$ where 
+    \begin{equation*}
+        G(s) = \log f(1) + \sum_{n = 2}^\infty\frac{(f'\ast f^{-1})(n)}{\log n}\frac{1}{n^s},
+    \end{equation*}
+    where $f^{-1}$ is the Dirichlet inverse of $f$ and $f'(n) = f(n)\log n$. Further, this Dirichlet series is absolutely convergent in the half plane $\sigma > \sigma_0$.
+\end{theorem}
+\begin{proof}
+    Since $F$ does not vanish in the right half plane $\sigma > \sigma_0$, there is a holomorphic function $G$ such that $F(s) = \exp(G(s))$. We have $G'(s) = F'(s)/F(s)$ for all $\sigma > \sigma_0$. But we already know 
+    \begin{equation*}
+        F'(s) = -\sum_{n = 1}^\infty\frac{f(n)\log n}{n^s}\quad\text{and}\quad\frac{1}{F(s)} = \sum_{n = 1}^\infty\frac{f^{-1}(n)}{n^s},
+    \end{equation*}
+    for $\sigma > \sigma_0$ and the convergence is absolute there. Thus, 
+    \begin{equation*}
+        G'(s) = - \sum_{n = 2}^\infty\frac{(f'\ast f^{-1})(n)}{n^s}.
+    \end{equation*}
+    Therefore, 
+    \begin{equation*}
+        G(s) = C + \sum_{n = 2}^\infty\frac{(f'\ast f^{-1})(n)}{\log n}\frac{1}{n^s},
+    \end{equation*}
+    since the Dirichlet series for $G$ converges absolutely in $\sigma > \sigma_0$ and upon differentiating, we obtain the Dirichlet series for $G'$. To determine the constant, use 
+    \begin{equation*}
+        f(1) = \lim_{\sigma\to\infty} F(\sigma + it) = e^C.
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{example}
+    We have shown earlier that $\zeta(s)$ does not vanish on the half plane $\sigma > 1$. Therefore, it has a ``logarithm'' here, given by 
+    \begin{equation*}
+        G(s) = \sum_{n = 2}^\infty\frac{(\mathbbm{1}'\ast \mathbbm{1}^{-1})(n)}{\log n}\frac{1}{n^s}.
+    \end{equation*}
+    Where $\mathbbm{1}^{-1} = \mu$ and $\mathbbm{1}' = \log$. Thus, 
+    \begin{equation*}
+        \log \zeta(s) = G(s) = \sum_{n = 2}^\infty\frac{\Lambda(n)}{\log n}\frac{1}{n^s},
+    \end{equation*}
+    on the half plane $\sigma > 1$. Unraveling the definition of the von Mangoldt function, 
+    \begin{equation*}
+        G(s) = \sum_{p\text{ prime}}\sum_{m = 1}^\infty\frac{1}{m p^{ms}}\quad\text{for }\sigma > 1.
+    \end{equation*}
+\end{example}
+
+\begin{example}
+    Similarly, given a completely multiplicative arithmetic function $f:\mathbb N\to\mathbb C$, if $F(s) = \sum_{n\ge 1}f(n)n^{-s}$ denotes the Dirichlet series, that is non vanishing in $\sigma > \sigma_0\ge\sigma_a$, then $F(s) = \exp(G(s))$ in $\sigma > \sigma_0$ and 
+    \begin{equation*}
+        G(s) = \sum_{n = 2}^\infty\frac{f(n)\Lambda(n)}{\log n}\frac{1}{n^s} = \sum_{p\text{ prime}}\sum_{m = 1}^\infty\frac{f(p)^m}{mp^{ms}}.
+    \end{equation*}
+\end{example}
+
+\subsection{Dirichlet's Theorem on Primes in Arithmetic Progressions}
+
+Our goal, in this subsection, is to show that whenever $(a, N) = 1$, there are infinitely many primes $p\equiv a\mod N$. Henceforth, all Dirichlet characters will be modulo $N$. The principal character (modulo $N$) will be denoted by $\mathbbm 1$. 
+
+For each character $\chi$, define 
+\begin{equation*}
+    l_1(s,\chi) = \sum_{p\text{ prime}}\frac{\chi(p)}{p^s}.
+\end{equation*}
+This is a Dirichlet series, which is absolutely convergent and holomorphic in the half plane $\sigma > 1$. Also, define 
+\begin{equation*}
+    l(s,\chi) = \sum_{p\text{ prime}}\sum_{n = 1}^\infty\frac{\chi(p)^n}{np^{ns}},
+\end{equation*}
+and we have seen in the previous section that $l(s,\chi)$ is absolutely convergent for $\sigma > 1$, is holomorphic there and $\exp(l(s,\chi)) = L(s,\chi)$ for $\sigma > 1$.
+
+\begin{proposition}
+    Let $R(s,\chi) = l(s,\chi) - l_1(s,\chi)$. Then, $R$ is a Dirichlet series that is absolutely convergent and holomorphic for $\sigma > 1/2$.
+\end{proposition}
+\begin{proof}
+    The difference of two Dirichlet series is a Dirichlet series. Let $\sigma > 1/2$. Then, 
+    \begin{equation*}
+        |R(s,\chi)|\le\sum_{p\text{ prime}}\sum_{n = 2}^\infty\frac{1}{np^{n\sigma}}
+    \end{equation*}
+\end{proof}
+
+\todo{Complete this section}
+
+\section{Analytic Continuation for \texorpdfstring{$\zeta(s)$}{} and \texorpdfstring{$L(s,\chi)$}{}}
+
+\begin{definition}
+    For $\sigma > 1$ and $0 < a \le 1$, define the \define{Hurwitz Zeta Function} $\zeta(s, a)$ as 
+    \begin{equation*}
+        \zeta(s, a) = \sum_{n = {0}}^\infty\frac{1}{(n + a)^s}.
+    \end{equation*}
+    The sum is absolutely convergent in the half plane $\sigma > 1$ and defines a holomorphic function there.
+\end{definition}
+
+\begin{theorem}
+    For $\sigma > 1$, we have the integral representation 
+    \begin{equation*}
+        \Gamma(s)\zeta(s, a) = \int_0^\infty\frac{x^{s - 1}e^{-ax}}{1 - e^{-x}}~dx.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    First, let $s > 1$ be real. Then, the Monotone Convergence Theorem gives 
+    \begin{equation*}
+        \int_0^\infty\frac{x^{s - 1}e^{-ax}}{1 - e^{-x}}~dx = \sum_{n = 0}^\infty \int_0^\infty x^{s - 1}e^{-(n + a)x} = \sum_{n = 0}^\infty\frac{\Gamma(s)}{(n + a)^s} = \Gamma(s)\zeta(s , a).
+    \end{equation*}
+
+    Thus, it suffices to show that the integral on the right defines a holomorphic function of $s$ on $\sigma > 1$. To do this, we shall show analyticity in every strip $1 + \delta < \sigma < c$ where $\delta > 0$. Obviously the functions 
+    \begin{equation*}
+        F_N(s) = \int_0^N \frac{x^{s - 1}e^{-ax}}{1 - e^{-x}}
+    \end{equation*}
+    are holomorphic on $\sigma > 1$. We shall show that they converge uniformly to the integral on the right hand side. Indeed, their difference is given by the integral 
+    \begin{equation*}
+        \left|\int_N^\infty\frac{x^{s - 1}e^{-ax}}{1 - e^{-x}}\right|\le\int_N^\infty\frac{x^{\sigma - 1}e^{-ax}}{1 - e^{-x}}~dx\le\int_N^\infty x^{\sigma - 1}e^{-ax}~dx\le\int_N^\infty x^{c - 1}e^{-ax}~dx.
+    \end{equation*}
+    The uniform convergence thus follows from the fact that $\Gamma(c)$ is well defined and converges.
+\end{proof}
+
+\begin{corollary}
+    In particular, for $a = 1$, we have 
+    \begin{equation*}
+        \Gamma(s)\zeta(s) = \int_0^\infty\frac{x^{s - 1}e^{-ax}}{1 - e^{-x}}
+    \end{equation*}
+\end{corollary}
+
+\subsection{Analytic Continuation of \texorpdfstring{$\zeta(s, a)$}{}}
+
+Let $0 < c < 2\pi$ and let $C$ denote the piecewise smooth ``contour'' which first traverses the negative real axis from $-\infty$ to $-c$ and then traverses, in counter-clockwise sense, the circle centered at $0$ of radius $c$ and finally, traverses the negative real axis from $-c$ to $-\infty$. \missingfigure{the contour}
+
+Let $C_1, C_2, C_3$ denote the aforementioned smooth pieces of $C$. Then, $C_1$ is parametrized as $re^{-\pi i }$ for $r$ running from $\infty$ to $c$. $C_2$ is parametrized in the obvious way and $C_3$ is parametrized as $re^{\pi i}$ for $r$ running from $c$ to $\infty$.
+
+\begin{theorem}
+    For $0 < a \le 1$, the function defined by contour integral 
+    \begin{equation*}
+        I(s, a) = \frac{1}{2\pi i}\int_C\frac{z^{s - 1}e^{az}}{1 - e^z}~dz
+    \end{equation*}
+    is entire. Further, we have 
+    \begin{equation*}
+        \zeta(s, a) = \Gamma(1 - s)I(s, a) \qquad\text{for }\sigma > 1,~\sigma\notin\Z.
+    \end{equation*}
+    \caution{Here, $z^s$ means $r^se^{-\pi is}$ on $C_1$ and $r^se^{\pi i s}$ on $C_3$.}
+\end{theorem}
+\begin{proof}
+    Let $M > 0$ and consider the compact disk $|s|\le M$. The integral can be broken up as $\int_{C_1} + \int_{C_2} + \int_{C_3}$. Since $C_2$ is a compact contour, the integral $\int_{C_2}$ defines an entire function anyway. Therefore, we need only show that the integrals corresponding to $C_1$ and $C_3$ are uniformly convergent on the chosen compact disk.
+
+    Along $C_1$, for $r\ge 1$, we have 
+    \begin{equation*}
+        |z^{s - 1}| = r^{\sigma - 1}\left|e^{-\pi i(\sigma - 1 + it)}\right| = r^{\sigma - 1}e^{\pi t}\le r^{M - 1}e^{\pi M}
+    \end{equation*}
+    The same bound works on $C_3$. Therefore, on either $C_1$ or $C_3$, for $r\ge 1$, we have 
+    \begin{equation*}
+        \left|\frac{z^{s - 1}e^{az}}{1 - e^z}\right|\le\frac{r^{M - 1}e^{\pi M}e^{-ar}}{1 - e^{-r}} = \frac{r^{M - 1}e^{\pi M}e^{(1 - a)r}}{e^{r} - 1}.
+    \end{equation*}
+    For $r > \log 2$, we have $e^{r} - 1 > e^r/2$ and hence, 
+    \begin{equation*}
+        \left|\frac{z^{s - 1}e^{az}}{1 - e^z}\right|\le 2r^{M - 1}e^{\pi M}e^{-ar}.
+    \end{equation*}
+    Since the $\Gamma(M)$ exists, we conclude that the convergence of the integral along $C_1$ and $C_3$ is uniform. The argument is similar to the one in the previous proof.
+
+    Finally, we must show the identity. Let $g(z) = e^{az}/(1 - e^z)$. We have 
+    \begin{equation*}
+        2\pi i I(s, a) = \left(\int_{C_1} + \int_{C_2} + \int_{C_3}\right)z^{s - 1}g(z)~dz.
+    \end{equation*}
+
+    That is, 
+    \begin{align*}
+        2\pi i I(s, a) &= \int_\infty^c r^{s - 1}e^{-\pi is}g(-r)~dr + i\int_{-\pi}^\pi c^{s - 1}e^{(s - 1)i\theta}ce^{i\theta}g(ce^{i\theta})~d\theta + \int_c^\infty r^{s - 1} e^{\pi i s} g(-r)~dr\\
+        &= 2i\sin(\pi s)\int_c^\infty r^{s - 1}g(-r)~dr + ic^s\int_{-\pi}^\pi e^{is\theta}g(ce^{i\theta})~d\theta.
+    \end{align*}
+    Set 
+    \begin{equation*}
+        I_1(s, c) = \int_c^\infty r^{s - 1}g(-r)~dr\quad\text{and}\quad I_2(s,c) = \frac{c^s}{2}\int_{-\pi}^\pi e^{is\theta}g(ce^{i\theta})~d\theta.
+    \end{equation*}
+    Then, 
+    \begin{equation*}
+        \pi I(s, a) = \sin(\pi s) I_1(s,c) + I_2(s, c).
+    \end{equation*}
+
+    We claim that $\displaystyle\lim_{c\to 0} I_2(s, c) = 0$. Note that $g(z)$ is analytic in $|z| < 2\pi$ except for a simple pole at $z = 0$ and hence, $zg(z)$ is is analytic everywhere inside $|z| < 2\pi$. Consider the closed disk $|z|\le\pi$. The function $zg(z)$ is analytic, hence, bounded on $|z|\le\pi$, consequently, there is a constant $A > 0$ such that $|g(z)|\le A/|z|$ for $|z|\le\pi$. Then, for $c < \pi$, we have 
+    \begin{equation*}
+        |I_2(s, c)|\le\frac{c^\sigma}{2}\int_{-\pi}^\pi e^{-t\theta}\frac{A}{c}~d\theta\le Ae^{\pi|t|}c^{\sigma - 1},
+    \end{equation*}
+    and the conclusion follows.
+
+    Note that the integral remains unchanged upon changing the value of $c$, which follows from one of Cauchy's theorems. Now, note that 
+    \begin{equation*}
+        \lim_{c\to 0}I_1(s, c ) = \int_{0}^\infty\frac{r^{s - 1}e^{-ar}}{1 - e^{-r}}~dr = \Gamma(s)\zeta(s, a)\quad\text{ for } \sigma > 1.
+    \end{equation*}
+    Hence, we have 
+    \begin{equation*}
+        \pi I(s, a) = \sin(\pi s)\Gamma(s)\zeta(s, a)\quad\text{ for }\sigma > 1.
+    \end{equation*}
+    Recall Euler's reflection formula, 
+    \begin{equation*}
+        \Gamma(s)\Gamma(1 - s) = \frac{\pi}{\sin(\pi s)}\quad\text{ for } s\in\bbC\backslash\Z.
+    \end{equation*}
+    Consequently, we have 
+    \begin{equation*}
+        \sin(\pi s)\Gamma(s) = \frac{\pi}{\Gamma(1 - s)}\quad\text{ for all } s\in\bbC,
+    \end{equation*}
+    since $1/\Gamma(1 - s)$ is an entire function. Substituting this, above, we have, 
+    \begin{equation*}
+        I(s, a) = \frac{1}{\Gamma(1 - s)}\zeta(s, a).
+    \end{equation*}
+    When $\sigma\notin\Z$, we can rearrange the above in the required form.
+\end{proof}
+
+\begin{definition}
+    For $\sigma\le 1$, \caution{define} 
+    \begin{equation*}
+        \zeta(s, a) = \Gamma(1 - s)I(s, a).
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}
+    The function $\zeta(s, a)$ so defined is analytic for all $s$ except for a simple pole at $s = 1$ with residue $1$. 
+\end{theorem}
+\begin{proof}
+    That it is analytic is obvious. We have 
+    \begin{equation*}
+        I(1, a) = \frac{1}{2\pi i}\int_C\frac{e^{az}}{1 - e^z}~dz.
+    \end{equation*}
+    In this case, the integrals on $C_1$ and $C_3$ cancel and we are left with 
+    \begin{equation*}
+        I(1, a) = \frac{1}{2\pi i}\int_{C_2}\frac{e^{az}}{1 - e^z} = \operatorname{Res}_{s = 0}\frac{e^{as}}{1 - e^s} = -1.
+    \end{equation*}
+    Consequently, 
+    \begin{equation}
+        \Res_{s = 1}\zeta(s, a) = \lim_{s\to 1}(s - 1)\Gamma(1 - s)I(s, a) = -\Res_{s = 0}\Gamma(s)\times I(1, a) = 1.
+    \end{equation}
+    This completes the proof.
+\end{proof}
+
+\subsection{Hurwitz's Formula}
+Consider the Dirichlet series
+\begin{equation*}
+    F(x, s) = \sum_{n = 1}^\infty \frac{e^{2\pi inx}}{n^s}.
+\end{equation*}
+This converges absolutely in $\sigma > 1$ and hence, defines a holomorphic functions there. If $x\notin\Z$, then the series converges conditionally in $\sigma > 0$ and hence, is holomorphic there. In any case, $F(x,s)$ is periodic in $x$ with period $1$. We call this the \define{periodic Zeta function}.
+
+
+\begin{lemma}\thlabel{lem:bounded-on-sr}
+    For $0 < r < \pi$, let $S(r)$ denote the region that remains after removing all open circular disks of radius $r$ centered at $2n\pi i$ for $n\in\Z$. If $0 < a\le 1$, then the function 
+    \begin{equation*}
+        g(z) = \frac{e^{az}}{1 - e^z}
+    \end{equation*}
+    is bounded in $S(r)$. \caution{The bound obviously depends on $r$.}
+\end{lemma}
+\begin{proof}
+\todo{add}
+\end{proof}
+
+\begin{theorem}[Hurwitz's Formula]
+    If $0 < a\le 1$ and $\sigma > 1$, then 
+    \begin{equation*}
+        \zeta(1 - s, a) = \frac{\Gamma(s)}{(2\pi)^s}\left(e^{-\pi is/2}F(a, s) + e^{\pi i s/2}F(-a, s)\right).
+    \end{equation*}
+    If $a\ne 1$, this representation is valid in $\sigma > 0$.
+\end{theorem}
+\begin{proof}
+    For every positive integer $N$, let $C(N)$ denote the contour shown in the following figure.
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{contour.png}
+    \end{center}
+
+    Set 
+    \begin{equation*}
+        I_N(s, a) = \frac{1}{2\pi i}\int_{C(N)}\frac{z^{s - 1}e^{az}}{1 - e^z}~dz
+    \end{equation*}
+    \caution{with the same conventions on $z^{s - 1}$ as mentioned while defining $I(s, a)$.}
+
+    We first show that $\displaystyle\lim_{N\to\infty} I_N(s, a) = I(s, a)$ for $\sigma < 0$. To do this, it suffices to show that the integral along the outer circle vanishes as $N\to\infty$. Since the orientation of the outer cycle is irrelevant while showing this, we parametrize the outer circle as $z = Re^{i\theta}$ where $-\pi\le\theta\le\pi$. Consequently, 
+    \begin{equation*}
+        |z^{s - 1}| = |R^{s - 1}e^{i\theta(s - 1)}|\le R^{\sigma - 1}e^{\pi|t|}.
+    \end{equation*}
+    Due to \thref{lem:bounded-on-sr}, there is an $A > 0$ (independent of $N$) such that the integrand is bounded by $AR^{\sigma - 1}e^{\pi|t|}$. Thus, the integral can be bounded above in absolute vaule by 
+    \begin{equation*}
+        2\pi R^\sigma e^{\pi|t|}.
+    \end{equation*}
+    But since $\sigma < 0$, we have the desired conclusion as $N\to\infty$. We rewrite this as 
+    \begin{equation*}
+        \lim_{N\to\infty} I(1 - s, a) = I(1 - s, a)\quad\text{ for } \sigma > 1.
+    \end{equation*}
+
+    We now use Cauchy's Residue Theorem to compute the value of $I_N(1 - s, a)$. The poles corresponding to which the winding number is non-zero (in fact, precisely $-1$) are $2n\pi$ for $n\in\{-N,\dots, N\}\backslash\{0\}$. 
+
+    Let 
+    \begin{equation*}
+        R(n) = \Res_{z = 2n\pi i}\frac{z^{-s}e^{az}}{1 - e^z}.
+    \end{equation*}
+    Then, 
+    \begin{equation*}
+        R(n) = \lim_{z\to2n\pi i}(z - 2n\pi i)\frac{z^{-s}e^{az}}{1 - e^z} = -\frac{e^{2n\pi i a}}{(2n\pi i)^s}.
+    \end{equation*}
+
+    Consequently, for $\sigma > 1$, 
+    \begin{equation*}
+        I_N(1 - s, a) = \sum_{n = 1}^N\frac{e^{2n\pi i a}}{(2n\pi i)^s} + \sum_{n = 1}^N\frac{e^{-2n\pi i a}}{(-2n\pi i)^s} = \frac{e^{-\pi i s/2}}{(2\pi)^s}\sum_{n = 1}^N\frac{e^{2n\pi ia}}{n^s} + \frac{e^{\pi i s/2}}{(2\pi)^s}\sum_{n = 1}^N\frac{e^{-2n\pi ia}}{n^s}.
+    \end{equation*}
+    Taking $N\to\infty$, we get
+    \begin{equation*}
+        I(1 - s, a) = \frac{e^{-\pi is/2}}{(2\pi)^s}F(a, s) + \frac{e^{\pi is/2}}{(2\pi)^s}F(-a, s)\quad\text{ for }\sigma > 1.
+    \end{equation*}
+
+    Recall that by definition, we have $\zeta(1 - s, a) = \Gamma(s)I(1 - s, a)$ for $\sigma > 0$, thus, for $\sigma > 1$. This gives, 
+    \begin{equation*}
+        \zeta(1 - s, a) = \frac{\Gamma(s)}{(2\pi)^s}\left(e^{-\pi is/2}F(a, s) + e^{\pi is/2}F(-a, s)\right)\quad\text{ for }\sigma > 1.
+    \end{equation*}
+    If $a\ne 1$, then the right hand side is analytic for $\sigma > 0$, as is the left hand side, whence the equality holds for $\sigma > 0$. This completes the proof.
+\end{proof}
+
+\subsection{Riemann's Functional Equation}
+
+\begin{theorem}
+    For all $s\ne 0$, we have 
+    \begin{equation*}
+        \zeta(1 - s) = 2(2\pi)^{-s}\Gamma(s)\cos\left(\frac{\pi s}{2}\right)\zeta(s).
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Put $a = 1$ in Hurwitz's formula to get the identity, (for $\sigma > 1$)
+    \begin{equation*}
+        \zeta(1 - s) = \frac{\Gamma(s)}{(2\pi)^s}\left(e^{-\pi is/2}F(1, s) + e^{\pi is/2}F(1, s)\right) = \frac{\Gamma(s)}{(2\pi)^s}2\cos\left(\frac{\pi s}{2}\right)\zeta(s).
+    \end{equation*}
+
+    Let $n$ be a positive integer and let $s\to 2n + 1$. In this limit, the right hand side vanishes and hence, we have $\zeta(-2n) = 0$ for all positive integers $n$. Thus, the right hand side is a well defined function that is holomorphic (modulo removable singularities) on $\bbC\backslash\{0\}$. Further, since $\zeta(1 - s)$ is holomorphic on $\bbC\backslash\{0\}$, equality holds for all $s\ne 0$.
+\end{proof}
+
+From Gau\ss's multipliation formula, we get 
+\begin{equation*}
+    \Gamma(s)\Gamma\left(s + \frac{1}{2}\right) = 2\pi^{1/2}2^{-2s}\Gamma(2s)
+\end{equation*}
+whenever either of the two sides is defined. Put $s\mapsto(1 - s)/2$ to get 
+\begin{equation*}
+    2^s\pi^{1/2}\Gamma(1 - s) = \Gamma\left(\frac{1 - s}{2}\right)\Gamma\left(1 - \frac{s}{2}\right),
+\end{equation*}
+whenever either of the two sides is defined.
+
+The reflection formula gives 
+\begin{equation*}
+    \Gamma(1 - s)\sin\left(\frac{\pi s}{2}\right) = \frac{2^{-s}\pi^{1/2}\Gamma\left(\frac{1 - s}{2}\right)}{\Gamma\left(\frac{s}{2}\right)}
+\end{equation*}
+whenever either of the two sides is defined.
+
+We have 
+\begin{equation*}
+    \zeta(s) = 2(2\pi)^{s - 1}\Gamma(1 - s)\sin\left(\frac{\pi s}{2}\right)\zeta(1 - s)
+\end{equation*}
+whenever either of the two sides is defined. Thus, we have 
+\begin{equation*}
+    \pi^{-s/2}\Gamma\left(\frac{s}{2}\right)\zeta(s) = \pi^{-(1 - s)/2}\Gamma\left(\frac{1 - s}{2}\right)\zeta(1 - s).
+\end{equation*}
+
+Define the \emph{xi function} as 
+\begin{equation*}
+    \xi(s) = \frac{1}{2}s(s - 1)\pi^{-s/2}\Gamma\left(\frac{s}{2}\right)\zeta(s).
+\end{equation*}
+This is an entire function and satisfies the equation 
+\begin{equation*}
+    \xi(s) = \xi(1 - s).
+\end{equation*}
+This is known as \define{Riemann's functional equation}.
+
+
+\subsection{Functional equation for \texorpdfstring{$L$}{L}-functions}
+
+\begin{theorem}
+    If $h$ and $N$ are positive integers with $1\le h\le N$, then for all $s\ne 0$, we have 
+    \begin{equation*}
+        \zeta\left(1 - s, \frac{h}{N}\right) = \frac{2\Gamma(s)}{(2\pi N)^s}\sum_{r = 1}^N \cos\left(\frac{\pi s}{2} - \frac{2\pi rh}{N}\right)\zeta\left(s, \frac{r}{N}\right).
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    For $\sigma > 1$, note that 
+    \begin{align*}
+        F\left(\frac{h}{N}, s\right) &= \sum_{n = 1}^\infty\frac{e^{2\pi i nh/N}}{n^s}\\
+        &= \sum_{r = 1}^N \sum_{q = 0}^\infty\frac{e^{2\pi i rh/N}}{(qN + r)^s}\\
+        &= \frac{1}{N^s}\sum_{r = 1}^N e^{2\pi irh/N}\sum_{q = 0}^\infty\frac{1}{\left(q + \frac{r}{N}\right)^s}\\
+        &= N^{-s}\sum_{r = 1}^N e^{2\pi i rh/N}\zeta\left(s, \frac{r}{N}\right).
+    \end{align*}
+    Substituting this in Hurwitz's formula, we obtain the equality for $\sigma > 1$. The result holds for all $s\ne 0$ as a result of analytic continuation.
+\end{proof}
+
+Let $\chi$ be a Dirichlet character modulo $N$. Then, $L(s,\chi)$ is absolutely convergent for $\sigma > 1$. In this half plane, we can write 
+\begin{align*}
+    L(s,\chi) &= \sum_{n = 1}^\infty\frac{\chi(n)}{n^s}\\
+    &= \sum_{r = 1}^N\sum_{q = 0}^\infty\frac{\chi(r)}{(qN + r)^s}\\
+    &= \frac{1}{N^s}\sum_{r = 1}^N\chi(r)\zeta\left(s, \frac{r}{N}\right).
+\end{align*}
+From the theory we developed earlier, we know that the Hurwitz zeta function has an analytic continuation to all of $\bbC$ with a simple pole at $s = 1$ of residue $1$. 
+
+\begin{itemize}
+    \item If $\chi$ is not the principal character modulo $N$, then $\sum_{r = 1}^N \chi(r) = 0$ and hence, the right hand side of the above equation is entire. Consequently, $L(s,\chi)$ can be analytically continued to an \caution{entire function}. 
+
+    \item On the other hand, if $\chi = \mathbbm 1$ is the principal character, then the right hand side has a simple pole at $s = 1$ of residue $\varphi(N)/N$.
+\end{itemize}
+
+\begin{proposition}\thlabel{prop:gauss-and-L}
+    Let $\chi$ be a primitive character modulo $N$. Then,
+    \begin{equation*}
+        G(1, \overline\chi) L(s,\chi) = \sum_{h = 1}^N \overline\chi(h) F\left(\frac{h}{N}, s\right)\quad\text{ for }\sigma > 1.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Omitted owing to its obviousness. The primitive-ness of the character is required only to use the fact that the Gauss sum is separable.
+\end{proof}
+
+\begin{theorem}[Functional Equation for $L$-series]
+    Let $\chi$ be a primitive character modulo $N$. Then, for all $s$, we have 
+    \begin{equation*}
+        L(1 - s, \chi) = \frac{N^{s - 1}\Gamma(s)}{(2\pi)^s}\left(e^{-\pi i s/2} + \chi(-1)e^{\pi is/2}\right)G(1,\chi) L(s,\overline\chi).
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Hurwitz's formula says
+    \begin{equation*}
+        \zeta(1 - s, h/N) = \frac{\Gamma(s)}{(2\pi)^s}\left(e^{-\pi is/2}F(h/N, s) + e^{\pi is/2}F(-h/N, s)\right)\qquad\text{for }\sigma > 1.
+    \end{equation*}
+
+    Thus, for $\sigma > 1$,
+    \begin{align*}
+        \sum_{h = 1}^N\chi(h)\zeta\left(1 - s, \frac{h}{N}\right) &= \frac{\Gamma(s)}{(2\pi)^s}\left\{e^{-\pi is/2}\sum_{h = 1}^N\chi(h)F(h/N, s) + e^{\pi is/2}\sum_{h = 1}^N \chi(h)F(-h/N, s)\right\}.
+    \end{align*}
+    We simplify the second term,
+    \begin{equation*}
+        \sum_{h = 1}^N\chi(h)F(-h/N, s) = \sum_{h\mod N}\chi(h)F\left(\frac{N - h}{N}, s\right) = \chi(-1)\sum_{h\mod N}\chi(h)F(h/N, s).
+    \end{equation*}
+
+    Substituting this back, for $\sigma > 1$, the right hand side becomes
+    \begin{equation*}
+        \frac{\Gamma(s)}{(2\pi)^s}\left(e^{-\pi is/2} + \chi(-1)e^{\pi is/2}\right)\sum_{h\mod N}\chi(h)F(h/N, s).
+    \end{equation*}
+
+    Using \thref{prop:gauss-and-L}, the above simplifies as 
+    \begin{equation*}
+        \sum_{h = 1}^N\chi(h)\zeta\left(1 - s, \frac{h}{N}\right) = 
+        \frac{\Gamma(s)}{(2\pi)^s}\left(e^{-\pi is/2} + \chi(-1)e^{\pi is/2}\right)G(1, \chi) L(s,\overline\chi)
+    \end{equation*}
+    for $\sigma > 1$. The left hand side is holomorphic on $s\ne 0$, as is the right hand side (since $\overline\chi$ is non principal). Thus, the equality holds for all $s$ (since the right hand side is entire). In particular, we can suppose $\Re(s) < 0$, whence, we can multiply by $N^{s - 1}$ to obtain the equality 
+    \begin{equation*}
+        L(1 - s, \chi) = \frac{N^{s - 1}\Gamma(s)}{(2\pi)^s}\left(e^{-\pi i s/2} + \chi(-1)e^{\pi is/2}\right)G(1,\chi) L(s,\overline\chi).
+    \end{equation*}
+    This equality holds in $\sigma < 0$ and hence, everywhere, since both sides are entire. This completes the proof.
+\end{proof}
+
+\section{The Prime Number Theorem}
+
+\begin{lemma}\thlabel{lem:zeta-not-vanish}
+    $\zeta(1 + it)\ne 0$ for all $t\in\R\setminus\{0\}$.
+\end{lemma}
+
+\begin{lemma}
+    The series 
+    \begin{equation*}
+        \Phi(s) = \sum_{n\ge 2}\sum_{p}\frac{1}{np^{ns}}
+    \end{equation*}
+    converges uniformly on compacta to a holomorphic function on $\Re s > \frac{1}{2}$.
+\end{lemma}
+\begin{proof}
+    Let $s = x + iy$ with $x > \frac{1}{2}$. We have the inequalities 
+    \begin{equation*}
+        \sum_{n\ge 2}\sum_{p}\frac{1}{np^{nx}} = \sum_{p}\frac{1}{p^{2x}}\left(\sum_{n\ge 0}\frac{1}{(n + 2)p^{nx}}\right)\le\sum_{p}\frac{1}{p^{2x}}\left(\sum_{n\ge 0}\frac{1}{\sqrt 2^n}\right)
+    \end{equation*}
+    and the conclusion follows.
+\end{proof}
+
+Define the series 
+\begin{equation*}
+    L(s) = \sum_{p}\frac{1}{p^s},
+\end{equation*}
+which is easily seen to be holomorphic in $\Re s > 1$ as the series converges uniformly on compacta. Let 
+\begin{equation*}
+    \ell(s) = \sum_{p}\frac{\log p}{p^s} = -L'(s)
+\end{equation*}
+on $\Res > 1$.
+
+Notice that 
+\begin{equation*}
+    L(s) = \log\zeta(s) - \Phi(s) \quad\text{for }\Re s > 1.
+\end{equation*}
+Due to \thref{lem:zeta-not-vanish}, the function $(s - 1)\zeta(s)$, which is known to be entire, does not vanish on an open set containing $\{z\colon\Re z\ge 1\}$. Therefore, we may consider a logarithm for the same around $s = 1$. It follows that on the right half plane $\Re s > 1$,
+\begin{equation*}
+    \ell(s) - \frac{1}{s - 1} = -\left(L(s) + \log(s - 1)\right)' = -\left(\log\left((s - 1)\zeta(s)\right) - \Phi(s)\right)'.
+\end{equation*}
+Note that the right hand side is defined and analytic in a neighborhood of $s = 1$ and hence, $\ell(s) - \frac{1}{s - 1}$ is defined and analytic in an open set containing $\Re s\ge 1$. This will be very useful later on.
+
+\begin{lemma}
+    Let $f:[0,\infty)\to\bbC$ be a bounded, locally integrable function. Define $g:\{z\colon\Re z > 0\}\to\bbC$ by 
+    \begin{equation*}
+        g(z) = \int_0^\infty e^{-zt}f(t)~dt.
+    \end{equation*}
+    Then $g$ is well-defined and analytic on its domain of definition.
+\end{lemma}
+\begin{proof}
+    Define $g_T:\bbC\to\bbC$ by 
+    \begin{equation*}
+        g_T(z) = \int_0^T e^{-zt} f(t)~dt.
+    \end{equation*}
+    We shall show that $g_T\to g$ uniformly on compacta contained in the right half plane. Indeed, let $K$ be one such compact set. Then, there is a $\delta_0 > 0$ such that $\Re z\ge\delta_0$ for every $z\in K$. It follows that for $T < S$, 
+    \begin{equation*}
+        |g_S(z) - g_T(z)|\le\int_T^S e^{-\delta_0t}|f(t)|~dt,
+    \end{equation*}
+    which goes to zero since $f$ is bounded. Thus, $g$ is analytic on its domain of definition.
+\end{proof}
+
+\begin{theorem}[Newman]\thlabel{thm:newman}
+    Let $f:[0,\infty)\to\bbC$ be a bounded, locally integrable functionand suppose that 
+    \begin{equation*}
+        g(z) = \int_0^\infty e^{-zt}f(t)~dt\quad\Re z > 0,
+    \end{equation*}
+    extends analytically to an open set containing $\Re z\ge 0$. Then, $\displaystyle\int_0^\infty f(t)~dt$ exists and is equal to $g(0)$.
+\end{theorem}
+
+\begin{lemma}\thlabel{lem:final-lemma-pnt}
+    Suppose $h: [1,\infty)\to\R$ is a non-decreasing function and 
+    \begin{equation*}
+        \int_1^\infty\frac{h(x) - x}{x^2}~dx
+    \end{equation*}
+    converges. Then, $h(x)\sim x$.
+\end{lemma}
+\begin{proof}
+    Suppose for some $\lambda > 1$, there are arbitrarily large values of $x$ with $h(x)\ge\lambda x$. Then, 
+    \begin{equation*}
+        \int_x^{\lambda x}\frac{h(t) - t}{t^2}~dt\ge \int_x^{\lambda x}\frac{\lambda x - t}{t^2}~dt = \int_1^\lambda\frac{\lambda - s}{s^2}~ds > 0
+    \end{equation*}
+    for all such $x$ (which are arbitrarily large), a contradiction to the fact that the integral converges.
+
+    Similarly, if for some $\lambda < 1$, there are arbitrarily large values of $x$ with $h(x)\le\lambda x$, then 
+    \begin{equation*}
+        \int_{\lambda x}^x\frac{h(t) - t}{t^2}\le\int_{\lambda x}^{x}\frac{\lambda x - t}{t^2}~dt = \int_\lambda^1\frac{\lambda - s}{s^2}~dt < 0
+    \end{equation*}
+    for all such $x$ (which are arbitrarily large). This is again a contradiction.
+\end{proof}
+
+It is not hard to see the equality 
+\begin{equation*}
+    \ell(s) = s\int_0^\infty e^{-st}\vartheta(e^t)~dt\qquad\Re s > 1,
+\end{equation*}
+which follows by just integrating the function $t\mapsto\vartheta(e^t)$ step-wise. Thus, 
+\begin{equation*}
+    \frac{\ell(s + 1)}{s + 1} - \frac{1}{s} = \int_0^\infty e^{-st}\left(e^{-t}\vartheta(e^t) - 1\right)~dt\qquad\Re s > 0.
+\end{equation*}
+
+Set $g(s) = \frac{\ell(s + 1)}{s + 1} - \frac{1}{s}$ and $f(t) = e^{-t}\vartheta(e^t) - 1$. Then, $f$ is a bounded locally integrable function on $[0, \infty)$ and $g$ is holomorphic in a neighborhood of $\Re s\ge 0$. Due to \thref{thm:newman}, it follows that 
+\begin{equation*}
+    \int_1^\infty\frac{\vartheta(x) - x}{x^2}~dx
+\end{equation*}
+converges. Finally, using \thref{lem:final-lemma-pnt}, we have $\vartheta(x)\sim x$, which is equivalent to the Prime Number Theorem due to \thref{thm:equivalents-of-pnt}.
+\end{document}

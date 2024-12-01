@@ -1,0 +1,490 @@
+\documentclass[12pt]{article}
+
+% \usepackage{./arxiv}
+
+\title{The Jacobson Radical}
+\author{Swayam Chube}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrN}{\mathscr N}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrR}{\mathscr R}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\rad}{\operatorname{rad}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\scshape}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+\begin{document}
+\maketitle
+
+\section{Jacobson Radical}
+
+\begin{definition}[Jacobson radical]
+    Let $R$ be a ring. The \emph{Jacobson radical} of $R$ is defined to be the intersection of all left maximal ideals in $R$ and is denoted by $\rad R$.
+\end{definition}
+
+\begin{lemma}
+    For $y\in R$, the following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $y\in\rad R$.
+        \item For every $x\in R$, $1 - xy$ is left-invertible in $R$.
+        \item For every simple (left) $R$-module $M$, $yM = 0$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    $1\implies 2:$ If $1 - xy$ were not left-invertible, then it would be contained in a maximal left ideal $\frakm$. But $y\in\frakm$ and hence, $1\in\frakm$, a contradiction. 
+
+    $2\implies 3:$ If $yM\ne 0$, then $yM = M$. Also, $M$ is a cyclic module, generated by some $m\in M$. Then, there is some $m'\in M$ such that $m = ym'$. So $M = R(ym')$. Hence, there is some $x\in R$ such that $m' = xym'$, equivalently, $(1 - xy)m' = 0$ whence $m' = 0$ and consequently, $m = 0$.
+
+    $3\implies 1:$ Every simple (left) $R$-module is of the form $R/\frakm$ where $\frakm$ is a maximal left ideal in $R$. Therefore, $y\in\frakm$ for every maximal left ideal in $R$. Thus, $y\in\rad R$. 
+\end{proof}
+
+\begin{corollary}
+    $\rad R$ is a two-sided ideal of $R$.
+\end{corollary}
+\begin{proof}
+    \begin{equation*}
+        \rad R = \bigcap\Ann_R(M),
+    \end{equation*}
+    where the intersection ranges over representatives from equivalence classes of simple $R$-modules under $R$-isomorphism. Recall that $\Ann_R(M)$ is always a two-sided ideal of $R$.
+\end{proof}
+
+\begin{proposition}
+    For $y\in R$, the following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $y\in\rad R$. 
+        \item For all $x,z\in R$, $1 - xyz\in R^\times$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    $1\implies 2:$ Obviously, $yz\in\rad R$ and hence, $1 - xyz$ is left-invertible. Let $u\in R$ be such that $u(1 - xyz) = 1$, that is, $u$ is right-invertible. Therefore, $u = 1 + uxyz$ whence, $u$ is left-invertible and hence in $R^\times$. It follows that $(1 - xyz)u = 1$ and $1 - xyz\in R^\times$.
+
+    $2\implies 1:$ Take $z = 1$.
+\end{proof}
+
+\begin{proposition}
+    Let $\fraka\unlhd R$ be a two-sided ideal contained in $\rad R$. Then, $\rad(R/\fraka) = (\rad R)/\fraka$.
+\end{proposition}
+\begin{proof}
+    A left maximal ideal of $R/\fraka$ is $\frakm/\fraka$ where $\frakm$ is a left maximal ideal of $R$. Conversely if $\frakm$ is a left maximal ideal of $R$, then it contains $\rad R$ and hence, $\fraka$. Consequently, $\frakm/\fraka$ is a left maximal ideal of $R/\fraka$. The conclusion follows.
+\end{proof}
+
+\begin{corollary}
+    Let $\overline R = R/\rad R$. Then $\rad\overline R = 0$.
+\end{corollary}
+
+% \begin{proposition}
+%     Let $\fraka\unlhd R$ be a two-sided ideal. Then, $\rad(R/\fraka) = 0$ if and only if $\fraka\supseteq\rad R$.
+% \end{proposition}
+% \begin{proof}
+% \end{proof}
+
+\begin{definition}[Semiprimitive]
+    A ring $R$ is said to be \emph{semiprimitive} or \emph{Jacobson semisimple} if $\rad R = 0$.
+\end{definition}
+
+\begin{definition}
+    A one-sided (resp. two-sided) ideal $I\unlhd R$ is said to be \emph{nil} if every element in $I$ is nilpotent. It is said to be \emph{nilpotent} if there is a positive integer $n > 0$ such that $I^n = 0$.
+\end{definition}
+
+\begin{remark}
+    It is immediate from the definition that every nilpotent ideal is nil. The converse is not true. Consider 
+    \begin{equation*}
+        R = k[x_1,x_2,\dots]/(x_1, x_2^2, x_3^3, \dots).
+    \end{equation*}
+    The maximal ideal $\overline\frakm = (\overline x_1,\overline x_2,\dots)$ is nil but not nilpotent.
+\end{remark}
+
+\begin{proposition}
+    Let $I\unlhd {}_RR$ be a nil left ideal. Then, $I\subseteq\rad R$.
+\end{proposition}
+\begin{proof}
+    Let $y\in I$ and $x\in R$. Then $xy\in I$ is nilpotent. Consequently, $1 - xy$ is a unit.
+\end{proof}
+
+\begin{lemma}[Nakayama-Azumaya-Krull]\thlabel{lem:nak}
+    For any left ideal $J\unlhd {}_RR$, the following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $J\subseteq\rad R$.
+        \item For any finitely generated (left) $R$-module $M$, $JM = M$ implies $M = 0$.
+        \item For any (left) $R$-modules $N\subseteq M$ such that $M/N$ is finitely generated, $N + JM = 0$ implies $N = M$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    $1\implies 2:$ Suppose $M\ne 0$. Pick a minimal set of generators $\{m_1,\dots,m_n\}\subseteq M$. Then, $m_n = a_1m_1 + \dots a_nm_n$, consequently,
+    \begin{equation*}
+        (1 - a_n)m_n = a_1m_1 + \dots + a_{n - 1}m_{n - 1}.
+    \end{equation*}
+    But $1 - a_n$ is a unit and hence, $m_n$ can be expressed as a linear combination of $\{m_1,\dots,m_{n - 1}\}$ contradicting the minimality of the set of generators.
+
+    $2\implies 3:$ Consider $M/N$.
+
+    $3\implies 1:$ Suppose there is some $y\in J\backslash\rad R$. Then, there is a left maximal ideal $\frakm$ that does not contain $y$. As a result, $\frakm + J\cdot R = R$, implying that $\frakm = R$, which is absurd. This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    Let $R$ be left artinian. Then, $\rad R$ is nilpotent, consequently, it is the largest nilpotent left (resp. right) ideal.
+\end{proposition}
+\begin{proof}
+    Let $J = \rad R$. There is a descending chain of left ideals,
+    \begin{equation*}
+        J\supseteq J^2\supseteq\dots
+    \end{equation*}
+    which must stabilize. Let $I = J^n = J^{n + 1} = \cdots$, which is a left ideal. Suppose $I\ne 0$. Let $\Sigma = \{\fraka\unlhd R\mid I\fraka\ne 0\}$. This is non-empty for it contains $I$. Let $\fraka_0$ be a minimum element in $\Sigma$. Then, there is some $a\in\fraka_0$ such that $Ia\ne 0$. Consequently, $\fraka_0 = Ra$. On the other hand, note that $I(I\fraka_0) = I^2\fraka_0 = I\fraka_0$, whereby $I\fraka_0\in\Sigma$ and $I\fraka_0 = \fraka_0$. Nakayama's lemma (\thref{lem:nak}) implies $\fraka_0 = 0$, a contradiction. Thus, $I = 0$ and $\rad R$ is nilpotent.
+\end{proof}
+
+\begin{theorem}
+    For a ring $R$, the following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $R$ is semisimple. 
+        \item $R$ is semiprimitive and left artinian.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    $1\implies 2:$ Note that ${}_RR$ is a finite direct sum of minimal left-ideals, which are artinian modules over $R$. Therefore, ${}_RR$ is a left artinian.
+
+    We shall now show that $\rad R = 0$. Indeed, let $\fraka = \rad R$. Then, there is a left ideal $\frakb$ such that $R = \fraka\oplus\frakb$. Then, there are idempotents $e,f$ such that $e + f = 1$ and $\fraka = Re$ and $\frakb = Rf$. Note that $f = 1 - e$ and hence, a unit, whence $\frakb = (1)$ and $\fraka = 0$.
+
+    $2\implies 1:$ We shall show that ${}_RR$ is a semisimple module. Pick a minimal left ideal $\fraka_1$. Then, there is a maximal left ideal $\frakm_1$ such that $\fraka_1\not\subseteq\frakm_1$ and hence, $R = \fraka_1\oplus\frakm_1$. Set $\frakb_1 = \frakm_1$. Now, if $\frakb_1$ is non-zero, then it contains a minimal left-ideal $\fraka_2$. Then, there is a maximal ideal $\frakm_2$ such that $R = \fraka_2\oplus\frakm_2$. It then follows that $\frakb_1 = \fraka_2\oplus(\frakb_1\cap\frakm_2)$. Set $\frakb_2 = \frakb_1\cap\frakm_2$ and continue this way.
+
+    Then, we obtain a strictly descending chain 
+    \begin{equation*}
+        \frakb_1\supsetneq\frakb_2\supsetneq\cdots.
+    \end{equation*}
+    This must stabilize and when it does, it must stabilize at $0$. This gives us a decomposition of ${}_RR$ in terms of minimal left ideals and the proof is complete.
+\end{proof}
+
+\begin{corollary}[Converse of Maschke]
+    Let $k$ be a field with $\chr k = p > 0$. Let $G$ be a finite group such that $p\mid |G|$. Then, $kG$ is not semisimple.
+\end{corollary}
+\begin{proof}
+    Let $\sigma = \sum_{g\in G} g$. Then, $k\sigma$ is a two-sided ideal of $kG$. Further, $\sigma^2 = 0$. Consequently, $k\sigma\subseteq\rad kG$, whence $kG$ is not semisimple.
+\end{proof}
+
+\begin{proposition}
+    Let $R$ be a ring. Then $\rad M_n(R) = M_n(\rad R)$.
+\end{proposition}
+\begin{proof}
+    First, we shall show that $M_n(\rad R)\subseteq\rad M_n(R)$. To do so, it suffices to show that $xE_{ij}\in\rad M_n(R)$ whenever $x\in\rad R$ and $1\le i,j\le n$. Let $A\in M_n(R)$ be given by $A = (a_{kl})_{1\le k,l\le n}$. Then, 
+    \begin{equation*}
+        I - Ax E_{ij} = I - \sum_{k = 1}^n a_{ki}x E_{kj} = \underbrace{I - a_{ji}E_{jj}}_{B} - \underbrace{\sum_{k\ne j} a_{ki}E_{kj}}_N.
+    \end{equation*}
+    Note that $B$ is a unit and $N$ is nilpotent. Therefore, $B - N$ is a unit. This shows that $xE_{ij}\in\rad M_n(R)$, whence $M_n(\rad R)\subseteq\rad M_n(R)$.
+
+    Conversely, note that $\rad M_n(R) = M_n(\fraka)$ for some two-sided ideal $\fraka\unlhd R$. This implies that for every $x\in R$ and $a\in\fraka$, $I - xaE_{11}$ is invertible. Consequently, $1 - xa$ must be invertible in $R$ and as a result, $a\in\rad R$. Hence, $M_n(\fraka)\subseteq M_n(\rad R)$. This completes the proof.
+\end{proof}
+
+\begin{theorem}[Hopkins-Levitzki]
+    Let $R$ be a semiprimary ring and $M$ a left $R$-module. Then the following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $M$ is noetherian.
+        \item $M$ is artinian.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Let $J = \rad R$. Then, there is a positive integer $n > 0$ such that $J^n = 0$. This gives a filtration 
+    \begin{equation*}
+        M\supseteq JM\supseteq\dots\supseteq J^{n - 1}M\supseteq J^nM = 0.
+    \end{equation*}
+    The successive quotients $J^iM/J^{i + 1}M$ is a $\overline R$-module whence it is artinian if and only if it is noetherian. Induct using the exact sequence 
+    \begin{equation*}
+        0\longrightarrow J^{i + 1}M\longrightarrow J^i M\longrightarrow J^iM/J^{i + 1}M\longrightarrow 0.
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    A left artinian ring is left noetherian.
+\end{corollary}
+\begin{proof}
+    A left artinian ring is semiprimary.
+\end{proof}
+
+\section{von Neumann Regular Rings}
+
+\begin{lemma}\thlabel{lem:left-ideal-direct-summand}
+    If a left ideal $\fraka\unlhd {}_RR$ is a direct summand of $R$, then it is generated by an idempotent.
+\end{lemma}
+\begin{proof}
+    There is a left ideal $\frakb$ such that $R = \fraka\oplus\frakb$ as left ideals. Hence, $1 = e + f$ for some $e\in\fraka$ and $f\in\frakb$. Then, $e = e\cdot 1 = e(e + f) = e^2 + ef$. Note that this means $ef\in \fraka$ but $ef\in\frakb$ (because $\frakb$ is a left ideal) and hence, $ef\in \fraka\cap\frakb = 0$. Consequently, $e = e^2$ is an idempotent. Now, for any $a\in\fraka$, $a = ae + af = ae$ because $af\in\frakb$ and $af = a - ae\in\fraka$ whence $af = 0$.
+\end{proof}
+
+\begin{theorem}
+    For a ring $R$, the following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item For any $a\in R$, there is an $x\in R$ such that $a = axa$.
+        \item Every principal left ideal is generated by an idempotent. 
+        \item Every principal left ideal is a direct summand of ${}_RR$.
+        \item Every finitely generated left ideal is generated by an idempotent. 
+        \item Every finitely generated left ideal is a direct summand of ${}_RR$.
+    \end{enumerate}
+    A ring satisfying any one of the above five equivalent conditions is called a \emph{von Neumann regular ring}.
+\end{theorem}
+\begin{proof}
+    First, we show equivalences $2\iff 3$ and $4\iff 5$.
+
+    $2\iff 3:$ Let $e\in R$ be an idempotent. Then, $R = Re\oplus R(1 - e)$. The converse follows from \thref{lem:left-ideal-direct-summand}.
+
+    $4\iff 5:$ The forward implication follows in the same way as $2\implies 3$ and the converse follows from \thref{lem:left-ideal-direct-summand}.
+
+    $1\implies 2:$ Let $Ra$ be a principal left ideal in $R$ for some $a\in R$. Then, there is an $x\in R$ such that $a = axa$, consequently, $xa = xaxa$. Set $e = xa$. Then, $e = e^2$ whence $e$ is an idempotent. Further, note that $Re\subseteq Ra$ and $a = ae\in Re$ whereby $Ra = Re$.
+
+    $2\implies 1:$ Let $Ra$ be a principal left ideal in $R$ for some $a\in R$. Then, there is an idempotent $e\in R$ such that $Ra = Re$. There are $x,y\in R$ such that $e = xa$ and $a = ye$. Now, 
+    \begin{equation*}
+        a = ye = ye^2 = axa.
+    \end{equation*}
+
+    $4\implies 2:$ Clear.
+
+    $2\implies 4:$ To see this direction, it suffices to show that a left ideal generated by two idempotents is generated by a single idempotent. Indeed, let $\fraka = R(e, f)$ where $e$ and $f$ are idempotents in $R$. Note that $\fraka = Re + Rf(1 - e)$. Since $Rf(1 - e)$ is a principal left ideal, it is generated by an idempotent $Re'$. Note that $e'e = xf(1 - e)e = 0$ for some $x\in R$. 
+
+    Let $g = 1 - (1 - e)(1 - e') = e + e' - ee'$. Note that $g$ is an idempotent and $g\in Re + Re'$. Further, $eg = e$ and $e'g = e'$ whereby $Rg = Re + Re'$. This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    Semisimple $\implies$ von Neumann regular $\implies$ semiprimitive.
+\end{corollary}
+\begin{proof}
+    The first implication is clear. Suppose $R$ is von Neumann regular. Let $a\in\rad R$. Then, there is $x\in R$ such that $a = axa$, that is, $a(1 - xa) = 0$. But $1 - xa$ is a unit in $R$ and hence, $a = 0$. Thus, $R$ is semiprimitive.
+\end{proof}
+
+\begin{theorem}
+    Left noetherian $+$ von Neumann regular $\implies$ semisimple.
+\end{theorem}
+\begin{proof}
+    Let $\fraka\unlhd {}_RR$ be a left ideal. Since $R$ is left noetherian, $\fraka$ is finitely generated and hence, a direct summand of ${}_RR$. As a result, ${}_RR$ is semisimple.
+\end{proof}
+
+\begin{corollary}
+    Left noetherian $+$ von Neumann regular $\implies$ left artinian.
+\end{corollary}
+\end{document}
