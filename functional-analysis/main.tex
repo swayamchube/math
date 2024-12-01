@@ -1,0 +1,1737 @@
+\documentclass[12pt]{article}
+
+% \usepackage{./arxiv}
+
+\title{Functional Analysis}
+\author{Swayam Chube}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrN}{\mathscr N}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrR}{\mathscr R}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\scshape}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+\begin{document}
+\maketitle
+
+\section{Preliminaries}
+
+\begin{lemma}[Riesz Lemma]
+    Let $X$ be a normed linear space and $Y\subsetneq X$ a proper closed subspace. Then, for every $0 < \alpha < 1$, there is an $x\in X\setminus Y$ such that $\|x\| = 1$ and $\operatorname{dist}(x, Y) > \alpha$.
+\end{lemma}
+
+\section{Completeness Arguments}
+
+\begin{theorem}[Rudin, Exercise 4.26]
+    Let $X$ and $Y$ be Banach spaces. The set of all surjective bounded linear operators in $\scrB(X, Y)$ forms an open subset.
+\end{theorem}
+\begin{proof}
+    Let $T: X\to Y$ be a surjective linear operator. By the open mapping theorem, there is an $r > 0$ such that $B_Y(0, 2r)\subseteq T\left(B_X(0, 1)\right)$. If $0\ne y\in Y$, then $\frac{ry}{\|y\|}\in B_Y(0, 2r)$, consequently, there is an $x'\in X$ with $\|x'\| < 1$ and $Tx' = \frac{ry}{\|y\|}$, thus, $x = \frac{\|y\|}{r}x'$ maps to $y$ under $T$. Note that $\|x\| < \frac{\|y\|}{r}$. For the sake of brevity, let $t = 1/r$.
+
+    Let $\delta = \frac{1}{2t`} > 0$ and $S\in\scrB(X, Y)$ such that $\|T - S\| < \delta$. We shall show that $S$ is surjective, for which, it would suffice to show that the image of $S$ contains the unit ball of $Y$. Indeed, let $y_0\in Y$ with $\|y_0\|\le 1$. Choose an $x_0\in X$ such that $\|x_0\| < t$ and $Tx_0 = y_0$. Setting $y_1 = y_0 - Sx_0$, we have 
+    \begin{equation*}
+        \|y_1\| = \|(T - S)x_0\|\le\delta t.
+    \end{equation*}
+    Again, choose $x_1\in X$ such that $Tx_1 = y_1$ and $\|x_1\| < t\|y_1\| = \delta t^2$. Setting $y_2 = y_1 - Sx_1$, we have 
+    \begin{equation*}
+        \|y_2\| = \|(T - S)x_1\|\le \delta^2t^2
+    \end{equation*}
+    and so on. We have thus constructed two sequences $(x_n)_{n\ge 0}$ and $(y_n)_{n\ge 0}$ such that 
+    \begin{itemize}
+        \item $Tx_n = y_n$, 
+        \item $y_{n + 1} = y_n - Sx_n$ for $n\ge 0$, and
+        \item $\|x_n\| < \delta^n t^{n + 1}$ and $\|y_n\|\le\delta^n t^{n}$.
+    \end{itemize}
+    Let $x = \displaystyle\sum_{n = 0}^\infty x_n$, which converges since $\displaystyle\sum_{n = 0}^\infty \|x_n\|$ does. Hence, 
+    \begin{equation*}
+        Sx = \lim_{n\to\infty}\sum_{i = 0}^n Sx_i = \sum_{i = 0}^\infty y_i - y_{i + 1} = y_0,
+    \end{equation*}
+    thereby completing the proof.
+\end{proof}
+
+\section{The Hahn-Banach Theorems}
+
+\begin{lemma}[Dominated Extension Theorem]
+    Let $X$ be a real vector space with a subspace $M$. Suppose $p: X\to\R$ satisfies
+    \begin{align*}
+        p(x + y)\le p(x) + p(y)\quad\text{and}\quad p(tx) = tp(x)\quad\forall x,y\in M,~\forall t\ge 0.
+    \end{align*}
+    Let $f: X\to\R$ be a linear functional such that $f(x)\le p(x)$ for all $x\in M$. Then, there is a linear functional $\Lambda: X\to\R$ such that $\Lambda x = f(x)$ for all $x\in M$ and 
+    \begin{align*}
+        -p(-x)\le \Lambda x\le p(x)\quad\forall x\in X.
+    \end{align*}
+\end{lemma}
+\begin{proof}
+    If $M = X$, then there is nothing to prove. Suppose now that $M$ is a proper subspace of $X$ and choose $x_1\in X\setminus M$. For $x,y\in M$, we have 
+    \begin{equation*}
+        f(x) + f(y) = f(x + y)\le p(x + y)\le p(x - x_1) + p(y + x_1),
+    \end{equation*}
+    and hence, 
+    \begin{equation*}
+        f(x) - p(x - x_1)\le -f(y) + p(y + x_1)\quad\forall x,y\in M.
+    \end{equation*}
+    Let $\alpha$ denote the supremum of the left hand side in the above inequality as $x$ ranges over $M$. Note that $\alpha$ is finite as the left hand side is always bounded above by $p(x_1)$. Let $M_1 = M + \R x_1$ and define $f_1: M_1\to\R$ by 
+    \begin{equation*}
+        f_1(m + \lambda x_1) = f(m) + \lambda\alpha;
+    \end{equation*}
+    in particular, $f_1(x_1) = \alpha$. Note that for $\lambda\ne 0$,
+    \begin{align*}
+        f_1(m + \lambda x_1) &= |\lambda| f_1(|\lambda|^{-1}m + \sgn(\lambda) x_1)\\
+        &= |\lambda|f(|\lambda|^{-1}m) + \lambda\alpha\\
+        &\le|\lambda|\left(p(|\lambda|^{-1}m + \sgn(\lambda) x_1) - \sgn(\lambda)\alpha\right)\\
+        &= p(m + \lambda x_1).
+    \end{align*}
+    This furnishes an extension $f_1: M_1\to\R$ such that $f_1(y)\le p(y)$ for all $y\in M_1$. One can then extend this, using Zorn's Lemma, to $\Lambda: X\to\R$ such that $\Lambda x\le p(x)$ for all $x\in X$. We then have 
+    \begin{equation*}
+        -p(-x)\le -\Lambda(-x) = \Lambda x\le p(x),
+    \end{equation*}
+    thereby commpleting the proof.
+\end{proof}
+
+\begin{theorem}[Hahn-Banach Extension Theorem]
+    Let $M$ be a subspace of a vector space (real or complex) $X$, $p$ a semi-norm on $X$, and $f$ a linear functional on $M$ such that $|f(x)|\le p(x)$ for all $x\in M$. Then $f$ extends to a linear functional $\Lambda$ on $X$ satisfying $|\Lambda x|\le p(x)$ for all $x\in X$.
+\end{theorem}
+\begin{proof}
+    Suppose first that the field of scalars is $\R$. Due to the preceding lemma, $f$ can be extended to $\Lambda: X\to\R$ satisfying 
+    \begin{equation*}
+        -p(x) = -p(-x)\le\Lambda x\le p(x)\quad\forall x\in X,
+    \end{equation*}
+    that is, $|\Lambda x|\le p(x)$.
+
+    Next, suppose the field of scalars is $\bbC$. Let $u = \Re f$. Due to the first part of the proof, $u$ can be extended to a linear functional $U: X\to\R$ satisfying $|Ux|\le p(x)$ for all $x\in X$. Define $\Lambda: X\to\bbC$ by 
+    \begin{equation*}
+        \Lambda x = u(x) - iu(ix)\quad\forall x\in X.
+    \end{equation*}
+    We contend that $\Lambda$ is the desired functional. Let $x\in X$ and choose an $\alpha\in\bbC$ with $|\alpha| = 1$ such that $\alpha\Lambda x = |\Lambda x|$. Hence, 
+    \begin{equation*}
+        |\Lambda x| = \alpha\Lambda x = \underbrace{\Lambda(\alpha x) = U(\alpha x)}_{\text{because LHS }\in\R_{\ge 0}}\le p(\alpha x) = p(x).
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    Let $X$ be a normed linear space and $M$ a subspace of $X$. Suppose $f: M\to\K$ is a bounded linear functional, then there exists a bounded linear functional $\Lambda: X\to \K$ extending $f$. Further, $\|f\| = \|\Lambda\|$
+\end{corollary}
+\begin{proof}
+    Invoke the preceding result with $p(x) = \|f\|\|x\|$. I
+\end{proof}
+
+\begin{theorem}[Hahn-Banach Separation Theorem]\thlabel{thm:hahn-banach-separation}
+    Suppose $A$ and $B$ are disjoint convex subsets of a topological vector space $X$. 
+    \begin{enumerate}[label=(\alph*)]
+        \item If $A$ is open, there exist $\Lambda\in X^\ast$ and $\gamma\in\R$ such that 
+        \begin{equation*}
+            \Re\Lambda x < \gamma\le\Re\Lambda y\quad\forall x\in A,~y\in B.
+        \end{equation*}
+        \item If $A$ is compact, $B$ is closed, and $X$ is locally convex, there exist $\Lambda\in X^\ast$ and $\gamma_1,\gamma_2\in\R$ such that 
+        \begin{equation*}
+            \Re\Lambda x < \gamma_1 < \gamma_2 < \Re\Lambda y\quad\forall x\in A,~y\in B.
+        \end{equation*}
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    We first prove this theorem when the scalar field is assumed to be $\R$.
+\begin{enumerate}[label=(\alph*)]
+    \item Fix points $a_0\in A$, $b_0\in B$. Set $x_0 = b_0 - a_0$ and $C = A - B + x_0$. Then, $C$ is a convex neighborhood of $0$ in $X$, and thus, admits a Minkowski functional, $p: X\to\R$ which is subadditive and $p(tx) = tp(x)$ for all $t\ge 0$.
+    Further, since $A\cap B = \emptyset$, $x_0\notin C$, whence $p(x_0)\ge 1$.
+
+    Define a linear functional $f: \R x_0\to\R$ by $f(\lambda x_0) = \lambda$ and using the Dominated Extension Theorem, extend this to a functional $\Lambda: X\to\R$ such that 
+    \begin{equation*}
+        -p(-x)\le \Lambda x\le p(x)\quad\forall x\in X.
+    \end{equation*}
+    Let $D = C\cap (-C)$, which is a symmetric convex neighborhood of the origin. For any $x\in D$, it is easy to see that $p(x)\le 1$, whence 
+    \begin{equation*}
+        -1\le -p(-x)\le\Lambda x\le p(x)\le 1,
+    \end{equation*}
+    and hence, $\Lambda$ is a continuous linear functional.
+
+    Now, for $a\in A$ and $b\in B$, 
+    \begin{equation*}
+        \Lambda a - \Lambda b = \Lambda(a - b) = \Lambda(a - b + x_0) - 1 \le p(a - b + x_0) - 1 < 0,
+    \end{equation*}
+    since $a - b + x_0\in C$. Hence, $\Lambda a < \Lambda b$ for every $a\in A$ and $b\in B$. Finally, since $\Lambda(A)$ and $\Lambda(B)$ are disjoint convex subsets of $\R$, both must be intervals with the former to the left of the latter. Further, since the former is an open subset of $\R$, we immediately obtain the desired conclusion.
+
+    \item There is a convex, balanced neighborhood $V$ of the origin in $X$ such that $(A + V)\cap (B + V) = \emptyset$. Set $C = A + V$, which is a convex open subset of $X$, disjoint from $B$. Due to part (a), there is a linear functional $\Lambda$ such that $\Lambda(C)$ is to the left of $\Lambda(B)$ and $\Lambda(A)$ sits as a compact interval inside $\Lambda(C)$. The conclusion now is immediate.
+\end{enumerate}
+
+We now suppose that the field of scalars is $\bbC$; whence $X$ is also a topological $\R$-vector space. In both parts (a) and (b), we were able to obtain an $\R$-linear functional, continuous on $X$ when viewed as a $\R$-TVS and separating the two sets as desired. Define the $\bbC$-linear functional $\Lambda x = u(x) - iu(ix)$ and note that this has the desired separation properties too.
+\end{proof}
+
+\begin{corollary}
+    If $X$ is an LCTVS, then $X^\ast$ separates points on $X$.
+\end{corollary}
+\begin{proof}
+    Let $p, q\in X$. Use \thref{thm:hahn-banach-separation} (b) with $A = \{p\}$ and $B = \{q\}$.
+\end{proof}
+
+\begin{theorem}
+    Let $M$ be a proper closed subspace of a locally convex topological vector space, and $x_0\in X\setminus M$. There exists a linear functional $\Lambda\in X^\ast$ such that $\Lambda x_0 = 1$ and $\Lambda x = 0$ for all $x\in M$.
+\end{theorem}
+\begin{proof}
+    Using \thref{thm:hahn-banach-separation}(b) with $A = \{x_0\}$ and $B = M$, there is a $\Lambda\in X^\ast$ and $\gamma_1,\gamma_2\in\R$ such that 
+    \begin{equation*}
+        \Re\Lambda x_0 < \gamma_1 < \gamma_2 < \Re\Lambda y\quad\forall y\in M.
+    \end{equation*}
+    Since $\Lambda(0) = 0$ and $0\in M$, we must have that $\Lambda x_0\ne 0$. Further, since $\lambda y\in M$ for every $\lambda\in\K$, the only way $\Re(\lambda\Lambda y) > \gamma_2$ for every $\lambda\in\K$ is if $\Lambda$ vanishes on $M$. Dividing $\Lambda$ by $\Lambda x_0$, we have our desired conclusion.
+\end{proof}
+
+\begin{corollary}
+    Let $X$ be an LCTVS and $M\subseteq X$ a subspace. Suppose $f: M\to\K$ is a continuous linear functional, then there is a $\Lambda\in X^\ast$ such that $\Lambda|_M = f$.
+\end{corollary}
+\begin{proof}
+\end{proof}
+
+\section{Weak and Weak* Topologies}
+
+\begin{lemma}\thlabel{lem:linear-combination-functionals}
+    Let $X$ be a $\K$-vector space and $\Lambda_1,\dots,\Lambda_n,\Lambda$ be linear functionals on $X$ and set 
+    \begin{equation*}
+        N = \{x\in X\colon \Lambda_i x = 0,~\forall 1\le i\le n\}.
+    \end{equation*}
+    The following are equivalent: 
+    \begin{enumerate}[label=(\alph*)]
+        \item There are scalars $\alpha_1,\dots,\alpha_n\in\K$ such that 
+        \begin{equation*}
+            \Lambda = \alpha_1\Lambda_1 + \cdots + \alpha_n\Lambda_n.
+        \end{equation*}
+        \item There exists $0 < \gamma < \infty$ such that 
+        \begin{equation*}
+            |\Lambda x|\le\gamma\max_{1\le i\le n}|\Lambda_i x|\quad\forall x\in X.
+        \end{equation*}
+        \item $\Lambda x = 0$ for every $x\in N$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    $(a)\implies(b)\implies(c)$ is trivial. It remains to show that $(c)\implies(a)$. Consider the map $\Phi: X\to\K^n$ given by 
+    \begin{equation*}
+        \Phi(x) = \left(\Lambda_1 x,\dots,\Lambda_n x\right)
+    \end{equation*}
+    and let $Y\subseteq\K^n$ be its image. Define $\Psi: Y\to\K$ by 
+    \begin{equation*}
+        \Psi(\Phi(x)) = \Lambda x.
+    \end{equation*}
+    That this is well-defined follows from the fact that $N\subseteq\ker\Lambda$. Since we are in a finite-dimensional space, the map $\Psi$ can be extended to a linear map $\Psi:\K^n\to\K$, which must be of the form 
+    \begin{equation*}
+        (y_1,\dots, y_n)\mapsto\alpha_1y_1 + \dots + \alpha_n y_n.
+    \end{equation*}
+    It then follows that $\Lambda = \alpha_1\Lambda_1 + \dots + \alpha_n\Lambda_n$.
+\end{proof}
+
+\begin{definition}
+    Let $X$ be a set and 
+    \begin{equation*}
+        \scrF = \{f: X\to Y_f\}
+    \end{equation*}
+    a collection of functions. The \define{$\scrF$-topology} on $X$ is defined to be the coarsest topology such that every $f\in\scrF$ is continuous.
+
+    The set $\scrF$ is said to \define{separate points} if for each pair $p\ne q$ in $X$, there is an $f\in\scrF$ such that $f(p)\ne f(q)$.
+\end{definition}
+
+\begin{remark}
+    The $\scrF$-topology is more explicitly the topology generated by 
+    \begin{equation*}
+        \{f^{-1}(U)\colon U\subseteq Y_f\text{ is open},~f\in\scrF\}.
+    \end{equation*}
+\end{remark}
+
+\begin{proposition}\thlabel{prop:F-topology-hausdorff}
+    If $\scrF$ is a separating family of functions on a space $X$, and each $Y_f$ is Hausdorff, then the $\scrF$-topology on $X$ is Hausdorff.
+\end{proposition}
+\begin{proof}
+    Let $p\ne q$ be points in $X$ and choose $f\in\scrF$ such that $f(p)\ne f(q)$. Then, there are disjoint neighborhoods $U$ and $V$ of $f(p)$ and $f(q)$ respectively in $Y_f$. Since each $f$ is continuous, $f^{-1}(U)$ and $f^{-1}(V)$ are disjoint neighborhoods of $p$ and $q$ in the $\scrF$-topology.
+\end{proof}
+
+\begin{proposition}
+    If $X$ is a compact topological space and $\scrF$ is a countable family of continuous separating real-valued functions on $X$, then $X$ is metrizable.
+\end{proposition}
+\begin{proof}
+    Let $\scrF = \{f_n\colon n\ge 1\}$. We may suppose without loss of generality that $\|f\|_\infty\le 1$ for each $f\in\scrF$. It is not hard to check that the function $d: X\times X\to\R$ given by 
+    \begin{equation*}
+        d(x, y) = \sum_{n = 1}^\infty 2^{-n}|f_n(x) - f_n(y)|
+    \end{equation*}
+    is a metric inducing the topology on $X$.
+\end{proof}
+
+\begin{theorem}
+    Let $X$ be a $\K$-vector space and $X'$ a vector space of linear functionals on $X$ that separates points. The $X'$-topology $\tau'$ on $X$ makes it a locally convex topological vector space whose dual is $X'$.
+\end{theorem}
+\begin{proof}
+    Due to \thref{prop:F-topology-hausdorff}, $\tau'$ is Hausdorff. Note that the topology is generated by the set 
+    \begin{equation*}
+        \{\Lambda^{-1}(U)\colon\Lambda\in X',~U\subseteq\K\text{ is open}\}.
+    \end{equation*}
+    Hence, a base for the topology is given by finite intersections of elements of the above form. Thus, is generated by intersections of the form 
+    \begin{equation*}
+        \Lambda_1^{-1}(U_1)\cap\dots\cap\Lambda_n^{-1}(U_n),
+    \end{equation*}
+    where $U_1,\dots,U_n\subseteq\K$ are open sets. It immediately follows that this base is translation invariant whence, the entire topology is translation invariant. A local base at $0$ is given by open sets of the above form, such that $0\in U_i$ for $1\le i\le n$. We can further refine this local base by choosing open sets of the form 
+    \begin{equation*}
+        V(\Lambda_1,\dots,\Lambda_n; \varepsilon_1,\dots,\varepsilon_n) = \left\{x\in X\colon|\Lambda_i x|\le \varepsilon_i,~1\le i\le n\right\}.
+    \end{equation*}
+    Further, from this description, it is not hard to see that $\alpha V$ is a basic open set whenever $\alpha > 0$ and $V$ a basic open set.
+
+    Now that we have established a local base for $\tau'$, we show that $(X, \tau')$ is indeed a topological vector space. That $\tau'$ is locally convex immediately follows from the above description of a local base. Next, we show that addition is continuous, for which it suffices to show continuity at $(0, 0)\in X\times X$. Let $U$ be a neighborhood of $0$ in $X$, then $U$ contains a basic open set $V$ of the above form. Since $\frac{1}{2}V + \frac{1}{2}V\subseteq V$, we see that addition is continuous.
+
+    To see that scalar multiplication is continuous, let $x\in X$, $\alpha\in\K$ and $x + V$ a neighborhood of $x$. We may suppose that $V$ is a basic open set of the above form. Since $V$ is absorbing, there is an $s > 0$ such that $x\in sV$. Choose $r$ sufficiently small so that $r(r + s) + r|\alpha| < 1$. Then, if $y\in x + rV$, and $|\beta - \alpha| < r$,
+    \begin{equation*}
+        \beta y - \alpha x = (\beta - \alpha)y + \alpha(y - x)\in r(r + s)V + |\alpha|rV\subseteq V,
+    \end{equation*}
+    since $y\in (r + s)V$. Hence, scalar multiplication is continuous and $(X, \tau')$ is a locally convex topological vector space. 
+
+    Finally, let $\Lambda$ be a continuous linear functional on $X$ and consider a basic open set $V(\Lambda_1,\dots,\Lambda_n,\varepsilon_1,\dots,\varepsilon_n)$ such that $|\Lambda x| <1$ on $V$. Thus, there is a $\gamma > 0$ such that 
+    \begin{equation*}
+        |\Lambda x|\le\gamma\max_{1\le i\le n}|\Lambda_i x|
+    \end{equation*}
+    whence, $\Lambda$ is a linear combination of the $\Lambda_i$.
+\end{proof}
+
+\begin{definition}
+    Let $X$ be a topological vector space whose dual $X^\ast$ separates points on $X$ (this is true in particular for locally convex TVSs). Then the $X^\ast$-topology on $X$ is called the \define{weak topology} and is denoted by $(X, \tau_w)$ or $X_w$.
+\end{definition}
+
+Obviously the weak topology is coarser than the original topology. A set $E\subseteq X$ is said to be \define{weakly bounded} if it is bounded in the weak topology. Similarly, a sequence $(x_n)$ is said to be \define{weakly convergent} to $x$ if it converges in the weak topology. Since the weak topology is Hausdorff, the limit of any weakly convergent sequence is unique.
+
+\begin{proposition}
+    Let $X$ be a topological vector space on which $X^\ast$ separates points. Then 
+    \begin{enumerate}[label=(\alph*)]
+        \item $X_w$ is a locally convex topological vector space. 
+        \item A set $E\subseteq X$ is weakly bounded if and only if every $\Lambda\in X^\ast$ is bounded on $E$. 
+        \item A sequence $(x_n)$ is weakly convergent to $x$ if and only if $\Lambda x_n\to \Lambda x$ for every $\Lambda\in X^\ast$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    All three assertions are trivial.
+\end{proof}
+
+\begin{proposition}
+    Let $X$ be a locally convex topological vector space and $E\subseteq X$ a convex subset. Then the weak closure $\overline E_w$ is the same as the original closure $\overline E$.
+\end{proposition}
+\begin{proof}
+    Since the weak topology is coarser than the original topology, $\overline E\subseteq\overline E_w$. Now, let $x_0\in X\setminus\overline E$. Due to the Hahn-Banach Separation Theorem, there is an $\Lambda\in X^\ast$ and $\gamma_1,\gamma_2\in\R$ such that 
+    \begin{equation*}
+        \Re \Lambda x_0 < \gamma_1 < \gamma_2 < \Re\Lambda y\quad\forall y\in\overline E\supseteq E.
+    \end{equation*}
+    Thus, there is a weak neighborhood of $x_0$ not intersecting $E$, consequently, $x_0\notin\overline E_w$. This completes the proof.
+\end{proof}
+
+
+\begin{theorem}
+    Suppose $X$ is an infinite-dimensional normed linear space. Then the weak topology on $X$ is not metrizable.
+\end{theorem}
+\begin{proof}
+    We shall show that the weak topology $(X, w)$ is not first-countable whence the conclusion would follow. Suppose not, then there is a local base $\{U_n\}$ at $0$. For each $n\ge 1$, there is a finite subset $F_n\subseteq X^\ast$ and $\varepsilon_n > 0$ such that 
+    \begin{equation*}
+        V_n = \left\{x\in X\colon |f(x)| < \varepsilon_n,~\forall f\in F_n\right\}.
+    \end{equation*}
+
+    We contend that 
+    \begin{equation*}
+        X^\ast = \bigcup_{n\ge 1} \operatorname{span}(F_n).
+    \end{equation*}
+    Indeed, let $g\in X^\ast$ and 
+    \begin{equation*}
+        U = \{x\in X\colon |g(x)| < 1\}.
+    \end{equation*}
+    There is an index $n\ge 1$ such that $V_n\subseteq U$. Now, if $x$ is in $\bigcap\limits_{f\in F_n}\ker f$, then so is $\lambda x$ for every $\lambda\in\K$, consequently, $\lambda x\in V_n$ and hence, $|\lambda||g(x)| < 1$ for every $\lambda\in\K$. This forces $g(x) = 0$, that is, 
+    \begin{equation*}
+        \bigcap_{f\in F_n}\ker f\subseteq\ker g,
+    \end{equation*}
+    which, in light of \thref{lem:linear-combination-functionals} gives $g\in\operatorname{span}(F_n)$, proving our claim.
+
+    It follows that $X^\ast$ has at most countable dimension and since $X$ is infinite-dimensional, so is $X^\ast$, but this is absurd, since $X^\ast$ is a Banach space.
+\end{proof}
+
+\begin{definition}
+    Let $X$ be a topological vector space and $X^\ast$. The evaluation functionals induced by $X$ form a separating vector space of functionals. The $X$-topology induced on $X^\ast$ by these functionals is called the \define{weak* topology}.
+\end{definition}
+
+\begin{theorem}[Banach-Alaoglu]
+    Let $X$ be a topological vector space and $V$ a neighborhood of $0$. The \define{polar} of $V$: 
+    \begin{equation*}
+        K = \{\Lambda\in X^\ast\colon |\Lambda x|\le 1,~\forall x\in V\}\subseteq X^\ast
+    \end{equation*}
+    is weak*-compact.
+\end{theorem}
+\begin{proof}
+    Since $V$ is a neighborhood of the origin, it is absorbing and hence, for each $x\in X$, there is $\gamma(x) > 0$ such that $x\in\gamma(x) V$. For $x\in V$, choose $\gamma(x)\le 1$. Let $D_x$ denote the compact set 
+    \begin{align}
+        D_x = \left\{z\in\K\colon |z|\le \gamma(x)\right\},
+    \end{align}
+    and 
+    \begin{equation*}
+        P = \prod_{x\in X}D_x,
+    \end{equation*}
+    which is compact due to Tychonoff's Theorem. Further, for each $\Lambda\in K$ and $x\in X$, since $x/\gamma(x)\in V$, we have $|\Lambda x|\le |\gamma(x)|$, consequently, the element $(\Lambda x)_{x\in X}$ is an element of $P$. Thus, we can identify $K$ with a subset of $P$. Henceforth, we shall denote elements of $P$ as functions $f: X\to\K$. We shall show that:
+    \begin{enumerate}[label=(\roman*)]
+        \item the subspace topology $K$ inherits from $P$ and the weak*-topology on $K$ are the same,
+        \item with respect to the subspace topology, $K$ is closed in $P$;
+    \end{enumerate}
+    whence it follows that $K$ is compact.
+
+    Let $\Lambda_0\in K$ and consider a basic open set in the weak*-topology centered at $\Lambda_0$ of the form 
+    \begin{equation*}
+        W = \left\{\Lambda\in X^\ast\colon |\Lambda x_i - \Lambda_0 x_i| < \varepsilon,~1\le i\le n\right\}.
+    \end{equation*}
+    In the product topology on $P$, the following set is open 
+    \begin{equation*}
+        V = \left\{f\in P\colon |f(x_i) - \Lambda_0 x_i| < \varepsilon,~1\le i\le n\right\}.
+    \end{equation*}
+    It is not hard to see that $W\cap K = V\cap K$. This shows that the subspace topology induced on $K$ by the product topology is finer than that induced by the weak*-topology.
+
+    On the other hand, choose any open set in the product topology in $P$ intersecting $K$ and choose an element $\Lambda_0$ in the intersection. The aforementioned open set contains one of the form $V$ as above and since $W\cap K = V\cap K$, we see that the weak*-topology is finer than the subspace topology. This shows that the two topologies are the same.
+
+    Finally, we must show that $K$ is closed in $P$. Let $f_0\in\overline K$, $x,y\in X$ and $\alpha, \beta\in\K$. We contend that $f_0(\alpha x + \beta y) = \alpha f_0(x) + \beta f_0(y)$. Let $\varepsilon > 0$ and 
+    \begin{equation*}
+        V = \left\{f\in P\colon |f(z) - f_0(z)| < \varepsilon,~z\in\{x, y, \alpha x + \beta y\}\right\}.
+    \end{equation*}
+    There is some $f\in K\cap V$. Then, 
+    \begin{align*}
+        &|f_0(\alpha x + \beta y) - \alpha f(x) - \beta f(y)|\le\\
+        &|f_0(\alpha x + \beta y) - f(\alpha x + \beta y)| + |\alpha f(x) - \alpha f_0(x)| + |\beta f(y) - \beta f_0(y)|\\
+        &\le(|\alpha| + |\beta| + 1)\varepsilon.
+    \end{align*}
+    Since the above inequality holds for all $\varepsilon > 0$, we have that $f_0$ is linear. Further, by construction, $f_0$ is bounded by $1$ on $V$, since $\gamma(x)\le 1$ for all $x\in V$ and hence, $f_0\in X^\ast$. It follows that $f_0\in K$ and hence, $K$ is closed in $P$, thereby completing the proof.
+\end{proof}
+
+\begin{proposition}[Rudin, Exercise 3.11]
+    Let $X$ be an infinite dimensional Fr\'echet space. Then $X^\ast$ with the weak*-topology is of the first category in itself.
+\end{proposition}
+\begin{proof}
+    Let $V_n = B(0, 1/n)\subseteq X$ and let $K_n$ denote their respective polars, that is 
+    \begin{equation*}
+        K_n = \{\Lambda\in X^\ast\colon |\Lambda x|\le 1,~\forall x\in V_n\}.
+    \end{equation*}
+    First, we claim that $\displaystyle X^\ast = \bigcup_{n = 1}^\infty K_n$. Indeed, for any $\Lambda\in X^\ast$, note that the open set $\Lambda^{-1}(B_{\K}(0, 1))$ contains some $V_n$ and hence, $\Lambda\in K_n$.
+
+    It remains to now show that these have empty interior. Indeed, suppose $K_N$ has nonempty interior for some $N\in\N$. Since $K_N$ is convex, symmetric, so is its interior. Thus, we have that $0$ lies in the interior of $K_N$. As a result, there is an $\varepsilon > 0$ and $x_1,\dots, x_n\in X$ such that 
+    \begin{equation*}
+        W = \left\{\Lambda\in X^\ast\colon |\Lambda x_i| < \varepsilon,~1\le i\le n\right\}\subseteq K_N.
+    \end{equation*}
+    Since $K_N$ is compact, it is bounded and hence, so is $W$. But since $X^\ast$ is infinite-dimensional too, so is $\bigcap_{i = 1}^n\ker\ev_{x_i}\subseteq W$ which is contained in a bounded set, whence, must be the trivial subspace.
+
+    Next, for any $x\in X$, note that 
+    \begin{equation*}
+        \bigcap_{i = 1}^n \ker\ev_{x_i} = \{0\}\subseteq\ker\ev_x,
+    \end{equation*}
+    thus $x$ is a linear combination of the $x_i$'s, that is, $X$ is finite-dimensional, a contradiction. This completes the proof.
+\end{proof}
+
+\subsection{The Krein-Milman Theorem}
+
+\begin{definition}
+    A subset $E$ of a topological vector space $X$ is said to be \define{totally bounded} if to every neighborhood $V$ of $0$ in $X$ corresponds a finite set $F$ such that $E\subseteq F + V$.
+\end{definition}
+
+\begin{remark}
+    Note that we can require that $F\subseteq E$. Indeed, let $V$ be a neighborhood of $0$ and choose a neighborhood $W$ of $0$ such that $W + W\subseteq V$. There is a finite set $F\subseteq X$ such that $E\subseteq F + W$. For each $f\in F$ such that $(f + W)\cap E\ne\emptyset$, choose some $e$ in the intersection. For any $w\in W$, we have $f + w  - e = (f - e) + w\in W + W\subseteq V$. Hence, $f + W\subseteq e + V$. The collection of all such $e$'s, say $\wt F$ is such that $E\subseteq \wt F + W$
+\end{remark}
+
+\begin{theorem}
+\begin{enumerate}[label=(\alph*)]
+    \item If $A_1,\dots, A_n$ are compact convex sets in a topological vector space $X$, then $\co(A_1\cup\dots\cup A_n)$ is compact. 
+    \item If $X$ is an LCTVS and $E\subseteq X$ is totally bounded, then $\co(E)$ is totally bounded.
+    \item If $X$ is a Fr\'echet space and $K\subseteq X$ is compact, then $\overline\co(X)$ is compact. 
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Let 
+    \begin{equation*}
+        \Delta = \left\{(s_1,\dots,s_n)\in\R^n\colon s_1 + \dots + s_n = 1,~s_i\ge 0~\forall 1\le i\le n\right\}.
+    \end{equation*}
+    Let $A = A_1\times\dots\times A_n$ and define the map $f: \Delta\times A\to X$ by 
+    \begin{equation*}
+        f(s, a) = s_1a_1 + \dots + s_na_n.
+    \end{equation*}
+    This is a continuous map since addition and scalar multiplication are continuous on $X$. Put $K = f(S\times A)$. Then, $K$ is compact and is contained in $\co(A_1\cup\dots\cup A_n)$.
+
+    We shall show that $K = \co(A_1\cup\dots\cup A_n)$, for which is suffices to show that $K$ is convex (since each $A_i$ is contained in $K$). Indeed, let $\alpha,\beta > 0$ with $\alpha + \beta = 1$. Then, for $(s, a), (t, b)\in S\times A$, we have 
+    \begin{equation*}
+        \alpha\sum_{i = 1}^n s_ia_i + \beta\sum_{i = 1}^n t_ib_i = \sum_{i = 1}^n (\alpha s_i + \beta t_i)\cdot\frac{\alpha s_ia_i + \beta t_ib_i}{\alpha s_i + \beta t_i} = f(u, c),
+    \end{equation*}
+    where $u = \alpha s + \beta t$ and 
+    \begin{equation*}
+        c_i = \frac{\alpha s_ia_i + \beta t_ib_i}{\alpha s_i + \beta t_i}\in A_i,
+    \end{equation*}
+    and we are done.
+
+    \item Let $U$ be a neighborhood of $0$ in $X$ and choose a convex, balanced neighborhood $V$ of $0$ in $X$ such that $V + V\subseteq U$. There is a finite set $F\subseteq X$ such that $E\subseteq F+ V$, whence $E\subseteq\co(F) + V$. Since the latter is convex, we have $\co(E)\subseteq \co(F) + V$.
+
+    Due to part (a), $\co(F)$ is compact. The collection $\{f + V\colon f\in\co(F)\}$ is an open cover of $\co(F)$ and hence, admits a finite subcover, $\co(F)\subseteq F_1 + V$ for some $F_1\subseteq X$. Therefore, 
+    \begin{equation*}
+        \co(E)\subseteq F_1 + V + V\subseteq F_1 + U,
+    \end{equation*}
+    that is, $\co(E)$ is totally bounded.
+
+    \item Due to part (b), $\co(K)$ is totally bounded. Thus, its closure is totally bounded and complete, whence compact. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{lemma}[Carath\'eodory]
+    If $E\subseteq\R^n$ and $x\in\co(E)$, then $x$ lies in the convex hull of of some subset of $E$ which contains at most $n + 1$ points.
+\end{lemma}
+\begin{proof}
+    We shall show that if $k > n$ and $x = \displaystyle\sum_{i = 1}^{k + 1}t_ix_i$ is a convex combination for some $x_i\in\R^n$, then $x$ is a convex combination of some $k$ of these vectors. This is enough to prove the statement of the theorem.
+
+    We may suppose without loss of generality that $t_i > 0$ for $1\le i\le k + 1$. Consider the linear map $\R^{k + 1}\to\R^{n + 1}$ given by 
+    \begin{equation*}
+        (a_1,\dots, a_{k + 1})\mapsto\left(\sum_{i = 1}^{k + 1} a_ix_i, \sum_{i = 1}^{k + 1}a_i\right).
+    \end{equation*}
+    The kernel of this map must be nontrivial and hence, there exists $(a_1,\dots, a_{k + 1})\in\R^{k + 1}$ with some $a_i\ne 0$, so that $\sum_{i = 1}^{k + 1}a_ix_i = 0$ and $\sum_{i = 1}^{k + 1}a_i = 0$. Set
+    \begin{equation*}
+        |\lambda| = \min_{1\le i\le k + 1}\frac{t_i}{|a_i|},
+    \end{equation*}
+    which is finite, since $a_i\ne 0$ for some $1\le i\le k + 1$. Choose the sign of $\lambda$ so that $\lambda a_j = \lambda_j$ for some $1\le j\le k + 1$. Set $c_i = t_i - \lambda a_i\ge 0$. Then, 
+    \begin{equation*}
+        \sum_{i = 1}^{k + 1}c_ix_i = \sum_{i = 1}^{k + 1}t_ix_i - \lambda\sum_{i = 1}^{k + 1}a_ix_i = x,
+    \end{equation*}
+    and 
+    \begin{equation*}
+        \sum_{i = 1}^{k + 1} c_i = \sum_{i = 1}^{k + 1}t_i - \lambda\sum_{i = 1}^{k + 1}a_i = 1.
+    \end{equation*}
+    Note that $c_j = 0$ and hence, we have written $x$ as a convex combination of some $k$ of the $x_i$'s.
+\end{proof}
+
+\begin{proposition}
+    If $K\subseteq\R^n$ is compact, then so is $\co(K)$.
+\end{proposition}
+\begin{proof}
+    Let 
+    \begin{equation*}
+        \Delta = \{(s_1,\dots, s_{n + 1})\in\R^{n + 1}\colon s_1 + \dots + s_{n + 1} = 1,~s_i\ge 0~\forall 1\le i\le n + 1\}.
+    \end{equation*}
+    Due to Carath\'eodory's lemma, it follows that $x\in\co(K)$ if and only if $x$ is a linear combination of some $n + 1$ elements of $K$. Thus, the map $\Delta\times K^{n + 1}\to \R^{n}$ given by 
+    \begin{equation*}
+        (t, x_1,\dots, x_{n + 1})\mapsto t_1x_1 + \dots + t_{n + 1}x_{n + 1}
+    \end{equation*}
+    is continuous and its image is $\co(K)$. This completes the proof.
+\end{proof}
+
+\begin{definition}
+    Let $X$ be a $\K$-vector space and $K\subseteq X$. A non-empty set $S\subseteq K$ is called an \define{extreme set} of $K$ if whenever $x,y\in K$, $0 < t < 1$ such that $(1 - t)x + ty\in S$, then $x,y\in S$.
+
+    The \define{extreme points} of $K$ are the extreme sets that are singletons. The set of all extreme points of $K$ is denoted by $E(K)$.
+\end{definition}
+
+\begin{lemma}
+    Let $X$ be a topological vector space on which $X^\ast$ separates points. Suppose $A, B$ are disjoint, nonempty, compact, convex sets in $X$. Then there exists $\Lambda\in X^\ast$ such that 
+    \begin{equation*}
+        \sup_{x\in A}\Re\Lambda x < \inf_{y\in B}\Re\Lambda y.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Topologize $X$ with the weak topology, which is coarser than the original topology, and hence, $A, B$ are compact. Now, use the Hahn-Banach separation theorem and the fact that $(X_w)^\ast = X^\ast$.
+\end{proof}
+
+\begin{theorem}[Krein-Milman]
+    Let $X$ be a topological vector space on which $X^\ast$ separates points. If $K\subseteq X$ is a nonempty compact convex set in $X$, then $K = \overline\co(E(K))$.
+\end{theorem}
+\begin{proof}
+    Let $\scrP$ denote the poset of all nonemtpy compact extreme sets of $K$ ordered by inclusion. Note that $\scrP$ is nonempty, since $K\in\scrP$. We make the following two observations about $\scrP$:
+    \begin{enumerate}[label=(\alph*)]
+        \item If $S\ne\emptyset$, is an intersection of elements of $\scrP$, then $S\in\scrP$.
+        \item If $S\in\scrP$, $\Lambda\in X^\ast$ and $\displaystyle\mu = \max_{x\in S}\Re\Lambda x$, then 
+        \begin{equation*}
+            S_\Lambda = \left\{x\in S\colon \Re\Lambda x = \mu\right\}\in\scrP.
+        \end{equation*}
+    \end{enumerate}
+    Observation (a) is obvious. As for (b), first note that $S_\Lambda$ is closed in $S$, and hence, in $K$, thus, is compact. Now, suppose $x, y\in K$ and $t > 0$ such that $tx + (1 - t)y\in S_\Lambda\subseteq S$. Since $S$ is an extreme set of $K$, $x,y\in S$, consequently, $\Re\Lambda x,\Re\Lambda y\le\mu$ and 
+    \begin{equation*}
+        \mu = \Re\Lambda(tx + (1 - t)y)\le t\mu + (1 - t)\mu = \mu,
+    \end{equation*}
+    whence $x,y\in S_\Lambda$, thereby proving (b).
+
+    Choose some $S\in\scrP$ and let $\scrP'$ be the sub-poset of all members of $\scrP$ that are contained in $S$. Let $\Omega$ be a maximal chain in $\scrP'$ and let $M$ denote the intersection of all elements of $\Omega$. Since $\Omega$ has the finite intersection property and all sets in $\Omega$ are compact, $M\ne\emptyset$ and is compact. 
+    
+    We contend that $M$ is a singleton. Indeed, since $M_\Lambda\subseteq M$, due to the minimality of $M$, we must have that $M_\Lambda = M$ for every $\Lambda\in X^\ast$. That is, $\Re\Lambda(x - y) = 0$ for all $x,y\in M$ and $\Lambda\in X^\ast$. Since $X^\ast$ separates points on $X$, we must have that $x - y = 0$, that is, $M$ is a singleton.
+
+    We have therefore proved that $E(K)\cap S\ne\emptyset$ for every $S\in\scrP$. Now, since $K$ is convex, $\overline\co(E(K))\subseteq K$, consequently, the former is compact. Suppose now that there is some $x_0\in K\setminus\overline\co(E(K))$. Applying the preceding lemma with $B = \{x_0\}$ and $A = \overline\co(E(K))$, there is a $\Lambda\in X^\ast$ such that 
+    \begin{equation*}
+        \Re\Lambda x_0 > \sup_{y\in\overline\co(E(K))}\Re\Lambda y.
+    \end{equation*}
+    Then, $K_\Lambda\in\scrP$ and is disjoint from $\overline\co(E(K))$, a contradiction. Thus, $\overline\co(E(K)) = K$, thereby completing the proof.
+\end{proof}
+
+
+\section{Compact Operators}
+
+\begin{definition}
+    A linear map $T: X\to Y$ between Banach spaces is said to be \define{compact} if $T(U)$ is relatively compact in $Y$ where $U$ is the unit ball in $X$.
+\end{definition}
+
+The following proposition is immediate from the equivalence of compactness and sequential compactness in metric spaces.
+
+\begin{proposition}\thlabel{prop:compact-operator-sequences}
+    $T$ is compact if and only if every bounded sequence $(x_n)$ in $X$ contains a subsequence $(x_{n_k})$ such that $(Tx_{n_k})$ converges in $Y$.
+\end{proposition}
+
+\begin{definition}
+    The \define{spectrum} $\sigma(T)$ of an operator $T\in\scrB(X)$ is the set of all scalars $\lambda$ such that $T - \lambda I$ is not invertible.
+\end{definition}
+
+\begin{theorem}\thlabel{thm:properties-compact-operator}
+    Let $X$ and $Y$ be Banach spaces. 
+    \begin{enumerate}[label = (\alph*)]
+        \item If $T\in\scrB(X, Y)$ and $\dim\scrR(T) < \infty$, then $T$ is compact.
+        \item If $T\in\scrB(X, Y)$, $T$ is compact, and $\scrR(T)$ is closed, then $\dim\scrR(T) < \infty$.
+        \item The compact operators form a closed subspace of $\scrB(X, Y)$ in its norm-topology. 
+        \item If $T\in\scrB(X)$, $T$ is compact, and $\lambda\ne 0$ is a scalar, then $\dim\scrN(T - \lambda I) < \infty$.
+        \item If $\dim X = \infty$, $T\in\scrB(X)$, and $T$ is compact, then $0\in\sigma(T)$.
+        \item If $S, T\in\scrB(X)$, and $T$ is compact, then so are $ST$ and $TS$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Let $U$ denote the unit ball of $X$. Then $T(U)$ is a bounded subset of $\scrR(T)$ and since the latter is closed in $Y$, $\overline{T(U)}$ is a closed and bounded subset of $\scrR(T)$, consequently, is compact.
+    \item Since $\scrR(T)$ is closed in $Y$, it is complete, i.e., a Banach space. Due to the open mapping theorem, $T(U)$ is open in $\scrR(T)$ with compact closure, whence $\scrR(T)$ is locally compact, and hence, finite dimensional.
+    \item Let $T_n\to T$ in $\scrB(X, Y)$ where each $T_n$ is a compact operator. We shall show that $T(U)$ is totally bounded in $Y$. Let $\varepsilon > 0$ and choose an $N$ such that $\|T - T_N\| < \varepsilon/3$. Note that $T_N(U)$ is totally bounded in $Y$, and hence, there are $x_1,\dots,x_n\in U$ such that 
+    \begin{equation*}
+        T_N(U)\subseteq\bigcup_{i = 1}^n B_Y(T_Nx_i, \varepsilon/3).
+    \end{equation*}
+    Now, for any $y\in U$, there is an index $1\le i\le n$ such that $T_Ny\in B(T_Nx_i, \varepsilon/3)$. As a result, 
+    \begin{equation*}
+        \|Ty - Tx_i\|\le\|Ty - T_Ny\| + \|T_Ny - T_Nx_i\| + \|T_Nx_i - Tx_i\| < \varepsilon.
+    \end{equation*}
+    Hence, 
+    \begin{equation*}
+        T(U)\subseteq\bigcup_{i = 1}^n B_Y(Tx_i, \varepsilon),
+    \end{equation*}
+    and the conclusion follows.
+
+    \item Let $Y = \scrN(T - \lambda I)$. Then note that $T$ acts on $Y$ by $y\mapsto\lambda y$. Further, since $T$ is compact and $Y$ is closed in $X$, the restriction of $T$ to $Y$ is compact and hence, $Y$ must be finite-dimensional. 
+    \item If $0\notin\sigma(T)$, then $T$ is invertible, whence $\scrR(T)$ is closed but $\dim\scrR(T) = \infty$, a contradiction. 
+    \item This follows from \thref{prop:compact-operator-sequences}.\qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    Suppose $X$ and $Y$ are Banach spaces and $T\in\scrB(X, Y)$. Then $T$ is compact if and only if $T^\ast\in\scrB(Y^\ast, X^\ast)$ is compact.
+\end{theorem}
+\begin{proof}
+    Suppose first that $T$ is compact and let $\{y_n^\ast\}$ be a sequence in the unit ball of $Y^\ast$. We shall show that $T^\ast y^\ast = y^\ast\circ T$ admits a convergent subsequence in $X^\ast$. Let $K = \overline{T(U)}\subseteq Y$, which, according to our assumption is compact in $Y$. Note that the collection $\{y_n^\ast\}$ is equicontinuous and pointwise bounded on $K$. Due to the Arzel\'a-Ascoli Theorem, there is a subsequence $\{y_{n_k}^\ast\}$ that converges uniformly on $K$. 
+    
+    We contend that $\{T^\ast y_{n_k}^\ast\}$ converges in the operator norm. Indeed, for any $x\in U$, 
+    \begin{equation*}
+        |(T^\ast y_{n_k}^\ast(x) - T^\ast y_{n_l}^\ast(x)| = |y_{n_k}^\ast(Tx) - y_{n_l}^\ast(Tx)|,
+    \end{equation*}
+    and since $Tx\in K$, the conclusion follows.
+
+    Conversely, suppose $T^\ast$ is compact. Consider the natural isometric embeddings $\Phi_X: X\to X^{\ast\ast}$ and $\Phi_Y: Y\to Y^{\ast\ast}$, which fit into a commutative diagram 
+    \begin{align}
+        \xymatrix {
+            X\ar[r]^X\ar[d]_{\Phi_X} & Y\ar[d]^{\Phi_Y}\\
+            X^{\ast\ast}\ar[r]_{T^{\ast\ast}} & Y^{\ast\ast}.
+        }
+    \end{align}
+    Due to the first part of the proof, $T^{\ast\ast}$ is compact. Thus, $T^{\ast\ast}(U^{\ast\ast})$ is totally bounded in $Y^{\ast\ast}$. Next, $\Phi_X(U)$ is contained in $U^{\ast\ast}$ and hence, $T^{\ast\ast}\Phi_X(U) = \Phi_Y T(U)$ is totally bounded in $Y^{\ast\ast}$. Since $\Phi_Y$ is an isometry, it follows that $T(U)$ is totally bounded in $Y$, thereby completing the proof.
+\end{proof}
+
+\begin{definition}
+    A closed subspace $M$ of a topological vector space $X$ is said to be \define{complemented} if there exists a closed subspace $N$ of $X$ such that 
+    \begin{equation*}
+        X = M + N\quad\text{and}\quad M\cap N = \{0\}.
+    \end{equation*}
+    In this case, $X$ is said to be the \define{direct sum} of $M$ and $N$, denoted by $X = M\oplus N$.
+\end{definition}
+
+\begin{lemma}\thlabel{lem:complementary-subspace}
+    Let $M$ be a closed subspace of a topological vector space $X$. 
+    \begin{enumerate}[label=(\alph*)]
+        \item If $X$ is locally convex and $\dim M < \infty$, then $M$ is complemented in $X$. 
+        \item If $\dim(X/M) < \infty$, then $M$ is complemented in $X$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Let $\{e_1,\dots,e_n\}$ be a basis for $M$. Every $x\in M$ has a unique representation 
+    \begin{equation*}
+        x = \alpha_1(x)e_1 + \dots + \alpha_n(x)e_n.
+    \end{equation*}
+    Note that $\alpha_i(e_j) = 0$ whenever $i\ne j$. Due to the Hahn-Banach Theorem, each $\alpha_i$ can be extended to a continuous linear functional on $X$. Let $\displaystyle N = \bigcap_{i = 1}^n\scrN(\alpha_i)$. It is not hard to argue that $X = M\oplus N$.
+
+    \item Let $\pi: X\to X/M$ be the quotient map, and let $\{e_1,\dots,e_n\}$ be a basis for $X/M$. Lift this to $\{x_1,\dots,x_n\}$ in $X$ and let $N$ be the vector subspace they span. Again, it is not hard to argue that $X = M\oplus N$.\qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    Let $X$ be a Banach space, $T\in\scrB(X)$ a compact operator, and $\lambda\ne 0$. Then $T - \lambda I$ has closed range.
+\end{theorem}
+\begin{proof}
+    Let $N = \scrN(T - \lambda I)$, which is a closed subspace of $X$. Due to \thref{lem:complementary-subspace}, admits a complement, say $M$. Let $S: M\to X$ be given by $x\mapsto Tx - \lambda x$, which is a bounded linear operator. Since $\scrR(S) = \scrR(T - \lambda I)$, it suffices to show that the former is closed. 
+
+    To this end, we first show that there is a constant $\beta > 0$ such that $\|Sx\|\ge\beta\|x\|$ for all $x\in M$, which is equivalent to 
+    \begin{equation*}
+        \beta = \inf_{\substack{\|x\| = 1\\ x\in M}}\|Sx\| > 0.
+    \end{equation*}
+    Suppose not. Then, there is a sequence $x_n\in M$ with $\|x_n\| = 1$, such that $Sx_n\to 0$ as $n\to\infty$. Since $T: X\to X$ is compact, its restriction to $M$ is also compact, whence, there is a subsequence $(x_{n_k})$ such that $Tx_{n_k}\to x_0$ for some $x_0\in X$. Replace $x_n$ with this subsequence. Then, $Tx_n - \lambda x_n\to 0$ and hence, $\lambda x_n\to x_0$. As a result, 
+    \begin{equation*}
+        Sx_0 = \lim_{n\to\infty} S(\lambda x_n) = \lambda\lim_{n\to\infty} Sx_n = 0.
+    \end{equation*}
+    But since $S$ is injective, $x_0 = 0$. This is absurd, since $\|x_0\| = \lim_{n\to\infty}\|\lambda x_n\| = |\lambda| > 0$. It follows that $\beta > 0$.
+
+    Finally, we show that $\scrR(S)$ is closed in $X$. Indeed, suppose $y\in\overline{\scrR(S)}$; then there is a sequence $(x_n)$ in $M$ such that $Sx_n\to y$, that is $(Sx_n)$ is Cauchy. But since 
+    \begin{equation*}
+        \beta\|x_n - x_m\|\le\|Sx_n - Sx_m\|,
+    \end{equation*}
+    so is $(x_n)$. Hence, $x_n\to x_0$ for some $x_0\in M$; and $Sx_0 = y$. This completes the proof.
+\end{proof}
+
+\begin{theorem}[Spectrum of a Compact Operator]
+    Let $X$ be a Banach space and $T\in\scrB(X)$ a compact operator. 
+    \begin{enumerate}[label=(\alph*)]
+        \item Every $0\ne\lambda\in\sigma(T)$ is an eigenvalue of $T$. 
+        \item For every $\lambda\ne 0$, the increasing chain of subspaces 
+        \begin{equation*}
+            \scrN(T - \lambda I)\subseteq\scrN((T - \lambda I)^2)\subseteq\cdots
+        \end{equation*}
+        eventually stabilizes. Further, a these subspaces are finite dimensional.
+        \item For every $r > 0$, the set 
+        \begin{equation*}
+            \{\lambda\in\sigma(T)\colon |\lambda| > r\}
+        \end{equation*}
+        is finite.
+        \item As a consequence, $\sigma(T)$ is countable and the only possible limit point of $\sigma(T)$ is $0$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Suppose $\dim X = \infty$, for if $\dim X < \infty$, then all the above statements are trivial as there are only finitely many eigenvalues.
+\begin{enumerate}[label=(\alph*)]
+    \item Suppose $0\ne\lambda\in\sigma(T)$ is not an eigenvalue of $T$, then $T - \lambda I$ is injective, but not surjective, else, due to the open mapping theorem, it would be invertible. Define 
+    \begin{equation*}
+        Y_n = (T - \lambda I)^{n}(X).
+    \end{equation*}
+    Obviously, $Y_{n + 1}\subseteq Y_n$ for all $n\ge 1$. Further, since the restriction of $T$ to each of these subspaces is compact, due to \thref{thm:properties-compact-operator} (d), each $Y_n$ is infinite-dimensional and all inclusions are strict.
+
+    For each $n\ge 1$, using the Riesz Lemma, choose $y_n\in Y_n\setminus Y_{n + 1}$ such that $\|y_n\| = 1$ and 
+    \begin{equation*}
+        \operatorname{dist}(y_n, Y_{n + 1}) > \frac{1}{2}.
+    \end{equation*}
+    Since $T$ is compact and $(x_n)$ is bounded, the sequence $(Tx_n)$ must admit a convergent subsequence. But for $n < m$, we have 
+    \begin{equation*}
+        \|Tx_n - Tx_m\| = \|(T - \lambda I)x_n + \lambda x_n - (T - \lambda I)x_m - \lambda x_m\|,
+    \end{equation*}
+    and since $(T - \lambda I)x_n - (T - \lambda I)x_m - \lambda x_m\in Y_{n + 1}$, we conclude that $\|Tx_n - Tx_m\| > \lambda/2$, a contradiction.
+
+    \item If $\lambda$ is not an eigenvalue, then each $\scrN((T - \lambda I)^n)$ is the trivial subspace and there is nothing to prove. Suppose now that $\lambda$ is an eigenvalue of $T$ and set $Y_n = \scrN((T - \lambda I)^n)$. Obviously $Y_1\subseteq Y_2\subseteq\cdots$. Further, $(T - \lambda I)^n = S + (-\lambda)^nI$ where $S$ is some compact operator and hence, $\dim Y_n < \infty$. Next, note that if $Y_n = Y_{n + 1}$ for some $n\ge 1$, then $Y_n = Y_{n + 1} = Y_{n + 2} = \cdots$.
+
+    Suppose now that $Y_n\subsetneq Y_{n + 1}$ for every $n\ge 1$. Again, using the Riesz Lemma, choose $y_{n + 1}\in Y_{n + 1}\setminus Y_n$ such that $\|y_{n + 1}\| = 1$ and 
+    \begin{equation*}
+        \operatorname{dist}(y_{n + 1}, Y_{n}) > \frac{1}{2}.
+    \end{equation*}
+    Again, since $(y_n)$ is bounded and $T$ is compact, the sequence $(Ty_n)$ must admit a convergent subsequence. But for $2\le n < m$, we have 
+    \begin{equation*}
+        \|Ty_n - Ty_m\| = \|(T - \lambda I)y_n + \lambda y_n - (T - \lambda I)y_m - \lambda y_m\|,
+    \end{equation*}
+    and since $(T - \lambda I)y_n - (T - \lambda I)y_{m} + \lambda y_n\in Y_{m - 1}$, it follows that $\|Ty_n - Tx_m\| > \lambda/2$, a contradiction.
+
+    \item Suppose there is an $r > 0$ such that the set $\{\lambda\in\sigma(T)\colon|\lambda| > r\}$ is infinite. Choose a countable subset $\{\lambda_1,\lambda_2,\dots\}$ with corresponding eigenvectors $\{x_1, x_2,\dots\}$. Let $Y_n = \operatorname{span}\{x_1,\dots, x_n\}$; when then form a strictly increasing chain of closed subspaces.
+
+    First, we contend that for $n\ge 2$, $(T - \lambda_n I)(Y_n)\subseteq Y_{n - 1}$. Indeed, any element of $Y_n$ can be written uniquely as 
+    \begin{equation*}
+        Y_n \ni y = \alpha_1x_1 + \dots + \alpha_nx_n.
+    \end{equation*}
+    Then, $(T - \lambda_nI)y = \alpha_1(T - \lambda_n I)x_1 + \dots + \alpha_{n - 1}(T - \lambda_n I)x_{n - 1}$. And for $1\le i\le n - 1$, we have 
+    \begin{equation*}
+        (T - \lambda_i I)(T - \lambda_n)x_i = (T - \lambda_n I)(T - \lambda_iI)x_i = 0,
+    \end{equation*}
+    whence $(T - \lambda_n)x_i\in Y_i$.
+
+    Next, using the Riesz Lemma, for $n\ge 2$, choose $y_n\in Y_n\setminus Y_{n - 1}$ such that $\|y_n\| = 1$ and 
+    \begin{equation*}
+        \operatorname{dist}(y_n, Y_{n - 1}) > \frac{1}{2}.
+    \end{equation*}
+    Since $(y_n)$ is bounded and $T$ is compact, the sequence $(Ty_n)$ admits a convergent subsequence. But for $2\le n < m$, we have
+    \begin{equation*}
+        \|Ty_n - Ty_m\| = \|(T - \lambda_n I)y_n + \lambda_ny_n - (T - \lambda_m I)y_m - \lambda_my_m\|,
+    \end{equation*}
+    and since 
+    \begin{equation*}
+        (T - \lambda_nI)y_n + \lambda_ny_n - (T - \lambda_mI)y_m\in Y_{m - 1},
+    \end{equation*}
+    we get that $\|Ty_n - Ty_m\| > |\lambda_m|/2 > r/2$, a contradiction.
+
+    \item Note that 
+    \begin{equation*}
+        \sigma(T) = \{0\}\cup\bigcup_{n\ge 1}\left\{\lambda\in\sigma(T)\colon |\lambda| > \frac{1}{n}\right\},
+    \end{equation*}
+    and being a countable union of finite sets, $\sigma(T)$ is countable. Next, suppose $0\ne\mu\in\K$ is a limit point of $\sigma(T)$. There is an $\varepsilon > 0$ such that $|\mu| > \varepsilon$. But since the set of eigenvalues in $\K\setminus\overline{B}(0,\varepsilon)$ is finite, $\mu$ cannot be their limit point. This completes the proof. \qedhere
+\end{enumerate}
+\end{proof}
+
+\subsection{Examples}
+
+\begin{theorem}[Minkowski's Integral Inequality]
+    Let $(X,\frakM, \mu)$ and $(Y,\frakN, \lambda)$ be positive measure spaces. If $f: X\times Y\to\R$ is non-negative and measurable with respect to the product measure, then for $1\le p < \infty$, 
+    \begin{equation*}
+        \left\{\int_X\left(\int_Y f(x, y)~d\lambda(y)\right)^p~d\mu(x)\right\}^{\frac{1}{p}}\le\int_Y\left(\int_X f(x, y)^p~d\mu(x)\right)^{\frac{1}{p}}~d\lambda(y)
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Since $p = 1$ is just Fubini, we assume $p > 1$ and let $q$ be the conjugate exponent to $p$. Let $H: X\to\R$ be defined as 
+    \begin{equation*}
+        H(x) = \int_Y f(x, y)~d\lambda(y),
+    \end{equation*}
+    which is a measurable function on $X$ due to Fubini. We now have the series of inequalities 
+    \begin{align*}
+        \|H\|_p^{p} &= \int_X \int_Y f(x,y)H(x)^{p - 1}~d\lambda(y)d\mu(x)\\
+        &= \int_Y\int_X f(x, y)H(x)^{p - 1}~d\mu(x)d\lambda(y)\\
+        &\le\int_Y\left(\int_X f(x,y)^{p}d\mu(x)\right)^{\frac 1 p}\left(\int_X H(x)^{pq - q}\right)^{\frac 1q}~d\lambda(y)\\
+        &= \int_Y\left(\int_Xf(x, y)^p~d\mu(x)\right)^{\frac{1}{p}}\|H\|_p^{\frac pq}~d\lambda(y)
+    \end{align*}
+    and hence 
+    \begin{equation*}
+        \|H\|_p\le\int_X\left(\int_X f(x,y)^p~d\mu(x)\right)^{\frac 1p}~d\lambda(y),
+    \end{equation*}
+    thereby completing the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $1 < p < \infty$ and define the \define{Hardy operator} $H: L^p(0,\infty)\to L^p(0, \infty)$ as 
+    \begin{equation*}
+        Hf(x) = \frac{1}{x}\int_0^x f(t)~dt.
+    \end{equation*}
+    Then, $H$ is a non-compact operator with operator norm 
+    \begin{equation*}
+        \|H|| = \frac{p}{p - 1}.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    For operator norm, take $x^{-1/p}\chi_{[0, N]}$ and let $N\to\infty$.
+\end{proof}
+
+\section{Reflexive Spaces}
+% \begin{lemma}
+%     $C[0, 1]$ with the standard supremum norm is not a reflexive Banach space.
+% \end{lemma}
+% \begin{proof}[Proof Sketch]
+%     Show first that $c_0$ can be embedded isometrically into $C[0, 1]$. If $C[0, 1]$ were reflexive, then $c_0$ would be too, since closed subspaces of a reflexive space are reflexive.
+% \end{proof}
+
+\begin{definition}
+    A normed linear space $X$ is said to be \define{reflexive} if the natural embedding $\Phi: X\to X^{\ast\ast}$ is surjective.
+\end{definition}
+
+\begin{proposition}
+    Let $X$ be a normed linear space. The natural embedding $\Phi: X\to X^{\ast\ast}$ is a topological imbedding when $X$ is given the weak topology and $X^\ast$ is given the weak*-topology.
+\end{proposition}
+\begin{proof}
+    % TODO: Add in later
+\end{proof}
+
+\begin{theorem}[Kakutani]
+    A Banach space $X$ is reflexive if and only if its norm-closed unit ball is weakly compact.
+\end{theorem}
+\begin{proof}
+    Let $B, B^{\ast\ast}$ denote the norm-closed unit balls of $X$ and $X^{\ast\ast}$ respectively. If $X$ were reflexive, then the natural embedding $\Phi:X\to X^{\ast\ast}$ is surjective. Due to the preceding result, $\Phi$ is a homeomorhpism when $X$ is given the weak topology and $X^{\ast\ast}$ is given the weak*-topology. Since $B^{\ast\ast}$ is compact in the weak*-topology, and $\Phi$ is an isometry, we see that $B$ must be compact in the weak topology.
+
+    Conversely, suppose $B$ is compact in the weak topology. Again, due to the preceding proposition, $\Phi(B)$ is compact and convex in the weak*-topology and $\Phi(B)\subseteq B^{\ast\ast}$. If $X$ were not reflexive, then $\Phi(B)\subsetneq B^{\ast\ast}$. Choose $x^{\ast\ast}\in B^{\ast\ast}\setminus\Phi(B)$. Due to the Hahn-Banach Separation Theorem, there is a linear functional $\Lambda: X^{\ast\ast}\to\K$ that is continuous with respect to the weak*-topology on $X^\ast$ and there are $\gamma_1,\gamma_2\in\R$ such that 
+    \begin{equation*}
+        \Re\Lambda(x^{\ast\ast}) < \gamma_1 < \gamma_2 < \Re\Lambda(y)\quad\forall y\in \Phi(B).
+    \end{equation*}
+    Note that there is some $0\ne x^\ast\in X^\ast$ such that $\Lambda = \ev_{x^\ast}$, and hence, 
+    \begin{equation*}
+        \Re x^{\ast\ast}(x^\ast) < \gamma_1 < \gamma_2\le\inf_{y\in\Phi(B)}\Re y(x^\ast) = \inf_{x\in B} \Re x^\ast(x).
+    \end{equation*}
+    The rightmost quantity is precisely $-\|x^\ast\|$. Thus $\Re x^{\ast\ast}(x^\ast) < -\|x^\ast\|$, in particular, $|x^{\ast\ast}(x^\ast)| > \|x^\ast\|$, whence $\|x^{\ast\ast}\| > 1$, a contradiction, since we chose it inside $B^{\ast\ast}$. This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    Every closed, bounded convex subset of a reflexive Banach space is weakly compact.
+\end{corollary}
+\begin{proof}
+    This follows from the fact that a convex closed subset of an LCTVS is also weakly closed.
+\end{proof}
+
+\section{Hilbert Spaces}
+
+\begin{definition}
+    An \define{inner product space} is a $\K$-vector space $H$ together with a function $(\cdot, \cdot): H\times H\to \K$ such that 
+    \begin{enumerate}[label=(\roman*)]
+        \item $(x, y) = \overline{(y, x)}$, 
+        \item $(x + y, z) = (x, z) + (y, z)$, 
+        \item $(\alpha x, y) = \alpha(x, y)$, 
+        \item $(x, x)\ge 0$, and $(x, x) = 0$ if and only if $x = 0$,
+    \end{enumerate}
+    for all $x,y, z\in H$ and $\alpha\in\K$.
+
+    Obviously, $\|x\|:= \sqrt{(x, x)}$ defines a norm on $H$. If $H$ is complete with respect to this norm, then $H$ is said to be a \define{Hilbert space}.
+\end{definition}
+
+\begin{proposition}
+    Let $H$ be an inner product space and $x,y\in H$. Then, 
+    \begin{equation*}
+        |(x, y)|\le\|x\|\|y\|\quad\text{and}\quad\|x + y\|\le\|x\| + \|y\|.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    For every $\lambda\in\K$, we have 
+    \begin{equation*}
+        0\le(x + \lambda y, x + \lambda y) = |\lambda|^2\|y\|^2 + \|x\|^2 + 2\Re(x,\lambda y).
+    \end{equation*}
+    For every $\alpha\in\R$, we can choose $\lambda\in\K$ such that $|\lambda| = |\alpha|$ and $\Re(x, \lambda y) = \alpha |(x,y)|$. Thus, 
+    \begin{equation*}
+        \alpha^2\|y\|^2 + 2\alpha(x, y) + \|x\|^2\ge 0
+    \end{equation*}
+    for every $\alpha\in\R$. Thus, 
+    \begin{align}
+        4|(x, y)|^2\le 4\|x\|^2\|y\|^2\implies |(x, y)|\le\|x\|\|y\|.
+    \end{align}
+    Finally, note that 
+    \begin{equation*}
+        \|x + y\|^2 = \|x\|^2 + \|y\|^2 + 2\Re(x, y)\le \|x\|^2 + \|y\|^2 + 2|(x, y)|\le  (\|x\| + \|y\|)^2,
+    \end{equation*}
+    thereby completing the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $H$ be a Hilbert space. Every nonempty closed convex $E\subseteq H$ contains a unique $x$ of minimal norm.
+\end{theorem}
+\begin{proof}
+    Let 
+    \begin{equation*}
+        d = \inf\{\|x\|\colon x\in E\}.
+    \end{equation*}
+    Choose a sequence $(x_n)$ in $E$ such that $\|x_n\|\to d$ as $n\to\infty$. Since $E$ is convex, $\frac{1}{2}(x_n + x_m)\in E$, whence $\|x_n + x_m\|\ge 2d$, for all $m,n\ge 1$.
+
+    Next, using the ``parallelogram identity'', 
+    \begin{equation*}
+        \|x_n - x_m\|^2  = 2\|x_n\|^2 + 2\|x_m\|^2 - \|x_n + x_m\|^2.
+    \end{equation*}
+    Let $\varepsilon > 0$ and choose $N\ge 1$ such that whenever $n\ge N$, 
+    \begin{equation*}
+        d\le \|x_n\|\le\sqrt{d^2 + \varepsilon^2}.
+    \end{equation*}
+    Thus, for $m,n\ge N$, 
+    \begin{equation*}
+        \|x_n - x_m\|^2\le 4d^2 + 4\varepsilon^2 - \|x_n + x_n\|^2\le 4\varepsilon^2,
+    \end{equation*}
+    thus $\|x_n - x_m\|\le 2\varepsilon$ whenever $m,n\ge N$. This shows that $(x_n)$ is Cauchy and hence, converges to some $x\in E$. Obviously, $\|x\| = d$.
+
+    As for uniqueness, suppose $x,y\in E$ with $\|x\| = \|y\| = d$. Then, 
+    \begin{equation*}
+        0\le \|x - y\|^2 = 2\|x\|^2 + 2\|y\|^2 - \|x + y\|^2\le 2d^2 + 2d^2 - 4d^2 = 0.
+    \end{equation*}
+    Thus, $x = y$, thereby completing the proof.
+\end{proof}
+
+The above theorem fails quite spectacularly for Banach spaces.
+
+\begin{example}
+    Let $X = C[0, 1]$ the $\R$-vector space of real-valued continuous functions on $[0, 1]$ with the supremum norm. Let 
+    \begin{equation*}
+        M = \left\{f\in X\colon \int_0^{1/2} f(t)~dt - \int_{1/2}^1 f(t)~dt = 1\right\}.
+    \end{equation*}
+    Then, $M$ is a closed convex subset of $X$ but no element of $M$ has minimal norm.
+\end{example}
+\begin{proof}
+    Obviously, $M$ is convex. To see that it is closed, note that the linear functional 
+    \begin{equation*}
+        T: X\to\R\qquad f\mapsto \int_0^{1/2} f(t)~dt - \int_{1/2}^1 f(t)~dt
+    \end{equation*}
+    is a bounded linear functional, and hence, is continuous. Thus, $M$ is closed too.
+
+    Next, for any $f\in M$,
+    \begin{equation*}
+        1 = \left|\int_0^{1/2} f(t)~dt - \int_{1/2}^1 f(t)~dt\right|\le\int_0^1|f(t)|~dt\le \|f\|_\infty.
+    \end{equation*}
+    We contend that 
+    \begin{equation*}
+        \inf\left\{\|f\|_\infty\colon f\in M\right\} = 1.
+    \end{equation*}
+    To see this, fix some $0 < \delta < 1/2$. Define the function 
+    \begin{equation*}
+        f(x) = 
+        \begin{cases}
+            1 + \varepsilon & 0\le x\le \frac{1}{2} - \delta\\
+            \frac{1 + \varepsilon}{\delta}\left(\frac{1}{2} - x\right) & \frac{1}{2} - \delta\le x\le \frac{1}{2} + \delta\\
+            -(1 + \varepsilon) & \frac{1}{2} + \delta\le x\le 1.
+        \end{cases}
+    \end{equation*}
+    Then,
+    \begin{equation*}
+        \int_0^{1/2} f(t)~dt - \int_{1/2}^1 f(t)~dt = (1 + \varepsilon)(1 - 2\delta) + \delta(1 + \varepsilon) = (1 - \delta)(1 + \varepsilon).
+    \end{equation*}
+    Choosing 
+    \begin{equation*}
+        \varepsilon = \frac{\delta}{1 - \delta},
+    \end{equation*}
+    we get $Tf = 1$. Note that $\|f\|_\infty = 1 + \varepsilon$ and as $\delta\to 0^+$, we get $\|f\|_\infty\to 1^+$. This proves our claim.
+
+    Finally, suppose $f\in M$ such that $\|f\|_\infty = 1$. Then, 
+    \begin{equation*}
+        0 = \int_{0}^{1/2}1 - f(t)~dt + \int_{1/2}^1 1 + f(t)~dt.
+    \end{equation*}
+    Since both integrals are non-negative and the functions are continuous, we must have $f(t) = 1$ whenever $0\le t\le 1/2$ and $f(t) = -1$ whenever $1/2\le t\le 1$, a contradiction. This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $M$ be a closed subspace of a Hilbert space $H$, then $H = M\oplus M^\perp$.
+\end{theorem}
+\begin{proof}
+    Since 
+    \begin{equation*}
+        M^\perp = \bigcap_{x\in M}\ker(\cdot, x),
+    \end{equation*}
+    it is a closed subspace of $H$. Obviously, $M\cap M^\perp = \{0\}$. It remains to show that $H = M + M^\perp$. Indeed, let $x\in H$ and let $x_1\in M$ be the unique element minimizing the distance to $x$. We contend that $x_2 = x - x_1$ is perpendicular to $x_1$.
+
+    Indeed, note that for every $y\in M$, we have 
+    \begin{equation*}
+        \|x_2\|^2\le \|x_2 + y\|^2\implies \|y\|^2 + 2\Re(x_2, y)\ge 0,
+    \end{equation*}
+    for all $y\in M$. Suppose $(x_2, y)\ne 0$ for some $y\in M$. We can choose $y$ such that $\Re(x_2, y) = -|(x_2, y)|$. Then, replacing $y$ by $\alpha y$ for some $\alpha > 0$, we have $\alpha^2\|y\|^2 - 2\alpha|(x, y)|\ge 0$ for all $\alpha > 0$. This is obviously false, and hence, $(x_2, y)\ne 0$ for all $y\in M$, thereby completing the proof.
+\end{proof}
+
+The above theorem fails for closed subspaces of Banach spaces.
+
+\begin{example}
+    $c_0\subseteq\ell^\infty$ is not complemented.
+\end{example}
+\begin{proof}
+We begin with a claim. 
+
+\noindent\textbf{Claim.} Let $T: \ell^\infty\to\ell^\infty$ be a bounded linear operator with $c_0\subseteq\ker T$. Then there is an infinite subset $A\subseteq\N$ such that $Tx = 0$ whenever $x$ is supported in $A$.
+
+\noindent\textbf{Proof of Claim:} Suppose not. Then, for every infinite subset $A\subseteq\N$, there is an $x\in\ell^\infty$, supported in $A$ such that $Tx\ne 0$. Choose an uncountable collection $\{A_i\colon i\in I\}$ of infinite subsets of $\N$ with pairwise finite intersections. According to our assumption, there are $x_i\in\ell^\infty$ supported in $A_i$ with $Tx_i\ne 0$ and $\|x_i\| = 1$.
+
+Since $I$ is uncountable, there is an $n\in\N$ such that 
+\begin{equation*}
+    I_n = \{i\in I\colon (Tx_i)(n)\ne 0\}
+\end{equation*}
+is uncountable (because the union of all the $I_n$'s is $I$). Further, there is a positive integer $k$ such that 
+\begin{equation*}
+    I_{n, k} = \left\{i\in I\colon |(Tx_i)(n)|\ge\frac
+    1k\right\}
+\end{equation*}
+is uncountable (because the union of all the $I_{n, k}$'s is $I_n$).
+
+Let $J\subseteq I_{n, k}$ be finite and set 
+\begin{equation*}
+    y = \sum_{j\in J}\sgn\left((Tx_j)(n)\right)\cdot x_j.
+\end{equation*}
+Then, 
+\begin{equation*}
+    (Ty)(n) = \sum_{j\in J}\sgn\left((Tx_j)(n)\right)\cdot(Tx_j)(n)\ge\sum_{j\in J}\frac{1}{k} = \frac{|J|}{k}.
+\end{equation*}
+
+Note that for $i\ne j$, $A_i\cap A_j$ is finite and hence, we can write $y = x + z$, where $x$ has finite support and $\|z\|\le 1$. Thus, $x\in c_0\subseteq\ker T$ and hence, 
+\begin{equation*}
+    \frac{|J|}{k}\le\|Ty\| = \|Tx + Tz\| = \|Tz\|\le\|T\|\implies|J|\le k\|T\|,
+\end{equation*}
+which is absurd, since $I_{n, k}$ is infinite. This proves the claim. $\square$
+
+Coming back, suppose $c_0$ were complemented in $\ell^\infty$. Then, there would be a projection operator $P: \ell^\infty\to c_0\subseteq\ell^\infty$. Set $T = \id - P$. Since $c_0\subseteq\ker T$, due to the claim above, there is an infinite subset $A\subseteq\N$, such that $Tx = 0$ whenever $x$ is supported in $A$. Consider $\chi_A \in\ell^\infty$, the characteristic function of the set $A$. But note that 
+\begin{equation*}
+    P(\chi_A) = (\id - T)(\chi_A) = \chi_A\notin c_0,
+\end{equation*}
+a contradiction. This completes the proof.
+\end{proof}
+
+
+\begin{theorem}[Riesz Representation Lemma]
+    Let $H$ be a Hilbert space. The natural map $H\to H^\ast$ given by $y\mapsto (\cdot, y)$ is an isometric and surjective.
+\end{theorem}
+\begin{proof}
+    Obviously, the map is injective and linear. To see isometry, note that $(y, y) = \|y\|^2$, whence $\|(\cdot, ,y)\|\ge \|y\|$ and due to Cauchy-Schwarz, 
+    \begin{equation*}
+        |(x, y)|\le \|x\|\|y\|\implies \|(\cdot, y)\|\le \|y\|\implies\|(\cdot, y)\| = \|y\|.
+    \end{equation*}
+    It remains to show surjectivity. Let $\Lambda\ne 0$ be a continuous linear functional on $H$ and $N = \ker\Lambda$. Since $N$ is closed, we can write $H = N\oplus N^\perp$. Choose a nonzero vector $z\in N^\perp$. For any $x\in H$, 
+    \begin{equation*}
+        x - \frac{\Lambda x}{\Lambda z}z\in\ker\Lambda,
+    \end{equation*}
+    whence 
+    \begin{equation*}
+        0 = \left(x - \frac{\Lambda x}{\Lambda z}z, z\right) = (x, z) - \frac{\Lambda x}{\Lambda z}\|z\|^2.
+    \end{equation*}
+    Thus, 
+    \begin{equation*}
+        \Lambda x = \left(x, \frac{\overline{\Lambda z}}{\|z\|^2} z\right),
+    \end{equation*}
+    thereby completing the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $H$ be a Hilbert space and suppose $f: H\times H\to\K$ is sesquilinear and bounded, that is, 
+    \begin{equation*}
+        M := \sup\left\{|f(x, y)|\colon \|x\| = \|y\| = 1\right\} < \infty,
+    \end{equation*}
+    then there exists a unique $S\in\scrB(H)$ such that 
+    \begin{equation*}
+        f(x, y) = (x, Sy)\quad\forall x,y\in H.
+    \end{equation*}
+    Further, $\|S\| = M$.
+\end{theorem}
+\begin{proof}
+    Fix $y\in H$ and consider the mapping $x\mapsto f(x, y)$. This is a continuous linear functional on $H$ and hence, is given by $x\mapsto (x, Sy)$ for a unique $Sy\in H$. We claim that the association $y\mapsto Sy$ is linear.
+
+    Indeed, if $y_1, y_2\in H$, then 
+    \begin{equation*}
+        f(\cdot, y_1 + y_2) = f(\cdot, y_1) + f(\cdot, y_2) = f(\cdot, Sy_1) + f(\cdot, Sy_2) = f\left(\cdot, Sy_1 + Sy_2\right).
+    \end{equation*}
+    Due to uniqueness of $S(y_1 + y_2)$, we see that $S(y_1 + y_2) = Sy_1 + Sy_2$. Next, let $\alpha\in\K$ and $y\in H$. Then, 
+    \begin{equation*}
+        (\cdot, S(\alpha y)) = f(\cdot, \alpha y) = \overline\alpha f(\cdot, y) = \overline\alpha (\cdot, Sy) = (\cdot, \alpha Sy),
+    \end{equation*}
+    whence $S(\alpha y) = \alpha Sy$, i.e., $S$ is linear.
+
+    Finally, we must show that $\|S\| = M$. Indeed, for $\|x\| = \|y\| = 1$:
+    \begin{equation*}
+        |f(x, y)|\le |(x, Sy)|\le \|x\|\|Sy\|\le\|S\|,
+    \end{equation*}
+    whence $M\le \|S\|$. On the other hand, if $Sy\ne 0$, then 
+    \begin{equation*}
+        \|Sy\| = \left(\frac{Sy}{\|Sy\|}, Sy\right) = f\left(\frac{Sy}{\|Sy\|}, y\right)\le M
+    \end{equation*}
+    Taking supremum over $\|y\| = 1$, we have that $\|S\|\le M\le \|S\|$, thereby completing the proof.
+\end{proof}
+
+\subsection{Adjoints}
+
+\begin{definition}
+    Let $T\in\scrB(H)$. The map $f: H\times H\to\K$ given by $f(x, y) = (Tx, y)$, is a bounded sesquilinear form on $H$, whence, there is a $T^\ast\in\scrB(H)$ such that 
+    \begin{equation*}
+        (Tx, y) = f(x, y) = (x, T^\ast y)\quad\forall x,y\in H.
+    \end{equation*}
+\end{definition}
+Next, note that 
+\begin{equation*}
+    (x, Ty) = \overline{(y, T^\ast x)} = (T^\ast x, y) = (x, T^{\ast\ast}y)\quad\forall x, y\in H.
+\end{equation*}
+Hence, $T^{\ast\ast} = T$. On the other hand, 
+\begin{equation*}
+    \|T^\ast\| = \sup\{|(Tx, y)|\colon \|x\| = \|y\| = 1\}\le \|T\|.
+\end{equation*}
+Consequently, $\|T\| = \|T^{\ast\ast}\|\le\|T^{\ast}\|\le\|T\|$, whence, $\|T^\ast\| = \|T\|$.
+
+Similarly, the following identities are easy to show for $S,T\in\scrB(H)$: 
+\begin{equation*}
+    (S + T)^\ast = S^\ast + T^\ast,\quad(\alpha S)^\ast = \overline\alpha S^\ast,\quad\text{and}\quad (ST)^\ast = T^\ast S^\ast.
+\end{equation*}
+Therefore, 
+\begin{equation*}
+    \|Tx\|^2 = (Tx, Tx) = (x, T^\ast Tx)\le \|T^\ast T\|\|x\|^2\quad\forall x\in H.
+\end{equation*}
+Hence, $\|T\|^2\le \|T^\ast T\|\le \|T^\ast\|\|T\| = \|T\|^2$, whence $\|T\|^2 = \|T^\ast T\|$. This makes $\scrB(H)$ a C*-algebra.
+
+\subsection{Compact Self-Adjoint Operators}
+
+\begin{lemma}
+    Let $H$ be a Hilbert space and $T\in\scrB(H)$ a compact self-adjoint operator. Then 
+    \begin{equation*}
+        \|T\| = \sup\{|\langle Tx, x\rangle|\colon \|x\| = 1\}.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Let $B$ denote the quantity on the right hand side. Due to the Cauchy-Schwarz Inequality, $B\le\|T\|$. Let $x\ne 0$ and set $\lambda = \sqrt{\frac{\|Tx\|}{\|x\|}}$.
+
+    We have 
+    \begin{align*}
+        \langle Tx, Tx\rangle &= \frac{1}{4}\left|\langle T(\lambda x + \lambda^{-1}Tx), \lambda x + \lambda^{-1}Tx\rangle - \langle T(\lambda x - \lambda^{-1}Tx), \lambda x - \lambda^{-1}Tx\rangle\right|\\
+        &\le\frac{1}{4}\left|\langle T(\lambda x + \lambda^{-1}Tx), \lambda x + \lambda^{-1}Tx\rangle\right| + \frac{1}{4}\left|\langle T(\lambda x + \lambda^{-1}Tx), \lambda x + \lambda^{-1}Tx\rangle\right|\\
+        &\le\frac{B}{4}\left(\|\lambda x + \lambda^{-1}Tx\|^2 + \|\lambda x - \lambda^{-1}Tx\|^2\right)\\
+        &=\frac{B}{2}\left(\|\lambda x\|^2 + \|\lambda^{-1}Tx\|^2\right)\\
+        &= B\|x\|\|Tx\|.
+    \end{align*}
+    Thus, $\|Tx\|\le B\|x\|$, whence $\|T\|\le B$, thereby completing the proof.
+\end{proof}
+
+\begin{lemma}
+    With the notation of the preceding lemma, either $\|T\|$ or $-\|T\|$ is an eigenvalue of $T$.
+\end{lemma}
+\begin{proof}
+    Due to the preceding lemma, there is a sequence of unit vectors $(x_n)$ in $H$ such that $|\langle Tx_n, x_n\rangle|\to \|T\|$. Since $T$ is self-adjoint, 
+    \begin{equation*}
+        \overline{\langle Tx, x\rangle} = \langle x, Tx\rangle = \langle Tx, x\rangle,
+    \end{equation*}
+    and hence, $\langle Tx, x\rangle\in\R$. Therefore, moving to a subsequence, we may suppose that $\langle Tx_n, x_n\rangle\to\lambda\in\{\pm\|T\|\}$. Further, since $T$ is compact, we may replace $(x_n)$ with a subsequence such that $Tx_n\to \lambda y$ for some $y\in H$. 
+
+    We contend that $x_n\to y$. First, note that 
+    \begin{equation*}
+        |\langle Tx_n, x_n\rangle|\le\|Tx_n\|\|x_n\| = \|Tx_n\|\le\|T\| = |\lambda|.
+    \end{equation*}
+    By our choice of the sequence $(x_n)$, $|\langle Tx_n, x_n\rangle|\to|\lambda|$ and hence, $\|Tx_n\|\to|\lambda|$. Next, 
+    \begin{align*}
+        \|\lambda x_n - Tx_n\|^2 &= \langle \lambda x_n - Tx_n, \lambda x_n - Tx_n\rangle\\
+        &= \lambda^2 + \|Tx_n\|^2 - \langle\lambda x_n, Tx_n\rangle - \langle Tx_n,\lambda x_n\rangle\\
+        &= \lambda^2 + \|Tx_n\|^2 - 2\lambda\langle Tx_n, x_n\rangle
+    \end{align*}
+    which goes to $0$ as $n\to\infty$. Hence, $\|\lambda x_n - Tx_n\|\to 0$ as $n\to\infty$, consequently, $x_n\to y$, thereby completing the proof.
+\end{proof}
+
+\section{Banach Algebras}
+
+\begin{definition}
+    A \define{Banach algebra} is a $\bbC$-algebra $\calA$ equipped with a norm $\|\cdot\|:\calA\to[0,\infty)$ with respect to which it is a Banach space and 
+    \begin{equation*}
+        \|xy\|\le\|x\|\|y\|\quad\forall x,y\in\calA.
+    \end{equation*}
+    The Banach algebra is said to be \define{unital} if it possesses a multiplicative identity.
+
+    An \define{involution} on an algebra $\calA$ is a map 
+    \begin{equation*}
+        \calA\to\calA\quad x\mapsto x^\ast
+    \end{equation*}
+    of order $2$ that satisfies 
+    \begin{equation*}
+        (x + y)^\ast = x^\ast + y^\ast\quad(\lambda x)^\ast = \overline\lambda x^\ast\quad (xy)^\ast = y^\ast x^\ast.
+    \end{equation*}
+    An algebra equipped with such an involution is called a \define{$\ast$-algebra}. A Banach $\ast$-algebra that satisfies 
+    \begin{equation*}
+        \|x^\ast x\| = \|x\|^2 \quad \forall x\in\calA
+    \end{equation*}
+    is called a \define{$C^\ast$-algebra}.
+\end{definition}
+
+\begin{remark}
+    If $\calA$ is a $C^\ast$-algebra, for $x\ne 0$, we have 
+    \begin{equation*}
+        \|x\|^2 = \|x^\ast x\|\le\|x^\ast\|\|x\|\implies\|x\|\le\|x^\ast\|\le\|x^{\ast\ast}\| = \|x\|,
+    \end{equation*}
+    whence $\|x\| = \|x^\ast\|$. That is, the involution is an isometry.
+\end{remark}
+
+\begin{definition}
+    If $\calA$ and $\calB$ are Banach algebras, a \define{homomorphism} is a bounded linear map $\phi:\calA\to\calB$ such that $\phi(xy) = \phi(x)\phi(y)$ for all $x,y\in\calA$.
+
+    Further, if $\calA$ and $\calB$ are Banach $\ast$-algebras, a \define{$\ast$-homomorphism} is a homomorphism of Banach algebras $\phi:\calA\to\calB$ such that $\phi(x^\ast) = \phi(x)^\ast$ for all $x\in\calA$.
+\end{definition}
+
+\begin{theorem}
+    Let $\calA$ be a unital Banach algebra. 
+    \begin{enumerate}[label=(\alph*)]
+        \item If $|\lambda| > \|x\|$, then $\lambda - x$ is invertible in $\calA$.
+        \item If $x$ is invertible, and $\|y\| < \|x^{-1}\|^{-1}$, then $x - y$ is invertible with inverse 
+        \begin{equation*}
+            (x - y)^{-1} = \sum_{n\ge 0}(x^{-1}y)^nx^{-1}.
+        \end{equation*}
+        \item If $x$ is invertible and $\|y\| < \frac{1}{2}\|x^{-1}\|^{-1}$, then 
+        \begin{equation*}
+            \|(x - y)^{-1} - x^{-1}\| < 2\|x^{-1}\|^2\|y\|.
+        \end{equation*}
+        \item $\calA^\times\subseteq\calA$ is open and $x\mapsto x^{-1}$ on $\calA^\times$ is continuous.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+\item We have 
+\begin{equation*}
+    (\lambda - x)^{-1} = \lambda^{-1}\left(e - \lambda^{-1}x\right)^{-1} = \sum_{n\ge 0}\lambda^{-(n + 1)}x^{-n},
+\end{equation*}
+which converges because things are Cauchy and all the good stuff.
+\item Again, we can write 
+\begin{equation*}
+    (x - y)^{-1} = \left(x(e - x^{-1}y)\right)^{-1} = (e - x^{-1}y)^{-1}x^{-1} = \sum_{n\ge 0}(x^{-1}y)x^{-1}.
+\end{equation*}
+\item Using the above expansion, we can write 
+\begin{equation*}
+    \|(x - y)^{-1} - x^{-1}\|\le\sum_{n\ge 0}\|x^{-1}\|^{n + 2}\|y\|^{n + 1} < 2\|x^{-1}\|^2\|y\|.
+\end{equation*}
+\item Due to part (b), $\calA^\times$ is open in $\calA$ and due to part (c), $x\mapsto x^{-1}$ is continuous.
+\end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Let $\calA$ be a unital Banach algebra and $x\in\calA$. The \define{spectrum} of $x$ is 
+    \begin{equation*}
+        \sigma(x) = \left\{\lambda\in\bbC\colon \lambda e - x \text{ is not invertible}\right\}.
+    \end{equation*}
+    For $\lambda\notin\sigma(x)$, define the \define{resolvent} of $x$ as 
+    \begin{equation*}
+        R_x(\lambda) = (\lambda e - x)^{-1}: \bbC\setminus\sigma(x)\to\calA.
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    For any $x\in\calA$, $\sigma(x)$ is a compact subset of $\bbC$ that is contained in the disk $\{\lambda\in\bbC\colon |\lambda|\le \|x\|\}$.
+\end{proposition}
+\begin{proof}
+    Obviously, if $|\lambda| > \|x\|$, then $\lambda e - x$ is invertible. Thus, $\sigma(x)$ is contained in the above disk. Consider the map $\lambda\mapsto\lambda e - x$, which is continuous and hence, the preimage of $\calA^\times$ is open in $\bbC$. As a result, $\sigma(x)$ is closed, thereby completing the proof.
+\end{proof}
+
+\begin{proposition}
+    $R_x$ is an analytic function. And, $R_x(\lambda)\to 0$ as $\lambda\to\infty$.
+\end{proposition}
+\begin{proof}
+    We have 
+    \begin{align*}
+        R_x(\mu) - R_x(\lambda) &= (\mu e - x)^{-1} - (\lambda e - x)^{-1}\\
+        &= R_x(\mu)\left((\lambda e - x) - (\mu e - x)\right)R_x(\lambda).
+    \end{align*}
+    Hence, 
+    \begin{equation*}
+        \frac{R_x(\mu) - R_x(\lambda)}{\mu - \lambda} = -R_x(\mu)R_x(\lambda).
+    \end{equation*}
+    In the limit $\mu\to\lambda$, we get 
+    \begin{equation*}
+        R_x'(\lambda) = - R_x(\lambda)^2.
+    \end{equation*}
+    As for the second part, simply note that for $|\lambda| > \|x\|$, 
+    \begin{equation*}
+        \|R_x(\lambda)\| = \left\|\sum_{n\ge 0}\lambda^{-(n + 1)}x^{n}\right\|\le|\lambda|^{-1}\sum_{n\ge 0}|\lambda|^{-n}\|x\|^n = \frac{1}{|\lambda| - \|x\|},
+    \end{equation*}
+    which goes to $0$ as $\lambda\to\infty$, thereby completing the proof.
+\end{proof}
+
+\begin{theorem}[Gelfand-Mazur]
+    Let $\calA$ be a unital Banach algebra $\sigma(x)\ne\emptyset$ for every $x\in\calA$.
+\end{theorem}
+\begin{proof}
+    Suppose $\sigma(x) = \emptyset$ for some $x\in\calA$. Then, $R_x:\bbC\to\calA$ is an analytic function. For any $\Lambda\in\calA^\ast$, $\Lambda\circ R_x$ is an entire function and is bounded, since 
+    \begin{equation*}
+        \lim_{\lambda\to\infty}\Lambda(R_x(\lambda)) = \Lambda\left(\lim_{\lambda\to\infty} R_x(\lambda)\right) = 0.
+    \end{equation*}
+    Due to Liouville's Theorem, $\Lambda\circ R_x$ must be constant on $\bbC$ and equal to $0$. Since this is true for every $\Lambda\in\calA^\ast$, we see that $R(\lambda) = 0$ for every $\lambda\in\bbC$, which is absurd. This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    If $\calA$ is a unital Banach algebra in which every nonzero element is invertible, then $\calA = \bbC e$.
+\end{corollary}
+\begin{proof}
+    Suppose $x\in\calA\setminus\bbC e$, then $\lambda e - x\ne 0$ for every $\lambda\in\bbC$, whence, $\lambda e - x$ is invertible for every $\lambda\in\bbC$, a contradiction.
+\end{proof}
+
+\begin{definition}
+    Let $\calA$ be a unital Banach algebra. For $x\in\calA$, the \define{spectral radius} of $x$ is defined to be 
+    \begin{equation*}
+        \rho(x) := \sup\left\{|\lambda|\colon\lambda\in\sigma(x)\right\}.
+    \end{equation*}
+\end{definition}
+We have the obvious inequality $\rho(x)\le\|x\|$.
+
+\begin{theorem}[Spectral Radius Formula]
+    Let $\calA$ be a unital Banach algebra and $x\in\calA$. Then, 
+    \begin{equation*}
+        \rho(x) = \lim_{n\to\infty}\|x^n\|^{1/n}.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    If $\lambda\in\sigma(x)$, then 
+    \begin{equation*}
+        \lambda^ne - x^n = (\lambda e - x)\left(\lambda^{n - 1}e + \dots + x^{n - 1}\right).
+    \end{equation*}
+    Consequently, $\lambda^n e - x^n$ cannot be invertible. Hence, $|\lambda|^n\le\|x^n\|$. In particular, this gives 
+    \begin{equation*}
+        \rho(x)\le\liminf_{n\to\infty} \|x^n\|^{1/n}.
+    \end{equation*}
+    Next, for $|\lambda| > \|x\|$, we have a Laurent series about infinity: 
+    \begin{equation*}
+        \Lambda\circ R_x(\lambda) = \sum_{n\ge 0}\lambda^{-(n + 1)}\Lambda(x^n).
+    \end{equation*}
+    Note that $\Lambda\circ R_x$ is analytic on $|\lambda| > \rho(x)$ and hence, the above Laurent series must be valid there too.
+
+    Hence, for any $|\lambda| > \rho(x)$, there is a constant $C_\Lambda > 0$ such that 
+    \begin{equation*}
+        |\Lambda(\lambda^{-n}x^n)| = |\lambda^{-n}\Lambda(x^n)|\le C_\Lambda\quad\forall n\in\N.
+    \end{equation*}
+    This holds for all $\Lambda\in\calA^\ast$. Thus, the sequence $(\lambda^{-n}x^n)$ is bounded, that is, there is a $C > 0$ such that $\|x^n\|\le C|\lambda|^n$. Hence, 
+    \begin{equation*}
+        \limsup_{n\to\infty}\|x^n\|^{1/n}\le\limsup_{n\to\infty} C^{1/n}|\lambda| = |\lambda|.
+    \end{equation*}
+    Taking infimum over $\lambda$, we get 
+    \begin{equation*}
+        \limsup_{n\to\infty}\|x^n\|^{1/n}\le\rho(x)\le\liminf_{n\to\infty}\|x^n\|^{1/n},
+    \end{equation*}
+    thereby completing the proof.
+\end{proof}
+
+\begin{definition}
+    Let $\calA$ be a unital Banach algebra. A \define{multiplicative functional} on $\calA$ is a \emph{nonzero} homomorhpism $h:\calA\to\bbC$. The set of all multiplicative functionals on $\calA$ is called the \define{spectrum} of $\calA$ and is denoted by $\sigma(\calA)$.
+\end{definition}
+
+\begin{proposition}
+    Let $\calA$ be a unital Banach algebra and suppose $h\in\sigma(\calA)$. 
+    \begin{enumerate}[label=(\alph*)]
+    \item $h(e) = 1$.
+    \item If $x\in\calA^\times$, then $h(x)\ne 0$. 
+    \item $|h(x)|\le\rho(x)\le\|x\|$ for all $x\in\calA$. That is, $\|h\|\le 1$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Since $h\ne 0$, there is an $x\in\calA$ such that $h(x)\ne 0$. Then, 
+    \begin{equation*}
+        h(x) = h(xe) = h(x)h(e)\implies h(e) = 1.
+    \end{equation*}
+    \item Obviously, 
+    \begin{equation*}
+        1 = h(e) = h(x^{-1}x) = h(x^{-1})h(x)\implies h(x)\ne 0.
+    \end{equation*}
+    \item Suppose $|\lambda| > \rho(x)$. Then, $\lambda e - x\in\calA^\times$, consequently, 
+    \begin{equation*}
+        0\ne h(\lambda e - x) = \lambda - h(x)\implies h(x)\ne\lambda.
+    \end{equation*}
+    Since this holds for all $|\lambda| > \rho(x)$, we have $|h(x)|\le\rho(x)\le\|x\|$.\qedhere
+\end{enumerate}
+\end{proof}
+
+As a consequence, $\sigma(\calA)$ is contained in the closed unit ball of $\calA^\ast$. Equip the latter with the weak*-topology. Using nets, it is easy to see that $\sigma(\calA)$ is closed in $\calA^\ast$. Due to Banach-Alaoglu, the closed unit ball of $\calA^\ast$ is weak*-compact and hence, so is $\sigma(\calA)$ with the subspace topology from the weak*-topology on $\calA^\ast$. Thus, $\sigma(\calA)$ is a \emph{compact Hausdorff space}.
+
+\begin{proposition}
+    Let $\calA$ be a commutative unital Banach algebra and $\calJ\subsetneq\calA$ be a proper ideal.
+    \begin{enumerate}[label=(\alph*)]
+        \item $\calJ\subseteq\calA\setminus\calA^\times$
+        \item $\overline\calJ$ is a proper ideal. 
+        \item $\calJ$ is contained in a maximal ideal. 
+        \item Every maximal ideal is closed.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    The first assertion is obvious. As for the second, note that $\calA\setminus\calA^\times$ is closed and hence, $\overline\calJ\subseteq\calA\setminus\calA^\times$. Consequently, $\overline\calJ\ne\calA$. To see that it is an ideal, suppose $x\in\overline\calJ$ and $a\in\calA$. Then, there is a sequence $(x_n)$ converging to $x$. Consequently, $(ax_n)$ converges to $ax$. But each $ax_n\in\calJ$ and hence, $ax\in\overline\calJ$. This proves (b).
+
+    The third assertion is a standard application of Zorn's lemma. As for (d), if $\calM$ is a maximal ideal, then $\calM\subseteq\overline\calM\subsetneq\calA$ due to (b). The maximality of $\calM$ forces $\calM = \overline\calM$, thereby completing the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $\calA$ be a commutative unital Banach algebra. Then, the map $h\mapsto\ker h$ is a bijective correspondence between $\sigma(\calA)$ and the set of all maximal ideals in $\calA$.
+\end{theorem}
+\begin{proof}
+    The map is obviously an injection. We establish surjectivity. Let $\calM$ be a maximal ideal in $\calA$ and consider the quotient algebra $\calA/\calM$ equipped with the norm: 
+    \begin{equation*}
+        \|x + \calM\| = \inf\left\{\|x + y\|\colon y\in\calM\right\}.
+    \end{equation*}
+    This is again a commutative unital Banach algebra in which every non-zero element is invertible (standard fact from ring theory). Due to Gelfand-Mazur, $\calA/\calM\cong\bbC(e + \calM)$. The composition 
+    \begin{equation*}
+        \calA\longrightarrow \calA/\calM\cong\bbC(e + \calM)\cong\bbC
+    \end{equation*}
+    is the required linear functional, thereby proving surjectivity.
+\end{proof}
+
+\begin{definition}
+    Let $\calA$ be a commutative unital Banach algebra. For each $x\in\calA$, there is a continuous function $\wh x: \sigma(\calA)\to\bbC$ given by $h\mapsto h(x)$. This gives a map 
+    \begin{equation*}
+    \Gamma_\calA: \calA\to C(\sigma(A))\qquad x\mapsto\wh x,
+    \end{equation*}
+    known as the \define{Gelfand transform} on $\calA$.
+\end{definition}
+
+\begin{proposition}
+    Let $\calA$ be a commutative unital Banach algebra and $x\in\calA$. 
+    \begin{enumerate}[label=(\alph*)]
+    \item The $\Gamma:\calA\to C(\sigma(\calA))$ is a homomorphism, and $\wh e$ is the constant function $1$. 
+    \item $x$ is invertible if and only if $\wh x$ never vanishes. 
+    \item The range of $\wh x: \sigma(\calA)\to\bbC$ is precisely $\sigma(x)$.
+    \item $\|\wh x\|_{\sup} = \rho(x)\le\|x\|$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+\item Obvious.
+\item If $x$ is invertible, then due to (a), so is $\wh x$, whence it never vanishes. On the other hand, if $x$ is not invertible, then it is contained in some maximal ideal $\frakM$, whence, there is an $h\in\sigma(\calA)$ that vanishes on $x$. Thus, $\wh x(h) = 0$, that is, $\wh x$ vanishes somewhere. 
+\item Next, suppose $\lambda = \wh x(h) = h(x)$. Then, $h(\lambda e - x) = 0$, hence, $\lambda e - x$ is not invertible, i.e. $\lambda\in\sigma(x)$. Similarly, if $\lambda\in\sigma(x)$, then $\lambda e - x$ is not invertible and hence, $\wh x$ vanishes somewhere, consequently, $h(\lambda e - x) = 0$ for some $h\in\sigma(\calA)$. This shows that $\lambda$ is in the range of $\wh x$.
+\item Follows from (c). \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Let $\calA$ be a commutative unital Banach $\ast$-algebra. If $\Gamma:\calA\to C(\sigma(\calA))$ is a $\ast$-homomorphism, then $\calA$ is said to be \define{symmetric}.
+\end{definition}
+
+\begin{remark}
+    Note that $\calA$ being symmetric is the same as saying 
+    \begin{equation*}
+        \wh{x^\ast} = \overline{\wh x} \quad\forall x\in\calA.
+    \end{equation*}
+\end{remark}
+
+\begin{proposition}
+    Let $\calA$ be a commutative Banach $\ast$-algebra. 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\calA$ is symmetric if and only if $\wh x$ is real-valued whenever $x = x^\ast$.
+        \item Every C*-algebra is symmetric.
+        \item If $\calA$ is symmetric, $\Gamma(\calA)$ is dense in $C(\sigma(\calA))$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+\item If $\calA$ is symmetric and $x^\ast = x$, then $\wh x = \wh{x^\ast} = \overline{\wh x}$, whence $\wh x$ is real-valued. Next, we prove the converse. For any $x\in\calA$, write 
+\begin{equation*}
+    x = \underbrace{\frac{x + x^\ast}{2}}_y + \underbrace{\frac{x - x^\ast}{2}}_z.
+\end{equation*}
+Note that $y^\ast = y$ and $z + z^\ast = 0$. Our hypothesis implies $\wh y$ is real-valued and $\wh z + \overline{\wh z} = 0$. Thus, 
+\begin{equation*}
+    \wh{x^\ast} = \wh{y^\ast} + \wh{z^\ast} = \wh y - \wh{z} = \wh y + \overline{\wh z} = \overline{\wh x}.
+\end{equation*}
+\item Let $x\in\calA$ be such that $x^\ast = x$. Suppose $h(x) = \alpha + i\beta$. We shall show that $\beta = 0$. Indeed, for $t\in\R$, let $z = x + it e$. Then, 
+\begin{equation*}
+    z^\ast z = (x - ite)(x + ite) = x^2 + t^2e.
+\end{equation*}
+And hence, 
+\begin{equation*}
+    |\alpha + (\beta + t)i|^2 = |h(z)|^2\le \|z\|^2  = \|z^\ast z\| = \|x^2 + t^2e\|\le \|x\|^2 + t^2.
+\end{equation*}
+That is, 
+\begin{equation*}
+    \alpha^2 + 2\beta t + \beta^2\le\|x\|^2\quad\forall t\in\R.
+\end{equation*}
+Thus, $\beta = 0$ and due to (a), $\calA$ is symmetric.
+\item Note that $\Gamma(\calA)$ contains all the constant functions and thus, the family $\Gamma(\calA)$ does not vanish at any point. Next, by definition, $\Gamma(\calA)$ separates points. Further, since $\Gamma$ is a $\ast$-homomorophism, $\Gamma(\calA)$ is closed under taking conjugates. Thus, $\Gamma(\calA)$ is dense in $C(\sigma(\calA))$ due to the Stone-Weierstrass Theorem. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    Let $\calA$ be a commutative unital Banach algebra. 
+    \begin{enumerate}[label=(\alph*)]
+    \item If $x\in\calA$, then $\|\wh x\|_{\sup} = \|x\|$ if and only if $\|x^{2^k}\| = \|x\|^{2^k}$ for all $k\ge 1$. 
+    \item $\Gamma:\calA\to C(\sigma(\calA))$ is an isometry if and only if $\|x^2\| = \|x\|^2$ for all $x\in\calA$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item This follows immediately from the spectral radius formula. 
+    \begin{equation*}
+        \|\wh x\|_{\sup} = \rho(x) = \lim_{k\to\infty}\|x^{2^k}\|^{1/2^k} = \lim_{k\to\infty}\|x\|^{2^k\cdot 2^{-k}} = \|x\|.
+    \end{equation*}
+    \item We have
+    \begin{equation*}
+        \|x^{2^k}\| = \|x^{2^{k - 1}}\|^2 = \cdots = \|x\|^{2^k}. \qedhere
+    \end{equation*}
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}[Gelfand-Naimark]
+    If $\calA$ is a commutative unital C*-algebra, then $\Gamma:\calA\to C(\sigma(\calA))$ is an isometric $\ast$-isomorphism.
+\end{theorem}
+\begin{proof}
+    That $\Gamma$ is a $\ast$-homomorphism has already been established. We first show that $\Gamma$ is an isometry. Let $x\in\calA$ and set $y = x^\ast x$. Then, $y^\ast = y$, so 
+    \begin{equation*}
+        \|y^{2^k}\| = \left\|\left(y^{2^{k - 1}}\right)^\ast y^{2^{k - 1}}\right\| = \|y^{2^{k - 1}}\|^2 = \cdots = \|y\|^{2^k}.
+    \end{equation*}
+    Due to part (a) of the preceding result, $\|\wh y\|_{\sup} = \|y\|$. But $\wh y = \overline{\wh x}\wh x = |\wh x|^2$. Hence,
+    \begin{equation*}
+        \|\wh x\|_{\sup}^2 = \|\wh y\|_{\sup} = \|y\| = \|x\|^2\implies\|\wh x\|_{\sup} = \|x\|,
+    \end{equation*}
+    whence, due to part (b) of the preceding result, $\Gamma$ is an isometry. Thus, its image is closed in $C(\sigma(\calA))$. But we already argued that $\Gamma(\calA)$ is dense in $C(\sigma(\calA))$ and hence, $\Gamma$ must be surjective. This completes the proof.
+\end{proof}
+\end{document}
