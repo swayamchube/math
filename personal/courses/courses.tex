@@ -1,0 +1,53 @@
+\documentclass[a4paper,12pt,english]{curve}
+\PassOptionsToPackage{style=ieee,sorting=ydnt,uniquename=init,defernumbers=true}{biblatex}
+\usepackage{settings}
+\usepackage{amsmath, amssymb, amsthm}
+\DefineBibliographyStrings{english}{url={\textsc{url}}}
+\addbibresource{refs.bib}
+\myname{Chube}{Swayam}
+\ifxetexorluatex % If you're using XeLaTeX or LuaLaTeX
+  \usepackage{fontspec} 
+  \usepackage[p,osf,swashQ]{cochineal}
+  \usepackage[medium,bold]{cabin}
+  \usepackage[varqu,varl,scale=0.9]{zi4}
+\else % If you're using pdfLaTeX or latex
+  \usepackage[T1]{fontenc}
+  \usepackage[p,osf,swashQ]{cochineal}
+  \usepackage{cabin}
+  \usepackage[varqu,varl,scale=0.9]{zi4}
+\fi
+
+\geometry{left=0.75in,right=0.75in,top=0.6in,bottom=1in}
+
+\includecomment{fullonly}
+
+
+
+
+\leftheader{
+  {\hspace{1mm}\LARGE\bfseries\sffamily Swayam Chube}
+
+  \makefield{\faEnvelope[regular]}{\href{mailto:chubeswayam1701@gmail.com}{\texttt{chubeswayam1701@gmail.com}}} \\
+  \makefield{\faGithub}{\href{http://github.com/swayamchube}{\texttt{swayamchube}}} \\
+  \makefield{\faGlobe}{\url{https://swayamchube.github.io/}} \\
+}
+
+
+\rightheader{~}
+\begin{fullonly}
+\photo[r]{photo.jpg}
+\photoscale{0.13}
+\end{fullonly}
+
+\hypersetup {colorlinks = true}
+
+\title{Curriculum Vitae}
+
+\begin{document}
+\makeheaders[c]
+
+This is a list of Mathematics and relevant Computer Science courses I have taken throughout my stay at IIT Bombay. Grades obtained are mentioned alongside the course name.
+
+\makerubric{mathematics}
+\makerubric{computer-science}
+\end{document}
