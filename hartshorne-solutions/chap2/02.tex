@@ -1,0 +1,125 @@
+\setcounter{exercise}{2}
+\begin{exercise}[Reduced Schemes]\hfill
+\begin{enumerate}[label=(\alph*)]
+    \item Suppose $X$ is reduced. Then, every open affine corresponds to a reduced ring. Consequently, the local ring of any point on $X$ is the localisation of a reduced ring and hence, is reduced.
+
+    Conversely, suppose $\scrO_{X, P}$ is reduced for every $P\in X$. Let $U = \Spec A$ be an affine open. The local ring of any point $P\in U$ is a localisation of $A$ at a prime. Since all these rings are reduced, so is $A$.
+
+    Let $U\subseteq X$ be open. Cover $U$ with affine opens $U_i = \Spec A_i$ and let $s\in\scrO(U)$ be nilpotent. Its image $s_i = \res_{U, U_i}(s)$ is nilpotent in $\scrO(U_i) = A_i$ and hence, $s_i = 0$. Consequently $s = 0$ due to the identity axiom. This shows that $\scrO(U)$ is reduced.
+
+    \item The first part follows immediately from the fact that there is a commutative diagram 
+    \begin{equation*}
+        \xymatrix {
+            A\ar[r]^\phi\ar[d] & B\ar[d]\\
+            A_{red}\ar[r]_{\phi_{red}} & B_{red}.
+        }
+    \end{equation*}
+    Consider the map of locally ringed spaces $(\id, f^\sharp)$, where $f^\sharp: \scrO_X\to\scrO_X^{red}$ is the collection of the canonical maps $\scrO_X(U)\to\scrO_X^{red}(U)$.
+
+    \item Follows from the fact that any morphism of rings $\phi: A\to B$ with $B$ reduced factors through the natural map $A\to A_{red}$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}\thlabel{exer:2.4} % Exercise 2.4
+    Let $\varphi\in\Hom_{\mathfrak{Rings}}(A,\Gamma(X,\scrO_X))$. Cover $X$ with affine opens $U_i = \Spec A_i$. The restriction map gives us a homomorphism 
+    \begin{equation*}
+        A\stackrel{\varphi}{\longrightarrow}\Gamma(X,\scrO_X)\xrightarrow{\res^{X}_{U_i}}\Gamma(U_i,\scrO_X) = A_i,
+    \end{equation*}
+    which induces a map on schemes $\pi_i: U_i\to\Spec A$ where $\pi_i = \Spec(\res^X_{U_i}\circ\varphi)$. 
+
+    We contend that the maps $\pi_i$ can be glued. Indeed, for $i\ne j$, cover $U_i\cap U_j$ with affine opens $U_{ijk} = \Spec A_{ijk}$. Now, 
+    \begin{equation*}
+        \pi_i|_{U_{ijk}} = \Spec(\res^{U_i}_{U_{ijk}})\circ\pi_i = \Spec(\res^{U_i}_{U_{ijk}}\circ\res^X_{U_i}\circ\varphi) = \Spec(\res^{X}_{U_{ijk}}\circ\varphi).
+    \end{equation*}
+    Similarly, $\pi_j|_{U_{ijk}} = \Spec(\res^X_{U_{ijk}}\circ\varphi)$, consequently, the family of morphisms $\{\pi_i\}$ can be glued to a morphism $\pi: X\to\Spec A$. This gives a map 
+    \begin{equation*}
+        \beta:\Hom_{\mathfrak{Rings}}(A,\Gamma(X,\scrO_X))\to\Hom_{\mathfrak{Sch}}(X,\Spec A).
+    \end{equation*}
+    It is straightforward to verify that $\alpha$ and $\beta$ are inverses to one another.
+\end{exercise}
+
+\begin{exercise}
+    Follows from the previous exercise and the fact that $\Z$ is an initial object in the category of rings.
+\end{exercise}
+
+\setcounter{exercise}{6}
+\begin{exercise}
+    Let $(f,f^\sharp): \Spec K\to X$ is a morphism of schemes which sends the unique point in $\Spec K$ to $x\in X$. Then, there is an induced map on local rings $f^\sharp_x: \scrO_x\to K$, which must be local and hence, factor through the maximal ideal of $\scrO_x$, thereby inducing a map $k(x)\to K$. It is easy to see that this process is reversible.
+\end{exercise}
+
+\setcounter{exercise}{8}
+\begin{exercise}
+    Let $Z\subseteq X$ be irreducible and closed. Let $U = \Spec A$ be an open affine intersecting $Z$. Then, $Z\cap U$ is open in $Z$ and hence, is irreducible. Further, it is closed in $U$ and hence, corresponds to a prime ideal $\xi = \frakp\in\Spec A$. Note that $\overline{\{\xi\}}\cap U = Z\cap U$ and $\overline{\{\xi\}}\subseteq Z$ since $Z$ is closed.
+
+    Let $V$ be any other open set intersecting $Z$. Then, one can replace $V$ with an open affine $\Spec B$ intersecting $Z$. Suppose $\xi\notin V$. Then, 
+    \begin{equation*}
+        (Z\cap U)\cap (Z\cap V) = Z\cap U\cap V = \overline{\{\xi\}}\cap U\cap V = \emptyset,
+    \end{equation*}
+    since the closure of $\{\xi\}$ in $U$ is contained in $U\setminus V$. This is not possible since $Z\cap U$ and $Z\cap V$ are nonempty open sets in an irreducible space. Hence, $\xi$ is a generic point.
+
+
+    Now we argue for uniqueness. Suppose $\xi_1$ and $\xi_2$ were two generic points in $Z$. Consider an affine neighborhood $U = \Spec A$ intersecting $Z$. Then, $Z\cap U$ must contain $\xi_1$ and $\xi_2$. Let $\xi_i$ correspond to a prime $\frakp_i$ in $A$ for $i = 1,2$. Now, $Z\cap U = V(\frakp_1) = V(\frakp_2)$, consequently, $\frakp_1 = \frakp_2$, that is, $\xi_1 = \xi_2$. This completes the proof.
+\end{exercise}
+
+\begin{definition}
+    Let $(X,\scrO_X)$ be a scheme and let $f\in\Gamma(X,\scrO_X)$. Define $X_f$ to be the set of all $x\in X$ such that the stalk $f_x$ of $f$ at $x$ is not contained in the maximal ideal $\frakm_x$ of the local ring $\scrO_{X, x}$. This is known as the \define{support} of $f$ on $X$.
+\end{definition}
+
+\setcounter{exercise}{15}
+\begin{exercise}\thlabel{exer:2.16}\hfill % Exercise 2.16
+\begin{enumerate}[label=(\alph*)]
+\item The set of all $x\in U$ such that $f_x\notin\frakm_x$ is the set of all prime ideals $\frakp$ in $B$ such that $f/1$ is not in the maximal ideal $\frakp B_\frakp$ in $B_\frakp$. Equivalently, $f\notin\frakp$. Thus, $X_f\cap U = D(\overline f)$. Now, since $X$ can be covered with open affines and the intersection of $X_f$ with every open affine is open, $X_f$ must also be open.
+
+\item Pick a finite open cover $\{U_i = \Spec A_i\}_{i = 1}^m$. The restriction of $a$ to $X_f\cap U_i = D(\res^X_{U_i}(f))$ is zero and hence, there is a positive integer $n_i$ such that $\res^X_{U_i}(f^{n_i}a) = 0$. Let $N = \max\limits_{1\le i\le m} n_i$. Then, $\res^X_{U_i}(f^Na) = 0$. Due to the identity axiom, we must have $f^Na = 0$.
+
+\item Let $U_i = \Spec A_i$ and let $f_i = \res^{X}_{U_i}(f)$. Since $X_f\cap U_i = D(f_i)$, there is a $b_i\in A_i = \Gamma(U_i,\scrO_X)$ such that $\res^X_{U_i\cap X_f}(b) = \frac{b_i}{f_i^{n_i}}$ for some nonnegative integer $n_i$. Choosing $n$ to be larger than all the $n_i$'s, we get that there is a $b_i\in A_i$ such that $\res^{X}_{U_i\cap X_f}(f^nb) = \res^{U_i}_{U_i\cap X_f}(b_i)$.
+
+Now consider $b_i - b_j$ on $U_i\cap U_j$, which can be covered by finitely many affine opens $U_{ijk} = \Spec A_{ijk}$. Since $\res^{X}_{U_i\cap U_j\cap X_f}(b_i - b_j) = 0$, using a similar argument as in (b), there is a positive integer $m_{ij}$ such that $f^{m_{ij}}(b_i - b_j)$ restricts to $0$ On $U_i\cap U_j$. Choosing $m$ larger than $m_{ij}$ for all pairs $i,j$, we have that $f^m(b_i - b_j)$ restricts to $0$ on $U_i\cap U_j$. Consequently, $\res^{U_i}_{U_i\cap U_j}(f^mb_i) = \res^{U_j}_{U_i\cap U_j}(f^mb_j)$ and hence, there is a $c\in\Gamma(X,\scrO_X)$ such that $\res^{X}_{U_i}(c) = f^mb_i$. Hence, $\res^X_{U_i\cap X_f}(c) = \res^X_{U_i\cap X_f}(f^{n + m}b)$. This completes the proof.
+
+\item First, we show that $\res^X_{X_f}(f)$ is invertible. Since $f_x\notin\frakm_x\subseteq\scrO_x$ for every $x\in X_f$, we see that the restriction of $f$ to every affine open contained in $X_f$ must be invertible (else it would lie in a prime ideal and hence, in the stalk of some point). Consider an open cover $U_i$ of $X_f$ using affine opens. There is a $g_i\in\Gamma(U_i,\scrO)$ such that $g_i\res^X_{U_i}(f) = 1$. For $i\ne j$, we have 
+\begin{equation*}
+    \res^{U_i}_{U_i\cap U_j}(g_i)\res^X_{U_i\cap U_j}(f) = 1 = \res^{U_j}_{U_i\cap U_j}(g_j)\res^X_{U_i\cap U_j}(f)
+\end{equation*}
+and hence, $\res^{U_i}_{U_i\cap U_j}(g_i) = \res^{U_j}_{U_i\cap U_j}(g_j)$ and hence, the $g_i$'s can be lifted to some $g\in\Gamma(X_f,\scrO_X)$, furthermore $\res^X_{X_f}(f)g = 1$, whence invertibility follows.
+
+Consider the map $\Phi: A_f\to\Gamma(X_f,\scrO_X)$ given by 
+\begin{equation*}
+    \frac{a}{f^n}\mapsto\frac{\res^X_{X_f}(a)}{\res^{X}_{X_f}(f^n)}.
+\end{equation*} 
+If $\Phi(a/f^n) = 0$, then $\res^X_{X_f}(a) = 0$, consequently, due to part (b), there is a positive integer $m$ such that $f^ma = 0$, equivalently, $a/f^n = 0$ in $A_f$. Hence, $\Phi$ is injective.
+
+As for surjectivity, let $b\in\Gamma(X_f,\scrO_X)$. Due to part (c), there is a positive integer $m$ such that $f^mb = \res^X_{X_f}(a)$ for some $a\in A$ whence $\Phi(a/f^m) = b$. This completes the proof.
+\end{enumerate} 
+\end{exercise}
+
+\begin{exercise}[A Criterion for Affineness]\thlabel{exer:2.17}\hfill % Exercise 2.17
+\begin{enumerate}[label=(\alph*)]
+    \item Each $f: f^{-1}U_i\to U_i$ has an inverse $g_i: U_i\to f^{-1}U_i$ that agrees on intersections since inverses are unique. These maps can be glued to give an inverse $g: Y\to X$ of $f$.
+
+    \item First, note that $X = \bigcup\limits_{i = 1}^n X_{f_i}$, for if not, then there is an $x\in X$ such that $x\notin X_{f_i}$ for $1\le i\le n$. Consider an affine open $U = \Spec B$ containing $x$ and let $\frakp$ be the prime corresponding to $x$. According to our hypothesis, $\res^X_{U}(f_i)\in\frakp$ for $1\le i\le n$. But these restrictions generate the unit ideal, a contradiction. 
+
+    Being a finite union of affine opens, $X$ is quasi-compact. Further, $X_{f_i}\cap X_{f_j}$ is a distinguished open in $X_{f_i}$ and hence, is quasi-compact. As a result, \thref{exer:2.16} (d) is applicable. Using \thref{exer:2.4} and glueing morphisms just as in part (a), we are done.
+\end{enumerate}
+\end{exercise}
+
+\begin{definition}
+    A morphism $f: X\to Y$ of schemes is said to be \define{dominant} if $f(X)$ is dense in $Y$.
+\end{definition}
+
+\begin{exercise}\thlabel{exer:2.18}\hfill % Exercise 2.18
+\begin{enumerate}[label=(\alph*)]
+\item Intersection of all prime ideals is the nilradical.
+
+\item We denote the morphism by $\pi: Y\to X$. If $\pi^\sharp$ is injective, then taking global sections, we obtain that $\varphi$ is injective. Conversely, suppose $\varphi$ is injective. It suffices to show that $\varphi^\sharp$ is injective on the $D(f)$'s since these form a base on $X$. We have 
+\begin{equation*}
+    \pi^\sharp_{D(f)}:\scrO_X(D(f)) \to \scrO(\pi^{-1}(D(f))\equiv \pi^\sharp_{D(f)}: A_f\to B_f,
+\end{equation*}
+which is injective. This proves the first part.
+
+Next, we must show that $\pi$ is dominant if $\varphi$ is injective. Indeed, suppose $\pi(Y)$ were not dense, then there would be a basic open set $D(f)$ in $\Spec A$ such that $\pi^{-1}D(f) = \emptyset$, equivalently, $f\in\frakq$ for every prime ideal $\frakq$ of $B$. Hence, $f$ is nilpotent in $B$, whence nilpotent in $A$, consequently, $D(f) = \emptyset$. This completes the proof.
+
+\item We denote the morphism by $\pi$. The first part follows from the fact that $\Spec A/\fraka\into\Spec A$ is a topological imbedding. The second part is argued in a similar way as (b) by first concluding surjectivity on basic opens $D(f)$. Then, taking stalks, it follows that $\pi^\sharp$ is surjective.
+
+\item 
+\end{enumerate}
+\end{exercise}

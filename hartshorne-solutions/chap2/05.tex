@@ -1,0 +1,30 @@
+\begin{definition}
+    An $\scrO_X$-module $\scrF$ is said to be \define{free} if it is isomorphic to a direct sum of copies of $\scrO_X$. It is said to be \define{locally free} if $X$ has an open cover by sets $U$ for which $\scrF|_U$ is a free $\scrO_X|_U$-module.
+\end{definition}
+
+\setcounter{exercise}{6}
+\begin{exercise}\thlabel{exer:5.7} \hfill % Exercise 5.7
+\begin{enumerate}[label=(\alph*)]
+\item We reduce this to the affine case since $\scrF$ is coherent on a noetherian scheme. Thus, we have a finitely generated $A$-module $M$ and a prime ideal $\frakp\in\Spec A$ such that $M_\frakp$ is a free $A_\frakp$-module. 
+
+Choose a basis $\left\{\frac{m_1}{1},\dots,\frac{m_n}{1}\right\}$ of $M_\frakp$ over $A_\frakp$ and consider the exact sequence 
+\begin{equation*}
+    0\to K\to A^n\to M\to Q\to 0,
+\end{equation*}
+where the map $A^n\to M$ is the natural map sending $e_i\mapsto m_i$ for $1\le i\le n$. Localising, we see that $K_\frakp = Q_\frakp = 0$ and hence, there is an $f\in A\setminus\frakp$ such that $K_f = Q_f = 0$ (since both $K$ and $Q$ are finitely generated). Localising the above exact sequence at $f$, we obtain an isomorphism $A^n_f\xrightarrow{\sim} M_f$. It follows that $M_\frakq$ is a free $A_\frakq$ module for all $\frakq\in D(f)$.
+
+\item Follows immediately from (a). 
+
+\item Let $\scrF^\vee$ denote the dual sheaf. Recall that 
+\begin{equation*}
+    \scrF^\vee(U) = \Hom_{\scrO_X|_U}\left(\scrF|_U,\scrO_X|_U\right).
+\end{equation*}
+This gives a natural map $\scrF(U)\otimes\scrF^\vee(U) \to\scrO_X(U)$ given by 
+\begin{equation*}
+    s\otimes\varphi\mapsto\varphi_U(s).
+\end{equation*}
+It is easy to check that this is a morphism of presheaves $\scrF\otimes\scrF^\vee\to\scrO_X$ and since the latter is a sheaf, it factors through the sheafification inducing a map on the tensor sheaf.
+
+We contend that this induced map is an isomorphism. To this end, it suffices to show that the induced morphism on stalks is an isomorphism.
+\end{enumerate}
+\end{exercise}

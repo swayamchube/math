@@ -1,0 +1,124 @@
+\begin{lemma}[Affine Communication Lemma]\thlabel{lem:affine-communication}
+    
+\end{lemma}
+
+\begin{definition}
+    A morphism $f: X\to Y$ of schemes is \define{locally of finite type} if there exists a covering of $Y$ by open affine subsets $V_i = \Spec B_i$ such that for each $i$, $f^{-1}V_i$ can be covered by open affine subsets $U_{ij} = \Spec A_{ij}$, where each $A_{ij}$ is a finitely generated $B_i$-algebra.
+
+    The morphism $f$ is \define{of finite type} if in addition each $f^{-1}V_i$ can be covered by a finite number of the $U_{ij}$.
+\end{definition}
+
+\begin{definition}
+    A morphism $f: X\to Y$ is a \define{finite} morphism if there exists a covering of $Y$ by open affine subsets $V_i = \Spec B_i$ such that for each $i$, $f^{-1}V_i$ is affine, equal to $\Spec A_i$, where $A_i$ is a finite $B_i$-module.
+\end{definition}
+
+\begin{exercise} % Exercise 3.1
+    Let $\pi: X\to Y$ denote the morphism. We use \thref{lem:affine-communication}. To this end, we first show that if $\Spec B\subseteq Y$ is an affine open such that $\pi^{-1}\Spec B$ can be covered by affine opens $U_i = \Spec A_i$, each of which is a finitely generated $B$-algebra, then the same is true for $\Spec B_f$, where $f\in B$. Now, $\pi^{-1}\Spec B_f\subseteq\pi^{-1}\Spec B$ and hence, is contained in $\bigcup U_i$. Consider $\pi^{-1}\Spec B_f\cap U_i$. This can be written as a union of $D(f_{ij})$'s where $f_{ij}\in A_{i}$. Note that $D(f_{ij}) = \Spec (A_i)_{f_{ij}}$, which is a finitely generated $A_i$ algebra, whence a finitely generated $B$-algebra, consequently, a finitely generated $B_f$-algebra. This proves the first condition of \thref{lem:affine-communication}.
+
+    Next, suppose $(1) = (f_1,\dots, f_n)$ in $B$ and $\Spec B_{f_i}$ has the desired property. Then obviously $B$ has the property, since $B_{f_i}$ is a finitely generated $B$-algebra, and hence, any finitely generated $B_{f_i}$-algebra will be a finitely generated $B$-algebra.
+\end{exercise}
+
+\begin{definition}
+    A morphism $f: X\to Y$ of schemes is \define{quasi-compact} if there is a cover of $Y$ by open affines $V_i$ such that $f^{-1}V_i$ is quasi-compact for each $i$.
+\end{definition}
+
+\begin{exercise}\thlabel{exer:3.2}
+    Let $\pi: X\to Y$ denote the morphism. We use \thref{lem:affine-communication}. To this end, it suffices to show that if $\Spec A\subseteq Y$ is an affine open such that $\pi^{-1}\Spec A$ is quasi-compact, then for any $f\in A = \Gamma(\Spec A, \scrO_{A})$, $\pi^{-1}\Spec A_f$ is quasi-compact. We wish to characterize 
+    \begin{equation*}
+        \{P\in\pi^{-1}\Spec A\colon f\notin\pi(p) = \frakp\in\Spec A\}.
+    \end{equation*}
+    We have the map $\pi^\sharp_P:\scrO_{Y,\pi(P)}\to\scrO_{X, P}$. If $f\in\frakp = \pi(P)$, then $f\in\frakm_{Y, P}$ and hence, $\pi^\sharp_Pf\in\frakm_{X, P}$ (since $\pi^\sharp_P$ is a local homomorphism). On the other hand, if $f\notin\frakp$, then $f/1 = 1/1$ in $\scrO_{Y,\pi(P)} = A_\frakp$,  consequently, $\pi^\sharp_Pf = 1\notin\frakm_{X, P}$.
+
+    Thus, the set we are looking for is the \emph{complement} of $(\pi^{-1}\Spec A)_{\pi^\sharp f}$, the latter being closed in the open subscheme $\pi^{-1}\Spec A$, due to \thref{exer:2.16}. Since $\pi^{-1}\Spec A$ is quasi-compact, we can cover it with open affines. Let $U = \Spec B$ be one such affine. Then, $\res\pi^\sharp f\in\scrO_B$ and the set of desired points $\frakp$ are precisely those in $D(\res\pi^\sharp f)$,  consequently, is quasi-compact. Being a finite union of quasi-compact sets, the required complement is quasi-compact.
+\end{exercise}
+
+\begin{exercise}\thlabel{exer:3.3}\hfill 
+\begin{enumerate}[label=(\alph*)]
+\item $\implies$ Obviously a morphism of finite type is locally of finite type. On the other hand, with the notation of the above above definitions, since $f^{-1}V_i$ can be covered by finitely many $U_{ij}$'s, it is a finite union of quasi-compact spaces, whence is quasi-compact. Thus, $f$ is a quasi-compact morphism.
+
+$\impliedby$ On the other hand, suppose $f: X\to Y$ is locally of finite type and quasi-compact. Then, due to \thref{exer:3.2}, $f^{-1}V_i$ is quasi-compact, whence can be covered by finitely many of the $U_{ij}$'s. Thus, $f$ is of finite type.
+
+\item 
+
+\item 
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}\thlabel{exer:3.4} % Exercise 3.4
+    Let $\pi: X\to Y$ denote the morphism. We use \thref{lem:affine-communication}. Suppose $V = \Spec B$ can be covered by distinguished opens $V_i = \Spec B_{f_i}$ for $1\le i\le n$ such that each $V_i$ has the desired property. We shall show that $V$ has the desired property. Let $U = \pi^{-1}V_i = \Spec A_i$ where $A_i$ is a finite $B_{f_i}$-module. Let $A = \Gamma(U, \scrO_X)$. Then, the morphism $\pi$ induces a homomorphism $\varphi: B\to A$ of rings making 
+    \begin{equation*}
+        \xymatrix {
+            B\ar[r]^\varphi\ar[d] & A\ar[d]^{\res^{U}_{U_i}}\\
+            B_{g_i}\ar[r] & A_i
+        }
+    \end{equation*}
+    commute. Using the above diagram, it is not hard to argue that $U_{g_i} = A_i$, consequently, \thref{exer:2.17} shows that $U$ is affine and equal to $\Spec A$. 
+
+    We have reduced the algebraic geometry problem to the following commutative algebra problem: 
+    \begin{quote}
+        Let $\varphi: B\to A$, let $f_1,\dots, f_n$ generate the unit ideal in $B$ and let $g_i = \varphi(f_i)$. Suppose $A_{g_i}$ is a finite $B_{f_i}$ module for $1\le i\le n$. Then $A$ is a finite $B$-module.
+    \end{quote}
+    \todo{add in}
+\end{exercise}
+
+\begin{definition}
+    A morphism $\pi: X\to Y$ is \define{quasi-finite} if for every $y\in Y$, $\pi^{-1}(y)$ is a finite set.
+\end{definition}
+
+\begin{exercise}\thlabel{exer:3.5}\hfill % Exercise 3.5
+\begin{enumerate}[label=(\alph*)]
+    \item This is essentially asking us to show that if $B$ is an $A$-algebra that is a finite $A$-module, then for every $\frakp\in\Spec A$, the fiber over $\frakp$ in $B$ is finite. Recall that the fiber over $\frakp$ is precisely $\Spec\left(\kappa(\frakp)\otimes_A B\right)$, which is the spectrum of a $\kappa(\frakp)$-algebra that is also a finite $\kappa(\frakp)$-module, i.e. the spectrum of an artinian ring, whence is finite.
+
+    \item Follows from the commutative algebra fact that integral morphisms induce closed maps on the spectrum.
+
+    \item\todo{add}
+\end{enumerate}
+\end{exercise}
+
+\begin{definition}
+    A morphism $\pi: X\to Y$, with $Y$ irreducible is \define{generically finite} if $\pi^{-1}(\eta)$ is a finite set, where $\eta$ is the generic point of $Y$.
+\end{definition}
+
+\setcounter{exercise}{6}
+\begin{exercise}\thlabel{exer:3.7} % Exercise 3.7
+    Let $\pi: X\to Y$ denote the morphism. Let $\xi$ be the generic point of $X$ and $\eta$ the generic point of $Y$. First, we show that $\pi(\xi) = \eta$. Indeed, 
+    \begin{equation*}
+        \pi(X) = \pi(\overline{\{\xi\}})\subseteq\overline{\{\pi(\xi)\}}.
+    \end{equation*}
+    But since $\pi$ is dominant, $\pi(X)$ is dense in $Y$, consequently, $\pi(\xi)$ must be a generic point, hence, equal to $\eta$.
+\end{exercise}
+
+\setcounter{exercise}{10}
+\begin{exercise}[Closed Subschemes]\thlabel{exer:3.11}\hfill % Exercise 3.11
+\begin{enumerate}[label=(\alph*)]
+    \item 
+    \item We may suppose, without loss of generality that $Y\subseteq X$. For a point $P\in Y$, choose an open affine neighborhood $U = \Spec C$ of $P$ in $Y$. Then, there is an $f\in A$ such that $P\in D(f)\cap Y\subseteq U$. We contend that $D(f)\cap Y$ is a distinguished open in $U$.
+    Indeed, the inclusion $\iota: (Y,\scrO_Y)\to(X,\scrO_X)$ restricted to $U$ induces a map of rings $\varphi: A\to C$. It is easy to see that $\iota^{-1}(D(f)) = D_U(\varphi(f))$, consequently, $D(f)\cap Y$ is a distinguished open in $U$.
+
+    Next, cover $X$ with $D(f_i)$'s such that $D(f_i)\cap Y$ is either affine in $Y$, or nonempty. Let $\overline f_i = \iota^\sharp_X(f_i)\in\Gamma(Y,\scrO_Y)$. We claim that $Y_{\overline f_i} = D(f_i)\cap Y$. Indeed, if $P\in D(f_i)\cap Y$, then there is a surjective map of stalks 
+    \begin{equation*}
+        \scrO_{X,P}\to\scrO_{Y, P}
+    \end{equation*}
+    sending $f_i$ to $\overline f_i$. Since $f_i$ is invertible in the former, it must be invertible in the latter. On the other hand, if $P\in Y_{\overline f_i}$, then $\overline f_i$ is invertible in the latter whence, cannot lie in the maximal ideal $\frakm_{X, P}$, since the above map is a local homomorphism of local rings. This shows that $D(f_i)\cap Y = Y_{f_i}$. 
+
+    Combining our above discussion with \thref{exer:2.17} (b), we have that $Y$ is affine. Next, we must show that $Y$ is obtained as the quotient of an ideal in $A$. For this, invoke \thref{exer:2.18} (d).
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise} % Exercise 3.12
+    
+\end{exercise}
+
+\begin{exercise}[Properties of Morphisms of Finite Type]\thlabel{exer:3.13}\hfill % Exercise 3.13
+% \begin{enumerate}[label=(\alph*)]
+% \item
+% \end{enumerate}
+\end{exercise}
+
+\begin{exercise}\label{exer:3.14} % Exercise 3.14
+    It suffices to assume $X$ is locally of finite type over $k$. In which case, there is a cover $U_i = \Spec A_i$ of $X$ such that each $A_i$ is a finitely generated $k$-algebra and hence, a Jacobson ring. Consequently, the closed points of $U_i$ are dense in $U_i$, whence the closed points of $X$ are dense in $X$.
+
+    As for a counterexample for arbitrary schemes, consider $\Spec A$ where $A$ is a ring such that $\frakR\ne\frakN$.
+\end{exercise}
+
+\

@@ -1,0 +1,120 @@
+\begin{exercise}\thlabel{exer:I.2.1}
+    Let $X$ be the affine algebraic set in $\bbA^{n + 1}$ corresponding to $\fraka$. Under the canonical map $\bbA^{n + 1}\setminus\{0\}\onto\bbP^n$. Since $f$ is homogeneous, $f$ vanishes on $X$, thus, $f^q\in\fraka$ for some $q > 0$ due to the affine nullstellensatz.
+\end{exercise}
+
+\begin{exercise}
+    $(i)\implies(ii)$ We look at the affine variety corresponding to $\fraka$. There are two possible options for this: either $\emptyset$ or the origin in $\bbA^{n + 1}$. In the former case, due to the weak nullstellensatz, $\fraka = S$. In the latter case, $\sqrt\fraka$ is the ideal corresponding to the origin, that is, $\sqrt\fraka = (x_0,\dots,x_n) = S_+$.
+
+    $(ii)\implies(iii)$ If $\sqrt\fraka = S$, then $1\in\fraka$, hence, $\fraka = S$. If $\sqrt\fraka = S_+$. There is a sufficiently large positive integer $N$ such that $x_i^N\in\fraka$ for $0\le i\le n$. It is then easy to see that $S_{(n + 1)N}\subseteq\fraka$.
+
+    $(iii)\implies(i)$ If $\fraka\supseteq S_d$ for some $d > 0$, then it contains the monomials $x_0^d,\dots, x_n^d$. The projective variety corresponding to this collection of monomials is empty.
+\end{exercise}
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*)]
+    \item Clear.
+    \item Clear.
+    \item Clear.
+    \item This follows from \thref{exer:I.2.1}.
+    \item Since $Z(I(Y))$ is closed and contains $Y$, it must contain $\overline Y$. Suppose $P$ is a point not contained in $\overline Y$. Then, $P$ is not contained in some closed set $Z(\fraka)$ containing $Y$, where $\fraka$ is a homogeneous ideal. Thus, there is a homogeneous $f\in\fraka$ such that $f(P)\ne 0$. But since $f\in I(Y)$, it follows that $P\notin Z(I(Y))$. This completes the proof.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*)]
+    \item There are two maps involved here:
+    \begin{align*}
+        \left\{\text{Algebraic sets in }\bbP^n\right\}&\to\left\{\text{Homogeneous ideals in } S\right\}\setminus\{S_+\}\\
+        Y&\longmapsto I(Y)
+    \end{align*}
+    and 
+    \begin{align*}
+        \left\{\text{Homogeneous ideals in } S\right\}\setminus\{S_+\}&\to\left\{\text{Algebraic sets in }\bbP^n\right\}\\
+        \fraka & \longmapsto Z(\fraka).
+    \end{align*}
+    Due to the preceding exercise, $Z(I(Y)) = \overline Y = Y$. On the other hand, if $Z(\fraka)\ne\emptyset$, then $I(Z(\fraka)) = \sqrt\fraka = \fraka$. On the other hand, if $Z(\fraka) = \emptyset$, then we have shown that $\fraka = S$, since it is not equal to $S_+$. Hence, $I(\emptyset) = S = \fraka$, thereby establishing the bijection. 
+
+    \item Suppose $I(Y)$ is not a prime ideal. Due to an equivalent characterization of homogeneous prime ideals mentioned in the book, there are homogeneous polynomials $f,g\in S\setminus I(Y)$ such that $fg\in I(Y)$. Then, $Y\subseteq Z(f)\cup Z(g)$ $Y\not\subseteq Z(f), Z(g)$ and hence, $Y$ is not irreducible. 
+    
+    On the other hand, suppose $Y = Y_1\cup Y_2$, where $Y_1, Y_2\subsetneq Y$ are closed in $Y$. Due to the bijection established in (a), $I(Y_i)\supsetneq I(Y)$. Choose $f\in I(Y_1)\setminus I(Y)$ and $g\in I(Y_2)\setminus I(Y)$. Then, $fg\in I(Y)$ and hence, $I(Y)$ is not prime.
+
+    \item $\bbP^n$ corresponds to $(0)$, which is prime in $S$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*)]
+    \item Due to (a) and (b) of the preceding exercise, this follows from the fact that $S$ is noetherian. 
+    \item This is a property of arbitrary noetherian topological spaces and we shall prove it in this generality.
+
+    Let $X$ be a noetherian topological space and let $\Sigma$ be the collection of all closed subspaces of $X$ that cannot be expressed as a finite union of irreducible closed subspaces of $X$. Suppose $\Sigma$ is non-empty. Since $X$ is noetherian, choose a minimal element $Y$ of $\Sigma$. $Y$ cannot be irreducible, else it would trivially be a finite union of closed irreducibles. Since $Y$ is not irreducible, it can be written as a union of proper closed subsets $Y = Y_1\cup Y_2$. Due to the minimality of $Y$, $Y_1, Y_2\notin\Sigma$, and hence, each can be written as a finite union of closed irreducibles, whence so can $Y$, a contradiction again. Thus, $\Sigma = \emptyset$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+    Let $U_i$ be the open set $\bbP^n\setminus Z(x_i)$ and set $Y_i = Y\cap U_i\ne\emptyset$, which is closed in $U_i$ and hence, is homeomorphic to an affine variety. We shall treat $Y_i$ as an affine variety.
+
+    The ``variables'' $\frac{x_0}{x_i},\dots,\frac{x_n}{x_i}$ form a set of coordinates on $U_i$ as an affine space. Under this identification, $A(Y_i)$ is the set of all polynomial functions $f\left(\frac{x_0}{x_i},\dots,\frac{x_n}{x_i}\right)$ which vanish on $Y_i$. This polynomial can be written in the form 
+    \begin{equation*}
+        \frac{\wt f(x_0,\dots, x_i,\dots, x_n)}{x_i^N}
+    \end{equation*}
+    where $N = \deg f$ and $\wt f$ is homogeneous. By construction, $\wt f$ is a homogeneous polynomial vanishing on $Y\cap U_i$ which is dense in $Y$. But $Z(\wt f)$ must be closed, and thus, $\wt f$ vanishes on $Y$. 
+
+    This gives a canonical ring homomorphism $A(Y_i)\to\left(S(Y)_{x_i}\right)_0$ given by $f\mapsto\wt f/x_i^N$. We contend that this homomorphism is bijective. Indeed, if $f$ lies in the kernel of the homomorphism, then $\wt f/x_i^N = 0$ as an element of $S(Y)_{x_i}$, consequently, $x_i^m\wt f = 0$ as an element of $S(Y)$. In particular, $\wt f/x_i^{N}$ vanishes identically on $Y\cap U_i$, since $x_i$ is nonzero here. To see surjectivity, simply note that every element in the codomain looks like $\wt f/x_i^N$. This establishes the desired isomorphism.
+
+    The dimension of $Y_i$ as a topological space is the dimension of $Y_i$ as an affine variety, which is the dimension of $\left(S(Y)_{x_i}\right)_0$ as a ring.
+
+    Next, we establish the isomorphism $S(Y)_{x_i}\cong A(Y_i)[x_i, x_i^{-1}]$. There is a map $S(Y)\to A(Y_i)[x_i, x_i^{-1}]$, which sends a polynomial function to $x_i^{\deg}\times\text{poly}(x_0/x_i,\dots,x_n/x_i)$. This is obviously a ring homomorphism. Further, note that $x_i$ is invertible in the image and hence, this factors through $S(Y)_{x_i}$. We shall show that the induced map is an isomorphism of rings. Note that any element in the image looks like a Laurent polynomial of the form
+    \begin{equation*}
+        \sum_{n\in\Z} f_n\left(\frac{x_0}{x_i},\dots,\frac{x_n}{x_i}\right)x_i^n
+    \end{equation*}
+    where $f_n$ vanishes on $Y\cap U_i$. Thus, its homogenization vanishes on $Y$ and hence, is an element of $S(Y)$. It follows that the map defined is surjective. Injectivity is obvious.
+
+    Therefore, $\dim Y_i$ is the Krull dimension of $A(Y_i)[x_i, x_i^{-1}]$, which is the transcendence degree of $\operatorname{Frac}(A(Y_i))(x_i)$. This is precisely $1 + \dim Y_i$. But also note that $\dim S(Y)_{x_i}$ is $\dim S(Y)$ by comparing transcendence degrees.
+
+    Therefore, we have shown $\dim S(Y) = 1 + \dim Y_i$ whenever $Y_i\ne\emptyset$. Taking supremum over all such $Y_i$, we obtain the desired conclusion.
+\end{exercise}
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*)]
+    \item $\dim\bbP^n = \dim k[x_0,\dots,x_n] - 1 = n + 1 - 1 = n$.
+    \item We have 
+    \begin{equation*}
+        \dim\overline Y = \sup\dim\overline Y\cap U_i = \sup\dim Y\cap U_i = \dim Y,
+    \end{equation*}
+    where the second equality follows from \textbf{Proposition 1.10} in Hartshorne.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+\end{exercise}
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*)]
+    \item Let $f\in I(Y)$; then $\beta(f)$ is its homogenization. On $U_0$, $x_0\ne 0$ and hence, $\beta(f)$ vanishes on $Y\subseteq U_0$. Again, the zero set of $\beta(f)$ is closed in $\bbP^n$, and hence, vanishes on $\overline Y$. Consequently, $\beta(I(Y))\subseteq I(\overline Y)$. On the other hand, if $F\in k[x_0,\dots,x_n]$ is a homogeneous polynomial vanishing over $\overline Y$, and hence, over $Y$. Thus, $f = \alpha(F)$ vanishes on $Y$. Consequently, $F = \beta(f)$, thereby concluding the proof.
+    \item I'm not in the mood to write it up.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*)]
+    \item Trivial.
+    \item Since $S(Y) = A(C(Y))$.
+    \item We have 
+    \begin{equation*}
+        \dim Y + 1 = \dim S(Y) = \dim A(C(Y)) = \dim C(Y).
+    \end{equation*}
+\end{enumerate}
+\end{exercise}
+
+\setcounter{exercise}{13}
+
+\begin{exercise}
+    $N = (r + 1)(s + 1) - 1$ and let the homogeneous coordinates of $\bbP^n$ be $[z_{ij}\colon 0\le i\le r,~0\le j\le s]$. There is a ring homomorphism 
+    \begin{equation*}
+    \varphi: k[\{z_{ij}\}]\to k[x_0,\dots,x_r,y_0,\dots,y_s],
+    \end{equation*}
+    sending $z_{ij}\mapsto x_iy_j$. Let $\fraka = \ker\varphi$. If $f\in\fraka$, then $f(\{x_iy_j\colon 0\le i\le r,~0\le j\le s\}) = 0$. Since an element in the image $\psi$ looks like $[a_ib_j\colon 0\le i\le r,~0\le j\le s]$, we have that $\im\psi\subseteq Z(\fraka)$.
+
+    On the other hand, suppose $[c_{ij}\colon 0\le i\le r,~0\le j\le s]\in Z(\fraka)$. Without loss of generality, suppose $c_{00} = 1$. Then, set $a_i = c_{i0}$ and $b_j = c_{0j}$ and note that $\psi(\mathbf a,\mathbf b) = \mathbf c$, thereby completing the proof.
+\end{exercise}

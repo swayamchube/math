@@ -1,0 +1,71 @@
+\begin{definition}
+    A morphism $\pi:X\to Y$ of schemes is said to be \define{separated} if the diagonal morphism $\Delta: X\to X\times_Y X$ is a closed immersion.
+    \begin{equation*}
+        \xymatrix{
+            X\ar[rd]^\Delta\ar@/^/[rrd]^{\id_X}\ar@/_/[rdd]_{\id_X} & & \\
+            & X\times_Y X\ar[r]^-{p_1}\ar[d]_{p_2} & X\ar[d]^{\pi}\\
+            & X\ar[r]_\pi & Y
+        }
+    \end{equation*}
+\end{definition}
+
+\begin{definition}
+    A morphism $\pi: X\to Y$ is said to be \define{universally closed} if it is closed as a continuous map on the underlying topological spaces and for every morphism $Y'\to Y$, the map obtained by \emph{base extension} $X\times_Y Y'\to Y'$ is also closed.
+\end{definition}
+
+\begin{definition}
+    A morphism $\pi: X\to Y$ is said to be \define{proper} if it is separated, of finite type and universally closed.
+\end{definition}
+
+Since a complete proof of the following is not provided in the text, I reproduce it here.
+
+\begin{corollary}[Hartshorne, II.4.6]
+    Assume that all schemes are noetherian in the following statements.
+    \begin{enumerate}[label=(\alph*)]
+        \item Open and closed immersions are separated.
+        \item A composition of two separated morphisms is seprated. 
+        \item Separated morphisms are stable under base extension.
+        \item If $\pi: X\to Y$ and $\pi': X'\to Y'$ are separated morphisms of schemes over a base scheme $S$, then the \define{product morphism} $\pi\times\pi': X\times_S X'\to Y\times_S Y'$ is also separated.
+        \item If $\pi: X\to Y$ and $\varphi: Y\to Z$ are two morphisms and if $\varphi\circ\pi$ is separated, then $\pi$ is separated.
+        \item A morphism $\pi: X\to Y$ is separated if and only if $Y$ can be covered by open subsets $V_i$ such that $\pi^{-1}V_i\to V_i$ is separated for each $i$.
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+\item We show more generally that ``a monomorphism of schemes is separated''. Let $Y\into X$ be a monomorphism in $\mathfrak{Sch}_\Z$. Then, the fiber product $Y\times_X Y$ is precisely $Y$, given by the following diagram. 
+\begin{equation*}
+    \xymatrix {
+    Z\ar@/^/[rrd]\ar@/_/[rdd] & & \\
+        &Y\ar[d]_\id\ar[r]^\id & Y\ar@{^(->}[d]\\
+        &Y\ar@{^(->}[r] & X
+    }
+\end{equation*}
+Since $Y\into X$ is a monomorphism, the two maps $Z\to Y$ in the above diagram must be the same and it follows that $Y = Y\times_X Y$. Hence, the diagonal morphism $\Delta: Y\to Y\times_X Y$ is the identity map, whence is a closed immersion.
+
+\item We use the valuative criterion. Let $R$ be a DVR and $K$ its fraction field. Let $U = \Spec K$ and $T = \Spec R$ and suppose $\pi: X\to Y$ and $\varphi: Y\to Z$ are separated. Let there be a commutative diagram 
+\begin{equation*}
+    \xymatrix {
+        U\ar[r]\ar[dd] & X\ar[d]\\
+        & Y\ar[d]\\
+        T\ar[r] & Z.
+    }
+\end{equation*}
+Suppose there are two lifts $\psi_1,\psi_2: T\to X$ making the diagram commute. Then, $\pi\circ\psi_1 = \pi\circ\psi_2$ since $Y\to Z$ is separated. Finally, since $X\to Y$ is separated, we must have $\psi_1 = \psi_2$. This shows that $X\to Z$ is separated.
+
+\item This is done in the book. 
+
+\item The same idea as in (b) works. Not writing this up because the diagram is too complicated to draw and I'm too lazy.
+
+\item Again, begin with a commutative diagram 
+\begin{equation*}
+    \xymatrix {
+        U\ar[r]\ar[d] & X\ar[d]\\
+        T\ar[r]\ar[rd] & Y\ar[d]\\
+        & Z
+    }
+\end{equation*}
+and suppose there are two lifts $\psi_1,\psi_2: T\to X$ making the diagram commute. Since $X\to Z$ is separated, we must have that $\psi_1 = \psi_2$. Hence, $X\to Y$ is separated.
+
+\item 
+\end{enumerate}
+\end{proof}

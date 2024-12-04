@@ -1,0 +1,75 @@
+\begin{definition}
+    A topological space $X$ is said to be \define{irreducible} if whenever $X = X_1\cup X_2$ where $X_1$ and $X_2$ are closed subsets of $X$, $X = X_1$ or $X = X_2$.
+\end{definition}
+
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*)]
+    \item $A(Y) = k[x, y]/(y^2 - x)$. Consider the surjective map
+    \begin{equation*}
+        \varphi: k[x, y]\to k[t]
+    \end{equation*}
+    sending $x\mapsto t^2$, $y\mapsto t$. Then, $\frakp = \ker\varphi$ is a prime ideal containing $(y^2 - x)$. Further, $\hght\frakp = \dim k[x, y] - \dim k[t] = 1$. Thus, $\frakp = (y^2 - x)$. This establishes the desired isomorphism.
+    \item Using analogous reasoning, one can show that $A(Z)\cong k[t, t^{-1}]$. Suppose there is an isomorphism $k[t, t^{-1}]\cong k[x]$. Under this isomorphism, $t$ must map to a unit and hence inside $k$, a contradiction.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+    Consider the map $\varphi: k[x, y, z]\to k[t]$ sending $x\mapsto t$, $y\mapsto t^2$, and $z\mapsto t^3$. Let $\frakp =\ker\varphi$, which is a prime ideal with $\hght\frakp = \dim k[x, y, z] - \dim k[t] = 2$. Note that $(x^2 - y, x^3 - z)\subseteq\frakp$. Now, suppose $f(x, y, z)\in\frakp$, then we can view $f$ as an element of $k[x][y, z]$ and write 
+    \begin{equation*}
+        f(x, y, z) = (y - x^2)P + (z - x^3)Q + \underbrace{f(x, x^2, x^3)}_{ = 0},
+    \end{equation*}
+    and hence, $\frakp = (y - x^2 , z - x^3)$. The conclusion follows.
+\end{exercise}
+
+\begin{exercise}
+\end{exercise}
+
+\begin{exercise}
+    Since $\bbA^1$ is not Hausdorff, the diagonal of $\bbA^1\times\bbA^1$ is not closed, while the diagonal of $\bbA^2$ is $Z(x - y)$, which is closed.
+\end{exercise}
+
+\begin{exercise}
+    $B\cong k[x_1,\dots, x_n]/\fraka$ for some radical ideal $\fraka$. If we set $Y = Z(\fraka)$, then $B = A(Y)$.
+\end{exercise}
+
+\begin{exercise}
+\begin{itemize}
+    \item If $X$ is irreducible and $U\subseteq X$ is non-empty open, then $X = (X\setminus U)\cup \overline U$ and hence, $U$ is dense. Further, $U$ is irreducible; for if $U = U_1\cup U_2$ where $U_i$ closed in $U$, then $U_i = U\cap X_i$ where $X_i$ closed in $X$. Consequently, $U\subseteq X_1\cup X_2$. The latter being closed, contains $\overline U = X$ and hence, for some $i$, $X = X_i$, therefore, $U = U_i$.
+
+    \item If $Y\subseteq X$ (any topological space) is irreducible, then so is $\overline Y$; for if $\overline Y = Y_1\cup Y_2$, where $Y_i$ closed in $\overline Y$, then $Y_i$ closed in $X$. Further, $Y = (Y\cap Y_1)\cup (Y\cap Y_2)$, thus, for some $i$, $Y = Y\cap Y_i$, hence, $Y_i\supseteq Y$ but being closed, $Y_i\supseteq\overline Y$.
+\end{itemize}
+\end{exercise}
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*)]
+    \item This is trivial. 
+    \item Let $\{U_\alpha\}$ be an open cover of $X$, a noetherian topological space. If $\frakM$ denotes the collection of all finite unions of $U_\alpha$'s, then $\frakM$ has a maximal element, which must be all of $X$. 
+    \item Let $Y\subseteq X$ and suppose $V_1\subseteq V_2\subseteq\cdots$ is an ascending chain of open subsets of $Y$. There are $U_i$ open in $X$ such that $V_i = U_i\cap Y$. Let $\wt U_i = \bigcup_{j = 1}^i U_j$. Note that $\wt U_i\cap Y = U_i$. Then, $\wt U_1\subseteq \wt U_2\subseteq\cdots$, and hence, stabilizes at some $\wt U_N$. It follows that $V_N = V_{N + 1} = \cdots$.
+    \item Every subspace of a noetherian topological space is noetherian, and hence, quasi-compact, and hence, closed (since the ambient space is Hausdorff). Thus, the topology is discrete. A discrete quasi-compact topology must have a finite underlying set.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+    There is a prime ideal $\frakp$ in $k[x_1,\dots,x_n]$ such that $Y = Z(\frakp)$. Similarly, there is an irreducible polynomial $f\in k[x_1,\dots,x_n]$ such that $H = Z(f)$. Note that $f\notin\frakp$, else $Y\subseteq H$.
+
+    Let $\frakq$ be a minimal prime over $(f) + \frakp$. Working in the ring $R/\frakp$, $\overline\frakq$ is minimal over $(\overline f)$. Due to Krull's Hauptidealsatz, $\hght\overline\frakq\le 1$. The height must be non-zero since $\overline\frakq\ne 0$. Thus, $\hght\overline\frakq = 1$, whence $\dim k[x_1,\dots,x_n]/\frakq = \dim R/\overline\frakq = \dim R - 1 = r - 1$.
+\end{exercise}
+
+\begin{exercise}
+    This is again a trivial consequence of the Hauptidealsatz.
+\end{exercise}
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*)]
+    \item Let $Y_0\subsetneq Y_1\subsetneq\cdots\subsetneq Y_n$ be a chain of closed irreducible subsets of $Y$. These are also irreducible as subspaces of $X$ and hence, so are their closures. This gives us a chain 
+    \begin{equation*}
+        \overline Y_0\subseteq \overline Y_1\subseteq\cdots\subseteq\overline Y_n.
+    \end{equation*}
+    We contend that the inclusions are strict. Suppose $\overline Y_i = \overline Y_{i + 1}$ for some $1\le i < n$. Thus, the closure of $Y_i$ in $Y$ is equal to that of $Y_{i + 1}$ in $Y$. This is absurd, since the $Y_j$'s are closed in $Y$. Thus, $\dim X\ge n$. Taking $\sup$ over all $n$, we have $\dim X\ge \dim Y$.
+    \item Due to part (a), we have $\dim X\ge\sup\dim U_i$. If $Y_0\subsetneq\dots\subsetneq Y_n$ is a chain of closed irreducible subsets of $X$, choose a $U = U_i$ having non-empty intersection with $Y_0$. Then, $U\cap Y_j$ is irreducible and dense in $Y_j$ for every $j$. Note that $U\cap Y_{j - 1}\subseteq Y_{j - 1}\subsetneq Y_j$. Since $Y_{j - 1}$ is closed in $Y_j$, $U\cap Y_{j - 1}$ is not dense in $Y_j$. Thus, $U\cap Y_{j - 1}\subsetneq U\cap Y_j$. Thus, $\dim U\ge n$ that is, $\sup\dim U_i\ge n$. Taking supremum over $n$, we obtain the desired conclusion.
+    \item 
+    \item Suppose $Y$ is properly contained in $X$. Then for any chain of closed irreducibles $Y_0\subsetneq\dots\subsetneq Y_n$ in $Y$, we can append $X$ to get a chain of closed irreducibles in $X$, in particular, this means $\dim X\ge\dim Y + 1$, a contradiction. 
+    \item $\Spec\left(\text{Nagata's monster ring}\right)$.
+\end{enumerate}
+\end{exercise}
