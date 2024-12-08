@@ -1,6 +1,7 @@
 \contentsline {chapter}{\numberline {I}Varieties}{2}{chapter.1}%
 \contentsline {section}{\numberline {I.1}Affine Varieties}{2}{section.1.1}%
 \contentsline {section}{\numberline {I.2}Projective Varieties}{4}{section.1.2}%
+\contentsline {section}{\numberline {I.3}Morphisms}{7}{section.1.3}%
 \contentsline {chapter}{\numberline {II}Schemes}{8}{chapter.2}%
 \contentsline {section}{\numberline {II.1}Sheaves}{8}{section.2.1}%
 \contentsline {section}{\numberline {II.2}Schemes}{9}{section.2.2}%

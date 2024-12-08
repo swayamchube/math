@@ -1,8 +1,8 @@
-\documentclass[12pt]{report}
+\documentclass[12pt]{article}
 
 % \usepackage{./arxiv}
 
-\title{Hartshorne Exercises}
+\title{Algebraic Curves}
 \author{Swayam Chube}
 \date{\today}
 
@@ -27,14 +27,14 @@
 \usepackage{mathpazo}
 % \usepackage{euler}
 \usepackage{mathrsfs}
-\usepackage{todonotes}
 \usepackage{stmaryrd}
 \usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
 \usepackage{marvosym}
 \usepackage{geometry}
-\usepackage{calligra}
 \usepackage{titlesec}
 
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
 \renewcommand{\qedsymbol}{$\blacksquare$}
 
 % Uncomment to override  the `A preprint' in the header
@@ -73,26 +73,27 @@
 \newtheorem{proposition}[theorem]{Proposition}
 
 \theoremstyle{defstyle}
-\newtheorem*{definition}{Definition}
+\newtheorem{definition}[theorem]{Definition}
 \newtheorem*{corollary}{Corollary}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{example}[theorem]{Example}
 \newtheorem*{notation}{Notation}
-\newtheorem{exercise}{Exercise}[section]
 
 % Common Algebraic Structures
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
-\newcommand{\bbC}{\mathbb{C}}
-\newcommand{\K}{\mathbb{K}}
-\newcommand{\calA}{\mathcal{A}}
-\newcommand{\frakM}{\mathfrak{M}}
-\newcommand{\calO}{\mathcal{O}}
-\newcommand{\bbA}{\mathbb{A}} % affine space or adele ring
-\newcommand{\bbP}{\mathbb{P}} % projective space
-\newcommand{\bbI}{\mathbb{I}} % idele group
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
 
 % Categories
 \newcommand{\catTopp}{\mathbf{Top}_*}
@@ -127,8 +128,6 @@
 % Commutative and Homological Algebra
 \newcommand{\spec}{\operatorname{spec}}
 \newcommand{\mspec}{\operatorname{m-spec}}
-\newcommand{\Spec}{\operatorname{Spec}}
-\newcommand{\mSpec}{\operatorname{MaxSpec}}
 \newcommand{\Tor}{\operatorname{Tor}}
 \newcommand{\tor}{\operatorname{tor}}
 \newcommand{\Ann}{\operatorname{Ann}}
@@ -156,33 +155,33 @@
 \newcommand{\fraks}{\mathfrak{s}}
 \newcommand{\frakt}{\mathfrak{t}}
 \newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
 \newcommand{\frakI}{\mathfrak{I}}
 \newcommand{\frakJ}{\mathfrak{J}}
 \newcommand{\frakK}{\mathfrak{K}}
 \newcommand{\frakL}{\mathfrak{L}}
 \newcommand{\frakN}{\mathfrak{N}} % nilradical 
-\newcommand{\frakP}{\mathfrak{P}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
 \newcommand{\frakR}{\mathfrak{R}} % jacobson radical
 \newcommand{\frakU}{\mathfrak{U}}
 \newcommand{\frakX}{\mathfrak{X}}
 
 % General/Differential/Algebraic Topology 
-\newcommand{\scrA}{\mathscr{A}}
-\newcommand{\scrB}{\mathscr{B}}
-\newcommand{\scrF}{\mathscr{F}}
-\newcommand{\scrG}{\mathscr{G}}
-\newcommand{\scrO}{\mathscr{O}}
-\newcommand{\scrP}{\mathscr{P}}
-\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrN}{\mathscr N}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrR}{\mathscr R}
+\newcommand{\scrS}{\mathscr S}
 \newcommand{\bbH}{\mathbb H}
 \newcommand{\Int}{\operatorname{Int}}
 \newcommand{\psimeq}{\simeq_p}
 \newcommand{\wt}[1]{\widetilde{#1}}
 \newcommand{\RP}{\mathbb{R}\text{P}}
 \newcommand{\CP}{\mathbb{C}\text{P}}
-
-% Algebraic Geometry 
-\newcommand{\res}{\operatorname{res}}
 
 % Miscellaneous
 \newcommand{\wh}[1]{\widehat{#1}}
@@ -211,9 +210,15 @@
 \newcommand{\bfX}{\mathbf{X}}
 \newcommand{\Ind}{\operatorname{Ind}}
 \newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
 
-\newcommand{\sheafHom}{\mathscr{H}\kern-3.5pt \text{\calligra\Large om}\,}
-\newcommand{\hght}{\operatorname{ht}}
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
 
 \geometry {
     margin = 1in
@@ -239,46 +244,8 @@
 []
 
 
-\renewcommand{\thechapter}{\Roman{chapter}}
-
 \begin{document}
 \maketitle
-\tableofcontents
 
-\newpage
-
-\chapter{Varieties}
-
-\section{Affine Varieties}
-\input{chap1/01.tex}
-
-\section{Projective Varieties}
-\input{chap1/02.tex}
-
-\section{Morphisms}
-\input{chap1/03.tex}
-
-\chapter{Schemes}
-
-\section{Sheaves}
-\input{chap2/01.tex}
-
-\newpage 
-\section{Schemes}
-\input{chap2/02}
-
-\newpage 
-
-\section{First Properties of Schemes}
-\input{chap2/03}
-
-\newpage
-
-\section{Separated and Proper Morphisms}
-\input{chap2/04.tex}
-
-\newpage 
-
-\section{Sheaves of Modules}
-\input{chap2/05.tex}
+\section{Local Properties of Plane Curves}
 \end{document}

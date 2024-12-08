@@ -107,9 +107,44 @@
 \end{enumerate}
 \end{exercise}
 
+\setcounter{exercise}{11}
+
+\begin{exercise}[The $d$-Uple Embedding]
+\begin{enumerate}[label=(\alph*)]
+    \item Note that $\theta$ is a degree $d$ graded ring homomorphism and hence, the kernel is homogeneous. The kernel is a prime ideal since the image of $\theta$ is a subring of an integral domain, whence an integral domain. Note that $\rho_d$ is injective. This will be useful.
+    \item Let
+    \begin{equation*}
+        S = \left\{(i_0,\dots, i_n)\colon i_j\ge 0,~i_0 + \dots + i_n = d\right\},
+    \end{equation*}
+    and note that $|S| = N$. We shall henceforth index the $y$-variables as $y_s$ for $s\in S$. Analogously, elements of $\bbP^N$ shall be denoted as $[a_s\colon s\in S]$.
+
+    Consider the open ``affine'' $U_{(d,0,\dots, 0)}, U_{(0,d,\dots, 0)},\dots$. We contend that these cover $Z(\fraka)$. Indeed, suppose $[a_s\colon s\in S]\in Z(\fraka)$. Then, there is some $s = (i_0,\dots,i_n)\in S$ such that $a_s\ne 0$. Consider the function 
+    \begin{equation*}
+        f(\{y_t\colon t\in S\}) = y_{(i_0,\dots, i_n)}^d - y_{(d,0,\dots, 0)}^{i_0}\cdots y_{(0,\dots, 0, d)}^{i_n}.
+    \end{equation*}
+    Note that $f\in\fraka$, and hence, $f(\{a_t\colon t\in S\}) = 0$. That is, 
+    \begin{equation*}
+        0\ne a_s^d = a_{(d,0,\dots, 0)}^{i_0}\cdots a_{(0,\dots, 0, d)}^{i_n},
+    \end{equation*}
+    thus, $[\{a_t\colon t\in S\}]$ lies in one of the aforementioned open sets.
+
+    We now construct local inverses for $\rho_d$. Consider $U_{(d,0,\dots,0)}\cap Z(\fraka)$ and take an element $[\{b_s\colon s\in S\}]$ in it. Define $\sigma_0: U_{(d,0,\dots,0)}\cap Z(\fraka)\to\bbP^n$ as 
+    \begin{equation*}
+        [\{b_s\colon s\in S\}]\mapsto \left[b_{(d,0,\dots, 0)} : b_{(d - 1, 1, 0,\dots, 0)} : \cdots : b_{(d - 1, 0,\dots, 0, 1)}\right].
+    \end{equation*}
+    It is not hard to see that $\rho_d\circ\sigma_0$ is the identity map on its domain. Analogously, construct $\sigma_i$ for $0\le i\le n$. Since the $U$'s cover $Z(\fraka)$, we see that $\rho_d$ must be surjective.
+
+    \item To show that $\rho_d$ is a homeomorphism, it suffices to show that the $\sigma$'s can be glued together, since each $\sigma_i$ is a continuous function (owing to it being polynomial in the coordinates).
+
+    Indeed, suppose $[\{b_s\colon s\in S\}]\in U_{(d,0,\dots, 0)}\cap U_{(0,d,\dots, 0)}$. Since $\rho$ is injective and $\rho_d(\sigma_0(b)) = \rho_d(\sigma_1(b))$, we have that $\sigma_0(b) = \sigma_1(b)$. 
+
+    \item
+\end{enumerate}
+\end{exercise}
+
 \setcounter{exercise}{13}
 
-\begin{exercise}
+\begin{exercise}[The Segre Embedding]
     $N = (r + 1)(s + 1) - 1$ and let the homogeneous coordinates of $\bbP^n$ be $[z_{ij}\colon 0\le i\le r,~0\le j\le s]$. There is a ring homomorphism 
     \begin{equation*}
     \varphi: k[\{z_{ij}\}]\to k[x_0,\dots,x_r,y_0,\dots,y_s],

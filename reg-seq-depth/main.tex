@@ -2,7 +2,7 @@
 
 % \usepackage{./arxiv}
 
-\title{PIDs that are not EDs}
+\title{Homological methods in Commutative Algebra}
 \author{Swayam Chube}
 \date{\today}
 
@@ -27,6 +27,7 @@
 \usepackage{mathpazo}
 % \usepackage{euler}
 \usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
 \usepackage{todonotes}
 \usepackage{stmaryrd}
 \usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
@@ -218,6 +219,9 @@
 \newcommand{\pdim}{\operatorname{pdim}}
 \newcommand{\Ext}{\operatorname{Ext}}
 \newcommand{\co}{\operatorname{co}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\projdim}{\operatorname{proj~dim}}
+\newcommand{\injdim}{\operatorname{inj~dim}}
 
 \geometry {
     margin = 1in
@@ -242,80 +246,121 @@
 {\centering}
 []
 
+
 \begin{document}
 \maketitle
-\begin{abstract}
-    It is known that every Euclidean Domain (ED) is a Principal Ideal Domain (PID). We present two exammples of PIDs that are not EDs, namely, $\R[X, Y]/(X^2 + Y^2 + 1)$ and $\Z\left[\frac{1 + \sqrt{-19}}{2}\right]$.
-\end{abstract}
 
-\section{\texorpdfstring{$\R[X, Y]/(X^2 + Y^2 + 1)$}{}}
+\section{The Koszul Complex}
 
-We first begin with two important lemmas.
-
-\begin{lemma}\thlabel{lem:prime-principal-pir}
-    Let $A$ be a commutative ring in which every prime ideal is principal. Then, $A$ is a principal ring.
-\end{lemma}
-\begin{proof}
-    Suppose not and let $\Sigma$ denote the poset of all proper ideals that are not principal. Let $\mathscr C$ denote a chain in $\Sigma$ and let $\fraka = \bigcup\mathscr C$. If $\fraka = (a)$ is principal, then there is an ideal $\frakb\in\mathscr C$ that contains $a$, consequently, $\frakb = (a)$, a contradiction. Thus, $\fraka\in\Sigma$ and is an upper bound for $\mathscr C$. Due to Zorn's Lemma, $\Sigma$ contains a maximal element, say $\frakp$.
-
-    We contend that $\frakp$ is prime. Suppose not. Then, there are $a,b\notin\frakp$ with $ab\in\frakp$. Note that $(\frakp : b)$ is an ideal properly containing $\frakp$ (since it also contains $a$) and hence, must be principal, say $(c)$. Next, $\frakp + (b)$ properly contains $\frakp$ and hence, must be principal, say $(d)$. Clearly, $\frakp\supseteq(\frakp : b)(\frakp + (b)) = (cd)$. On the other hand, if $x\in\frakp$, then $x = \alpha d$ for some $\alpha\in A$. Since $\alpha d\in\frakp$, we have $\alpha\in (\frakp : b) = (c)$. Thus, $\frakp\subseteq(\frakp : b)(\frakp + (b))$ and $\frakp = (cd)$ is principal, a contradiction. Hence, $\frakp$ is prime, and must be principal, again, a contradiction. This completes the proof.
-\end{proof}
-
-\begin{lemma}\thlabel{lem:group-surjection}
-    Let $A$ be a Euclidean Domain with Euclidean function $\delta: A\backslash\{0\}\to\N_0$. Then, there is a non-zero prime $p\in A$ such that $\pi: A\twoheadrightarrow A/p$ restricts to a surjective group homomorphism $\pi: A^\times\to (A/p)^\times$.
-\end{lemma}
-\begin{proof}
-    Let $p\in A$ be a non-zero element in $A\backslash A^\times$ that minimizes $\delta$. Then, $p$ must be irreducible, for if $p = ab$ with $a$ non-unit, then 
+\begin{definition}
+    Let $A$ be a ring and $x_1,\dots,x_n\in A$. Set $K_0 = A$ and for $1\le p\le n$, let 
     \begin{equation*}
-        \delta(p) = \delta(ab)\ge\delta(a)\ge\delta(p),
+        K_p = \bigoplus_{1\le i_1 < \cdots < i_p\le n} A e_{i_1}\wedge\dots\wedge e_{i_p},
     \end{equation*}
-    consequently, $\delta(a) = \delta(ab)$ whence $b$ must be a unit. This shows that $p$ is prime. 
+    which is a free module of rank $\binom{n}{p}$.
 
-    Now, let $\overline a\in A/p$ be invertible. Then, there is a non-zero $a\in A$ with $\pi(a) = \overline a$. Thus, there are $q$ and $r$ with $a = pq + r$. Since $r\ne 0$, we must have $\delta(r) < \delta(p)$, whereby, $r\in A^\times$. Note that $\pi(r) = \pi(a) = \overline a$ and hence, the restriction of $\pi$ to $A^\times\to (A/p)^\times$ is surjective.
-\end{proof}
-
-We are now ready to prove the main of this section. Let $A = R[X, Y]/(X^2 + Y^2 + 1)$ and let $x$ and $y$ denote the images of $X$ and $Y$ in $A$.
-
-\begin{proposition}\thlabel{prop:primes-in-A}
-    Every non-zero prime ideal in $A$ is of the form $(ax + by + c)$ where $(a,b)\ne 0$.
-\end{proposition}
-\begin{proof}
-    Let $\frakp$ be a non-zero prime ideal of $A$. Note first that 
+    Define $d: K_p\to K_{p - 1}$ as 
     \begin{equation*}
-        \dim A = \dim R[X, Y] - \operatorname{ht}((X^2 + Y^2 + 1)) = 1,
+        d\left(e_{i_1}\wedge\dots\wedge e_{i_p}\right) = \sum_{r = 1}^p (-1)^{r - 1} x_{i_r} e_{i_1}\wedge\dots\wedge\wh{e_{i_r}}\wedge\dots\wedge e_{i_p},
     \end{equation*}
-    whence $\frakp$ is maximal. Further, $A/\frakp$ is a finitely generated $\R$-algebra and also a field, and due to Zariski's Lemma, must be a finite extension of $\R$. Thus, $[A/\frakp : \R]\le 2$. Let $\overline x, \overline y$ denote the images of $x$ and $y$ in $A/\frakp$. Since $1,\overline x,\overline y$ cannot be linearly independent over $\R$, we must have a non-trivial linear combination $a\overline x + b\overline y + c = 0$ in $A/\frakp$. Hence, $ax + by + c\in\frakp$. If $(a,b) = 0$, then $\frakp$ would contain a unit which is impossible.
-
-    Note that $(aX + bY + c)$ was a maximal ideal in $R[X, Y]$. Hence, $(ax + by + c)$ is a maximal ideal in $A$. Further, the quotient $A/(ax + by + c)$ strictly contains $\R$ and due to Zariski's Lemma, must be a finite extension of it, whence is isomorphic to $\bbC$. This shows that $\frakp = (ax + by + c)$ and $A/\frakp\cong\bbC$ thereby completing the proof.
-\end{proof}
+    and extending linearly. This is called the \define{Koszul complex}.  For an $A$-module $M$, we set $K_\bullet(\underline x, M) = K_\bullet(\underline x)\otimes_A M$. The homologies of this complex $H_p\left(K_\bullet(\underline x, M)\right)$ are denoted by $H_p(\underline x, M)$. For a complex $C_\bullet$ of $A$-modules, we set $C_\bullet(\underline x) = C_\bullet\otimes_A K_\bullet(\underline x)$.\footnote{Recall that the tensor product of two complexes is obtained by taking the total complex corresponding to the tensor double complex.} 
+\end{definition}
 
 \begin{proposition}
-    $A$ is a PID but not an ED.
+    For $p\ge 2$, $d\circ d = 0$ as a map $K_p\to K_{p - 2}$.
 \end{proposition}
 \begin{proof}
-    Due to \thref{prop:primes-in-A} and \thref{lem:prime-principal-pir}, $A$ is a PID. Suppose $A$ were an ED. According to \thref{lem:group-surjection}, there is a non-zero prime $p\in A$ and a group surjection $\pi: A^\times\to (A/p)^\times$. Note that $A^\times\cong\R^\times$ and $(A/p)^\times\cong\bbC^\times$. But there is no surjective group homomorphism $\R^\times\twoheadrightarrow\bbC^\times$, a contradiction.
+    In the expression for $(d\circ d)\left(e_{i_1}\wedge\dots\wedge e_{i_p}\right)$, we find the coefficient of 
+    \begin{equation*}
+        e_{i_1}\wedge\dots\wedge\wh{e_{i_a}}\wedge\dots\wedge\wh{e_{i_b}}\wedge\dots\wedge e_{i_p},
+    \end{equation*}
+    where $1\le a < b\le p$. The coefficient is equal to the coefficient in 
+    \begin{equation*}
+        (-1)^{a - 1}x_{i_a}d\left(e_{i_1}\wedge\dots\wh e_{i_a}\wedge\dots\wedge e_{i_p}\right) + (-1)^{b - 1} x_{i_b}d\left(e_{i_1}\wedge\dots\wedge e_{i_b}\wedge\dots\wedge e_{i_p}\right),
+    \end{equation*}
+    which is equal to 
+    \begin{equation*}
+        (-1)^{a - 1}x_{i_a}\cdot(-1)^{b - 2}x_{i_b} + (-1)^{b - 1}x_{i_b}\cdot(-1)^{a - 1}x_{i_a} = 0. \qedhere
+    \end{equation*}
 \end{proof}
 
-\section{\texorpdfstring{$\Z\left[\frac{1 + \sqrt{-19}}{2}\right]$}{}}
-Let $K = \Q[\sqrt{-19}]$ be a number field and let $\mathcal O_K$ denote the ring of integers in $K$. It is well known that $\mathcal O_K = \Z\left[\frac{1 + \sqrt{-19}}{2}\right]$ and that it has class number $1$. Hence, every fractional ideal over $\mathcal O_K$ is principal. In particular, every integral ideal of $\mathcal O_K$ is principal and $\mathcal O_K$ is a PID.
+\begin{theorem}
+    Let $C_\bullet$ be a complex of $A$-modules and $x\in A$. There is an exact sequence of complexes 
+    \begin{equation*}
+        0\longrightarrow C_\bullet\longrightarrow C_\bullet(x)\longrightarrow C_\bullet[-1]\longrightarrow 0.
+    \end{equation*}
+    This furnishes an exact sequence 
+    \begin{equation*}
+        \cdots\to H_p(C_\bullet)\to H_p(C_\bullet(x))\to H_{p - 1}(C_\bullet)\xrightarrow{(-1)^{p - 1}x} H_{p - 1}(C_\bullet)\to\cdots.
+    \end{equation*}
+    Further, we have $x\cdot H_{p}(C_\bullet(x)) = 0$ for all $p$.
+\end{theorem}
 
-We shall now argue that $\calO_K$ is not an ED. Suppose $\delta:\calO_K\backslash\{0\}\to\N_0$ is a Euclidean function and let $p\in\mathcal O_K$ be a non-zero, non-invertible element that minimizes $\delta$. Consider the canonical projection $\pi: \calO_K\twoheadrightarrow\calO_K/(p)$. 
+\begin{corollary}
+    Let $M$ be an $A$-module and $x_1,\dots,x_n\in A$. Then, $(\underline x)$ annihilates $H_p(\underline x, M)$ for all $p$.
+\end{corollary}
+\begin{proof}
+    Induct on $n$. The inductive step follows from the fact that 
+    \begin{equation*}
+        K_\bullet(x_1,\dots, x_n, M)\cong K_\bullet(x_n)\otimes_A K(x_1,\dots, x_{n - 1}, M).
+    \end{equation*}
+    We know that $(x_1,\dots, x_{n - 1})$ annihilates the homology groups of the latter and hence, they annihilate the homology groups of $K_\bullet(x_1,\dots, x_n, M)$. Further, due to the preceding theorem, $x_n$ annihilates the homologies of the above tensor product. This completes the proof.
+\end{proof}
 
-If $0\ne\overline a\in\calO_K/(p)$, then there is an $a\in\calO_K$ that maps to it under $\pi$. We may write $a = pq + r$ where $q\in\calO_K$, $0\ne r$ and $\delta(r) < \delta(p)$. Due to the minimality of $\delta(p)$, we must have that $r$ is a unit. Note that the only units in $\calO_K$ are $\pm 1$. Indeed, if $x\in\calO_K$ is a unit, then there are integers $m$ and $n$ such that 
+\begin{theorem}
+    Let $M$ be an $A$-module and $x_1,\dots,x_n\in A$ an $M$-sequence. Then 
+    \begin{equation*}
+        H_p(\underline x, M) = 0\quad\text{for } p > 0\qquad H_0(\underline x, M) = M/(\underline x)M.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\begin{theorem}
+    Let $A$ be a Noethering ring, $M$ a finite $A$-odule, and $I$ an ideal of $A$; suppose that $IM\ne M$. For a positive integer $n$, the following conditions are equivalent: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\Ext^i_A(N, M) = 0$ for $0\le i < n$ and for any finite $A$-module $N$ with $\Supp(N)\subseteq V(I)$. 
+        \item $\Ext^i_A(A/I, M) = 0$ for $0\le i < n$. 
+        \item $\Ext^i_A(N, M) = 0$ for $0\le i < n$ and \emph{some} finite $A$-module $N$ with $\Supp(N) = V(I)$. 
+        \item there exists an $M$-sequence of length $n$ contained in $I$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\end{proof}
+
+\begin{corollary}
+    Let $A$ be a Noetherian ring, $I$ an ideal of $A$, and $M$ a finite $A$-module such that $M\ne IM$; then the length of a maximal $M$-sequence in $I$ is determined by 
+    \begin{equation*}
+        \Ext^i_A(A/I, M) = 0\quad\text{for } i < n\quad\text{and}\quad\Ext^n_A(A/I, M)\ne 0.
+    \end{equation*}
+\end{corollary}
+
+This integer is denoted by $\depth(I, M)$ and is called the \define{$I$-depth} of $M$. In other words, 
 \begin{equation*}
-    x = m + n\left(\frac{1 + \sqrt{-19}}{2}\right) = \frac{(2m + n) + n\sqrt{-19}}{2}.
+    \depth(I, M) = \inf\left\{i\colon\Ext^i_A(A/I, M)\ne 0\right\}.
 \end{equation*}
-Since $x$ is a unit, we have $N_{K/\Q}(x) = \pm 1$, that is, 
-\begin{equation*}
-    (2m + n)^2 + 19 n^2 = 4.
-\end{equation*}
-It is not hard to see, from the above equation, that the only solutions are $x = \pm 1$.
+For a Noetherian local ring $(A,\frakm, k)$, we write $\depth_A M$ for $\depth(\frakm, M)$.
 
-Hence, $r\in\{\pm 1\}$, in particular, $\calO_K/(p)$ can have atmost $3$ elements and at least $2$ elements. Thus, the \emph{ideal norm} of $(p)$ is either $2$ or $3$. Hence, $N_{K/\Q}(p)\in\{2, 3\}$.
+\begin{corollary}
+    Let $A$ be a Noetherian ring, $I, I'$ ideals of $A$, and $M$ a finite $A$-module such that $M\ne IM$ and $M\ne I'M$. Then, $\depth(I, M) = \depth(I', M)$.
+\end{corollary}
 
-We may suppose $p = m + n\frac{1 + \sqrt{-19}}{2}$. The equation involving norm gives us 
-\begin{equation*}
-    (2m + n)^2 + 19n^2\in\{8, 12\}.
-\end{equation*}
-Due to size reasons, $n = 0$. And we are left with $m^2\in\{2,3\}$, which is impossible. Thus, $\calO_K$ cannot be an ED. This completes the proof.
+\section{Regular Rings}
+
+\begin{definition}
+    Let $(A,\frakm, k)$ be a local ring, $M$ a finite $A$-module. A \define{minimal (free) resolution} is an exact sequence $L_\bullet\to M\xrightarrow{\varepsilon} 0$ such that 
+    \begin{enumerate}[label=(\alph*)]
+        \item 
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma}
+    Let $(A,\frakm, k)$ be a local ring, and $M$ a finite $A$-module. Suppose $L_\bullet\to M$ is a minimal resolution of $M$; then 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\dim_k \Tor^A_i(M, k) = \rank L_i$ for all $i$, 
+        \item $\projdim M = \sup\left\{i\colon\Tor^A_i(M, k)\ne 0\right\}\le\projdim_A k$,
+        \item if $M\ne 0$ and $\projdim M = r < \infty$, then for any finite $A$-module $N\ne 0$ we have $\Ext^r_A(M, N)\ne 0$.
+    \end{enumerate}
+\end{lemma}
 \end{document}
