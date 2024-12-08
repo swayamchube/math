@@ -1,0 +1,334 @@
+\documentclass[12pt]{article}
+
+% \usepackage{./arxiv}
+
+\title{$\displaystyle\prod_{i = 1}^\infty\Z$}
+\author{Swayam Chube}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrN}{\mathscr N}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrR}{\mathscr R}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\scshape}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+\begin{document}
+\maketitle
+
+In $G = \displaystyle\prod_{i = 1}^\infty\Z$, there are the ``standard basis vectors'' $\{e_i\colon i\ge 1\}$ given by 
+\begin{equation*}
+    e_i(j) = 
+    \begin{cases}
+        1 & i = j\\
+        0 & \text{otherwise}.
+    \end{cases}
+\end{equation*}
+These are linearly independent over $\Z$ and hence generate a free abelian subgroup of $G$, which we denote by $H$.
+
+\begin{lemma}\thlabel{lem:vanish-on-H}
+    Let $f: G\to\Z$ be a homomorphism such that $f|_H = 0$. Then $f = 0$.
+\end{lemma}
+\begin{proof}
+    As a consequence of the hypothesis, it is easy to see that $f(a_1,a_2,\dots) = f(b_1,b_2,\dots)$ if $a_i = b_i$ for all but finitely many $i\ge 1$. 
+
+    Let $p\ge 2$ be any prime and $(a_n)_{n\ge 1}$ be any sequence of integers. Our observation above yields that for all $n\ge 1$, 
+    \begin{equation*}
+        f(a_1p, a_2p^2,\dots) = f(\underbrace{0,\dots,0}_{n - 1\text{ times}}, a_np^n, a_{n + 1}p^{n + 1},\dots).
+    \end{equation*}
+    The right hand side is divisible by $p^n$ and hence, $p^n\mid f(a_1p,a_2p^2,\dots)$ for all $n\ge 1$. This is possible if and only if 
+    \begin{equation*}
+        f(a_1p, a_2p^2,\dots) = 0.
+    \end{equation*}
+
+    Finally, let $(a_n)_{n\ge 1}\in G$. Since $2^n$ and $3^n$ are coprime for all $n\ge 1$, there are $b_n, c_n\in\Z$ such that $a_n = b_n2^n + c_n3^n$. Thus, 
+    \begin{equation*}
+        f(a_1,a_2,\dots) = f(2b_1, 4b_2, \dots) + f(3c_1, 9c_2,\dots) = 0.
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    $G$ is not a free abelian group.
+\end{theorem}
+\begin{proof}
+    Suppose $G$ were free, then there is a set $S$ and an isomorphism $\displaystyle\varphi: G\to F = \bigoplus_{S}\Z$. Since $G$ is uncountable, so is $S$. Let $\pi_s: F\to\Z$ denote the projection onto the $s$-th coordinate.
+
+    For each $i\ge 1$, $\varphi(e_i)$ has only finitely many nonzero coordinates, say $S_i\subseteq S$. Then, $\bigcup_i S_i$ is a countable subset of $S$, whence $T = S\setminus\bigcup_{i} S_i$ is still uncountable, in particular, nonempty.
+
+    For each $t\in T$, $\pi_t\circ\varphi(e_i) = 0$ for all $i\ge 1$ and hence, $\pi_t\circ\varphi|_H = 0$. Due to the preceding lemma, $\pi_t\circ\varphi = 0$ for all $t\in T$, but this is absurd, since $\varphi$ is surjective.
+\end{proof}
+
+\begin{lemma}\thlabel{lem:vanish-on-ei}
+    If $f: G\to\Z$ is a homomorphism, then $f(e_i) = 0$ for all but finitely many $i\ge 1$.
+\end{lemma}
+\begin{proof}
+    Suppose not, then there is a sequence $1\le i_1 < i_2 < \cdots$ such that $f(e_{i_j})\ne 0$. By composing $f$ with a suitable endomorphism of $G$, we may suppose that $i_j = j$ and $f(e_{i_j}) > 0$ for all $j\ge 1$.
+
+    Let $a_i = f(e_i)$ and $p$ be a prime not dividing $a_1$. Define two sequences $(x_n)_{n\ge 1}$ and $(y_n)_{n\ge 1}$ by setting $x_1 = 1$,
+    \begin{equation*}
+        x_{n + 1} = pf(x_1,\dots,x_n,0,0,\dots)\quad\text{for }n\ge 1,
+    \end{equation*}
+    and 
+    $y_1 = 1$, 
+    \begin{equation*}
+        y_{n} = f(x_1,\dots,x_{n - 1},0,0,\dots)\quad\text{for }n\ge 2.
+    \end{equation*}
+    Hence, $x_n = py_n$ for $n\ge 2$.
+    Note that for $n\ge 2$
+    \begin{equation*}
+        y_{n + 1} = y_n + a_nx_n = y_n + pa_ny_n = y_n(1 + pa_n)\ge (p + 1)y_n.
+    \end{equation*}
+    In particular, $y_n\to\infty$ as $n\to\infty$. Also, multiplying both sides of the above equation by $p$, we have 
+    \begin{equation*}
+        x_{n + 1} = x_n(1 + pa_n)\quad\text{for }n\ge 2.
+    \end{equation*}
+    Therefore, for $n\ge 2$, $y_n\mid x_m$ whenever $m\ge n$. We can write 
+    \begin{equation*}
+        f(x_1,x_2,\dots) = y_n + f(0,\dots,0,x_n,x_{n + 1},\dots).
+    \end{equation*}
+    Since $y_n$ divides the right hand side, $y_n\mid f(x_1,x_2,\dots)$ for all $n\ge 1$. But $y_n$ grows without bound, and hence, $f(x_1,x_2,\dots) = 0$. Finally, note that 
+    \begin{equation*}
+        0 = f(x_1,x_2,\dots) = a_1 + f(0,x_2,x_3,\dots)\equiv a_1\pmod p,
+    \end{equation*}
+    since $p\mid x_i$ for all $i\ge 2$. This is absurd, since $p\nmid a_1$.
+\end{proof}
+
+\begin{theorem}
+    $\Hom_{\Z}(G,\Z)$ is a free abelian group with basis $\pi_i: G\to\Z$, the canonical projections.
+\end{theorem}
+\begin{proof}
+    Follows from \thref{lem:vanish-on-H} and \thref{lem:vanish-on-ei}
+\end{proof}
+\end{document}
