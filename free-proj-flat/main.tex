@@ -1,0 +1,304 @@
+\documentclass[12pt]{article}
+
+% \usepackage{./arxiv}
+
+\title{Free, Projective, and Flat Modules}
+\author{Swayam Chube}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrN}{\mathscr N}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrR}{\mathscr R}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\scshape}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+\begin{document}
+\maketitle
+
+\subsection{Cartier}
+
+\begin{theorem}
+    Let $M$ be a finitely generated module over an integral domain $A$. If for every $\frakm\in\MaxSpec(A)$, $M_\frakm$ is free as an $A_\frakm$-module, then $M$ is a projective $A$-module.
+\end{theorem}
+\begin{proof}
+    First show that $M$ is a torsion-free $A$-module. Suppose $am = 0$ for some $0\ne a\in A$ and $m\in M$. Let $\fraka$ be the annihilator of $m$ in $A$ and $\frakm$ a maximal ideal containing $A$. Note that $\frac{a}{1}\frac{m}{1} = 0$ in $M_\frakm$, which is free over $A_\frakm$, an integral domain, whence, is torsion free. That is, $\frac{m}{1} = 0$, whence, there is some $s\in A\setminus\frakm$ such that $sm = 0$, which is absurd, since $\fraka\subseteq\frakm$. This shows that $M$ is torsion-free.
+
+    Now, choose a set of generators $\{m_i\colon 1\le i\le n\}$ for $M$ over $A$. Let $\scrP$ be the collection of $A$-endomorphisms of $M$ which are of the form 
+    \begin{equation*}
+        m\longmapsto\sum_{i = 1}^n f_i(m)m_i,
+    \end{equation*}
+    where $f_1,\dots, f_n: M\to A$ are $A$-module homomorphisms. Note that $\scrP$ is an $A$-submodule of $\End_A(M)$. We shall show that $\id_M\in\scrP$.
+
+    Let $\frakm$ be a maximal ideal of $A$. We know that $M_\frakm$ is free as an $A_\frakm$-module and hence, there are $A_\frakm$-module homomorphisms $f_i: M_\frakm\to A_\frakm$ such that 
+    \begin{equation*}
+        m' = \sum_{i = 1}^n f_i'(m')\frac{m_i}{1}\quad\forall m'\in M_\frakm.
+    \end{equation*}
+    To see that this is possible, first consider an $A_\frakm$-basis $\{e_i\colon 1\le i\le N\}$ for $M_\frakm$. We can write 
+    \begin{equation*}
+        e_i = \sum_{j = 1}^n a_{ij}\frac{m_j}{1}\quad\forall~1\le i\le N.
+    \end{equation*}
+    Further, there are $A_\frakm$-linear maps $f_i: M_\frakm\to A_\frakm$ such that 
+    \begin{equation*}
+        m' = \sum_{j = 1}^N f_j(m')e_j.
+    \end{equation*}
+    Set 
+    \begin{equation*}
+        f_j'(m') = \sum_{i = 1}^N a_{ij}f_i(m')\quad\forall~m'\in M_\frakm.
+    \end{equation*}
+    Then, 
+    \begin{equation*}
+        \sum_{j = 1}^nf_j'(m')\frac{m_j}{1} = \sum_{i = 1}^N\sum_{j = 1}^n a_{ij}f_i(m')\frac{m_j}{1} = \sum_{i = 1}^N f_i(m')e_i = m'.
+    \end{equation*}
+
+    Coming back, since $M$ is torsion-free, the canonical map $M\to M_\frakm$ is an injective map of $A$-modules. Further, we can find an $s\in A\setminus\frakm$ such that $s f_i'\left(\frac{m_j}{1}\right)\in A$ for $1\le i,j\le n$. 
+
+    Note that $m'\mapsto sf_i'(m')$ is $A_\frakm$-linear as a map $M_\frakm\to A_\frakm$, and hence, is $A$-linear. The restriction of this map to $M\subseteq M_\frakm$ takes values in $A$. Thus, we can identify $sf_i'$ with an $A$-linear map $M\to A$. Further, for every $m\in M$, we have 
+    \begin{equation*}
+        sm = \sum_{i = 1}^n sf_i'(m)m_i.
+    \end{equation*}
+    That is, $s\cdot\id_M\in\scrP$. Now, let $\fraka$ be the collection of all $a\in A$ such that $a\cdot\id_M\in\scrP$. Then $\fraka$ is an ideal of $A$. If $\fraka$ were a proper ideal, it would be contained in a maximal ideal $\frakm$. But from our preceding conclusion, there is some $s\in A\setminus\frakm$ such that $s\cdot\id_M\in\scrP$, a contradiction. Thus, $\fraka = A$, in particular, $\id_M\in\scrP$.
+
+    Finally, we show that $M$ is projective. We have shown that there are $A$-linear maps $f_i: M\to A$ such that 
+    \begin{equation*}
+        m = \sum_{i = 1}^n f_i(m)m_i\quad\forall~m\in M.
+    \end{equation*}
+    Let $F$ be the free module $\bigoplus_{i = 1}^n Ae_i$ and let $g: F\to M$ be given by $e_i\mapsto m_i$ and $f: M\to F$ given by 
+    \begin{equation*}
+        f(m) = \sum_{i = 1}^n f_i(m)e_i.
+    \end{equation*}
+    By our construction, $g\circ f = \id_M$, and hence $M$ is a direct summand of $F$, i.e. $M$ is projective.
+\end{proof}
+\end{document}

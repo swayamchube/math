@@ -1,0 +1,743 @@
+\documentclass[12pt]{article}
+
+% \usepackage{./arxiv}
+
+\title{Subnormality in Group Theory}
+\author{Swayam Chube}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrN}{\mathscr N}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrR}{\mathscr R}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\scshape}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+\begin{document}
+\maketitle
+
+\section{Sylow Theory}
+
+\subsection{The Three Theorems}
+
+In this section, we shall state and prove the three Sylow theorems.
+
+\begin{theorem}[Sylow's First Theorem]\thlabel{sylow-first}
+    Let $G$ be a finite group and $p$ be a prime dividing the order of $G$ with $k\in\N$ such that $p^k\||G|$. Then, there is a subgroup $P\le G$ with $|P| = p^k$.
+\end{theorem}
+
+We denote the set of all $p$-Sylow subgroups by $\Syl_p(G)$.
+
+\begin{theorem}[Sylow's Second Theorem]\thlabel{sylow-second}
+    Let $G$ be a finite group and $p$ be a prime dividing the order of $G$. Then, all subgroups in $\Syl_p(G)$ are conjugate.
+\end{theorem}
+
+In order to prove the above theorem, we require the following lemmas: 
+\begin{lemma}\thlabel{p-group-normalizer-lemma}
+    Let $G$ be a finite group, $p$ a prime dividing $|G|$ and $P\in\Syl_p(G)$. If $H$ is a $p$-group contained in $N_G(P)$, then $H$ is contained in $P$.
+\end{lemma}
+
+\begin{lemma}\thlabel{p-group-conjugate-sylow-lemma}
+    Let $G$ be a finite group, $p$ a prime dividing $|G|$, $H$ a $p$-subgroup and $P\in\Syl_p(G)$. Then, there is $x\in G$ such that $xHx^{-1}\subseteq P$.
+\end{lemma}
+
+\begin{theorem}[Sylow's Third Theorem]
+    Let $G$ be a finite grouop and $p$ a prime dividing $|G|$. Let $n_p$ be the cardinality of $\Syl_p(G)$. Then, 
+    \begin{enumerate}
+        \item $n_p = |G|/|N_G(P)|$ for any $P\in\Syl_p(G)$
+        \item $n_p\mid |G|$
+        \item $n_p\equiv1\pmod p$
+    \end{enumerate}
+\end{theorem}
+
+\subsection{Some Related Results}
+
+Henceforth, unless specified otherwise, $G$ is a finite group and $p$ is a prime dividing the order of $G$.
+
+\begin{lemma}\thlabel{p-group-containment-lemma}
+    Let $G$ be a finite group and $P$ be a $p$-subgroup of $G$. Then, there is a $p$-Sylow subgroup of $G$ containing $P$.
+\end{lemma}
+\begin{proof}
+    Choose any $Q\in\Syl_p(G)$. Using \thref{p-group-conjugate-sylow-lemma}, there is $x\in G$ such that $xPx^{-1}\subseteq Q$, and equivalently, $P\subseteq x^{-1}Qx$, which is also a $p$-Sylow subgroup. This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    Let $G$ be a finite group and $H$ a subgroup. If $P\in\Syl_p(H)$, then there is $Q\in\Syl_p(G)$ such that $P = H\cap Q$.
+\end{corollary}
+\begin{proof}
+    Since $P$ is a $p$-subgroup of $G$, due to \thref{p-group-containment-lemma}, there is a $p$-Sylow subgroup $Q$ containing it. We shall show that $P = H\cap Q$. Obviously, $P\subseteq H\cap Q$, therefore, $v_p(|H\cap Q|)\ge v_p(|P|) = v_p(H)$. But since $H\cap Q$ is a subgroup of $H$, we must have $v_p(|H|)\ge v_p(|H\cap Q|)$, as a result, $v_p(|H|) = v_p(|H\cap Q|)$ and $P = H\cap Q$, since $H\cap Q$ is a $p$-group owing the fact that it is a subgroup of $Q$.
+\end{proof}
+
+
+\begin{theorem}\thlabel{generalized-normalizer-stability}
+    Let $P\in\Syl_p(G)$ and $H$ be a subgroup of $G$ such that $N_G(P)\subseteq H$. Then, $N_G(H) = H$ and $[G:H]\equiv 1\pmod p$.
+\end{theorem}
+\begin{proof}
+    Let $x\in N_G(H)$. Then, $P^x\subseteq H$ and is also an element of $\Syl_p(H)$. Using \thref{sylow-second}, there is $h\in H$ such that $P^x = P^h$, equivalently, $x^{-1}h\in N_G(P)\subseteq H$, implying that $x\in H$.
+
+    Now, we have 
+    \begin{equation*}
+        [G:H] = \frac{[G:N_G(P)]}{[H:N_G(P)]} = \frac{n_p(G)}{n_p(H)}\equiv1\pmod p
+    \end{equation*}
+\end{proof}
+
+In particular, we have the following attractive result:
+\begin{corollary}\thlabel{normalizer-stability-lemma}
+    Let $P\in\Syl_p(G)$. Then, $N_G(N_G(P)) = N_G(P)$.
+\end{corollary}
+
+\begin{theorem}[Frattini Argument]
+    Let $N$ be a normal subgroup of $G$ and $P\in\Syl_p(N)$, then $G = N_G(P)N$.
+\end{theorem}
+\begin{proof}
+    Let $g\in G$. Since $N\unlhd G$, $P^g\subseteq N^g\subseteq N$, $P^g\in\Syl_p(N)$, as a result, there is $n\in N$ such that $(P^g) = P^n$, equivalently, $P^{n^{-1}g} = P$. This immediately implies $n^{-1}g\in N_G(P)$, therefore, $g\in NN_G(P) = N_G(P)N$, completing the proof.
+\end{proof}
+
+\section{Nilpotent Groups}
+
+\begin{definition}[Nilpotent Groups]\thlabel{def-nilpotent}
+    A group $G$ is said to be \textit{nilpotent} if there is a finite collection of normal subgroups $H_0,\ldots,H_n$ with 
+    \begin{equation*}
+        1 = H_0\subseteq H_1\subseteq\cdots\subseteq H_n = G
+    \end{equation*}
+    and such that 
+    \begin{equation*}
+        H_{i + 1}/H_i\subseteq Z(G/H_{i})
+    \end{equation*}
+    for $0\le i < n$.
+\end{definition}
+
+The Upper Central Series and the Lower Central Series are often useful in the analysis of nilpotent groups.
+
+\begin{definition}[Upper Central Series]\thlabel{def-upper-central}
+    For any group $G$, define the \textit{Upper Central Series} as a sequence of groups,
+    \begin{equation*}
+        1 = Z_0\unlhd Z_1\unlhd\cdots
+    \end{equation*}
+    such that 
+    \begin{enumerate}
+        \item Each $Z_i$ is characteristic in $G$ 
+        \item $Z_{i + 1}/Z_i = Z(G/Z_i)$
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[Lower Central Series]\thlabel{def-lower-central}
+    For any group $G$, define the \textit{Lower Central Series} as a sequence of groups,
+    \begin{equation*}
+        G = G_0\unrhd G_1\unrhd\cdots
+    \end{equation*}
+    such that $G_{i + 1} = [G,G_{i}]$
+\end{definition}
+
+\subsection{Analyzing The Upper And Lower Central Series}
+\begin{lemma}\thlabel{lem-zi-construct}
+    For all $i\ge 0$, let $\pi_i:G\twoheadrightarrow G/Z_i$ denote the projection. Then, $Z_{i + 1} = \pi_i^{-1}\left(Z(G/Z_i)\right)$.
+\end{lemma}
+\begin{proof}
+    Obvious.
+\end{proof}
+
+\begin{lemma}\thlabel{lem-zi-characteristic}
+    For all $i\ge0$, $Z_i$ is characteristic in $G$
+\end{lemma}
+\begin{proof}
+    We shall show this by induction on $i$. The statement is obviously true for $Z_0 = \{1\}$. Suppose we have shown that the statement holds up to $i\ge0$. Let $\varphi: G\to G$ be an automorphism of groups. We now have the following commutative diagram: 
+
+    \begin{center}
+    \begin{tikzcd}
+        G\arrow[r,"\varphi"]\arrow[d, two heads, "\pi_i" left]\arrow[rd,dotted,"f" description] & G\arrow[d, two heads, "\pi_i" right]\\
+        G/Z_i\arrow[r,dotted, "\exists!~\psi" below] & G/Z_i
+    \end{tikzcd}
+    \end{center}
+
+    Since $\ker\pi_i\circ\varphi = \varphi^{-1}(\ker\pi_i) = Z_i$, due to the \textbf{universal property} of the quotient, there is a unique homomorphism $\varphi: G/Z_i\to G/Z_i$ such that the above diagram commutes. Define $f = \pi_i\circ\varphi$. Then, $Z_i = \ker f = \pi_i^{-1}(\ker\psi)$, and thus, $\ker\psi = 1$. This implies that $\psi$ is injective. Further, since $\pi_i$ is surjective, so is $f = \pi_i\circ\varphi$, implying that $\psi$ must be surjective. As a result, $\psi$ is an automorphism of groups.
+
+    Let $g\in Z_{i + 1}$, then $\pi_i(\varphi(g)) = \psi(\pi_i(g))$. We know, due to \thref{lem-zi-construct}, that $\pi(g)\in Z(G/Z_i)$ and therefore, $\psi(\pi_i(g))\in Z(G/Z_i)$, consequently $\pi_i(\varphi(g))\in Z(G/Z_i)$ and thus, $\varphi(g)\in Z_{i + 1}$.
+
+    Since we have shown for all automorphisms $\varphi: G\to G$, that $\varphi(Z_{i + 1})\subseteq Z_{i + 1}$, then $\varphi^{-1}(Z_{i + 1})\subseteq Z_{i + 1}$. This immediately gives us that $\varphi(Z_{i + 1}) = Z_{i + 1}$ for all automorphisms $\varphi: G\to G$ and $Z_{i + 1}$ is characteristic.
+\end{proof}
+
+\begin{lemma}\thlabel{lem-commutator-upper-containment}
+    For all $i\ge 0$, we have $[G,Z_{i + 1}]\subseteq Z_i$.
+\end{lemma}
+\begin{proof}
+    Let $g\in G$ and $x\in Z_{i + 1}$. Let $\pi_i: G\to G/Z_i$ be the natural projection. Then, 
+    \begin{equation*}
+        \pi_i([g,x]) = [\pi_i(g), \pi_i(x)] = 1
+    \end{equation*}
+    where the last equality follows from the fact that $\pi_i(x)\in\pi_i(Z_{i + 1}) = Z(G/Z_i)$. This immediately implies that $[g,x]\in Z_i$ and the desired conclusion.
+\end{proof}
+
+\begin{lemma}\thlabel{lem-gi-characteristic}
+    For all $i\ge 0$, $G_i$ is characteristic in $G$.
+\end{lemma}
+\begin{proof}
+    We shall show this by induction on $i$. The base case with $G_0 = G$ is trivial. Let $\varphi:G\to G$ be an automorphism of groups. Then, for all $g\in G$ and $x\in G_i$, it is not hard to see that $\varphi([g,x]) = [\varphi(g),\varphi(x)]\in [G,G_i] = G_{i + 1}$. Therefore, for all automorphisms $\varphi: G\to G$, $\varphi(G_{i + 1})\subseteq G_{i + 1}$. This implies that $\varphi(G_{i + 1}) = G_{i + 1}$, and completes the induction.
+\end{proof}
+
+\begin{lemma}\thlabel{lem-gi-containment-center}
+    For all $i\ge 0$, $G_i/G_{i + 1} \subseteq Z(G/G_{i + 1})$.
+\end{lemma}
+\begin{proof}
+    Let $\pi_{i + 1}: G\to G/G_{i + 1}$ denote the natural projection. Let $x\in G_i$ and $g\in G$, then 
+    \begin{equation*}
+        1 = \pi_{i + 1}([x, g]) = [\pi_{i + 1}(x), \pi_{i + 1}(g)]
+    \end{equation*}
+    since $\pi_{i + 1}$ is surjective, $\pi_{i + 1}(x)\in Z(G/G_{i + 1})$. This completes the proof.
+\end{proof}
+
+\begin{theorem}\thlabel{thm-equivalence-nilpotent}
+    For a group $G$, the following are equivalent,
+    \begin{enumerate}
+        \item For some $n\ge 0$, $Z_n = G$
+        \item For some $m\ge 0$, $G_m = 1$
+        \item $G$ is nilpotent
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+We shall show that $(1)\Longrightarrow (2)\Longrightarrow (3)\Longrightarrow (1)$, which would imply the desired conclusion.
+\begin{itemize}
+    \item $\underline{(1)\Longrightarrow(2):}$ We have a finite series
+    \begin{equation*}
+        1 = Z_0\subseteq Z_1\subseteq\cdots\subseteq Z_n = G
+    \end{equation*}
+    We shall show, through induction on $i$, that $G_i\subseteq Z_{n - i}$. The base case with $i = 0$ is obviously true. Using \thref{lem-commutator-upper-containment}, we have, for all $i\le n - 1$,
+    \begin{equation*}
+        G_{i + 1} = [G, G_i]\subseteq [G, Z_{n - i}]\subseteq [G, Z_{n - i - 1}]\subseteq Z_{i + 1}
+    \end{equation*}
+    which completes the induction. Finally, we have $G_n\subseteq Z_0 = 1$, implying the desired conclusion.
+
+    \item $\underline{(2)\Longrightarrow(3):}$ Simply define $H_i = G_{n - i}$ for all $0\le i\le n$. Due to \thref{lem-gi-containment-center}, we have that $H_{i + 1}/H_i\subseteq Z(G/H_i)$.
+
+    \item $\underline{(3)\Longrightarrow(1):}$ We shall show that for all $i\ge 0$, $H_i\subseteq Z_i$. The base case with $i = 0$ is trivial. Consider the following commutative diagram:
+    \begin{center}
+    \begin{tikzcd}
+        G\arrow[r, two heads, "\pi_i"]\arrow[d, two heads, "\pi_i'" left] & G/Z_i\\
+        G/H_i\arrow[ru, dotted, two heads, "\exists!~\phi" below]
+    \end{tikzcd}
+    \end{center}
+    Since $H_i\subseteq Z_i$, using the universal property of the quotient, there is an epimorphism $\phi: G/H_i\to G/Z_i$ such that the above diagram commutes. Let $x\in H_{i + 1}$. Then, $\pi_i'(x)\in Z(G/H_i)$, therefore, for all $g\in G$
+    \begin{equation*}
+        1 = \phi\left(\pi_i'([g, x])\right) = \pi_i([g,x]) = [\pi_i(g), \pi_i(x)]
+    \end{equation*}
+    Now, since $\pi_i$ is surjective, $\pi_i(x)\in Z(G/Z_i)$, and thus, $x\in Z_{i + 1}$. This implies the desired conclusion.
+\end{itemize}
+\end{proof}
+
+\subsection{Related Results for Nilpotent Groups}
+
+\begin{lemma}\thlabel{lem-p-group-nilpotent}
+    Every finite $p$-group is nilpotent.
+\end{lemma}
+\begin{proof}
+    Let $G$ be a finite $p$-group. We shall show that the upper central series is finite by showing the proper containment $Z_i\subsetneq Z_{i + 1}$ whenever $Z_i\subsetneq G$ which would imply the desired conclusion. Let $\pi_i: G\to G/Z_i$ denote then natural projection. We know, due to \thref{lem-zi-construct}, that $Z_{i + 1} = \pi_i^{-1}(Z(G/Z_i))$ and since $G/Z_i$ is a non-trivial $p$-group, it must have a non-trivial center, therefore, $Z_i\subsetneq Z_{i + 1}$. This completes the proof.
+\end{proof}
+
+\begin{lemma}\thlabel{lem-normalizer-proper-containment}
+    Let $G$ be a nilpotent group and $H$, a proper subgroup of $G$. Then, $H\subsetneq N_G(H)$.\\
+    \textit{Note that finiteness of $G$ is \underline{NOT} required}.
+\end{lemma}
+\begin{proof}
+    Since $G$ is nilpotent, the upper central series $1 = Z_0\subseteq Z_1\subseteq\cdots\subseteq Z_n = G$ is strictly increasing (with respect to containment). Let $k$ be the maximal index such that $Z_k\subseteq H$, that is to say, $Z_{k + 1}\subsetneq H$. Now, using \thref{lem-commutator-upper-containment},
+    \begin{equation*}
+        [Z_{k + 1}, H]\subseteq [Z_{k + 1}, G]\subseteq Z_k\subseteq H
+    \end{equation*}
+    as a result, $Z_{k + 1}\subseteq N_G(H)$ which completes the proof.
+\end{proof}
+
+\begin{lemma}\thlabel{lem-nilpotent-sylow}
+    Let $G$ be a finite nilpotent group. For every prime $p$ dividing the order of $G$, the $p$-Sylow subgroup $P$ is normal and therefore unique.
+\end{lemma}
+\begin{proof}
+    Recall from the study of Sylow subgroups that $N_G(N_G(P)) = N_G(P)$. This combined with \thref{lem-normalizer-proper-containment} implies that $N_G(P) = G$, and $P$ is normal in $G$ which immediately implies uniqueness.
+\end{proof}
+
+\begin{lemma}\thlabel{lem-product-nilpotent}
+    Let $G_1,\ldots,G_n$ be nilpotent groups. Then, their direct product $G_1\times\cdots\times G_n$ is also nilpotent.
+\end{lemma}
+\begin{proof}
+    The central series of the product is the pointwise product of the individual central series.
+\end{proof}
+
+\begin{theorem}\thlabel{thm-nilpotent-decomposition}
+    A finite group is nilpotent if and only if it is a direct product of $p$-groups.
+\end{theorem}
+\begin{proof}
+    Suppose $G$ is a finite nilpotent group, then due to \thref{lem-nilpotent-sylow}, the Sylow subgroups of $G$ are normal and it is well known that in this case, $G$ is the direct product of the Sylow subgroups.
+
+    Conversely, if $G$ is the direct product of $p$-groups, then using \thref{lem-product-nilpotent} and \thref{lem-p-group-nilpotent}, we have that $G$ is nilpotent.
+\end{proof}
+
+\begin{proposition}\thlabel{prop:normalizer-strict-implies-nilpotent}
+    Let $G$ be a finite group. If $H\subsetneq N_G(H)$ for every proper subgroup $H$ of $G$, then $G$ is nilpotent.
+\end{proposition}
+\begin{proof}
+    Let $P$ be a Sylow subgroup of $G$. Since $N_G(P) = N_G(N_G(P))$, we must have that $N_G(P) = G$, consequently, $P$ is normal in $G$. It follows that $G$ is a (internal) direct product of its Sylow subgroups, i.e., a direct product of $p$-groups, each of which is nilpotent. Hence, $G$ is nilpotent.
+\end{proof}
+
+\begin{theorem}\thlabel{thm-nilpotent-subgroup-quotient}
+    Every subgroup and quotient of a nilpotent group is nilpotent.
+\end{theorem}
+\begin{proof}
+    Let $G$ be a nilpotent group and $H$ a subgroup of $G$. Let $H_0\supseteq H_1\supseteq\cdots$ be the lower central series of $H$. We shall show by induction on $i$, that $H_i\subseteq G_i$. The base case with $i = 0$ is trivial. We now have 
+    \begin{equation*}
+        H_{i + 1} = [H, H_i]\subseteq [G, H_i]\subseteq [G, G_i] = G_{i + 1}
+    \end{equation*}
+    this completes the induction. Finally, since the lower central series of $G$ is finite, the lower central series of $H$ must be finite too, implying that $H$ is nilpotent.
+
+    On the other hand, let $N$ be a normal subgroup of $G$ and $G' = G/N$. Let $\pi: G\to G'$ denote the natural projection. We shall show by induction on $i$ that $G_i' = \pi(G_i)$. The base case with $i = 0$ is trivial. We have 
+    \begin{equation*}
+        G_{i + 1}' = [G', G_i'] = \pi([G, G_i]) = \pi(G_{i + 1})
+    \end{equation*}
+    This completes the induction and implies that the lower central series of $G'$ is finite.
+\end{proof}
+
+\begin{lemma}\thlabel{lem-nilpotent-iff-quotient}
+    A group $G$ is nilpotent if and only if $G/Z(G)$ is nilpotent.
+\end{lemma}
+\begin{proof}
+    One direction of the statement is trivial due to \thref{thm-nilpotent-subgroup-quotient}. Now suppose $\widetilde{G} = G/Z(G)$ is nilpotent and let $\pi: G\to G/Z(G)$ denote the natural projection. Let $\widetilde{G} = \widetilde{G}_0\supseteq\widetilde{G}_1\supseteq\cdots\supseteq\widetilde{G}_n = 1$ denote the lower central series of $\widetilde{G}$. We shall show by induction on $i$ that $G_i\subseteq\pi^{-1}(\widetilde{G}_i)$. We have 
+    \begin{equation*}
+        \pi(G_{i + 1}) = \pi([G, G_{i}]) = [\pi(G), \pi(G_i)]\subseteq[\widetilde{G},\widetilde{G}_i] = \widetilde{G}_{i + 1}
+    \end{equation*}
+    This completes the induction and implies the desired conclusion.
+\end{proof}
+
+\begin{lemma}\thlabel{lem-normal-in-nilpotent}
+    Let $G$ be a nilpotent group and $N$ a non-trivial normal subgroup of $G$. Then, $Z(G)\cap N$ is non-trivial.
+\end{lemma}
+\begin{proof}
+    Let $1 = Z_0\subseteq Z_1\subseteq\cdots\subseteq Z_n = G$ denote the upper central series of $G$. Let $k$ be the unique index such that $Z_k\cap N = 1$ while $Z_{k + 1}\cap N\ne 1$. We shall show that $G\cap Z_{k + 1}\subseteq Z(G)$. Indeed, we have 
+    \begin{equation*}
+        [G, N\cap Z_{k + 1}]\subseteq [G, N]\cap[G, Z_{k + 1}]\subseteq N\cap Z_{k} = 1
+    \end{equation*}
+    where we used that for all normal subgroups $N$, $[G,N]\subseteq N$ and \thref{lem-commutator-upper-containment}. 
+
+    Since $[G, N\cap Z_{k + 1}] = 1$, we must have that $1\ne N\cap Z_{k + 1}\subseteq Z(G)$, which completes the proof.
+\end{proof}
+
+
+\subsection{The Fitting Subgroup}
+
+\begin{definition}
+    Let $G$ be a finite group. For every prime $p$, let $\Syl_p(G)$ denote the collection of all Sylow $p$-subgroups of $G$. Define 
+    \begin{equation*}
+        \bfO(G) = \bigcap_{H\in\Syl_p(G)} H.
+    \end{equation*}
+\end{definition}
+
+Since all Sylow $p$-subgroups of $G$ are conjugate, $\bfO(G)$ is a normal $p$-subgroup of $G$. For distinct primes $p\ne q$, $\bfO_p(G)\cap\bfO_q(G) = \{1\}$ and hence, $\bfO_p(G)$ commutes with $\bfO_q(G)$.
+
+\begin{proposition}
+    $\bfO_p(G)$ contains every normal $p$-subgroup of $G$.
+\end{proposition}
+\begin{proof}
+    Let $P\noreq G$ be a normal $p$-subgroup. It is well-known that there is a Sylow $p$-subgroup of $G$ containing $P$. But since all the Sylow $p$-subgroups of $G$ are conjugate, $P$ must be contained in all of them, and hence, in $\bfO_p(G)$.
+\end{proof}
+
+Consider the product map 
+\begin{equation*}
+    \mu: \prod_{p\mid G}\bfO_p(G)\longrightarrow G,
+\end{equation*}
+given by $\mu\left((x_p)\right) = \prod x_p$. We contend that this map is injective. Let $H$ be the image of $\mu$. Since each $\bfO_p(G)$ is contained in $H$, their orders must divide the order of $H$. Further, since they are coprime, we have that the order of $H$ is equal to the order of the product $\prod_p\bfO_p(G)$ and hence, the map must be injective.
+
+\begin{definition}
+    The image of $\mu$ is denoted by $\bfF(G)$ and is called the \define{Fitting subgroup}.
+\end{definition}
+
+\begin{proposition}
+    $\bfF(G)$ is a normal nilpotent subgroup of $G$. Further, it contains every nilpotent normal subgroup of $G$.
+\end{proposition}
+\begin{proof}
+    Being a product of normal subgroups, $\bfF(G)$ is normal. It is nilpotent as it is isomorphic to a direct product of $p$-groups, each of which is nilpotent.
+
+    Let $N\noreq G$ be a normal nilpotent subgroup of $G$ and suppose $P\in\Syl_P(N)$. Then, $P$ is normal in $G$. For any $g\in G$, $P^g$ is also contained in $N$ (owing to $N$ being normal in $G$) and has the same cardinality as $P$, i.e. is a Sylow $p$-subgroup of $N$. Consequently, $P = P^g$ and $P$ is normal in $G$, whence $P$ is contained in $\bfO_p(G)\subseteq\bfF(G)$. This shows that all Sylow subgroups of $N$ are contained in $\bfF(G)$. Since $N$ is the product of its Sylow subgroups, we have shown that $N$ is contained in $\bfF(G)$.
+\end{proof}
+
+\begin{proposition}
+    $\bfF(G)$ is characteristic in $G$.
+\end{proposition}
+\begin{proof}
+    Let $\varphi\in\Aut(G)$. Note that $\varphi(\bfF(G))$ is also nilpotent and normal in $G$. Consequently, it must be contained in $\bfF(G)$, whence the conclusion follows.
+\end{proof}
+
+\begin{proposition}\thlabel{prop:fitting-of-normal}
+    If $N\noreq G$, then $\bfF(N)\subseteq\bfF(G)$.
+\end{proposition}
+\begin{proof}
+    We know that $\bfF(N)$ is nilpotent and hence, it suffices to show that it is normal in $G$. For any $g\in G$, the map $x\mapsto g^{-1}xg = x^g$ is an automorphism of $N$. Since $\bfF(N)$ is characteristic in $N$, we have that $\bfF(N)^g\subseteq\bfF(N)$, whence the conclusion follows.
+\end{proof}
+
+\section{Subnormality}
+
+\begin{definition}
+    Let $G$ be a grouop. A subgroup $S\subseteq G$ is said to be \define{subnormal} in $G$ if there exist subgroups $H_i$ of $G$ such that 
+    \begin{equation*}
+        S = H_0\noreq H_1\noreq\cdots\noreq H_r = G.
+    \end{equation*}
+    In this situation, we write $S\nor\nor G$. The smallest integer $r$ for which the above holds is called the \define{subnormal depth} of $S$ in $G$.
+\end{definition}
+
+\begin{remark}
+    Note that the definition of a subnormal subgroup behaves well with respect to ``contraction''. That is, if $S\subnor G$ and $H$ is any subgroup of $G$, then $S\cap H\subnor H$. As a result, if $S, T\subnor G$, then $S\cap T\subnor G$.
+
+    Now, suppose $\varphi: G\to\overline G$ is a surjective group homomorphism and $S\subnor G$. Then, $\varphi(S)\subnor\overline G$, since the image of a subnormal series under $\varphi$ is still subnormal.
+\end{remark}
+
+\begin{lemma}
+    Let $G$ be a finite group. Then $G$ is nilpotent if and only if every subgroup of $G$ is subnormal.
+\end{lemma}
+\begin{proof}
+    Suppose $G$ is nilpotent and $H$ is a proper subgroup of $G$. Define $H_0 = H$ and $H_{i + 1} = N_G(H_i)$. Then, either $H_{i + 1} = G$ or $H_i\subsetneq H_{i + 1}$. This gives us a subnormal series for $H$.
+
+    Conversely, suppose every subgroup of $G$ is subnormal and let $H$ be a proper subgroup. There is a sequence 
+    \begin{equation*}
+        H = H_0\nor H_1\nor\cdots\nor H_n = G.
+    \end{equation*}
+    In particular, we may assume that $H_i\subsetneq H_{i + 1}$ for $0\le i\le n - 1$. Hence, $H\subsetneq H_1\subseteq N_G(H)$. Due to \thref{prop:normalizer-strict-implies-nilpotent}, we see that $G$ must be nilpotent.
+\end{proof}
+
+\begin{proposition}
+    Let $G$ be a finite group and $H\le G$. Then $H\subseteq\bfF(G)$ if and only if $H$ is nilpotent and subnormal in $G$.
+\end{proposition}
+\begin{proof}
+    Since $\bfF(G)$ is nilpotent, if $H$ were contained in $\bfF(G)$, then it would be niloptent too. Further, due to the preceding lemma, $H\subnor G$ and $\bfF(G)\nor G$, whence $H\subnor G$.
+
+    We prove the converse by induction on $|G|$. If $H = G$, then there is nothing to prove, since $G$ would be nilpotent and $\bfF(G) = G$. Suppose now that $H\subsetneq G$. There is a subnormal series
+    \begin{equation*}
+        H = H_0\nor H_1\nor\cdots\nor H_n = G.
+    \end{equation*}
+    where every successive containment is proper. Set $M = H_{n - 1}\nor G$. The inductive hypothesis applies since $H$ is nilpotent and subnormal in $M$, consequently, $H\subseteq\bfF(M)\subseteq\bfF(G)$, due to \thref{prop:fitting-of-normal}, thereby completing the proof.
+\end{proof}
+
+\begin{definition}
+    A \define{minimal normal subgroup} of a group $G$ is a non-identity normal subgroup of $G$ that does not admit any non-trivial normal subgroups. The \define{socle} of a \caution{finite} group $G$ is defined to be the subgroup generated by all minimal normal subgroups of $G$, which is precisely their product.
+\end{definition}
+
+If $M$ and $N$ are two minimal normal subgroups of $G$, then $M\cap N = \{1\}$ and hence, every element of $M$ commutes with every element of $N$. Thus, $\Soc(G)$ is precisely the product of all minimal normal subgroups of $G$ and is a normal subgroup of $G$. Further, if $G$ is a finite group that is not trivial, then it admits a non-trivial minimal finite group, and hence, $\Soc(G)$ is non-trivial.
+
+\begin{proposition}
+    Let $G$ be a finite group. Then $\Soc(G)$ is characteristic in $G$.
+\end{proposition}
+\begin{proof}
+    Let $\varphi\in\Aut(G)$. For a minimal normal subgroup $M$ of $G$, $\varphi(M)$ is also a minimal normal subgroup of $G$. Consequently, $\varphi$ permutes the minimal normal subgroups of $G$ and thus stabilizes the socle.
+\end{proof}
+
+\begin{theorem}
+    Let $G$ be a finite group, $S\subnor G$, and $M$ a minimal normal subgroup of $G$. Then $M\subseteq N_G(S)$.
+\end{theorem}
+\begin{proof}
+    Induction on $|G|$. If $S = G$, then there is nothing to prove, so we can suppose that $S\subsetneq G$. Since $S\subnor G$, arguing as in the preceding proof, we can choose a normal subgroup $N\subsetneq G$ such that $S\subnor N\nor G$.
+
+    If $M\cap N = 1$, then every element of $M$ commutes with every element of $N$, and hence, $M\subseteq C_G(N)\subseteq C_G(S)\subseteq N_G(S)$. Suppose now that $M\cap N$ is non-trivial. But since $M$ is a minimal normal subgroup, $M = M\cap N$, i.e. $M\subseteq N$.
+
+    The inductive hypothesis applies to $N$, whence every minimal normal subgroup of $N$ normalizes $S$, consequently, $\Soc(N)$ normalizes $S$. Therefore, it suffices to show that $M\subseteq\Soc(N)$. 
+
+    Since $N$ is a finite group and $M$ is a non-trivial normal subgroup of $N$, it contains a minimal normal subgroup. That is, $M\cap\Soc(N)\ne 1$. Since $\Soc(N)$ is characteristic in $N$, it must be normal in $G$. Owing to the minimality of $M$ in $G$, $M\cap\Soc(N) = M$, that is, $M\subseteq\Soc(N)$ as desired.
+\end{proof}
+
+\begin{theorem}[Wielandt]
+    Let $G$ be a finite group and $S,T\subnor G$. Then $\langle S, T\rangle\subnor G$.
+\end{theorem}
+\begin{proof}
+    Induction on $|G|$. Suppose $G$ is non-trivial, choose a minimal normal subgroup $M$ of $G$ and set $\overline G = G/M$. By abuse of notation, we use the ``overbar'' to denote the homomorphism $G\to\overline G$. Note that 
+    \begin{equation*}
+        \langle\overline S,\overline T\rangle = \overline{\langle S, T\rangle} = \overline{\langle S, T\rangle M},
+    \end{equation*}
+    since $M$ is the kernel of $G\to\overline G$. The inductive hypothesis applies to $\overline G$ and hence, $\langle\overline S,\overline T\rangle\subnor\overline G$. There is a natural bijection between the subgroups of $G$ containing $M$ and the subgroups of $\overline G$, which preserves normality and hence, subnormality. Therefore, $\langle S, T\rangle M\subnor G$.
+
+    Finally, note that $M\subseteq N_G(S), N_G(T)$ and hence, $M\subseteq N_G(\langle S, T\rangle)$, whence $\langle S, T\rangle\nor\langle S, T\rangle M\subnor G$, whence the conclusion follows.
+\end{proof}
+
+\begin{lemma}
+    Let $G$ be a group and $H\le G$. If $HH^x = G$ for some $x\in G$, then $H = G$.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+% \begin{proposition}
+%     Let $G$ be a finite group and $S\le G$. If $SS^x = S^xS$ for all $x\in G$, then $S\subnor G$.
+% \end{proposition}
+% \begin{proof}
+    
+% \end{proof}
+
+\begin{theorem}[Wielandt Zipper Lemma]
+    Let $G$ be a finite group and $S\le G$ such that $S\subnor H$ for every proper subgroup $H$ of $G$ containing $S$. If $S$ is not subnormal in $G$, then there is a unique maximal subgroup of $G$ containing $S$.
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\begin{definition}
+    For a subgroup $H$ of a group $G$, let $H^G$ denote the smallest normal subgroup of $G$ containing $H$. This is known as the \define{normal closure} of $H$ in $G$.
+\end{definition}
+
+\begin{theorem}[Baer]
+    Let $G$ be a finite group and $H\le G$. Then $H\subseteq\bfF(G)$ if and only if $\langle H, H^x\rangle$ is nilpotent for all $x\in G$.
+\end{theorem}
+\begin{proof}
+    If $H\subseteq\bfF(G)$, then $H^x\subseteq\bfF(G)$ for every $x\in G$, since $\bfF(G)\noreq G$. Hence, $\langle H, H^x\rangle\subseteq\bfF(G)$. But since $\bfF(G)$ is nilpotent, so is $\langle H, H^x\rangle$.
+
+    Conversely, suppose $\langle H, H^x\rangle$ is nilpotent for every $x\in G$. We induct on $|G|$. Taking $x = 1$, we see that $H$ is nilpotent, whence it suffices to prove that $H\subnor G$. 
+
+    Suppose $H$ is not subnormal in $G$. For any proper subgroup $K$ of $G$ containing $H$, the induction hypothesis applies to $K$ and hence, $H\subseteq\bfF(K)$, that is, $H\subnor K$. Due to Wielandt's Zipper Lemma, there is a unique maximal subgroup $M$ of $G$ containing $H$.
+
+    If $\langle H, H^x\rangle = G$, then $G$ is nilpotent and $\bfF(G) = G$, and $H\subnor G$, a contradiction. Thus, $\langle H, H^x\rangle\subsetneq G$ for all $x\in G$. This subgroup must be contained in a maximal subgroup of $G$; but since it contains $H$, and there is a unique maximal subgroup $M$ containing $H$, we conclude that $H^x\subseteq M$ for all $x\in G$. Therefore, $H^G\subseteq M\subsetneq G$. 
+
+    Since $H^G$ is normal and properly contained in $G$, the induction hypothesis applies and $H\subnor H^G\nor G$, that is, $H\subnor G$, a contradiction. This completes the proof.
+\end{proof}
+
+\begin{theorem}[Zenkov]
+    Let $G$ be a finite group and $A, B\le G$ be abelian subgroups. If $M$ is a minimal element in the set 
+    \begin{equation*}
+        \left\{A\cap B^g\colon g\in G\right\},
+    \end{equation*}
+    then $M\subseteq\bfF(G)$.
+\end{theorem}
+\begin{proof}
+    The set $\{A\cap B^g\colon g\in G\}$ remains unchanged upon replacing $B$ with $B^g$. Therefore, we may assume that $M = A\cap B$. We prove the statement by induction on $|G|$.
+\end{proof}
+
+\end{document}
