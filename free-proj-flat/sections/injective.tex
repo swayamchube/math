@@ -40,3 +40,83 @@ We note some trivial properties of essential extensions before proceeding.
 \begin{proof}
     Trivial.
 \end{proof}
+
+\begin{definition}
+    Let $M\le E$ be $A$-modules. Then $E$ is said to be an \define{injective hull} of $M$ if $E$ is an injective $A$-module and $M\le_e E$. It is customary to denote $E$ by $E_A(M)$.
+\end{definition}
+
+\begin{proposition}\thlabel{prop:inj-iff-no-ess-ext}
+    An $A$-module $E$ is injective if and only if $E$ has no proper essential extensions.
+\end{proposition}
+\begin{proof}
+    Suppose $E$ were injective and $E\le_e M$. Then, there is a submodule $N$ of $M$ such that $M = E\oplus N$. If $N$ were non-trivial, then it would intersect $E$ trivially, thus $N$ must be trivial and $E = M$.
+
+    Conversely, suppose $E$ has no proper essential extensions. There is an injective module $I$ such that $E\into I$. We shall show that $E$ is a direct summand of $I$. Indeed, consider the collection 
+    \begin{equation*}
+        \Sigma = \left\{N\le I\colon E\cap N = 0\right\}.
+    \end{equation*}
+    A standard application of Zorn's lemma furnishes a maximal element $N$ of $\Sigma$. Note that if $M$ is a submodule of $I$ properly containing $N$, then $E\cap M\ne 0$. The canonical projection $I\onto I/N$ restricts to an injective map on $E$ and any submodule of $I/N$ is of the form $M/N$ for some $M$ containing $N$. Thus, it follows that $E\into I/N$ is an essential extension. But since $E$ does not admit any proper essential extensions, we must have that the aforementioned map is surjective, that is, $E + N = I$, whence $E\oplus N = I$ and hence, $E$ is injective.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:equiv-char-inj-hull}
+    Let $M\le E$ be $A$-modules. The following are equivalent: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $E$ is an injective hull of $M$. 
+        \item $E$ is a minimal injective $A$-module containing $M$. 
+        \item $E$ is a maximal essential extension of $M$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    $(a)\implies(b)$ Suppose $I$ is an injective module such that $M\le I\le E$. Since $M\le_e E$, we have that $I\le_e E$. But due to \thref{prop:inj-iff-no-ess-ext}, we see that $I = E$.
+
+    $(b)\implies(c)$ Let $N\le E$ be a maximal element of $\{N\le E\colon M\le_e N\}$. We contend that $N$ has no proper essential extensions. Suppose $f: N\into L$ is an essential extension. Then, there is a map $L\to E$ making 
+    \begin{equation*}
+        \xymatrix {
+            & & E\\
+            0\ar[r] & N\ar@{^(->}[ru]\ar[r]_f & L\ar[u]
+        }
+    \end{equation*}
+    commute. We claim that the map $L\to E$ is injective. Indeed, if $0\ne x\in L$ maps to $0$, then there is an $0\ne a\in A$ such that $0\ne ax\in f(N)$. But since $N\into E$, we have that $ax = 0$, a contradiction. Thus, in $E$, $L = N$, since $N$ has no proper essential extensions in $E$. Consequently, $N$ has no proper essential extensions, that is, $N$ is injective, whence $N = E$. 
+
+    $(c)\implies(a)$ Injectivity follows from the fact that $E$ has no proper essential extensions due to maximality.
+\end{proof}
+
+\begin{theorem}
+    Let $M$ be an $A$-module. Then there exists an injective hull $M\into E$, which is unique up to isomorphism.
+\end{theorem}
+\begin{proof}
+    Let $I$ be an injective module such that $M\into I$. Using $(b)\implies(c)$ of the proof of \thref{thm:equiv-char-inj-hull}, we see that a maximal essential extension $E$ of $M$ contained in $I$ is an injective hull. 
+
+    It remains to establish uniqueness. Suppose $M\into E'$ is another injective hull. Then, there is a commutative diagram 
+    \begin{equation*}
+        \xymatrix {
+             & E'\\
+            M\ar@{^(->}[r]\ar@{^(->}[ru] & E\ar[u]
+        }
+    \end{equation*}
+    with the induced map $E\to E'$ injective as argued in the preceding proof. The maximality of essentialness and transitivity of essentialness both imply that $E\to E'$ must be an isomorphism.
+\end{proof}
+
+
+\begin{theorem}[Cantor-Schr\"oder-Bernstein]
+    If $M$ and $N$ are injective $A$-modules with injective $A$-linear maps $M\into N$ and $N\into M$, then $M\cong N$.
+\end{theorem}
+\begin{proof}
+    We may suppose that $N\le M$, whence there is a submodule $P$ of $M$ such that $M = N\oplus P$ where $P$ is injective too. Let $f: M\to N$ be an injective $A$-linear map.
+
+    Note first that if $x_0 + f(x_1) + \dots + f^{(n)}(x_n) = 0$ where $x_i\in P$, then all $x_i = 0$. Indeed, $f(x_1) + \dots + f^{(n)}(x_n)\in\im(f)\subseteq N$ and $x_0\in P$, whence $x_0 = 0$. Since $f$ is injective, we have $x_1 + \dots + f^{(n - 1)}(x_n) = 0$. Working downwards, we have our conclusion. 
+
+    Now, set $X = P\oplus f(P)\oplus f^{(2)}(P)\oplus\cdots\subseteq M$ and let $E = E_A(f(X))\subseteq N$ an injective hull. Write $N = E\oplus Q$. Since $X = P\oplus f(X)$, we have 
+    \begin{equation*}
+        E(X)\cong E(P\oplus f(X))\cong E(P)\oplus E(f(X))\cong P\oplus E.
+    \end{equation*}
+    On the other hand, since $f$ is injective,
+    \begin{equation*}
+        E(X)\cong E(f(X)) = E\implies P\oplus E\cong E.
+    \end{equation*}
+    Consequently,
+    \begin{equation*}
+        M = N\oplus P = Q\oplus E\oplus P\cong Q\oplus E\cong N,
+    \end{equation*}
+    thereby completing the proof.
+\end{proof}
