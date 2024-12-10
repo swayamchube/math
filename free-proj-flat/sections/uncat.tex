@@ -1,0 +1,40 @@
+\subsection{Eakin-Nagata Theorem}
+
+\begin{theorem}[Formanek]\thlabel{thm:formanek}
+    Let $A$ be a ring, and $B$ a finitely generated faithful $A$-module. Suppose the set of $A$-submodules $\Sigma = \left\{\fraka B\colon \fraka\noreq A\right\}$ has the ascending chain condition, then $A$ is noetherian.
+\end{theorem}
+\begin{proof}
+    It suffices to show that $B$ is a noetherian $A$-module since it is finitely generated and faithful. Suppose not. Then consider the collection 
+    \begin{equation*}
+        \Gamma = \left\{\fraka B\colon \fraka\noreq A,~B/\fraka B\text{ is a non-noetherian }A\text{-module}\right\},
+    \end{equation*}
+    which contains $(0)$ and hence is non-empty. Since $\Sigma$ has the ascending chain condition, so does $\Gamma$, whence, it contains a maximal element $\fraka B$. 
+
+    Replacing $B$ by $B/\fraka B$, we see that $B$ is a non-noetherian $A$-module. This may not be faithful and hence, replace $A$ by $A/\Ann_A(B)$. Then, $B$ is a finite, non-noetherian, faithful $A$-module such that for every ideal $0\ne\fraka\nor A$, $B/\fraka B$ is a noetherian $A$-module.
+
+    Next, set 
+    \begin{equation*}
+        \frakM = \left\{N\le B\colon B/N\text{ is a faithful }A\text{-module}\right\},
+    \end{equation*}
+    which is non-empty, since $\{0\}\in\frakM$. Suppose $B$ is generated as an $A$-module by $b_1,\dots, b_n$. It is not hard to argue that 
+    \begin{equation*}
+        N\in\frakM\iff \forall~a\in A\setminus\{0\},~\{ab_1,\dots, ab_n\}\not\subseteq N.
+    \end{equation*}
+    It follows that every chain in $\frakM$ has a maximal element and hence Zorn's Lemma applies to furnish a maximal element $N_0\in\Gamma$.
+
+    If $B/N_0$ is a noetherian $A$-module, then $A$ is noetherian since $B/N_0$ is faithful and finite. If not, replace $B$ with $B/N_0$, which is still a finite faithful $A$-module and satisfies: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $B$ is a non-noetherian $A$-module. 
+        \item for any ideal $0\ne\fraka\noreq A$, $B/\fraka B$ is a noetherian $A$-module. 
+        \item for any submodule $0\ne N$ of $B$, $B/N$ is not faithful as an $A$-module.
+    \end{enumerate}
+
+    Now, let $N$ be a non-zero submodule of $B$. Due to (3), there is a $0\ne a\in A$ such that $aB\subseteq N$. Due to (2), $B/aB$ is a noetherian $A$-module with $N/aB$ as a submodule. Thus, $N/aB$ is a noetherian, in particular, a finite $A$-module. Since $aB$ is also finite as an $A$-module, we have that $N$ is a finite $A$-module. Hence, $B$ is a noetherian $A$-module, which is absurd. This completes the proof.
+\end{proof}
+
+\begin{theorem}[Eakin-Nagata]\thlabel{thm:eakin-nagata}
+    Let $A\subseteq B$ be an extension of rings such that $B$ is a finite $A$-module. If $B$ is a noetherian ring, then so is $A$.
+\end{theorem}
+\begin{proof}
+    Note that $B$ is a finite, faithful $A$-module, since $1\in B$. The conclusion follows from \thref{thm:formanek}.
+\end{proof}

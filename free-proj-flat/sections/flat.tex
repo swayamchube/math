@@ -1,0 +1,210 @@
+\begin{definition}
+    An $A$-module $M$ is said to be \define{flat} if the functor $-\otimes_A M: \mathfrak{Mod}_A\to\mathfrak{Mod}_A$ is exact.
+\end{definition}
+
+\begin{definition}
+    Let $M$ be an $A$-module and $\sum_{i = 1}^n f_ix_i = 0$ be a relation in $M$ for $f_i\in A$ and $x_i\in M$. We say that the relation is \define{trivial} if there exists an integer $m\ge 0$, elements $y_j\in M$ for $1\le j\le m$ and $a_{ij}\in A$ for $1\le i\le n$ and $1\le j\le m$ such that 
+    \begin{align*}
+        x_i = \sum_{j = 1}^m a_{ij}y_j\quad\forall~1\le i\le n\quad\text{and}\quad 0 = \sum_{i = 1}^n a_{ij}f_i\quad\forall~1\le j\le m.
+    \end{align*}
+\end{definition}
+
+\begin{lemma}[Equational criterion of flatness]\thlabel{lem:eq-criterion-flatness}
+    An $A$-module $M$ is flat if and only if every relation in $M$ is trivial.
+\end{lemma}
+\begin{proof}
+    Suppose $M$ is flat and $\sum_{i = 1}^n f_ix_i = 0$ is a relation in $M$. Let $\fraka = (f_1,\dots,f_n)\subseteq A$ and consider the $A$-linear surjection $A^n = \bigoplus_{i = 1}^n Ae_i\to I$ given by $e_i\mapsto f_i$ whose kernel is $K\subseteq A^n$. That is, $0\to K\to A^n\to \fraka\to 0$. Since $M$ is flat, tensoring with $M$ preserves exactness and we have an exact sequence 
+    \begin{equation*}
+        0\longrightarrow K\otimes_A M\longrightarrow A^n\otimes_A M\longrightarrow \fraka\otimes_A M\longrightarrow 0.
+    \end{equation*}
+    Note that the natural map $\fraka\otimes_A M\to R\otimes_A M$ is injective due to the flatness of $M$. Consequently, $\sum_{i = 1}^n f_i\otimes x_i$ maps to $0$ in $R\otimes_A M$ and hence, must be zero in $\fraka\otimes_A M$. The exactness of the above sequence furnishes an element $\sum_{j = 1}^m k_j\otimes y_j\in K\otimes_A M$ that maps to $0$ in $A^n\otimes_A M$.
+
+    Each $k_j$ can be written in the form 
+    \begin{equation*}
+        \sum_{i = 1}^n a_{ij}e_i\quad\forall~1\le j\le m,
+    \end{equation*}
+    and hence, the image of $\sum_{j = 1}^m k_j\otimes y_j$ in $A^n\otimes_A M$ is 
+    \begin{equation*}
+        \sum_{j = 1}^m\sum_{i = 1}^m a_{ij}e_i\otimes y_j = \sum_{i = 1}^n e_i\otimes\left(\sum_{j = 1}^m a_{ij}y_j\right) = 0,
+    \end{equation*}
+    and the conclusion follows.
+
+    Conversely, suppose every relation in $M$ is trivial and let $\fraka$ be a finitely generated ideal of $A$. It suffices to show that $\Tor_1^A(A/\fraka, M) = 0$, which is equivalent (from the $\Tor$ long exact sequence) to showing that the map $\fraka\otimes_A M\to A\otimes_A M$ is injective.
+
+    Suppose $\sum_{i = 1}^n f_i\otimes x_i\in\fraka\otimes_A M$ maps to $0$ in $A\otimes_A M$. Then, $\sum_{i = 1}^n f_ix_i = 0$ in $M$, consequently, there is an $m\ge 0$, $y_j\in M$, $a_{ij}\in M$ for $1\le i\le n$ and $1\le j\le m$ such that 
+    \begin{equation*}
+        x_i = \sum_{j = 1}^m a_{ij}y_j\quad\forall~1\le i\le n\quad\text{and}\quad 0 = \sum_{i = 1}^n a_{ij}f_i\quad\forall~1\le j\le m.
+    \end{equation*}
+    Consequently, in $\fraka\otimes_A M$,
+    \begin{equation*}
+        \sum_{i = 1}^n f_i\otimes x_i = \sum_{i = 1}^n f_i\otimes\left(\sum_{j = 1}^m a_{ij}y_j\right) = \left(\sum_{i = 1}^n a_{ij}f_i\right)\otimes y_j = 0.
+    \end{equation*}
+    This proves injectivity, thereby completing the proof.
+\end{proof}
+
+\begin{lemma}
+    Let $(A,\frakm, k)$ be a local ring and $M$ a flat $A$-module. If $x_1,\dots,x_n\in M$ are such that their images $\overline x_1,\dots,\overline x_n\in M/\frakm M$ are linearly independent over $k$, then $x_1,\dots,x_n$ are linearly independent over $A$.
+\end{lemma}
+\begin{proof}
+    We prove this statement by induction on $n$. If $n = 1$, then $a\in A$ is such that $ax_1 = 0$ and $\overline x_1\ne 0$. From \thref{lem:eq-criterion-flatness}, there are $b_1,\dots,b_m\in A$ and $y_1,\dots, y_m\in M$ such that 
+    \begin{equation*}
+        x_1 = \sum_{j = 1}^m b_jy_j\quad\text{and}\quad ab_j = 0\quad\forall~1\le j\le m.
+    \end{equation*}
+    Since $x_1\notin\frakm M$, it follows that at least one of the $b_j$'s must be a unit, whence $a = 0$.
+
+    Now, suppose $n > 1$ and there is a relation $\sum_{i = 1}^n a_ix_i = 0$ in $M$. From \thref{lem:eq-criterion-flatness}, there is an $m\ge 0$, $y_j\in M$, and $b_{ij}\in A$ for $1\le i\le n$ and $1\le j\le m$ such that 
+    \begin{equation*}
+        x_i = \sum_{j = 1}^m b_{ij}y_j\quad\forall~1\le i\le n\quad\text{and}\quad 0 = \sum_{i = 1}^n b_{ij}a_i\quad\forall~1\le j\le m.
+    \end{equation*}
+    Since $x_n\notin\frakm M$, at least one of the $b_{nj}$'s must be a unit, whence we can write 
+    \begin{equation*}
+        a_n = \sum_{i = 1}^{n - 1}c_ia_i,
+    \end{equation*}
+    for some $c_i\in A$ for $1\le i\le n - 1$. Therefore, we have 
+    \begin{equation*}
+        0 = \sum_{i = 1}^n a_ix_i = \sum_{i = 1}^{n - 1}a_i(x_i + c_ix_n).
+    \end{equation*}
+    Since $\overline x_1,\dots,\overline x_{n - 1}$ are $k$-linearly independent in $M/\frakm M$, we see that $\overline x_1 + \overline c_1\overline x_n,\dots,\overline x_{n - 1} + \overline c_{n - 1}\overline x_n$ must also be $k$-linearly independent. Due to the induction hypothesis, $a_1 = \dots = a_{n - 1} = 0$ and hence, $a_n = 0$. This completes the proof.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:flat-local-free}
+    Let $(A,\frakm, k)$ be a local ring. If $M$ is a finitely generated flat $A$-module, then $M$ is free.
+\end{theorem}
+\begin{proof}
+    Let $x_1,\dots,x_n\in M$ be a minimal generating set, that is, $\overline x_1,\dots,\overline x_n$ are $k$-linearly independent in $M/\frakm M$. Due to the preceding lemma, $x_1,\dots,x_n$ are linearly independent over $A$, and hence, $M$ is a free $A$-module.
+\end{proof}
+
+\subsection{Cartier's Theorem}
+
+\begin{theorem}[Cartier]\thlabel{thm:cartier}
+    Let $M$ be a finitely generated module over an integral domain $A$. If for every $\frakm\in\MaxSpec(A)$, $M_\frakm$ is free as an $A_\frakm$-module, then $M$ is a projective $A$-module.
+\end{theorem}
+\begin{proof}
+    First show that $M$ is a torsion-free $A$-module. Suppose $am = 0$ for some $0\ne a\in A$ and $m\in M$. Let $\fraka$ be the annihilator of $m$ in $A$ and $\frakm$ a maximal ideal containing $A$. Note that $\frac{a}{1}\frac{m}{1} = 0$ in $M_\frakm$, which is free over $A_\frakm$, an integral domain, whence, is torsion free. That is, $\frac{m}{1} = 0$, whence, there is some $s\in A\setminus\frakm$ such that $sm = 0$, which is absurd, since $\fraka\subseteq\frakm$. This shows that $M$ is torsion-free.
+
+    Now, choose a set of generators $\{m_i\colon 1\le i\le n\}$ for $M$ over $A$. Let $\scrP$ be the collection of $A$-endomorphisms of $M$ which are of the form 
+    \begin{equation*}
+        m\longmapsto\sum_{i = 1}^n f_i(m)m_i,
+    \end{equation*}
+    where $f_1,\dots, f_n: M\to A$ are $A$-module homomorphisms. Note that $\scrP$ is an $A$-submodule of $\End_A(M)$. We shall show that $\id_M\in\scrP$.
+
+    Let $\frakm$ be a maximal ideal of $A$. We know that $M_\frakm$ is free as an $A_\frakm$-module and hence, there are $A_\frakm$-module homomorphisms $f_i: M_\frakm\to A_\frakm$ such that 
+    \begin{equation*}
+        m' = \sum_{i = 1}^n f_i'(m')\frac{m_i}{1}\quad\forall m'\in M_\frakm.
+    \end{equation*}
+    To see that this is possible, first consider an $A_\frakm$-basis $\{e_i\colon 1\le i\le N\}$ for $M_\frakm$. We can write 
+    \begin{equation*}
+        e_i = \sum_{j = 1}^n a_{ij}\frac{m_j}{1}\quad\forall~1\le i\le N.
+    \end{equation*}
+    Further, there are $A_\frakm$-linear maps $f_i: M_\frakm\to A_\frakm$ such that 
+    \begin{equation*}
+        m' = \sum_{j = 1}^N f_j(m')e_j.
+    \end{equation*}
+    Set 
+    \begin{equation*}
+        f_j'(m') = \sum_{i = 1}^N a_{ij}f_i(m')\quad\forall~m'\in M_\frakm.
+    \end{equation*}
+    Then, 
+    \begin{equation*}
+        \sum_{j = 1}^nf_j'(m')\frac{m_j}{1} = \sum_{i = 1}^N\sum_{j = 1}^n a_{ij}f_i(m')\frac{m_j}{1} = \sum_{i = 1}^N f_i(m')e_i = m'.
+    \end{equation*}
+
+    Coming back, since $M$ is torsion-free, the canonical map $M\to M_\frakm$ is an injective map of $A$-modules. Further, we can find an $s\in A\setminus\frakm$ such that $s f_i'\left(\frac{m_j}{1}\right)\in A$ for $1\le i,j\le n$. 
+
+    Note that $m'\mapsto sf_i'(m')$ is $A_\frakm$-linear as a map $M_\frakm\to A_\frakm$, and hence, is $A$-linear. The restriction of this map to $M\subseteq M_\frakm$ takes values in $A$. Thus, we can identify $sf_i'$ with an $A$-linear map $M\to A$. Further, for every $m\in M$, we have 
+    \begin{equation*}
+        sm = \sum_{i = 1}^n sf_i'(m)m_i.
+    \end{equation*}
+    That is, $s\cdot\id_M\in\scrP$. Now, let $\fraka$ be the collection of all $a\in A$ such that $a\cdot\id_M\in\scrP$. Then $\fraka$ is an ideal of $A$. If $\fraka$ were a proper ideal, it would be contained in a maximal ideal $\frakm$. But from our preceding conclusion, there is some $s\in A\setminus\frakm$ such that $s\cdot\id_M\in\scrP$, a contradiction. Thus, $\fraka = A$, in particular, $\id_M\in\scrP$.
+
+    Finally, we show that $M$ is projective. We have shown that there are $A$-linear maps $f_i: M\to A$ such that 
+    \begin{equation*}
+        m = \sum_{i = 1}^n f_i(m)m_i\quad\forall~m\in M.
+    \end{equation*}
+    Let $F$ be the free module $\bigoplus_{i = 1}^n Ae_i$ and let $g: F\to M$ be given by $e_i\mapsto m_i$ and $f: M\to F$ given by 
+    \begin{equation*}
+        f(m) = \sum_{i = 1}^n f_i(m)e_i.
+    \end{equation*}
+    By our construction, $g\circ f = \id_M$, and hence $M$ is a direct summand of $F$, i.e. $M$ is projective.
+\end{proof}
+
+\begin{corollary}
+    A finitely generated flat module over an integral domain is projective.
+\end{corollary}
+\begin{proof}
+    Follows from \thref{thm:cartier} and \thref{thm:flat-local-free}.
+\end{proof}
+
+\subsection{Finitely Presented Modules and Flatness}
+
+\begin{theorem}
+    Let $M$ be a finitely presented $A$-module and $N$ be any $A$-module. If $B$ is a flat $A$-algebra, then there is a natural isomorphism 
+    \begin{equation*}
+        \Hom_A(M, N)\otimes_A B\cong \Hom_B(M\otimes_A B, N\otimes_A B).
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Fixing $N$ and $B$, there are contravariant functors $\scrF,\scrG:\mathfrak{Mod}_A^{op}\to\mathfrak{Mod}_B$ given by 
+    \begin{equation*}
+        \scrF(M) = \Hom_A(M, N)\otimes_A B\qquad\scrG(M) = \Hom_B(M\otimes_A B, N\otimes_A B).
+    \end{equation*}
+    Define the natural transformation $\lambda:\scrF\implies\scrG$ given by 
+    \begin{equation*}
+        \lambda_M\left(f\otimes b\right) = b\cdot(f\otimes\id_B).
+    \end{equation*}
+    We first show that this is natural in $M$. Indeed, suppose $\varphi: M'\to M$ is $A$-linear, we wish to show that 
+    \begin{equation*}
+        \xymatrix {
+            \scrF(M)\ar[r]\ar[d]_{\lambda_M} & \scrF(M')\ar[d]^{\lambda_{M'}}\\
+            \scrG(M)\ar[r] & \scrG(M')
+        }
+    \end{equation*}
+    commutes. Consider $f\otimes b\in\scrF(M)$, which maps to $f\circ\varphi\otimes b\in\scrF(M')$, which maps to $b\cdot(f\circ\varphi\otimes\id_B)\in\scrG(M')$. On the other hand, under $\lambda_M$, $f\otimes b$ maps to $b\cdot(f\otimes\id_B)\in\scrG(M)$, which maps to $b\cdot(f\circ\varphi\otimes\id_B)$, which shows commutativity.
+
+    Next, suppose $M = A^n$ were free of finite rank. In this case, there is a sequence of isomorphisms
+    \begin{equation*}
+        \Hom_A(A^n, N)\otimes_A B\cong N^n\otimes_A B\cong(N\otimes_A B)^n\cong\Hom_B(B^n, N\otimes_A B)\cong\Hom_B(A^n\otimes_A B, N\otimes_A B).
+    \end{equation*}
+    Under the above isomorphism, $f\otimes b$ first maps to $(f(e_1),\dots,f(e_n))^\top\otimes b$ in $N^n\otimes_A B$. Under the second map, it goes to $(f(e_1)\otimes b,\dots,f(e_n)\otimes b)^\top$ in $(N\otimes_A B)^n$. Under the third map it goes to the unique morpism $g: B^n\to N\otimes_A B$ that sends $e_i\mapsto f(e_i)\otimes b$. 
+
+    Consider the map $b\cdot(f\otimes\id_B)\in\Hom_B(A^n\otimes_A B, N\otimes_A B)$. Under this map, $e_i\in B^n$ is the same as $e_i\otimes 1\in A^n\otimes B$, which maps to $b\cdot(f(e_i)\otimes 1) = f(e_i)\otimes b\in N\otimes_A B$. It follows that this is the same as the aforementioned $g$. Thus, $\lambda_M$ is an isomorphism in this case.
+
+    Finally, there is an exact sequence $A^m\to A^n\to M\to 0$ since $M$ is finitely presented. This fits into a commutative diagram 
+    \begin{equation*}
+        \xymatrix {
+            0\ar[r]\ar@{=}[d] & \scrF(M)\ar[r]\ar[d]^\lambda & \scrF(A^n)\ar[r]\ar[d]^\lambda & \scrF(A^m)\ar[d]^\lambda\\
+            0\ar[r] & \scrG(M)\ar[r] & \scrG(A^n)\ar[r] & \scrG(A^m)\\
+        }
+    \end{equation*}
+    where the last two $\lambda$'s are isomorphisms. Due to the Five Lemma (after adding another column of zeros to the left), we see that $\lambda_M:\scrF(M)\to\scrG(M)$ must be an isomorphism, thereby completing the proof.
+\end{proof}
+
+\begin{corollary}
+    Let $M$ be a finitely presented $A$-module and $N$ be any $A$-module. Then for every $\frakp\in\Spec(A)$, 
+    \begin{equation*}
+        \Hom_A(M, N)_\frakp\cong\Hom_{A_\frakp}\left(M_\frakp, N_\frakp\right).
+    \end{equation*}
+\end{corollary}
+\begin{proof}
+    Note that the localization functor at $\frakp\in\Spec(A)$ is naturally isomorphic to $-\otimes_A A_\frakp$.
+\end{proof}
+
+\begin{theorem}
+    Let $M$ be a finitely presented $A$-module. Then the following are equivalent
+    \begin{enumerate}[label=(\alph*)]
+        \item $M$ is projective. 
+        \item $M_\frakp$ is a free $A_\frakp$-module for all $\frakp\in\Spec(A)$.
+        \item $M_\frakm$ is a free $A_\frakm$-module for all $\frakm\in\MaxSpec(A)$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    That $(a)\implies(b)\implies(c)$ is obvious. It suffices to show that $(c)\implies(a)$. To this end, we shall show that $\Hom_A(M,-)$ is an exact functor. We know that $\Hom_A(M,-)$ is left exact so let $0\to N'\to N\to N''\to 0$ be a short exact sequence. Upon application of the above functor, note that we have an exact sequence 
+    \begin{equation*}
+        0\longrightarrow\Hom_A(M, N')\longrightarrow\Hom_A(M, N)\longrightarrow\Hom_A(M, N'')\to K\to 0,
+    \end{equation*}
+    where $K$ is the cokernel. Localizing the above sequence at a maximal ideal $\frakm$ and using the exactness of localization and the preceding result, we have an exact sequence 
+    \begin{equation*}
+        0\longrightarrow\Hom_{A_\frakm}(M_\frakm, N'_\frakm)\longrightarrow\Hom_{A_\frakm}(M_\frakm, N_\frakm)\longrightarrow\Hom_{A_\frakm}(M_\frakm, N''_\frakm)\to K_\frakm\to 0.
+    \end{equation*}
+    But since $M_\frakm$ is a free $A_\frakm$-module, the functor $\Hom_{A_\frakm}(M_\frakm,-)$ is exact, whence $K_\frakm = 0$ for every $\frakm\in\MaxSpec(A)$. This shows that $K = 0$, that is, $M$ is projective.
+\end{proof}

@@ -1,0 +1,42 @@
+\begin{definition}
+    An $A$-module $M$ is said to be \define{injective} if the (contravariant) functor $\Hom_A(-,M):\mathfrak{Mod}_A^{op}\to\mathfrak{Mod}_A$ is exact.
+\end{definition}
+
+\subsection{Injective Hulls}
+
+\begin{definition}
+    Let $M\le E$ be $A$-modules. Then $E$ is said to be an \define{essential extension} of $M$ if every non-zero submodule of $E$ intersects $M$ non-trivially. We denote this by $M\le_e E$.
+\end{definition}
+\begin{remark}
+    The above is equivalent to requiring that for every $x\in E\setminus\{0\}$, there is an $a\in A\setminus\{0\}$ such that $ax\in M\setminus\{0\}$.
+\end{remark}
+
+We note some trivial properties of essential extensions before proceeding.
+
+\begin{proposition}
+    Let $L\le M\le N$ be $A$-modules. Then 
+    \begin{equation*}
+        L\le_e M\text{ and } M\le_e N\iff L\le_e N.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Straightforward.
+\end{proof}
+
+\begin{proposition}
+    Let $M\le E$ be $A$-modules. Consider the set 
+    \begin{equation*}
+        \mathcal E = \{N\le E\colon M\le_e N\}.
+    \end{equation*}
+    Then $\mathcal E$ has a maximal element.
+\end{proposition}
+\begin{proof}
+    Standard application of Zorn's lemma.
+\end{proof}
+
+\begin{proposition}
+    If $N_1\le_e M_1$ and $N_2\le_e M_2$, then $N_1\oplus N_2\le_e M_1\oplus M_2$.
+\end{proposition}
+\begin{proof}
+    Trivial.
+\end{proof}

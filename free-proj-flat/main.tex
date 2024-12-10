@@ -2,7 +2,7 @@
 
 % \usepackage{./arxiv}
 
-\title{Free, Projective, and Flat Modules}
+\title{Projective, Injective, and Flat Modules}
 \author{Swayam Chube}
 \date{\today}
 
@@ -220,6 +220,15 @@
 \newcommand{\co}{\operatorname{co}}
 \newcommand{\Spec}{\operatorname{Spec}}
 \newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+\newcommand{\scrG}{\mathscr{G}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+
 
 \geometry {
     margin = 1in
@@ -248,57 +257,16 @@
 \begin{document}
 \maketitle
 
-\subsection{Cartier}
+\section{Projective Modules}
+\input{sections/projective.tex}
 
-\begin{theorem}
-    Let $M$ be a finitely generated module over an integral domain $A$. If for every $\frakm\in\MaxSpec(A)$, $M_\frakm$ is free as an $A_\frakm$-module, then $M$ is a projective $A$-module.
-\end{theorem}
-\begin{proof}
-    First show that $M$ is a torsion-free $A$-module. Suppose $am = 0$ for some $0\ne a\in A$ and $m\in M$. Let $\fraka$ be the annihilator of $m$ in $A$ and $\frakm$ a maximal ideal containing $A$. Note that $\frac{a}{1}\frac{m}{1} = 0$ in $M_\frakm$, which is free over $A_\frakm$, an integral domain, whence, is torsion free. That is, $\frac{m}{1} = 0$, whence, there is some $s\in A\setminus\frakm$ such that $sm = 0$, which is absurd, since $\fraka\subseteq\frakm$. This shows that $M$ is torsion-free.
+\section{Flat Modules}
+\input{sections/flat.tex}
 
-    Now, choose a set of generators $\{m_i\colon 1\le i\le n\}$ for $M$ over $A$. Let $\scrP$ be the collection of $A$-endomorphisms of $M$ which are of the form 
-    \begin{equation*}
-        m\longmapsto\sum_{i = 1}^n f_i(m)m_i,
-    \end{equation*}
-    where $f_1,\dots, f_n: M\to A$ are $A$-module homomorphisms. Note that $\scrP$ is an $A$-submodule of $\End_A(M)$. We shall show that $\id_M\in\scrP$.
+\section{Injective Modules}
+\input{sections/injective.tex}
 
-    Let $\frakm$ be a maximal ideal of $A$. We know that $M_\frakm$ is free as an $A_\frakm$-module and hence, there are $A_\frakm$-module homomorphisms $f_i: M_\frakm\to A_\frakm$ such that 
-    \begin{equation*}
-        m' = \sum_{i = 1}^n f_i'(m')\frac{m_i}{1}\quad\forall m'\in M_\frakm.
-    \end{equation*}
-    To see that this is possible, first consider an $A_\frakm$-basis $\{e_i\colon 1\le i\le N\}$ for $M_\frakm$. We can write 
-    \begin{equation*}
-        e_i = \sum_{j = 1}^n a_{ij}\frac{m_j}{1}\quad\forall~1\le i\le N.
-    \end{equation*}
-    Further, there are $A_\frakm$-linear maps $f_i: M_\frakm\to A_\frakm$ such that 
-    \begin{equation*}
-        m' = \sum_{j = 1}^N f_j(m')e_j.
-    \end{equation*}
-    Set 
-    \begin{equation*}
-        f_j'(m') = \sum_{i = 1}^N a_{ij}f_i(m')\quad\forall~m'\in M_\frakm.
-    \end{equation*}
-    Then, 
-    \begin{equation*}
-        \sum_{j = 1}^nf_j'(m')\frac{m_j}{1} = \sum_{i = 1}^N\sum_{j = 1}^n a_{ij}f_i(m')\frac{m_j}{1} = \sum_{i = 1}^N f_i(m')e_i = m'.
-    \end{equation*}
+\section{Uncategorized}
+\input{sections/uncat.tex}
 
-    Coming back, since $M$ is torsion-free, the canonical map $M\to M_\frakm$ is an injective map of $A$-modules. Further, we can find an $s\in A\setminus\frakm$ such that $s f_i'\left(\frac{m_j}{1}\right)\in A$ for $1\le i,j\le n$. 
-
-    Note that $m'\mapsto sf_i'(m')$ is $A_\frakm$-linear as a map $M_\frakm\to A_\frakm$, and hence, is $A$-linear. The restriction of this map to $M\subseteq M_\frakm$ takes values in $A$. Thus, we can identify $sf_i'$ with an $A$-linear map $M\to A$. Further, for every $m\in M$, we have 
-    \begin{equation*}
-        sm = \sum_{i = 1}^n sf_i'(m)m_i.
-    \end{equation*}
-    That is, $s\cdot\id_M\in\scrP$. Now, let $\fraka$ be the collection of all $a\in A$ such that $a\cdot\id_M\in\scrP$. Then $\fraka$ is an ideal of $A$. If $\fraka$ were a proper ideal, it would be contained in a maximal ideal $\frakm$. But from our preceding conclusion, there is some $s\in A\setminus\frakm$ such that $s\cdot\id_M\in\scrP$, a contradiction. Thus, $\fraka = A$, in particular, $\id_M\in\scrP$.
-
-    Finally, we show that $M$ is projective. We have shown that there are $A$-linear maps $f_i: M\to A$ such that 
-    \begin{equation*}
-        m = \sum_{i = 1}^n f_i(m)m_i\quad\forall~m\in M.
-    \end{equation*}
-    Let $F$ be the free module $\bigoplus_{i = 1}^n Ae_i$ and let $g: F\to M$ be given by $e_i\mapsto m_i$ and $f: M\to F$ given by 
-    \begin{equation*}
-        f(m) = \sum_{i = 1}^n f_i(m)e_i.
-    \end{equation*}
-    By our construction, $g\circ f = \id_M$, and hence $M$ is a direct summand of $F$, i.e. $M$ is projective.
-\end{proof}
 \end{document}
