@@ -2,6 +2,39 @@
     An $A$-module $M$ is said to be \define{injective} if the (contravariant) functor $\Hom_A(-,M):\mathfrak{Mod}_A^{op}\to\mathfrak{Mod}_A$ is exact.
 \end{definition}
 
+\begin{theorem}[Baer's Criterion]\thlabel{thm:baer-criterion}
+    An $A$-module $E$ is injective if and only if for every ideal $\fraka\noreq A$, every $A$-linear map $\fraka\to E$ can be extended to an $A$-linear map $A\to E$.
+\end{theorem}
+\begin{proof}
+    The forward direction is tautological. We prove the converse. Suppose $N\le M$ are $A$-modules and $\alpha: N\to E$ is an $A$-linear map. We shall extend $\alpha$ to a map $M\to E$.
+
+    Let $\Sigma$ be the collection of all pairs $(N',\alpha')$ where $N\le N'\le M$ and $\alpha': N'\to E$ is $A$-linear such that $\alpha'|_N = \alpha$. Using a standard Zorn argument, $\Sigma$ admits a maximal element $\alpha': N'\to E$ extending $\alpha$. We contend that $N' = M$.
+
+    Suppose not. Then choose some $x\in M\setminus N'$ and let $\fraka = (N'\colon_A x)\noreq A$. Consider the composite map $\fraka\xrightarrow{x} N'\xrightarrow{\alpha'} E$, which extends to a map $f: A\to E$ and set $N'' = N' + Ax\le M$. Define $\alpha'': N''\to E$ by 
+    \begin{equation*}
+        \alpha''(n' + ax) = \alpha'(n') + f(a).
+    \end{equation*}
+    This is well defined, for if $n_1' + a_1 x = n_2' + a_2 x$, then $(a_1 - a_2)x = n_2' - n_1'$, i.e. $(a_1 - a_2)\in\fraka$ and hence, 
+    \begin{equation*}
+        f(a_1 - a_2) = \alpha'((a_1 - a_2)x) = \alpha'(n_2' - n_1').
+    \end{equation*}
+    But note that $(N', \alpha') < (N'', \alpha'')$ in $\Sigma$, a contradiction. Thus $N' = M$ and we are done.
+\end{proof}
+
+\begin{corollary}
+    Let $A$ be a noetherian ring. If $\{E_i\colon i\in I\}$ is a collection of injective $A$-modules, then $E = \displaystyle\bigoplus_{i\in I} E_i$ is an injective $A$-module.
+\end{corollary}
+\begin{proof}
+    Let $\fraka\noreq A$ and $f: \fraka\to E$ be $A$-linear. Note that $\fraka = (a_1,\dots,a_n)$ is finitely generated, and each $f(a_i)$ has support contained in a finite subset of $I$. Thus, $f(\fraka)$ is contained in a direct sum of a finite subset of $\{E_i\colon i\in I\}$. But note that a finite direct sum of injectives in injective over any ring, and hence, $f$ can be extended to all of $A$, thereby completing the proof.
+\end{proof}
+
+\begin{corollary}
+    Let $A$ be a PID. An $A$-module $E$ is injective if and only if it is divisible.
+\end{corollary}
+\begin{proof}
+    Immediate from \thref{thm:baer-criterion}.
+\end{proof}
+
 \subsection{Injective Hulls}
 
 \begin{definition}
@@ -41,9 +74,27 @@ We note some trivial properties of essential extensions before proceeding.
     Trivial.
 \end{proof}
 
+\begin{remark}\thlabel{rem:ext-inj-is-inj}
+    Before we proceed, we make an important observation. Suppose $M\le_e N$ and suppose there is a commutative diagram: 
+    \begin{equation*}
+        \xymatrix {
+            N\ar[rd]^f\\
+            M\ar@{^(->}[u]\ar@{^(->}[r] & E.
+        }
+    \end{equation*}
+    We claim that $f$ is injective. Indeed, due to the commutativity of the diagram, $\ker f\cap M = 0$, but since $M\le_e N$, we have that $\ker f = 0$.
+\end{remark}
+
 \begin{definition}
     Let $M\le E$ be $A$-modules. Then $E$ is said to be an \define{injective hull} of $M$ if $E$ is an injective $A$-module and $M\le_e E$. It is customary to denote $E$ by $E_A(M)$.
 \end{definition}
+
+\begin{proposition}
+    Suppose $M\le E$ and $N\le F$ are $A$-modules such that $E$ and $F$ are injective hulls of $M$ and $N$ respectively. Then $E\oplus F$ is an injective hullof $M\oplus N$.
+\end{proposition}
+\begin{proof}
+    Obviously $E\oplus F$ is injective and due to the preceding result, an essential extension of $M\oplus N$. The conclusion follows.
+\end{proof}
 
 \begin{proposition}\thlabel{prop:inj-iff-no-ess-ext}
     An $A$-module $E$ is injective if and only if $E$ has no proper essential extensions.
@@ -119,4 +170,43 @@ We note some trivial properties of essential extensions before proceeding.
         M = N\oplus P = Q\oplus E\oplus P\cong Q\oplus E\cong N,
     \end{equation*}
     thereby completing the proof.
+\end{proof}
+
+\begin{proposition}
+    Let $A$ be a noetherian ring and $M$ an $A$-module. Then $\Ass_A(E(M)) = \Ass_A(M)$. In particular, $E(A/\frakp) = \{\frakp\}$ for every $\frakp\in\Spec(A)$.
+\end{proposition}
+\begin{proof}
+    Since $M\into E(M)$, we have that $\Ass_A(M)\subseteq\Ass_A(E(M))$. Conversely, suppose $\frakp\in\Ass_A(E(M))$, that is, $R/\frakp\into E(M)$ and identify $R/\frakp$ with a submodule of $E(M)$. Since $M\le_e E(M)$, $(R/\frakp)\cap M\ne 0$. Choosing a non-zero $x$ in the intersection, we have that $\Ann_A(x) = \frakp$, that is, $\frakp\in\Ass_A(M)$. This completes the proof.
+\end{proof}
+
+\begin{definition}
+    A nonzero $A$-module $M$ is said to be \define{decomposable} if there are nonzero submodules $N_1, N_2\le M$ such that $M = N_1\oplus N_2$. An $A$-module that is not decomposable is said to be \define{indecomposable}.
+\end{definition}
+
+\begin{theorem}[Matlis]
+    Let $A$ be a noetherian ring and $M$ an $A$-module. Then, 
+    \begin{enumerate}[label=(\alph*)]
+        \item $E$ is an indecomposable injective $A$-module if and only if $E\cong E(A/\frakp)$ for some $\frakp\in\Spec(A)$.
+        \item $E_A(A/\frakp)\not\cong E(A/\frakq)$ if $\frakp\ne\frakq\in\Spec(A)$. 
+        \item every injective $A$-module can be written as a direct sum of indecomposable $A$-modules.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Suppose $E$ is an indecomposable injective $A$-module and choose some $\frakp\in\Ass_A(E)$. There is an injection $A/\frakp\into E$, which extends to an injection (due to \thref{rem:ext-inj-is-inj}) $E(A/\frakp)\into E$. Since $E$ is indecomposable, $E\cong E(A/\frakp)$. 
+    
+    Conversely, we must show that $E = E(A/\frakp)$ is indecomposable. Suppose $E = E_1\oplus E_2$. The map $A/\frakp\into E_1\oplus E_2$ sends $\overline 1\in A/\frakp$ to some $(x_1,x_2)\in E_1\oplus E_2$. Then, 
+    \begin{equation*}
+        \frakp = \Ann_A((x_1, x_2)) = \Ann_A(x_1)\cap\Ann_A(x_2),
+    \end{equation*}
+    whence, we may suppose without loss of generality that $\frakp = \Ann_A(x_1)$.  Consequently, the composition $A/\frakp\into E\onto E_1$ is injective. This means that $E\onto E_1$ is a lift of an injection $A/\frakp\into E_1$, whence $E\onto E_1$ must be injective (due to \thref{rem:ext-inj-is-inj}), that means $E_2 = 0$, as desired.
+
+    \item Follows from the fact that $\Ass_A(E(A/\frakp)) = \{\frakp\}$.
+
+    \item This is another standard Zorn argument. Begin with the collection 
+    \begin{equation*}
+        \Sigma = \left\{\{E_i\}_{i\in I}\colon\text{each $E_i$ is indecomposable injective, and their sum is direct}\right\}.
+    \end{equation*}
+    Choose a maximal element $\{E_i\}_{i\in J}$ in $\Sigma$ and let $I = \bigoplus_{i\in J} E_i$. Suppose $I\ne E$. Since $I$ is injective (owing to $A$ being noetherian), we can write $E = I\oplus E'$. Since $E'\ne 0$, it has an associated prime, $\frakp$. We can then write $E' = E(A/\frakp)\oplus E''$, contradicting the maximality of $\{E_i\}_{i\in J}$. This completes the proof. \qedhere
+\end{enumerate}
 \end{proof}
