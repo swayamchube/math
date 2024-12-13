@@ -1,0 +1,78 @@
+\begin{definition}
+    Let $F:\scrA\to\scrB$ and $G:\scrB\to\scrA$ be functors. We say that $F$ is \define{left adjoint} to $G$ and $G$ is \define{right adjoint} to $F$, and write $F\dashv G$, if 
+    \begin{equation*}
+        \scrB(F(A), B)\cong\scrA(A, G(B))
+    \end{equation*}
+    \underline{naturally} in $A$ and $B$.
+\end{definition}
+
+We denote the above bijection by using an ``overbar'', that is, 
+\begin{equation*}
+    \left(F(A)\xrightarrow{g} B\right)\mapsto\left(A\xrightarrow{\overline g} G(B)\right)\quad\text{ and }\quad\left(A\xrightarrow{f}G(B)\right)\mapsto\left(F(A)\xrightarrow{\overline f} B\right),
+\end{equation*}
+where $\overline{\overline f} = f$ and $\overline{\overline g} = g$. We call $\overline f$ the \define{transpose} of $f$.
+
+Naturality in $A$ and $B$ means that given $B\xrightarrow{q} B'$ in $\scrB$, we have 
+\begin{equation*}
+    \overline{\left(F(A)\xrightarrow{g} B\xrightarrow{q}B'\right)} = \left(A\xrightarrow{\overline g} G(B)\xrightarrow{G(q)} G(B')\right)
+\end{equation*}
+and given $A'\xrightarrow{p} A$ in $\scrA$, we have 
+\begin{equation*}
+    \overline{\left(A'\xrightarrow{p} A\xrightarrow{f} G(B)\right)} = \left(F(A')\xrightarrow{F(p)} F(A)\xrightarrow{\overline f} B\right).
+\end{equation*}
+
+These conditions can be interpreted informally in a nicer way. If $B\xrightarrow{q} B'$ is a map in $\scrB$, then this induces a natural map 
+\begin{equation*}
+    \scrB(F(A), B)\longrightarrow\scrB(F(A), B')\qquad g\longmapsto q\circ g
+\end{equation*}
+and 
+\begin{equation*}
+    \scrA(A, G(B))\longrightarrow\scrA(A, G(B'))\qquad f\mapsto G(q)\circ f.
+\end{equation*}
+
+We would like like 
+\begin{equation*}
+    \xymatrix {
+        \scrB(F(A), B)\ar[r]\ar[d] & \scrA(A, G(B))\ar[d]\\
+        \scrB(F(A), B')\ar[r] & \scrA(A, G(B'))
+    }
+\end{equation*}
+to commute, where the horizontal maps are the ``overbar'' bijections and the vertical ones are the naturally induced maps as discussed above. Note that the commutativity of the above square is equivalent to 
+\begin{equation*}
+    \overline{q\circ g} = G(q)\circ\overline g,
+\end{equation*}
+for every $g\in\scrB(F(A), B)$. This is precisely the condition imposed on ``overbar'' above.
+
+Similarly, if $A'\xrightarrow{p} A$ is a map in $\scrA$, then this induces a natural map 
+\begin{equation*}
+    \scrB(F(A), B)\longrightarrow\scrB(F(A'), B)\qquad g\mapsto g\circ F(p),
+\end{equation*}
+and 
+\begin{equation*}
+    \scrA(A, G(B))\longrightarrow\scrA(A', G(B))\qquad f\mapsto f\circ p.
+\end{equation*}
+
+We would like 
+\begin{equation*}
+    \xymatrix {
+        \scrB(F(A), B)\ar[d] & \scrA(A, G(B))\ar[l]\ar[d]\\
+        \scrB(F(A'), B) & \scrA(A', G(B))\ar[l]
+    }
+\end{equation*}
+to commute, where the horizontal maps are the ``overbar'' bijections and the vertical ones are the naturally induced maps discussed above. Note that the commutativity of the above square is equivalent to 
+\begin{equation*}
+    \overline f\circ F(p) = \overline{f\circ p}.
+\end{equation*}
+Again, this is precisely the condition imposed on ``overbar'' above.
+
+
+\begin{definition}
+    Let $\scrA$ be a category. An object $I\in\scrA$ is \define{initial} for every $A\in\scrA$, there is a unique map $I\to A$. An object $T\in\scrA$ is \define{terminal} or \define{final} if for every $A\in\scrA$, there is a unique map $A\to T$.
+\end{definition}
+
+\begin{proposition}
+    Initial and terminal objects are unique up to a unique isomorphism.
+\end{proposition}
+\begin{proof}
+    Suppose $I$ and $I'$ are initial objects. There are unique maps $I\xrightarrow{f} I'$ and $I'\xrightarrow{f'} I$. Note that $I\xrightarrow{f'\circ f} I$; but since this map is unique, it must be equal to $1_I$. Similarly, $f\circ f' = 1_{I'}$, whence both $f$ and $f'$ are isomorphisms. The uniqueness follows trivially. An analogous proof works for terminal objects.
+\end{proof}

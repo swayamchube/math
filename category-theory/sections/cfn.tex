@@ -1,0 +1,165 @@
+\begin{definition}
+    A \define{category} $\scrA$ consists of: 
+    \begin{itemize}
+        \item a collection $\ob(\scrA)$ of objects,
+        \item for each $A, B\in\ob(\scrA)$, a collection $\scrA(A, B)$ of \define{maps}, \define{arrows}, or \define{morphisms} from $A$ to $B$,
+        \item for each $A, B, C\in\ob(\scrA)$, a function 
+        \begin{equation*}
+            \scrA(B, C)\times\scrA(A, B)\to\scrA(A, C)\qquad (g, f)\mapsto g\circ f,
+        \end{equation*}
+        called \define{composition}, and
+        \item for each $A\in\ob(\scrA)$, an element $1_A\in\scrA(A, A)$, called the \define{identity} on $A$, 
+    \end{itemize}
+    satisfying the following axioms: 
+    \begin{description}
+        \item[associativity:] for each $f\in\scrA(A, B)$, $g\in\scrA(B, C)$ and $h\in\scrA(C, D)$, we have $(h\circ g)\circ f = h\circ(g\circ f)$,
+        \item[identity:] for each $f\in\scrA(A, B)$, we have $f\circ 1_A = f = 1_B\circ f$.
+    \end{description}
+\end{definition}
+
+Abusing notation, we often write $A\in\scrA$ instead of $A\in\ob(\scrA)$.
+
+\begin{definition}
+    A map $f: A\to B$ in a category $\scrA$ is said to be an \define{isomorphism} if there exists a map $g: B\to A$ in $\scrA$ such that $g\circ f = 1_A$ and $f\circ g = 1_B$. 
+\end{definition}
+
+\begin{definition}
+    Every category $\scrA$ has an \define{opposite} category $\scrA^{op}$ given by simply reversing the arrows of $\scrA$. Note that $\ob(\scrA) = \ob(\scrA^{op})$.
+\end{definition}
+
+\begin{definition}
+    Let $\scrA,\scrB$ be categories. A (covariant) \define{functor} $F: \scrA\to\scrB$ consists of: 
+    \begin{itemize}
+        \item a function $\ob(\scrA)\to\ob(\scrB)$ written as $A\mapsto F(A)$, and
+        \item for each $A, A'\in\scrA$, a function $\scrA(A, A')\to\scrB(F(A), F(A'))$ written as $f\mapsto F(f)$,
+    \end{itemize}
+    satisfying the following axioms: 
+    \begin{itemize}
+        \item $F(f'\circ f) = F(f')\circ F(f)$ whenever $A\xrightarrow{f} A'\xrightarrow{f'} A''$ in $\scrA$, and
+        \item $F(1_A) = 1_{F(A)}$ for every $A\in\scrA$.
+    \end{itemize}
+
+    A \define{contravariant functor} from $\scrA$ to $\scrB$ is simply a functor $F:\scrA^{op}\to\scrB$.
+\end{definition}
+
+\begin{definition}
+    Let $\scrA$ be a category. A \define{presheaf} on $\scrA$ is a functor $\scrA^{op}\to\catSet$.
+\end{definition}
+
+\begin{definition}
+    A functor $F:\scrA\to\scrB$ is \define{faithful} (resp. \define{full}) if for each $A, A'\in\scrA$, the function 
+    \begin{equation*}
+        \scrA(A, A')\to\scrB(F(A), F(A'))\qquad f\mapsto F(f)
+    \end{equation*}
+    is injective (resp. surjective).
+\end{definition}
+
+\begin{definition}
+    Let $\scrA$ be a category. A \define{subcategory} $\scrS$ of $\scrA$ consists of a subclass $\ob(\scrA)$ of $\ob(\scrA)$ together with, for each $S, S'\in\ob(\scrS)$, a subclass $\scrS(S, S')$ of $\scrA(S, S')$ such that $\scrS$ is closed under composition and identities. It is a \define{full} subcategory if $\scrS(S, S') = \scrA(S, S')$ for all $S, S'\in\ob(\scrS)$.
+\end{definition}
+
+\begin{remark}
+    For a subcategory $\scrS$ of $\scrA$, there is a natural ``inclusion'' functor $\scrS\to\scrA$. The subcategory is said to be full if this functor is full.
+\end{remark}
+
+\begin{definition}
+    Let $\scrA,\scrB$ be categories and $F, G:\scrA\to\scrB$ be functors. A \define{natural transformation} $\alpha: F\implies G$ is a family $\left(\alpha_A: F(A)\to G(A)\right)_{A\in\scrA}$ of maps in $\scrB$ such that for every map $A\xrightarrow{f} A'$ in $\scrA$, the diagram 
+    \begin{equation*}
+        \xymatrix {
+            F(A)\ar[r]^{F(f)}\ar[d]_{\alpha_A} & F(A')\ar[d]^{\alpha_{A'}}\\
+            G(A)\ar[r]_{G(f)} & G(A')
+        }
+    \end{equation*}
+    commutes. The maps $\alpha_A$ are called the \define{components} of $\alpha$.
+\end{definition}
+
+If $\alpha: F\implies G$ and $\beta: G\implies H$ are natural transformations, then we can define a natural transformation $\beta\circ\alpha: F\implies H$ by setting $(\beta\circ\alpha)_A = \beta_A\circ\alpha_A$ for every $A\in\scrA$. Further, there is also the identity natural transformation $1_F: F\implies F$ where every component is the identity map on $F(A)$ for every $A\in\scrA$.
+
+\begin{definition}
+    For categories $\scrA, \scrB$, we construct the \define{functor category} $[\scrA,\scrB]$ or $\scrB^{\scrA}$ whose objects are functors $\scrA\to\scrB$ and morphisms are natural transformations between functors. 
+    
+    An isomorhpism in $[\scrA,\scrB]$ is called a \define{natural isomorphism} between two functors. We say that two functors are \define{naturally isomorphic} if there exists a natural isomorphism between them.
+\end{definition}
+
+\begin{lemma}\thlabel{lem:nat-trans-is-iso}
+    Let $\alpha:F\implies G$, where $F,G:\scrA\to\scrB$ are functors. Then $\alpha$ is a natural isomorphism if and only if $\alpha_A: F(A)\to G(A)$ is an isomorphism for all $A\in\scrA$.
+\end{lemma}
+\begin{proof}
+    Suppose $\alpha$ is a natural isomorphism. Then, there is a $\beta: G\implies F$ such that $\beta\circ\alpha = 1_F$ and $\alpha\circ\beta = 1_G$ in $[\scrA,\scrB]$. Thus, $\beta_A\circ\alpha_A = 1_{F(A)}$ and $\alpha_A\circ\beta_A = 1_{G(A)}$ for every $A\in\scrA$. It follows that both $\beta_A$ and $\alpha_A$ are isomorphisms.
+
+    Conversely, suppose every $\alpha_A$ is an isomorhpism. Let $\beta_A$ denote its inverse. This gives a collection of maps $\beta = (\beta_A)_{A\in\scrA}$. It suffices to show that $\beta: G\implies F$ is a natural transformation, which reduces to proving the desired square commutes and is trivial.
+\end{proof}
+
+\begin{definition}
+    Given functors $F, G:\scrA\to\scrB$, we say that
+    \begin{quote}
+        \begin{center}
+        $F(A)\cong G(A)$ \define{naturally in} $A$
+        \end{center}
+    \end{quote}
+    if $F$ and $G$ are naturally isomorphic.
+\end{definition}
+
+\begin{definition}
+    An \define{equivalence} between categories $\scrA$ and $\scrB$ consists of a pair of functors $F:\scrA\to\scrB$ and $G:\scrB\to\scrA$, together with natural isomorphisms
+    \begin{equation*}
+        \eta: 1_{\scrA}\implies G\circ F\quad\text{ and }\quad\varepsilon: F\circ G\implies 1_{\scrB}.
+    \end{equation*}
+    If this happens, we say that $\scrA$ and $\scrB$ are \define{equivalent}, and write $\scrA\simeq\scrB$. We also say that the functors $F$ and $G$ are \define{equivalences}.
+\end{definition}
+
+\begin{definition}
+    A functor $F:\scrA\to\scrB$ is \define{essentially surjective on objects} if for all $B\in\scrB$, there exists $A\in\scrA$ such that $F(A)\cong B$.
+\end{definition}
+
+\begin{theorem}
+    A functor is an equivalence if and only if it is full, faithful, and essentially surjective on objects.
+\end{theorem}
+\begin{proof}
+    Suppose $F:\scrA\to\scrB$ is an equivalence of categories. Then, there is a functor $G: \scrB\to\scrA$ and natural isomorphisms $\eta: GF\implies 1_{\scrA}$ and $\varepsilon: 1_{\scrB}\implies FG$. Hence, there are commuting squares 
+    \begin{equation*}
+        \xymatrix@+2pc {
+            A\ar[r]^{f}\ar[d]_{\eta_A} & A'\ar[d]^{\eta_{A'}}\\
+            G(F(A))\ar[r]_{G(F(f))} & G(F(A'))
+        }
+        \quad\text{ and }\quad
+        \xymatrix@+2pc {
+            F(G(B))\ar[r]^{F(G(g))}\ar[d]_{\varepsilon_B} & F(G(B'))\ar[d]^{\varepsilon_{B'}}\\
+            B\ar[r]_{g} & B'
+        }
+    \end{equation*}
+    for each $f\in\scrA(A, A')$ and $g\in\scrB(B, B')$. Faithfulness follows from the fact that the $\eta_{\ast}$'s and $\varepsilon_{\ast}$'s are isomorphisms. To see fullness, replace $f$ by $\wt f = \eta_{A'}^{-1}\circ f\circ\eta_A$ and note that $G(F(\wt f)) = f$ and similarly in the other commuting square. Essential surjectivity on objects follows immediately by looking at the second square, taking $B = B'$ and $g = 1_{B}$.
+
+    Conversely, suppose $F$ is full, faithful, and essentially surjective on objects. For each $B\in\scrB$, choose an object $G(B)\in\scrA$ and an isomorphism $\varepsilon_B: F(G(B))\to B$. For $B\xrightarrow{g} B'$ in $\scrB$, using the full, faithfulness of $F$, choose $G(g)\in\scrA(G(B), G(B'))$ such that $F(G(g)) = \varepsilon_{B'}^{-1}\circ g\circ\varepsilon_B$.
+
+    To see that $G$ is functorial, consider $B\xrightarrow{g} B'\xrightarrow{g''} B''$ in $\scrB$. Note that 
+    \begin{equation*}
+        F(G(g' g)) = \varepsilon_{B''}^{-1}g'g\varepsilon_B = \varepsilon_{B''}^{-1}g'\varepsilon_{B'}\varepsilon_{B'}^{-1}g\varepsilon_B = F(G(g'))F(G(g)) = F(G(g')G(g)),
+    \end{equation*}
+    whence, due to the faithfulness of $F$, $G(g'\circ g) = G(g')\circ G(g)$. Similarly, one can show that $G(1_B) = 1_{G(B)}$.
+
+    We now construct a natural isomorphism $\eta: 1_{\scrA}\implies GF$. For each $A\in\scrA$, $\eta_{F(A)}: F(G(F(A)))\to F(A)$, whence due to the full, faithfulness of $F$, there is a unique $\varepsilon_A: A\to G(F(A))$ such that $F(\eta_{A}) = \varepsilon_{F(A)}^{-1}$ and a unique $\gamma_A: G(F(A))\to A$ such that $F(\gamma_A) = \varepsilon_{F(A)}$. 
+    
+    Consider the diagram 
+    \begin{equation*}
+        \xymatrix@+2pc {
+            F(A)\ar[d]_{F(f)}\ar[r]^-{F(\eta_A)} & F(G(F(A)))\ar[d]_{F(G(F(f)))}\ar[r]^-{\varepsilon_{F(A)}} & F(A)\ar[d]^{F(f)}\\
+            F(A')\ar[r]_-{F(\eta_{A'})} & F(G(F(A')))\ar[r]_-{\varepsilon_{F(A')}} & F(A')
+        }
+    \end{equation*}
+    where the outer and left square commute. Since $\varepsilon$'s are isomorphisms, we see that the left square commutes too, that is, 
+    \begin{equation*}
+        F\left(G(F(f))\circ\eta_A\right) = F(G(F(f)))\circ F(\eta_A) = F(\eta_{A'})\circ F(f) = F(\eta_{A'}\circ f),
+    \end{equation*}
+    but since $F$ is full and faithful, $\eta_{A'}\circ f = G(F(f))\circ\eta_A$. 
+
+    It remains to show that the $\eta$'s are all isomorhpisms. But this is trivial, since 
+    \begin{equation*}
+        F(\gamma_A\circ\eta_A) = F(\gamma_A)\circ F(\eta_A) = \varepsilon_{F(A)}\circ F(\eta_A) = 1_{F(A)}
+    \end{equation*}
+    and 
+    \begin{equation*}
+        F(\eta_A\circ\gamma_A) = F(\eta_A)\circ F(\gamma_A) = F(\eta_A)\circ\varepsilon_{F(A)} = 1_{F(G(F(A)))}.
+    \end{equation*}
+    Again, due to the full and faithfulness of $F$, we have $\gamma_A\circ\eta_A = 1_A$ and $\eta_A\circ\gamma_A = 1_{G(F(A))}$, thereby completing the proof.
+\end{proof}

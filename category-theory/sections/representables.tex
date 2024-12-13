@@ -1,0 +1,130 @@
+\begin{definition}
+    Let $\scrA$ be a locally small category and $A\in\scrA$. Define a functor $H^A = \scrA(A, -): \scrA\to\catSet$ as follows: 
+    \begin{itemize}
+        \item for objects $B\in\scrA$, put $H^A(B) = \scrA(A, B)$, and
+        \item for maps $B\xrightarrow{g} B'$ in $\scrA$, define 
+        \begin{equation*}
+            H^A(g) = \scrA(A, g): \scrA(A, B)\to\scrA(A, B')
+        \end{equation*}
+        by $p\mapsto g\circ p$ for all $A\xrightarrow{p} B$.
+    \end{itemize}
+\end{definition}
+
+Consider the map from $\scrA$ to $[\scrA, \catSet]$ given by $A\mapsto H^A$, which we denote by $H^\bullet$. If $A'\xrightarrow{f} A$ is a morphism in $\scrA$, then there is a natural transformation $H^f: H^{A}\implies H^{A'}$ given by $\left(H^f(B)\right)_{B\in\scrA}$, where 
+\begin{equation*}
+    H^f(B): \scrA(A, B)\longrightarrow\scrA(A', B)\qquad p\longmapsto p\circ f.
+\end{equation*}
+
+To see that this is indeed a natural transformation, let $B\xrightarrow{g} B'$ in $\scrA$. We would like 
+\begin{equation*}
+    \xymatrix@+1pc {
+        \scrA(A, B)\ar[r]^{H^A(g)}\ar[d]_{H^f(B)} & \scrA(A, B')\ar[d]^{H^f(B')}\\
+        \scrA(A', B)\ar[r]_{H^{A'}(g)} & \scrA(A', B')
+    }
+\end{equation*}
+to commute. Indeed, some $p\in\scrA(A, B)$ mapsto $g\circ p$ in $\scrA(A, B')$ and to $g\circ p\circ f$ in $\scrA(A', B')$. On the other hand, $p$ mapsto $p\circ f$ in $\scrA(A', B)$ and then to $g\circ  p\circ f$ in $\scrA(A', B')$, as desired.
+
+\begin{definition}
+    Let $\scrA$ be a locally small category. The functor $H^\bullet: \scrA^{op}\to[\scrA, \catSet]$ is defined 
+    \begin{itemize}
+    \item on objects $A$ by $H^\bullet(A) = H^A$, and 
+    \item on morphisms $A'\xrightarrow{f} A$ in $\scrA$ by $H^\bullet(f) = H^f: H^A\implies H^{A'}$.
+    \end{itemize}
+\end{definition}
+
+Similarly, we have the dual definitions. 
+
+\begin{definition}
+    Let $\scrA$ be a locally small category and $A\in\scrA$. Define a functor $H_A = \scrA(-, A): \scrA^{op}\to\catSet$ as follows: 
+    \begin{itemize}
+        \item for objects $B\in\scrA$, put $H_A(B) = \scrA(B, A)$, and 
+        \item for maps $B'\xrightarrow{g} B$ in $\scrA$, define 
+        \begin{equation*}
+            H_A(g) = \scrA(g, A): \scrA(B, A)\to\scrA(B', A)
+        \end{equation*}
+        by $p\mapsto p\circ g$ for all $B\xrightarrow{p} A$.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}
+    Let $\scrA$ be a locally small category. The functor $H_\bullet: \scrA\to[\scrA^{op}, \catSet]$ is defined 
+    \begin{itemize}
+        \item on objects $A$ by $H_\bullet(A) = H_A$, and 
+        \item on morphisms $A\xrightarrow{f} A'$ by $H_\bullet(f) = H_f: H_A\implies H_{A'}$ given by 
+        \begin{equation*}
+            H_f(B): H_A(B) = \scrA(B, A)\longrightarrow\scrA(B, A') = H_{A'}(B)\qquad p\longmapsto f\circ p.
+        \end{equation*}
+    \end{itemize}
+    This is known as the \define{Yoneda embedding} of $\scrA$.
+\end{definition}
+
+\begin{theorem}[Yoneda's Lemma]
+    Let $\scrA$ be a locally small category and $X: \scrA^{op}\to\catSet$ be a functor. Then, there is a bijection
+    \begin{equation*}
+        [\scrA^{op},\catSet](H_A, X)\xrightarrow{\sim} X(A)\qquad\alpha\mapsto\alpha_A(1_A),
+    \end{equation*}
+    which is natural in $A\in\scrA$ and $X\in[\scrA^{op}, \catSet]$.
+\end{theorem}
+\begin{proof}
+    Let the map $[\scrA^{op},\catSet](H_A, X)\to X(A)$ defined above be denoted by $\alpha\mapsto\wh\alpha$. We define a map in the opposite direction: for each $x\in X(A)$, let $\wt x: H_A\implies X$ be given by $(\wt x_B)_{B\in\scrA}$, where 
+    \begin{equation*}
+        \wt x_B: H_A(B) = \scrA(B, A)\to X(B)\qquad \wt x_B(f) = \left(X(f)\right)(x)\in X(B).
+    \end{equation*}
+    We first show that this is indeed a natural transformation from $H_A$ to $X$. Let $B'\xrightarrow{g} B$ be an arrow in $A$. We would like to conclude that 
+    \begin{equation*}
+        \xymatrix {
+            H_A(B)\ar[r]^{-\circ g}\ar[d]_{\wt x_B} & H_A(B')\ar[d]^{\wt x_{B'}}\\
+            X(B)\ar[r]_{X(g)} & X(B')
+        }
+    \end{equation*}
+    commutes. Indeed, let $f\in H_A(B) = \scrA(B, A)$. It maps to $f\circ g\in H_A(B')$, which maps to $(X(f\circ g))(x)\in X(B')$. On the other hand, $f$ maps to $(X(f))(x)\in X(B)$, which maps to $(X(g))((X(f))(x)) = X(f\circ g)(x)$, since $X$ is contravariant on $\scrA$.
+
+    Next, we show that the previously defined maps $\alpha\mapsto\wh\alpha$ and $x\mapsto\wt x$ are inverses to one another. Let $\alpha: H_A\implies X$ be a natural transformation and fix some $B\in\scrA$. Then, for any $f\in H_A(B) = \scrA(B, A)$, we have 
+    \begin{equation*}
+        \wt{\wh{\alpha}}_B(f) = (Xf)(\wh{\alpha}) = (Xf)(\alpha_A(1_A))\in X(B).
+    \end{equation*}
+    It remains to show that $(Xf)(\alpha_A(1_A)) = \alpha_B(f)$, where $f\in H_A(B) = \scrA(B, A)$. Note that $\alpha$ is a natural transformation and hence, there is a commutative square corresponding to the map $B\xrightarrow{f} A$ as follows: 
+    \begin{equation*}
+        \xymatrix@C+1pc {
+            H_A(A)\ar[r]^{-\circ f}\ar[d]_{\alpha_A} & H_A(B)\ar[d]^{\alpha_B}\\
+            X(A)\ar[r]_{Xf} & X(B).
+        }
+    \end{equation*}
+    Under the above square, $1_A$ first maps to $f\in\scrA(B, A)$ under the horizontal map and then maps to $\alpha_B(f)$. On the other hand, $1_A$ maps to $\alpha_A(1_A)$ under the vertical map and then to $(Xf)(\alpha_A(1_A))$ under the horizontal map, which gives us what we wanted due to commutativity. 
+
+    On the other hand, if $x\in X(A)$, then 
+    \begin{equation*}
+        \wh{\wt{x}} = \wt{x}_A(1_A) = (X(1_A))(x) = 1_{X(A)}(x) = x.
+    \end{equation*}
+    This shows that the two maps are inverses to one another.
+
+    Finally, we must show naturality of $\wt{\cdot}$ and $\wh{\cdot}$. If we show naturality of even one of them, we have shown the other, since the components are all isomorphisms (invoke \thref{lem:nat-trans-is-iso}). We prove naturality of $\wh{\cdot}$.
+
+    First, consider naturality in $A$. Let $B\xrightarrow{f} A$ be an arrow in $\scrA$, which induces a map $H_f: H_B\implies H_A$ in $[\scrA^{op},\catSet]$, which in turn induces a map 
+    \begin{equation*}
+        -\circ H_f: [\scrA^{op}, \catSet](H_A, X)\longrightarrow[\scrA^{op},\catSet](H_B, X).
+    \end{equation*}
+    We would like to show that 
+    \begin{equation*}
+        \xymatrix@C+2pc {
+            [\scrA^{op},\catSet](H_A, X)\ar[r]^{-\circ H_f}\ar[d]_{\wh{\cdot}} & [\scrA^{op},\catSet](H_B, X)\ar[d]^{\wh{\cdot}}\\
+            X(A)\ar[r]_{Xf} & X(B)
+        }
+    \end{equation*}
+    commutes. Indeed, consider $\alpha: H_A\implies X$. First, under the horizontal map, it goes to $\alpha\circ H_f$, which under the vertical map goes to $(\alpha\circ H_f)_B(1_B)\in X(B)$. On the other hand, under the vertical map, $\alpha$ first goes to $\alpha_A(1_A)$, which under the horizontal map goes to $(Xf)(\alpha_A(1_A))$.
+
+    Now, note that 
+    \begin{equation*}
+        (\alpha\circ H_f)_B(1_B) = \alpha_B((H_f)_B(1_B)) = \alpha_B(f) = (Xf)(\alpha_A(1_A)),
+    \end{equation*}
+    the last of which is an equality that we argued earlier while showing that the maps were inverses.
+
+    Next, we must argue for naturality in $X$. Suppose $\theta: X\implies X'$ is a natural transformation, where $X': \scrA^{op}\to\catSet$ is a functor. We would like to show that the square 
+    \begin{equation*}
+        \xymatrix@C+2pc {
+            [\scrA^{op},\catSet](H_A, X)\ar[r]^{\theta\circ-}\ar[d]_{\wh{\cdot}} & [\scrA^{op},\catSet](H_A, X')\ar[d]^{\wh{\cdot}}\\
+            X(A)\ar[r]_{\theta_A} & X'(A)
+        }
+    \end{equation*}
+    Let $\alpha: H_A\implies X$. This maps to $\theta\circ\alpha$ under the horizontal map and goes to $(\theta\circ\alpha)_A(1_A)$ under the vertical map. On the other hand, it first goes to $\alpha_A(1_A)$ under the vertical map which maps to $\theta_A(\alpha_A(1_A))$ under the horizontal map. These two are obviously equal, since $(\theta\circ\alpha)_A = \theta_A\circ\alpha_A$. This completes the proof.
+\end{proof}
