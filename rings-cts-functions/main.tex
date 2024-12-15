@@ -1,0 +1,437 @@
+\documentclass[12pt]{article}
+
+% \usepackage{./arxiv}
+
+\title{Rings of Continuous Functions}
+\author{Swayam Chube}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+\newcommand{\ob}{\operatorname{ob}}
+
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}} % Refrain from using lowercase
+\newcommand{\mspec}{\operatorname{m-spec}} % Refrain from using lowercase
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}} % subscript
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}} % Support
+\newcommand{\Ass}{\operatorname{Ass}} % Associated Primes
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrN}{\mathscr N}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrR}{\mathscr R}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+\newcommand{\scrG}{\mathscr{G}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\pr}{\operatorname{pr}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\scshape}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+\begin{document}
+\maketitle
+
+\section{\texorpdfstring{$C(X)$}{C(X)}}
+
+\subsection{Maximal Ideals}
+
+\begin{theorem}
+    Let $X$ be a compact Hausdorff space. Every maximal ideal in $C(X)$ is of the form 
+    \begin{equation*}
+        \frakm_x = \left\{f\in C(X)\colon f(x) = 0\right\}.
+    \end{equation*}
+\end{theorem}
+
+\begin{proposition}
+    Let $X$ be a compact Hausdorff space. Every prime ideal in $C(X)$ is contained in a unique maximal idea.
+\end{proposition}
+
+\begin{theorem}[Sury, ??]
+    Every maximal ideal in $C[0, 1]$ is uncountably generated.
+\end{theorem}
+
+\subsection{Krull Dimension}
+
+Throughout this (sub)section, $X$ denotes a compact Hausdorff space. For every $x\in X$, there is a maximal ideal 
+\begin{equation*}
+    \frakm_x = \left\{f\in C(X)\colon f(x) = 0\right\}.
+\end{equation*}
+These are the only maximal ideals in $C(X)$. The goal of this (sub)section is to prove the following 
+
+\begin{theorem}\thlabel{thm:inf-krull-dim}
+    If there is a point $p\in X$ and an $f\in C(X)$ such that $f(p) = 0$ and there is no neighborhood of $p$ on which $f$ vanishes, then $C(X)$ has infinite Krull dimension.
+\end{theorem}
+
+\begin{definition}
+    A \define{partially ordered ring} is a pair $(A,\leqq)$ where $\leqq$ is a partial order on $A$ such that
+    \begin{itemize}
+        \item $x\leqq y$ implies $x + z \leqq y + z$, and 
+        \item $0\leqq x$ and $0\leqq y$ implies $0\leqq xy$,
+    \end{itemize}
+    for all $x,y,z\in A$.
+    A \define{totally ordered ring} is a partially ordered ring $(A,\leqq)$ such that $\leqq$ is a total order.
+\end{definition}
+
+The ring $C(X)$ has a canonical partial order, given by $f\leqq g$ if and only if $f(x)\le g(x)$ for all $x\in X$.
+
+\begin{definition}
+    An ideal $\fraka$ of a partially ordered ring $A$ is said to be \define{convex} if whenever $a,b\in A$ such that $0\leqq a\leqq b$ and $b\in\fraka$, then $a\in\fraka$.
+\end{definition}
+
+\begin{proposition}
+    If $(A,\leqq)$ is a partially ordered ring, and $\fraka\noreq A$ is a convex ideal, then $A/\fraka$ has a natural partial order given by: 
+    \begin{equation*}
+        (a + \fraka)\leqq(b + \fraka) \quad\text{if}\quad a\leqq b.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Standard.
+\end{proof}
+
+\begin{proposition}
+    Let $\frakP$ be a prime ideal in $C(X)$. Then, $\frakP$ is convex.
+\end{proposition}
+\begin{proof}
+    Suppsoe $0\leqq f\leqq g$ in $C(X)$ and $g\in\frakP$. The function $h: X\to\R$ given by 
+    \begin{equation*}
+        h(x) = 
+        \begin{cases}
+            \frac{f(x)^2}{g(x)} & g(x)\ne 0\\
+            0 & g(x) = 0
+        \end{cases}
+    \end{equation*}
+    is a continuous function such that $f^2 = gh\in\frakP$, whence $f\in\frakP$.
+\end{proof}
+
+\begin{proposition}
+    The ring $A = C(X)/\frakP$ is a totally ordered local domain. Further, the primes of $A$ are totally ordered by inclusion.
+\end{proposition}
+\begin{proof}
+    That it is a local domain follows from the fact that there is a unique maximal ideal containing $\frakP$. For any $f\in C(X)$, $f^2\equiv |f|^2\pmod\frakP$, and hence, $f\equiv |f|\pmod\frakP$ or $f\equiv -|f|\pmod\frakP$. Consequently, $f + \frakP$ is comparable with $0$ in $A$, whence $A$ is totally ordered.
+
+    Recall that the primes in $A$ are of the form $\frakp = \frakQ/\frakP$ for some prime $\frakQ\supseteq\frakP$. Since $\frakQ$ is convex, so is $\frakp$.
+
+    Finally, let $\frakp$ and $\frakq$ be two primes in $A$ and suppose $a\in\frakq\setminus\frakp$. Then, for every $b\in\frakq$, $b < a$, else $a\in\frakp$. Hence, $b\in\frakp$. This shows that $\frakp\subseteq\frakq$, whence the primes are totally ordered by inclusion.
+\end{proof}
+
+
+Let $p\in X$ be a point such that there is an $f\in C(X)$ such that $f(p) = 0$ but there is no neighborhood of $p$ on which $f$ is identically $0$. Upon multiplying by a suitable real scalar, we may suppose that $0\le f(x) < e^{-2} < 1$ on $X$.
+
+\begin{proposition}
+    The maximal ideal $\frakm_p$ properly contains a prime ideal, say $\frakP$.
+\end{proposition}
+\begin{proof}
+    Consider the local ring $C(X)_{\frakm_p}$. If $\frakm_p$ does not properly contain a prime ideal, then $C(X)_{\frakm_p}$ is a local ring of dimension $0$, whence the maximal ideal is the nilradical. But this ring is isomorphic to the ring of germs at $p$ and the germ of $f$ at $p$ is not nilpotent since it does not vanish on any neighborhood of $p$.
+\end{proof}
+
+Let 
+\begin{equation*}
+    I_p = \left\{g\in C(X)\colon g\text{ vanishes on a neighborhood of }p\right\}\subseteq\frakm_p.
+\end{equation*}
+
+\begin{proposition}
+    $I_p\subseteq\frakP$.
+\end{proposition}
+\begin{proof}
+    The localization map $C(X)\to C(X)_{\frakm_p}$ is a surjective ring homomorphism whose kernel is $I_p$. Note that $\frakP^{ec} = \frakP$, since $\frakP$ is prime. But upon contracting, we see that $\frakP$ must contain the kernel.
+\end{proof}
+
+\begin{proof}[Proof of \thref{thm:inf-krull-dim}]
+Let $A = C(X)/\frakP$. We shall show that $A$ has infinite Krull dimension. To this end, it suffices to show that we can find a prime ideal $\frakQ$ such that $\frakP\subsetneq\frakQ\subsetneq\frakm_p$, since this process can then be repeated ad infinitum.
+
+Define the function $g: X\to\R$ by 
+\begin{equation*}
+    g(x) = 
+    \begin{cases}
+        \frac{1}{|\log f(x)|} & f(x)\ne 0\\
+        0 & f(x) = 0.
+    \end{cases}
+\end{equation*}
+This is a continuous function on $X$. Further, from basic calculus, it is evident that for every positive integer $k$, there is a neighborhood of $0$ in $[0,\infty)$ on which $t|\log t|^k < 1$. Hence, for every positive integer $k$, there is a neighborhood $U$ of $p$ on which $g(x)^k\ge f(x)$.
+
+Since $C(X)/I_p$ is ordered, we see that $g^k + I_p\geqq f + I_p$ for all positive integers $k$ in $C(X)/I_p$. Since $A$ is a quotient of $C(X)/I_p$, we have that $g^k + \frakP\geqq f + \frakP$ for all positive integers $k$ in $A$. 
+
+Let $a,b\in A$ denote the images of $f$ and $g$ respectively. Then $a\le b^k$ for all positive integers $k$. Note that by construction, $0\le g(x) < \frac{1}{2}$ on all of $X$. Suppose $A$ has no prime ideals other than the maximal ideal and $(0)$, then the radical of $(a)\noreq A$, which is the intersection of all primes containing $(a)$ must be equal to the maximal ideal.
+
+In particiular, there is a positive integer $n$ such that $b^n\in (a)$, whence there is some $c\in A$ such that $b^n = ac$. Since $0 < a, b$, we have that $0 < c$. Therefore, we can find some $0\leqq h\in C(X)$ such that $c$ is the image of $h$ in $A$. Since the supremum of $g$ on $X$ is smaller than $\frac{1}{2}$, and $h$ is bounded on $X$ (since $X$ is compact), we have that for sufficiently large positive integers $k$, $0 < g^kh < 1$. That is, for sufficiently large $k$, $0\leqq b^kc\leqq 1$. 
+
+Hence, for all sufficiently large $k$, we have 
+\begin{equation*}
+    a\leqq b^{n + k} = a(b^kc)\leqq a\implies b^{n + k} = a.
+\end{equation*}
+Consequently, $b^N = b^{N + 1}$ for sufficiently large $N$. Since $A$ is a domain, this is possible if and only if $b\in\{0, 1\}$, neither of which is the case. This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    Let $X$ be a compact Hausdorff space such that $C(X)$ consists of only the locally constant functions on $X$. Then $X$ is a finite set.
+\end{proposition}
+\begin{proof}
+    We first show that every $G_\delta$-set in $X$ is open. To this end, suppose $U_1, U_2,\dots$ is a collection of open subsets of $X$ containing a point $p\in X$. Urysohn's lemma furnishes continuous functions $f_n: X\to[0, 1]$ such that $f_n(p) = 1$ and $f_n$ vanishes on $X\setminus U_n$. Define $f: X\to[0, 1]$ by 
+    \begin{equation*}
+        f(x) = \sum_{n = 1}^\infty\frac{1}{2^n}f_n(x)\qquad x\in X.
+    \end{equation*}
+    This series converges uniformly due to the Weierstrass $M$-test, whence $f$ is continuous, i.e., locally constant. Thus, there is a neighborhood $V$ of $p$ in $X$ on which $f$ is identically $1$. Note that if $f(q) = 1$ then $q\in U_n$ for all $n\ge 1$. Thus, 
+    \begin{equation*}
+        V\subseteq\bigcap_{n = 1}^\infty U_n\implies\bigcap_{n = 1}^\infty U_n\text{ is open}.
+    \end{equation*}
+
+    Next, given disjoint points $a,b\in X$, there is a continuous function $f:X\to [0,1]$ such that $f(a) = 0$ and $f(1) = b$. Note that the zero set of $f$ is open because $f$ is locally constant. Whence, we have a disjoint union of clopen sets $U_{a,b}\sqcup U_{b, a}$ such that $a\in U_{a,b}$ and $b\in U_{b, a}$.
+
+    Suppose now that $X$ is not finite and choose a countably infinite set $A\subseteq X$. Consider the collection $\scrS$ of sets $S$ such that
+    \begin{itemize}
+        \item $S$ is a collection of pairs $(a, b)$ with $a, b\in A$ and $a\ne b$. 
+        \item For all $a\ne b$ in $A$, exactly one of $(a, b)$ and $(b, a)$ is in $S$.
+    \end{itemize}
+    Note that every $S\in\mathscr S$ is a countable set. Next, define 
+    \begin{equation*}
+        U_S = \bigcap_{(a, b)\in S} U_{a, b}.
+    \end{equation*}
+    Since every $G_\delta$ in $X$ is open, every $U_S$ is clopen. Further, 
+    \begin{equation*}
+        X = \bigsqcup_{S\in\mathscr S} U_S.
+    \end{equation*}
+    Finally, note that the elements of $a$ lie in disjoint $U_S$'s by construction. As a result, at least countably many of the $U_S$'s are non-empty. Hence, we have expressed $X$ as a disjoint union of at least countably many disjoint open sets, a contradiction to the compactness of $X$. This completes the proof.
+\end{proof}
+
+To summarize, we have: 
+\begin{theorem}
+    Let $X$ be a compact Hausdorff space. Then, 
+    \begin{itemize}
+        \item $\dim C(X) = 0$ if $X$ is a finite set. 
+        \item $\dim C(X) = \infty$ in all other cases.
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    If $X$ is finite, then $C(X) = \R^n$ as a ring, whence $\dim C(X) = 0$. The other cases have been handled above.
+\end{proof}
+\end{document}
