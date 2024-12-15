@@ -270,15 +270,46 @@
     \begin{equation*}
         \frakm_x = \left\{f\in C(X)\colon f(x) = 0\right\}.
     \end{equation*}
+    Further, the natural map
+    \begin{equation*}
+        X\longrightarrow\MaxSpec C(X)\qquad x\longmapsto\frakm_x
+    \end{equation*}
+    is a homeomorphism when the latter is endowed with the Zariski topology.
 \end{theorem}
 
 \begin{proposition}
-    Let $X$ be a compact Hausdorff space. Every prime ideal in $C(X)$ is contained in a unique maximal idea.
+    Let $X$ be a compact Hausdorff space. Every prime ideal in $C(X)$ is contained in a unique maximal ideal.
 \end{proposition}
 
-\begin{theorem}[Sury, ??]
+\begin{theorem}[Sury]
     Every maximal ideal in $C[0, 1]$ is uncountably generated.
 \end{theorem}
+\begin{proof}
+    Suppose $c\in [0, 1]$ such that $\frakm_c$ is countably generated, by say $(f_1, f_2,\dots)$. Upon multiplying by a suitable real scalar, we may suppose that $\|f_i\|_\infty\le 1$. Define $f\in C[0, 1]$ by 
+    \begin{equation*}
+        f(x) = \sum_{n = 1}^\infty\frac{\sqrt{|f_n(x)|}}{2^n}.
+    \end{equation*}
+    Since $f\in\frakm_c$, there is an $r\ge 1$ and $g_1,\dots,g_r\in C[0, 1]$ such that $f = g_1f_1 + \dots + g_rf_r$. Let $M > 0$ be such that $\|g_i\|\le M$ for $1\le i\le r$. Then, 
+    \begin{equation*}
+        |f(x)|\le M\sum_{i = 1}^r |f_i(x)|.
+    \end{equation*}
+
+    Using continuity, we can choose a neighborhood $U$ of $c$ in $[0, 1]$ on which 
+    \begin{equation*}
+        \sqrt{|f_i(x)|} < \frac{1}{2^i M}\qquad 1\le i\le r,~\forall~x\in U.
+    \end{equation*}
+    Further, note that not all the $f_i$'s (for $1\le i\le r$) can vanish on $U$, since that would mean $f$ vanishes on $U$, and hence, every $f_i$ (for $i\ge 1$) vanishes on $U$.
+
+    Consequently, there is some $x_0\in U$ and $1\le j\le r$ such that $f_j(x)\ne 0$. In particular, this means 
+    \begin{equation*}
+        |f_j(x_0)| < \frac{\sqrt{|f_j(x_0)|}}{2^j}.
+    \end{equation*}
+    Putting all this together, we have 
+    \begin{equation*}
+        |f(x_0)|\le M\sum_{i = 1}^r |f_i(x_0)| < M\sum_{i = 1}^r\frac{\sqrt{|f_i(x_0)|}}{2^i M}\le |f(x_0)|,
+    \end{equation*}
+    a contradiction. This completes the proof.
+\end{proof}
 
 \subsection{Krull Dimension}
 
@@ -420,7 +451,7 @@ Consequently, $b^N = b^{N + 1}$ for sufficiently large $N$. Since $A$ is a domai
     \begin{equation*}
         X = \bigsqcup_{S\in\mathscr S} U_S.
     \end{equation*}
-    Finally, note that the elements of $a$ lie in disjoint $U_S$'s by construction. As a result, at least countably many of the $U_S$'s are non-empty. Hence, we have expressed $X$ as a disjoint union of at least countably many disjoint open sets, a contradiction to the compactness of $X$. This completes the proof.
+    Finally, note that the elements of $A$ lie in disjoint $U_S$'s by construction. As a result, at least countably many of the $U_S$'s are non-empty. Hence, we have expressed $X$ as a disjoint union of at least countably many disjoint open sets, a contradiction to the compactness of $X$. This completes the proof.
 \end{proof}
 
 To summarize, we have: 
