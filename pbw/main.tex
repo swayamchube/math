@@ -221,6 +221,7 @@
 \newcommand{\Ext}{\operatorname{Ext}}
 \newcommand{\co}{\operatorname{co}}
 \newcommand{\ind}{\operatorname{ind}}
+\newcommand{\Der}{\operatorname{Der}}
 
 \geometry {
     margin = 1in
@@ -498,5 +499,119 @@ The above discussion also shows:
     $\frakF(X)$ is the universal enveloping algebra of $\frakL(X)$.
 \end{proposition}
 
+\section{Epimorphisms of Lie Algebras}
 
+\begin{definition}
+    Let $\frakg$ and $\frakh$ be Lie algebras with a Lie algebra homomorphism $\psi:\frakg\to\operatorname{Der}(\frakh)$. Then, there is a Lie algebra structure on $\frakt = \frakh\oplus\frakg$ given by 
+    \begin{equation*}
+        [(h, g), (h', g')] = \left([h, h'] + \psi_g(h') - \psi_{g'}(h), [g, g']\right).
+    \end{equation*}
+    This is the \define{semidirect product} and is often denoted by $\frakh\rtimes_{\psi}\frakg$
+\end{definition}
+
+\begin{lemma}\thlabel{lem:not-epimorphic}
+    Suppose $\frakh\subsetneq\frakg$ is an inclusion of Lie algebras and $V$ a $\frakg$-module with a $0\ne\psi\in V$ that is annihilated by $\frakh$ but not by $\frakg$. Then the inclusion $\frakh\into\frakg$ is not an epimorphism.
+\end{lemma}
+\begin{proof}
+    We can treat $V$ as an abelian Lie algebra and consider the semidirect product $\frakt = V\rtimes\frakg$. Note that since $V$ is abeilan, every $k$-linear map $V\to V$ is a derivation of $V$. 
+
+    Define the map $\theta: \frakg\to V\rtimes\frakg$ by $\theta(x) = (x\cdot\psi, x)$. We contend that this is a Lie algebra homomorphism. Indeed, for $x,y\in\frakg$, we have 
+    \begin{align*}
+        [\theta(x), \theta(y)] &= \left[(x\cdot\psi, x), (y\cdot\psi, y)\right]\\
+        &= \left(x\cdot(y\cdot\psi) - y\cdot(x\cdot\psi), [x, y]\right)\\
+        &= [x, y]\cdot\psi.
+    \end{align*}
+     Further, for $x\in\frakh$, $\theta(\frakh) = (0, x)$. Consequently, the two maps $\theta:\frakg\to V\rtimes\frakg$ and $\iota:\frakg\into V\rtimes\frakg$ agree on $\frakh$ but not on $\frakg$. Thus, the inclusion $\frakh\into\frakg$ is not an epimorphism.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:epi-surj-lie-alg}
+    Epimorphisms in the category of Lie algebras (including the infinite-dimensional ones) are precisely the surjective Lie algebra homomorphisms.
+\end{theorem}
+\begin{proof}
+    Obviously, surjecive Lie algebra homomorphisms $\frakh\to\frakg$ are epimorphisms. Therefore, it suffices to show that a proper inclusion $\frakh\subsetneq\frakg$ of Lie algebras is not epimorphic. We prove this in the case $\frakg$ is finite-dimensional but an analogous proof works in the infinite-dimensional case.
+
+    Choose a $k$-basis $x_1,\dots,x_n$ of $\frakg$ such that $x_{p + 1},\dots,x_{n}$ is a $k$-basis of $\frakh$. Let $\frakU$ denote the universal enveloping algebra of $\frakg$. Recall that the Poincar\'e-Birkhoff-Witt theorem guarantees a $k$-basis of $\frakU$ in the form $x_1^{m_1}\cdots x_n^{m_n}$ where $m_i\ge 0$ for $1\le i\le n$. We use the notation $\mathbf{x}^m$ to denote products of the aforementioned kind.
+
+    Let $V$ be the subspace of $\frakU$ spanned by $\mathbf{x}^k$ where $k_{p + 1} = \cdots = k_n = 0$, and let $\pi: \frakU\onto V$ denote the projection. Define a $\frakg$-action on $V$ as follows: For $v\in V\subseteq\frakU$ and $x\in\frakg$, set $x\cdot v = \pi(x v)$, where $xv$ is the standard product in the associative algebra $\frakU$. 
+
+    First, we must show that this is gives $V$ the structure of a $\frakg$-module. To this end, we must show that for $x,x'\in\frakg$ and $v\in V$, 
+    \begin{equation*}
+        \pi\left([x, x']\cdot v\right) = \pi(x\cdot\pi(x'\cdot v)) - \pi(x'\cdot\pi(x\cdot v)).
+    \end{equation*}
+    But by definition, $\pi\left([x, x']\cdot v\right) = \pi(xx'v) - \pi(x'xv)$. Hence, it suffices to show that 
+    \begin{equation*}
+        \pi\left(x\cdot\pi(x'\cdot v)\right) = \pi(xx'v).
+    \end{equation*}
+    We can write $x'v = \pi(x'v) + v'$, where $v'$ is a linear combination of basis elements $\mathbf{x}^k$ with $k_i > 0$ for some $p < i\le n$. So it suffices to show that $\pi(x\mathbf{x}^k) = 0$ for some such $k$ and every $x\in\frakg$. For if this is shown, then 
+    \begin{equation*}
+        \pi(xx'v) = \pi\left(x\pi(x'v) + xv'\right) = \pi(x\pi(x'v)) + \pi(xv') = \pi(x\pi(x'v)),
+    \end{equation*}
+    as desired.
+
+    Therefore, let $x\in\frakg$ and $k$ a multivector of nonnegative integers such that $k_i > 0$ for some $p < i\le n$. We can write $\mathbf{x}^k$ as $\mathbf{x}^h\mathbf{x}^l$ where $h_i = 0$ for $p < i\le n$ and $l_i = 0$ for $1\le i\le p$. Note that $l\ne 0$ as a vector. Then, we may write $x\mathbf{x}^h$ as a linear combination of elements $\mathbf{x}^{h'}\mathbf{x}^{l'}$ with $h_i' = 0$ for $i < p\le n$ and $l_i' = 0$ for $1\le i\le p$. In conclusion, $x\mathbf{x}^k$ is a linear combination of elements of the form $\mathbf{x}^{h'}\mathbf{x}^{l'}\mathbf{x}^{l}$.
+
+    Since $\frakh$ is a subalgebra, note that the vector space spanned by $\mathbf{x}^{l}$ where $l_i = 0$ for $1\le i\le p$ is precisely the universal enveloping algebra of $\frakh$. In particular, it is an associative $k$-subalgebra of $\frakU$. This shows that $\mathbf{x}^{l'}\mathbf{x}^{l}$ can be written as a linear combination of elements of the form $\mathbf{x}^{l''}$ where $l_i'' = 0$ for $1\le i\le p$. Since the terms of degree greater than $0$ form an ideal in $\frakU(\frakh)\subseteq\frakU$, $l\ne 0$ will imply $l''\ne 0$. 
+
+    The above paragraph shows that $x\mathbf{x}^k$ can be written as a linear combination of elements of the form $\mathbf{x}^{h'}\mathbf{x}^{l''}$ where $h_i' = 0$ for $p < i\le n$ and $l_i'' = 0$ for $1\le i\le p$ and $l''\ne 0$ as a vector. But these are all basis elements and are not contained in $V$, therefore, map to $0$ under $\pi$. Hence, $\pi(x\mathbf{x}^k) = 0$ whenever $k$ is such that $k_i > 0$ for some $p < i\le n$.
+
+    We have established that $V$ is indeed a $\frakg$-module. The element $1\in V$ is not annihilated by $\frakg$, but is annihilated by $\frakh$ since for any $y\in\frakh$, $y\cdot 1 = \pi(y) = 0$, since $y\notin V\subseteq\frakU$. Invoking \thref{lem:not-epimorphic}, we have that $\frakh\into\frakg$ is not an epimorphism, thereby completing the proof.
+\end{proof}
+
+\begin{remark}
+    In the case that $\frakg$ is infinite-dimensional, choose first a $k$-basis $\{x_\beta\colon\beta\in B\}$ of $\frakh$ and extend it to a $k$-basis 
+    \begin{equation*}
+        \{x_\alpha\colon\alpha\in A\}\sqcup\{x_\beta\colon \beta\in B\}
+    \end{equation*}
+    of $\frakg$. Well order $A$ and $B$ separately and define a well order on $A\sqcup B$ by setting $a < b$ whenever $a\in A$ and $b\in B$. That this is indeed a well-order is easy to check. The proof then remains unchanged by replacing each instance of ``$1\le i\le p$'' with ``$i\in A$'' and ``$p < i\le n$ with $i\in B$''.
+\end{remark}
+
+
+The analogue of \thref{thm:epi-surj-lie-alg} is not true in the category of finite-dimensional Lie algebras: 
+
+\begin{theorem}
+    Let $k$ be algebraically closed and $\chr k = 0$, $\frakg = \mathfrak{sl}_2(k)$, and $\frakh\subsetneq\frakg$ be the subalgebra of upper triangular matrices in $\frakg$. Then, $\frakh\into\frakg$ is an epimorphism.
+\end{theorem}
+\begin{proof}
+    Recall that there is the standard basis $\{h, x, y\}$ of $\frakg$ over $k$ and $\frakh$ is generated by $\{h, x\}$. For the sake of this proof, make the replacements $h\mapsto\frac{1}{2}h$, $x\mapsto\frac{1}{\sqrt 2}x$, and $y\mapsto\frac{1}{\sqrt 2}y$, so that 
+    \begin{equation*}
+        [h, x] = x,\quad [h, y] = -y,\quad\text{and}\quad[x, y] = h.
+    \end{equation*}
+    Suppose now that there are two morphisms $\frakg\to\frakt$ that agree on $\frakh$. We shall show that both the morphisms are equal. Since $\frakg$ is simple, both morphisms must be injective, unless they are both $0$ in which case there's nothing to prove. Denote the images of $h$ and $x$ in $\frakt$ by $h$ and $x$ since both morphisms agree here and let $y, y'$ denote the images of $y$ in $\frakt$ under the two morphsims and suppose that $y\ne y'$.
+
+    Set $u_0 = y - y'$, and define $u_n = [y, u_{n - 1}]$ for $n\ge 1$ with the convention that $u_{-1} = 0$. Note that $[x, u_0] = [x, y] - [x, y'] = 0$ and $[h, u_0] = -u_0$.
+
+    \noindent\textbf{Claim 1.} $[x, u_n] = -\frac{1}{2}n(n + 1)u_{n - 1}$ and $[h, u_n] = -(n + 1)u_{n}$ for $n\ge 0$.
+
+    \noindent We induct on $n$. The base case of $n = 0$ is clear. For $n\ge 1$, we have 
+    \begin{align*}
+        &[x, [y, u_{n - 1}]] + [y, [u_{n - 1}, x]] + [u_{n - 1}, [x, y]] = 0\\
+        \implies&[x, u_n] + \frac{1}{2}n(n - 1)[y, u_{n - 2}] + [u_{n - 1}, h]\\
+        \implies &[x, u_n] = -\frac{1}{2}n(n - 1)u_{n - 1} - nu_{n - 1} = -\frac{1}{2}n(n + 1)u_{n - 1}.
+    \end{align*}
+    Similarly, we have 
+    \begin{align*}
+        &[h, [y, u_{n - 1}]] + [y, [u_{n - 1}, h]] + [u_{n - 1}, [h, y]] = 0\\
+        \implies&[h, u_n] + n[y, u_{n - 1}] - [u_{n - 1}, y] = 0\\
+        \implies&[h, u_n] = -(n + 1)u_n.
+    \end{align*}
+    This proves Claim 1.
+
+    \noindent\textbf{Claim 2.} $\{h, x, y\}\cup\{u_n\colon n\ge 0\}$ is linearly independent.
+
+    \noindent Suppose not. Then there is a linear combination 
+    \begin{equation*}
+        \alpha_n u_n + \dots + \alpha_0 u_0 + \alpha_h h + \alpha_x x + \alpha_y y = 0.
+    \end{equation*}
+    with $\alpha_n\ne 0$. If $n\ge 1$, then apply $[x,\cdot]$ until you are left with a linear combination of the form 
+    \begin{equation*}
+        \beta_0 u_0 + \beta_h h + \beta_x x + \beta_y y = 0
+    \end{equation*}
+    where $\beta_0\ne 0$. Next, applying $[h,\cdot]$, we have 
+    \begin{equation*}
+        -\beta_0 u_0 + \beta_x x - \beta_y y = 0.
+    \end{equation*}
+    Adding the above two equations, we have $2\beta_x x + \beta_h h = 0$, whence $\beta_x = \beta_h = 0$. This gives $\beta_0 u_0 + \beta_y y = 0$. Applying $[x, \cdot]$, we get $\beta_y = 0$, which leaves us with $\beta_0u_0 = 0$, which is absurd, since $u_0\ne 0$ and $\beta_0\ne 0$. This proves Claim 2.
+
+    Finally, we have our desired contradiction, since $\frakt$ is a finite-dimensional Lie algebra. It follows that the inclusion $\frakh\into\frakg$ is epimorphic.
+\end{proof}
 \end{document}
