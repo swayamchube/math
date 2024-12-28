@@ -76,7 +76,7 @@
 
 \theoremstyle{defstyle}
 \newtheorem{definition}[theorem]{Definition}
-\newtheorem*{corollary}{Corollary}
+\newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{example}[theorem]{Example}
 \newtheorem*{notation}{Notation}
@@ -228,6 +228,7 @@
 \newcommand{\noreq}{\trianglelefteqslant}
 \newcommand{\subnor}{\nor\!\nor}
 \newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\core}{\operatorname{core}}
 
 \geometry {
     margin = 1in
@@ -543,7 +544,7 @@ We shall show that $(1)\Longrightarrow (2)\Longrightarrow (3)\Longrightarrow (1)
     This completes the induction and implies the desired conclusion.
 \end{proof}
 
-\begin{lemma}\thlabel{lem-normal-in-nilpotent}
+\begin{lemma}\thlabel{lem:normal-in-nilpotent}
     Let $G$ be a nilpotent group and $N$ a non-trivial normal subgroup of $G$. Then, $Z(G)\cap N$ is non-trivial.
 \end{lemma}
 \begin{proof}
@@ -676,7 +677,7 @@ If $M$ and $N$ are two minimal normal subgroups of $G$, then $M\cap N = \{1\}$ a
     Since $N$ is a finite group and $M$ is a non-trivial normal subgroup of $N$, it contains a minimal normal subgroup. That is, $M\cap\Soc(N)\ne 1$. Since $\Soc(N)$ is characteristic in $N$, it must be normal in $G$. Owing to the minimality of $M$ in $G$, $M\cap\Soc(N) = M$, that is, $M\subseteq\Soc(N)$ as desired.
 \end{proof}
 
-\begin{theorem}[Wielandt]
+\begin{theorem}[Wielandt]\thlabel{thm:wielandt-join}
     Let $G$ be a finite group and $S,T\subnor G$. Then $\langle S, T\rangle\subnor G$.
 \end{theorem}
 \begin{proof}
@@ -689,11 +690,15 @@ If $M$ and $N$ are two minimal normal subgroups of $G$, then $M\cap N = \{1\}$ a
     Finally, note that $M\subseteq N_G(S), N_G(T)$ and hence, $M\subseteq N_G(\langle S, T\rangle)$, whence $\langle S, T\rangle\nor\langle S, T\rangle M\subnor G$, whence the conclusion follows.
 \end{proof}
 
-\begin{lemma}
+\begin{lemma}\thlabel{lem:product-conjugate}
     Let $G$ be a group and $H\le G$. If $HH^x = G$ for some $x\in G$, then $H = G$.
 \end{lemma}
 \begin{proof}
-    
+    Write $x = uv$, where $u\in H$ and $v\in H^x$. Then $xv^{-1} = u$ and we have 
+    \begin{equation*}
+        H^x = \left(H^x\right)^{v^{-1}} = H^{uv^{-1}} = H^u = H.
+    \end{equation*}
+    Then $G = HH^x = HH = H$, as desired.
 \end{proof}
 
 % \begin{proposition}
@@ -707,14 +712,26 @@ If $M$ and $N$ are two minimal normal subgroups of $G$, then $M\cap N = \{1\}$ a
     Let $G$ be a finite group and $S\le G$ such that $S\subnor H$ for every proper subgroup $H$ of $G$ containing $S$. If $S$ is not subnormal in $G$, then there is a unique maximal subgroup of $G$ containing $S$.
 \end{theorem}
 \begin{proof}
-    
+    We induct on $|G : S|$. Since $S$ is not normal, $N_G(S)\subsetneq G$, and thus $N_G(S)\subseteq M$ for some maximal subgroup $M$ of $G$. We must show that this $M$ is unique. Suppose that $S\subseteq K$ is another maximal subgroup of $G$. We shall show that $K = M$.
+
+    By our hypothesis, $S\subnor K$. Suppose first that $S\noreq K$. Then $K\subseteq N_G(S)\subseteq M$ and hence due to maximality, $K = M$, as desired. We can suppose, therefore, that $S$ is not normal in $K$. Choose the shortest subnormal series 
+    \begin{equation*}
+        S = H_0\nor H_1\nor\cdots\nor H_r = K,
+    \end{equation*}
+    where $r\ge 2$, since $S$ is not normal in $K$. Also, $S$ is not normal in $H_2$ since otherwise we could delete $H_1$ to obtain a shorter subnormal series. Let $x\in H_2$ be such that $S^x\ne S$, and write $T = \langle S, S^x\rangle\supsetneq S$. Note that $T\subseteq K$. Also, $S^x\subseteq H_1^x = H_1\subseteq N_G(S)$, and thus, $T\subseteq N_G(S)\subseteq M$. Furthermore, we have that $S\nor T\subsetneq G$.
+
+    Note that $S^x$ also satisfies the hypothesis of the theorem because conjugation by $x$ is an automorphism of $G$. We claim that the subgroup $T = \langle S, S^x\rangle$ also satisfies the same hypothesis. In particular, we need to show that if $T\subseteq H\subsetneq G$, then $T\subnor H$ and $T$ is not subnormal in $G$.
+
+    First, if $T\subseteq H\subsetneq G$, then $S\subseteq H$, and thus $S\subnor H$, and similarly, $S^x\subnor H$, consequently, due to \thref{thm:wielandt-join}, $T\subnor  H$. Also, $S\nor T$ and so if $T\subnor G$, then it would follow that $S\subnor G$, a contradiction. Thus $T$ is not subnormal in $G$.
+
+    Our inductivev hypothesis applies to $T$ since it properly contains $S$, and hence $T$ is contained in a unique maximal subgroup of $G$. But since $T\subseteq M$ and $T\subseteq K$, we have that $M = K$, as desired.
 \end{proof}
 
 \begin{definition}
     For a subgroup $H$ of a group $G$, let $H^G$ denote the smallest normal subgroup of $G$ containing $H$. This is known as the \define{normal closure} of $H$ in $G$.
 \end{definition}
 
-\begin{theorem}[Baer]
+\begin{theorem}[Baer]\thlabel{thm:baer}
     Let $G$ be a finite group and $H\le G$. Then $H\subseteq\bfF(G)$ if and only if $\langle H, H^x\rangle$ is nilpotent for all $x\in G$.
 \end{theorem}
 \begin{proof}
@@ -729,7 +746,7 @@ If $M$ and $N$ are two minimal normal subgroups of $G$, then $M\cap N = \{1\}$ a
     Since $H^G$ is normal and properly contained in $G$, the induction hypothesis applies and $H\subnor H^G\nor G$, that is, $H\subnor G$, a contradiction. This completes the proof.
 \end{proof}
 
-\begin{theorem}[Zenkov]
+\begin{theorem}[Zenkov]\thlabel{thm:zenkov}
     Let $G$ be a finite group and $A, B\le G$ be abelian subgroups. If $M$ is a minimal element in the set 
     \begin{equation*}
         \left\{A\cap B^g\colon g\in G\right\},
@@ -737,7 +754,89 @@ If $M$ and $N$ are two minimal normal subgroups of $G$, then $M\cap N = \{1\}$ a
     then $M\subseteq\bfF(G)$.
 \end{theorem}
 \begin{proof}
-    The set $\{A\cap B^g\colon g\in G\}$ remains unchanged upon replacing $B$ with $B^g$. Therefore, we may assume that $M = A\cap B$. We prove the statement by induction on $|G|$.
+    The set $\{A\cap B^g\colon g\in G\}$ remains unchanged upon replacing $B$ with $B^g$. Therefore, we may assume that $M = A\cap B$. We prove the statement by induction on $|G|$. First, suppose that $G = \langle A, B^g\rangle$ for some $g\in G$. Since $A$ and $B^g$ are abelian, we have $A\cap B^g\subseteq Z(G)$, and hence, 
+    \begin{equation*}
+        A\cap B^g = \left(A\cap B^g\right)^{g^{-1}} = A^{g^{-1}}\cap B\subseteq B.
+    \end{equation*}
+    It follows that $A\cap B^g\subseteq A\cap B\subseteq M$, and by the minimality of $M$, we have $M = A\cap B^g\subseteq Z(G)\subseteq F(G)$, as desired.
+
+    Next, assume that $\langle A, B^g\rangle\subsetneq G$ for all $g\in G$. To show that $M$ is contained in $\bfF(G)$, it suffices to show that every Sylow $p$-subgroup $P$ of $M$ is contained in $\bfF(G)$ (because every group is generated by its Sylow subgroups). Due to \thref{thm:baer}, it suffices to show that $\langle P, P^g\rangle$ is nilpotent for every $g\in G$.
+
+    Fix $g\in G$, and let $H = \langle A, B^g\rangle\subsetneq G$, and $C = B\cap H$. For $h\in H$, we have 
+    \begin{equation*}
+        A\cap C^h = A\cap\left(B\cap H\right)^h = A\cap B^h\cap H = A\cap B^h.
+    \end{equation*}
+    In particular, $M = A\cap B = A\cap B\cap H = A\cap C$ is minimal in the set $\{A\cap C^h\colon h\in H\}$ since its minimal in the larger set $\{A\cap B^g\colon g\in G\}$. By the inductive hypothesis, $P\subseteq M\subseteq\bfF(H)$, and hence, $P\subseteq\bfO_p(H)$, since $\bfO_p(H)$ is the unique Sylow $p$-subgroup of $\bfF(H)$. Also, $P^g\subseteq B^g\subseteq H$, and since $\bfO_p(H)$ is a normal subgroup, we have that $\bfO_p(H)P^g$ is a $p$-group containing $\langle P, P^g\rangle$. In particular, $\langle P, P^g\rangle$ is a $p$-group, whence is nilpotent, as desired.
+\end{proof}
+
+\begin{corollary}\thlabel{cor:for-luccini}
+    Let $A$ be an abelian subgroup of a non-trivial finite group $G$, and suppose that $|A|\ge |G : A|$. Then $A\cap\bfF(G)$ is non-trivial.
+\end{corollary}
+\begin{proof}
+    If $A = G$, then there is nothing to prove. Suppose now that $A\subsetneq G$. If $g\in G$, then $|A||A^g| = |A|^2\ge |A||G : A| = |G|$. Further, due to \thref{lem:product-conjugate}, $AA^g\subsetneq G$. Hence, 
+    \begin{equation*}
+        |G| > |AA^g| = \frac{|A||A|^g}{|A\cap A^g|}\ge\frac{|G|}{|A\cap A^g|},
+    \end{equation*}
+    and thus $A\cap A^g$ is non-trivial. Since this holds for all $g\in G$, we can apply \thref{thm:zenkov} to deduce that there is a $g\in G$ such that $A\cap A^g\subseteq\bfF(G)$, whence $A\cap\bfF(G)$ is non-trivial.
+\end{proof}
+
+\begin{theorem}[Luccini]\thlabel{thm:luccini}
+    Let $A$ be a proper cyclic subgroup of a finite group $G$, and let $K = \core_G(A)$. Then $|A : K| < |G : A|$, and in particular, if $|A|\ge |G : A|$, then $K$ is non-trivial.
+\end{theorem}
+\begin{proof}
+    Induction on $|G|$. Note that $A/K$ is a proper cyclic subgroup of $G/K$ and the core of $A/K$ in $G/K$ is trivial. If $K$ is non-trivial, then the inductive hypothesis applies and we deduce that 
+    \begin{equation*}
+        |A/K| = \left|A/K : \core_{G/K}(A/K)\right| < |G/K : A/K| = |G : A|.
+    \end{equation*}
+
+    We may now assume  that $K = 1$, and we shall show that $|A| < |G : A|$. Suppose not, that is, $|A|\ge |G : A|$. Due to \thref{cor:for-luccini}, $A\cap\bfF(G)$ is non-trivial. In particular, $\bfF(G)$ is non-trivial, so we can choose a minimal normal subgroup $E$ of $G$ with $E\subseteq\bfF(G)$ (since $\bfF(G)$ is normal in $G$). Due to \thref{lem:normal-in-nilpotent}, $E\cap Z(\bfF(G))$ is non-trivial; but since $Z(\bfF(G))$ is characteristic in $\bfF(G)$, it is normal in $G$. Due to the minimality of $E$, we must have $E\subseteq Z(\bfF(G))$, in particular, $E$ is abelian. Being abelian, every Sylow subgroup of $E$ is characteristic in $G$, whence due to minimality, $E$ itself must be a $p$-group. We contend that $E$ is an elementary abelian $p$-group. Indeed, consider $\wt E = \{x^p\colon x\in E\}$, which is proper and characteristic in $E$, and hence, is normal in $G$. Due to minimality of $E$, $\wt E = 1$, as desired.
+
+    Since $E\subseteq Z(\bfF(G))$, we see that $E$ normalizes the non-trivial group $A\cap\bfF(G)$, and of course $A$ normalizes this too. Then $A\cap\bfF(G)\noreq AE$. Since $\core_G(A) = 1$, we cannot have $AE = G$, else $A\cap\bfF(G)$ would be contained in the core. It follows that $AE\subseteq G$.
+
+    Set $\overline G = G/E$, $\overline A = AE/E\subsetneq\overline G$, $\overline{M} = \core_{\overline{G}}(\overline A)$, with $E\subseteq M$ and $M\noreq G$. Note that $M\subseteq AE$, and hence, $AE\subseteq AM\subseteq AE$, whence $AM = AE$. Due to the inductive hypothesis, we must have $|\overline A : \overline M| < |\overline G : \overline A|$, that is, $|AE : M| < |G : AE|$.
+
+    \begin{equation*}
+        \xymatrix {
+            G\ar@{-}[dd]\ar@{-}[rd] & & & \\
+            & AE\ar@{-}[rd]\ar@{-}[ld] & & \\
+            A\ar@{-}[rd] & & M\ar@{-}[rd]\ar@{-}[ld] & \\
+            & B\ar@{-}[rd] & & E\ar@{-}[ld] \\
+            & & B\cap E & 
+        }
+    \end{equation*}
+
+    Let $B = A\cap M$ so that $B$ is cyclic. We have 
+    \begin{equation*}
+        |AE : A| = |AM : A| = |M : A\cap M| = |M : B|,
+    \end{equation*}
+    and hence, $|AE : M| = |A : B|$. Therefore, 
+    \begin{equation*}
+        |M : B| = |AE : A| = \frac{|G : A|}{|G : AE|} < \frac{|G : A|}{|AE : M|} = \frac{|G : A|}{|A : B|}\le\frac{|A|}{|A : B|} = |B|.
+    \end{equation*}
+    Before we proceed, note that $E\subseteq M\subseteq AE = EA$, and hence, because of what's colloquially known as Dedekind's rule, $M = E(A\cap M) = EB = BE$ (since $E\noreq G$).
+
+    Suppose $M$ is abelian, and let $\varphi: M\to M$ be the endomorphism $\varphi(m) = m^p$. Then $E\subseteq\ker\varphi$ since it is an elementary abelian $p$-group. It follows that 
+    \begin{equation*}
+        \varphi(M) = \varphi(EB) = \varphi(B)\subseteq B\subseteq A.
+    \end{equation*}
+    Now, $M\noreq G$, and hence, $\varphi(M)\noreq G$, and we conclude that $\varphi(M) = 1$, since $\core_G(A) = 1$. Then $\varphi(B) = 1$, and since $B$ is cyclic, it follows that $|B|\le p$. Then $|M : B| < |B|\le p$, and since $M/B\cong E/B\cap E$\footnote{These quotients make sense because $M$ is abelian.}, it is a $p$-group, it follows that $M/B = 1$, that is, $M = B\subseteq A$. But $M\noreq G$, and since $M\subseteq A$, we have $M = 1$, whence $E = 1$, a contradiction.
+
+    It follows that $M$ is non-abelian, and since $M/E\cong B/B\cap E$ is cyclic, we conclude that $E$ is not central in $M$\footnote{Recall that if $G/Z(G)$ is cyclic, then $G$ is abelian.}, and so $E\cap Z(M)\subsetneq E$. Again recall that $Z(M)$ is characteristic in $M$ and hence normal in $G$. Due to the minimality of $E$, we must have $E\cap Z(M) = 1$, and thus $Z(M)$ is cyclic because the restriction of the surjection $M\onto M/E$ is injective on $Z(M)$.
+
+    Since $B$ is an abelian subgroup of $M$ and $|M : B| < |B|$, due to \thref{cor:for-luccini}, we have that $B\cap\bfF(M)$ is non-trivial. Due to \thref{prop:fitting-of-normal}, $\bfF(M)\subseteq\bfF(G)$, and so $E$ centralizes $\bfF(M)$ because $E\subseteq Z(\bfF(G))$. Since every element of $B\cap \bfF(M)$ commutes with every element of $B$ (since $B$ is abelian) and every element of $E$, we see that $B\cap \bfF(M)$ is a non-trivial central subgroup of $EB = M$. Since $Z(M)$ is cyclic, we see that $B\cap\bfF(M)\subseteq Z(M)$ is characteristic in $Z(M)\noreq G$\footnote{Every subgroup of a cyclic group is characteristic.}, and hence, $B\cap\bfF(M)$ is a non-trivial normal subgroup of $G$ contained in $A$, a contradiction. This completes the proof.
+\end{proof}
+
+\begin{theorem}[Horosevskii]
+    Let $\sigma\in\Aut(G)$, where $G$ is a non-trivial finite group. Then the order $o(\sigma)$ of $\sigma$ as an element of $\Aut(G)$ is strictly smaller than $|G|$.
+\end{theorem}
+\begin{proof}
+    Let $A = \langle\sigma\rangle\subseteq\Aut(G)$, so that $A$ is a cyclic group of order equal to the order of $\sigma$ as an element of $\Aut(G)$. Set $\Gamma = G\rtimes_\theta A$, where $\theta: A\to\Aut(G)$ is the obvious inclusion map. We identify $G$ and $A$ with subgroups $G\times\{1\}$ and $\{1\}\times A$ of $\Gamma$. Note that the conjugation action of $A$ on $G$ as elements of $\Gamma$ is given by $g^\tau = \tau(g)\in G$ for $\tau\in A$. By definition of an automorphism, every non-identity element of $A$ acts non-trivially on $G$, and hence, $A\cap C_\Gamma(G) = 1$.
+
+    Since $G$ is non-trivial and $A$ is cyclic, due to \thref{thm:luccini}, $|A : K| < |\Gamma : A|$, where $K = \core_\Gamma(A)$. But then $K\cap G\subseteq A\cap G = 1$, and both $K$ and $G$ are normal in $\Gamma$, consequently, their elements commute, that is, $K\subseteq C_\Gamma(G)$. Since $K\subseteq A$, we see that $K\subseteq A\cap C_\Gamma(G) = 1$, that is, $K$ is trivial. Thus,
+    \begin{equation*}
+        o(\sigma) = |A| = |A : K| < |\Gamma : A| = G,
+    \end{equation*}
+    as desired.
 \end{proof}
 
 \end{document}
