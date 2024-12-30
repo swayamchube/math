@@ -257,6 +257,8 @@
 \begin{document}
 \maketitle
 
+\tableofcontents
+
 \section{Sylow Theory}
 
 \subsection{The Three Theorems}
@@ -327,11 +329,11 @@ In particular, we have the following attractive result:
     Let $P\in\Syl_p(G)$. Then, $N_G(N_G(P)) = N_G(P)$.
 \end{corollary}
 
-\begin{theorem}[Frattini Argument]
+\begin{theorem}[Frattini Argument]\thlabel{thm:frattini-argument}
     Let $N$ be a normal subgroup of $G$ and $P\in\Syl_p(N)$, then $G = N_G(P)N$.
 \end{theorem}
 \begin{proof}
-    Let $g\in G$. Since $N\unlhd G$, $P^g\subseteq N^g\subseteq N$, $P^g\in\Syl_p(N)$, as a result, there is $n\in N$ such that $(P^g) = P^n$, equivalently, $P^{n^{-1}g} = P$. This immediately implies $n^{-1}g\in N_G(P)$, therefore, $g\in NN_G(P) = N_G(P)N$, completing the proof.
+    Let $g\in G$. Since $N\noreq G$, $P^g\subseteq N^g\subseteq N$, $P^g\in\Syl_p(N)$, as a result, there is $n\in N$ such that $(P^g) = P^n$, equivalently, $P^{n^{-1}g} = P$. This immediately implies $n^{-1}g\in N_G(P)$, therefore, $g\in NN_G(P) = N_G(P)N$, completing the proof.
 \end{proof}
 
 \section{Nilpotent Groups}
@@ -353,7 +355,7 @@ The Upper Central Series and the Lower Central Series are often useful in the an
 \begin{definition}[Upper Central Series]\thlabel{def-upper-central}
     For any group $G$, define the \textit{Upper Central Series} as a sequence of groups,
     \begin{equation*}
-        1 = Z_0\unlhd Z_1\unlhd\cdots
+        1 = Z_0\noreq Z_1\noreq\cdots
     \end{equation*}
     such that 
     \begin{enumerate}
@@ -608,6 +610,9 @@ given by $\mu\left((x_p)\right) = \prod x_p$. We contend that this map is inject
 \begin{proof}
     We know that $\bfF(N)$ is nilpotent and hence, it suffices to show that it is normal in $G$. For any $g\in G$, the map $x\mapsto g^{-1}xg = x^g$ is an automorphism of $N$. Since $\bfF(N)$ is characteristic in $N$, we have that $\bfF(N)^g\subseteq\bfF(N)$, whence the conclusion follows.
 \end{proof}
+
+\section{Solvable Groups}
+\input{sections/solvable.tex}
 
 \section{Subnormality}
 

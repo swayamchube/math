@@ -1,0 +1,125 @@
+\begin{definition}[Derived Series]\thlabel{def-derived-series}
+    Let $G$ be a group. The \textit{derived series} of a group is given by the sequence of subgroups 
+    \begin{equation*}
+        G = G^{(0)}\supseteq G^{(1)}\supseteq\cdots
+    \end{equation*}
+    such that $G^{(i + 1)} = [G^{(i)}, G^{(i)}]$.
+\end{definition}
+
+\begin{definition}[Solvable Groups]\thlabel{def-solvable-group}
+    A group $G$ is said to be solvable if there is $n\ge 0$ and a series $G = H^{(0)}\supseteq H^{(1)}\supseteq\cdots H^{(n)} = 1$ such that for all $0\le i\le n - 1$, each $H^{(i + 1)}$ is normal in $H^{(i)}$ and $H^{(i)}/H^{(i + 1)}$ is Abelian.
+\end{definition}
+
+\subsection{Analyzing the Derived Series}
+\begin{lemma}\thlabel{lem-gi-characteristic}
+    For all $i\ge 0$, $G^{(i)}$ is characteristic in $G$.
+\end{lemma}
+\begin{proof}
+    We shall show this statement by induction on $i$. The base case with $i = 0$ is trivial. Let $\varphi: G\to G$ be an automorphism of groups. Then, 
+    \begin{equation*}
+        \varphi(G^{(i + 1)}) = \varphi([G^{(i)}, G^{(i)}]) = [\varphi(G^{(i)}), \varphi(G^{(i)})] = G^{(i + 1)}
+    \end{equation*}
+\end{proof}
+
+\begin{theorem}\thlabel{thm-solvable-equivalence}
+    For any group $G$, the following are equivalent
+    \begin{enumerate}
+        \item There is $n\ge 0$ such that $G^{(n)} = 1$
+        \item $G$ is solvable
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\hfill 
+\begin{itemize}
+    \item $\underline{(1)\Longrightarrow(2):}$ Simply choose $H^{(i)} = G^{(i)}$.
+    \item $\underline{(2)\Longrightarrow(1):}$ We shall show by induction on $i$ that $G^{(i)}\subseteq H^{(i)}$. The base case with $i = 0$ is trivial. Now, for all $0\le i\le n - 1$,
+    \begin{equation*}
+        G^{(i + 1)} = [G^{(i)}, G^{(i)}]\subseteq [H^{(i)}, H^{(i)}]\subseteq H^{(i + 1)}
+    \end{equation*}
+    where the last containment follows from the fact that $H^{(i)}/H^{(i + 1)}$ is Abelian. This completes the proof.
+\end{itemize}
+\end{proof}
+
+\begin{lemma}\thlabel{lem-nilpotent-solvable}
+    All nilpotent groups are solvable.
+\end{lemma}
+\begin{proof}
+    Let $G = G_0\supseteq G_1\supseteq\cdots\supseteq G_n = 1$ be the lower central series. We shall show by induction on $i$ that for all $0\le i\le n$, $G^{(i)}\subseteq G_i$. The base case with $i = 0$ is trivial. For $i\ge 0$, we have 
+    \begin{equation*}
+        G^{(i + 1)} = [G^{(i)}, G^{(i)}] \subseteq [G_i, G_i]\subseteq [G,G_i] = G_{i + 1}
+    \end{equation*}
+    This completes the induction step and implies the desired conclusion.
+\end{proof}
+
+\begin{corollary}\thlabel{cor-p-group-solvable}
+    All $p$-groups are solvable.
+\end{corollary}
+
+\begin{theorem}\thlabel{lem-solvable-extension}
+    Let $1\to N\stackrel{\alpha}{\longrightarrow} G\stackrel{\pi}{\longrightarrow} H\to 1$ be a short exact sequence. Then, $G$ is solvable if and only if both $N$ and $H$ are solvable.
+\end{theorem}
+\begin{proof}
+    Without loss of generality, we may assume $N$ to be a normal subgroup in $G$ and $H$ its corresponding quotient.
+
+    Suppose $G$ is solvable. Then, we can inductively show that $N^{(i)}\subseteq G^{(i)}$, implying the solvability of $N^{(i)}$. On the other hand, $\pi(G^{(i)}) = H^{(i)}$, again implying the solvability of $H$.
+
+    Conversely, suppose both $N$ and $H$ are solvable. Then, $\pi(G^{(n)}) = 1$ for some $n\ge 0$, therefore, $G^{(n)}\subseteq N$. From here, it isn't hard to show that $G^{(n + i)}\subseteq N^{(i)}$, implying the solvability of $G$. This completes the proof.
+\end{proof}
+
+\begin{corollary}\thlabel{cor-solvable-subgroup}
+    Let $G$ be a solvable group. If $H$ is a subgroup of $G$, then $H$ is solvable.
+\end{corollary}
+
+\begin{proposition}\thlabel{prop:minimal-normal-solvable}
+    A minimal normal subgroup of a solvable group is an elementary abelian $p$-group.
+\end{proposition}
+
+\subsection{Two theorems of P. Hall}
+
+\begin{theorem}[Hall]
+    Let $G$ be a solvable group of order $|G| = ab$, where $\gcd(a, b) = 1$.
+    \begin{description}
+        \item[Existence:] $G$ admits a subgroup of order $a$.
+        \item[Conjugacy:] Any two subgroups of order $a$ are conjugate in $G$.
+    \end{description}
+\end{theorem}
+\begin{proof}
+    Induct on $|G|$. The base cases where $|G|$ is a prime number are trivially established.
+
+    \noindent\boxed{\textbf{\itshape Case 1.}} $G$ contains a non-trivial normal subgroup $H$ of order $a'b'$, where $a'\mid a$, $b'\mid b$, and $b' < b$.
+
+    \noindent\emph{Existence.} In this case, $G/H$ is a solvable group of order group of order $(a/a')(b/b') < ab$. Due to the induction hypothesis, $G/H$ admits a subgroup $A/H$ of order $a/a'$, where $A$ is a subgroup of $G$ of order $ab' < ab$. Since $A$ is solvable, the induction hypothesis applies to $A$, which then admits a subgroup of order $a$.
+
+    \noindent\emph{Conjugacy.} Let $A$ and $A'$ be subgroups of $G$ of order $a$. Note that $AH$ is a subgroup of $G$ of order 
+    \begin{equation*}
+        |AH| = \frac{|A| |H|}{|A\cap H|}\le|A|\frac{|H|}{|A\cap H|}.
+    \end{equation*}
+    Note that $|A\cap H|$ divides $|H| = a'b'$ and since $\gcd(a', b') = 1$ and $|A\cap H|$ divides $|A| = a$, we see that $|H|/|A\cap H|\le b'$. It follows that $|AH|\le ab'$. But, on the other hand, $AH$ contains $A$ and $H$ as subgroups, whence $a\mid |AH|$ and $a'b'\mid |AH|$, whence $ab'\mid |AH|$, that is, $|AH| = ab'$. Similarly, one can argue that $|A'H| = ab'$.
+
+    Now, $|G/H| = a/a'\cdot b/b'$ and $|AH/H| = |A'H/H| = a/a'$. The induction hypothesis applies and these groups are conjugate in $G/H$, whence $AH$ and $A'H$ are conjugate in $G$. That is, there is an $x\in G$ such that $x AH x^{-1} = A'H$. Therefore, $xAx^{-1}$ and $A'$ are subgroups of $A'H$ of order $a$, and since $|A'H| < |G|$, the induction hypothesis applies once again, and $A$ nad $A'$ are conjugate in $G$.\\
+
+    It follows from the first case that if there is a non-trivial proper normal subgroup whose order is not divisible by $b$, then the theorem has been proved. We may therefore assume that $b\mid |H|$ for every non-trivial normal subgroup $H$ of $G$. If $H$ is a minimal normal subgroup of $G$, then due to \thref{prop:minimal-normal-solvable}, $H$ is an elementary abelian $p$-group. It follows that $b = p^m = |H|$ for some $m \ge 1$. Thus, $H$ is a normal (hence unique) Sylow $p$-subgroup of $G$. So we have shown that every minimal normal subgroup of $G$ is the Sylow $p$-subgroup, and hence, $G$ admits a unique minimal normal subgroup. The problem is no reduced to the following:\\
+
+    \noindent\boxed{\textbf{\itshape Case 2.}} $|G| = ap^m$, where $p\nmid a$, and $G$ has a normal abelian Sylow $p$-subgroup $H$, and $H$ is the unique minimal normal subgroup in $G$.
+
+    \noindent\emph{Existence.} The group $G/H$ is solvable of order $a$. If $K/H$ is a minimal normal subgroup of $G/H$, then $|K/H| = q^n$ for some prime $q\ne p$ due to \thref{prop:minimal-normal-solvable}; and so $|K| = p^mq^n$, also note that $K\noreq G$. If $Q$ is a Sylow $q$-subgroup of $K$, then $K = HQ$. Let $N^\ast = N_G(Q)$ and let $N = N^\ast\cap K = N_K(Q)$. Then \thref{thm:frattini-argument} gives $G = KN^\ast$. Since 
+    \begin{equation*}
+        G/K\cong KN^\ast/K\cong N^\ast/N^\ast\cap K = N^\ast/N,
+    \end{equation*}
+    we have $|N^\ast| = |G||N|/|K|$. But $K = HQ$, and $Q\subseteq N\subseteq K$ gives $K = HN$, whence $|K| = |HN| = |H||N|/|H\cap N|$, so that 
+    \begin{equation*}
+        |N^\ast| = \frac{|G||N|}{|K|} = \frac{|G||N||H\cap N|}{|H||N|} = \frac{|G|}{|H|}|H\cap N| = a|H\cap N|.
+    \end{equation*}
+    We claim that $H\cap N = 1$. We show this in two stages: 
+    \begin{itemize}
+        \item First, we show that $H\cap N\subseteq Z(K)$. Let $x\in H\cap N$. Every $k\in K$ has the form $k = hs$ for some $h\in H$ and $s\in Q$. Since $H$ is abelian, it suffices to show that $x$ commutes commutes with $s$. Note that the commutator $[x, s]\in Q$, since $x$ normalizes $Q$. On the other hand, $[x, s] = x(sx^{-1}s{^-1})\in H$, because $H$ is normal in $G$. Therefore, $[x, s]\in Q\cap H = 1$. Thus, $H\cap N\subseteq Z(K)$.
+        \item Next, we show that $Z(K) = 1$. Since $Z(K)$ is characteristic in $K$ and $K$ is normal in $G$, we have that $Z(K)\noreq G$. If $Z(K)$ were non-trivial, then it would contain a minimal normal subgroup of $G$, i.e., $H$ due to uniqueness. But since $K = HQ$, and $H$ is central in $K$, we see that $Q$ must be normal in $K$. A normal Sylow subgroup is characteristic (owing to its uniqueness), and hence, $Q\noreq G$. Again, this means $H\subseteq Q$, because $Q$ must also contain a minimal normal subgroup of $G$. This is absurd, since $H$ is a $p$-group. Thus, $Z(K) = 1$.
+    \end{itemize}
+    We have shown that $|N^\ast| = a$, thereby proving existence. 
+
+    \noindent\emph{Conjugacy.} Let $A$ be another subgroup of $G$ of order $a$. Since $|AK|$ is divisible by $a$ and by $|K| = p^mq^n$, it follows that $|AK| = ap^m = |G|$, that is, $AK = G$. Hence, 
+    \begin{equation*}
+        \frac{G}{K}\cong\frac{AK}{K}\cong\frac{A}{A\cap K},
+    \end{equation*}
+    so $|A\cap K| = q^n$. From Sylow's theorem, $A\cap K$ is conjugate to $Q$. It follows that $N^\ast = N_G(Q)$ is conjugate to $N_G(A\cap K)$, whence $a = |N_G(A\cap K)|$. Since $A\subseteq N_G(A\cap K)$, we must have $A = N_G(A\cap K)$ and that $A$ is conjugate to $N^\ast$ as desired.
+\end{proof}
