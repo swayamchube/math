@@ -9,3 +9,5 @@
 \contentsline {subsection}{\numberline {3.1}Analyzing the Derived Series}{9}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Two theorems of P. Hall}{10}{subsection.3.2}%
 \contentsline {section}{\numberline {4}Subnormality}{12}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Theorems of Luccini and Horosevskii}{15}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Quasisimple Groups}{17}{subsection.4.2}%
