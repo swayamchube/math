@@ -1,0 +1,279 @@
+\subsection{Integrality}
+
+\begin{definition}
+    The \define{discriminant} of a basis $\alpha_1,\dots,\alpha_n$ of a separable extension $L/K$ of degree $n$ is defined by 
+    \begin{equation*}
+        d(\alpha_1,\dots,\alpha_n) = \det\left((\sigma_i\alpha_j)\right)^2
+    \end{equation*}
+    where $\sigma_i$, $i = 1,\dots, n$ are the distinct $K$-embeddings of $L$ into $\overline K$.
+\end{definition}
+
+It is not hard to see that 
+\begin{equation*}
+    d(\alpha_1,\dots,\alpha_n) = \det\left((\Tr^L_K(\alpha_i\alpha_j))\right).
+\end{equation*}
+
+\begin{proposition}
+    If $L/K$ is a finite separable field extension and $\alpha_1,\dots,\alpha_n$ is a $K$-basis for $L$, then the discriminant 
+    \begin{equation*}
+        d(\alpha_1,\dots,\alpha_n)\ne 0,
+    \end{equation*}
+    and the \define{trace pairing} $(x, y) = \Tr^L_K(xy)$ is a nondegenerate bilinear form on the $K$-vector space $L$.
+\end{proposition}
+\begin{proof}
+    We first show that the trace pairing is nondegenerate. Let $\theta\in L$ be a primitmive element. Then, a $K$-basis for $L$ is given by $\{1,\theta,\dots,\theta^{n - 1}\}$. With respect to this basis, the trace pairing is represented by the matrix $M = \left((\Tr^{L}_K(\theta^{i - 1}\theta^{j - 1}))\right)$ which is a Vandermonde matrix and hence, has nonzero determinant. Thus, the trace pairing is nondegenerate. 
+
+    Next, consider $L$ with the basis $\{\alpha_1,\dots,\alpha_n\}$. The matrix of the trace pairing with respect to this basis is $\left((\Tr^{L}_K(\alpha_i\alpha_j))\right)$ and must have nonzero determinant. It follows that $d(\alpha_1,\dots,\alpha_n)\ne 0$.
+\end{proof}
+
+\begin{notation}
+    Henceforth, let $A$ be an integrally closed domain with fraction field $K$, $L$ a finite separable extension of $L$, and $B$ the integral closure of $A$ in $L$.
+\end{notation}
+
+\begin{lemma}
+    Let $\alpha_1,\dots,\alpha_n$ be a $K$-basis of $L$ which is contained in $B$, of discriminant $d = d(\alpha_1,\dots,\alpha_n)$. Then one has 
+    \begin{equation*}
+        dB\subseteq A\alpha_1 + \dots + A\alpha_n.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Let $\alpha = a_1\alpha_1 + \dots + a_n\alpha_n\in B$ with $a_i\in K$ for $1\le i\le n$. Consider the matrix equation 
+    \begin{equation*}
+        \begin{pmatrix}
+            & \vdots & \\
+            \cdots & \Tr^L_K(\alpha_i\alpha_j) & \cdots \\
+            & \vdots &
+        \end{pmatrix}
+        \begin{pmatrix}
+            a_1\\\vdots\\a_n
+        \end{pmatrix}
+        = 
+        \begin{pmatrix}
+            \Tr^L_K(\alpha_1\alpha)\\\vdots\\\Tr^L_K(\alpha_n\alpha).
+        \end{pmatrix}
+    \end{equation*}
+    The matrix has elements in $A$ and hence, its inverse is some matrix with elements in $A$ divided by its determinant, which is $d$. Thus, each $a_i$ is in $\frac{1}{d}A$ and the conclusion follows.
+\end{proof}
+
+\begin{definition}
+    A system of elements $\omega_1,\dots,\omega_n\in B$ such that each $b\in B$ can be written uniquely as a linear combination 
+    \begin{equation*}
+        b = a_1\omega_1 + \dots + a_n\omega_n
+    \end{equation*}
+    with coefficients $a_i\in A$ is called an \define{integral basis} of $B$ over $A$.
+\end{definition}
+
+\begin{remark}
+    The existence of an integral basis signifies that $B$ is a free $A$-module of rank $n$ and this may not always be true. Therefore, an integral basis may not always exist. 
+\end{remark}
+
+\begin{proposition}
+    If in addition to our setup, $A$ is a PID, then every finitely generated $B$-submodule $M\ne 0$ of $L$ is a free $A$-module of rank $n = [L : K]$. In particular, $B$ admits an integral basis over $A$.
+\end{proposition}
+\begin{proof}
+    \todo{add in}
+\end{proof}
+
+\subsection{Dedekind Domains}
+
+\begin{definition}
+    A noetherian, integrally closed domain of Krull dimension $1$ is called a \define{Dedekind domain}.
+\end{definition}
+
+We shall now prove that ideals in a Dedekind domain admit unique factorization. Let $\frako$ be a Dedekind domain.
+
+\begin{lemma}
+    For every ideal $\fraka\ne 0$ of $\frako$, there exist nonzero prime ideals $\frakp_1,\dots,\frakp_r$ such that $\frakp_1\cdots\frakp_r\subseteq\fraka$.
+\end{lemma}
+\begin{proof}
+    Let $\frakM$ be the colection of all ideals that do not fulfill this condition. Suppose $\frakM$ is nonempty. Thus, it contains a maximal element, say $\fraka$, which cannot be a prime ideal, so there exist $b_1,b_2\in\frako\setminus\fraka$ such that $b_1b_2\in\fraka$. Let $\fraka_1 = \fraka + (b_1)$ and $\fraka_2 = \fraka + (b_2)$. The maximality of $\fraka$ forces $\fraka_1,\fraka_2\in\frakM$. Further, note that $\fraka_1\fraka_2\subseteq\fraka + (b_1b_2) = \fraka$, whence $\fraka\in\frakM$, a contradiction.
+\end{proof}
+
+\begin{lemma}
+    Let $\frakp$ be a prime ideal of $\frako$ and set 
+    \begin{equation*}
+        \frakp^{-1} = \{x\in K\colon x\frakp\subseteq\frako\}.
+    \end{equation*}
+    Then one has $\fraka\frakp^{-1}\ne\fraka$ or every ideal $\fraka\ne 0$.
+\end{lemma}
+\begin{proof}
+    First, we show that $\frakp^{-1}\ne\frako$. Let $0\ne a\in\frakp$ and $\frakp_1\cdots\frakp_r\subseteq(a)\subseteq\frakp$, with $r$ the minimal such. Due to prime avoidance, $\frakp_i = \frakp$ for some $1\le i\le n$. Without loss of generality, let $\frakp = \frakp_1$. Since $\frakp_2\cdots\frakp_n\subsetneq(a)$, choose $b\in\frakp_2\cdots\frakp_r\setminus(a)$, equivalently, $a^{-1}b\notin\frako$. But on the other hand, we have $b\frakp\subseteq(a)$ whence $a^{-1}b\frakp\subseteq\frako$, consequently, $a^{-1}b\in\frakp^{-1}$. It follows that $\frakp\ne\frako$.
+
+    Now, let $\fraka\ne 0$ be an ideal of $\frako$ and let $\alpha_1,\dots,\alpha_n$ be a generating set for $\fraka$. Assume that $\fraka\frakp^{-1} = \fraka$ and choose $x\in\frakp^{-1}\setminus\frako$. We can write 
+    \begin{equation*}
+        x\alpha_i = \sum_{j} a_{ij}\alpha_j,\quad a_{ij}\in\frako.
+    \end{equation*}
+    Let $A$ denote the matrix $\left(x\delta_{ij} - a_{ij}\right)$ to obtain 
+    \begin{equation*}
+        A
+        \begin{pmatrix}
+            \alpha_1\\\vdots\\\alpha_n
+        \end{pmatrix}
+        = 0.
+    \end{equation*}
+    Multiplying with the adjugate, we get $\det(A)\alpha_i = 0$ for $1\le i\le n$. Since we are in an integral domain and $\fraka\ne 0$, this forces $\det(A) = 0$, consequently, $x$ is integral over $\frako$, a contradiction to $\frako$ being integrally closed.
+\end{proof}
+
+\begin{theorem}
+    Every ideal $\fraka$ of $\frako$ different from $(0)$ and $(1)$ admits a factorization $\fraka = \frakp_1\cdots\frakp_r$ into nonzero prime ideals $\frakp_i$ of $\frako$ which is unique up to the order of the factors.
+\end{theorem}
+\begin{proof}
+    \textbf{Existence.} Let $\frakM$ be the collection of all ideals different from $(0)$ and $(1)$ that do not admit a factorization. Suppose $\frakM$ is nonempty and choose a maximal element $\fraka$ in it. There is a maximal ideal $\frakp$ containing $\fraka$ and we have 
+    \begin{equation*}
+        \fraka\subsetneq\fraka\frakp^{-1}\subseteq\frakp\frakp^{-1}\subseteq\frako.
+    \end{equation*}
+    Also note that $\frakp\subsetneq\frakp\frakp^{-1}\subseteq\frako$ and hence $\frakp\frakp^{-1} = \frako$. Now note that $\fraka\frakp^{-1}$ is an ideal in $\frako$ and since $\fraka\ne\frakp$, this ideal must be proper. Thus, it admits a prime decomposition which when multiplied by $\frakp$ gives a prime decomposition of $\fraka$, a contradiction. 
+
+    \noindent\textbf{Uniqueness.} Suppose 
+    \begin{equation*}
+        \fraka = \frakp_1\cdots\frakp_r = \frakq_1\cdots\frakq_s.
+    \end{equation*}
+    Due to prime avoidance, for every $1\le i\le s$, there is an index $j$ such that $\frakp_j = \frakq_i$. Multiplying both sides by $\frakp_j^{-1}$, we obtain a smaller decomposition. Now induct downwards.
+\end{proof}
+
+\begin{definition}
+    Let $\frako$ be a Dedekind domain with fraction field $K$. A \define{fractional ideal} of $K$ is a finitely generated $\frako$-submodule $\fraka\ne 0$ of $K$.
+\end{definition}
+
+\begin{remark}
+    Note that every ideal of $\frako$ is a fractional ideal and conversely, every fractional ideal contained in $\frako$ is an ideal. To belabour the point, we shall call the ideals contained in $\frako$ as \define{integral ideals}.
+\end{remark}
+
+\begin{proposition}
+    The fractional ideals form an abelian group, the \define{ideal group} $J_K$ of $K$. The identity element is $(1) = \frako$, and the inverse of $\fraka$ is 
+    \begin{equation*}
+        \fraka^{-1} = \{x\in K\colon x\fraka\subseteq\frako\}.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    We have argued in the preceding proof that $\frakp\frakp^{-1} = \frako$. To see that $\frakp^{-1}$ is a fractional ideal, choose any $0\ne d\in\frakp$. Then $d\frakp^{-1}\subseteq\frako$ and the conclusion follows.
+    
+    Hence, for any integral ideal $\fraka = \frakp_1\cdots\frakp_r$, we have an inverse given by $\frakb = \frakp_1^{-1}\cdots\frakp_r^{-1}$, which is a fractional ideal. Since $\frakb\fraka = \frako$, we have that $\frakb\subseteq\fraka^{-1}$. Conversely, if $x\in\fraka^{-1}$, then $x\frako = x\fraka\frakb\subseteq\frako\frakb\subseteq\frakb$, that is, $x\in\frakb$ and hence, $\frakb = \fraka^{-1}$. This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    Every fractional ideal $\fraka\ne 0$ admits a unique representation as a product 
+    \begin{equation*}
+        \fraka = \prod_{\frakp}\frakp^{v_\frakp}
+    \end{equation*}
+    with $v_\frakp\in\Z$ and $v_\frakp = 0$ almost everywhere. 
+\end{corollary}
+\begin{proof}
+    There is a $d\ne 0$ in $\frako$ such that $d\fraka\subseteq\frako$ and hence, admits a prime decomposition $d\fraka = \frakp_1\cdots\frakp_r$. Also, since $(d)$ admits a prime decomposition, dividing the two, the conclusion follows.
+\end{proof}
+
+\begin{definition}
+    The fractional ideals of the form $(a) = a\frako$ where $a\in K$ are called the principal fractional ideals. The principal fractional ideals corresponding to elements of $K^\times$ form a subgroup of $J_K$ denoted by $P_K$. The quotient $\Cl_K = J_K/P_K$ is called the \define{ideal class group}.
+\end{definition}
+
+\begin{proposition}
+    Let $0\ne\fraka$ be an integral ideal of a Dedekind domain $\frako$. Then $\frako/\fraka$ is a principal ring.
+\end{proposition}
+\begin{proof}
+    Due to the Chinese Remainder Theorem, it suffices to prove this for $\fraka = \frakp^n$ where $\frakp$ is a maximal ideal and $n$ a positive integer. Choose some $\pi\in\frakp\setminus\frakp^2$ and let $1\le k\le n$. Consider the decomposition of $\pi\frako = \frakp_1\cdots\frakp_r$. Since $\frakp\supseteq\frakp$, exactly one of the $\frakp_i$'s must be equal to $\frakp$. Hence, we can write $\pi\frako = \frakp\fraka$ where $\fraka$ is an ideal comaximal with $\frakp$. Thus, 
+    \begin{equation*}
+        \frac{\pi\frako}{\frakp^n} = \frac{\frakp\fraka + \frakp^n}{\frakp^n} = \frac{\frakp}{\frakp^n}
+    \end{equation*}
+    is principal. Further, since every ideal of $\frako/\frakp^n$ is of the form $\frakp^k/\frakp^n$, the conclusion follows.
+\end{proof}
+
+\begin{corollary}
+    Every ideal of a Dedekind domain can be generated by two elements.
+\end{corollary}
+\begin{proof}
+    Let $\fraka$ be a nonzero ideal in $\frako$ and choose $0\ne a\in\fraka$. Then, $\fraka/(a)$ is principal in $\frako/(a)$ and the conclusion follows.
+\end{proof}
+
+\begin{proposition}
+    A Dedekind domain with finitely many prime ideals is a PID.
+\end{proposition}
+\begin{proof}
+    It suffices to show that all maximal ideals are principal. Let $\frakp$ be a maximal ideal. Let $\pi\in\frakp\setminus\frakp^2$. Using the Chinese Remainder Theorem, choose some $x\in\frako$ with 
+    \begin{equation*}
+        x\equiv\pi\pmod{\frakp^2}\quad\text{and}\quad x\equiv 1\pmod\frakq,~\frakq\ne\frakp.
+    \end{equation*}
+    It is easy to see that $(x) = \frakp$ thereby completing the proof.
+\end{proof}
+
+\begin{proposition}
+    Let $A$ be an integral domain. Every invertible fractional ideal of $A$ is projective.
+\end{proposition}
+\begin{proof}
+    Let $\fraka$ be an invertible fractional ideal of $A$ and set $\frakb = \fraka^{-1}$. By definition, there are $x_1,\dots,x_n\in\fraka$, and $y_1,\dots,y_n\in\frakb$ such that $x_1y_1 + \dots + x_ny_n = 1$. Hence, for any $x\in\fraka$, 
+    \begin{equation*}
+        x = x_1(y_1x) + \dots + x_n(y_nx),
+    \end{equation*}
+    but $y_1x,\dots,y_n x\in\frakb\fraka = A$, whence $\fraka\subseteq Ax_1 + \dots + Ax_n\subseteq\fraka$, that is, $\fraka = Ax_1 + \dots + Ax_n$. Similarly, one can show that $\frakb = Ay_1 + \dots + Ay_n$.
+
+    Now, let $M\onto\fraka$ be a surjective $A$-linear map. Choose $m_i\in M$ such that $f(m_i) = x_i$ for $1\le i\le n$, and define $g:\fraka\to M$ by 
+    \begin{equation*}
+        g(x) = \sum_{i = 1}^n (xy_i)m_i,
+    \end{equation*}
+    which is well-defined because $xy_i\in\fraka\frakb = A$. Then, 
+    \begin{equation*}
+        f(g(x)) = \sum_{i = 1}^n (xy_i)f(m_i) = \sum_{i = 1}^n (xy_i)x_i = x,
+    \end{equation*}
+    which completes the proof.
+\end{proof}
+
+\subsection{Extensions of Dedekind Domains}
+
+\begin{lemma}
+    Let $\frako$ be a noetherian domain of dimension $1$ and $\wt\frako$ its integral closure. Then, for each ideal $\fraka\ne 0$ of $\frako$, the quotient $\wt\frako/\fraka\wt\frako$ is a finitely generated $\frako$-module.
+\end{lemma}
+\begin{proof}
+    Let $0\ne a\in\fraka$. Then $\wt\frako/\fraka\wt\frako$ is a quotient of $\wt\frako/a\wt\frako$ and hence, it suffices to show that the latter is a finitely generated $\frako$-module. To this end, set 
+    \begin{equation*}
+        \fraka_m = \left(a^m\wt\frako\cap\frako, a\frako\right).
+    \end{equation*}
+    This is a descending chain of ideals containing $a\frako$. Note that $\frako/a\frako$ is a dim $0$ noetherian ring, i.e., is artinian. Hence, the chain $\fraka_m$ must be stationary. Let $n$ be an index such that $\fraka_n = \fraka_{n + 1} = \cdots$.
+
+    We contend that $\wt\frako\subseteq a^{-n}\frako + a\wt\frako$. Let $\beta = \frac{b}{c}\in\wt\frako\setminus\{0\}$ with $b,c\in\frako$. Again, note that $\frako/c\frako$ is artinian and hence, the chain of ideals $(\overline a^m)$ where $\overline a = a\mod c\frako$ stabilizes. Then, there is a smallest positive integer $h$ such that $(\overline a^h) = (\overline a^{h + 1}) = \cdots$.
+
+    In particular, we can find some $x\in\frako$ such that $a^h\equiv xa^{h + 1}\mod c\frako$, that is, $a^h(1 - xa)\in c\frako$. Therefore, 
+    \begin{equation*}
+        \beta = \frac{b}{c}(1 - xa) + \beta xa = \frac{b}{a^h}\frac{(1 - xa)a^h}{c} + \beta xa\in a^{-h}\frako + a\wt\frako.
+    \end{equation*}
+
+    Let $h$ be the smallest positive integer such that $\beta\in a^{-h}\frako + a\wt\frako$. It suffices to show that $h\le n$. Suppose to the contrary that $h > n$. We can then write 
+    \begin{equation*}
+        \beta = \frac{u}{a^h} + a\wt u\quad\text{ where } u\in\frako,~\wt u\in\wt\frako.
+    \end{equation*}
+    Hence, $u = a^h(\beta - a\wt u)\in a^h\wt\frako\cap\frako\subseteq\fraka_h = \fraka_{h + 1}$ since $h > n$. Hence, $u = a^{h + 1}\wt u' + au'$ for some $\wt u'\in\wt\frako$ and $u'\in\frako$. Substituting this back into the expression for $\beta$, we have 
+    \begin{equation*}
+        \beta = a\wt u' + \frac{u'}{a^{h - 1}} + a\wt u'\in a^{-(h - 1)}\frako + a\wt\frako,
+    \end{equation*}
+    a contradiction to the minimality of $h$. Thus, we have $\wt\frako\subseteq a^{-n}\frako + a\wt\frako$.
+
+    Hence, $\wt\frako/a\wt\frako$ becomes a submodule of the $\frako$-module $(a^{-n}\frako + a\wt\frako)/a\wt\frako$ which is generated by $a^{-n}\mod a\wt\frako$. It is therefore a finitely generated $\frako$-module, thereby completing the proof.
+\end{proof}
+
+\begin{theorem}[Krull-Akizuki]
+    Let $\frako$ be a one-dimensional noetherian integral domain with fraction field $K$. Let $L/K$ be a finite extension and $\frakO$ the integral closure of $\frako$ in $L$. Then $\frakO$ is a Dedekind domain.
+\end{theorem}
+\begin{proof}
+    Let $\omega_1,\dots,\omega_n\in\frakO$ be a $K$-basis of $L$ and let $\frakO_0 = \frako[\omega_1,\dots,\omega_n]$, which is a one-dimensional noetherian ring. Note that $\frakO$ is the integral closure of $\frakO_0$.
+
+    Let $\frakA$ be an ideal of $\frakO$. We shall show that $\frakA$ is a finitely generated $\frakO$-module. Choose some $0\ne a\in\frakA\cap\frakO_0$ (it is an easy exercise to see that such an element exists). By the preceding lemma, $\frakO/a\frakO$ is a finitely generated $\frakO_0$-module, whence is noetherian. Thus, it is also a noetherian $\frakO$-module. Consequently, the submodule $\frakA/a\frakO$ is also a noetherian $\frakO$-module, whence $\frakA$ is a noetherian $\frakO$-module. This completes the proof.
+\end{proof}
+
+\begin{definition}
+    Let $\frako$ be a Dedekind domain with fraction field $K$, $L$ a finite extension of $K$ and $\frakO$ the integral closure of $\frako$ in $L$. If $\frakp$ is a maximal in $\frako$, then there is a prime decomposition
+    \begin{equation*}
+        \frakp\frakO = \frakP_1^{e_1}\cdots\frakP_r^{e_r}
+    \end{equation*}
+    where the exponent $e_i$ is called the \define{ramification index} and the degree of the field extension $f_i = \left[\frakO/\frakP_i : \frako/\frakp\right]$ is called the \define{inertia degree} of $\frakP_i$ over $\frakp$.
+\end{definition}
+
+\begin{remark}
+    Note that a prime $\frakP$ lies over $\frakp$ if and only if $e(\frakP/\frakp)\ge 1$.
+\end{remark}
+
+\begin{theorem}
+    Let $L/K$ be finite separable. Then we have the \define{fundamental identity} 
+    \begin{equation*}
+        \sum_{i = 1}^r e_if_i = n.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+\end{proof}

@@ -1,0 +1,228 @@
+\subsection{Minkowski's Bound}
+
+Let $K$ be a number field, and $\frako$ be its ring of integers, i.e., the integral closure of $\Z$ in $K$. We have seen that $\frako$ is a Dedekind domain, and hence, the group of fractional ideals is a free abelian group with basis given by the integral prime ideals of $\frako$. In this section, we shall show that the class group, which is the quotient of the group of fractional ideals by the principal fractional ideals, is finite. Further, we shall also obtain bounds on the ideals representing each ideal class in the class group, $\Cl K$.
+
+\begin{theorem}
+    There is a $\lambda > 0$ (depending on $K$) such that for every non-zero ideal $\fraka$ of $\frako$, there is an $\alpha\in\fraka\setminus\{0\}$ such that 
+    \begin{equation*}
+        \left|N^K_{\Q}(\alpha)\right|\le\lambda\frakN(\fraka).
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Let $n = [K : \Q]$, and $\{\alpha_1,\dots,\alpha_n\}$ an integral basis of $\frako$ as a $\Z$-module, and $\{\sigma_1,\dots,\sigma_n\}$ the distinct embeddings of $K$ into $\bbC$. Set 
+    \begin{equation*}
+        \lambda = \prod_{i = 1}^{n}\left(\sum_{j = 1}^n |\sigma_i\alpha_j|\right).
+    \end{equation*}
+    Let $m$ be the unique positive integer such that $m^n\le\frakN(\fraka) < (m + 1)^n$ and consider $(m + 1)^n$ distinct elements of the form 
+    \begin{equation*}
+        \sum_{i = 1}^n m_i\alpha_i\qquad\text{ where}\quad 0\le m_i\le m.
+    \end{equation*}
+    Since $[\frako : \fraka] = \frakN(\fraka) < (m + 1)^n$, two of the above must be the same modulo $\fraka$. Thus, there is an 
+    \begin{equation*}
+        \alpha = \sum_{i = 1}^n m_i\alpha_i\qquad -m\le m_i\le m
+    \end{equation*}
+    with $\alpha\in I$. Now, note that 
+    \begin{align*}
+        \left|N^K_\Q(\alpha)\right| &= \prod_{i = 1}^n\left|\sum_{j = 1}^n m_j\sigma_i(\alpha_j)\right|\\
+        &\le\prod_{i = 1}^n \left(m\sum_{j = 1}^n |\sigma_i(\alpha_j)|\right)\\
+        &\le \lambda\cdot m^n\le \lambda\frakN(\fraka),
+    \end{align*}
+    thereby completing the proof.
+\end{proof}
+
+\begin{corollary}\thlabel{cor:bound-on-ideal-norm}
+    In addition to the conclusion of the theorem, every ideal class in $\Cl(K)$ contains an integral ideal $\fraka$ with $\frakN(\fraka)\le\lambda$.
+\end{corollary}
+\begin{proof}
+    Let $C\in\Cl(K)$ be an ideal class. If $C = 0$, then there is nothing to prove. Else, lt $\frakb$ be an integral ideal in the ideal class $C^{-1}$. According to the theorem, there is an $\alpha\in\frakb$ such that $|N^K_\Q(\alpha)|\le \lambda\frakN(\frakb)$. Due to unique factorization, we can find an integral ideal $\fraka$ such that $\fraka\frakb = (\alpha)$. Since $\frakb\in C^{-1}$, we have that $\fraka\in C$. Further,
+    \begin{equation*}
+        \lambda\frakN(\frakb)\ge\left|N^K_\Q(\alpha)\right| = \frakN\left(\alpha\frako\right) = \frakN(\fraka)\frakN(\frakb)\implies\frakN(\fraka)\le\lambda,
+    \end{equation*}
+    which completes the proof.
+\end{proof}
+
+\begin{corollary}
+    $\Cl(K)$ is a finite group.
+\end{corollary}
+\begin{proof}
+    Due to the preceding result, every ideal class in $\Cl(K)$ has an integral ideal $\fraka$ representing it with $\frakN(\fraka)\le\lambda$. There is a prime factorization 
+    \begin{equation*}
+        \fraka = \prod_{i = 1}^r \frakp_i^{e_i}\implies\frakN(\fraka) = \prod_{i = 1}^r \frakN(\frakp_i)^{e_i}.
+    \end{equation*}
+    Note that if $\frakp_i\cap\Z = p_i\Z$, then $\frakN(\frakp_i)\ge p_i$. In particular, we have $\lambda\ge p_1^{e_1}\cdots p_r^{e_r}$. Thus, the $\frakp_i$'s which occur in the decomposition of $\fraka$ can lie over only those rational primes which are less than $\lambda$. Futher, for each $\frakp$ lying over a rational prime $p$, the exponent $e$ of  $\frakp$ in the decomposition of $\fraka$ is bounded. Thus, $\fraka$ has only finitely many possible prime decompositions. It follows that $\Cl(K)$ is finite.
+\end{proof}
+
+
+Our next goal is to establish ``Minkowski's bound''. Let $K$ be a number field with $[K : \Q] = n$ and $\frako\subseteq K$ the ring of integers. Let $\sigma_1,\dots,\sigma_r$ denote the distinct real embeddings $K\into\R$ and $\tau_1,\overline\tau_1,\dots,\tau_s,\overline\tau_s$, the $2s$ complex embeddings $K\into\bbC$. Here, $\overline\tau(\alpha) := \overline{\tau(\alpha)}$, the composition of complex conjugation with $\tau$. By definition, we must have $n = r + 2s$.
+
+There is an additive group monomorphism $\Phi: K\into\R^n$ given by 
+\begin{equation*}
+    \alpha\mapsto\left(\sigma_1(\alpha),\dots,\sigma_r(\alpha),\Re\tau_1(\alpha),\Im\tau_1(\alpha),\dots,\Re\tau_s(\alpha),\Im\tau_s(\alpha)\right).
+\end{equation*}
+Before proceeding, fix an integral basis $\{\alpha_1,\dots,\alpha_n\}$ of $\frako$ over $\Z$.
+
+\begin{lemma}
+    $\Phi(\alpha_1),\dots,\Phi(\alpha_n)$ are linearly independent over $\R$.
+\end{lemma}
+\begin{proof}
+    Let $A$ be the matrix with $i$-th row as $\Phi(\alpha_i)$. First, subtract $i = \sqrt{-1}$ times the column corresponding to $\Im\tau_j$ from the column corresponding to $\Re\tau_j$. Then, multiply the column corresponding to $\tau_j$ by $2i$ and finally add the column corresponding to $\Re\tau_j$ to the column corresponding to $\Im\tau_j$. We then have 
+    \begin{equation*}
+        \det A = \frac{1}{(2i)^s}\det
+        \begin{pmatrix}
+            \vdots & \cdots & \vdots & \vdots & \vdots & \cdots & \vdots & \vdots \\
+            \sigma_1(\alpha_j) & \cdots & \sigma_r(\alpha_j) & \overline\tau_1(\alpha_j) & \tau_1(\alpha_j) & \cdots & \overline\tau_s(\alpha_j) & \tau_s(\alpha_j)\\
+            \vdots & \cdots & \vdots & \vdots & \vdots & \cdots & \vdots & \vdots
+        \end{pmatrix}
+    \end{equation*}
+    In particular, this gives 
+    \begin{equation*}
+        |\det A| = \frac{1}{2^s}\sqrt{|d_K|}\ne 0,
+    \end{equation*}
+    where $d_K$ is the discriminant of $K$.
+\end{proof}
+
+
+Before we proceed, we recall the Smith Normal Form for $\Z$. Let $G$ be a free abelian group of rank $n$, and $H$ a subgroup of $G$ of finite index. The inclusion $H\into G$ is an injective homomorphism of free abelian groups having the same rank. This inclusion can be put into the Smith normal form, whence there is a basis $\{\gamma_1,\dots,\gamma_n\}$ of $H$ and $\{\beta_1,\dots,\beta_n\}$ of $G$ such that $\gamma_i = d_i\beta_i$ for $1\le i\le n$, and $0 < d_1\mid d_2\mid\cdots\mid d_n$. It follows that $[G: H] = d_1\cdots d_n$.
+
+
+\begin{theorem}\thlabel{thm:vol-Phi-ideal}
+    Let $\fraka$ be a non-zero ideal of $\frako$. Then the image of $\fraka$ under $\Phi$ in $\R^n$ is a complete lattice with fundamental parallelotope having (Lebesgue) volume 
+    \begin{equation*}
+        \vol\left(\R^n/\Phi(\fraka)\right)\frac{1}{2^s}\frakN(\fraka)\sqrt{|d_K|}
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    We can choose an integral basis $\alpha_1,\dots,\alpha_n$ of $\frako$ such that there are positive integers $d_1\mid d_2\mid\dots\mid d_n$ such that $d_1\alpha_1,\dots, d_n\alpha_n$ is a $\Z$-basis of $\fraka$. The image under $\Phi$ of this integral basis of $\fraka$ is $d_1\Phi(\alpha_1),\dots, d_n\Phi(\alpha_n)$. The volume of this parallelotope is precisely $d_1\cdots d_n$ times the volume of the parallelotope we computed earlier, that is, 
+    \begin{equation*}
+        d_1\cdots d_n\times\frac{1}{2^s}\sqrt{|d_k|} = \frac{1}{2^s}\frakN(\fraka)\sqrt{|d_K|},
+    \end{equation*}
+    as desired.
+\end{proof}
+
+\begin{lemma}[Minkowski]\thlabel{lem:minkowski}
+    Let $\Lambda\subseteq\R^n$ be a complete lattice, and $E\subseteq\R^n$ a convex, measurable subset that is symmetric about $0$ (equiv. centrally symmetric). If $\vol(E) > 2^n\vol\left(\R^n/\Lambda\right)$, then $E$ contains a lattice point of $\Lambda$. 
+    
+    \noindent Further, if $E$ is compact, then the same conclusion holds if $\vol(E)\ge 2^n\vol\left(\R^n/\Lambda\right)$.
+\end{lemma}
+\begin{proof}
+    % TODO: Add in later
+\end{proof}
+
+Now, define a ``norm map'' $\mathbf{N}: \R^n\to\R$ by 
+\begin{equation*}
+    \mathbf{N}(x) = x_1\cdots x_r\left(x_{r + 1}^2 + x_{r + 2}^2\right)\cdots\left(x_{r + 2s - 1}^{2} + x_{r + 2s}^2\right).
+\end{equation*}
+It is not hard to see that there is a commutative diagram 
+\begin{equation*}
+    \xymatrix@+1pc {
+        K\ar[r]^\Phi\ar[rd]_{N^K_{\Q}} & \R^n\ar[d]^{\mathbf{N}}\\
+        & \R
+    }
+\end{equation*}
+
+\begin{corollary}
+    Let $A\subseteq\R^n$ be a compact, convex, centrally symmetric subset of $\R^n$ such that for each $x\in A$, $|\mathbf N(x)|\le 1$. Then, every complete lattice $\Lambda$ in $\R^n$ contains a non-zero point $x$ with 
+    \begin{equation*}
+        |\mathbf N(x)|\le\frac{2^n}{\vol(A)}\vol\left(\R^n/\Lambda\right).
+    \end{equation*}
+\end{corollary}
+\begin{proof}
+    Let $t > 0$ be such that 
+    \begin{equation*}
+        t^n = \frac{2^n}{\vol(A)}\vol\left(\R^n/\Lambda\right),
+    \end{equation*}
+    and set $E = tA$. Then, $\vol(E) = 2^n\vol\left(\R^n/\Lambda\right)$. Since $E$ is compact, \thref{lem:minkowski} implies the existence of a non-zero $x\in\Lambda\cap E$. Then $x = ta$ for some $a\in A$. As a result, 
+    \begin{equation*}
+        |\mathbf N(x)| = t^n\left|\mathbf N(a)\right|\le t^n,
+    \end{equation*}
+    as desired.
+\end{proof}
+
+\begin{theorem}
+    Every full lattice $\Lambda\subseteq\R^n$ contains a non-zero point $x\in\Lambda$ with 
+    \begin{equation*}
+        |\mathbf N(x)|\le\frac{n!}{n^n}\left(\frac{8}{\pi}\right)^s\vol\left(\R^n/\Lambda\right).
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Let 
+    \begin{equation*}
+        A = \left\{x\in\R^n\colon |x_1| + \dots + |x_r| + 2\left(\sqrt{x_{r + 1}^2 + x_{r + 2}^2} + \dots + \sqrt{x_{n - 1}^2 + x_n^2}\right)\le n\right\}.
+    \end{equation*}
+    Then $A$ is compact and for each $x\in A$, due to the AM-GM inequality, it follows that $|\mathbf N(x)|\le 1$. It also follows from the triangle inequality that $A$ is convex. In order to invoke the preceding result, we must compute the volume of $A$.
+
+    Let $V_{r, s}(t)$ denote the volume of 
+    \begin{equation*}
+        A_{r, s}(t) = \left\{x\in\R^n\colon |x_1| + \dots + |x_r| + 2\left(\sqrt{x_{r + 1}^2 + x_{r + 2}^2} + \dots + \sqrt{x_{n - 1}^2 + x_n^2}\right)\le t\right\},
+    \end{equation*}
+    where $n = r + 2s$. Then, $V_{r, s}(t) = t^{r + 2s}V_{r, s}(1)$, and note that for $r\ge 1$,
+    \begin{equation*}
+        V_{r, s}(1) = 2\int_{0}^1 V_{r-1, s}(1 - x)~dx = 2V_{r - 1, s}(1)\int_0^1(1 - x)^{r + 2s - 1}~dx = \frac{2}{r + 2s} V_{r - 1, s}(1).
+    \end{equation*}
+    Inducting downwards, this gives 
+    \begin{equation*}
+        V_{r, s}(1) = \frac{2^r (2s)!}{(r + 2s)!} V_{0, s}(1).
+    \end{equation*}
+    Again, if $s\ge 1$, then 
+    \begin{align*}
+        V_{0, s}(1) &= \iint_{B\left(0, \frac12\right)} V_{0, s - 1}\left(1 - 2\sqrt{x^2 + y^2}\right)~dxdy\\
+        &= V_{0, s - 1}(1)\iint_{B\left(0, \frac12\right)} \left(1 - 2 \sqrt{x^2 + y^2}\right)^{2(s - 1)}~dxdy\\
+        &= V_{0, s - 1}(1)\int_{0}^{2\pi}\int_0^{\frac{1}{2}}\left(1 - 2r\right)^{2(s - 1)}r~drd\theta\\
+        &= 2\pi V_{0, s - 1}(1)\int_0^{\frac12} (1 - 2r)^{2(s - 1)}r~dr\\
+        &= \frac{\pi}{2} V_{0, s - 1}(1)\int_0^1 (1 - t)^{2(s - 1)}t~dt\\
+        &= \frac{\pi}{2} V_{0, s - 1}(1)\beta(2, 2s - 1)\\ 
+        &= \frac{\pi}{2}\frac{\Gamma(2)\Gamma(2s - 1)}{\Gamma(2s + 1)} V_{0, s - 1}\\
+        &= \frac{\pi}{2}\frac{1}{2s(2s - 1)} V_{0, s - 1}(1).
+    \end{align*}
+    Inducting downwards, we obtain
+    \begin{equation*}
+        V_{0, s}(1) = \left(\frac{\pi}{2}\right)^{s - 1}\frac{1}{(2s)\cdot(2s - 1)\cdot\dots\cdot 3}V_{0, 1}(1) = \left(\frac{\pi}{2}\right)^s\frac{1}{(2s)!}.
+    \end{equation*}
+    Thus, 
+    \begin{equation*}
+        \vol(A) = n^n V_{r, s}(1) = n^n\frac{2^r(2s)!}{n!}\cdot\left(\frac{\pi}{2}\right)^s\frac{1}{(2s)!} = \frac{2^r\cdot n^n}{n!}\left(\frac{\pi}{2}\right)^s.
+    \end{equation*}
+    Finally, invoking the preceding corollary, we have our desired conclusion.
+\end{proof}
+
+\begin{corollary}
+    Every non-zero integral ideal $\fraka$ of $\frako$ contains a non-zero $\alpha$ such that 
+    \begin{equation*}
+        \left|N^K_\Q(\alpha)\right|\le\frac{n!}{n^n}\left(\frac{4}{\pi}\right)^s\sqrt{|d_K|}
+    \end{equation*}
+\end{corollary}
+\begin{proof}
+    Let $\Lambda = \Phi(\fraka)$, a complete lattice in $\R^n$ and due to \thref{thm:vol-Phi-ideal}, we know that 
+    \begin{equation*}
+        \vol(\R^n/\Lambda) = \frac{1}{2^s}\frakN(\fraka)\sqrt{|d_K|}.
+    \end{equation*}
+    Combining this with the preceding corollary, we get that $\Lambda$ contains a non-zero point $x = \Phi(\alpha)$ with 
+    \begin{equation*}
+        |N^K_\Q(\alpha)| = |\mathbf N(x)|\le\frac{n!}{n^n}\left(\frac{8}{\pi}\right)^s\cdot\frac{1}{2^s}\frakN(\fraka)\sqrt{|d_K|} = \frac{n!}{n^n}\left(\frac{4}{\pi}\right)^s\sqrt{|d_K|},
+    \end{equation*}
+    as desired.
+\end{proof}
+
+\begin{corollary}[Minkowski's Bound]
+    Every ideal class in $\Cl(K)$ contains an integral ideal $\fraka$ such that 
+    \begin{equation*}
+        \frakN(\fraka)\le\frac{n!}{n^n}\left(\frac{4}{\pi}\right)^s\sqrt{|d_K|}.
+    \end{equation*}
+\end{corollary}
+\begin{proof}
+    Follows immediately from the preceding corollary and \thref{cor:bound-on-ideal-norm}.
+\end{proof}
+
+\subsection{Dirichlet's Unit Theorem}
+
+\begin{lemma}
+    For any positive integers $m$ and $M$, the set of algebraic integers $\alpha$ such that 
+    \begin{itemize}
+        \item the degree of $\alpha$ is $\le m$, and 
+        \item $|\alpha'|\le M$ for all conjugates $\alpha'$ of $\alpha$
+    \end{itemize}
+    is finite.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}

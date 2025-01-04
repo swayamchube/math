@@ -1,0 +1,390 @@
+\subsection{Valuations}
+
+\begin{definition}
+    A \define{valuation} of a field $K$ is a function $|\cdot|: K\to\R$ such that 
+    \begin{itemize}
+        \item $|x|\ge 0$, and $|x| = 0$ if and only if $x = 0$, 
+        \item $|xy| = |x||y|$, and 
+        \item $|x + y|\le |x| + |y|$
+    \end{itemize}
+    for all $x,y\in K$. We tacitly exclude the case where $|\cdot|$ is the trivial valuation, that is, $|x|= 1$ for all $x\in K^\times$.
+\end{definition}
+
+Obviously, every valuation defines a natural metric on the field given by 
+\begin{equation*}
+    d(x, y) = |x - y|\qquad\forall~x,y\in K.
+\end{equation*}
+
+\begin{definition}
+    Two valuation of $K$ are said to be \define{equivalent} if they define the same topology on $K$.
+\end{definition}
+
+\begin{proposition}
+    Two valuations $|\cdot|_1$ and $|\cdot|_2$ on $K$ are equivalent if and only if there exists a real number $s > 0$ such that 
+    \begin{equation*}
+        |x|_1 = |x|_2^s\qquad\forall~x\in K.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    If $|\cdot|_1 = |\cdot|_2^s$ for some $s > 0$, then it is obvious that they define the same topology on $K$. Now, for any valuation $|\cdot|_1$, the inequality $|x| < 1$ is equivalent to the condition that $\{x^n\colon n\in\N\}$ converges to $0$ in the topology defined by $|\cdot|$. Therefore, if $|\cdot|_1$ and $|\cdot|_2$ are equivalent, one has the implication 
+    \begin{equation*}
+        |x|_1 < 1\implies\{x^n\colon n\in\N\}\text{ converges to }0\implies |x|_2 < 1.
+    \end{equation*}
+    Analogously, one has an implication in the other direction. That is, $|x|_1 < 1$ if and only if $|x|_2 < 1$.
+
+    Let $y\in K$ be fixed such that $|y|_1 > 1$. Let $x\in K$, $x\ne 0$. Then $|x|_1 = |y|_1^\alpha$ for some $\alpha\in\R$. Let $\{m_i/n_i\}$ be a sequence of rational numbers (with $n_i > 0$) converging to $\alpha$ from above. Then we have $|x|_1 = |y|_1^\alpha < |y|_1^{m_i/n_i}$. Hence 
+    \begin{equation*}
+        \left|\frac{x^{n_i}}{y^{m_i}}\right|_1 < 1 \implies\left|\frac{x^{n_i}}{y^{m_i}}\right| < 1,
+    \end{equation*}
+    so that $|x|_2 < |y|_2^{m_i/n_i}$, and thus $|x|_2\le |y|_2^\alpha$ as we let $i\to\infty$. Similarly, taking a sequence of rationals converging to $\alpha$ from below, we get $|x|_2\ge|y|_2^\alpha$. Thus, for all $x\in K$, $x\ne 0$, we get 
+    \begin{equation*}
+        \frac{\log |x|_1}{\log |x|_2} = \frac{\alpha\log |y|_1}{\alpha\log |y|_2} = \frac{\log |y|_1}{\log |y|_2} =: s > 0,
+    \end{equation*}
+    thereby completing the proof.
+\end{proof}
+
+\begin{theorem}[Approximation Theorem]\thlabel{lem:approximation-theorem}
+    Let $|\cdot|_1,\dots,|\cdot|_n$ be pairwise inequivalent valuations of the field $K$ and let $a_1,\dots,a_n\in K$. Then for every $\varepsilon > 0$ there is an $x\in K$ such that 
+    \begin{equation*}
+        |x - a_i|_i < \varepsilon\quad\text{ for all } 1\le i\le n.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    The theorem is obvious for $n = 1$, so we suppose that $n\ge 2$. Since $|\cdot|_1$ and $|\cdot|_n$ are inequivalent, there exist $\alpha,\beta\in K^\times$ such that $|\alpha|_1 < 1$, $|\alpha|_n\ge 1$, $|\beta|_1\ge 1$, and $|\beta|_n < 1$. Setting $y = \beta/\alpha$, we get that $|y|_1 > 1$ and $|y|_n < 1$. 
+
+    We shall prove by induction on $n$ that there is a $z\in K$ such that 
+    \begin{equation*}
+        |z|_1 > 1\quad\text{ and }\quad |z|_j < 1\quad\text{ for } 2\le j\le n.
+    \end{equation*}
+    We just proved this for $n = 2$, so suppose that $n\ge 3$ and assume we have found such a $z$ for $2\le j\le n - 1$. If $|z|_n\le 1$, then $z^my$ will do for $m$ sufficiently large. However, if $|z|_n > 1$, then the sequence $t_m = z^m/(1 + z^m)$ converges to $1$ with respect to $|\cdot|_1$ and $|\cdot|_n$, and to $0$ with respect to $|\cdot|_2,\dots,|\cdot|_{n - 1}$ because 
+    \begin{equation*}
+        \left|1 - \frac{z^m}{1 + z^m}\right|_i = \frac{1}{|1 + z^m|_i}\le\frac{1}{|z|_i^m - 1}\to 0
+    \end{equation*}
+    for $i\in\{1, n\}$ and 
+    \begin{equation*}
+        \left|\frac{z^m}{1 + z^m}\right|_i = \frac{|z|_i^m}{|1 + z^m|_i}\le\frac{|z|_i^m}{1 - |z|_i^m}\to 0
+    \end{equation*}
+    for $2\le i\le n - 1$. Hence, for sufficiently large $m$, $t_my$ will suffice. Replace $z$ with this newly found element. Note that the sequence $z^m/(1 + z^m)$ converges to $1$ with respect to $|\cdot|_1$ and to $0$ with respect to $|\cdot|_2,\dots, |\cdot|_n$. Therefore, we can choose $z$ such that $|z|_1$ is as close to $1$ as we like and $|z|_2,\dots,|z|_n$ are as close to $0$ as we like.
+
+    For each $1\le i\le n$, choose a $z_i\in K$ as above (with $1$ replaced by $i$) and finally set $x = a_1z_1 + \dots + a_nz_n$. We have 
+    \begin{equation*}
+        |x - a_i|_i\le |a_1|_i|z_1|_1 + \dots + |a_i||z_i - 1|_i + \dots + |a_n|_i|z_n|_i.
+    \end{equation*}
+    Due to the preceding paragraph the $z_i$'s can be chosen such that $|x - a_i| < \varepsilon_i$ for $1\le i\le n$. This completes the proof.
+\end{proof}
+
+\begin{definition}
+    A valuation $|\cdot|$ is called \define{non-archimedean} if $\{|n|\colon n\in\N\}$ is bounded. Otherwise, it is called \define{archimedean}.
+\end{definition}
+
+\begin{proposition}
+    A valuation $|\cdot|$ is non-archimedean if and only if it satisfies the \define{ultrametric inequality}
+    \begin{equation*}
+        |x + y|\le\max\{|x|, |y|\}\quad\text{ for }x,y\in K.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    If $|\cdot|$ satisfies the ultrametric inequality, then 
+    \begin{equation*}
+        |n| = |1 + \cdots + 1|\le |1| = 1,
+    \end{equation*}
+    as desired. Conversely, suppose $|\cdot|$ is non-archimedean and let $|x|\ge |y|$ and $M > 0$ be such that $|n|\le M$ for all $n\in\N$. We then have 
+    \begin{equation*}
+        |x + y|^n = \left|\sum_{k = 0}^n\binom{n}{k}x^k y^{n - k}\right|\le M\sum_{k = 0}^n |x|^k |y|^{n - k}\le N(n + 1)|x|^n.
+    \end{equation*}
+    Taking $n$-th roots, we have $|x + y|^n\le N^{1/n}(n + 1)^{1/n}|x|$. In the limit $n\to\infty$, we have $|x + y|\le |x|$, as desired.
+\end{proof}
+
+\begin{remark}
+    If $|\cdot|$ is a non-archimedean valuation, and $x,y\in K$ with $|x| > |y|$, then we have 
+    \begin{equation*}
+        |x + y|\le |x|\quad\text{ and }\quad |x| = |(x + y) + (-y)|\le\max\{|x + y|, |y|\} = |x + y|,
+    \end{equation*}
+    whence $|x + y| = |x|$, that is, $|x + y| = \max\{|x|, |y|\}$ whenever $|x|\ne |y|$.
+\end{remark}
+
+\begin{theorem}[Ostrowski]
+    Every valuation of $\Q$ is equivalent to one of the valuatiosn $|\cdot|_p$ or $|\cdot|_\infty$.
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\subsection{Hensel's Lemma}
+
+\begin{definition}
+    Let $K$ be a complete non-archimedean valued field with valuation ring $(\frako,\frakp,\kappa)$. We call a polynomial $f(X) = a_0 + \cdots + a_nX^n\in\frako[X]$ \define{primitive} if $f(X)\not\equiv0\pmod\frakp$. That is, 
+    \begin{equation*}
+        |f| := \max\{|a_0|,\dots,|a_n|\} = 1.
+    \end{equation*}
+\end{definition}
+
+\begin{lemma}[Hensel's Lemma]
+    Let $K$ be a complete non-archimedean valued field with valuation ring $(\frako, \frakp,\kappa)$. If a primitive polynomial $f(X)\in\frako[X]$ admits modulo $\frakp$ a factorization 
+    \begin{equation*}
+        f(X)\equiv\overline g(X)\overline h(X)\mod\frakp,
+    \end{equation*}
+    into relatively prime polynomials $\overline g,\overline h\in\kappa[X]$, then $f(X)$ admits a factorization $f(X) = g(X)h(X)$ into polynomials $g, h\in\frako[X]$ such that $\deg g = \deg\overline g$, and 
+    \begin{equation*}
+        g(X)\equiv\overline g(X)\mod\frakp\quad\text{ and }\quad h(X)\equiv\overline{h}(X)\mod\frakp.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Let $d = \deg f$ and $m = \deg\overline g$. Then $m + \deg\overline h = \deg\overline f\le d$. Let $g_0, h_0\in\frako[X]$ be polynomials such that $g_0\equiv\overline g\mod\frakp$, $h_0\equiv\overline h\mod\frakp$, $\deg g_0 = m$, and $\deg h_0\le d - m$. Since $(\overline g, \overline h) = 1$, there are polynomials $a(X), b(X)\in\frako[X]$ satisfying $ag_0 + bh_0\equiv 1\mod\frakp$. Among the coefficients of the two polynomials $f - g_0h_0, ag_0 + bh_0 - 1\in\frakp[X]$, choose the one with largest absolute value $|\cdot|$, and call it $\pi$ (not to be confused with the uniformizer).
+
+    We inductively look for polynomials of the form 
+    \begin{equation*}
+        g = g_0 + p_1\pi + p_2\pi^2 + \cdots\quad\text{ and } h = h_0 + q_1\pi + q_2\pi^2 + \cdots,
+    \end{equation*}
+    where $p_i,q_i\in\frako[X]$ are such that $\deg p_i < m$, and $\deg q_i\le d - m$. Let 
+    \begin{equation*}
+        g_{n - 1} = g_0 + p_1\pi + \cdots + p_{n - 1}\pi^{n - 1}\quad\text{ and }\quad h_{n - 1} = h_0 + q_1\pi + \cdots + q_{n - 1}\pi^{n - 1}.
+    \end{equation*}
+    Since $K$ is complete, it is easy to see that the coefficients of $g_n$ and $h_n$ converge. Further, we have $f\equiv g_{n - 1}h_{n - 1}\mod\pi^n$, whence, in the limit, $n\to\infty$, we would have $f = gh$. Thus, it only remains to construct the $p_n$'s and $q_n$'s.
+
+    We have already established $g_0, h_0$. Suppose now that $n\ge 1$. Then, in view of the relation 
+    \begin{equation*}
+        g_n = g_{n - 1} + p_n\pi^n,\qquad h_n = h_{n - 1} + q_n\pi^n, 
+    \end{equation*}
+    the condition $f\equiv g_nh_n\mod\pi^{n + 1}$ is equivalent to 
+    \begin{equation*}
+        f - g_{n - 1}h_{n - 1}\equiv\left(g_{n - 1}q_n + h_{n - 1}p_n\right)\pi^n\mod\pi^{n + 1}.
+    \end{equation*}
+    Set $f_n = \pi^{-n}\left(f - g_{n - 1}h_{n - 1}\right)$, then the above condition is equivalent to 
+    \begin{equation*}
+        f_n\equiv g_{n - 1}q_n + h_{n - 1}p_n\equiv g_0q_n + h_0p_n\mod\pi.
+    \end{equation*}
+    Recall that $g_0 a + h_0b\equiv 1\mod\pi$ due to our choice of $\pi$, and hence, 
+    \begin{equation*}
+        g_0af_n + h_0bf_n\equiv f_n\mod\pi.
+    \end{equation*}
+    Next, we write 
+    \begin{equation*}
+        b(X)f_n(X) = q(X)g_0(X) + p_n(X),
+    \end{equation*}
+    in $K[X]$, where $\deg p_n < \deg g_0 = m$. Since $g_0\equiv\overline g\mod\frakp$, and $\deg g_0 = \deg\overline g$, the leading term of $g_0$ is a unit, whence $q(X), p_n(X)\in\frako[X]$. We obtain the congruence, 
+    \begin{equation*}
+        g_0(af_n + h_0q) + h_0p_n\equiv f_n\mod\pi.
+    \end{equation*}
+    Omit from the polynomial $a(X)f_n(X) + h_0(X)q(X)$ all coefficients that are divisible by $\pi$ to get a polynomial $q_n(X)$ such that $g_0q_n + h_0 p_n\equiv f_n\mod \pi$.
+
+    Finally, note that $\deg f_n\le d$, $\deg g_0 = m$, and $\deg(h_0p_n) < (d - m) + m = d$. Hence, $g_0q_n$ has degree $\le d$ modulo $\pi$. Recall that the leading coefficient of $g_0$ is a unit in $\frako$, and the leading coefficient of $q_n$ is not divisible by $\pi$, and hence, the degree of $g_0(X)q_n(X)$ modulo $\pi$ is precisely $m + \deg q_n$, whence $\deg q_n\le d - m$. This completes the induction step, and hence, the proof.
+\end{proof}
+
+\begin{corollary}\thlabel{cor:polynomial-norm}
+    Let $K$ be complete with respect to the non-archimedean valuation $|\cdot|$. Then, for every irreducible polynomial $f(X) = a_0 + a_1X + \dots + a_n X^n\in K[X]$ with $a_0a_n\ne 0$, one has 
+    \begin{equation*}
+        |f| = \max\{|a_0|, |a_n|\}.
+    \end{equation*}
+    In particular, $a_n = 1$ and $a_0\in\frako$ imply that $f\in\frako[X]$.
+\end{corollary}
+\begin{proof}
+    Multiplying by a suitable element of $K$, we may suppose that $f\in\frako[X]$, and $|f| = 1$. Let $r\ge 0$ be the smallest such that $|a_r| = 1$. That is, we have 
+    \begin{equation*}
+        f(X)\equiv X^r\left(a_r + a_{r + 1}X + \cdots + a_n X^{n - r}\right)\mod\frakp.
+    \end{equation*}
+    If $\max\{|a_0|, |a_n|\} < 1$, then $0 < r < n$, and hence, due to Hensel's Lemma, could lift the above factorization a non-trivial factorization in $\frako[X]$, contradicting the irreducibility of $f(X)\in K[X]$. This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $K$ be complete with respect to the valuation $|\cdot|$, and suppose $L/K$ is an algebraic extension. Then, there is a unique extension of $|\cdot|$ to $L$. Further, if $L$ is finite over $K$, then the extension is given by 
+    \begin{equation*}
+        |\alpha| = \sqrt[n]{\left|N^L_K(\alpha)\right|},
+    \end{equation*}
+    and $L$ is also complete.
+\end{theorem}
+\begin{proof}
+    Suppose we have shown the second assertion of the theorem, that is, for every finite extension $L/K$, there is a unique extension of $|\cdot|$ to $L$ given by the above formula. We can then extend this valuation to all of $\overline K$ (the algebraic closure of $K$) by defining 
+    \begin{equation*}
+        |\alpha| = \sqrt[n]{\left|N^L_K(\alpha)\right|}\qquad n = [L : K],
+    \end{equation*}
+    and $L$ is any finite extension of $K$ containing $\alpha$. First, we note that this is well-defined. Indeed, if $m = [K(\alpha): K]$, then 
+    \begin{equation*}
+        N^L_K(\alpha) = N^{K(\alpha)}_K\left(N^L_{K(\alpha)}(\alpha)\right) = \left(N^{K(\alpha)}_{K}(\alpha)\right)^{[L : K(\alpha)]},
+    \end{equation*}
+    consequently, 
+    \begin{equation*}
+        |\alpha| = \sqrt[m]{\left|N^{K(\alpha)}_K(\alpha)\right|},
+    \end{equation*}
+    which is independent of our choice of finite extension $L/K$. Further, since the extension of $|\cdot|$ to every finite subextension of $\overline K$ is unique, and $K$ is the union of all such subextensions, we see that there is a unique extension of $|\cdot|$ to $\overline K$.
+
+    All that remains is to argue for the existence and uniqueness of an extension of $|\cdot|$ to $L$ where $L/K$ is a finite extension with $n = [L : K]$.
+
+\begin{itemize}
+    \item\textbf{Existence:} Let $(\frako, \frakp,\kappa)$ be the valuation ring of $K$ and $\frakO$ its integral closure in $L$. We claim that 
+    \begin{equation*}
+        \frakO = \left\{\alpha\in L\colon N^L_K(\alpha)\in\frako\right\}.
+    \end{equation*}
+    Indeed, if $\alpha\in\frakO$, then $N^L_K(\alpha)$ is integral over $\frako$ and lies in $K$, and hence it lies in $\frako$, since $\frako$ is integrally closed in $K$. Conversely, suppose $\alpha\in L^\times$ is such that $N^L_K(\alpha)\in\frako$. Let 
+    \begin{equation*}
+        f(X) = X^d + a_{d - 1}X^{d - 1} + \dots + a_0\in K[X]
+    \end{equation*}
+    be the minimal polynomial of $\alpha$ over $K$. Then $N^L_K(\alpha) = \pm a_0^m\in\frako$, and hence, $|a_0|\le 1$. Then, due to \thref{cor:polynomial-norm}, we see that $f(X)\in\frako[X]$, that is, $\alpha\in\frakO$. This proves our claim.
+
+    All that remains to show is that the function $|\alpha| = \sqrt[n]{\left|N^L_K(\alpha)\right|}$ satisfies the ultrametric inequality. Indeed, suppose $|\alpha|\le|\beta|$ and $\beta\ne 0$. We want to show that $|\alpha + \beta|\le \max\{|\alpha|, |\beta|\}$, which, after dividing throughout by $\beta$, is equivalent to showing $|\alpha + 1|\le\max\{|\alpha|, 1\}$, whenever $|\alpha|\le 1$. Note that $|\alpha|\le 1$ implies $\left|N^L_K(\alpha)\right|\le 1$, whence, due to the preceding paragraph, $\alpha\in\frakO$. Since $\frakO$ is a ring, we see that $\alpha + 1\in\frakO$, and again, due to the preceding paragraph, we must have $|\alpha + 1|\le 1$. This completes the proof of existence.
+
+    \item\textbf{Uniqueness:} Let $|\cdot|'$ be another extension with valuation ring $(\frakO',\frakP')$. We claim that $\frakO\subseteq\frakO'$. Suppose not, and choose $\alpha\in\frakO\setminus\frakO'$, and let 
+    \begin{equation*}
+        f(X) = X^d + a_1 X^{d - 1} + \dots + a_d\in\frako[X]
+    \end{equation*}
+    be the minimal polynomial of $\alpha$ over $K$. Then, one has $\alpha^{-1}\in\frakP'$, since $|\alpha|' > 1$. Hence, 
+    \begin{equation*}
+        1 = -a_1\alpha^{-1} - \cdots - a_d\left(\alpha^{-1}\right)^d\in\frakP',
+    \end{equation*}
+    a contradiction. This shows that inclusion $\frakO\subseteq\frakO'$, which is equivalent to the statement
+    \begin{equation*}
+        |\alpha|\le 1\implies |\alpha|'\le 1,
+    \end{equation*}
+    whence the two valuations are equivalent on $L$, and hence, $|\cdot| = |\cdot|^s$ for some $s > 0$. But since the two valuations agree on $K$, we must have $s = 1$, that is, $|\cdot| = |\cdot|'$. This completes the proof.\qedhere
+\end{itemize}
+\end{proof}
+
+\begin{lemma}[Krasner]
+    Let $(K, |\cdot|)$ be a complete valued field, $\alpha\in K^{sep}$ and $\beta\in\overline K$. Let $\alpha_1,\dots,\alpha_n$ be the distinct conjugates of $\alpha$ in $\overline K$ with $\alpha\ne\alpha_i$ for $1\le i\le n$. If 
+    \begin{equation*}
+        |\alpha - \beta| < |\alpha - \alpha_i|\qquad\forall~1\le i\le n,
+    \end{equation*}
+    then $K[\alpha]\subseteq K[\beta]$.
+\end{lemma}
+\begin{proof}
+    Suppose $K[\alpha]\not\subseteq K[\beta]$. Since $\alpha$ is separable over $K[\beta]$, there is an automorphism $\sigma\in\Aut(\overline K/K[\beta])$ such that $\sigma\alpha\ne\alpha$ but $\sigma\beta = \beta$.
+\end{proof}
+
+\begin{theorem}
+    Let $(K, |\cdot|)$ be a complete field. If $L/K$ is an infinite separable algebraic extension, then $L$ is not complete.
+\end{theorem}
+\begin{proof}
+    If $|\cdot|$ were archimedean, then $K = \R$ or $K = \bbC$, neither of which admit infinite degree algebraic extensions. Thus, we may suppose that $|\cdot|$ is non-archimedean. We have seen that there is a unique extension of $|\cdot|$ to $\overline K$ which we shall denote by $|\cdot|$ too. Suppose $(L, |\cdot|)$ is complete. Let $x_0, x_1, x_2,\dots$ be a $K$-linearly independent subset of $L$. We shall construct a sequence $\{a_{n}\}_{n\ge 0}$ of non-zero elements in $K$ such that: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $|a_nx_n|\to 0$ monotonically as $n\to\infty$.
+        \item If we set 
+        \begin{equation*}
+            s_n = a_0x_0 + \dots + a_{n - 1}x_{n - 1}\qquad n\ge 1,
+        \end{equation*}
+        then 
+        \begin{equation*}
+            |a_nx_n| < d_n = \min\{|s_n - \sigma s_n|\colon\sigma\in\Gal(K^{sep}/K)\}\setminus\{0\}.
+        \end{equation*}
+    \end{enumerate}
+    This is achieved inductively, using the fact that $K$ contains elements of arbitrarily small valuation, indeed choose any $\alpha\in K$ with $|\alpha| < 1$ and take $\alpha^m$ for sufficiently large $m$. Since we are in a non-archimedean field the sequence $\{s_n\}$ is Cauchy, and converges to some $s\in K$. The ultrametric inequality then gives 
+    \begin{equation*}
+        |s_n - s| = \left|\sum_{k = n}^\infty a_k x_k\right| = |a_nx_n| < d_n,
+    \end{equation*}
+    whence, due to Krasner's Lemma, % TODO: Krasner's lemma
+    $s_n\in K(s)$ for all $n\ge 1$. But since the $s_n$'s are linearly independet, we see that $[K(s) : K] = \infty$, which is absurd. Thus, $L$ cannot be complete.
+\end{proof}
+
+\begin{remark}
+    In particular, $\overline\Q_p$ is not complete and hence, admits a proper completion which we denote by $\bbC_p$.
+\end{remark}
+
+\begin{theorem}
+    Let $(K, |\cdot|)$ be a complete valued field and as we have seen the valuation on $K$ extends uniquely to $\overline K$. Then, the completion $\bbC_K$ of $\overline K$ under this valuation is algebraically closed.
+\end{theorem}
+\begin{proof}
+    Let $f(X) = X^n + a_{n - 1}X^{n - 1} + \dots + a_0\in\bbC_K[X]$. Since $\overline K$ is dense in $\bbC_K$, we can choose $a_{i, j}\in\overline K$ such that 
+    \begin{itemize}
+        \item $|a_{i, j} - a_i| < \min\left\{|a_i|, \frac{1}{j}\right\}$ if $a_i\ne 0$, and 
+        \item $a_{i, j} = 0$ if $a_i = 0$.
+    \end{itemize}
+    Hence, $|a_{i, j}| = |(a_{i, j} - a_i) + a_i| = |a_i|$. Set 
+    \begin{equation*}
+        f_j(X) = X^n + a_{n - 1, j}X^{n - 1} + \dots + a_{0, j}\in\overline K[X].
+    \end{equation*}
+    Pick any root $r_j\in\overline K$ of $f_j(X)$. We shall show that the sequence $\{r_j\}$ admits a convergent subsequence. First, note that 
+    \begin{equation*}
+        |r_j|^n = \left|\sum_{i = 0}^{n - 1} a_{i, j}r_j^i\right| = \max_{0\le i\le n - 1} |a_i| |r_j|^i = |a_{i(j)}| |r_j|^{i(j)},
+    \end{equation*}
+    for some $0\le i(j)\le n - 1$. In particular, this gives 
+    \begin{equation*}
+        |r_j|\le |a_{i(j)}|^{\frac{1}{n - i(j)}},
+    \end{equation*}
+    that is, 
+    \begin{equation*}
+        |r_j|\le C := \max_{0\le i\le n - 1} |a_i|^{\frac{1}{n - i}}.
+    \end{equation*}
+
+    Now, 
+    \begin{equation*}
+        |f(r_j)| = |f(r_j) - f_j(r_j)| = \left|\sum_{i = 0}^{n - 1} (a_i - a_{i, j})r_j^i\right|\le\max_{0\le i\le n - 1} |a_i - a_{i, j}| |r_j|^i.
+    \end{equation*}
+    Note that if $C\ge 1$, then $|r_j|^i\le C^i\le C^{n - 1}$ and if $C < 1$, then $|r_j|^i < 1$. In particular, we have $|r_j|^i\le\max\{1, C^{n - 1}\}$, thus 
+    \begin{equation*}
+        |f(r_j)|\le \max_{0\le i\le n - 1} |a_i - a_{i, j}|\cdot\max\{1, C^{n - 1}\}\le\frac{\max\{1, C^{n - 1}\}}{j},
+    \end{equation*}
+    that is, $f(r_j)\to 0$ as $j\to\infty$. Let $L\supseteq\bbC_K$ be a splitting field of $f(X)$ and extend the absolute value $|\cdot|$ on $\bbC_K$ to $L$. Then, we can write $f(X) = (X - \rho_1)\cdots(X - \rho_n)$ for some $\rho_1,\dots,\rho_n\in L$. Then, 
+    \begin{equation*}
+        \lim_{j\to\infty}\prod_{k = 1}^n |r_j - \rho_k| = 0.
+    \end{equation*}
+    Suppose none of the sequences $\{|r_j - \rho_k|\}_{j = 1}^\infty$ admit convergent subsequences, then for every $1\le k\le n$, there is an $\varepsilon_k > 0$ such that $|r_j - \rho_k|\ge\varepsilon_k$ for all $j\ge N_k$. Therefore, 
+    \begin{equation*}
+        \prod_{k = 1}^n |r_j - \rho_k|\ge\varepsilon_1\cdots\varepsilon_n
+    \end{equation*}
+    for all $j\ge\max\{N_1,\dots, N_k\}$, a contradiction. Suppose $k_0$ is such that $\{|r_j - \rho_{k_0}|\}_{j = 1}^\infty$ admits a convergent subsequence, then $\{r_j\}$ admits a convergent subsequence converging to $\rho_{k_0}$. This shows that $\{r_j\}$ admits a Cauchy subsequence $\{r_{j_i}\}_{i = 1}^\infty$ in $\bbC_K$, which converges to some $r\in\bbC_K$. Then, 
+    \begin{equation*}
+        f(r) = \lim_{j\to\infty} f_{j_i}(r_{j_i}) = 0,
+    \end{equation*}
+    since the coefficients of $f_j$ converge to those of $f$ as $j\to\infty$. This shows that $\bbC_K$ is algebraically closed, thereby completing the proof.
+\end{proof}
+
+\begin{remark}
+    In particular, $\bbC_p$ is algebraically closed.
+\end{remark}
+
+\begin{theorem}
+    Let $(K, |\cdot|)$ be a complete valued field and let $V$ be an $n$-dimensional normed vector space over $K$. Then for any basis $v_1,\dots,v_n$ of $V$, the maximum norm 
+    \begin{equation*}
+        \|x_1v_1 + \dots + x_nv_n\| = \max\{|x_1|,\dots,|x_n|\}
+    \end{equation*}
+    is equivalent to the given norm on $V$. In particular, $V$ is complete and the isomorphism 
+    \begin{equation*}
+        K^n\longrightarrow V\qquad (x_1,\dots,x_n)\longmapsto x_1v_1 + \dots + x_nv_n
+    \end{equation*}
+    is a homeomorphism.
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\subsection{Local Fields}
+
+\begin{definition}
+    A complete discretely valued field having finite residue class field is called a \define{local field}.
+\end{definition}
+
+\begin{theorem}\thlabel{thm:equivalent-local-field}
+    Let $(K, |\cdot|)$ be a non-archimedean valued field with valuation ring $(\frako, \frakp, \kappa)$. Then $\frako$ is compact if and only if $|\cdot|$ is discrete, complete, and $\kappa$ is finite (i.e. $K$ is a local field).
+\end{theorem}
+\begin{proof}
+    Suppose $\frako$ is compact. We first show that $K$ is complete. Suppose $(x_n)$ is a Cauchy sequence in $K$. Then, there is an $N\in\N$ such that for all $m,n\ge N$, $|x_m - x_n|\le 1$ whenever $m,n\ge N$. In particular, $|x_n - x_N|\le 1$ whenever $n\ge N$. Since $\frako$ is a compact metric space, it is complete, and the sequence $(x_n - x_N)_{n\ge N}$ is Cauchy, so it converges to some $y\in\frako$. It follows that the sequence $(x_n)$ converges to $x_N + y\in K$.
+
+    Since $\frakp$ is open in $\frako$, it must have finite index, else the cosets of $\frakp$ in $\frako$ would form an infinite open cover consisting of disjoint open sets, which obviously does not admit a finite subcover. Thus $\kappa$ is finite.
+
+    Finally, since $\frakp$ is finite index and open in $\frako$, it must be closed, whence compact. Let $z_0\in\frakp$ be the point maximizing $|\cdot|$ on $\frakp$. Since $|z_0| < 1$ and there is no $z\in K$ such that $|z_0| < z < 1$, we see that $|\cdot|$ is discrete.
+
+    Conversely, suppose $|\cdot|$ is discrete, complete, and $\kappa$ is finite. Since $\frako$ is closed in $K$, it is complete too. We shall show that $\frako$ is totally bounded, whence compactness would follow. Let $\varepsilon > 0$, $\pi$ be the uniformizer of $|\cdot|$, and choose $n$ sufficiently large so that $|\pi^n| < \varepsilon$, then each coset $x + \pi^n\frako$ has diameter equal to that of $\pi^n\frako$, whose diameter is 
+    \begin{equation*}
+        \sup_{x, y\in\frako}\left|\pi^n x - \pi^n y\right| = |\pi^n|\sup_{x, y\in\frako}|x - y|\le|\pi^n| < \varepsilon.
+    \end{equation*}
+    Since $\frako/\pi^n\frako$ has finite cardinality, we have obtained an finite open cover of $\frako$ using balls of diameter at most $\varepsilon$, whence total boundedness follows, thereby completing the proof.
+\end{proof}
+
+\begin{corollary}
+    Let $(K, |\cdot|)$ be a non-archimedean valued field. Then $K$ is a local field if and only if it is locally compact.
+\end{corollary}
+\begin{proof}
+    If $K$ is a local field, then due to \thref{thm:equivalent-local-field}, $\frako$ is compact. Since every open set containing the origin contains a neighborhood of the form $B(0, \varepsilon)$ for some $\varepsilon < 1$, its closure is closed in $\frako$ and hence, is compact. It follows that $K$ is locally compact. 
+
+    Conversely, suppose $K$ is locally compact. Then, there is compact set $C$ containing $0$ with non-empty interior. We may further suppose that $0$ is contained in the interior. Thus, there is a $\varepsilon > 0$ such that $B(0,\varepsilon)\subseteq C$. Since $C$ is closed, $\overline B(0,\varepsilon)\subseteq C$, so the former is compact. Choose $\alpha\in K$ such that $\varepsilon |\alpha| > 1$, then $\alpha\cdot\overline B(0,\alpha)$ is a compact set containing $\frako = \overline B(0, 1)$. Since the latter is closed, it must be compact, whence due to \thref{thm:equivalent-local-field}, $K$ is a local field. This completes the proof.
+\end{proof}
+
+\begin{remark}
+    We may, more generally, define $(K, |\cdot|)$ to be a local field if and only if $K$ is locally compact. This also justifies the usage of the word ``local''. Indeed, as we have seen in the above proof, the local compactness of $K$ implies the compactness of $\overline B(0, 1)$. This can then be used to show the completeness of $K$ as in the proof of \thref{thm:equivalent-local-field}. Thus, if $(K, |\cdot|)$ were a locally compact archimedean valued field, then it must be a complete archimedean valued field, consequently $K$ is either $\R$ or $\bbC$. On the other hand, if $(K, |\cdot|)$ is a locally compact non-archimedean valued field, then due to the above result, $K$ is a local field in our sense.
+\end{remark}
+
+\begin{theorem}\thlabel{thm:classification-local-field}
+    The local fields are precisely the finite extensions of the fields $\Q_p$ and $\F_p(\!(t)\!)$.
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
