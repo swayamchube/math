@@ -1,0 +1,151 @@
+\subsection{The topology on \texorpdfstring{$\scrD_K$}{DK}}
+
+
+
+
+\subsection{Distributions}
+Let $\Omega\subseteq\R^n$. Recall that for each compact $K\subseteq\Omega$, we defined $\scrD_K$ to be the set of all $C_c^\infty(\R^n)$ functions with support contained in $K$. Define 
+\begin{equation*}
+    \scrD(\Omega) = \bigcup_{K\Subset\Omega}\scrD_K.
+\end{equation*}
+
+\begin{definition}
+    Let $\Omega\subseteq\R^n$ be a nonempty open set.
+    \begin{enumerate}[label=(\alph*)]
+        \item For every compact $K\Subset\Omega$, let $\tau_K$ denote the standard Fr\'echet space topology of $\scrD_K$. 
+        \item Let $\beta$ denote the collection of all convex balanced sets $W\subseteq\scrD(\Omega)$ such that $\scrD_K\cap W\in\tau_K$ for every $K\Subset\Omega$.
+        \item $\tau$ is the collection of all unions of sets of the form $\phi + W$, with $\phi\in\scrD(\Omega)$ and $W\in\beta$.
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    \begin{enumerate}[label=(\alph*)]
+        \item $\tau$ is a topology on $\scrD(\Omega)$, and $\beta$ is a local base for $\tau$.
+        \item $\tau$ makes $\scrD(\Omega)$ into a locally convex topological vector space.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Let $V_1,V_2\in\tau$. We shall show that for all $\phi\in V_1\cap V_2$, there is some $W\in\beta$ such that $\phi + W\subseteq V_1\cap V_2$. Since each $V_i$ is open, there is some $W_i\in\beta$ such that $\phi\in\phi_i + W_i\subseteq$. Let $K\Subset\Omega$ such that $\phi,\phi_1,\phi_2\in\scrD_K$. Since each $\scrD_K\cap W_i$ is open in $\scrD_K$, $W_i$ is convex and balanced, and $\phi - \phi_i\in\scrD_K\cap W_i$. Since the Minkowski functional on $\scrD_K$ corresponding to $\scrD_K\cap W_i$ is continuous, there is a $0 < \delta_i < 1$ such that $\phi - \phi_i\in (1 - \delta_i) W_i$. Hence, 
+    \begin{equation*}
+        \phi - \phi_i + \delta_i W_i\subseteq(1 - \delta_i)\subseteq W_i\implies\phi + \delta_i W_i\subseteq\phi_i + W_i\subseteq V_i,
+    \end{equation*}
+    whence $\phi + (\delta_1 W_1)\cap(\delta_2 W_2)\subseteq V_1\cap V_2$. Since $\delta_1W_1\cap\delta_2W_2\in\beta$, the conclusion follows.
+    \item Since $\beta$ consists of convex sets, it suffices to show that $\tau$ makes $\scrD(\Omega)$ a topological vector space. First, we must show that the space is $T_1$. Let $\phi_1\ne\phi_2\in\scrD(\Omega)$, and set 
+    \begin{equation*}
+        W = \{\phi\in\scrD(\Omega)\colon\|\phi\|_0 < \|\phi_1 - \phi_2\|_0\},
+    \end{equation*}
+    where $\|\cdot\|_0$ is precisely the $\sup$-norm on $\Omega$. By definition, it is easy to see that $W\in\beta$ and $\phi_1\notin\phi_2 + W$, consequently, $\{\phi_1\}$ is closed.
+
+    To see that addition is continuous, let $(\phi_1,\phi_2)\mapsto\phi_1 + \phi_2$ and $V$ an open set containing $\phi_1 + \phi_2$. Since $\beta$ forms a local base for the topology, we can find some $W\in\beta$ such that $(\phi_1 + \phi_2) + W\subseteq V$, and 
+    \begin{equation*}
+        \left(\phi_1 + \frac{1}{2}W\right) + \left(\phi_2 + \frac{1}{2}W\right)\subseteq (\phi_1 + \phi_2) + W\subseteq V.
+    \end{equation*}
+    Thus, addition is continuous.
+
+    Finally, we must show that scalar multiplication is continuous. Let $\alpha_0\in\K$ and $\phi_0\in\scrD(\Omega)$. Then, 
+    \begin{equation*}
+        \alpha\phi - \alpha_0\phi_0 = \alpha(\phi - \phi_0) + (\alpha - \alpha_0)\phi_0.
+    \end{equation*}
+    Let $V$ be an open set containing $\alpha_0\phi_0$, and choose a $W\in\beta$ such that $\alpha_0\phi_0 + W\subseteq V$. There is a $\delta > 0$ such that $\delta\phi_0\in\frac{1}{2}W$. Next, choose $c > 0$ such that $2c(|\alpha_0| + \delta) = 1$. For $|\alpha - \alpha_0| < \delta$ and $\phi - \phi_0\in cW$, we have 
+    \begin{equation*}
+        \alpha\phi - \alpha_0\phi_0\in |\alpha|cW + \frac{1}{2}W\subseteq c(|\alpha_0| + \delta) W + \frac{1}{2}W\subseteq W,
+    \end{equation*}
+    as desired. This completes the proof.\qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}\thlabel{thm:technical-theorem}
+\begin{enumerate}[label=(\alph*)]
+    \item A convex balanced subset $V$ of $\scrD(\Omega)$ is open if and only if $V\in\beta$. 
+    \item The topology $\tau_K$ of any $\scrD_K\subseteq\scrD(\Omega)$ coincides with the subspace topology that $\scrD_K$ inherits from $\scrD(\Omega)$. 
+    \item If $E$ is a bounded subset of $\scrD(\Omega)$, then $E\subseteq\scrD_K$ for some $K\subseteq\Omega$ and there are real numbers $0 < M_N < \infty$ such that every $\phi\in E$ satisfies the inequalities $\|\phi\|_N\le M_N$ for $N\ge 0$.
+    \item $\scrD(\Omega)$ has the Heine-Borel property, that is, closed and bounded sets are compact. 
+    \item If $\{\phi_i\}$ is a Cauchy sequence in $\scrD(\Omega)$, then $\{\phi_i\}\subseteq\scrD_K$ for some compact $K\subseteq\Omega$, and 
+    \begin{equation*}
+        \lim_{(i,j)\to\infty}\|\phi_i - \phi_j\|_N = 0
+    \end{equation*}
+    for all $N\ge 0$. 
+    \item If $\phi_i\to 0$ in the topology of $\scrD(\Omega)$, then there is a compact set $K\subseteq\Omega$ which contains the support of every $\phi_i$ and $\partial^\alpha\phi_i\to 0$ uniformly as $i\to\infty$, for every multi-index $\alpha$.
+    \item $\scrD(\Omega)$ is a Fr\'echet space.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Let $V\in\tau$ and $\phi\in\scrD_K\cap V$. Since $\beta$ form a local base, there is a $W\in\beta$ such that $\phi + W\subseteq V$. Hence, 
+\begin{equation*}
+    \phi + (\scrD_K\cap W)\subseteq\scrD_K\cap V.
+\end{equation*}
+Since $\scrD_K\cap W$ is open in $\scrD_K$, we have that $\scrD_K\cap V\in\tau_K$.
+\begin{enumerate}[label=(\alph*)]
+\item Now, let $V$ be a convex balanced subset of $\scrD(\Omega)$. If $V$ is open, then due to our observation above, $V\in\beta$. The converse direction is trivial since $\beta\subseteq\tau$.
+
+\item The above remark shows that the induced topology on $\scrD_K$ is coarser than $\tau_K$. Conversely, suppose $E\in\tau_K$. We have to show that $E = \scrD_K\cap V$ for some $V|in\tau$. By definition, for every $\phi\in E$, there is a positive integer $N$ and $\delta > 0$ such that 
+\begin{equation*}
+    \{\psi\in\scrD_K\colon\|\psi - \phi\|_N < \delta\}\subseteq E.
+\end{equation*}
+Set $W_\phi = \{\psi\in\scrD(\Omega)\colon \|\psi\|_N < \delta\}\in\beta$, so that
+\begin{equation*}
+    \scrD_K\cap(\phi + W_\phi) = \phi + \scrD_K\cap W_\phi\subseteq E.
+\end{equation*}
+Since $W_\phi\in\beta$ for every $\phi\in E$, we see that $V := \bigcup\limits_{\phi\in E} (\phi + W_\phi)$ is an element of $\tau$ and $V\cap E = E$, as desired. 
+
+\item Suppose $E$ does not lies in any $\scrD_K$. Using an exhaustion of $\Omega$, we can find a sequence of functions $\phi_m\in E$ and distinct points $x_m\in\Omega$ with no limit point in $\Omega$ such that $\phi_m(x_m)\ne 0$. Let $W$ be the set of all $\phi\in\scrD(\Omega)$ which satisfy 
+\begin{equation*}
+    |\phi(x_m)| < \frac{1}{m}|\phi_m(x_m)| \qquad\forall~m\ge 1.
+\end{equation*}
+Note that 
+\begin{equation*}
+    W\cap\scrD_K = \bigcap_{x_m\in W\cap\scrD_K}\left\{\phi\in\scrD_K\colon|\phi(x_m)| < \frac{1}{m}|\phi_m(x_m)|\right\},
+\end{equation*}
+which is a finite intersection since only finitely many of the $x_m$'s can be contained in $K$ (as they do not admit a limit point in $\Omega$). Thus, $W\cap\scrD_K$ is open, owing to the continuity of the ``evaluation functionals'' on $\scrD_K$; hence $W\in\beta$. Since $\phi_m\notin mW$, no multiple of $W$ contains $E$, which shows that $E$ is not bounded. Hence, every bounded $E$ lies in some $\scrD_K$. Being a bounded subset of $\scrD_K$, every seminorm on $\scrD_K$ is bounded on $E$, whence the last assertion of (c) follows.
+
+\item This follows immediately from the above parts, since every bounded set is contained in some $\scrD_K$, whose subspace topology is same as the canonical topology, in which it has the Heine-Borel property.
+
+\item Every Cauchy sequence is bounded and hence, is contained in some $\scrD_K$, which has its canonical topology induced by the seminorms $\|\cdot\|_N$, whence the conclusion follows. 
+
+\item This follows immediately from (e). 
+
+\item Finally, we have shown that any Cauchy sequence in $\scrD(\Omega)$ lies in $\scrD_K$, which is Fr\'echet, whence it must converge. This completes the proof. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    Let $\Lambda$ be a linear map from $\scrD(\Omega)$ to a locally convex space $Y$. Then the following are equivalent:
+    \begin{enumerate}[label=(\alph*)]
+        \item $\Lambda$ is continuous. 
+        \item $\Lambda$ is bounded. 
+        \item If $\phi_i\to 0$ in $\scrD(\Omega)$, then $\Lambda\phi_i\to 0$ in $Y$. 
+        \item The restriction of $\Lambda$ to every $\scrD_K\subseteq\scrD(\Omega)$ are continuous.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+$(a)\implies(b)$ is well known. Next, if $\phi_i\to 0$ in $\scrD(\Omega)$, then it is contained in some $\scrD_K$ for a compact $K\Subset\Omega$. Since the restriction of $\Lambda$ to $\scrD_K$ is continuous and it is a metrizable topological vector space, $\Lambda\phi_i\to 0$ in $Y$, thereby proving $(b)\implies(c)$.
+
+To see $(c)\implies(d)$, it suffices to show that the restriction of $\Lambda$ to each $\scrD_K$ is sequentially continuous. If $\phi_i\to 0$ in $\scrD_K$ and since the topology of $\scrD_K$ is the subspace topology, we see that $\phi_i\to 0$ in $\scrD(\Omega)$ and according to our assumption, $\Lambda\phi_i\to 0$ in $Y$, which proves sequential continuity.
+
+Finally, let $U$ be a convex balanced neighborhood of $0$ in $Y$. It suffices to show that $V = \Lambda^{-1}U$ is open. Note that $V$ is a convex balanced subset of $\scrD(\Omega)$ containing $0$. Due to \thref{thm:technical-theorem} (a), $V$ is open in $\scrD(\Omega)$ if and only if $V\cap\scrD_K$ is open in $\scrD_K$ for every compact $K\Subset\Omega$. But this is precisely the content of (d), thereby completing the proof.
+\end{proof}
+
+\begin{definition}
+    A linear functional on $\scrD(\Omega)$ continuous with respect to the topology $\tau$ is called a \define{distribution}.
+\end{definition}
+
+\begin{theorem}
+    If $\Lambda$ is a linear functional on $\scrD(\Omega)$, the following are equivalent: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\Lambda\in\scrD'(\Omega)$. 
+        \item To every compact $K\Subset\Omega$, corresponds a nonnegative integer $N$ and a constant $C < \infty$ such that
+        \begin{equation*}
+            |\Lambda\phi|\le C\|\phi\|_N\qquad\forall~\phi\in\scrD_K.
+        \end{equation*}
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    If $\Lambda\in\scrD'(\Omega)$, then the restriction of $\Lambda$ to every $\scrD_K$ is continuous and so is bounded on some neighborhood of the origin, containing an open neighborhood of the form 
+    \begin{equation*}
+        \{\phi\in\scrD_K\colon \|\phi\|_N < \frac{1}{N}\},
+    \end{equation*}
+    whence (b) follows.
+
+    Conversely, suppose (b) holds. Then, as argued above, the restriction of $\Lambda$ to every $\scrD_K$ is continuous, and due to the prededing theorem, $\Lambda$ is continuous.
+\end{proof}

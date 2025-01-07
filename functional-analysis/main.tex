@@ -218,6 +218,7 @@
 \newcommand{\pdim}{\operatorname{pdim}}
 \newcommand{\Ext}{\operatorname{Ext}}
 \newcommand{\co}{\operatorname{co}}
+\newcommand{\scrD}{\mathscr{D}}
 
 \geometry {
     margin = 1in
@@ -245,8 +246,11 @@
 
 \begin{document}
 \maketitle
+\tableofcontents
 
-\section{Preliminaries}
+\newpage
+
+\section{Preliminaries on Topological Vector Spaces}
 
 \begin{lemma}[Riesz Lemma]
     Let $X$ be a normed linear space and $Y\subsetneq X$ a proper closed subspace. Then, for every $0 < \alpha < 1$, there is an $x\in X\setminus Y$ such that $\|x\| = 1$ and $\operatorname{dist}(x, Y) > \alpha$.
@@ -1734,4 +1738,7 @@ Thus, $\beta = 0$ and due to (a), $\calA$ is symmetric.
     \end{equation*}
     whence, due to part (b) of the preceding result, $\Gamma$ is an isometry. Thus, its image is closed in $C(\sigma(\calA))$. But we already argued that $\Gamma(\calA)$ is dense in $C(\sigma(\calA))$ and hence, $\Gamma$ must be surjective. This completes the proof.
 \end{proof}
+
+\section{Distributions}
+\input{sections/distributions.tex}
 \end{document}
