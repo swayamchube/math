@@ -12,4 +12,4 @@
 \contentsline {section}{\numberline {8}Banach Algebras}{27}{section.8}%
 \contentsline {section}{\numberline {9}Distributions}{33}{section.9}%
 \contentsline {subsection}{\numberline {9.1}The topology on $\mathscr {D}_K$}{33}{subsection.9.1}%
-\contentsline {subsection}{\numberline {9.2}Distributions}{33}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.2}Distributions}{34}{subsection.9.2}%

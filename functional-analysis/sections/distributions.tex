@@ -1,13 +1,42 @@
 \subsection{The topology on \texorpdfstring{$\scrD_K$}{DK}}
 
+Let $\Omega\subseteq\R^n$ be an open set. We begin by topologizing $C^\infty(\Omega)$. Fix an exhaustion $\{K_i\}$ of $\Omega$ by compact sets. That is,
+\begin{itemize}
+    \item $\displaystyle\Omega = \bigcup_{i = 1}^\infty K_i$, and 
+    \item $K_i\subseteq K_{i + 1}^\circ$ for all $i\ge 1$.
+\end{itemize}
 
+Define the seminorms $p_N: C^\infty(\Omega)\to\R$ given by 
+\begin{equation*}
+    p_N(\phi) = \sup\left\{|\partial^\alpha\phi(x)|\colon x\in K_N,~|\alpha|\le N\right\}.
+\end{equation*}
+That this is a separating family of seminorms is obvious, and since this is a countable family, the induced locally convex vector topology on $C^\infty(\Omega)$ is metrizable.
+
+It is easy to see that the ``evaluation functionals'' on $C^\infty(\Omega)$ equipped with this topology are continuous, therefore, 
+\begin{equation*}
+    \scrD_K := \bigcap_{x\in\Omega\setminus K} \ker\ev_x
+\end{equation*}
+is closed in $C^\infty(\Omega)$. It is easy to see that a (countable) local base at $0$ is given by the sets 
+\begin{equation*}
+    V_N = \left\{f\in C^\infty(\Omega)\colon p_N(f) < \frac{1}{N}\right\}
+\end{equation*}
+for $N\ge 1$. Further, in this topology $C^\infty(\Omega)$ is a Fr\'echet space\footnote{I might add in the details to this some day.} and since $\scrD_K$ is closed, it to is a Fr\'echet space. It can also be showed that $C^\infty(\Omega)$ has the Heine-Borel property and hence, the same conclusion holds for $\scrD_K$.
 
 
 \subsection{Distributions}
-Let $\Omega\subseteq\R^n$. Recall that for each compact $K\subseteq\Omega$, we defined $\scrD_K$ to be the set of all $C_c^\infty(\R^n)$ functions with support contained in $K$. Define 
+Let $\Omega\subseteq\R^n$ be an open set. Define
 \begin{equation*}
     \scrD(\Omega) = \bigcup_{K\Subset\Omega}\scrD_K.
 \end{equation*}
+Introduce the seminorms $\|\cdot\|_N: \scrD(\Omega)\to\R$ given by 
+\begin{equation*}
+    \|\phi\|_N = \max\left\{|\partial^\alpha\phi(x)|\colon x\in\Omega,~|\alpha|\le N\right\},
+\end{equation*}
+for $\phi\in\scrD(\Omega)$ and $N\ge 0$. The restrictions of these seminorms to $\scrD_K$ are still seminorms. We claim that they induce the same topology as the canoical topology of $\scrD_K$ discussed in the preceding (sub)section. First, there is a positive integer $N_0$ such that $K\subseteq K_N$ for all $N\ge N_0$. For these $N$, $\|\phi\|_N = p_N(\phi)$ if $\phi\in\scrD_K$. Further, since $\|\phi\|_N\le\|\phi\|_{N + 1}$, the topologies induced by either sequence of seminorms are unchanged if we let $N$ start at $N_0$ instead of $1$. Thus, the two topologies coincide and a local base is given by sets of the form 
+\begin{equation*}
+    V_N = \left\{\phi\in\scrD_K\colon\|\phi\|_N < \frac{1}{N}\right\}.
+\end{equation*}
+In particular, $\scrD_K$ is still a Fr\'echet space having the Heine-Borel property.
 
 \begin{definition}
     Let $\Omega\subseteq\R^n$ be a nonempty open set.
