@@ -1,0 +1,437 @@
+\documentclass[12pt]{article}
+
+% \usepackage{./arxiv}
+
+\title{Riemann-Roch for Riemann Surfaces}
+\author{Swayam Chube}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrN}{\mathscr N}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrR}{\mathscr R}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\core}{\operatorname{core}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\scshape}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+\begin{document}
+\maketitle
+
+\section{\v{C}ech Cohomology}
+
+\begin{definition}
+    Let $X$ be a topological space and $\scrF$ a sheaf of abelian groups on $X$. Let $\frakU = (U_i)_{i\in I}$ be an open cover of $X$. Define the \define{$q$-th cochain group} of $\scrF$ with respect to $\frakU$ as 
+    \begin{equation*}
+        C^q(\frakU,\scrF) = \prod_{(i_0,\dots,i_q)\in I^{q + 1}}\scrF(U_{i_0}\cap\dots\cap U_{i_q}).
+    \end{equation*}
+    We denote elements of this cochain group by $\displaystyle \left(f_{i_0,\dots,i_q}\right)_{(i_0,\dots,i_{q})\in I^{q + 1}}$ and these are called $q$-cochains.
+
+    Next, define the \define{coboundary operators} 
+    \begin{equation*}
+        \delta: C^0(\frakU,\scrF)\to C^1(\frakU,\scrF)\qquad\delta: C^1(\frakU,\scrF)\to C^2(\frakU,\scrF)
+    \end{equation*}
+    as follows: 
+    \begin{itemize}
+        \item For $(f_i)_{i\in I}\in C^0(\frakU,\scrF)$, let $\delta\left((f_i)_{i\in I}\right) = (g_{ij})_{i,j\in I}\in C^2(\frakU,\scrF)$ where 
+        \begin{equation*}
+            g_{ij} = f_j|_{U_i\cap U_j} - f_i|_{U_i\cap U_j}\in\scrF(U_i\cap U_j).
+        \end{equation*}
+
+        \item For $(f_{ij})_{i, j\in I}\in C^1(\frakU,\scrF)$, let $\delta\left((f_{ij})_{i, j\in I}\right) = (g_{ijk})_{i, j,k\in I}$ where 
+        \begin{equation*}
+            g_{ijk} = f_{jk}|_{U_i\cap U_j\cap U_k} - f_{ik}|_{U_i\cap U_j\cap U_k} + f_{ij}|_{U_i\cap U_j\cap U_k}\in\scrF(U_i\cap U_j\cap U_k).
+        \end{equation*}
+    \end{itemize}
+\end{definition}
+
+The coboundary operators are group homomorphisms and let
+\begin{equation*}
+    Z^1(\frakU,\scrF) = \ker\left(C^1(\frakU,\scrF)\xrightarrow\delta C^2(\frakU,\scrF)\right)\qquad B^1(\frakU,\scrF) = \im\left(C^0(\frakU,\scrF)\xrightarrow{\delta} C^1(\frakU,\scrF)\right).
+\end{equation*}
+The elements of $Z^1(\frakU,\scrF)$ are called $1$-cocycles and the elements of $B^1(\frakU,\scrF)$ are called $1$-coboundaries. It is easy to see that $(f_{ij})_{i,j\in I}$ is a $1$-cocycle if and only if 
+\begin{equation*}
+    f_{ik}|_{U_i\cap U_j\cap U_k} = f_{jk}|_{U_i\cap U_j\cap U_k} + f_{ij}|_{U_i\cap U_j\cap U_k}\in\scrF(U_i\cap U_j\cap U_k).
+\end{equation*}
+The above relation is called the \define{cocycle relation}. Indeed, if $(f_{ij})_{i, j\in I}$ is a $1$-cocycle, then taking $i = j$, we see that 
+\begin{equation*}
+    f_{ii}|_{U_i\cap U_k} = 0\qquad\forall k\in I.
+\end{equation*}
+Since the $U_k$'s cover $U_i$, using the identity axiom, we have that $f_{ii} = 0\in\scrF(U_i)$. As a consequence, we also see that 
+\begin{equation*}
+    f_{ji}|_{U_i\cap U_j\cap U_k} + f_{ij}|_{U_i\cap U_j\cap U_k} = 0.
+\end{equation*}
+Again, using the same argument, we have that $f_{ij} + f_{ji} = 0\in\scrF(U_i\cap U_j)$. It immediately follows from the above discussion that $\delta\circ\delta = 0$ as a map $C^0(\frakU,\scrF)\to C^2(\frakU,\scrF)$.
+
+\begin{definition}
+    The group 
+    \begin{equation*}
+        H^1(\frakU,\scrF) := \frac{Z^1(\frakU,\scrF)}{B^1(\frakU,\scrF)}
+    \end{equation*}
+    is called the \define{$1$-st cohomology group} with coefficients in $\scrF$ \define{with respect to the covering} $\frakU$.
+\end{definition}
+
+\begin{definition}
+    Let $\frakU = (U_i)_{i\in I}$ and $\frakV = (V_k)_{k\in K}$ be two open covers of $X$. We say that $\frakV$ is \define{finer} than $\frakU$ if every $V_k$ is contained in some $U_i$.
+\end{definition}
+
+Thus, there is a map $\tau: K\to I$ such that $V_k\subseteq U_{\tau(k)}$. This defines a mapping 
+\begin{equation*}
+    t^{\frakU}_{\frakV}: Z^1(\frakU,\scrF)\to Z^1(\frakV,\scrF)
+\end{equation*}
+as follows: for $(f_{ij})\in Z^1(\frakU,\scrF)$, let $t^{\frakU}_{\frakV}\left((f_{ij})\right) = (g_{kl})$, where 
+\begin{equation*}
+    g_{kl} = f_{\tau(k)\tau(l)}|_{V_k\cap V_l}\qquad\forall~k, l\in K.
+\end{equation*}
+To see that this map is indeed well-defined, we need only check that $(g_{kl})$ is a $1$-cocycle. To this end, we must check that the cocycle condition is satisfied. Indeed, for indices $k,l,m\in K$, we have 
+\begin{align*}
+    g_{km}|_{V_k\cap V_l\cap V_m} &= f_{\tau(k)\tau(m)}|_{V_k\cap V_l\cap V_m}\\
+    &= \left(f_{\tau(k)\tau(l)}|_{U_{\tau(k)}\cap U_{\tau(l)}\cap U_{\tau(m)}} + f_{\tau(l)\tau(m)}|_{U_{\tau(k)}\cap U_{\tau(l)}\cap U_{\tau(m)}}\right)|_{V_k\cap V_l\cap V_m}\\
+    &= f_{\tau(k)\tau(l)}|_{V_k\cap V_l\cap V_m} + f_{\tau(k)\tau(l)}|_{V_k\cap V_l\cap V_m}\\
+    &= g_{kl}|_{V_k\cap V_l\cap V_m} + g_{lm}|_{V_k\cap V_l\cap V_m},
+\end{align*}
+as desired. Further, we claim that the above map takes $1$-coboundaries to $1$-coboundaries. Indeed, suppose $(f_{ij})_{i,j\in I}$ is a $1$-coboundary, that is, there is some $(f_i)_{i\in I}$ such that 
+\begin{equation*}
+    f_{ij} = f_i|_{U_i\cap U_j} - f_j|_{U_i\cap U_j}.
+\end{equation*}
+Let $(g_k)_{k\in K}$ be such that $g_k = f_{\tau(k)}|_{V_k}$. Then $\delta\left((g_k)\right) = (g_{kl})$ where 
+\begin{align*}
+    g_{kl} &= g_k|_{V_k\cap V_l} - g_l|_{V_k\cap V_l}\\
+    &= f_{\tau(k)}|_{V_k\cap V_l} - f_{\tau(l)}|_{V_k\cap V_l}\\
+    &= f_{\tau(k)\tau(l)}|_{V_k\cap V_l},
+\end{align*}
+that is, $(g_kl) = t^{\frakU}_{\frakV}\left((f_{ij})\right)$, that is, $t^{\frakU}_{\frakV}$ takes $1$-coboundaries to $1$-coboundaries. This induces a map 
+\begin{equation*}
+    t^{\frakU}_{\frakV}: H^1(\frakU,\scrF)\to H^1(\frakV,\scrF).
+\end{equation*}
+
+\begin{lemma}
+    The map $t^{\frakU}_{\frakV}$ induced on cohomology is independent of the choice of $\tau: K\to I$.
+\end{lemma}
+\begin{proof}
+    Suppose $\wt\tau: K\to I$ is another such mapping. Suppose $(f_{ij})\in Z^1(\frakU,\scrF)$ and let 
+    \begin{equation*}
+        g_{kl} = f_{\tau(k)\tau(l)}|_{V_k\cap V_l}\qquad\text{and}\qquad\wt g_{kl} = f_{\wt\tau(k)\wt\tau(l)}|_{V_k\cap V_l}.
+    \end{equation*}
+    We must show that the cocycles $(g_{kl})$ and $(\wt g_{kl})$ are cohomologous, that is, their difference lies in $B^1(\frakV,\scrF)$. Define
+    \begin{equation*}
+        h_k = f_{\tau(k),\wt\tau(k)}|_{V_k}\in\scrF(V_k).
+    \end{equation*}
+    Then, on $V_k\cap V_l$, we have 
+    \begin{align*}
+        g_{kl} - \wt g_{kl} &= f_{\tau(k)\tau(l)} - f_{\wt\tau(k)\wt\tau(l)}\\
+        &= f_{\tau(k)\tau(l)} + f_{\tau(l),\wt\tau(k)} - f_{\tau(l)\wt\tau(k)} - f_{\wt\tau(k)\wt\tau(l)}\\
+        &= f_{\tau(k)\wt\tau(k)} - f_{\tau(l)\wt\tau(l)}\\
+        &= h_k - h_l.
+    \end{align*}
+    Whence $(g_{kl} - \wt g_{kl})$ is a coboundary, as desired.
+\end{proof}
+
+\begin{lemma}
+    The map $t^{\frakU}_{\frakV}: H^1(\frakU,\scrF)\to H^1(\frakV,\scrF)$ is injective.
+\end{lemma}
+\begin{proof}
+    Suppose $(f_{ij})\in Z^1(\frakU,\scrF)$ is a $1$-cocycle whose image in $Z^1(\frakV,\scrF)$ is a $1$-coboundary. Then, there is some $(g_k)\in C^1(\frakU,\scrF)$ such that 
+    \begin{equation*}
+        f_{\tau(k)\tau(l)}|_{V_k\cap V_l} = g_k|_{V_k\cap V_l} - g_l|_{V_k\cap V_l}.
+    \end{equation*}
+    Then on $U_i\cap V_k\cap V_l$, we have 
+    \begin{equation*}
+        g_k - g_l = f_{\tau(k)\tau(l)} = f_{\tau(k)i} + f_{i\tau(l)} = f_{i\tau(l)} - f_{i\tau(k)}.
+    \end{equation*}
+    Hence $f_{i\tau(k)} + g_k = f_{i\tau(l)} + g_l$ on $U_i\cap V_k\cap V_l$. The gluability axiom applied to the open cover $\{U_i\cap V_k\}_{k\in K}$ furnishes a $h_i\in\scrF(U_i)$ such that 
+    \begin{equation*}
+        h_i = f_{i\tau(k)} + g_k\qquad\text{on } U_i\cap V_k\text{ for all }k\in K.
+    \end{equation*}
+    Then, on $U_i\cap U_j\cap V_k$ we have 
+    \begin{equation*}
+        f_{ij} = f_{i\tau(k)} + f_{\tau(k)j} = f_{i\tau(k)} + g_k - f_{j\tau(k)} - g_k = h_i - h_j.
+    \end{equation*}
+    Since $\{U_i\cap U_j\cap V_k\}$ forms an open cover of $U_i\cap U_j$, using the identity axiom, we have that $f_{ij} = h_i - h_j$ on $U_i\cap U_j$. Thus, $(f_{ij})\in B^1(\frakU,\scrF)$, thereby completing the proof.
+\end{proof}
+
+\begin{definition}
+    If $\frakW < \frakV < \frakU$ are open covers of $X$, then it is easy to see that $t^{\frakV}_{\frakW}\circ t^{\frakU}_{\frakV} = t^{\frakU}_{\frakW}$. This gives us a directed system of cohomology groups, and we define 
+    \begin{equation*}
+        H^1(X,\scrF) = \varinjlim_{\frakU} H^1(\frakU,\scrF).
+    \end{equation*}
+\end{definition}
+\begin{remark}\thlabel{rem:vanishing-cohomology}
+    Note that since the $t^{\frakU}_{\frakV}$ are all injective, the natural map $H^1(\frakU,\scrF)\to H^1(X,\scrF)$ is injective. In particular, this means that $H^1(X,\scrF) = 0$ if and only if $H^1(\frakU,\scrF) = 0$ for every open cover $\frakU$ of $X$.
+\end{remark}
+
+\begin{theorem}[Leray]
+    Let $\scrF$ be a sheaf of abelian groups on the topological space $X$ and $\frakU = (U_i)_{i\in I}$ be an open cover of $X$ such that $H^1(U_i,\scrF) = 0$ for every $i\in I$. Then for every open covering $\frakV = (V_\alpha)_{\alpha\in A} < \frakU$, the mapping 
+    \begin{equation*}
+        t^{\frakU}_{\frakV} : H^1(\frakU,\scrF)\to H^1(\frakV,\scrF)
+    \end{equation*}
+    is an isomorphism. The covering $\frakU$ is called a \define{Leray covering} of $X$ for the sheaf $\scrF$.
+\end{theorem}
+\begin{proof}
+    Let $\tau: A\to I$ be such that $V_\alpha\subseteq U_{\tau(\alpha)}$ for every $\alpha\in A$. Since we know that $t^{\frakU}_{\frakV}$ is injective, we would like to show that it is surjective. Let $(f_{\alpha\beta})\in Z^1(\frakV,\scrF)$. The family $(U_i\cap V_\alpha)_{\alpha\in A}$ is an open covering of $U_i$, which we denote by $U_i\cap\frakV$. By assumption and \thref{rem:vanishing-cohomology}, we know that $H^1(U_i\cap\frakV,\scrF) = 0$, that is, there exist $g_{i\alpha}\in\scrF(U_i\cap V_\alpha)$ such that 
+    \begin{equation*}
+        f_{\alpha\beta} = g_{i\alpha} - g_{i\beta}\quad\text{ on } U_i\cap V_\alpha\cap V_\beta.
+    \end{equation*}
+    On the intersection $U_i\cap U_j\cap V_\alpha\cap V_\beta$, we have 
+    \begin{equation*}
+        g_{j\alpha} - g_{i\alpha} = g_{j\beta} - g_{i\beta}.
+    \end{equation*}
+    Using the gluability axiom on the open cover $\{U_i\cap U_j\cap V_\alpha\}_{\alpha\in A}$, there exist elements $F_{ij}\in\scrF(U_i\cap U_j)$ such that 
+    \begin{equation*}
+        F_{ij} = g_{j\alpha} - g_{i\alpha}\quad\text{ on } U_i\cap U_j\cap V_\alpha.
+    \end{equation*}
+    We claim that $f_{ij}$ satisfies the cocycle condition. Obviously, from the above description, on $U_i\cap U_j\cap U_k\cap V_\alpha$ we have that $F_{ik} = F_{ij} + F_{jk}$. Using the identity axiom, we see that this equality holds on $U_i\cap U_j\cap U_k$. Thus, $(F_{ij})\in Z^1(\frakU,\scrF)$. Let $h_\alpha = g_{\tau(\alpha)\alpha}|_{V_\alpha}\in\scrF(V_\alpha)$. The on $V_\alpha\cap V_\beta$, we have 
+    \begin{align*}
+        F_{\tau(\alpha)\tau(\beta)} - f_{\alpha\beta} &= \left(g_{\tau(\beta)\alpha} - g_{\tau(\alpha)\alpha}\right) - \left(g_{\tau(\beta)\alpha} - g_{\tau(\beta)\beta}\right)\\
+        &= g_{\tau(\beta)\beta} - g_{\tau(\alpha)\alpha}\\
+        &= h_\beta - h_\alpha,
+    \end{align*}
+    whence $(F_{\tau(\alpha)\tau(\beta)}) - (f_{\alpha\beta})$ is a coboundary, thereby completing the proof.
+\end{proof}
+
+\begin{corollary}
+    If $\frakU$ is a Leray covering of $X$, then $H^1(\frakU,\scrF)\cong H^1(X,\scrF)$.
+\end{corollary}
+\end{document}
+
