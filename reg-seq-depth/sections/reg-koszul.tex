@@ -1,0 +1,385 @@
+\subsection{Regular sequences and the Koszul complex}
+
+\begin{definition}
+    Let $A$ be a ring and $M$ an $A$-module. An element $a\in A$ is said to be \define{$M$-regular} if $a$ is a non zero-divisor on $M$.  A sequence $a_1,\dots,a_n$ of elements of $A$ is an \define{$M$-sequence} if 
+    \begin{enumerate}[label=(\arabic*)]
+        \item Each $a_i$ is $M/(a_1,\dots,a_{i - 1})M$-regular.
+        \item $M\ne (a_1,\dots,a_n)M$.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Let $A$ be a ring and $x_1,\dots,x_n\in A$. We define a complex $K_\bullet$ by setting $K_0 = A$, $K_p = 0$ for $p > n$ or $p < 0$, and 
+    \begin{equation*}
+        K_p = \bigoplus_{1\le i < \dots < i_p\le n} A e_{i_1}\wedge\dots\wedge e_{i_p}.
+    \end{equation*}
+    For $1\le p\le n$, define $K_p\to K_{p - 1}$ by 
+    \begin{equation*}
+        d\left(e_{i_1}\wedge\dots\wedge e_{i_p}\right) = \sum_{i = 1}^p (-1)^{r - 1}x_{i_r} e_{i_1}\wedge\dots\wedge\wh e_{i_r}\wedge\dots\wedge e_{i_p},
+    \end{equation*}
+    and extend linearly to $K_p$. This is known as the \define{Koszul complex}.
+\end{definition}
+
+\begin{proposition}
+    The Koszul complex is indeed a complex.
+\end{proposition}
+\begin{proof}
+    $d\circ d: K_1\to K_{- 1}$ is obviously the zero map. Now, let $p\ge 2$, we shall show that $(d\circ d)(e_{i_1}\wedge\dots\wedge e_{i_p}) = 0$. Note that the above can be written as a linear combination of the basis elements of $K_{p - 2}$. Consider the basis element $e_{i_1}\wedge\dots\wedge\wh e_{i_a}\wedge\dots\wedge\wh e_{i_b}\wedge\dots\wedge e_{i_p}$. We shall show that its coefficient is $0$.
+
+    Indeed, its coefficient is contributed by 
+    \begin{equation*}
+    e_{i_1}\wedge\dots\wedge\wh e_{i_a}\wedge\dots\wedge e_{i_p}\quad\text{and}\quad e_{i_1}\wedge\dots\wedge\wh e_{i_b}\wedge\dots\wedge e_{i_p},
+    \end{equation*}
+    each of which has coefficient $(-1)^{a - 1}x_{i_a}$ and $(-1)^{b - 1} x_{i_b}$ respectively. The coefficient of our desired basis element in the differential of the first is $(-1)^{b - 2}x_{i_b}$ and in the second is $(-1)^{a - 1}x_{i_a}$. Thus, the coefficient of our desired basis element in the differential of $e_{i_1}\wedge\dots\wedge e_{i_p}$ is 
+    \begin{equation*}
+        (-1)^{a - 1}x_{i_a}(-1)^{b - 2}x_{i_b} + (-1)^{b - 1}x_{i_b}(-1)^{a - 1}x_{i_a} = 0,
+    \end{equation*}
+    thereby completing the proof.
+\end{proof}
+
+\begin{definition}
+    Let $C_\bullet$ and $D_\bullet$ be complexes of $A$-modules. Define their \define{tensor product} $(C\otimes D)_\bullet$ by 
+    \begin{equation*}
+        (C\otimes D)_n = \bigoplus_{i + j = n} C_i\otimes_A D_j.
+    \end{equation*}
+    The boundary maps are given by $d: (C\otimes D)_n\to (C\otimes D)_{n - 1}$ 
+    \begin{equation*}
+        d(x\otimes y) = dx\otimes y + (-1)^i x\otimes dy\qquad x\in C_i,~y\in C_j.
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    There is an isomorphism of complexes $(C\otimes D)_\bullet \cong (D\otimes C)_\bullet$.
+\end{proposition}
+\begin{proof}
+    If $x\otimes y\in (C\otimes D)_n$ with $x\in C_i$ and $y\in D_j$, then send this element to $(-1)^{ij}y\otimes x\in (D\otimes C)_n$. It is not hard to check that this is indeed a chain map. That this is an isomorphism of chain complexes follows from the fact that for every $n$, $(C\otimes D)_n\to (D\otimes C)_n$ is an isomorphism.
+\end{proof}
+
+\begin{proposition}
+    Let $x_1,\dots,x_n\in A$. Then $K_\bullet(x_1,\dots,x_n)\cong K_\bullet(x_1)\otimes\dots\otimes K_\bullet(x_n)$ as complexes.
+\end{proposition}
+\begin{proof}
+    We prove this by induction on $n$. The base case with $n = 1$ is tautological. Suppose now that $n\ge 1$. We shall show that $K_\bullet(x_1,\dots,x_n)\otimes K_\bullet(x_{n + 1})\cong K_\bullet(x_1,\dots,x_{n + 1})$. Write the complex $K_\bullet(x_{n + 1})$ as 
+    \begin{equation*}
+        0\longrightarrow Ae_{n + 1}\xrightarrow{e_{n + 1}\mapsto x_{n + 1}} A\longrightarrow 0.
+    \end{equation*}
+    Then, $\left(K(x_1,\dots,x_n)\otimes K(x_{n + 1})\right)_p = \left(K_p(x_1,\dots,x_{n})\otimes A\right)\oplus\left(K_{p - 1}(x_1,\dots,x_n)\otimes Ae_{n + 1}\right)$. There is a natural isomorphism 
+    \begin{equation*}
+        \left(K(x_1,\dots,x_n)\otimes K(x_{n + 1})\right)_p\longrightarrow K_p(x_1,\dots,x_{n + 1}),
+    \end{equation*}
+    which sends $e_{i_1}\wedge\dots\wedge e_{i_p}\otimes 1$ to $e_{i_1}\wedge\dots\wedge e_{i_p}$ in $K_p(x_1,\dots,x_n)$, and sends $e_{i_1}\wedge\dots\wedge e_{i_{p - 1}}\otimes e_{n + 1}$ to $e_{i_1}\wedge\dots\wedge e_{i_{p - 1}}\wedge e_{n + 1}$ in $K_p(x_1,\dots,x_{n + 1})$.
+
+    It remains to check that the map defined above is indeed a chain map. Indeed, under the differential in the tensor complex, $e_{i_1}\wedge\dots\wedge e_{i_p}\otimes 1$ maps to $d(e_{i_1}\wedge\dots\wedge e_{i_p})\otimes 1$, which maps to $e(e_{i_1}\wedge\dots\wedge e_{i_p})$ under the aforementioned isomorphism. On the other hand, the starting element maps to $e_{i_1}\wedge\dots\wedge e_{i_p}$ under the isomorphism first and then maps to $d(e_{i_1}\wedge\dots\wedge e_{i_p})$ under the differential.
+
+    Next, if we begin with $e_{i_1}\wedge\dots\wedge e_{i_{p - 1}}\otimes e_{n + 1}$, then under the differential, it maps to 
+    \begin{equation*}
+        d(e_{i_1}\wedge\dots\wedge e_{i_{p - 1}})\otimes e_{n + 1} + (-1)^{p - 1}x_{n + 1} e_{i_1}\wedge\dots\wedge e_{i_{p - 1}}\otimes 1,
+    \end{equation*}
+    which maps to 
+    \begin{equation*}
+        d(e_{i_1}\wedge\dots\wedge e_{i_{p - 1}})\wedge e_{n + 1} + (-1)^{p - 1} x_{n + 1} e_{i_1}\wedge\dots\wedge e_{i_{p - 1}}
+    \end{equation*}
+    under the isomorphism. On the other hand, the starting element maps to $e_{i_1}\wedge\dots\wedge e_{i_{p - 1}}\wedge e_{n + 1}$ under the isomorphism, which maps to the above element under the differential. This completes the proof.
+\end{proof}
+
+\begin{definition}
+    Let $\underbar{x} = x_1,\dots,x_n$ be a sequence in $A$. For an $A$-module $M$, set 
+    \begin{equation*}
+    K_\bullet(\underbar x, M) = K(\underbar x)\otimes M.
+    \end{equation*}
+    The homology groups of this complex are denoted by $H_p(\underbar{x}, M)$.
+    Similarly, for a complex $C_\bullet$ of $A$-modules, set $C_\bullet(\underbar x) = C_\bullet\otimes K_\bullet(\underbar x)$.
+\end{definition}
+
+\begin{proposition}
+    Let $\ub x = x_1,\dots,x_n$ be a sequence in $A$. Then 
+    \begin{equation*}
+        H_0(\ub x, M) = M/(\ub x)M\qquad H_n(\ub x, M)\cong\left\{\xi\in M\colon x_1\xi = \cdots = x_n\xi = 0\right\}.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    The assertion about $H_0(\ub x, M)$ is trivial. $H_n(\ub x, M)$ is precisely the kernel of the map $K_n(\ub x, M)\to K_{n - 1}(\ub x, M)$, which is given by 
+    \begin{equation*}
+        \xi e_1\wedge\dots\wedge e_n\longmapsto\sum_{i = 1}^n (-1)^{i - 1}x_i\xi e_1\wedge\dots\wedge\wh e_i\wedge\dots\wedge e_n,
+    \end{equation*}
+    where $\xi e_{i_1}\wedge\dots\wedge e_{i_p}\in K_p(\ub x, M)$ is shorthand for $e_{i_1}\wedge\dots\wedge e_{i_p}\otimes\xi\in K_p(\ub x, M)$.
+
+    The right hand side of the above equation is zero if and only if each $x_i\xi$ is zero, whence the conclusion follows.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:complex-tensor-koszul}
+    Let $C_\bullet$ be a complex of $A$-modules and $x\in A$. Then, there is a short exact sequence of complexes 
+    \begin{equation*}
+        0\to C_\bullet\to C_\bullet(x)\to C_\bullet'\to 0,
+    \end{equation*}
+    where $C_{p + 1}' = C_p$ is the (upward) shift of the complex $C_\bullet$. The homology long exact sequence so obtained looks like 
+    \begin{equation*}
+        \cdots\to H_p(C_\bullet)\to H_p(C_\bullet(x))\to H_{p - 1}(C_\bullet)\xrightarrow{(-1)^{p - 1}x} H_{p - 1}(C_\bullet)\to\cdots.
+    \end{equation*}
+    Further, we have $x\cdot H_p(C_\bullet(x)) = 0$ for all $p\in\Z$.
+\end{theorem}
+\begin{proof}
+    Denote the Koszul complex $K_\bullet(x)$ by 
+    \begin{equation*}
+        \cdots\to 0\to Ae_1\xrightarrow{e_1\mapsto x} A\to 0.
+    \end{equation*}
+    Thus, we can identify $C_\bullet(x)$ with $C_p\oplus C_{p - 1}$ with the boundary map as 
+    \begin{equation*}
+        d(\xi, \eta) = (d\xi + (-1)^{p - 1}x\eta, d\eta)\in C_{p - 1}\oplus C_{p - 2}.
+    \end{equation*}
+
+    Hence, we have a short exact sequence 
+    \begin{equation*}
+        \xymatrix {
+            \cdots\ar[r] & C_p\ar[r]\ar[d] & C_{p - 1}\ar[d]\ar[r] & \cdots\\
+            \cdots\ar[r] & C_p\oplus C_{p - 1}\ar[d]\ar[r] & C_{p - 1}\oplus C_{p - 2}\ar[d]\ar[r] & \cdots\\
+            \cdots\ar[r] & C_{p - 1}\ar[r] & C_{p - 2}\ar[r] & \cdots
+        }.
+    \end{equation*}
+    That the above commutes is straightforward. It remains to compute the boundary map from $H_{p - 1}(C_\bullet) = H_p(C_\bullet')$ to $H_{p - 1}(C_\bullet)$.
+
+    Choose a cycle $\eta\in C_p' = C_{p - 1}$, that is, $d\eta = 0$. This lifts to $(0,\eta)\in C_p\oplus C_{p - 1}$, which maps to $\left((-1)^{p - 1}x\eta, 0\right)\in C_{p - 1}\oplus C_{p - 2}$, which again lifts to $(-1)^{p - 1}x\eta$ in $C_{p - 1}$, which is a cycle in $C_{p - 1}$. Hence, the induced map on homologies is multiplication by $(-1)^{p - 1}x$.
+
+    Finally, we must show that $x$ annihilates $H_p(C_\bullet(x))$ for all $p$. Choose a cycle $(\xi,\eta)\in C_p\oplus C_{p - 1}$, that is, $d\eta = 0$, and $d\xi = (-1)^p x\eta$. Hence, 
+    \begin{equation*}
+        C_{p + 1}\ni d(0, (-1)^p\xi) = \left((-1)^px\xi, (-1)^p d\xi\right) = x\cdot(\xi, \eta).
+    \end{equation*}
+    Thus, $x$ annihilates $[(\xi,\eta)]\in H_p(C_\bullet(x))$, whence annihilates all of $H_p(C_\bullet(x))$.
+\end{proof}
+
+\begin{corollary}
+    Let $\ub x = x_1,\dots,x_n$ be a sequence in $A$. Then $(\ub x)$ annihilates $H_p(\ub x, M)$ for every $p\in\Z$.
+\end{corollary}
+\begin{proof}
+    It suffices to show that $x_n$ annihilates $H_p(\ub x, M)$ since the Koszul complex is invariant under permutation of the sequence $\ub x$. But this is obvious, since $K_\bullet(\ub x, M)$ is isomorphic to $K_\bullet(x_1,\dots,x_{n - 1}, M)\otimes K_\bullet(x_n)$ due to the commutativity of tensor products of complexes. We are done by invoking the preceding theorem with $C_\bullet = K_\bullet(x_1,\dots,x_{n - 1}, M)$ and $x = x_n$.
+\end{proof}
+
+\begin{theorem}
+    Let $A$ be a ring, $M$ an $A$-module, and $x_1,\dots,x_n$ an $M$-sequence. Then 
+    \begin{equation*}
+        H_P(\ub x, M) = 0\quad\forall~p > 0,\qquad H_0(\ub x, M) = M/(\ub x)M.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Induct on $n$. The base case with $n = 1$ follows from the fact that $H_1(x_1, M) = (0 :_M x_1) = 0$, since $x_1$ is $M$-regular. Now, suppose $n > 1$. If $p > 1$, then there is an exact sequence furnished by \thref{thm:complex-tensor-koszul} by taking $C_\bullet = K_\bullet(x_1,\dots,x_{n - 1}, M)$ and $x = x_n$:
+    \begin{equation*}
+        0 = H_p(x_1,\dots,x_{n - 1}, M)\longrightarrow H_p(x_1,\dots,x_n, M)\longrightarrow H_{p - 1}(x_1,\dots,x_{n - 1}, M) = 0,
+    \end{equation*}
+    whence $H_p(\ub x, M) = 0$. It remains to establish that $H_1(\ub x, M) = 0$. Set $M_i = M/(x_1,\dots,x_i)M$ with the convention that $M_0 = M$. The above long exact sequence again furnishes 
+    \begin{equation*}
+        0 = H_1(x_1,\dots,x_{n - 1}, M)\to H_1(\ub x, M)\to H_0(x_1,\dots,x_{n - 1}, M) = M_{n - 1}\xrightarrow{x_n} M_{n - 1}.
+    \end{equation*}
+    But since $x_n$ is a non zero-divisor on $M_{n - 1}$, we see that $H_1(\ub x, M) = 0$ as desired.
+\end{proof}
+
+\begin{theorem}
+    Suppose one of the following two conditions holds: 
+    \begin{enumerate}[label=(\greek*)]
+        \item $(A,\frakm)$ is a Noetherian local ring, $x_1,\dots,x_n\in\frakm$, and $M$ is a finite $A$-module. 
+        \item $A$ is an $\N$-graded ring, $M$ is an $\N$-graded $A$-module, and $x_1,\dots,x_n$ are homogeneous elements of positive degree.
+    \end{enumerate}
+    Then, if $H_1(\ub x, M) = 0$ and $M\ne 0$, then $x_1,\dots,x_n$ is an $M$-sequence.
+\end{theorem}
+\begin{proof}
+    Induction on $n$. If $n = 1$, then $0 = H_1(x_1, M) = (0 :_M x_1)$, whence $x_1$ is a non zero-divisor on $M$. Now suppose $n > 1$. Again, we make use of the exact sequence associated with $K_\bullet(x_1,\dots,x_{n - 1}, M)\otimes K_\bullet(x_n)$ to get 
+    \begin{equation*}
+        H_1(x_1,\dots,x_{n - 1}, M)\xrightarrow{-x_n}H_1(x_1,\dots,x_{n - 1}, M)\to H_1(\ub x, M) = 0.
+    \end{equation*}
+    But since $H_i(x_1,\dots,x_{n - 1}, M)$ is a finite $A$-module in case ($\alpha$) or a $\N$-graded module in case ($\beta$), the above surjection implies, due to Nakayama, that $H_1(x_1,\dots,x_{n - 1}, M) = 0$. The induction hypothesis then implies $x_1,\dots,x_{n - 1}$ is an $M$-sequence.
+
+    Now, continuing the above long exact sequence, we get 
+    \begin{equation*}
+        0 = H_1(\ub x, M)\longrightarrow H_0(x_1,\dots,x_{n - 1}, M) = M_{n - 1}\xrightarrow{x_n} M_{n - 1},
+    \end{equation*}
+    where $M_{n - 1} = M/(x_1,\dots,x_{n - 1})M$. The above sequence implies $x_n$ is $M_{n - 1}$-regular, whence $x_1,\dots,x_n$ is an $M$-sequence, as desired.
+\end{proof}
+
+\begin{theorem}
+    Let $A$ be a Noetherian ring, $M$ a finite $A$-module, and $I$ an ideal of $A$ such that $M\ne IM$. For a given integer $n > 0$, the following conditions are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\Ext^i_A(N, M) = 0$ for all $i < n$ and for any finite $A$-module $N$ with $\Supp(N)\subseteq V(I)$.
+        \item $\Ext^i_A(A/I, M) = 0$ for all $i < n$. 
+        \item $\Ext^i_A(N, M) = 0$ for all $i < n$ and for some finite $A$-module $N$ with $\Supp(N) = V(I)$. 
+        \item There exists an $M$-sequence of length $n$ contained in $I$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    $(1)\Rightarrow(2)\Rightarrow(3)$ is clear. $(3)\Rightarrow(4)$ First, we show that $I$ contains an $M$-regular element. Suppose not, then due to prime avoidance, $I$ must be contained in some associated prime $\frakp\in\Ass_A(M)$. Thus, there is an injective map $A/\frakp\into M$, which upon localizing at $\frakp$, we see that $\Hom_{A_{\frakp}}(\kappa(\frakp), M_\frakp)\ne 0$. Now, $\frakp\in V(I) = \Supp(N)$, whence $N_\frakp\ne 0$, and hence, due to Nakayama's lemma, $N_\frakp/\frakp N_\frakp \ne 0$ (since $N_\frakp$ is a finite $A_\frakp$-module). Then, $N_\frakp/\frakp N_\frakp$ is a non-zero $\kappa(\frakp)$-vector space, and consequently, $\Hom_{A_{\frakp}}(N_\frakp/\frakp N_\frakp, \kappa(\frakp))\ne 0$ (choose a basis and project onto a coordinate). Now, we can form the composition 
+    \begin{equation*}
+        N_\frakp\to N_\frakp/\frakp N_\frakp\to \kappa(\frakp)\into M_\frakp.
+    \end{equation*}
+    The first two maps are surjections and hence, the composition is non-zero. It follows that $\Hom_{A_\frakp}(N_\frakp, M_\frakp)\ne 0$. Since $N$ is finite over a Noetherian ring, we have 
+    \begin{equation*}
+        \left(\Hom_A(N, M)\right)_\frakp = \Hom_{A_\frakp}(N_\frakp, M_\frakp)\ne 0,
+    \end{equation*}
+    whence $\Ext^0_A(N, M) = \Hom_A(N, M)\ne 0$, a contradiction to (3). Hence, $I$ contains an $M$-regular element, say $f$. If $n = 1$, then we are already done. If $n > 1$, then set $M_1 = M/fM$ and consider the short exact sequence 
+    \begin{equation*}
+        0\to M\xrightarrow{f} M\to M_1\to 0.
+    \end{equation*}
+    The long exact sequence using $\Ext_A(N, -)$ gives 
+    \begin{equation*}
+        \cdots\to\Ext^{i - 1}_A(N, M)\xrightarrow{f}\Ext^{i - 1}_A(N, M)\to\Ext^{i - 1}_A(N, M_1)\to\Ext^{i}_A(N, M)\to\cdots.
+    \end{equation*}
+    For $1\le i < n$, this implies $\Ext^{i - 1}_A(N, M_1) = 0$, and due to the induction hypothesis, there is an $M_1$-sequence $f_2,\dots,f_n$ in $I$. Thus, $f_1,\dots,f_n$ is an $M$-sequence in $I$.
+
+    $(4)\Rightarrow(1)$. Induction on $n$. We shall deal with the base case later. Suppose $n > 1$. Let $\ub x = x_1,\dots, x_n$ be an $M$-sequence in $I$. Set $M_1 = M/x_1 M$ which fits into a short exact sequence $0\to M\xrightarrow{x_1} M\to M_1\to 0$. The sequence $x_2,\dots,x_n$ is an $M_1$-sequence in $I$, whence due to the inductive hypothesis, $\Ext^i_A(N, M_1) = 0$ for all $i < n - 1$. The long exact sequence corresponding to $\Ext_A(N,-)$ gives us 
+    \begin{equation*}
+        0 = \Ext^{i - 1}_A(N, M_1)\to \Ext^i_A(N, M)\xrightarrow{x_1}\Ext^i(N, M)
+    \end{equation*}
+    for all $0\le i < n$, with the convention that $\Ext^{-1}(N, M_1) = 0$. But note that $\Ext^i_A(N,-)$ is annihilated by $\Ann_A(N)$. But since $\Supp(N) = V(\Ann_A(N))\subseteq V(I)$, we conclude that $I\subseteq\sqrt I\subseteq\sqrt{\Ann_A(N)}$. In particular, a sufficiently large power of $x_1$ annihilates $N$, whence, annihilates $\Ext^i_A(N, M)$. But since multiplication by $x_1$ is injective, we must have that $\Ext^i_A(N, M) = 0$ for $i < n$, thereby completing the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $A$ be a Noetherian ring, $I$ an ideal of $A$, and $M$ a finite $A$-module such that $M\ne IM$. Then the length of any maximal $M$-sequence contained in $I$ is the same, say $n$, and $n$ is determined by 
+    \begin{equation*}
+        \Ext^i_A(A/I, M) = 0 \quad\forall~i < n\quad\text{ and }\quad\Ext^n_A(A/I, M)\ne 0.
+    \end{equation*}
+    We write $n = \depth(I, M)$ and call $n$ the \define{$I$-depth} of $M$.
+\end{theorem}
+\begin{proof}
+    Let $\ub a = a_1,\dots,a_n$ be a maximal $M$-sequence in $I$. Suppose $\Ext^n_A(A/I, M) = 0$. Define $M_i = M/(a_1,\dots,a_i)M$. Using the short exact sequence $0\to M\xrightarrow{a_1} M\to M_1\to 0$, we have an exact sequence
+    \begin{equation*}
+        0 = \Ext^{n - 1}_A(A/I, M)\to \Ext^{n - 1}_A(A/I, M_1)\to\Ext^{n}_A(A/I, M) = 0,
+    \end{equation*}
+    whence $\Ext^{n - 1}_A(A/I, M_1) = 0$; and since $a_2,\dots,a_n$ is an $M_1$-sequence, $\Ext^{i}_A(A/I, M_1) = 0$ for $i < n - 1$. Arguing similarly, we get that $\Ext^0_A(A/I, M_n) = 0$. Due to the preceding theorem, $I$ must contain an $M_n$-regular element, contradicting the maximality of $\ub a$. Thus, $\Ext^n_A(A/I, M) \ne 0$ and $\Ext^{i}_A(A/I, M) = 0$ for $i < n$.
+
+    On the other hand, if $\ub b = b_1,\dots,b_m$ is a maximal $M$-sequence, then due to the above paragraph, $\Ext^m_A(A/I, M)\ne 0$ and $\Ext^i_A(A/I, M) = 0$ for $i < m$. In particular, this means that $m = n$.
+
+    Finally, suppose $n$ satisfies the conditions given in the theorem. Then, due to the preceding theorem, there is an $M$-sequence $\ub a = a_1,\dots,a_n$ in $I$. Further, since $\Ext^n_A(A/I, M)\ne 0$, this sequence must be maximal, else it could be extended and again, due to the preceding theorem $\Ext^n_A(A/I, M) = 0$. This completes the proof.
+\end{proof}
+
+\begin{remark}
+    The above theorem can be phrased more succinctly as 
+    \begin{equation*}
+        \depth(I, M) = \inf\left\{i\colon\Ext^i_A(A/I, M)\ne 0\right\}.
+    \end{equation*}
+    In particular, if $(A,\frakm, k)$ is a Noetherian local ring, then we write $\depth(\frakm, M)$ as $\depth M$ and 
+    \begin{equation*}
+        \depth M = \inf\left\{i\colon\Ext^i_A(k, M)\ne 0\right\}.
+    \end{equation*}
+\end{remark}
+
+\begin{theorem}[Depth Sensitivity of Koszul Complex]
+    Let $A$ be a Noetherian ring, $I = (y_1,\dots,y_n)$ an ideal of $A$, and $M$ a finite $A$-module such that $M\ne IM$. If 
+    \begin{equation*}
+        q = \sup\left\{i\colon H_i(\ub y, M)\ne 0\right\}, 
+    \end{equation*}
+    then $\depth(I, M) = n - q$.
+\end{theorem}
+\begin{proof}
+    We shall argue by induction on $s = \depth(I, M)$. If $s = 0$, then every element of $I$ is a zero-divisor on $M$, whence by prime avoidance, there is an associated prime $\frakp\in\Ass_A(M)$ such that $I\subseteq\frakp$. By definition, there is some $0\ne\xi\in M$ such that $\frakp = \Ann_A(\xi)$, and hence, $I\xi = 0$. Recall that $H_n(\ub y, M) = (0 :_M (\ub y)) = (0 :_M I)\ne 0$, since it contains $\xi$. Thus, $q = n$.
+
+    Now, suppose $s > 0$, then $H_n(\ub y, M) = 0$, since some element of $I$ is a non zero-divisor on $M$. In particular, this means $q < n$. Let $\ub x = x_1,\dots,x_s$ be a maximal $M$-sequence in $I$. There is a short exact sequence $0\to M\xrightarrow{x_1} M\to M_1\to 0$, where $M_1 = M/x_1M$. Since every element in the Koszul comples $K_\bullet(\ub y)$ is a free module, tensoring with the above short exact sequence will give a short exact sequence of complexes 
+    \begin{equation*}
+        0\to K_\bullet(\ub y, M)\xrightarrow{x_1} K_\bullet(\ub y, M)\to K_\bullet(\ub y, M_1)\to 0.
+    \end{equation*}
+    The associated long exact sequence looks like 
+    \begin{equation*}
+        H_i(\ub y, M)\xrightarrow{x_1} H_i(\ub y, M)\to H_i(\ub y, M_1)\to H_{i - 1}(\ub y, M)\xrightarrow{x_1} H_{i - 1}(\ub y, M)
+    \end{equation*}
+    for all $i$. Recall that $I = (\ub y)$ annihilates $H_i(\ub y, M)$ for all $i$, and hence the image of the first map and the kernel of the last map in the above sequence is $0$, therby giving us a short exact sequence 
+    \begin{equation*}
+        0\to H_i(\ub y, M)\to H_i(\ub y, M_1)\to H_{i - 1}(\ub y, M)\to 0,\qquad\forall~i\in\Z.
+    \end{equation*}
+    Now, note that if $H_i(\ub y, M_1) = 0$, then $H_i(\ub y, M) = H_{i - 1}(\ub y, M) = 0$. Hence, $H_{q + 1}(\ub y, M_1)\ne 0$, but for $i > q + 1$, $H_i(\ub y, M_1) = 0$. Now, $\depth(I, M_1) = s - 1$, since $x_2,\dots,x_n$ is a maximal $M_1$-sequence in $I$, for if not, then the original sequence $\ub x$ could be extended to a larger $M$-sequence in $I$. By the induction hypothesis, we have $q + 1 = n - (s - 1)$, and thus, $s = n - q$.
+\end{proof}
+
+\begin{remark}
+    In other words, $\depth(I, M)$ is the number of successive zero terms from the left in the sequence
+    \begin{equation*}
+        H_n(\ub y, M),~H_{n - 1}(\ub y, M),~\dots,~H_0(\ub y, M) = M/IM\ne 0.
+    \end{equation*}
+\end{remark}
+
+% \subsection{Cohen-Macaulay Rings}
+
+% \begin{theorem}[Ischebeck]
+%     Let $(A,\frakm)$ be a Noetherian local ring, $M$ and $N$ be non-zero finite $A$-modules, and suppose $\depth M = k$ and $\dim N = r$. Then
+%     \begin{equation*}
+%         \Ext^i_A(N, M) = 0 \qquad\text{for }i < k - r.
+%     \end{equation*}
+% \end{theorem}
+% \begin{proof}
+% \end{proof}
+
+\subsection{Gorenstein Rings}
+
+\begin{lemma}
+    Let $A$ be a ring, $M$ an $A$-module, and $n\ge 0$ an integer. Then 
+    \begin{equation*}
+        \injdim M\le n\iff \Ext^{n + 1}_A(A/I, M) = 0\quad\text{for all ideals } I.
+    \end{equation*}
+    If $A$ is Noetherian, then we can replace ``for all ideals'' by ``for all prime ideals'' in the above equivalence.
+\end{lemma}
+\begin{proof}
+    The forward direction is trivial by considering an injective resolution of length $\le n$ and constructing the left derived functors of $\Hom_A(A/I, -)$.
+
+    We prove the converse. If $n = 0$, then $\Ext^1_A(A/I, M) = 0$, which is equivalent to Baer's criterion for injectivity. Thus $M$ is injective, that is, $\injdim M = 0\le n$. Now, suppose $n > 0$. Consider an injective resolution of length $n - 1$ and let $K$ be the cokernel of the last map. That is, 
+    \begin{equation*}
+        0\to M\to E^0\to E^1\to\cdots\to E^{n - 1}\to K_n\to 0,
+    \end{equation*}
+    where every $E^i$ is injective. We claim that $K$ is injective. To see this, break down the above exact sequence into short exact sequences of the form 
+    \begin{equation*}
+        0\to K_0\to E^0\to K_1\to 0\qquad 0\to K_1\to E^1\to K_2\to 0,
+    \end{equation*}
+    and so on, with the convention that $K_0 = M$. The long exact sequence for $\Ext_A(A/I, -)$ on the first short exact sequence gives 
+    \begin{equation*}
+        0 = \Ext^n_A(A/I, E^0)\to\Ext^n_A(A/I, K_1)\to\Ext^{n + 1}_A(A/I, K_0) = 0,
+    \end{equation*}
+    whence $\Ext^n(A/I, K_1) = 0$. Proceeding similarly with the other exact sequences, one can show that $\Ext^1_A(A/I, K_n) = 0$, for every ideal $I$ of $A$. Hence, $K_n$ is injective, i.e., $\injdim M\le n$.
+\end{proof}
+
+
+\begin{lemma}
+    Let $A$ be a ring, $M$ and $N$ two $A$-modules, and $x\in A$. Suppose that $x$ is both $A$-regular and $M$-regular, and that $xN = 0$. Set $B = A/xA$ and $\overline M = M/xM$. Then 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\Hom_A(N, M) = 0$ and $\Ext_A^{n + 1}(N, M)\cong\Ext^n_B(N, \overline M)$ for all $n\ge 0$.
+        \item $\Ext^n_A(M, N)\cong\Ext^n_B(\overline M, N)$ for all $n\ge 0$.
+        \item $\Tor^A_n(M, N)\cong\Tor^B_n(\overline M, N)$ for all $n\ge 0$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+\item If $f: N\to M$ is $A$-linear, then for any $n\in N$, $xf(n) = f(xn) = 0$, and since $x$ is $M$-regular, $f(n) = 0$. Thus $f = 0$, as desired. Now, set $T^n(N) = \Ext^{n + 1}_A(N, M)$. Then, the collection $(T^n)_{n\ge 0}$ is a contravariant $\delta$-functor from the category $\mathfrak{Mod}_B$ to the category $\mathfrak{Mod}_A$. Further, the short exact sequence 
+\begin{equation*}
+    0\to M\xrightarrow x M\to\overline M\to 0
+\end{equation*}
+furnishes a long exact sequence 
+\begin{equation*}
+    0 = \Hom_A(N, M)\to \Hom_A(N,\overline M)\xrightarrow\delta\Ext^1_A(N, M)\xrightarrow x\Ext^1_A(N, M)\to\cdots.
+\end{equation*}
+Since $x$ annihilates $N$, it must annihilate $\Ext^1_A(N, M)$, and so the above exact sequences reduces to 
+\begin{equation*}
+    0\to\Hom_A(N,\overline M)\xrightarrow{\delta}\Ext^1_A(N, M)\to 0.
+\end{equation*}
+Thus $\delta$ is a natural isomorphism between the functors $T^0$ and $\Ext^1_A(-, M)$. Now, it suffices to show that the collection $(T^n)_{n\ge 0}$ constitutes a universal $\delta$-functor, whence it suffices to show that $T^n(P) = 0$ for every projective $B$-module $P$ and $n\ge 1$; since then it would be coeffaceable by projectives and due to a theorem of Grothendieck, it would be universal. 
+
+This is equivalent to showing that $\Ext^n_A(P, M) = 0$ where $P$ is a direct sum of copies of $A/xA$ and $n\ge 2$. But note that $\projdim_A A/xA\le 1$, and hence $\Ext^n_A(A/xA, M) = 0$ for all $A$-modules $M$ and $n\ge 2$, as desired. This proves (1).
+
+\item We contend that $\Tor^A_n(M, B) = 0$ for all $n > 0$. Since $\projdim_A B\le 1$, it immediately follows that $\Tor^A_n(M, B) = 0$ for $n > 1$. For $n = 1$, the short exact sequence 
+\begin{equation*}
+    0\to A\xrightarrow x A\to B\to 0 
+\end{equation*}
+furnishes a long exact sequence 
+\begin{equation*}
+    0 = \Tor^A_1(M, A)\to\Tor^A_1(M, B)\to M\xrightarrow x M\to \overline M\to 0.
+\end{equation*}
+Since $x$ is $M$-regular, we have that $\Tor^A_1(M, A) = 0$.
+
+Now, let $P_\bullet\to M\to 0$ be a free resolution of $M$. Because of the preceding paragraph, the sequence $P_\bullet\otimes_A B\to M\otimes_A B\to 0$ is exact, so that $P_\bullet\otimes B$ is a free resolution of the $B$-module $M\otimes B\cong\overline M$. From the Hom-Tensor adjunction, note that there are natural isomorphisms
+\begin{equation*}
+    \Hom_A(P_\bullet, N) = \Hom_A(P_\bullet, \Hom_B(B, N))\cong\Hom_B(P_\bullet\otimes_A B, N).
+\end{equation*}
+Therefore, 
+\begin{equation*}
+    \Ext^n_A(M, N) = H^n\left(\Hom_A(P_\bullet, N)\right) = H^n\left(\Hom_B(P_\bullet\otimes_A B, N)\right) = \Ext^n_B(\overline M, N),
+\end{equation*}
+as desired.
+
+\item Continuing with the notation of (2), we have 
+\begin{equation*}
+    \Tor^A_n(M, N) = H_n\left(P_\bullet\otimes_A N\right) = H_n\left((P_\bullet\otimes_A B)\otimes_B N\right) = \Tor^B_n(\overline M, N),
+\end{equation*}
+thereby completing the proof. \qedhere
+\end{enumerate}
+\end{proof}

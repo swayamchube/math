@@ -1,0 +1,49 @@
+\subsection{Regular Rings}
+
+\begin{definition}
+    Let $(A,\frakm, k)$ be a local ring and let $M$ be a finite $A$-module. An exact sequence 
+    \begin{equation*}
+        \cdots\to L_i\xrightarrow{d_i} L_{i - 1}\xrightarrow{d_{i - 1}}\cdots\to L_1\xrightarrow{d_1} L_0\xrightarrow\varepsilon M\to 0
+    \end{equation*}
+    is called a \define{minimal (free) resolution} of $M$ if 
+    \begin{itemize}
+        \item each $L_i$ is a finite free $A$-module
+        \item $0 = \overline d_i: L_{i}\otimes_A k\to L_{i - 1}\otimes_A k$, or equivalently $d_i L_i\subseteq\frakm L_{i - 1}$ for all $i\ge 1$, and 
+        \item $\overline\varepsilon: L_0\otimes_A k\to M\otimes_A k$ is an isomorphism.
+    \end{itemize}
+\end{definition}
+
+It is easy to see that a minimal free resolution exists for every finite module over a Noetherian local ring; at each stage simply take a minimal generating set of the kernel and continue.
+
+\begin{lemma}
+    Let $(A,\frakm, k)$ be a local ring, and $M$ a finite $A$-module. Suppose $L_\bullet$ is a minimal resolution of $M$; then 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\dim_k\Tor^A_i(M, k) = \rank L_i$ for all $i$.
+        \item $\projdim_A M = \sup\left\{i\colon\Tor^A_i(M, k)\ne 0\right\}\le\projdim_A k$, 
+        \item if $M\ne 0$ and $\projdim_A M = r < \infty$, then for any finite $A$-module $N\ne 0$, we have $\Ext^r_A(M, N)\ne 0$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+    \item This follows immediately from the fact that $\overline d_i = 0$ for all $i\ge 1$.
+    \item The second inequality is straightforward. For if $\projdim_A k = \infty$, then there is nothing to prove. If $\projdim_A k < \infty$, then take a projective resolution of this length and tensor with $A$ to conclude.
+    
+    From (1) it immediately follows that $\projdim_A M\le\sup\left\{i\colon \Tor^A_i(M, k)\ne 0\right\}$, since this quantity is precisely the length of the minimal free resolution of $M$. If $\projdim_A M = \infty$, then there is nothing to prove. If $\projdim_A M < \infty$, then take a projective resolution of $M$ achieving this length and tensor with $k$ whence it follows that $\sup\left\{i\colon\Tor^A_i(M, k)\ne 0\right\}\le\projdim_A M$, as desired.
+
+    \item Applying $\Hom_A(-, N)$ to the resolution $L_\bullet\to M$, we obtain a complex which ends with 
+    \begin{equation*}
+        \Hom_A(L_{r - 1}, N)\xrightarrow{d_r^\ast}\Hom_A(L_r, N)\to 0,
+    \end{equation*}
+    where $\Ext^r_A(M, N)$ is the cokernel of the above map. Since each $L_i$ is free, we can write $\Hom_A(L_i, N)$ as a direct sum of some copies of $N$ and we can express every boundary map $d_i: L_i\to L_{i - 1}$ as a matrix with entries in $\frakm$. It follows that $d_i^\ast$ is given by the same matrix (with entries in $\frakm$). Hence, the image of $d_r^\ast$ is contained in $\frakm\Hom_A(L_r, N)$, which is properly contained in $\Hom_A(L_r, N)$ by Nakayama's lemma. This completes the proof.\qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}[Auslander-Buchsbaum]
+    Let $A$ be a Noetherian local ring and $M\ne 0$ a finite $A$-module. If $\projdim_A M < \infty$, then 
+    \begin{equation*}
+        \projdim_A M + \depth M = \depth A.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    
+\end{proof}

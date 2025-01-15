@@ -24,6 +24,7 @@
 \usepackage{xcolor}
 \usepackage{theoremref}
 \usepackage{enumitem}
+\usepackage{moreenum}
 \usepackage{mathpazo}
 % \usepackage{euler}
 \usepackage{mathrsfs}
@@ -222,6 +223,8 @@
 \newcommand{\depth}{\operatorname{depth}}
 \newcommand{\projdim}{\operatorname{proj~dim}}
 \newcommand{\injdim}{\operatorname{inj~dim}}
+\newcommand{\ub}[1]{\underbar{#1}}
+\newcommand{\Ass}{\operatorname{Ass}}
 
 \geometry {
     margin = 1in
@@ -249,118 +252,12 @@
 
 \begin{document}
 \maketitle
+\tableofcontents
 
-\section{The Koszul Complex}
-
-\begin{definition}
-    Let $A$ be a ring and $x_1,\dots,x_n\in A$. Set $K_0 = A$ and for $1\le p\le n$, let 
-    \begin{equation*}
-        K_p = \bigoplus_{1\le i_1 < \cdots < i_p\le n} A e_{i_1}\wedge\dots\wedge e_{i_p},
-    \end{equation*}
-    which is a free module of rank $\binom{n}{p}$.
-
-    Define $d: K_p\to K_{p - 1}$ as 
-    \begin{equation*}
-        d\left(e_{i_1}\wedge\dots\wedge e_{i_p}\right) = \sum_{r = 1}^p (-1)^{r - 1} x_{i_r} e_{i_1}\wedge\dots\wedge\wh{e_{i_r}}\wedge\dots\wedge e_{i_p},
-    \end{equation*}
-    and extending linearly. This is called the \define{Koszul complex}.  For an $A$-module $M$, we set $K_\bullet(\underline x, M) = K_\bullet(\underline x)\otimes_A M$. The homologies of this complex $H_p\left(K_\bullet(\underline x, M)\right)$ are denoted by $H_p(\underline x, M)$. For a complex $C_\bullet$ of $A$-modules, we set $C_\bullet(\underline x) = C_\bullet\otimes_A K_\bullet(\underline x)$.\footnote{Recall that the tensor product of two complexes is obtained by taking the total complex corresponding to the tensor double complex.} 
-\end{definition}
-
-\begin{proposition}
-    For $p\ge 2$, $d\circ d = 0$ as a map $K_p\to K_{p - 2}$.
-\end{proposition}
-\begin{proof}
-    In the expression for $(d\circ d)\left(e_{i_1}\wedge\dots\wedge e_{i_p}\right)$, we find the coefficient of 
-    \begin{equation*}
-        e_{i_1}\wedge\dots\wedge\wh{e_{i_a}}\wedge\dots\wedge\wh{e_{i_b}}\wedge\dots\wedge e_{i_p},
-    \end{equation*}
-    where $1\le a < b\le p$. The coefficient is equal to the coefficient in 
-    \begin{equation*}
-        (-1)^{a - 1}x_{i_a}d\left(e_{i_1}\wedge\dots\wh e_{i_a}\wedge\dots\wedge e_{i_p}\right) + (-1)^{b - 1} x_{i_b}d\left(e_{i_1}\wedge\dots\wedge e_{i_b}\wedge\dots\wedge e_{i_p}\right),
-    \end{equation*}
-    which is equal to 
-    \begin{equation*}
-        (-1)^{a - 1}x_{i_a}\cdot(-1)^{b - 2}x_{i_b} + (-1)^{b - 1}x_{i_b}\cdot(-1)^{a - 1}x_{i_a} = 0. \qedhere
-    \end{equation*}
-\end{proof}
-
-\begin{theorem}
-    Let $C_\bullet$ be a complex of $A$-modules and $x\in A$. There is an exact sequence of complexes 
-    \begin{equation*}
-        0\longrightarrow C_\bullet\longrightarrow C_\bullet(x)\longrightarrow C_\bullet[-1]\longrightarrow 0.
-    \end{equation*}
-    This furnishes an exact sequence 
-    \begin{equation*}
-        \cdots\to H_p(C_\bullet)\to H_p(C_\bullet(x))\to H_{p - 1}(C_\bullet)\xrightarrow{(-1)^{p - 1}x} H_{p - 1}(C_\bullet)\to\cdots.
-    \end{equation*}
-    Further, we have $x\cdot H_{p}(C_\bullet(x)) = 0$ for all $p$.
-\end{theorem}
-
-\begin{corollary}
-    Let $M$ be an $A$-module and $x_1,\dots,x_n\in A$. Then, $(\underline x)$ annihilates $H_p(\underline x, M)$ for all $p$.
-\end{corollary}
-\begin{proof}
-    Induct on $n$. The inductive step follows from the fact that 
-    \begin{equation*}
-        K_\bullet(x_1,\dots, x_n, M)\cong K_\bullet(x_n)\otimes_A K(x_1,\dots, x_{n - 1}, M).
-    \end{equation*}
-    We know that $(x_1,\dots, x_{n - 1})$ annihilates the homology groups of the latter and hence, they annihilate the homology groups of $K_\bullet(x_1,\dots, x_n, M)$. Further, due to the preceding theorem, $x_n$ annihilates the homologies of the above tensor product. This completes the proof.
-\end{proof}
-
-\begin{theorem}
-    Let $M$ be an $A$-module and $x_1,\dots,x_n\in A$ an $M$-sequence. Then 
-    \begin{equation*}
-        H_p(\underline x, M) = 0\quad\text{for } p > 0\qquad H_0(\underline x, M) = M/(\underline x)M.
-    \end{equation*}
-\end{theorem}
-\begin{proof}
-    
-\end{proof}
-
-\begin{theorem}
-    Let $A$ be a Noethering ring, $M$ a finite $A$-odule, and $I$ an ideal of $A$; suppose that $IM\ne M$. For a positive integer $n$, the following conditions are equivalent: 
-    \begin{enumerate}[label=(\alph*)]
-        \item $\Ext^i_A(N, M) = 0$ for $0\le i < n$ and for any finite $A$-module $N$ with $\Supp(N)\subseteq V(I)$. 
-        \item $\Ext^i_A(A/I, M) = 0$ for $0\le i < n$. 
-        \item $\Ext^i_A(N, M) = 0$ for $0\le i < n$ and \emph{some} finite $A$-module $N$ with $\Supp(N) = V(I)$. 
-        \item there exists an $M$-sequence of length $n$ contained in $I$.
-    \end{enumerate}
-\end{theorem}
-\begin{proof}
-\end{proof}
-
-\begin{corollary}
-    Let $A$ be a Noetherian ring, $I$ an ideal of $A$, and $M$ a finite $A$-module such that $M\ne IM$; then the length of a maximal $M$-sequence in $I$ is determined by 
-    \begin{equation*}
-        \Ext^i_A(A/I, M) = 0\quad\text{for } i < n\quad\text{and}\quad\Ext^n_A(A/I, M)\ne 0.
-    \end{equation*}
-\end{corollary}
-
-This integer is denoted by $\depth(I, M)$ and is called the \define{$I$-depth} of $M$. In other words, 
-\begin{equation*}
-    \depth(I, M) = \inf\left\{i\colon\Ext^i_A(A/I, M)\ne 0\right\}.
-\end{equation*}
-For a Noetherian local ring $(A,\frakm, k)$, we write $\depth_A M$ for $\depth(\frakm, M)$.
-
-\begin{corollary}
-    Let $A$ be a Noetherian ring, $I, I'$ ideals of $A$, and $M$ a finite $A$-module such that $M\ne IM$ and $M\ne I'M$. Then, $\depth(I, M) = \depth(I', M)$.
-\end{corollary}
+\section{Regular Sequences}
+\input{sections/reg-koszul.tex}
 
 \section{Regular Rings}
+\input{sections/regular-rings.tex}
 
-\begin{definition}
-    Let $(A,\frakm, k)$ be a local ring, $M$ a finite $A$-module. A \define{minimal (free) resolution} is an exact sequence $L_\bullet\to M\xrightarrow{\varepsilon} 0$ such that 
-    \begin{enumerate}[label=(\alph*)]
-        \item 
-    \end{enumerate}
-\end{definition}
-
-\begin{lemma}
-    Let $(A,\frakm, k)$ be a local ring, and $M$ a finite $A$-module. Suppose $L_\bullet\to M$ is a minimal resolution of $M$; then 
-    \begin{enumerate}[label=(\alph*)]
-        \item $\dim_k \Tor^A_i(M, k) = \rank L_i$ for all $i$, 
-        \item $\projdim M = \sup\left\{i\colon\Tor^A_i(M, k)\ne 0\right\}\le\projdim_A k$,
-        \item if $M\ne 0$ and $\projdim M = r < \infty$, then for any finite $A$-module $N\ne 0$ we have $\Ext^r_A(M, N)\ne 0$.
-    \end{enumerate}
-\end{lemma}
 \end{document}
