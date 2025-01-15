@@ -176,5 +176,150 @@ Finally, let $U$ be a convex balanced neighborhood of $0$ in $Y$. It suffices to
     \end{equation*}
     whence (b) follows.
 
-    Conversely, suppose (b) holds. Then, as argued above, the restriction of $\Lambda$ to every $\scrD_K$ is continuous, and due to the prededing theorem, $\Lambda$ is continuous.
+    Conversely, suppose (b) holds. Then, as argued above, the restriction of $\Lambda$ to every $\scrD_K$ is continuous, and due to the preceding theorem, $\Lambda$ is continuous.
+\end{proof}
+
+\begin{example}
+There are some canonical examples of distributions. If $f\in L^1_{loc}(\Omega)$, then the map $\Lambda_f: \scrD(\Omega)\to\R$ given by 
+\begin{equation*}
+    \Lambda_f(\phi) = \int_\Omega f(x)\phi(x)~dx\qquad\forall~\phi\in\scrD(\Omega).
+\end{equation*}
+If $K = \Supp\phi$, then 
+\begin{equation*}
+    |\Lambda_f(\phi)|\le\|f\|_{L^1(K)}\|\phi\|_0,
+\end{equation*}
+and hence $\Lambda_f$ is a distribution of order $0$.
+\end{example}
+
+\begin{example}[Dirac Distribution]
+    The map $\Lambda:\scrD(\Omega)\to\R$ defined by $\phi\mapsto\phi(0)$ is a distribution of order $0$, since 
+    \begin{equation*}
+        |\Lambda(\phi)|\le\|\phi\|_0.
+    \end{equation*}
+    This is known as the \define{Dirac distribution}.
+\end{example}
+
+\begin{definition}
+    Let $\Lambda\in\scrD'(\Omega)$ be a distribution and $\alpha$ a multi-index. Define $\partial^\alpha\Lambda\in\scrD'(\Omega)$ by 
+    \begin{equation*}
+        \left(\partial^\alpha\Lambda\right)(\phi) = (-1)^{|\alpha|}\Lambda\left(\partial^\alpha\phi\right).
+    \end{equation*}
+\end{definition}
+
+We show that this is indeed a distribution. Let $K\Subset\Omega$ be a compact set. Then there is an integer $N$ and $C > 0$ such that 
+\begin{equation*}
+    |\Lambda(\phi)|\le C\|\phi\|_N\qquad\forall~\phi\in\scrD_K.
+\end{equation*}
+Then, 
+\begin{equation*}
+    \left|(\partial^\alpha\Lambda)(\phi)\right|\le C\|\partial^\alpha\phi\|_N\le C\|\phi\|_{N + |\alpha|}\qquad\forall~\phi\in\scrD_K,
+\end{equation*}
+as desired.
+
+We further note that the formula 
+\begin{equation*}
+    \partial^\alpha\partial^\beta\Lambda = \partial^{\alpha + \beta}\Lambda = \partial^{\beta}\partial^\alpha\Lambda
+\end{equation*}
+holds for every distribution $\Lambda\in\scrD'(\Omega)$. This is quite straightforward, since 
+\begin{equation*}
+    \left(\partial^\alpha\partial^\beta\Lambda\right)(\phi) = (-1)^{|\alpha|}\partial^\beta\Lambda\left(\partial^\alpha\phi\right) = (-1)^{|\alpha| + |\beta|}\Lambda\left(\partial^{\alpha + \beta}\phi\right) = \left(\partial^{\alpha + \beta}\Lambda\right)(\phi),
+\end{equation*}
+as desired.
+
+\begin{definition}
+    Let $\Lambda\in\scrD'(\Omega)$ be a distribution and $f\in C^\infty(\Omega)$. Define $f\Lambda\in\scrD'(\Omega)$ as 
+    \begin{equation*}
+        (f\Lambda)(\phi) = \Lambda\left(f\phi\right)\qquad\forall~\phi\in\scrD_K.
+    \end{equation*}
+\end{definition}
+
+We contend that this is indeed a distribution. For any multi-index $\alpha$, we have 
+\begin{equation*}
+    \partial^\alpha\left(f\phi\right) = \sum_{\substack{\beta + \gamma = \alpha\\\beta,\gamma\ge0}}\frac{\alpha!}{\beta!\gamma!}(\partial^\beta f)(\partial^\gamma\phi).
+\end{equation*}
+
+If $K\Subset\Omega$ is a compact set, then there is a positive integer $N$ and a constant $C > 0$ such that $|\Lambda(f)|\le C\|\phi\|_N$ for all $\phi\in\scrD_K$. Define 
+\begin{equation*}
+    C' = \sup\left\{|\partial^\beta f(x)|\colon x\in K,~|\beta|\le N\right\}.
+\end{equation*}
+Then, for any $x\in K$, and $|\alpha|\le N$, we have
+\begin{equation*}
+    \left|\partial^\alpha(f\phi)(x)\right|\le\sum_{\substack{\beta + \gamma = \alpha\\\beta,\gamma\ge 0}}\frac{\alpha!}{\beta!\gamma!}C'|\partial^\gamma\phi(x)|\le\left(\sum_{\substack{\beta + \gamma = \alpha\\\beta,\gamma\ge 0}}\frac{\alpha!}{\beta!\gamma!}C'\right)\|\phi\|_N
+\end{equation*}
+As $\alpha$ ranges over all multi-indices of absolute value at most $N$, we can take supremum of the left hand side to obtain 
+\begin{equation*}
+    \|f\phi\|_N\le C''\|\phi\|_N,
+\end{equation*}
+where $C''$ is a constant independent of $\phi$. Therefore, 
+\begin{equation*}
+    (f\Lambda)(\phi) = \Lambda(f\phi)\le C\|f\phi\|_N\le CC''\|\phi\|_N,
+\end{equation*}
+and hence, $f\Lambda$ is a distribution.
+
+\begin{theorem}[Countable Partition of Unity]\thlabel{thm:countable-partition-unity}
+    If $\Gamma$ is a c ollection of open sets in $\R^n$ whose union is $\Omega$, then there exists a sequence $\{\psi_i\}$ of elements in $\scrD(\Omega)$, with $\psi_i\ge 0$, such that 
+    \begin{enumerate}[label=(\alph*)]
+        \item each $\psi_i$ is supported in some member of $\Gamma$, 
+        \item $\displaystyle\sum_i\psi_i(x) = 1$ for every $x\in\Omega$, 
+        \item to every compact $K\Subset\Omega$, there is an integer $m$ and an open set $W\supseteq K$ such that 
+        \begin{equation*}
+            \psi_1(x) + \dots + \psi_m(x) = 1\qquad\forall~x\in W.
+        \end{equation*}
+    \end{enumerate}
+    Such a collection $\{\psi_i\}$ is called a \define{locally finite partition of unity} in $\Omega$ \define{subordinate} to the open cover $\Gamma$.
+\end{theorem}
+
+\begin{definition}
+    Suppose $\Lambda\in\scrD'(\Omega)$. If $\omega\subset\Omega$ is an open set and if $\Lambda\phi = 0$ for every $\phi\in\scrD(\Omega)$, we say that $\Lambda$ \define{vanishes in} $\omega$. Let $W$ be the union of all open $\omega\subseteq\Omega$ in which $\Lambda$ vanishes. The set $\Omega\setminus W$ is the \define{support} of $\Lambda$.
+\end{definition}
+
+\begin{theorem}
+    If $W$ is as above, then $\Lambda$ vanishes in $W$.
+\end{theorem}
+\begin{proof}
+    Let $\Gamma$ be the collection of all $\omega$ as in the above definition. Let $\{\psi_i\}$ be a locally finite partition of unity in $W$, subordinate to $\Gamma$. If $\phi\in\scrD(W)$, then since $\phi$ has compact support contained in $W$, all but finitely many $\psi_i$ vanish on the support of $\phi$, in particular, we can write 
+    \begin{equation*}
+        \phi = \sum_{i}\psi_i\phi,
+    \end{equation*}
+    where the sum on the right is essentially finite. Thus, we can write 
+    \begin{equation*}
+        \Lambda(\phi) = \sum_i \Lambda(\psi_i\phi),
+    \end{equation*}
+    but the support of each $\psi_i$ is contained in some $\omega$ on which $\Lambda$ vanishes. Consequently, the sum on the right is identically $0$, as desired.
+\end{proof}
+
+\begin{theorem}
+    Let $\Lambda\in\scrD'(\Omega)$ and $S_\Lambda$ be the support of $\Lambda$. 
+    \begin{enumerate}[label=(\alph*)]
+        \item If the support of $\phi\in\scrD(\Omega)$ is disjoint from $S_\Lambda$, then $\Lambda\phi = 0$.
+        \item If $S_\Lambda$ is empty, then $\Lambda = 0$. 
+        \item If $\psi\in C^\infty(\Omega)$ and $\psi = 1$ on some open set $V$ containing $S_\Lambda$, then $\phi\Lambda = \Lambda$. 
+        \item If $S_\Lambda$ is a compact subset of $\Omega$, then $\Lambda$ has finite order. In fact, there is a constant $C < \infty$ and a nonnegative integer $N$ such that $|\Lambda\phi|\le C\|\phi\|_N$ for every $\phi\in\scrD(\Omega)$. Further, $\Lambda$ extends in a unique way to a continuous linear functional on $C^\infty(\Omega)$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item This is just a restatement of the preceding result. 
+    \item Again, this is an immediate consequence of either the preceding result or (a). 
+    \item Let $\psi\in\scrD(\Omega)$. Consider the function $\phi - \psi\phi$. This vanishes on $V$, an open set containing $S_\Lambda$, and hence, the support of $\phi - \psi\phi$ is disjoint from $S_\Lambda$. Due to (a), we must have 
+    \begin{equation*}
+        \Lambda\left(\phi - \psi\phi\right) = 0\implies\Lambda\phi = \Lambda(\psi\phi) = (\psi\Lambda)(\phi),
+    \end{equation*}
+    as desired. 
+    \item In light of \thref{thm:countable-partition-unity} (d) with $\Gamma = \{\Omega\}$, there is a $\psi\in\scrD(\Omega)$ which is identically $1$ on an open set $V$ containing $S_\Lambda$. Due to (c), we have $\psi\Lambda = \Lambda$. Let $K$ denote the support of $\psi$. Then, there is a positive integer $N$ and a constant $C > 0$ such that $|\Lambda\phi|\le C\|\phi\|_N$ for all $\phi\in\scrD_K$. Consequently, for any $\phi\in\scrD(\Omega)$, we  can write 
+    \begin{equation*}
+        |\Lambda\phi| = |\Lambda(\psi\phi)|\le C\|\psi\phi\|_N\le CC'\|\phi\|_N,
+    \end{equation*}
+    where the last inequality has been argued earlier while showing that the differentiation of a distribution gives a distribution. It follows that $\Lambda$ is a distribution of finite order and that the constant $CC'$ is independent of the choice of compact set containing the support of $\phi$.
+
+    Finally, we must show that there is a unique extension of $\Lambda$ to $C^\infty(\Omega)$. For each $f\in C^\infty(\Omega)$, define 
+    \begin{equation*}
+        \Lambda f = \Lambda(\psi f).
+    \end{equation*}
+    This is obviously an extension of $\Lambda$ defined on $\scrD(\Omega)$. We must show that this is continuous. Indeed, recall that $K$ is the support of $\psi$ and choose an exhaustion $K_0\subset K_1\subset\cdots$ of $\Omega$. Choose a positive integer $M$ sufficiently large so that $M\ge N$ and $K\subseteq K_M$. Further, using an analogous argument as before, there is a constant $\wt C$ such that $\rho_M(\psi f)\le\wt C\rho_M(f)$. Indeed, for $|\alpha|\le M$ and $x\in K_M$, we have 
+    \begin{align*}
+        \left|\partial^\alpha(f\psi)(x)\right| &= \left|\sum_{\substack{\beta + \gamma = \alpha\\\beta,\gamma\ge 0}}\frac{\alpha!}{\beta!\gamma!}\partial^\beta \psi(x)\partial^\gamma f(x)\right|\le\wt C\rho_M(f).
+    \end{align*}
+    It follows that $\Lambda$ is a continuous linear functional on $C^\infty(\Omega)$. It remains to show that $\scrD(\Omega)$ is dense in $C^\infty(\Omega)$, whence it would follow that the extension is unique. Indeed, for any $f\in C^\infty(\Omega)$ and positive integer $n$, we can find $\psi_n\in\scrD(\Omega)$ such that $\psi_n = 1$ on $K_n$. Then, $f - \psi_nf = 0$ on $K_m$ for all $m\le n$. In particular, this means that $p_m(f - \psi_nf) \to 0$ as $n\to\infty$, consequently, $\psi_nf\to f$ in $C^\infty(\Omega)$, as desired. This completes the proof.\qedhere
+\end{enumerate}
 \end{proof}

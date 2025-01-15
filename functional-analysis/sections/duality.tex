@@ -1,0 +1,154 @@
+Throughout this section, for a normed linear space $X$, we use $x^\ast$ to denote the elements of its dual $X^\ast$. Further, there is a natural pairing 
+\begin{equation*}
+    \langle\cdot,\cdot\rangle: X\times X^\ast\to\K\qquad\langle x, x^\ast\rangle = x^\ast(x).
+\end{equation*}
+
+\begin{definition}
+    Suppose $X$ is a Banach space, $M$ is a subspace of $X$, and $N$ is a subspace of $X^\ast$. Their \define{annihilators} $M^\perp$ and ${}^\perp N$ are defined as follows 
+    \begin{align*}
+        M^\perp = \left\{x^\ast\in X^\ast\colon\langle x, x^\ast\rangle = 0~\text{for all }x\in M\right\}\\
+        ^\perp N = \left\{x\in X\colon \langle x, x^\ast\rangle = 0~\text{for all }x^\ast\in N\right\}.
+    \end{align*}
+    Obviously, $M^\perp$ is weak*-closed in $X^\ast$ and $^\perp N$ is norm-closed in $X$.
+\end{definition}
+
+\begin{theorem}
+    Let $X$ be a normed linear space, $M$ a subspace of $X$ and $N$ a subspace of $X^\ast$. 
+    \begin{enumerate}[label=(\alph*)]
+        \item $^\perp(M^\perp)$ is the norm-closure of $M$ in $X$. 
+        \item $({}^\perp N)^\perp$ is the weak*-closure of $N$ in $X^\ast$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Obviously $M\subseteq {}^\perp(M^\perp)$, and the latter is norm closed in $X$, and hence contains the norm closure of $M$. On the other hand, if $x$ is not in the norm closure of $M$, then due to the Hahn-Banach theorem, there is an $x^\ast\in X^\ast$ such that $\langle x, x^\ast\rangle\ne 0$ but $x^\ast$ vanishes on $M$. Hence, $x\notin {}^\perp(M^\perp)$.
+
+    Simiarly, $N$ is contained in $({}^\perp N)^\perp$, which is weak*-closed, therefore contains the weak*-closure of $N$. On the other hand, if $x^\ast$ is not in the weak*-closure of $N$, using the fact that $X^\ast$ is locally convex under the weak*-topology, there is a continuous linear functional $\Lambda: X^\ast\to\K$ (w.r.t. the weak*-topology) that vanishes on $N$ but not $x^\ast$. But $\Lambda = \ev_x$ for some $x\in X$ and since $\Lambda$ vanishes on $N$, we have that $x\in {}^\perp N$. Therefore, $x\notin({}^\perp N)^\perp$.
+\end{proof}
+
+\begin{theorem}
+    Suppose $X$ and $Y$ are normed linear spaces, and $T\in\scrB(X, Y)$. Then 
+    \begin{equation*}
+        \scrN(T^\ast) = \scrR(T)^\perp\qquad\text{and}\qquad\scrN(T) = {}^\perp\scrR(T^\ast).
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    The proof is quite straightforward. 
+    \begin{align*}
+        y^\ast\in\scrN^\ast(T)\iff T^\ast y^\ast = 0\iff \langle x, T^\ast y^\ast\rangle~\forall x\in X\\
+        \iff \langle Tx, y^\ast\rangle = 0~\forall x\in X\iff y^\ast\in\scrR(T)^{\perp}.
+    \end{align*}
+    Similarly, 
+    \begin{align*}
+        x\in\scrN(T)\iff Tx = 0\iff \langle Tx, y^\ast\rangle = 0~\forall y^\ast\in X^\ast\\
+        \iff\langle x, T^\ast y^\ast\rangle = 0~\forall y^\ast\in X^\ast\iff x\in{}^\perp\scrR(T^\ast).
+    \end{align*}
+    This completes the proof.
+\end{proof}
+
+\begin{corollary}\label{cor:for-closed-range}
+    Let $T\in\scrB(X, Y)$ where $X$ and $Y$ are normed linear spaces.
+    \begin{enumerate}[label=(\alph*)]
+        \item $\scrN(T^\ast)$ is weak*-closed in $Y^\ast$. 
+        \item $\scrR(T)$ is dense in $Y$ if and only if $T^\ast$ is injective. 
+        \item $T$ is injective if and only if $\scrR(T^\ast)$ is weak*-dense in $X^\ast$.
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    All three follow immediately from Hahn-Banach and the preceding result.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:equiv-surj-criterion}
+    Let $U$ and $V$ be the open unit balls in the Banach spaces $X$ and $Y$ respectively. If $T\in\scrB(X, Y)$, the following are equivalent:
+    \begin{enumerate}[label=(\alph*)]
+        \item There is a $\delta > 0$ such that $\|T^\ast y^\ast\|\ge\delta\|y^\ast\|$ for every $y^\ast\in Y^\ast$. 
+        \item $\overline{T(U)}\supseteq\delta V$. 
+        \item $T(U)\supseteq\delta V$. 
+        \item $T(X) = Y$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Suppose (a) holds and chooe $y_0\notin\overline{T(U)}$. Using the Hahn-Banach separation theorem, choose a $y^\ast\in Y^\ast$ such that $|\langle y, y^\ast\rangle|\le 1$ for every $y\in \overline{T(U)}$, but $|\langle y_0, y^\ast\rangle| > 1$. Thus, if $x\in U$, then we have 
+    \begin{equation*}
+        |\langle x, T^\ast y^\ast\rangle| = |\langle Tx, y^\ast\rangle|\le 1.
+    \end{equation*}
+    Thus $\|T^\ast y^\ast\|\le 1$, whence it follows from (a) that 
+    \begin{equation*}
+        \|y_0\|\ge\|y_0\|\|T^\ast y^\ast\|\ge\delta\|y_0\|\|y^\ast\|\ge\delta|\langle y_0, y^\ast\rangle| > \delta.
+    \end{equation*}
+    Consequently, if $\|y\|\le\delta$, then $y\in\overline{T(U)}$, as desired. 
+
+    Next, suppose (b) holds. Replacing $T$ by $\delta^{-1}T$, we may suppose that $\delta = 1$, that is, $V\subseteq\overline{T(U)}$, whence $\overline V\subseteq\overline{T(U)}$. If $y\in Y$ is non-zero, and $\varepsilon > 0$, then $y/\|y\|\in\overline V$, and we can find an $x_0\in U$ such that $\|Tx_0 - y/\|y\|\| < \varepsilon/\|y\|$, therefore, there is an $x\in X$ with $\|x\|\le \|y\|$ such that $\|Tx - y\| < \varepsilon$.
+
+    We shall now show that $V\subseteq T(U)$. Pick some $y\in V$ and set $y_1 = y$. Choose a sequence $(\varepsilon_n)$ of positive reals such that 
+    \begin{equation*}
+        \sum_{n = 1}^\infty \varepsilon_n < 1 - \|y_1\|.
+    \end{equation*}
+    We shall now define two sequences $(x_n)$ and $(y_n)$. Let $n\ge 1$ and suppose $y_n$ has been chosen. Then there is an $x_n\in X$ such that $\|x_n\|\le \|y_n\|$ and $\|y_n - Tx_n\| < \varepsilon_n$. Set 
+    \begin{equation*}
+        y_{n + 1} = y_n - Tx_n.
+    \end{equation*}
+    Note that for $n\ge 1$,
+    \begin{equation*}
+        \|x_{n + 1}\|\le \|y_{n + 1}\| < \varepsilon_n,
+    \end{equation*}
+    according to our construction. Hence, the sequence $(x_n)$ is absolutely summable and since we are in a Banach space, it is summable. It follows that 
+    \begin{equation*}
+        \|x\| := \left\|\sum_{n = 1}^\infty x_n\right\|\le\sum_{n = 1}^\infty\|x_n\| < \|x_1\| + \sum_{n = 1}^\infty \varepsilon_n < 1,
+    \end{equation*}
+    since $\|x_1\|\le \|y_1\|$. Consequently, $x\in U$, and 
+    \begin{equation*}
+        Tx = \lim_{N\to\infty}\sum_{n = 1}^N Tx_n = \lim_{N\to\infty}\sum_{n = 1}^\infty y_n - y_{n + 1} = y_1 = y,
+    \end{equation*}
+    as desired.
+
+    If (c) holds, then using the fact that $V$ is absorbing in $Y$, it is immediate that $T$ is surjective.
+
+    Finally, suppose (d) holds. Due to the open mapping theorem, there is a $\delta > 0$ such that $\delta V\subseteq T(U)$. Hence 
+    \begin{align*}
+        \|T^\ast y^\ast\| &= \sup\left\{|\langle x, T^\ast y^\ast\rangle|\colon x\in U\right\}\\
+        &= \sup\left\{|\langle Tx, y^\ast\rangle|\colon x\in U\right\}\\
+        &\ge\sup\left\{|\langle y, y^\ast\rangle|\colon y\in\delta V\right\}\\
+        &= \delta\sup\left\{|\langle y, y^\ast\rangle|\colon y\in V\right\} = \delta\|y^\ast\|.
+    \end{align*}
+    This completes the proof.
+\end{proof}
+
+\begin{theorem}[Closed Range Theorem]
+    If $X$ and $Y$ are Banach spaces and $T\in\scrB(X, Y)$, then the following are equivalent: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\scrR(T)$ is norm-closed in $Y$. 
+        \item $\scrR(T^\ast)$ is weak*-closed in $X^\ast$.
+        \item $\scrR(T^\ast)$ is norm-closed in $X^\ast$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Suppose first that (a) holds. We shall show that $\scrR(T^\ast)$ is its own weak*-closure. Recall that the weak*-closure of $\scrR(T^\ast)$ is given by $({}^\perp\scrR(T^\ast))^\perp = \scrN(T)^\perp$. Therefore, it suffices to show that $\scrN(T)^\perp\subseteq\scrR(T^\ast)$. 
+
+    Pick $x^\ast\in\scrN(T)^\perp$ and define a linear functional $\Lambda$ on $\scrR(T)$ by 
+    \begin{equation*}
+        \Lambda(Tx) = \langle x, x^\ast\rangle\qquad\forall~x\in X.
+    \end{equation*}
+    This functional is well-defined, for if $Tx = Tx'$, then $x - x'\in\scrN(T)$ and thus $\langle x - x', x^\ast\rangle = 0$. Next, since $\scrR(T)$ is closed in $Y$, it is a Banach space and hence, the open mapping theorem applies, consequently, there is a constant $K > 0$ such that for each $y\in\scrR(T)$, there is an $x\in X$ with $Tx = y$ and $\|x\|\le K\|y\|$. Hence, 
+    \begin{equation*}
+        |\Lambda y| = |\Lambda(Tx)| = |\langle x,x^\ast\rangle|\le \|x\|\|x^\ast\|\le K\|y\|\|x^\ast\|,
+    \end{equation*}
+    i.e., $\Lambda$ is continuous. This can then be extended to a linear functional $y^\ast\in Y^\ast$. Hence, for all $x\in X$, we have 
+    \begin{equation*}
+        \langle Tx, y^\ast\rangle = \Lambda(Tx) = \langle x, x^\ast\rangle.
+    \end{equation*}
+    Thus $x^\ast = T^\ast y^\ast$, as desired.
+
+    Obviously, if (b) holds, then (c) does, since the norm topology on $X^\ast$ is finer than the weak*-topology.
+
+    Suppose now that (c) holds. Let $Z$ denote the norm-closure of $\scrR(T)$ in $Y$ and let $S$ denote the corestriction of $T$ to $Z$. Due to \thref{cor:for-closed-range} (b), since $\scrR(S)$ is dense in $Z$, $S^\ast: Z^\ast\to X^\ast$ is injective.
+
+    If $z^\ast\in Z^\ast$, we can extend this to some $y^\ast\in Y^\ast$ using Hahn-Banach. Then, for every $x\in X$, we have 
+    \begin{equation*}
+        \langle x, T^\ast y^\ast\rangle = \langle Tx, y^\ast\rangle = \langle Sx, z^\ast\rangle = \langle x, S^\ast z^\ast\rangle.
+    \end{equation*}
+    Hence, $S^\ast z^\ast = T^\ast y^\ast$, consequently, $\scrR(S^\ast) = \scrR(T^\ast)$, is norm-closed due to (c), and hence, complete. It follows from the open mapping theorem that $S^\ast: Z^\ast\to\scrR(S^\ast)$ is an isomorphism, owing to it being continuous and bijective between Banach spaces. Hence, there is a constant $c > 0$ such that 
+    \begin{equation*}
+        c\|z^\ast\|\le\|S^\ast z^\ast\|\qquad\forall~z^\ast\in Z^\ast.
+    \end{equation*}
+    Due to \thref{thm:equiv-surj-criterion}, $S: X\to Z$ is surjective. But since $\scrR(T) = \scrR(S)$, we have that $\scrR(T) = Z$ is a closed subspace of $Y$, thereby completing the proof.
+\end{proof}
