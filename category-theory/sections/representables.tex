@@ -58,7 +58,7 @@ Similarly, we have the dual definitions.
     This is known as the \define{Yoneda embedding} of $\scrA$.
 \end{definition}
 
-\begin{theorem}[Yoneda's Lemma]
+\begin{theorem}[Yoneda's Lemma]\thlabel{thm:yoneda}
     Let $\scrA$ be a locally small category and $X: \scrA^{op}\to\catSet$ be a functor. Then, there is a bijection
     \begin{equation*}
         [\scrA^{op},\catSet](H_A, X)\xrightarrow{\sim} X(A)\qquad\alpha\mapsto\alpha_A(1_A),
@@ -128,3 +128,27 @@ Similarly, we have the dual definitions.
     \end{equation*}
     Let $\alpha: H_A\implies X$. This maps to $\theta\circ\alpha$ under the horizontal map and goes to $(\theta\circ\alpha)_A(1_A)$ under the vertical map. On the other hand, it first goes to $\alpha_A(1_A)$ under the vertical map which maps to $\theta_A(\alpha_A(1_A))$ under the horizontal map. These two are obviously equal, since $(\theta\circ\alpha)_A = \theta_A\circ\alpha_A$. This completes the proof.
 \end{proof}
+
+\begin{corollary}
+    For a locally small category $\scrA$, the Yoneda embedding $H_\bullet: \scrA\to[\scrA^{op},\catSet]$ is full and faithful.
+\end{corollary}
+\begin{proof}
+    Let $A, A'\in\scrA$. Due to (the proof of) \thref{thm:yoneda}, there is a bijection 
+    \begin{equation*}
+        \wh{\cdot}: [\scrA^{op},\catSet](H_A, H_{A'})\to H_{A'}(A)\qquad \alpha\mapsto\alpha_A(1_A).
+    \end{equation*}
+    Under this map, $H_f$ maps to 
+    \begin{equation*}
+        \wh{H_f} = (H_f)_A(1_A) = f\circ 1_A = f.
+    \end{equation*}
+    This shows that $f\mapsto H_f$ must be a bijection, thereby completing the proof.
+\end{proof}
+
+\begin{lemma}
+    Let $F: \scrA\to\scrB$ be a full, faithful functor, and $A, A'\in\scrA$. Then 
+    \begin{enumerate}[label=(\alph*)]
+        \item a map $f\in\scrA$ is an isomorphism if and only if the map $F(f)$ in $\scrB$ is an isomorphism. 
+        \item for any isomorphism $g: F(A)\to F(A')$ in $\scrB$, there is a unique isomorphism $f: A\to A'$ in $\scrA$ such that $F(f) = g$. 
+        \item the objects $A$ and $A'$ of $\scrA$ are isomorphic if and only if the objects $F(A)$ and $F(A')$ of $\scrB$ are isomorphic.
+    \end{enumerate}
+\end{lemma}

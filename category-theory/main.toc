@@ -2,4 +2,5 @@
 \contentsline {section}{\numberline {1}Categories, Functors, and Natural Transformations}{2}{section.1}%
 \contentsline {section}{\numberline {2}Adjoints}{5}{section.2}%
 \contentsline {section}{\numberline {3}Representables}{7}{section.3}%
-\contentsline {part}{II\hspace {1em}Abelian Categories}{11}{part.2}%
+\contentsline {section}{\numberline {4}Limits}{10}{section.4}%
+\contentsline {part}{II\hspace {1em}Abelian Categories}{14}{part.2}%

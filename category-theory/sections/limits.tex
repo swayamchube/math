@@ -1,0 +1,130 @@
+\begin{definition}
+    Let $\scrA$ be a category and $\mathbf{I}$ a small category. A functor $\mathbf{I}\to\scrA$ is called a \define{diagram} in $\scrA$ of \define{shape} $\mathbf{I}$.
+\end{definition}
+
+\begin{definition}
+    Let $\scrA$ be a category, $\mathbf{I}$ a small category, and $D: \mathbf{I}\to\scrA$ a diagram in $\scrA$. 
+    \begin{enumerate}[label=(\alph*)]
+        \item A \define{cone} on $D$ is an object $A\in\scrA$ (the \define{vertex} of the cone) together with a family $\left(A\xrightarrow{f_I} D(I)\right)_{I\in\mathbf{I}}$ of maps in $\scrA$ such that for all maps $I\xrightarrow{u} J$ in $\mathbf{I}$, the triangle 
+        \begin{equation*}
+            \xymatrix {
+                & D(I)\ar[dd]^{Du}\\
+                A\ar[ru]^{f_I}\ar[rd]_{f_J} & \\
+                & D(J)
+            }
+        \end{equation*}
+        commutes.
+
+        \item A \define{limit} of $D$ is a cone $\left(L\xrightarrow{p_I} D(I)\right)_{I\in\mathbf{I}}$ with the property that for any cone on $D$, there exists a unique map $\overline f: A\to L$ such that $p_I\circ\overline f = f_I$ for all $I\in\mathbf{I}$. The maps $p_I$ are called the \define{projections} of the limit.
+    \end{enumerate}
+\end{definition}
+
+\begin{example}
+    The fibered product in a category is an example of a limit. Suppose we wish to define $X\times_Z Y$, where $X, Y, Z\in\scrA$, a category. Consider the small category $\mathbf{I}$: 
+    \begin{equation*}
+        \xymatrix {
+            & \bullet_1\ar[d]\\
+            \bullet_2\ar[r] & \bullet_3
+        }
+    \end{equation*}
+    and the functor $D: \mathbf{I}\to\scrA$ sending $\bullet_1\mapsto X$, $\bullet_2\mapsto Y$, and $\bullet_3\mapsto Z$. The limit $(L, p_X, p_Y)$ over $D$ is called the \define{fibered product}. 
+
+    Given any other pair $(T, f_X, f_Y)$ making the following diagram commute: 
+    \begin{equation*}
+        \xymatrix {
+            T\ar@/^1pc/[rrd]^{f_X}\ar@/_1pc/[rdd]_{f_Y}\ar@{.>}[rd]|-{\exists !} & & \\
+            & L\ar[r]^{p_X}\ar[d]_{p_Y} & X\ar[d]\\
+            & Y\ar[r] & Z
+        }
+    \end{equation*}
+    there is a unique map $T\to L$ making all triangles in the above diagram commute. The square in the above diagram is often called a \define{pullback square}.
+
+    Similarly, one can construct the product of $X$ and $Y$. In this case, take $\mathbf{I}$ to be $$\bullet_1\qquad\bullet_2$$ and $D$ to be the functor sending $\bullet_1\mapsto X$ and $\bullet_2\mapsto Y$. The limit over $D$ is called the \define{product} of $X$ and $Y$ and is denoted by $X\times Y$.
+
+    Note that a product can be defined for an arbitrary collection of objects. Just take a suitable category $\mathbf{I}$ with no arrows (other than the identities) and the desired diagram functor $D$. A limit over $D$ is the required product.
+\end{example}
+
+\begin{example}
+    We now define equalizers. Consider the category $\mathbf I$:
+    \begin{equation*}
+        \xymatrix {
+            \bullet_1\ar@/^1pc/[r]\ar@/_1pc/[r] & \bullet_2.
+        }
+    \end{equation*}
+    Let $s, t: X\to Y$ be maps in $\scrA$ and let $D: \mathbf I\to\scrA$ be the functor sending $\bullet_1\mapsto X$, $\bullet_2\mapsto Y$ and the two arrows to $s$ and $t$. An \define{equalizer} of $s$ and $t$ is a limit over $D$.
+\end{example}
+
+\begin{definition}
+    \begin{enumerate}[label=(\alph*)]
+        \item Let $\mathbf{I}$ be a small category. A category $\scrA$ \define{has limits of shape} $\mathbf I$ if for every diagram $D:\mathbf I\to\scrA$, a limit of $D$ exists. 
+        \item A category \define{has all limits} if it has limits of shape $\mathbf I$ for all small categories $\mathbf I$.
+        \item A category is said to be \define{finite} if it contains only finitely many morphisms. 
+        \item A \define{finite limit} is a limit of shape $\mathbf{I}$ for some finite category $\mathbf{I}$.
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    Let $\scrA$ be a category. 
+    \begin{enumerate}[label=(\alph*)]
+        \item If $\scrA$ has all products and equalizers, then $\scrA$ has all limits. 
+        \item If $\scrA$ has binary products, a terminal object and equalizers, then $\scrA$ has all finite limits.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    We prove (a), since the proof of (b) is analogous. Let $D:\mathbf{I}\to\scrA$ be a diagram in $\scrA$. We shall work with the two products 
+    \begin{equation*}
+        \prod_{I\in\mathbf{I}} D(I)\qquad\text{and}\qquad\prod_{\substack{J\xrightarrow{u} K\\\text{in }\mathbf{I}}} D(K).
+    \end{equation*}
+    For each $u: J\to K$ in $\mathbf{I}$, there is a composition 
+    \begin{equation*}
+        \prod_{I\in\mathbf{I}} D(I)\xrightarrow{\pr_J} D(J)\xrightarrow{Du} D(K).
+    \end{equation*}
+    The universal property of products furnishes a unique 
+    \begin{equation*}
+        s: \prod_{I\in\mathbf{I}} D(I)\longrightarrow\prod_{\substack{J\xrightarrow{u} K\\\text{in }\mathbf{I}}} D(K).
+    \end{equation*}
+    Similarly, for each $u: J\to K$ in $\mathbf{I}$, there is a composition 
+    \begin{equation*}
+        \prod_{I\in\mathbf{I}}D(I)\xrightarrow{\pr_K} D(K).
+    \end{equation*}
+    The universal property of products furnishes a unique 
+    \begin{equation*}
+        t: \prod_{I\in\mathbf{I}} D(I)\longrightarrow\prod_{\substack{J\xrightarrow{u} K\\\text{in }\mathbf{I}}} D(K).
+    \end{equation*}
+    Let $p: L\longrightarrow \prod_{I\in\mathbf{I}} D(I)$ denote their equalizer and denote $p_I = \pr_I\circ p$. We contend that this is the desired limit.
+
+    Let $\left(A\xrightarrow{f_I} D(I)\right)_{I\in\mathbf{I}}$ be another cone on $D$. That is, for $J\xrightarrow{u} K$, we have a commutative diagram: 
+    \begin{equation*}
+        \xymatrix {
+            & D(J)\ar[dd]^{Du}\\
+            A\ar[ru]^{f_J}\ar[rd]_{f_K} & \\
+            & D(K).
+        }
+    \end{equation*}
+    The universal property of products first furnishes a unique map 
+    \begin{equation*}
+        f: A\longrightarrow\prod_{I\in\mathbf{I}} D(I)
+    \end{equation*}
+    and a unique 
+    \begin{equation*}
+        g: A\longrightarrow\prod_{\substack{J\xrightarrow{u}K\\\text{in }\mathbf{I}}} D(K),
+    \end{equation*}
+    whose $K$-th component is given by $f_K$.
+
+    We would like to show that 
+    \begin{equation*}
+        \xymatrix@R+1pc {
+            && A\ar[ld]_{f}\ar[rd]^g\ar@{.>}@/_1pc/[lld]|-{\exists!} &\\
+            L\ar[r] & \displaystyle\prod_{I\in\mathbf{I}} D(I)\ar@/^1pc/[rr]^s\ar@/_1pc/[rr]_t && \displaystyle\prod_{\substack{J\xrightarrow{u}K\\\text{in }\mathbf{I}}} D(K)
+        }
+    \end{equation*}
+    commutes. We have, for each $J\xrightarrow{u} K$, 
+    \begin{equation*}
+        \pr_K\circ s\circ f = Du\circ\pr_I\circ f = Du\circ f_I = f_K = \pr_K\circ g.
+    \end{equation*}
+    Due to the universal property, $s\circ f = g$. Now, the universal property of equalizers furnishes a unique map $A\to L$ making the diagram commute. The composition 
+    \begin{equation*}
+        A\longrightarrow L\longrightarrow\prod_{I\in\mathbf{I}} D(I)\xrightarrow{\pr_I} D(I)
+    \end{equation*}
+    is precisely $pr_I\circ f = f_I$. This shows that $L$ is indeed the desired limit.
+\end{proof}
