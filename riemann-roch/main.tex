@@ -258,6 +258,7 @@
 
 \begin{document}
 \maketitle
+\tableofcontents
 
 \section{\v{C}ech Cohomology}
 
@@ -433,5 +434,63 @@ that is, $(g_kl) = t^{\frakU}_{\frakV}\left((f_{ij})\right)$, that is, $t^{\frak
 \begin{corollary}
     If $\frakU$ is a Leray covering of $X$, then $H^1(\frakU,\scrF)\cong H^1(X,\scrF)$.
 \end{corollary}
-\end{document}
 
+\section{The Finiteness Theorem}
+
+\subsection{Laurent Schwartz's Theorem}
+
+\begin{theorem}[Closed Range Theorem]\thlabel{thm:closed-range}
+    Let $u: E\to F$ be a continuous linear map between Banach spaces. Then $u(E)$ is closed in $F$ if and only if $u^{\ast}(F^\ast)$ is closed in $E^\ast$.
+\end{theorem}
+\begin{proof}
+    See \cite[Theorem 4.14]{grandpa-rudin}.
+\end{proof}
+
+\begin{theorem}[Schauder]\thlabel{thm:schauder}
+    Let $u: E\to F$ be a continuous linear map between Banach spaces. Then $u$ is compact if and only if $u^\ast$ is.
+\end{theorem}
+\begin{proof}
+    See \cite[Theorem 4.19]{grandpa-rudin}.
+\end{proof}
+
+\begin{lemma}\thlabel{lem:schwartz}
+    Let $E$, $F$ be Banach spaces and let $u: E\to F$ be a continuous linear map. Suppose that $u$ is injective and that $u(E)$ is closed. Let $v: E\to F$ be a compact continuous linear map. Then $\ker(u + v)$ is finite-dimensional and $(u + v)(E)$ is closed in $F$.
+\end{lemma}
+\begin{proof}
+    Let $N = \ker(u + v)$. To see that this is finite-dimensional, it suffices to show that the closed unit ball in $N$ is compact. To this end, let $(x_n)$ be a sequence in the closed unit ball of $N$. Since $v$ is compact, there is a subsequence $(x_{n_k})$ such that $\left(v(x_{n_k})\right)$ converges, as a result, $u(x_{n_k}) = -v(x_{n_k})$ also converges. Since $u(E)$ is closed in $F$, it is a Banach space and $u: E\to u(E)$ is a bijection, whence, due to the ``bounded inverse theorem'', there is a constant $c > 0$ such that $\|u(x)\|\ge c\|x\|$ for all $x\in E$, consequently, for $k,l\ge 1$, 
+    \begin{equation*}
+        \|x_{n_k} - x_{n_l}\|\le\frac{1}{c}\|u(x_{n_k}) - u(x_{n_l})\|,
+    \end{equation*}
+    whence $(x_{n_k})$ is Cauchy, and thus converges. This shows that $N$ is finite-dimensional.
+
+    Owing to $N$ being finite-dimensional, there is a closed subspace $N'$ of $E$ such that $E = N\oplus N'$. Since $(u + v)(E) = (u + v)(N')$, it suffices to show that the latter is closed in $F$. Let $(x_n)$ be a sequence in $N'$ such that $(u + v)(x_n)$ converges in $F$; we show that the limit lies in $(u + v)(N')$. First, we claim that the sequence $(x_n)$ is bounded. If not, then we can move to a subsequence and assume that $0\ne x_n$ for all $n$ and $\|x_n\|\to\infty$ as $n\to\infty$. Set $x_n' = x_n/\|x_n\|$. Then $\|x_n'\| = 1$ and $(u + v)(x_n')\to 0$ as $n\to\infty$. Since $v$ is compact, there is a subsequence $(x_{n_k}')$ such that $v(x_{n_k}')$ converges, consequently, 
+    \begin{equation*}
+        u(x_{n_k}') = (u + v)(x_{n_k}') - v(x_{n_k}')
+    \end{equation*}
+    also converges. As we argued in the preceding paragraph using the ``bounded inverse theorem'', this means that $(x_{n_k}')$ converges. It follows that there is some $x_0\in N'$ with $\|x_0\| = 1$ and $(u + v)(x_0) = 0$, that is, $x_0\in N\cap N' = \{0\}$, a contradiction. Hence, $(x_n)$ is a bounded sequence in $E$.
+
+    Compactness of $v$ implies that there is a subsequence $(x_{n_k})$ such that $v(x_{n_k})$ converges in $F$; and since $(u + v)(x_n)$ was assumed to be convergent, we see that $u(x_{n_k})$ is convergent too. Again, using the ``bounded inverse theorem'', we have that $(x_{n_k})$ is convergent to some $x_0\in N'$. Hence, 
+    \begin{equation*}
+        \lim_{n\to\infty} (u + v)(x_n) = \lim_{k\to\infty}(u + v)(x_{n_k}) = (u + v)(x_0)\in (u + v)(E),
+    \end{equation*}
+    as desired.
+\end{proof}
+
+\begin{theorem}[L. Schwartz]\thlabel{thm:schwartz}
+    Let $E$, $F$ be Banach space and let $u, v: E\to F$ be continuous linear maps. Suppose that $u$ is surjective and that $v$ is compact. Then $F' = (u + v)(E)$ is closed and $F/F'$ is finite-dimensional.
+\end{theorem}
+\begin{proof}
+    Due to \thref{thm:closed-range}, it suffices to show that $(u^\ast + v^\ast)(F^\ast)$ is closed in $E^\ast$. Due to \thref{thm:schauder}, we know that $v^\ast$ is compact, and due to \thref{thm:closed-range}, we know that $u^\ast(F^\ast)$ is closed in $E^\ast$. Further, since $u$ is surjective, it is easy to see that $u^\ast$ must be injective. Thus, due to \thref{lem:schwartz}, we see that $(u^\ast + v^\ast)(F^\ast)$ is closed in $E^\ast$, as desired. We have shown that $F'$ is closed in $F$.
+
+    To show that $F/F'$ is finite-dimensional, we shall show that its closed unit ball is compact. Indeed, let $(w_n)$ be a sequence in the closed unit ball of $F/F'$, and choose preimages $(x_n)$ in $F$ satisfying $\|x_n\|\le 2$. Since $u: E\to F$ is surjective, it is a consequence of the open mapping theorem, that there is a constant $M > 0$, independent of the sequence chosen, and a sequence $(y_n)$ in $E$ such that $\|y_n\|\le M$ and $u(y_n) = x_n$. Since $v$ is compact, there is a subsequence $(x_{n_k})$ such that $z_k = v(x_{n_k})$ converges in $F$ to some $\wt z$. We can write 
+    \begin{equation*}
+        y_{n_k} = u(x_{n_k}) + v(x_{n_k}) - z_k = (u + v)(x_{n_k}) - z_k,
+    \end{equation*}
+    and hence, $-z_k$ maps to $w_{n_k}$ in $F/F'$. Since the former converges, so does the latter. It follows that $(w_n)$ admits a convergent subsequence, consequently, the closed unit ball in $F/F'$ is compact, whence $F/F'$ is finite-dimensional. This completes the proof.
+\end{proof}
+
+\subsection{The Finiteness Theorem}
+
+\bibliographystyle{alpha}
+\bibliography{references}
+\end{document}
