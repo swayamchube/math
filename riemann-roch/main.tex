@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[10pt]{article}
 
 % \usepackage{./arxiv}
 
@@ -173,13 +173,14 @@
 \newcommand{\frakX}{\mathfrak{X}}
 
 % General/Differential/Algebraic Topology 
-\newcommand{\scrA}{\mathscr A}
-\newcommand{\scrB}{\mathscr B}
-\newcommand{\scrF}{\mathscr F}
-\newcommand{\scrN}{\mathscr N}
-\newcommand{\scrP}{\mathscr P}
-\newcommand{\scrR}{\mathscr R}
-\newcommand{\scrS}{\mathscr S}
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrO}{\mathscr{O}} % sheaf
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrS}{\mathscr{S}}
 \newcommand{\bbH}{\mathbb H}
 \newcommand{\Int}{\operatorname{Int}}
 \newcommand{\psimeq}{\simeq_p}
@@ -402,7 +403,7 @@ that is, $(g_kl) = t^{\frakU}_{\frakV}\left((f_{ij})\right)$, that is, $t^{\frak
     Note that since the $t^{\frakU}_{\frakV}$ are all injective, the natural map $H^1(\frakU,\scrF)\to H^1(X,\scrF)$ is injective. In particular, this means that $H^1(X,\scrF) = 0$ if and only if $H^1(\frakU,\scrF) = 0$ for every open cover $\frakU$ of $X$.
 \end{remark}
 
-\begin{theorem}[Leray]
+\begin{theorem}[Leray]\thlabel{thm:leray}
     Let $\scrF$ be a sheaf of abelian groups on the topological space $X$ and $\frakU = (U_i)_{i\in I}$ be an open cover of $X$ such that $H^1(U_i,\scrF) = 0$ for every $i\in I$. Then for every open covering $\frakV = (V_\alpha)_{\alpha\in A} < \frakU$, the mapping 
     \begin{equation*}
         t^{\frakU}_{\frakV} : H^1(\frakU,\scrF)\to H^1(\frakV,\scrF)
@@ -490,6 +491,140 @@ that is, $(g_kl) = t^{\frakU}_{\frakV}\left((f_{ij})\right)$, that is, $t^{\frak
 \end{proof}
 
 \subsection{The Finiteness Theorem}
+
+The objective of this (sub)section is to prove the following theorem: 
+\begin{theorem}\thlabel{thm:finiteness-of-cohomology}
+    Let $X$ be a compact Riemann surface, and let $\frakU = \{U_i\}_{i\in I}$ be an open covering of $X$. Then $H^1(\frakU,\scrO)$ is a finite-dimensional vector space.
+\end{theorem}
+
+Since $X$ is compact, there is a finite covering $\frakV = \{V_\alpha\}$ such that each $V_\alpha$ is an \emph{analytic disc}\footnote{An open set $U\subseteq X$ is said to be a analytic disc if there is a chart $\phi: U\to D$ where $D$ is the open unit disc in $\bbC$.} and such that $\frakV$ is a refinement of $\frakU$. Due to \thref{thm:leray}, we know that $H^1(\frakU,\scrO)\cong H^1(\frakV,\scrO)$ and hence, it suffices to show that the latter is a finite-dimensional vector space.
+
+We may therefore suppose that $\frakU = \{U_i\}_{i\in I}$ where $I$ is finite, and that there are charts $\phi_i: U_i\to D\subseteq\bbC$, there $D = B(0, 1)$, the open unit disc in $\bbC$. For any $r < 1$, set $U_i(r) = \phi_i^{-1}\left(B(0, r)\right)$. There is a $0 < r_0 < 1$ such that $\bigcup_{i\in I} U_i(r_0) = X$. Thus, for $r_0 < r < 1$, we have that $\bigcup_{i\in I} U_i(r) = X$. Denote by $\frakU(r)$ the finite covering $\{U_i(r)\}_{i\in I}$ of $X$.
+
+Let 
+\begin{equation*}
+    Z_b^1(r) = \left\{(f_{ij})_{i,j\in I}\in Z^1(\frakU(r),\scrO)\colon \sup_{x\in U_i(r)\cap U_j(r)}|f_{ij}(x)| < \infty\quad\text{for all }i,j\in I\right\},
+\end{equation*}
+and for $\xi = (f_{ij})_{i,j\in I}\in Z^1_b(r)$, define 
+\begin{equation*}
+    \|\xi\| := \|\xi\|_r = \max_{i,j\in I}\sup_{x\in U_i(r)\cap U_j(r)}|f_{ij}(x)|.
+\end{equation*}
+The above gives $Z^1_b(r)$ the structure of a normed linear space. It is easy to see that $Z^1_b(r)$ is in fact a Banach space since a uniformly Cauchy sequence of holomorphic functions converges to a holomorphic function.
+
+Next, define 
+\begin{equation*}
+    B^1_b(r) = Z^1_b(r)\cap B^1(\frakU(r), \scrO),
+\end{equation*}
+and 
+\begin{equation*}
+    C^0_b(r) = \left\{(f_i)_{i\in I}\in C^0(\frakU(r),\scrO)\colon \sup_{x\in U_i(r)}|f_i(x)| < \infty\quad\text{for all }i\in I\right\}.
+\end{equation*}
+If $\eta = (f_i)_{i\in I}\in C^0_b(r)$, we also set 
+\begin{equation*}
+    \|\eta\| = \|\eta\|_r = \max_{i\in I}\sup_{x\in U_i(r)}|f_i(x)|.
+\end{equation*}
+Then $C_b^0(r)$ is also a Banach space under the above norm for the same reason $Z^1_b(r)$ was.
+
+\begin{lemma}\thlabel{lem:preimage-bounded-boundaries}
+    Let $\delta: C^0(\frakU(r),\scrO)\to B^1(\frakU(r),\scrO)$ be the coboundary operator as defined earlier. We have 
+    \begin{equation*}
+        \delta^{-1}\left(B^1_b(r)\right) = C^0_b(r).
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Obviously, the image of $C^0_b(r)$ under $\delta$ is contained in $B^1_b(r)$ since the indexing set $I$ is finite. Conversely, let $(f_i)_{i\in I}\in C^0(\frakU(r), \scrO)$ be such that 
+    \begin{equation*}
+        M_{ij} = \sup_{x\in U_i(r)\cap U_j(r)} |f_i(x) - f_j(x)| < \infty\quad\text{for all }i,j\in I.
+    \end{equation*}
+    Since $U_i(r)$ is relatively compact in $U_i$, it suffices to show that every $a\in\partial U_i(r)$ has a neighborhood $V$ in $U_i$ such that 
+    \begin{equation*}
+        \sup_{x\in V\cap U_i(r)}|f_i(x)| < \infty.
+    \end{equation*}
+    Indeed, since $\partial U_i(r) = \overline{U_i(r)}\setminus U_i(r)$ is compact, it can be covered with finitely many such $V$'s and hence, there is a constant $M > 0$ such that for each $a\in\partial U_i(r)$, we have 
+    \begin{equation*}
+        \limsup_{\substack{x\to a\\ x\in U_i(r)}} |f_i(x)| < M,
+    \end{equation*}
+    consequently, from the Maximum Modulus Principle (see \cite[Theorem VI.1.4]{conway-complex-1}), $f_i$ is bounded on $U_i(r)$, that is, $(f_i)_{i\in I}\in C^0_b(r)$.
+    
+    Now, let $a\in\partial U_i(r)$, choose an index $j\in I$ such that $a\in U_j(r)$, and let $V$ be a neighborhood of $a$ that is relatively compact in $U_j(r)$. We have, for $x\in V\cap U_i(r)$, 
+    \begin{equation*}
+        \sup_{x\in V\cap U_i(r)} |f_i(x)|\le\sup_{x\in V\cap U_i(r)}|f_i(x) - f_j(x)| + \sup_{x\in V} |f_j(x)|\le M_{ij} + \sup_{x\in V}|f_j(x)| < \infty,
+    \end{equation*}
+    since $V$ is relatively compact in $U_j(r)$. The conclusion follows.
+\end{proof}
+
+\begin{theorem}[Montel]\thlabel{thm:montel}
+    Let $X$ be a Riemann surface and let $\mathcal{F}\subseteq\scrO(X)$ be a subset such that for each compact set $K\subseteq X$
+    \begin{equation*}
+        \sup_{f\in\mathcal F}\sup_{x\in K} |f(x)| < \infty.
+    \end{equation*}
+    Then any sequence $(f_n)_{n\ge 1}$ of functions in $\mathcal F$ has a subsequence converging uniformly on compact subsets of $K$.
+\end{theorem}
+\begin{proof}[Proof Sketch.]
+    Cover $X$ by countably many charts. Using a diagonal argument, choose a subsequence $(f_\nu)_{\nu}$ that converges uniformly on compact subsets of each chart. Since any compact subset of $X$ can be covered by finitely many compact sets, each contained in a chart, we have the desired conclusion.
+\end{proof}
+
+\begin{lemma}\thlabel{lem:intermediate-finiteness}
+    For $r_0 < r < 1$, the vector space 
+    \begin{equation*}
+        Z^1_b(r)/B^1_b(r)
+    \end{equation*}
+    is finite-dimensional.
+\end{lemma}
+\begin{proof}
+    Choose $\rho$ such that $r < \rho < 1$. Since $\frakU(r)$ is a refinement of $\frakU$ through the identity map $\tau: I\to I$, due to \thref{thm:leray}, we have that the restriction map 
+    \begin{equation*}
+        Z^1(\frakU,\scrO)\to Z^1(\frakU(r),\scrO)\qquad (f_{ij})_{i,j\in I}\longmapsto \left(f_{ij}|_{U_i(r)\cap U_j(r)}\right)_{i,j\in I}
+    \end{equation*}
+    induces an isomorphism $H^1(\frakU,\scrO)\to H^1(\frakU(r),\scrO)$. Thus, the map 
+    \begin{equation*}
+        Z^1(\frakU,\scrO)\oplus C^0(\frakU(r),\scrO)\to Z^1(\frakU(r),\scrO)\qquad\left((f_{ij})_{i,j\in I}, (g_i)_{i\in I}\right)\longmapsto \left(f_{ij}|_{U_i(r)\cap U_j(r)}\right)_{i,j\in I} + \delta\left((g_i)_{i\in I}\right).
+    \end{equation*}
+    Since every $f\in\scrO(U_i\cap U_j)$ is bounded on $U_i(\rho)\cap U_j(\rho)$, owing to the latter being relatively compact in the former, it follows that the map 
+    \begin{equation*}
+        Z^1_b(\rho)\oplus C^0(\frakU(r),\scrO)\to Z^1(\frakU(r),\scrO)\qquad\left((f_{ij})_{i,j\in I}, (g_i)_{i\in I}\right)\longmapsto \left(f_{ij}|_{U_i(r)\cap U_j(r)}\right)_{i,j\in I} + \delta\left((g_i)_{i\in I}\right)
+    \end{equation*}
+    is surjective too. We claim that the restriction of the above map 
+    \begin{equation*}
+        u: Z^1_b(\rho)\oplus C^0_b(r)\to Z^1_b(r)\qquad\left((f_{ij})_{i,j\in I}, (g_i)_{i\in I}\right)\longmapsto \left(f_{ij}|_{U_i(r)\cap U_j(r)}\right)_{i,j\in I} + \delta\left((g_i)_{i\in I}\right)
+    \end{equation*}
+    is surjective. Indeed, for some $(f_{ij})_{i,j\in I}\in Z^1_b(r)$, choose an element $(\wt f_{ij})_{i,j\in I}\in Z^1(\frakU,\scrO)$ which maps to the image of $(f_{ij})$ in $H^1(\frakU(r),\scrO)$. The difference 
+    \begin{equation*}
+        (f_{ij})_{i,j\in I} - \left(\wt f_{ij}|_{U_i(r)\cap U_j(r)}\right)_{i,j\in I}\in B^1_b(r),
+    \end{equation*}
+    since $U_i(r)\cap U_j(r)$ is relatively compact in $U_i\cap U_j$. From \thref{lem:preimage-bounded-boundaries}, we know that the preimage of the above map under $\delta$ lies inside $C^0_b(r)$, as desired.
+
+    Let $v: Z^1_b(\rho)\oplus C^0_b(r)\to Z^1_b(r)$ be given by the map 
+    \begin{equation*}
+        v\left((f_{ij})_{i,j\in I}, (g_i)_{i\in I}\right) = \left(-f_{ij}|_{U_i(r)\cap U_j(r)}\right)_{i,j\in I}.
+    \end{equation*}
+    Note that $U_i(r)\cap U_j(r)$ is relatively compact in $U_i(\rho)\cap U_j(\rho)$, whence by \thref{thm:montel} it is easy to argue that $v$ is compact\footnote{Probably add more details here?}. 
+
+    Finally, by \thref{thm:schwartz}, the continuous linear mapping $u + v : Z^1_b(\rho)\oplus C^0_b(r)\to Z^1_b(r)$ given by 
+    \begin{equation*}
+        (u + v)\left((f_{ij})_{i,j\in I}, (g_i)_{i\in I}\right) = \delta\left((g_i)_{i\in I}\right)
+    \end{equation*}
+    has closed image with finite codimension. Since the image of $u + v$ is precisely $B^1_b(r)$, we have the desideratum.
+\end{proof}
+
+\begin{lemma}\thlabel{lem:U(r)-finiteness}
+    $\dim H^1\left(\frakU(r),\scrO\right) < \infty$.
+\end{lemma}
+\begin{proof}
+    Let $\tau: I\to I$ be the identity map. Due to \thref{thm:leray}, the induced map $\tau^\ast: H^1(\frakU,\scrO)\to H^1(\frakU(r),\scrO)$ is an isomorphism. The map 
+    \begin{equation*}
+        Z^1(\frakU,\scrO)\to Z^1_b(\rho)\qquad (f_{ij})_{i,j\in I}\longmapsto \left(f_{ij}|_{U_i(\rho)\cap U_j(\rho)}\right)
+    \end{equation*}
+    induces a map $\alpha: H^1(\frakU,\scrO)\to Z^1_b(\rho)/B^1_b(\rho)$. Similarly, the map 
+    \begin{equation*}
+        Z^1_b(\rho)\to Z^1(\frakU(r),\scrO)\qquad (f_{ij})_{i,j\in I}\longmapsto \left(f_{ij}|_{U_i(r)\cap U_j(r)}\right)
+    \end{equation*}
+    induces a map $\beta: Z^1_b(\rho)/B^1_b(\rho)\to H^1(\frakU(r),\scrO)$ such that $\tau^\ast = \beta\circ\alpha$. In particular, this means that $\beta$ is surjective. Due to \thref{lem:intermediate-finiteness}, $H^1(\frakU(r),\scrO)$ is finite-dimensional.
+\end{proof}
+
+\begin{proof}[Proof of \thref{thm:finiteness-of-cohomology}]
+    Follows immediately from \thref{thm:leray} and \thref{lem:U(r)-finiteness}.
+\end{proof}
 
 \bibliographystyle{alpha}
 \bibliography{references}

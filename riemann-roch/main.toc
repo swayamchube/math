@@ -1,4 +1,4 @@
 \contentsline {section}{\numberline {1}\v {C}ech Cohomology}{1}{section.1}%
-\contentsline {section}{\numberline {2}The Finiteness Theorem}{5}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Laurent Schwartz's Theorem}{5}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}The Finiteness Theorem}{6}{subsection.2.2}%
+\contentsline {section}{\numberline {2}The Finiteness Theorem}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Laurent Schwartz's Theorem}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}The Finiteness Theorem}{5}{subsection.2.2}%
