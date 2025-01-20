@@ -176,6 +176,7 @@
 \newcommand{\scrA}{\mathscr{A}}
 \newcommand{\scrB}{\mathscr{B}}
 \newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrM}{\mathscr{M}}
 \newcommand{\scrN}{\mathscr{N}}
 \newcommand{\scrP}{\mathscr{P}}
 \newcommand{\scrO}{\mathscr{O}} % sheaf
@@ -629,6 +630,64 @@ Then $C_b^0(r)$ is also a Banach space under the above norm for the same reason 
 
 \begin{proof}[Proof of \thref{thm:finiteness-of-cohomology}]
     Follows immediately from \thref{thm:leray} and \thref{lem:U(r)-finiteness}.
+\end{proof}
+
+\begin{definition}
+    As a consequence of \thref{thm:finiteness-of-cohomology}, we have that for a compact Riemann surface $X$, $\dim H^1(X,\scrO) < \infty$ and this integer is called the \define{genus} of $X$.
+\end{definition}
+
+\subsection{The Riemann Existence Theorem}
+
+\begin{theorem}[Riemann]\thlabel{thm:riemann-existence}
+    Let $X$ be a compact Riemann surface. For any $a\in X$, there exists a meromorphic function, holomorphic on $X\setminus\{a\}$, and having a pole at $a$.
+\end{theorem}
+\begin{proof}
+    Let $U_1$ be an analytic disc centered at $a$, that is, there is a chart $\phi: U_1\to D$ with $\phi(a) = 0$. Set $U_2 = X\setminus\{a\}$ and $\frakU = \{U_1, U_2\}$. The canonical map $H^1(\frakU,\scrO)\to H^1(X,\scrO)$ is injective and hence, $H^1(\frakU,\scrO)$ is finite-dimensional, say of dimension $m < \infty$.
+
+    Let $\psi_1$ be the meromorphic function $1/\phi$ on $U_1$, which is holomorphic on $U_1\setminus\{a\}$, and let $\psi_2$ be the identically $0$ function on $U_2$. Define $\xi_k\in Z^1(\frakU,\scrO)$ as 
+    \begin{equation*}
+        (\xi_k)_{ij} = \psi_i^k - \psi_j^k\in\scrO(U_i\cap U_j).
+    \end{equation*}
+    This obviously satisfies the cocycle condition, and hence is an element of $Z^1(\frakU,\scrO)$. There is a linear combination 
+    \begin{equation*}
+        c_1\xi_1 + \dots + c_r\xi_r\in B^1(\frakU,\scrO)\quad\text{for some } r\le m + 1,
+    \end{equation*}
+    where at least one $c_i$ is non-zero. In particular, there exist $g_1\in\scrO(U_1)$ and $g_2\in\scrO(U_2)$ such that 
+    \begin{equation*}
+        \frac{c_1}{\phi} + \cdots + \frac{c_r}{\phi_r} = g_1 - g_2\quad\text{ on } U_1\cap U_2.
+    \end{equation*}
+    Finally, define $f: X\setminus\{a\}\to\bbC$ by 
+    \begin{equation*}
+        f = 
+        \begin{cases}
+            -g_2 & \text{on } U_2\\
+            \frac{c_1}{\phi} + \dots + \frac{c_r}{\phi^r} - g_1 & \text{on } U_1.
+        \end{cases}
+    \end{equation*}
+    This is obviously holomorphic on $X\setminus\{a\}$. Further, since at least one $c_i$ is non-zero, it has a pole at $a\in X$, as desired.
+\end{proof}
+
+\begin{corollary}
+    Let $X$ be a compact Riemann surface, $a_1,\dots,a_n\in X$ are distinct points and $c_1,\dots,c_n\in\bbC$. There is a meromorphic function $f\in\scrM(X)$ such that $f(a_i) = c_i$ for $1\le i\le n$.
+\end{corollary}
+\begin{proof}
+    For every pair $i\ne j$, using \thref{thm:riemann-existence}, one gets a function $f\in\scrM(X)$ which has a pole at $a_i$ but is holomorphic at $a_j$. Choose a constant $\lambda_{ij}\in\bbC^\times$ such that 
+    \begin{equation*}
+        \lambda_{ij}\ne f_{ij}(a_j) - f_{ij}(a_k) \quad\text{for all }1\le k\le n.
+    \end{equation*}
+    Then the function 
+    \begin{equation*}
+        g_{ij} = \frac{f_{ij} - f_{ij}(a_j)}{f_{ij} - f_{ij}(a_j) + \lambda_{ij}}\in\scrM(X)
+    \end{equation*}
+    is holomorphic at the points $a_k$ for $1\le k\le n$, and satisfies $g_{ij}(a_i) = 1$ and $g_{ij}(a_j) = 0$. Now the functions 
+    \begin{equation*}
+        \scrM(X)\ni h_i = \prod_{\substack{1\le j\le n\\j\ne i}} g_{ij}\quad\text{for }1\le i\le n
+    \end{equation*}
+    satisfy $h_i(a_j) = \delta_{ij}$ and thus 
+    \begin{equation*}
+        f  = \sum_{i = 1}^n c_ih_i\in\scrM(X)
+    \end{equation*}
+    is our desired meromorphic function.
 \end{proof}
 
 \bibliographystyle{alpha}
