@@ -1,0 +1,895 @@
+\documentclass[10pt]{amsart}
+
+\title{MA 534: Homework 1}
+\author{Swayam Chube (200050141)}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem*{claim}{Claim}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{notation}{Notation}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\frakM}{\mathfrak{M}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbI}{\mathbb{I}}
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakF}{\mathfrak{F}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakP}{\mathfrak{P}} % nilradical 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakT}{\mathfrak{T}} % tensor algebra
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{#1}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\ind}{\operatorname{ind}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\Lip}{\operatorname{Lip}}
+\newcommand{\lip}{\operatorname{lip}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\pv}{\operatorname{p.v.}}
+
+\geometry {
+    margin = 1in
+}
+
+\begin{document}
+\maketitle 
+
+Throughout this article, we fix a sequence of mollifiers $\rho_\varepsilon:\R^n\to\R$ for $\varepsilon > 0$ given by 
+\begin{equation*}
+	\rho_\varepsilon(x) = \frac{1}{\varepsilon^n}\rho\left(\frac{x}{\varepsilon}\right)\qquad\forall~x\in\R^n,
+\end{equation*}
+where $\rho: \R^n\to\R$ is given by 
+\begin{equation*}
+	\rho(x) = 
+	\begin{cases}
+		C\exp\left(-\frac{1}{1 - |x|^2}\right) & |x| < 1\\
+		0 & |x|\ge 1,
+	\end{cases}
+\end{equation*}
+with the constant $C > 0$ chosen such that $\int_{\R^n}\rho = 1$, and consequently, $\int_{\R^n}\rho_\varepsilon = 1$ for all $\varepsilon > 0$.
+
+For an open set $\Omega\subseteq\R^n$, define 
+\begin{equation*}
+	\Omega_\varepsilon = \left\{x\in\Omega\colon\dist(x,\R^n\setminus\Omega) > \varepsilon\right\},
+\end{equation*}
+which is an open subset of $\Omega$.
+
+\begin{lemma}\thlabel{lem:convolution-compact-convergence}
+	Let $\Omega\subseteq\R^n$ be an open set and $u\in C(\Omega)$. Set $u_\varepsilon = u\ast\rho_\varepsilon\in C^\infty(\Omega_\varepsilon)$. Then, the sequence of smooth functions $\{u_\varepsilon\}$ converges uniformly on compact subsets of $\Omega$ to $u$. 
+	
+	That is, given a compact set $K\subseteq\Omega$ and a $\delta > 0$, there is an $\eta > 0$ such that for all $\varepsilon < \eta$, $K\subseteq\Omega_\varepsilon$, and $\|u_\varepsilon - u\|_{K} < \delta$.
+\end{lemma}
+\begin{proof}
+	For $\varepsilon < \dist(K,\R^n\setminus\Omega)$, we know that $K\subseteq\Omega_\varepsilon$. For such $\varepsilon$, we have for $x\in K$, that 
+	\begin{align*}
+		|u_\varepsilon(x) - u(x)| &= \left|\int_{B(0,\varepsilon)}u(x - y)\rho_\varepsilon(y)~dy - u(x)\right|\\
+		&= \left|\int_{B(0, \varepsilon)}\left(u(x - y) - u(x)\right)\rho_\varepsilon(y)~dy\right|\\
+		&\le\int_{B(0,\varepsilon)}|u(x - y) - u(x)| \rho_\varepsilon(y)~dy
+	\end{align*}
+	Let $K_\varepsilon = \bigcup_{x\in K} B(x,\varepsilon)$, which is a bounded open set containing $K$, and is contained in $\Omega$. Thus, for sufficiently small $\varepsilon$, we know that $K_\varepsilon$ is relatively compact in $\Omega$ (since its closure would be contained in $\Omega$ and its closure is compact). Fix an $\alpha > 0$ such that $\overline K_\alpha$ is contained in $\Omega$ and hence, is compactly contained in the latter. 
+
+	Since $u$ is continuous, it is uniformly continuous on $\overline K_\alpha$, and hence, there is an $\eta > 0$ such that whenever $|x - y| < \eta$, and $x,y\in\overline K_\alpha$, $|u(x) - u(y)| < \delta$. Using the above equation, with $\varepsilon < \min\{\alpha,\eta\}$ so that $K\subseteq\Omega_\varepsilon$ and $B(x,\varepsilon)\subseteq K_\alpha$ for all $x\in K$, we have 
+	\begin{equation*}
+		|u_\varepsilon(x) - u(x)|\le\int_{B(0,\varepsilon)}|u(x - y) - u(x)|\rho_\varepsilon(y)~dy\le\delta,
+	\end{equation*}
+	as desired. This completes the proof.
+\end{proof}
+
+\begin{theorem}[Green's Second Identity]
+	Let $\Omega\subseteq\R^n$ be a bounded open set and $u, v\in C^1(\overline\Omega)\cap C^2(\Omega)$. Then 
+	\begin{equation*}
+		\int_{\Omega} u(x)\Delta v(x) - v(x)\Delta u(x)~dx = \int_{\partial\Omega} u(x)\frac{\partial v}{\partial n}(x) - v(x)\frac{\partial u}{\partial n}(x)~ds(x).
+	\end{equation*}
+\end{theorem}
+
+Throughout this article, let $\omega_n$ denote the surface area of the unit sphere $S^{n - 1}\subseteq\R^{n}$. In particular, this means that the surface area of a sphere of radius $R$ is $\omega_n R^{n - 1}$.
+
+\section{Problem 1}
+
+Fix an exhaustion $\{K_n\}$ of $\Omega$, that is, $\Omega = \bigcup_{n = 1}^\infty K_n$ and $K_i\subseteq K_{i + 1}^\circ$. Set $\omega_i = K_{i}^\circ$. We may suppose without loss of generality that $\omega_1\ne\emptyset$. Note that each $\omega_i$ is open and relatively compact in $\Omega$. Therefore, $f\in L^1(\omega_i)$ for all $i\in\N$. Further, we know that $\int_{\omega_i} f\varphi = 0$ for all $\varphi\in C_c^\infty(\omega_i)$ and all $i\in\N$. We shall show that $f = 0$ a.e. on $\omega_i$ for all $i\in\N$, whence it would follow that $f = 0$ a.e. on $\Omega$, since $\Omega$ is a countable union of the $\omega_i$'s. Henceforth, we shall replace $\omega_i$ by $\Omega$, so that we may assume $f\in L^1(\Omega)$ and $\int f\varphi = 0$ for all $\varphi\in C_c^\infty(\Omega)$. In particular, we have assumed $\Omega$ to be open and bounded, whence it is a finite measure space.
+
+\begin{claim}
+	$\displaystyle\int_\Omega f\varphi = 0$ for all $\varphi\in C_c(\Omega)$.
+\end{claim}
+\begin{proof}
+	Let $\varphi\in C_c(\Omega)$ and $K = \Supp\varphi$, which is a compact subset of $\Omega$. Fix a $\delta > 0$ such that $2\delta < \dist(K,\R^n\setminus\Omega)$, so that the set 
+	\begin{equation*}
+		Q_\varepsilon = \left\{x\in\Omega\colon\dist(x, K)\le\varepsilon\right\}
+	\end{equation*}
+	is contained in $\Omega$ for all $\varepsilon < \delta$. Further, since the function $\dist(\cdot, K)$ is continuous, the above set is closed (in $\R^n$) and also bounded, whence is compact in $\Omega$. In particular, note that $Q_\varepsilon\subseteq Q_\delta$ for all $\varepsilon < \delta$. Note that for $x\in\Omega\setminus Q_\varepsilon$ with $\varepsilon < \delta$, we have that 
+	\begin{equation*}
+		\varphi_\varepsilon(x) = (\varphi\ast\rho_\varepsilon)(x) = \int_{B(0,\varepsilon)} \varphi(x - y)\rho(y)~dy = 0,
+	\end{equation*}
+	since $x - y\notin K$ for all $|y| < \varepsilon$. It follows that $\Supp\varphi_\varepsilon\subseteq Q_\varepsilon\subseteq Q_\delta\subseteq\Omega$, in particular, is compact. Further, due to \thref{lem:convolution-compact-convergence}, we know that $\varphi_\varepsilon$ converges to $\varphi$ uniformly on compact subsets of $\Omega$, and thus, converges uniformly on $Q_\delta$ (for $\varepsilon < \delta$). We then have for $\varepsilon < \delta$,
+	\begin{align*}
+		\left|\int_\Omega f(x)\varphi(x)~dx\right| &= \left|\int_{Q_\delta} f(x)\varphi(x)~dx\right|\\
+		&= \left|\int_{Q_\delta}f(x)\varphi(x) - f(x)\varphi_\varepsilon(x)~dx\right|\\
+		&\le \|\varphi - \varphi_\varepsilon\|_{Q_\delta}\|f\|_{L^1(Q_\delta)}\\
+		&\le \|\varphi - \varphi_\varepsilon\|_{Q_\delta}\|f\|_{L^1(\Omega)}.
+	\end{align*}
+	Due to uniform convergence, the right hand side goes to $0$ as $\varepsilon\to 0$. It follows that $\int_\Omega f\varphi = 0$, as desired.
+\end{proof}
+
+\begin{lemma}\thlabel{lem:cor-to-lusin}
+	Let $X$ be a locally compact Hausdorff space with a Radon measure $\mu$, $A\subseteq X$ have finite $\mu$-measure, and $f$ a complex measurable function on $X$ such that $f(x) = 0$ whenever $x\notin A$. Further, suppose that $|f|\le 1$ on $X$. Then there is a sequence $\{g_n\}$ such that $g_n\in C_c(X)$, $|g_n|\le 1$, and 
+	\begin{equation*}
+		f(x) = \lim_{n\to\infty} g_n(x)\quad\text{a.e. on } X.
+	\end{equation*}
+\end{lemma}
+\begin{proof}
+	See \cite[Corollary to Theorem 2.24]{papa-rudin}.
+\end{proof}
+
+We shall now show that $f = 0$ a.e. on $\Omega$. Since $\Omega$ is a finite measure space and the Lebesgue measure is Radon, the above furnishes a sequence $\{g_n\}$ in $C_c(\Omega)$ with $|g_n|\le 1$ on $\Omega$ such that 
+\begin{equation*}
+	\lim_{n\to\infty} g_n(x) = \frac{\overline f(x)}{1 + |f(x)|}\quad\text{a.e. on }\Omega.
+\end{equation*}
+Thus, $|fg_n|\le |f|$, and hence, the Lebesgue Dominated Convergence Theorem applies to get 
+\begin{equation*}
+	\int_{\Omega}\frac{|f|^2}{1 + |f|} = \int_{\Omega} fg_n = 0.
+\end{equation*}
+Since the integrand $|f|^2/(1 + |f|)$ is non-negative measurable, we see that $|f|^2/(1 + |f|) = 0$ a.e. on $\Omega$, in other words, $f = 0$ a.e. on $\Omega$, as desired.
+
+Recall now that our $\Omega$ was in fact $\omega_i$ on which $f$ is $L^1$, but on $\Omega$, $f$ is just $L^1_{loc}$. We have shown that there is a measure zero set $E_i\subseteq\omega_i$ such that $f = 0$ on $\omega_i\setminus E_i$, therefore, $f = 0$ on $\Omega\setminus\bigcup_{i\in\N} E_i$, and since $\bigcup_{i\in\N} E_i$ is also measure zero, we see that $f = 0$ a.e. on $\Omega$.
+
+\section{Problem 2}
+
+For any distribution $u$, note that 
+\begin{equation*}
+	\left(\Delta u, \varphi\right) = \left(\sum_{i = 1}^n \partial_i^2 u,\varphi\right) = \sum_{i = 1}^n \left(u, \partial_i^2\varphi\right) = (u, \Delta\varphi).
+\end{equation*}
+So, according to the hypothesis of the question, 
+\begin{equation*}
+	\int_{\Omega} u\Delta\varphi = 0\qquad\forall\varphi\in C_c^\infty(\Omega).
+\end{equation*}
+
+\begin{lemma}\thlabel{lem:uniform-convergence-harmonic}
+	Let $\Omega\subseteq\R^n$ be an open set. If $\{u_\varepsilon\}_{\varepsilon > 0}$ is a sequence of harmonic functions on $\Omega$ that converges uniformly on compacta to $u\in C(\Omega)$, then $u$ is harmonic, and in particular, $u$ is smooth on $\Omega$
+\end{lemma}
+\begin{proof}
+	It suffices to show that $u$ has the mean value property. Indeed, for some point $x_0\in\Omega$, there is an $R > 0$ such that $\overline B(x_0, R)\subseteq\Omega$. Consequently, for $0 < r < R$, we have 
+	\begin{equation*}
+		0 = \lim_{\varepsilon\to 0}\frac{1}{|B(x_0, r)|}\int_{B(x_0, r)} u_\varepsilon(x)~dx = \frac{1}{B(x_0, r)}\int_{B(x_0, r)}\lim_{\varepsilon\to 0}u_\varepsilon(x)~dx = \frac{1}{|B(x_0, r)|}\int_{B(x_0, r)} u(x)~dx,
+	\end{equation*}
+	where we can interchange the limit with the integral since the convergence $u_\varepsilon\to u$ is uniform on $B(x, r)\subseteq\overline B(x, R)$, since the latter is compact and contained in $\Omega$. This shows that $u$ has the mean value property on $\Omega$, consequently, is harmonic on $\Omega$.
+\end{proof}
+
+Coming back to the problem at hand, let $u_\varepsilon = u\ast\rho_\varepsilon$, defined and smooth on $\Omega_\varepsilon$. Fix a point $p\in\Omega$ and choose a relatively compact ball $\omega\Subset\Omega$ centered at $p$.
+
+There is a $\delta > 0$ such that $\omega\subseteq\Omega_\delta$, and hence, for all $\varepsilon < \delta$, we have that $\omega\subseteq\Omega_\varepsilon$. For $\varphi\in C_c^\infty(\omega)\subseteq C_c^\infty(\Omega)$, using Green's second identity, we have (since the boundary terms corresponding to $\varphi$ vanish, owing to it having compact support in $\omega$)
+\begin{align*}
+	\int_{\omega}\Delta u_\varepsilon(x)\varphi(x)~dx &= \int_{\omega} u_\varepsilon(x)\Delta\varphi(x)~dx\\
+	&= \int_{\omega}\Delta\varphi(x)\int_{B(0,\varepsilon)} u(x - y)\rho(y)~dy~dx\\
+	&= \int_{B(0,\varepsilon)} \int_\omega u(x - y)\Delta\varphi(x)~dx~dy.
+\end{align*}
+Perform the substitution $z = x - y$, that is, $x = z + y$, then the inner integral transforms into 
+\begin{equation*}
+	\int_{\omega - y} u(z)\Delta\varphi(z + y)~dz = \int_{\omega - y} u(z)\Delta_z(\varphi(z + y))~dz.
+\end{equation*}
+Since $|y| < \varepsilon$ and $\omega\subseteq\Omega_\varepsilon$, we know that $\omega - y\subseteq\Omega$. Further, $\Supp_z\varphi(z + y) = \Supp\varphi - y\subseteq\omega - y\subseteq\Omega$ is still compactly supported in $\Omega$. Thus, according to our hypothesis,
+\begin{equation*}
+	\int_\omega u(x - y)\Delta\varphi(x)~dx = \int_{\omega - y} u(z)\Delta\varphi(z + y)~dz = \int_{\Omega}u(z)\Delta_z\left(\varphi(z + y)\right)~dz = 0,
+\end{equation*}
+since $\Delta\varphi(z + y)$ vanishes outside $\omega - y$, the integral can be taken to be over all of $\Omega$. It follows that 
+\begin{equation*}
+	\int_{\omega}\Delta u_\varepsilon(x)\varphi(x)~dx = 0
+\end{equation*}
+for al $\varphi\in C_c^\infty(\omega)$, consequently, $\Delta u_\varepsilon = 0$ in $\omega$ for all $\varepsilon < \delta$. Finally, due to \thref{lem:convolution-compact-convergence}, we know that $\{u_\varepsilon\}_{\varepsilon < \delta}$ converges uniformly on compacta to $u$ on $\omega$. Due to \thref{lem:uniform-convergence-harmonic}, we see that $u$ is harmonic on $\omega$, whence is smooth on $\omega$. 
+
+We have shown that every point in $\Omega$ has a neighborhood on which $u$ is smooth and harmonic (in the classical sense). Thus, $u$ is smooth and $\Delta u = 0$ on $\Omega$, since both properties of being smooth and harmonic are local properties.
+
+\section{Problem 3}
+
+Let $K\subseteq\R^n$ be a compact subset. Fix a $\rho\in C_c^\infty(\R^n)$ such that $\rho\equiv 1$ on $V$, an open subset of $\R^n$ containing $K$, and $\rho\ge 0$ everywhere. Let $\varphi\in C_c^\infty(K)$. Since $\varphi$ is $\bbC$-valued, we can write $\varphi = \phi + i\psi$ where $\phi,\psi\in C_c^\infty(K)$ are real-valued.
+
+Let $\displaystyle M = \max\left\{\sup_{x\in K}|\phi(x)|, \sup_{x\in K}|\psi(x)|\right\}$. Then, 
+\begin{equation*}
+	\left|(u, \varphi)\right| = \left|(u,\phi) + i(u, \psi)\right|\le |(u,\phi)| + |(u, \psi)|.
+\end{equation*}
+Note that $M\rho - \phi\ge 0$, since on $K$, $M\rho(x) = M\ge\phi(x)$ and outside $K$, $\phi\equiv 0$. Hence, $(u,\phi)\le M(u,\rho)$. Similarly, $M\rho + \phi\ge 0$, since on $K$, $\phi(x)\ge -M$ and outside $K$, $\phi\equiv 0$. It follows that $(u,\phi)\ge -M(u,\rho)$. Note that $(u,\rho)\ge 0$ since $\rho\ge 0$, and hence 
+\begin{equation*}
+	|(u,\phi)|\le M(u,\rho).
+\end{equation*}
+Similarly, one can show that $|(u,\psi)|\le M(u,\rho)$. Finally, note that for all $x\in K$, we have 
+\begin{equation*}
+	|\varphi(x)| = \sqrt{\phi(x)^2 + \psi(x)^2}\ge |\phi(x)|\implies\sup_{x\in K}|\varphi(x)|\ge\sup_{x\in K}|\phi(x)|,
+\end{equation*}
+and similarly, for $\psi$. Thus, 
+\begin{equation*}
+	\sup_{x\in K}|\varphi(x)|\ge\max\left\{\sup_{x\in K}|\phi(x)|, \sup_{x\in K}|\psi(x)|\right\} = M.
+\end{equation*}
+Hence, 
+\begin{equation*}
+	|(u,\varphi)|\le |(u,\phi)| + |(u,\psi)|\le 2M(u,\rho)\le 2(u,\rho)\sup_{x\in K} |\varphi(x)|.
+\end{equation*}
+Since $(u,\rho)$ depends only on $K$ and is independent of $\varphi$, we see that $u$ has order $0$.
+
+From a result we have seen in class, $u$ can be extended to a linear functional on $C_c(\R^n)$. Recall that this extension was defined to be 
+\begin{equation*}
+	(u,\varphi) = \lim_{\varepsilon\to 0^+}(u,\varphi\ast\rho_\varepsilon)\qquad\forall~\varphi\in C_c(\R^n),
+\end{equation*}
+where the $\rho_\varepsilon$ are the standard mollifiers discussed in the introduction. If $\varphi\ge 0$, then obviously $\varphi\ast\rho_\varepsilon\ge 0$, and hence $(u,\varphi)\ge 0$, that is, $u$ is a positive linear functional on $C_c(\R^n)$. Due to the Riesz Representation Theorem (\cite[Theorem 2.14]{papa-rudin}), there is a positive Borel measure $\mu$ on $\R^n$ such that 
+\begin{equation*}
+	(u,\varphi) = \int_{\R^n} \varphi~d\mu\qquad\forall~\varphi\in C_c(\R^n),
+\end{equation*}
+thereby completing the proof.
+
+\section{Problem 4}
+
+We have seen in class that the distribution $\pv\left(\frac{1}{x}\right)$ has order at most $1$. Suppose, for the sake of contradiction that $\pv\left(\frac{1}{x}\right)$ has order $0$, then for every compact set $K\subseteq\R$, there is a constant $C > 0$ such that 
+\begin{equation*}
+	\left|\left(\pv\left(\frac{1}{x}\right),\varphi\right)\right|\le C\|\varphi\|_K\qquad\forall~\varphi\in C_c^\infty(K).
+\end{equation*}
+
+Choose $K = [0, 1]$, then there is a constant $C > 0$ such that the above inequality is satisfied. For $n\ge 3$, let $\varphi\in C_c^\infty([0, 1])$ be such that it is identically equal to $1$ on the interval $\left[\frac{1}{n}, 1- \frac{1}{n}\right]$. Then, $\|\varphi\|_K = 1$, and 
+\begin{align*}
+	\left(\pv\left(\frac{1}{x}\right),\varphi\right) &= \lim_{\varepsilon\to 0}\int_{|x| > \varepsilon}\frac{\varphi(x)}{x}~dx\\
+	&= \lim_{\substack{\varepsilon\to 0\\\varepsilon < \frac{1}{n}}}\int_{|x| > \varepsilon}\frac{\varphi(x)}{x}~dx\\
+	&\ge\int_{\frac{1}{n}}^{1 - \frac{1}{n}}\frac{1}{x}~dx\\
+	&= \log (n - 1).
+\end{align*}
+This shows that $\log (n - 1)\le C$ for every positive integer $n\ge 3$, which is absurd. Thus, $\pv\left(\frac{1}{x}\right)$ cannot have order $0$ as a distribution and hence, must have order $1$.
+
+\section{Problem 5}
+
+First, we show that $u$ is indeed a distribution on $(0, \infty)$. Let $K\subseteq(0,\infty)$ be a compact set. Since $0\notin K$, there is a $\delta > 0$ such that $(-\delta,\delta)\cap K = \emptyset$. Thus, there is a positive integer $M > 0$ such that for all $n\ge M$, $\frac{1}{n}\notin K$. Now, let $N$ be the largest positive integer such that $\frac{1}{N}\in K$. If there is no such $N$, then for all $\varphi\in C_c^\infty(K)$,
+\begin{equation*}
+	|(u, \varphi)| = \left|\sum_{k = 1}^\infty\partial^k\varphi\left(\frac{1}{k}\right)\right| = 0\le\sup_{\substack{|\alpha|\le 0\\ x\in K}}|\partial^k\varphi(x)|,
+\end{equation*}
+since for all positive integers $k$, $\partial^k\varphi\left(\frac{1}{k}\right) = 0$.
+
+On the other hand, if such an $N$ exists, then for all $\varphi\in C_c^\infty(K)$, 
+\begin{align*}
+	\left|(u, \varphi)\right| = \left|\sum_{k = 1}^\infty\partial^k\varphi\left(\frac{1}{k}\right)\right| = \left|\sum_{\substack{\frac{1}{k}\in K\\ k\in\N}}\partial^k\varphi\left(\frac{1}{k}\right)\right|\le\sum_{\substack{\frac{1}{k}\in K\\ k\in\N}}\left|\partial^k\varphi\left(\frac 1k\right)\right|.
+\end{align*}
+Note that the last sum is finite, since for $k > N$, $\frac{1}{k}\notin K$. As a result, for all $k\in\N$ such that $\frac{1}{k}\in K$, we have 
+\begin{equation*}
+	\left|\partial^k\varphi\left(\frac{1}{k}\right)\right|\le\sup_{\substack{|\alpha|\le N\\ x\in K}}|\partial^\alpha\varphi(x)|.
+\end{equation*}
+Hence, 
+\begin{equation*}
+	|(u, \varphi)|\le\sum_{\substack{\frac{1}{k}\in K\\ k\in\N}}\sup_{\substack{|\alpha|\le N\\ x\in K}}|\partial^\alpha\varphi(x)|\le N\sup_{\substack{|\alpha|\le N\\ x\in K}}|\partial^\alpha\varphi(x)|.
+\end{equation*}
+This shows that $u$ is a distribution on $(0,\infty)$.
+
+Now, we deal with the second part of the problem. Suppose there is a distribution $\Lambda\in\mathscr D'(\R)$ which restricts to $u$ on $(0,\infty)$. Let $K = [0, 1]$. Then there is a constant $C > 0$ and a non-negative integer $m$ such that 
+\begin{equation*}
+	|(\Lambda,\varphi)|\le C\sup_{\substack{|\alpha|\le m\\ x\in K}} |\partial^\alpha\varphi(x)|.
+\end{equation*}
+Choose $N$ to be a very large positive integer, say $N \ge m + 100\ge 100$ such that $4\mid N$, and let $\delta > 0$ be such that 
+\begin{equation*}
+	Q = \left[\frac{1}{N} - \frac{1}{\delta}, \frac{1}{N} + \frac{1}{\delta}\right]\subseteq\left(\frac{1}{N + 1}, \frac{1}{N - 1}\right)\subseteq(0, 1).
+\end{equation*}
+Choose $\eta\in C_c^\infty(Q)$ such that $\eta\ge 0$ and $\eta\left(\frac{1}{N}\right) > 0$. For $\lambda > 1$, define $\varphi_\lambda\in C_c^\infty(Q)\subseteq C_c^\infty(K)$ by 
+\begin{equation*}
+	\varphi_\lambda(x) = \eta(x)\cos\left(\lambda\left(x - \frac{1}{N}\right)\right)\qquad\forall~x\in\R.
+\end{equation*}
+
+Then, for $k\le m$, we have 
+\begin{equation*}
+	\partial^k\varphi_\lambda(x) = \sum_{r = 0}^k\binom{k}{r}\eta^{(k - r)}(x)\cos^{(r)}\left(\lambda\left(x - \frac{1}{N}\right)\right)\lambda^r.
+\end{equation*}
+Let $C' > 0$ be such that 
+\begin{equation*}
+	\sup_{\substack{r\le m\\ x\in Q}}|\eta^{(r)}(x)| < C',
+\end{equation*}
+and $M > 0$ be such that 
+\begin{equation*}
+	\binom{k}{r} < M'\qquad\forall~0\le r\le k\le m.
+\end{equation*}
+Then, forall $0\le k\le m$ and $x\in Q$,
+\begin{equation*}
+	|\partial^k\varphi_\lambda(x)|\le\sum_{r = 0}^k MC'\lambda^r\le (k + 1)MC'\lambda^k\le (m + 1)MC'\lambda^m\qquad\forall~x\in Q,
+\end{equation*}
+where the last two inequalities follow from the fact that $\lambda > 1$. 
+
+On the other hand, since $\varphi_\lambda\in C_c^\infty(Q)\subseteq C_c^\infty((0, 1))$, we see that 
+\begin{equation*}
+	(\Lambda,\varphi_\lambda) = (u,\varphi_\lambda) = \sum_{k = 1}^\infty\partial^k\varphi_\lambda\left(\frac{1}{k}\right) = \partial^N\varphi_\lambda\left(\frac{1}{N}\right).
+\end{equation*}
+We have 
+\begin{equation*}
+	\partial^N\varphi_\lambda\left(\frac{1}{N}\right) = \sum_{k = 0}^N\binom{N}{k}\eta^{(N - k)}\left(\frac{1}{N}\right)\cos^{(k)}(0)\lambda^k,
+\end{equation*}
+which is a polynomial in $\lambda$, say $p(\lambda)\in\R[\lambda]$, with leading coefficient 
+\begin{equation*}
+	\eta\left(\frac{1}{N}\right)\cos^{(N)}(0) = \eta\left(\frac{1}{N}\right)\ne 0,
+\end{equation*}
+where the first equality follows from the fact that $4\mid N$ and hence $\cos^{(N)}(x) = \cos x$. The seminorm estimate then gives us 
+\begin{equation*}
+	|p(\lambda)|\le(m + 1)MCC'\lambda^m.
+\end{equation*}
+Dividing throughout by $\lambda^N$ and taking $\lambda\to\infty$, the left hand side goes to $|\eta\left(\frac{1}{N}\right)| > 0$ while the right hand side goes to $0$, since $N > m$. This is an immediate contradiction, and hence, there is no such $\Lambda\in\mathscr D'(\R)$.
+
+\section{Problem 6}
+
+We shall make use of Problem \ref{problem-11}. Define the distribution $v\in\mathscr D'(\R)$ by $v = u - \pv\left(\frac{1}{x}\right)$. Then, for $\varphi\in C_c^\infty(\R^n)$,
+\begin{align*}
+	(xv, \varphi) &= \left(u - \pv\left(\frac{1}{x}\right), x\varphi\right)\\
+	&= (u, x\varphi) - \lim_{\varepsilon\to 0}\int_{|x| > \varepsilon}\frac{1}{x}\cdot x\varphi(x)~dx\\
+	&= (xu, \varphi) - \lim_{\varepsilon\to 0}\int_{|x| > \varepsilon}\varphi(x)~dx.
+\end{align*}
+The integral above can be written as 
+\begin{equation*}
+	\int_{\R^n} \chi_{|x| > \varepsilon}\varphi,
+\end{equation*}
+where the integrand is pointwise bounded by $|\varphi|$, since 
+\begin{equation*}
+	|\chi_{|x| > \varepsilon}(y)\varphi(y)|\le |\varphi(y)|,
+\end{equation*}
+and the latter is compactly supported and continuous, whence integrable. Thus, the Dominated Convergence Theorem applies and we have 
+\begin{equation*}
+	\lim_{\varepsilon\to 0}\int_{|x| > \varepsilon}\varphi(x)~dx = \int_{\R^n}\lim_{\varepsilon\to 0}\chi_{|x| > \varepsilon}(y)\varphi(y)~dy = \int_{\R^n}\chi_{\R^n\setminus\{0\}}(y)\varphi(y)~dy  = \int_{\R^n}\varphi.
+\end{equation*}
+But we also have that $xu = 1$, and hence, 
+\begin{equation*}
+	(xv, \varphi) = \int_{\R^n}\varphi - \int_{\R^n}\varphi = 0.
+\end{equation*}
+Thus, $xv = 0$. Using the result of Problem \ref{problem-11}, we know that $v = c\delta$ for some $c\in\bbC$, where $\delta$ is the Dirac delta distribution centered at $0$. Hence, 
+\begin{equation*}
+	u = \pv\left(\frac{1}{x}\right) + c\delta\quad\text{ for some }c\in\bbC.
+\end{equation*}
+Conversely, if $u$ is of the above form, then for $\varphi\in C_c^\infty(\R)$, we can write 
+\begin{align*}
+	(xu, \varphi) &= (u, x\varphi)\\
+	&= \left(\pv\left(\frac{1}{x}\right), x\varphi\right) + (\delta, x\varphi)\\
+	&= \lim_{\varepsilon\to 0}\int_{|x| > \varepsilon}\frac{1}{x}\cdot x\varphi(x)~dx\\
+	&= \lim_{\varepsilon\to 0}\int_{|x| > \varepsilon}\varphi(x)~dx = \int_{\R^n}\varphi,
+\end{align*}
+where the last equality follows in the same way using the Dominated Convergence Theorem as we have argued in the earlier paragraphs. It follows that $xu = 1$. This completes the characterization of $u$.
+
+
+\section{Problem 7}\label{problem-7}
+
+For $\varphi\in C_c^\infty(\R^n)$, we have 
+\begin{align*}
+	\int_{\R^n} f_\varepsilon(x)\varphi(x)~dx &\stackrel{x\mapsto \varepsilon y}{=\joinrel=\joinrel=} \int_{\R^n}f(y)\varphi(\varepsilon y)~dy,
+\end{align*}
+and hence, 
+\begin{equation*}
+	\left(f_\varepsilon,\varphi\right) - (\delta, \varphi) = \int_{\R^n} f(y)\left(\varphi(\varepsilon y) - \varphi(0)\right)~dy,
+\end{equation*}
+since $\int_{\R^n} f = 1$. Further, since $\varphi$ is compactly supported, there is an $M > 0$ such that $|\varphi(x)|\le M$ for all $x\in\R^n$, consequently, 
+\begin{equation*}
+	|\varphi(\varepsilon y) - \varepsilon(0)|\le |\varphi(\varepsilon y)| + |\varphi(0)|\le 2M
+\end{equation*}
+due to the triangle inequality. In particular, $|f(y)(\varphi(\varepsilon y) - \varphi(0))|\le 2M|f(y)|$, which is an integrable function on $\R^n$. It follows from the Dominated Convergence Theorem that
+\begin{align*}
+	\lim_{\varepsilon\to 0}|(f_\varepsilon, \varphi) - (\delta, \varphi)| &=\lim_{\varepsilon\to 0}\left|\int_{\R^n} f(y)(\varphi(\varepsilon y) - \varphi(0))~dy\right|\\
+	&\le\lim_{\varepsilon\to 0}\int_{\R^n} |f(y)(\varphi(\varepsilon y) - \varphi(0))|~dy\\
+	&= \int_{\R^n} \lim_{\varepsilon\to 0}|f(y)(\varphi(\varepsilon y) - \varphi(0))|~dy = 0,
+\end{align*}
+since $\lim\limits_{\varepsilon\to 0} f(y)(\varphi(\varepsilon y) - \varphi(0)) = 0$ for all $y\in\R^n$ due to continuity of $\varphi$. This shows that $f_\varepsilon\to\delta$ in $\mathscr D'(\R^n)$.
+
+\section{Problem 8}\label{problem-8}
+
+We make use of Problem \ref{problem-7}. Let $f\in L^1(\R)$ be given by 
+\begin{equation*}
+	f(x) = \frac{1}{\pi(x^2 + 1)}\qquad\forall x\in\R.
+\end{equation*}
+Then, following in the notation of Problem \ref{problem-7},
+\begin{equation*}
+	f_\varepsilon(x) = \frac{1}{\varepsilon}\frac{1}{\pi\left(\frac{x^2}{\varepsilon^2} + 1\right)} = \frac{\varepsilon}{\pi(x^2 + \varepsilon^2)}.
+\end{equation*}
+Thus, $f_\varepsilon$ converges to $\delta$ in $\mathscr D'(\R)$.
+
+\section{Problem 9}
+
+This is called the \emph{Sokhotski-Plemelj formula}. For $\varphi\in C_c^\infty(\R)$, we can write 
+\begin{equation*}
+	\lim_{\varepsilon\to 0}\int_{\R}\frac{1}{x + i\varepsilon}\varphi(x)~dx = \lim_{\varepsilon\to 0}\int_{\R}\frac{x - i\varepsilon}{x^2 + \varepsilon^2}\varphi(x)~dx = \lim_{\varepsilon\to 0}\int_{\R}\frac{x^2}{x^2 + \varepsilon^2}\frac{\varphi(x)}{x}~dx - i\int_{\R}\frac{\varepsilon}{x^2 + \varepsilon^2}\varphi(x)~dx.
+\end{equation*}
+From the conclusion of Problem \ref{problem-8}, we note immediately that the second term in the above limit converges to $-i\pi\varphi(0)$. Thus, we have 
+\begin{equation*}
+	\lim_{\varepsilon\to 0}\frac{1}{x + i\varepsilon}\varphi(x)~dx = \lim_{\varepsilon\to 0}\int_{\R}\frac{x^2}{x^2 + \varepsilon^2}\frac{\varphi(x)}{x}~dx - i\pi(\delta,\varphi),
+\end{equation*}
+where $\delta$ is the Dirac delta distribution centered at $0$. For $0 < \delta\le 1$, we can break the first integral as 
+\begin{equation*}
+	\int_{|x| > \delta}\frac{x^2}{x^2 + \varepsilon^2}\frac{\varphi(x)}{x}~dx + \int_{|x|\le\delta}\frac{x^2}{x^2 + \varepsilon^2}\frac{\varphi(x)}{x}~dx.
+\end{equation*}
+The second integral above can be written as 
+\begin{equation*}
+	\int_{-\delta}^0\frac{x^2}{x^2 + \varepsilon^2}\frac{\varphi(x)}{x}~dx + \int_{0}^\delta\frac{x^2}{x^2 + \varepsilon^2}\frac{\varphi(x)}{x}~dx.
+\end{equation*}
+Performing the substitution $x\mapsto -y$ in the first integral, we obtain 
+\begin{equation*}
+	-\int_{0}^\delta\frac{y^2}{y^2 + \varepsilon^2}\frac{\varphi(-y)}{y}~dy + \int_{0}^\delta\frac{x^2}{x^2 + \varepsilon^2}\frac{\varphi(x)}{x}~dx = \int_{0}^\delta\frac{x^2}{x^2 + \varepsilon^2}\frac{\varphi(x) - \varphi(-x)}{x}~dx.
+\end{equation*}
+Since $|x|\le\delta\le 1$, using the mean value property, for $x > 0$, there is some $c_x\in (-x, x)\subseteq[-1, 1]$ such that $\varphi(x) - \varphi(-x) = 2x\varphi'(c_x)$. Since $\varphi'$ is a continuous function, it is bounded on $[-1, 1]$ in absolute value by some $M > 0$. Thus, the integrand is equal to 
+\begin{equation*}
+	\frac{x^2}{x^2 + \varepsilon^2}\cdot 2\varphi'(c_x),
+\end{equation*}
+and hence, is bounded in absolute value by $2M$. Since the constant function $2M$ is integrable on $[0,\delta]$, the Dominated Convergence Theorem applies and we can write 
+\begin{equation*}
+	\lim_{\varepsilon\to 0}\frac{x^2}{x^2 + \varepsilon^2}\frac{\varphi(x) - \varphi(-x)}{x}~dx = \int_{0}^\delta\lim_{\varepsilon\to 0}\frac{x^2}{x^2 + \varepsilon^2}\frac{\varphi(x) - \varphi(-x)}{x}~dx = \int_0^\delta\frac{\varphi(x) - \varphi(-x)}{x}~dx.
+\end{equation*}
+Next, we take care of the first integral, 
+\begin{equation*}
+	\int_{|x| > \delta}\frac{x^2}{x^2 + \varepsilon^2}\frac{\varphi(x)}{x}~dx.
+\end{equation*}
+First, note that $\varphi$ has compact support, and hence, there is an $R > 0$ such that $\Supp\varphi\subseteq(-R, R)$. In particular, the above integral is over a bounded measure space, $\delta < |x| < R$. Since the closure of this domain in $\R$, namely $\delta\le|x|\le R$ is compact, and $\frac{\varphi(x)}{x}$ is a continuous function on it, it is bounded above by some $\wt M > 0$ in absolute value. It follows that the integrand above is bounded in absolute value by $\wt M$, which is an integrable function on the measure space $\delta < |x| < R$. Hence, the Dominated Convergence Theorem applies and we can write 
+\begin{align*}
+	\lim_{\varepsilon\to 0}\int_{|x| > \delta}\frac{x^2}{x^2 + \varepsilon^2}\frac{\varepsilon(x)}{x}~dx &= \lim_{\varepsilon\to 0}\int_{\delta < |x| < R}\frac{x^2}{x^2 + \varepsilon^2}\frac{\varphi(x)}{x}~dx\\
+	&= \int_{\delta < |x| < R}\lim_{\varepsilon\to 0}\frac{x^2}{x^2 + \varepsilon^2}\frac{\varphi(x)}{x}~dx\\
+	&= \int_{\delta < |x| < R}\frac{\varphi(x)}{x}~dx\\
+	&= \int_{|x| > \delta}\frac{\varphi(x)}{x}~dx.
+\end{align*}
+We have shown that 
+\begin{equation*}
+	\lim_{\varepsilon\to 0}\int_{\R}\frac{x^2}{x^2 + \varepsilon^2}\frac{\varphi(x)}{x}~dx = \int_{|x| > \delta}\frac{\varphi(x)}{x}~dx + \int_{0}^\delta\frac{\varphi(x) - \varphi(-x)}{x}~dx,
+\end{equation*}
+for all $0 < \delta\le 1$. Thus, the equality holds in the limit $\delta\to 0^+$. In this limit, we shall show that the second integral goes to $0$. Indeed, using the mean value theorem, we have 
+\begin{equation*}
+	\left|\int_0^\delta\frac{\varphi(x) - \varphi(-x)}{x}~dx\right| = \left|\int_0^\delta 2\varphi'(c_x)~dx\right|\le\int_0^\delta 2|\varphi'(c_x)|~dx\le 2M\delta,
+\end{equation*}
+where $M$ is the same constant introduced earlier. It follows now that the second integral goes to $0$ as $\delta\to 0^+$. This leaves us with 
+\begin{equation*}
+	\lim_{\varepsilon\to 0}\frac{x^2}{x^2 + \varepsilon^2}\frac{\varphi(x)}{x}~dx = \lim_{\delta\to 0}\int_{|x| > \delta}\frac{\varphi(x)}{x}~dx = \left(\pv\left(\frac{1}{x}\right),\varphi\right).
+\end{equation*}
+Combining this with our simplification of the secon term in the beginning, we have 
+\begin{equation*}
+	\lim_{\varepsilon\to 0}\left(\frac{1}{x + i\varepsilon},\varphi\right) = \left(\pv\left(\frac{1}{x}\right) - i\pi\delta, \varphi\right)\qquad\forall~\varphi\in C_c^\infty(\R),
+\end{equation*}
+as desired.
+
+
+
+\section{Problem 10}
+
+We shall make (light) use of the Fourier transform to solve this. Consider the function $\chi(x)$, the indicator function of the interval $\left[-\frac{n}{2\pi}, \frac{n}{2\pi}\right]$. The Fourier transform of this is given by 
+\begin{align*}
+	\wh\chi(\xi) &= \int_{\R}\chi(x)e^{-2\pi i\xi}~dx\\
+	&= \int_{-\frac{n}{2\pi}}^\frac{n}{2\pi} e^{-2\pi ix\xi}~dx\\
+	&= \frac{1}{2\pi i\xi}\left(e^{in\xi} - e^{-in\xi}\right)\\
+	&= \frac{\sin n\xi}{\pi\xi}.
+\end{align*}
+
+Let $\varphi\in C_c^\infty(\R)$. Then there is an $R > 0$ such that the support of $\varphi$ is contained in the open interval $(-R, R)$. We can write 
+\begin{align*}
+	\int_{\R}\frac{\sin nx}{\pi x}\varphi(x)~dx &= \int_{-R}^R\frac{\sin nx}{\pi x}\varphi(x)~dx\\
+	&= \int_{-R}^R\left(\int_{-\frac{n}{2\pi}}^{\frac{n}{2\pi}}e^{-2\pi ixy}~dy\right)\varphi(x)~dx\\
+	&= \int_{-\frac{n}{2\pi}}^\frac{n}{2\pi}\int_{-R}^R\varphi(x)e^{-2\pi i xy}~dx~dy\\
+	&= \int_{-\frac{n}{2\pi}}^{\frac{n}{2\pi}}\wh\varphi(y)~dy.
+\end{align*}
+Note that we can make use of Fubini's theorem because the integrand $\varphi(x)e^{-2\pi i xy}$ is a continuous function on $\R\times\R$, which contains the domain of integration. As a result,
+\begin{equation*}
+	\lim_{n\to\infty}\int_{\R}\frac{\sin nx}{\pi x}\varphi(x)~dx = \lim_{n\to\infty}\int_{-\frac{n}{2\pi}}^{\frac{n}{2\pi}}\wh\varphi(y)~dy = \int_{\R}\wh\varphi(y)~dy = \varphi(0).
+\end{equation*}
+where the last equality follows from the Fourier inversion formula on the Schwarz class 
+\begin{equation*}
+	\int_{\R}\wh\varphi(y)e^{2\pi i xy}~dy = \varphi(x)\quad\text{for all }x\in\R,
+\end{equation*}
+evaluated at $x = 0$. We have shown that 
+\begin{equation*}
+	\left(\frac{\sin nx}{\pi x},\varphi\right)\to(\delta,\varphi)
+\end{equation*}
+for every $\varphi\in C_c^\infty(\Omega)$, where $\delta$ is the Dirac delta distribution centered at $0$. This completes the proof.
+
+\section{Problem 11}\label{problem-11}
+
+First, we show that $\Supp u\subseteq\{0\}$. To this end, let $a = (a_1,\dots,a_n)\in\R^n\setminus\{0\}$, then there is some $a_i\ne 0$ for $1\le i\le n$. Then, consider the open ball 
+\begin{equation*}
+	U = \left\{x\in\R^n\colon |x - a| < |a_i|\right\}.
+\end{equation*}
+For any $x = (x_1,\dots,x_n)\in U$, we have that $|x_i - a_i|\le |x - a| < |a_i|$, and hence, $x_i\ne 0$. It follows that the function $x\mapsto\frac{1}{x_i}$ is a well-defined smooth function on $U$. Now, for any $\varphi\in C_c^\infty(U)$, we have 
+\begin{equation*}
+	(u, \varphi) = \left(u, x_i\cdot\frac{1}{x_i}\varphi\right) = \left(x_iu, \frac{1}{x_i}\varphi\right) = 0,
+\end{equation*}
+since $\frac{1}{x_i}\varphi$ is a compactly supported smooth function on $U$, and thus, a compactly supported smooth function on all of $\R^n$ (simply extend by $0$ to all of $\R^n$). Thus, we have shown that $a\notin\Supp\varphi$, consequently, $\Supp\varphi\subseteq\{0\}$. We have seen in class that for such distributions, there is a positive integer $N$ and constants $c_\alpha\in\bbC$ such that 
+\begin{equation*}
+	u = \sum_{|\alpha|\le N} c_\alpha\partial^\alpha\delta,
+\end{equation*}
+where $\delta$ is the Dirac delta distribution centered at $0$. We contend that $c_\alpha = 0$ for $1\le |\alpha|\le N$. Indeed, suppose $\beta\ne\alpha$ with $|\beta|\le N$. Let $\alpha = (\alpha_1,\dots,\alpha_n)$ and $\beta = (\beta_1,\dots,\beta_n)$. If $\beta_i > \alpha_i$ for any $1\le i\le n$, then $\partial^\beta x^\alpha = 0$ identically, and hence,
+\begin{equation*}
+	\left(\partial^\beta\delta, x^\alpha\right) = (-1)^{|\beta|}\left(\delta, \partial^\beta x^\alpha\right) = 0.
+\end{equation*}
+On the other hand, if $\beta_i\le\alpha_i$ for $1\le i\le n$, then 
+\begin{equation*}
+	\partial^\beta x^\alpha = \prod_{i = 1}^n\frac{\partial^{\beta_i}}{\partial x_i^{\beta_i}}x_i^{\alpha_i} = \prod_{i = 1}^n\frac{\alpha_i!}{(\alpha_i - \beta_i)!}x_i^{\alpha_i - \beta_i},
+\end{equation*}
+and since $\beta\ne\alpha$, there is an index $j$ such that $\beta_j < \alpha_j$, consequently, 
+\begin{equation*}
+	\left(\partial^\beta\delta, x^\alpha \right) = (-1)^{|\beta|}\left(\delta, \partial^\beta x^\alpha\right) = 0.
+\end{equation*}
+Hence, 
+\begin{equation*}
+	(u, x^\alpha) = \sum_{|\beta|\le N} c_\beta\left(\partial^\beta\delta, x^\alpha\right) = c_\alpha(-1)^{|\alpha|}(\delta, \partial^\alpha x^\alpha) = (-1)^{|\alpha|}c_\alpha\prod_{i = 1}^n \alpha_i!.
+\end{equation*}
+Now, there is an index $k$ such that $\alpha_k > 0$. Set $\gamma = (\gamma_1,\dots,\gamma_n)$, with $\gamma_i = \alpha_i$ for $i\ne k$ and $\gamma_k = \alpha_k - 1$. We can write 
+\begin{equation*}
+	(u, x^\alpha) = (u, x_i x^\gamma) = (x_iu, x^\gamma) = 0.
+\end{equation*}
+It follows that $c_\alpha = 0$ whenever $1\le |\alpha|\le N$. Therefore, $u = c_0\delta$, as desired.
+
+\section{Problem 12}
+
+Let $\rho = \rho_1\in C_c^\infty(\R)$ be the standard mollifier as defined in the introduction, so that $\int_\R\rho = 1$. For $\varphi\in C_c^\infty(\R)$, let $c = \int_\R\varphi$ and set $\psi = \varphi - c\rho$. This is a compactly supported smooth function on $\R$. Indeed, let $N$ be a positive integer such that both $\rho$ and $\varphi$ have supports contained in the compact interval $[-N, N]$, then $\psi$ must be supported inside $[-N, N]$ too, as a consequence, $\psi$ is compactly supported. Define
+\begin{equation*}
+	\Phi(t) = \int_{-N}^t \psi(t)~dt.
+\end{equation*}
+Note that for $t\ge N$, we have
+\begin{equation*}
+	\Phi(t) = \int_{-N}^N\psi(t)~dt + \int_{N}^t\psi(t)~dt = \int_{-N}^N\varphi(t)~dt - c\int_{-N}^N \rho(t)~dt = 0,
+\end{equation*}
+since $\int_{-N}^N\varphi = \int_{\R}\varphi = c$ and $\int_{-N}^{N}\rho = \int_\R\rho = 1$. On the other hand, for $t\le -N$, we have that 
+\begin{equation*}
+	\Phi(t) = \int_{-N}^t\psi(t)~dt = -\int_{t}^{-N}\psi(t)~dt = 0,
+\end{equation*}
+since $\psi$ is identically zero on the interval $[t, -N]$. Thus, $\Phi$ is compactly supported in $[-N, N]$ and $\Phi'(t) = \psi(t)$. We have 
+\begin{equation*}
+	0 = (u', \Phi) = -(u,\Phi') = -(u,\psi),
+\end{equation*}
+and hence, 
+\begin{equation*}
+	(u,\varphi) = c(u,\rho) = (u,\rho)\int_{\R}\varphi.
+\end{equation*}
+Hence, $u = (u,\rho)$ is a constant, as desired.
+
+\section{Problem 13}
+
+We claim that the answer is $0 < a < n$. First, let $a < n$. We shall show that $\frac{1}{|x|^a}$ is locally integrable. Let $K\subseteq\R^n$ be compact. Then, there is an $R > 0$ such that $K\subseteq B(0, R)$. Note that 
+\begin{equation*}
+	\int_K \frac{1}{|x|^a}~dx\le\int_{B(0, R)}\frac{1}{|x|^a}~dx = \int_{\R^n}\chi_{B(0, R)\setminus\{0\}}\frac{1}{|x|^a}~dx.
+\end{equation*}
+Consider the sequence of functions 
+\begin{equation*}
+	\chi_{B(0, R)\setminus B(0,\varepsilon)}\frac{1}{|x|^a},
+\end{equation*}
+which are positive, measurable, pointwise increasing (with respect to $\varepsilon$), and converge pointwise to 
+\begin{equation*}
+	\chi_{B(0, R)\setminus\{0\}}\frac{1}{|x|^a}.
+\end{equation*}
+Thus, the Monotone Convergence Theorem applies and 
+\begin{equation*}
+	\int_{B(0, R)\setminus\{0\}}\frac{1}{|x|^a}~dx = \lim_{\varepsilon\to 0^+}\int_{B(0, R)\setminus B(0,\varepsilon)}\frac{1}{|x|^a}~dx.
+\end{equation*}
+The integral on the right can be computed using polar coordinates as 
+\begin{equation*}
+	\int_{r = \varepsilon}^R \int_{\partial B(0, r)}\frac{1}{r^a}~d\sigma~dr = \int_{r = \varepsilon}^R \omega_n r^{n - 1 - a}~dr = \frac{\omega_n}{n - a}\left(R^{n - a} - \varepsilon^{n - a}\right),
+\end{equation*}
+which converges as $\varepsilon\to 0^+$, since $a < n$. This shows that $\frac{1}{|x|^a}$ is locally integrable for $a < n$.
+
+Suppose now that $a\ge n$. We shall show that the function is not locally integrable. Indeed, let $K = \overline B(0, R)$ for some $R > 0$ and consider the integral 
+\begin{equation*}
+	\int_{B(0, R)}\frac{1}{|x|^a}~dx.
+\end{equation*}
+Due to the above arguments, we can write this (using the Monotone Convergence Theorem) as 
+\begin{equation*}
+	\lim_{\varepsilon\to 0^+}\int_{\overline B(0, R)\setminus B(0,\varepsilon)}\frac{1}{|x|^a}~dx = \lim_{\varepsilon\to 0^+}\int_{r = \varepsilon}^R \int_{\partial B(0, r)}\frac{1}{r^a}~d\sigma~dr = \lim_{\varepsilon\to 0^+}\int_{r = \varepsilon}^R\omega_n r^{n - 1 - a}~dr.
+\end{equation*}
+If $a = n$, then the limit on the right is $\omega_n\log\left(\frac{R}{\varepsilon}\right)$, which diverges as $\varepsilon\to 0^+$. On the other hand, if $a > n$, then the integral is 
+\begin{equation*}
+	\frac{\omega_n}{a - n}\left(\varepsilon^{n - a} - R^{n - a}\right),
+\end{equation*}
+which diverges as $\varepsilon\to 0^+$ since $n - a < 0$. Thus, $\frac{1}{|x|^a}$ is not locally integrable for $a\ge n$, thereby completing the proof.
+
+\section{Problem 14}
+That $u\in\mathscr D'(\R^n)$ follows from the preceding problem. We shall show that $\Delta u = \delta$. First note that $\Delta u = \sum_{i = 1}^n\partial_i^2 u$, and 
+\begin{equation*}
+	(\partial_i^2 u, \varphi) = (-1)^2(u,\partial_i^2\varphi)\implies(\Delta u, \varphi) = (u,\Delta\varphi).
+\end{equation*}
+Hence, it sufices to show that $(u,\Delta\varphi) = \varphi(0)$ for all $\varphi\in C_c^\infty(\R^n)$. Let $K$ denote the support of $\varphi$, which is compact, and hence, is contained in an open ball of the form $B(0, R)$ for some $R > 0$. Note that the support of every partial derivative of $\varphi$ is also contained in this open ball. In particular, this means that $\Delta\varphi$ is compactly supported in $B(0, R)$.
+
+We wish to compute 
+\begin{equation*}
+	\int_{\R^n}\frac{1}{|x|^{n - 2}}\Delta\varphi(x)~dx = \int_{B(0, R)}\frac{1}{|x|^{n - 2}}\Delta\varphi(x)~dx.
+\end{equation*}
+First, we must argue that the latter is indeed integrable. This is easy to see, since $\Delta\varphi$ is compactly supported and hence, bounded by some $M > 0$ on $\R^n$. It follows that $\left|\frac{1}{|x|^{n - 2}}\Delta\varphi(x)\right|\le\frac{M}{|x|^{n - 2}}$, which is locally integrable as argued in the preceding problem. In particular, it is integrable over $\overline B(0, R)$, and hence on $B(0, R)$. Note that this also implies integrability over all of $\R^n$, since $\Delta\varphi$ is compactly supported inside $B(0, R)$.
+
+Next, we show that
+\begin{equation*}
+	\lim_{\varepsilon\to 0}\int_{\varepsilon < |x| < R}\frac{1}{|x|^{n - 2}}\Delta\varphi(x)~dx = \int_{B(0, R)\setminus\{0\}}\frac{1}{|x|^{n - 2}}\Delta\varphi(x)~dx = \int_{B(0, R)}\frac{1}{|x|^{n - 2}}\Delta\varphi(x)~dx
+\end{equation*}
+The second equality is obvious. To see the first, consider the sequence of functions 
+\begin{equation*}
+	\chi_{B(0, R)\setminus\overline B(0,\varepsilon)}(x)\frac{1}{|x|^{n - 2}}\Delta\varphi(x).
+\end{equation*}
+These are bounded in absolute value by $\frac{1}{|x|^{n - 2}}|\Delta\varphi(x)|$, which we have argued to be integrable on $\R^n$ in the preceding paragraph. It follows that the dominated convergence theorem applies. The above sequence of functions converges pointwise to the function 
+\begin{equation*}
+	\chi_{B(0, R)\setminus\{0\}}(x)\frac{1}{|x|^{n - 2}}\Delta\varphi(x).
+\end{equation*}
+Hence, we have shown that 
+\begin{equation*}
+	\lim_{\varepsilon\to 0}\int_{B(0, R)\setminus\overline B(0,\varepsilon)}\frac{1}{|x|^{n - 2}}\Delta\varphi(x)~dx = \int_{B(0, R)\setminus\{0\}}\frac{1}{|x|^{n - 2}}\Delta\varphi(x)~dx,
+\end{equation*}
+as desired.
+
+Finally, we evaluate the above limit on the left hand side. Using Green's second identity on the domain $\Omega = B(0, R)\setminus\overline B(0,\varepsilon)$ with the notation $u(x) = \frac{1}{|x|^{n - 2}}$, we have 
+\begin{equation*}
+	\int_{\Omega} u(x)\Delta\varphi(x) - \varphi\Delta u(x) = \int_{\partial\Omega} u(x)\frac{\partial\varphi}{\partial n}(x) - \varphi(x)\frac{\partial u}{\partial n}(x)~ds(x).
+\end{equation*}
+The boundary $\partial\Omega$ consists of two pieces, one the outer sphere $|x| = R$, which we shall denote by $C_1$ and the inner sphere $|x| = \varepsilon$, which we shall denote by $C_2$. Note that $C_1$ has the outward pointing normal and $C_2$ the inward pointing normal. For each $x\in C_1$, there is a neighborhood on which $\Delta\varphi = 0$, since $\varphi$ is compactly supported within $B(0, R)$. It follows that both $\varphi(x)$ and $\frac{\partial\varphi}{\partial n}(x)$ are identically $0$ on $C_1$. This leaves us with the terms corresponding to $C_2$. Note that the inward normal on $C_2$ is precisely $\frac{-x}{\varepsilon}$ for all $x\in C_2$. This gives us:
+\begin{align*}
+	\int_{|x| = \varepsilon}\varphi(x)\frac{\partial u}{\partial n}(x)~ds(x) &= \int_{|x| = \varepsilon}\varphi(x)\nabla u(x)\cdot\frac{-x}{\varepsilon}~ds(x)\\
+	&= \int_{|x| = \varepsilon}\varphi(x)\frac{-(n - 2)x}{|x|^n}\cdot\frac{-x}{\varepsilon}~ds(x)\\
+	&= \frac{n - 2}{\varepsilon^{n - 1}}\int_{|x| = \varepsilon}\varphi(x)~ds(x)\\
+	&= \frac{n - 2}{\varepsilon^{n - 1}}\int_{|x| = \varepsilon}\varphi(x) - \varphi(0)~ds(x) + \underbrace{\frac{n - 2}{\varepsilon^{n - 1}}\int_{|x| = \varepsilon}\varphi(0)~ds(x)}_{(n - 2)\omega_n\varphi(0)}\\
+\end{align*}
+We claim that the first term vanishes in the limit $\varepsilon\to 0$. Indeed, note that 
+\begin{equation*}
+	\left|\frac{n - 2}{\varepsilon^{n - 1}}\int_{|x| = \varepsilon}\varphi(x) - \varphi(0)~ds(x)\right|\le\frac{n - 2}{\varepsilon^{n - 1}}\int_{|x| = \varepsilon}|\varphi(x) - \varphi(0)|~ds(x)\le(n - 2)\omega_n\sup_{|x| = \varepsilon}|\varphi(x) - \varphi(0)|.
+\end{equation*}
+Given a $\delta > 0$, there is a corresponding $\eta > 0$ such that 
+\begin{equation*}
+	|\varphi(x) - \varphi(0)| < \frac{\delta}{(n - 2)\omega_n}\qquad\forall~|x| < \eta.
+\end{equation*}
+Hence, for all $\varepsilon < \eta$, we have that 
+\begin{equation*}
+	\left|\frac{n - 2}{\varepsilon^{n - 1}}\int_{|x| = \varepsilon}\varphi(x) - \varphi(0)~ds(x)\right| < \delta.
+\end{equation*}
+It follows that 
+\begin{equation*}
+	\lim\frac{n - 2}{\varepsilon^{n - 1}}\int_{|x| = \varepsilon}\varphi(x) - \varphi(0)~ds(x) = 0,
+\end{equation*}
+so that
+\begin{equation*}
+	\lim_{\varepsilon\to 0}\int_{|x| = \varepsilon}\varphi(x)\frac{\partial u}{\partial n}(x)~ds(x) = (n - 2)\omega_n\varphi(0).
+\end{equation*}
+
+Next, we show that 
+\begin{equation*}
+	\lim_{\varepsilon\to 0}\int_{C_2} u(x)\frac{\partial\varphi}{\partial n}(x)~ds(x) = 0.
+\end{equation*}
+Indeed, the above integral in absolute value is equal to 
+\begin{align*}
+	\left|\int_{|x| = \varepsilon} u(x)\nabla\varphi(x)\cdot\frac{-x}{\varepsilon}~ds(x)\right| &\le\int_{|x| = \varepsilon}|u(x)|\left|\nabla\varphi(x)\cdot\frac{x}{\varepsilon}\right|~ds(x)\\
+	&\le\int_{|x| = \varepsilon}|u(x)|\|\nabla \varphi(x)\|\left\|\frac{x}{\varepsilon}\right\|~ds(x)\\
+	&= \int_{|x| = \varepsilon} |u(x)|\|\nabla \varphi(x)\|~ds(x),
+\end{align*}
+where the second inequality follows from the Cauchy-Schwarz inequality. We may suppose that $\varepsilon\le 1$. Since $u$ and $\|\nabla\varphi(x)\|$ are continuous functions on the compact ball $\overline B(0, 1)$, both are bounded there, in the sense that there are constants $M_1, M_2 > 0$ such that $|u(x)|\le M_1$ and $\|\nabla\varphi(x)\|\le M_2$ for all $x\in\overline B(0, 1)$. Thus, 
+\begin{equation*}
+	\left|\int_{|x| = \varepsilon} u(x)\nabla\varphi(x)\cdot\frac{-x}{\varepsilon}~ds(x)\right| \le\int_{|x| = \varepsilon}M_1M_2~ds(x) = M_1M_2\omega_n\varepsilon^{n}.
+\end{equation*}
+As $\varepsilon\to 0$, the right hand side goes to $0$, consequently, 
+\begin{equation*}
+	\lim_{\varepsilon\to 0}\int_{|x| = \varepsilon} u(x)\nabla\varphi(x)\cdot\frac{-x}{\varepsilon}~ds(x) = 0.
+\end{equation*}
+In conclusion, this gives us 
+\begin{equation*}
+	\lim_{\varepsilon\to 0}\int_{B(0, R)\setminus\overline B(0,\varepsilon)}u(x)\Delta\varphi(x) - \varphi(x)\Delta u(x) = - (n - 2)\omega_n\varphi(0).
+\end{equation*}
+Note that $u$ is a harmonic function on $\R^n\setminus\{0\}$, consequently, $\Delta u = 0$ on $\R^n\setminus\{0\}$. It follows that 
+\begin{equation*}
+	(\Delta u,\varphi) = \lim_{\varepsilon\to 0}\int_{B(0, R)\setminus\overline B(0,\varepsilon)}u(x)\Delta\varphi(x) = - (n - 2)\omega_n\varphi(0).
+\end{equation*}
+This gives us that $\Delta u = -(n - 2)\omega_n\delta$, where $\delta$ is the Dirac delta distribution centered at $0$.
+
+\section{Problem 15}
+
+Let 
+\begin{equation*}
+	u_n(x) = n\int_{\frac{1}{n}}^n \phi\left(n(x - t)\right)~dt.
+\end{equation*}
+We shall show that $u_n\to H$ where $H$ is the Heaviside function. Let $\psi\in C_c^\infty(\R)$. Consequently, there is an $R > 0$ such that $\Supp\psi\subseteq[-R, R]$. Then
+\begin{equation*}
+	(u_n,\psi) = n\int_{\R}\int_{\frac{1}{n}}^n \phi\left(n(x - t)\right)\psi(x)~dt~dx = n\int_{\frac{1}{n}}^n\int_{\R}\phi\left(n(x - t)\right)\psi(x)~dx~dt.
+\end{equation*}
+Performing the substitution $x = y + t$ to get
+\begin{align*}
+	(u_n,\psi) &= n\int_{\frac{1}{n}}^n\int_{\R}\phi(ny)\psi(y + t)~dy~dt\\
+	&= n\int_{\R}\int_{\frac{1}{n}}^n \phi(ny)\psi(y + t)~dt~dy\\
+	&= n\int_{\R} \phi(ny)\int_{\frac{1}{n}}^n \psi(y + t)~dt~dy\\
+	&= n\int_{-\frac{1}{n}}^\frac{1}{n}\phi(ny)\int_{\frac{1}{n}}^n\psi(y + t)~dt~dy\\
+	&= n\int_{-\frac{1}{n}}^\frac{1}{n}\phi(ny)\int_{\frac{1}{n} + y}^{n + y}\psi(z)~dz~dy,
+\end{align*}
+where we have performed the substitution $z = y + t$. Let $N > 0$ be a positive integer such that $N - \frac{1}{N} > R$. Then, for all $n\ge N$, $n + y > R$ whenever $-\frac{1}{n}\le y\le\frac{1}{n}$. Thus
+\begin{align*}
+	(u_n,\psi) &= n\int_{-\frac{1}{n}}^\frac{1}{n}\phi(ny)\int_{\frac{1}{n} + y}^\infty\psi(z)~dz~dy\\
+	&= n\int_{-\frac{1}{n}}^\frac{1}{n}\phi(ny)\left(\int_{0}^\infty\psi - \int_{0}^{\frac{1}{n} + y}\psi(z)~dz\right)~dy\\
+	&= \int_{0}^\infty\psi - n\int_{-\frac{1}{n}}^\frac{1}{n}\phi(ny)\int_0^{\frac{1}{n} + y}\psi(z)~dz~dy.
+\end{align*}
+Now, we show that the second quantity goes to $0$ as $n\to\infty$. First, make the substitution $w = ny$ and rewrite the integral as 
+\begin{equation*}
+	\int_{-1}^1\phi(w)\int_{0}^{\frac{1 + y}{n}}\psi(z)~dz~dy,
+\end{equation*}
+which is bounded in absolute value by 
+\begin{equation*}
+	\left|\int_{-1}^1\phi(w)\int_{0}^{\frac{1 + y}{n}}\psi(z)~dz~dy\right|\le\int_{-1}^{1}|\phi(w)|\int_{0}^\frac{1 + y}{n}|\psi(z)|~dz~dy.
+\end{equation*}
+Since $\psi$ is compactly supported, it is bounded on $\R$, similarly, so is $\phi$. Let $M > 0$ be such that $|\phi(x)|\le M$ and $|\psi(x)|\le M$ for all $x\in\R$. Then, the above quantity is bounded by 
+\begin{equation*}
+	\int_{-1}^1M\int_{0}^{\frac{1 + y}{n}} M~dz~dy = M^2\int_{-1}^{1}\frac{1 + y}{n}~dy = \frac{2M^2}{n},
+\end{equation*}
+which goes to $0$ as $n\to\infty$. Hence, 
+\begin{equation*}
+	\lim_{n\to\infty} \int_{-1}^1\phi(w)\int_{0}^{\frac{1 + y}{n}}\psi(z)~dz~dy = 0,
+\end{equation*}
+which gives 
+\begin{equation*}
+	\lim_{n\to\infty} (u_n,\psi) = \int_{0}^\infty \psi = (H,\psi),
+\end{equation*}
+as desired.
+
+\section{Problem 16}
+This is quite straightforward. For $\varphi\in C_c^\infty(\R)$, we have 
+\begin{align*}
+	(u',\varphi) = -(u,\varphi') = -\int_0^1\varphi'(x)~dx = \varphi(0) - \varphi(1).
+\end{align*}
+Thus, $u' = \delta_0 - \delta_1$, where $\delta_c$ denotes the Dirac delta distribution centered at $c\in\R$.
+ 
+\bibliographystyle{alpha}
+\bibliography{references}
+\end{document}
