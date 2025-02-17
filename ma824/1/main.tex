@@ -448,7 +448,7 @@ But for $n\in S\Delta T$, we have that $|x_S(n) - x_T(n)| = 1$, whence $\|x_S - 
 
 Let $X$ be a locally compact normed linear space; then there is a neighborhood $V$ of the origin in $X$ such that $\overline V$ is compact. Since $V$ is open, there is an $r > 0$ such that $B(0, r)\subseteq V$, consequently, $\overline B(0, r)\subseteq\overline V$. Since the latter is compact, so is the former. Further, the map $x\mapsto r x$ is a homeomorphism $X\to X$ with inverse given by $x\mapsto r^{-1}x$. Under the former map, the closed unit ball $\overline B(0, 1)$ mapsto $\overline B(0, r)$. Since the latter is compact, the former must be too, that is, $\overline B(0, 1)$ is compact. Hence, we may suppose without loss of generality that $V = B(0, 1)$.
 
-There are two ways to finish from here; we elucidate both. The first is due to Andr\'e Weil and generalizes well to topological vector spaces over complete valued fields. Note that $\overline V$ is compact and 
+The following method is due to Andr\'e Weil and generalizes well to topological vector spaces over complete valued fields. Note that $\overline V$ is compact and 
 \begin{equation*}
 	\overline V \subseteq \bigcup_{x\in\overline V}\left(x + \frac{1}{2}V\right).
 \end{equation*}
@@ -524,8 +524,17 @@ Before we begin, let $x = (x(i))\in X$ and $j\in I$. Then, for $1\le p < \infty$
 \end{equation*}
 And if $p = \infty$, then obviously $\|x(i)\|\le \|x\|$. All integrals over $I$ henceforth are with respect to the counting measure $(I, \scrP(I), \mu)$ on $I$.
 
+Throughout this solution, let $\|\cdot\|_p$ denote the $L^p\left(I,\scrP(I),\mu\right)$ norm with $1\le p\le\infty$. We also identify sequences indexed by $I$ with measurable functions $I\to\K$, so that there is no difference between a sum indexed by $I$ and an integral over $I$.
+
 \begin{enumerate}[label=(\alph*)]
-	\item % TODO: show that this is actually a normed linear space.
+	\item Let $1\le p\le\infty$, $x, y\in\bigoplus_p X_i$, and $\alpha,\beta\in\K$. We shall show that $\alpha x + \beta y\in\bigoplus_p X_i$ and $\|\alpha x + \beta y\|\le |\alpha|\|x\| + |\beta|\|y\|$. Indeed, note that $\|\alpha x + \beta y\|$ is the $L^p$-norm of the function $f: I\to\K$ given by $f(i) = \left\|\alpha x(i) + \beta y(i)\right\|$. The triangle inequality gives us $f(i)\le |\alpha|\|x(i)\| + |\beta|\|y(i)\|$ for all $i\in I$. Let $g, h: I\to\K$ be given by $g(i) = \|x(i)\|$ and $h(i) = \|y(i)\|$. Then $f = |\alpha|g + |\beta|h$. Since the $L^p$-spaces form a normed linear space, we have 
+	\begin{equation*}
+		\|\alpha x + \beta y\|\le\|f\|_p\le |\alpha|\|g\|_p + |\beta|\|h\|_p = |\alpha|\|x\| + |\beta|\|y\| < \infty.
+	\end{equation*}
+	Hence, $\alpha x + \beta y\in\bigoplus_p X_i$ for all $\alpha,\beta\in\K$. This shows that $\bigoplus_p X_i$ is a vector space and the inequality proved above shows that $\|\cdot\|$ is indeed a norm on $\bigoplus_p X_i$.
+	
+	Finally, we must show that $P_i : X\to X_i$ has norm $\le 1$. That $P_i$ is a linear map is obvious. For any $x\in X$, as we had observed in the paragraph preceding the solution of part (a), $\|x(i)\|\le \|x\|$, and hence, $\|P_i\|\le 1$.
+
 
 	\item Suppose first that each $X_i$ is a Banach space and let $(x_n)_{n\ge 1}$ be a Cauchy sequence in $X$. That is, given any $\varepsilon > 0$, there is a positive integer $N > 0$ such that $\|x_m - x_n\| < \varepsilon$ for all $m,n\ge N$. Hence, for $i\in I$, we have $\|x_m(i) - x_n(i)\| < \varepsilon$ for all $m,n\ge N$. This shows that the sequence $(x_n(i))_{n\ge 1}$ is Cauchy in $X_i$, therefore converges to some $x(i)\in X_i$ since $X_i$ is Banach. Since the norm is a continuous function on each $X_i$, it follows that $\|x_n(i)\|\to \|x\|$. Set $x = (x(i))$. We now treat the cases $p < \infty$ and $p = \infty$ separately. 
 	
