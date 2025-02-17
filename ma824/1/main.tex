@@ -1,0 +1,866 @@
+\documentclass[10pt]{amsart}
+
+\title{MA 824: Assignment 1}
+\author{Swayam Chube (200050141)}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{bbm}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem*{claim}{Claim}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{notation}{Notation}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\frakM}{\mathfrak{M}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbI}{\mathbb{I}}
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakF}{\mathfrak{F}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakP}{\mathfrak{P}} % nilradical 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakT}{\mathfrak{T}} % tensor algebra
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{#1}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\ind}{\operatorname{ind}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\Lip}{\operatorname{Lip}}
+\newcommand{\lip}{\operatorname{lip}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\pv}{\operatorname{p.v.}}
+\newcommand{\Graph}{\operatorname{Graph}}
+
+\geometry {
+    margin = 1in
+}
+
+\begin{document}
+\maketitle 
+
+\section{Problem 1}
+
+\subsection*{Some Preliminary Estimates}
+First, suppose $1\le p <  q < \infty$. Then 
+\begin{equation*}
+	\|x\|_q^q = \sum_{i = 1}^d |x_i|^q = \sum_{i = 1}^d |x_i|^p\cdot|x_i|^{q - p}\le \|x\|_q^{q - p}\sum_{i = 1}^d |x_i|^p = \|x\|_q^{q - p}\|x\|_p^p,
+\end{equation*}
+where the first inequality follows from the fact that $|x_i|\le \|x\|_q$ for $1\le i\le d$. The above shows that $\|x\|_q^p\le\|x\|_p^p$, that is, $\|x\|_q\le \|x\|_p$.
+
+On the other hand, using H\"older's inequality on the measure space $\{1,\dots,d\}$ equipped with the counting measure, we have 
+\begin{equation*}
+	\|x^p\|_1\le \|x^p\|_{\frac{q}{p}}\|\mathbbm 1\|_{\frac{q}{q - p}},
+\end{equation*}
+where $x^p = (|x_1|^p,\dots,|x_d|^p)\in\bbC^d$. Now note that $\|\mathbbm 1\|_{\frac{q}{q - p}} = d^{\frac{q - p}{q}}$, and 
+\begin{equation*}
+	\|x^p\|_{\frac{q}{p}} = \left(\sum_{i = 1}^d |x_i|^q\right)^{\frac{p}{q}} = \|x\|_q^p.
+\end{equation*}
+This gives us 
+\begin{equation*}
+	\|x\|_p^p\le \|x\|_q^p d^{\frac{q - p}{q}}\implies\|x\|_p\le d^{\frac{1}{p} - \frac{1}{q}}\|x\|_q,
+\end{equation*}
+that is, 
+\begin{equation*}
+	\|x\|_q\le \|x\|_p\le d^{\frac{1}{p} - \frac{1}{q}}\|x\|_q.
+\end{equation*}
+Note that both inequalities are tight. Indeed, take $x = (1,0,\dots,0)\in\bbC^d$, then $\|x\|_q = \|x\|_p = 1$. On the other hand, taking $x = (1, 1,\dots, 1)\in\bbC^d$, we see that $\|x\|_p = d^{\frac{1}{p}}$ and $\|x\|_q = d^{\frac{1}{q}}$, whence $\|x\|_p = d^{\frac{1}{p} - \frac{1}{q}}\|x\|_q$.
+
+Next, suppose $q = \infty$ and $p < q$. For $x = (x_1,\dots,x_d)\in\bbC^d$, there is an index $1\le i_0\le d$ such that $|x_{i_0}| = \|x\|_\infty$. Hence, we have 
+\begin{equation*}
+	\|x\|_p = \left(\sum_{i = 1}^d |x_i|^p\right)^{\frac{1}{p}}\ge|x_{i_0}| = \|x\|_\infty,
+\end{equation*}
+and
+\begin{equation*}
+	\|x\|_p = \left(\sum_{i = 1}^d |x_i|^p\right)^{\frac{1}{p}}\le\left(\sum_{i = 1}^d \|x\|_\infty^p\right)^{\frac{1}{p}} = d^{\frac{1}{p}}\|x\|_\infty.
+\end{equation*}
+The inequalities 
+\begin{equation*}
+	\|x\|_\infty\le \|x\|_p\le d^{\frac{1}{p}}\|x\|_\infty
+\end{equation*}
+are tight. Taking $x = (1,0,\dots, 0)\in\bbC^d$, we have $\|x\|_p = \|x\|_\infty = 1$. And taking $x = (1,1,\dots,1)\in\bbC^d$, we have $\|x\|_p = d^{\frac{1}{p}} = d^{\frac{1}{p}}\|x\|_\infty$, as desired.
+
+\subsection*{Conclusion}
+
+First, if $p = q$, then take $c = C = 1$. Henceforth, we assume that $p \ne q$. Next, suppose $1\le p, q < \infty$. Then using our estimates from the previous (sub)section,
+\begin{equation*}
+	\begin{cases}
+		d^{-\left(\frac{1}{p} - \frac{1}{q}\right)}\|x\|_p & p < q\\
+		\|x\|_p & p > q
+	\end{cases}
+	\le \|x\|_q\le
+	\begin{cases}
+		\|x\|_p & p < q\\
+		d^{\left(\frac{1}{q} - \frac{1}{p}\right)}\|x\|_p & p > q.
+	\end{cases}
+\end{equation*}
+Finally, if $q = \infty$, then $p < \infty$ and we have 
+\begin{equation*}
+	d^{-\frac{1}{p}}\le \|x\|_q\le \|x\|_p,
+\end{equation*}
+and if $p = \infty$ so that $q < \infty$, then 
+\begin{equation*}
+	\|x\|_p\le \|x\|_q\le d^{\frac{1}{q}}\|x\|_p.
+\end{equation*}
+As we have seen in the preceding (sub)section, all the above estimates are tight, that is, the constants are the best possible. 
+
+\section{Problem 2}
+
+\begin{enumerate}[label=(\alph*)]
+\item There is a $0 < \lambda < 1$ such that $p = \lambda r + (1 - \lambda)s$. H\"older's inequality gives 
+\begin{equation*}
+	\|f\|_p^p = \|f^p\|_1 = \|f^{\lambda r + (1 - \lambda)s}\|_1\le \|f^{\lambda r}\|_{\frac{1}{\lambda}}\|f^{(1 - \lambda)s}\|_{\frac{1}{1 - \lambda}}.
+\end{equation*}
+Note that 
+\begin{equation*}
+	\|f^{\lambda r}\|_{\frac{1}{\lambda}} = \left(\int_{X}\left(|f|^{\lambda r}\right)^{\frac{1}{\lambda}}~d\mu\right)^{\lambda} = \left(\int_{X} |f|^r~d\mu\right)^\lambda = \|f\|_r^{\lambda r} \le\max\{\|f\|_r, \|f\|_s\}^{\lambda r}
+\end{equation*}
+and 
+\begin{equation*}
+	\|f^{(1 - \lambda)s}\|_{\frac{1}{1 - \lambda}} = \left(\int_{X}\left(|f|^{(1 - \lambda)s}\right)^{\frac{1}{1 - \lambda}}~d\lambda\right)^{1 - \lambda} = \|f\|_s^{(1 - \lambda)s}\le\max\{\|f\|_r, \|f\|_s\}^{(1 - \lambda)s}.
+\end{equation*}
+Thus 
+\begin{equation*}
+	\|f\|_p^p\le\max\{\|f\|_r, \|f\|_s\}^{\lambda r + (1 - \lambda)s}\implies\|f\|_p\le\max\{\|f\|_r, \|f\|_s\},
+\end{equation*}
+as desired.
+
+\item Suppose first that $\|f\|_\infty = \infty$. As a result, for every $C > 0$, 
+\begin{equation*}
+	\mu\left\{x\in X\colon |f(x)|\ge C\right\} > 0.
+\end{equation*}
+Hence, 
+\begin{equation*}
+	\|f\|_p^p = \int_X |f|^p~d\mu\ge\int_{\left\{x\colon |f(x)|\ge C\right\}}|f(x)|^p~d\mu\ge \mu\left\{x\in X\colon |f(x)|\ge C\right\}C^p,
+\end{equation*}
+and hence, 
+\begin{equation*}
+	\|f\|_p\ge C\mu\left\{x\in X\colon |f(x)|\ge C\right\}^{\frac{1}{p}}.
+\end{equation*}
+Thus, as $p\to\infty$, using the fact that $\mu\left\{x\in X\colon |f(x)|\ge C\right\} > 0$, we have 
+\begin{equation*}
+	\liminf_{p\to\infty} \|f\|_p \ge C\liminf_{p\to\infty}\mu\left\{x\in X\colon |f(x)|\ge C\right\}^{\frac{1}{p}} = \infty.
+\end{equation*}
+It follows immediately that $\lim\limits_{n\to\infty}\|f\|_p = \infty$.
+
+Next, suppose $\|f\|_\infty < \infty$. For $p > r$, we have 
+\begin{equation*}
+	\|f\|_p^p = \int_X |f|^p~d\mu = \int_X |f|^{p - r}|f|^r~d\mu\le \|f\|_\infty^{p - r}\int_X |f|^r~d\mu.
+\end{equation*}
+Thus, 
+\begin{equation*}
+	\|f\|_p\le \|f\|_\infty^{1 - \frac{r}{p}}\|f\|_r^{\frac{r}{p}}.
+\end{equation*}
+Since $\|f\|_\infty > 0$, we have $\|f\|_r > 0$, consequently, 
+\begin{equation*}
+	\limsup_{p\to\infty} \|f\|_p\le \|f\|^\infty \lim_{p\to\infty}\|f\|_\infty^{-\frac{r}{p}}\|f\|_r^{\frac{r}{p}} = \|f\|_\infty.
+\end{equation*}
+On the other hand, let $0 < C < \|f\|_\infty$, so that 
+\begin{equation*}
+	\mu\left\{x\in X\colon |f(x)|\ge C\right\} > 0.
+\end{equation*}
+An obvious estimate gives us 
+\begin{equation*}
+	\|f\|_p^p = \int_X |f|^p~d\mu\ge\int_{\{x\in X\colon |f(x)|\ge C\}}|f|^p~d\mu\ge C^p\mu\left\{x\in X\colon |f(x)|\ge C\right\},
+\end{equation*}
+consequently, 
+\begin{equation*}
+	\|f\|_p\ge C\mu\left\{x\in X\colon |f(x)|\ge C\right\}^{\frac{1}{p}}.
+\end{equation*}
+Finally, we claim that $0 < \mu\left\{x\in X\colon |f(x)|\ge C\right\} < \infty$. Indeed, since $\|f\|_\infty > 0$, it is obvious that the above measure is positive. Further, since $\|f\|_r < \infty$, we have 
+\begin{equation*}
+	C\mu\left\{x\in X\colon |f(x)|\ge C\right\}^{\frac{1}{r}}\le\left(\int_X |f|^r~d\mu\right)^{\frac{1}{r}} = \|f\|_r < \infty,
+\end{equation*}
+whence the measure is finite. It follows that 
+\begin{equation*}
+	\liminf_{p\to\infty}\|f\|_p\ge C\liminf_{p\to\infty}\mu\left\{x\in X\colon |f(x)|\ge C\right\}^{\frac{1}{p}} = C.
+\end{equation*}
+Since the above inequality holds for all $0 < C < \|f\|_\infty$; taking a supremum over all such $C$, we get that 
+\begin{equation*}
+	\|f\|_\infty\ge \limsup_{p\to\infty} \|f\|_p\ge\liminf_{p\to\infty}\|f\|_p\ge\|f\|_\infty,
+\end{equation*}
+therefore, 
+\begin{equation*}
+	\lim_{p\to\infty} \|f\|_p = \|f\|_\infty,
+\end{equation*}
+as desired. 
+
+\item Since $r < s$, we have $\frac{1}{r} > \frac{1}{s}$. Choose a $p\ge 1$ such that 
+\begin{equation*}
+	\frac{1}{r} = \frac{1}{p} + \frac{1}{s}\implies 1 = \frac{r}{p} + \frac{r}{s}.
+\end{equation*}
+H\"older's inequality then gives us 
+\begin{equation*}
+	\|f^r\|_1\le \|f^r\|_{\frac{s}{r}}\|\mathbbm 1\|_{\frac{p}{r}},
+\end{equation*}
+where $\mathbbm 1$ denotes the constant function $1$. Now note that 
+\begin{equation*}
+	\|f^r\|_{\frac{s}{r}} = \left(\int_X |f|^s\right)^\frac{r}{s} = \|f\|_s^r,
+\end{equation*}
+$\|\mathbb 1\|_{\frac{p}{r}} = 1$, since $\mu(X) = 1$; and 
+\begin{equation*}
+	\|f^r\|_1 = \int_X |f|^r~d\mu = \|f\|_r^r.
+\end{equation*}
+Hence, we have shown that $\|f\|_r^r \le \|f\|_s^r$. If $\|f\|_s = \infty$, then the inequality $\|f\|_r\le \|f\|_s$ is trivial. If $\|f\|_s < \infty$, then taking $r$-th roots we get $\|f\|_r\le \|f\|_s$, as desired.
+\end{enumerate}
+
+\section{Problem 3}
+
+First, suppose $1\le p < \infty$. For $i\ge 1$, define the ``standard basis vectors'' $e_i\in\ell^p$ by 
+\begin{equation*}
+	e_i(j) = 
+	\begin{cases}
+		1 & i = j\\
+		0 & \text{otherwise}.
+	\end{cases}
+\end{equation*}
+Let $\K$ denote the base field over which $\ell^p$ is defined. If $\K = \R$, set $Q = \Q$ and if $\K = \bbC$, then set $Q = \Q + \Q i$. Note that in either case, $Q$ is dense in $\K$.
+
+Set 
+\begin{equation*}
+	D = \bigcup_{n = 1}^\infty\left\{q_1e_1 + \dots + q_ne_n\colon q_1,\dots,q_n\in Q\right\}.
+\end{equation*}
+Being a countable union of countable sets, $D$ is itself countable. We contend that $D$ is dense in $\ell^p$. Let $x = (x_n)\in\ell^p$ and $\varepsilon > 0$. Since the sum $\displaystyle\sum_{n = 1}^\infty |x_n|^p$ converges, there is a positive integer $N$ such that the tail sum 
+\begin{equation*}
+	\sum_{n = N + 1}^\infty |x_n|^p < \left(\frac{\varepsilon}{2}\right)^p.
+\end{equation*}
+Let $y = (y_n)\in\ell^p$ be given by 
+\begin{equation*}
+	y_n = \begin{cases}
+		x_n & n\le N\\
+		0 & n > N.
+	\end{cases}
+\end{equation*}
+Then, 
+\begin{equation*}
+	\|x - y\|^p = \sum_{n = N + 1}^\infty |x_n|^p < \left(\frac{\varepsilon}{2}\right)^p.
+\end{equation*}
+Therefore, $\|x - y\| < \frac{\varepsilon}{2}$. Next, using the density of $Q$ in $\K$, for each $1\le n\le N$, we can find a $z_n\in Q$ such that 
+\begin{equation*}
+	|y_n - z_n|^p < \frac{1}{N}\left(\frac{\varepsilon}{2}\right)^p.
+\end{equation*}
+Setting $z = z_1e_1 + \dots + z_Ne_N\in D\subseteq\ell^p$,
+\begin{equation*}
+	\|y - z\|^p = \sum_{n = 1}^N |y_n - z_n|^p < \left(\frac{\varepsilon}{2}\right)^p.
+\end{equation*}
+It follows from the triangle inequality that 
+\begin{equation*}
+	\|x - z\|\le \|x - y\| + \|y - z\| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon.
+\end{equation*}
+Thus, we have shown that for all $x\in\ell^p$ and $\varepsilon > 0$, there is a $z\in D$ wiht $\|x - z\| < \varepsilon$, and hence, $D$ is dense in $\ell^p$.
+
+Finally, we show that $\ell^\infty$ is not separable. For this part of the proof, we write an element $x\in \ell^\infty$ as $(x(n))_{n\ge 1}$. Suppose not and there were a countable dense subset $D\subseteq\ell^\infty$. For each subset $S\subseteq\N = \{1,2,\dots\}$, define $x_S\in\ell^\infty$ as 
+\begin{equation*}
+	x_S(n) = 
+	\begin{cases}
+		1 & n\in S\\
+		0 & \text{otherwise},
+	\end{cases}
+\end{equation*}
+and set $U_S = B\left(x_S, \frac{1}{2}\right)$. We claim that the $U_S$'s are pairwise disjoint. Indeed, suppose $S, T\subseteq\N$ are distinct subsets and $y\in U_S\cap U_T$. It follows that 
+\begin{equation*}
+	\|x_S - x_T\| = \|(x_S - y) - (x_T - y)\|\le \|x_S - y\| + \|x_T - y\| < 1.
+\end{equation*}
+But for $n\in S\Delta T$, we have that $|x_S(n) - x_T(n)| = 1$, whence $\|x_S - x_T\|\ge 1$, a contradiction. Thus, the $U_S$'s are pairwise disjoint. For each $S\subseteq\N$, there is a $z_S\in D$ such that $z_S\in U_S\cap D$, owing to the density of $D$. Since the $U_S$'s are pairwise disjoint, the $z_S$'s are distinct. But $\N$ has uncountably many subsets (due to Cantor), and $D$ is countable, a contradiction. Hence $\ell^\infty$ is not separable.
+
+
+\section{Problem 4}
+
+Let $X$ be a locally compact normed linear space; then there is a neighborhood $V$ of the origin in $X$ such that $\overline V$ is compact. Since $V$ is open, there is an $r > 0$ such that $B(0, r)\subseteq V$, consequently, $\overline B(0, r)\subseteq\overline V$. Since the latter is compact, so is the former. Further, the map $x\mapsto r x$ is a homeomorphism $X\to X$ with inverse given by $x\mapsto r^{-1}x$. Under the former map, the closed unit ball $\overline B(0, 1)$ mapsto $\overline B(0, r)$. Since the latter is compact, the former must be too, that is, $\overline B(0, 1)$ is compact. Hence, we may suppose without loss of generality that $V = B(0, 1)$.
+
+There are two ways to finish from here; we elucidate both. The first is due to Andr\'e Weil and generalizes well to topological vector spaces over complete valued fields. Note that $\overline V$ is compact and 
+\begin{equation*}
+	\overline V \subseteq \bigcup_{x\in\overline V}\left(x + \frac{1}{2}V\right).
+\end{equation*}
+Since the latter is an open cover, it contains a finite subcover of $\overline V$. That is, there are $x_1,\dots,x_n\in\overline V$ such that 
+\begin{equation*}
+	\overline V\subseteq\bigcup_{i = 1}^n \left(x_i + \frac{1}{2}V\right).
+\end{equation*}
+Let $Y$ denote the span of $\{x_1,\dots,x_n\}$. Being a finite-dimensional subspace of $X$, $Y$ is closed in $X$ as we have seen in class. The above containment implies 
+\begin{equation*}
+	V\subseteq\overline V\subseteq\bigcup_{i = 1}^n\left(x_i + \frac{1}{2}V\right)\subseteq Y + \frac{1}{2}V.
+\end{equation*}
+But then 
+\begin{equation*}
+	Y + \frac{1}{2}V\subseteq Y + \frac{1}{2}\left(Y + \frac{1}{2}V\right) = Y + \frac{1}{2}Y + \frac{1}{4}V = Y + \frac{1}{4}V,
+\end{equation*}
+where the last equality follows from the fact that $Y$ is a vector space and hence, $\frac{1}{2}Y = Y$ and $Y + Y = Y$. Inductively, suppose we have shown that 
+\begin{equation*}
+	V\subseteq Y + \frac{1}{2^m}V
+\end{equation*}
+for some positive integer $m$. Then, 
+\begin{equation*}
+	V \subseteq Y + \frac{1}{2^m}\left(Y + \frac{1}{2}V\right) = Y + \frac{1}{2^m}Y + \frac{1}{2^{m + 1}}V = Y + \frac{1}{2^{m + 1}}V,
+\end{equation*}
+where the last equality follows from the fact that $Y$ is a vector space. Consequently, we have 
+\begin{equation*}
+	V\subseteq\bigcap_{m = 1}^\infty\left(Y + \frac{1}{2^m}V\right).
+\end{equation*}
+
+\begin{claim}
+	\begin{equation*}
+		\overline Y = \bigcap_{m = 1}^\infty\left(Y + \frac{1}{2^m}V\right)
+	\end{equation*}
+\end{claim}
+\begin{proof}
+	Suppose $y\in\overline Y$ and $m$ a positive integer. Then, by definition, there is some $x\in Y$ such that $\|x - y\| < 2^{-m}$, that is, $y - x\in 2^{-m}V$, consequently, $y\in Y + 2^{-m}V$. It follows that $y\in\bigcap_{m = 1}^\infty (Y + 2^{-m}V)$.
+
+	Conversely, if $y\in\bigcap_{m = 1}^\infty(Y + 2^{-m}V)$ and $r > 0$. Choose a positive integer $m$ such that $2^{-m} < r$. Since $y\in Y + 2^{-m}V$, there is some $x\in Y$ such that $y\in x + 2^{-m}V$, equivalently, $\|y - x\| < 2^{-m} < r$. Hence, $B(y, r)\cap Y\ne\emptyset$. It follows that $y\in\overline Y$.
+\end{proof}
+
+Using the above claim, we have 
+\begin{equation*}
+	V\subseteq\overline Y = Y,
+\end{equation*}
+since $Y$ is closed in $X$, owing to it being finite-dimensional. Since $Y$ is a vector space, we see that $\Span(V)\subseteq Y$. Now, for any $0\ne x\in X$, we have $\frac{x}{2\|x\|}\in V$, since it has norm $\frac{1}{2}$. Hence, $x\in\Span(V)$, in particular, $\Span(V) = X$. This shows that $X\subseteq Y$, that is, $X = Y$, hence $X$ is finite-dimensional, as desired.
+
+% TODO: Add a solution using Riesz lemma.
+
+\section{Problem 5}
+
+% We begin by proving a preliminary lemma. 
+% \begin{lemma}
+% 	Let $I$ be an indexing set and $x_i$ be non-negative real numbers such that $\displaystyle\sum_{i\in I} x_i < \infty$\footnote{Here a sum over $I$ is taken to be the integral $\int_I x(i)~d\mu$, where $\mu$ is the counting measure on $I$.}. Then at most countably many $x_i$'s are non-zero.
+% \end{lemma}
+% \begin{proof}
+% 	For each positive integer $n$, let 
+% 	\begin{equation*}
+% 		I_n = \left\{i\in I\colon x_i\ge\frac{1}{n}\right\}.
+% 	\end{equation*}
+% 	Then, 
+% 	\begin{equation*}
+% 		\frac{1}{n}|I_n|\le\sum_{i\in I} x_i < \infty.
+% 	\end{equation*}
+% 	As a result, $|I_n|$ has finite cardinality. It is easy to see that
+% 	\begin{equation*}
+% 		I_\infty := \left\{i\in I\colon x_i\ne 0\right\} = \bigcup_{n\ge 1}I_n,
+% 	\end{equation*}
+% 	whence $I_\infty$ is at most countable.
+% \end{proof}
+
+Before we begin, let $x = (x(i))\in X$ and $j\in I$. Then, for $1\le p < \infty$, 
+\begin{equation*}
+	\|x(i)\|^p\le\sum_{i\in I}\|x(i)\|^p = \|x\|^p\implies\|x(i)\|\le \|x\|.
+\end{equation*}
+And if $p = \infty$, then obviously $\|x(i)\|\le \|x\|$. All integrals over $I$ henceforth are with respect to the counting measure $(I, \scrP(I), \mu)$ on $I$.
+
+\begin{enumerate}[label=(\alph*)]
+	\item % TODO: show that this is actually a normed linear space.
+
+	\item Suppose first that each $X_i$ is a Banach space and let $(x_n)_{n\ge 1}$ be a Cauchy sequence in $X$. That is, given any $\varepsilon > 0$, there is a positive integer $N > 0$ such that $\|x_m - x_n\| < \varepsilon$ for all $m,n\ge N$. Hence, for $i\in I$, we have $\|x_m(i) - x_n(i)\| < \varepsilon$ for all $m,n\ge N$. This shows that the sequence $(x_n(i))_{n\ge 1}$ is Cauchy in $X_i$, therefore converges to some $x(i)\in X_i$ since $X_i$ is Banach. Since the norm is a continuous function on each $X_i$, it follows that $\|x_n(i)\|\to \|x\|$. Set $x = (x(i))$. We now treat the cases $p < \infty$ and $p = \infty$ separately. 
+	
+	Let $p < \infty$. First, we show that $x\in X$. Indeed, by Fatou's lemma, we have 
+	\begin{align*}
+		\|x\|^p = \int_I \|x(i)\|^p~d\mu(i) = \int_I\liminf_{n\to\infty}\|x_n(i)\|^p~d\mu(i)\le\liminf_{n\to\infty}\int_{I}\|x_n(i)\|^p~d\mu = \liminf_{n\to\infty}\|x_n\|^p < \infty,
+	\end{align*}
+	since the sequence $(x_n)$ is bounded in $X$, owing to it being Cauchy (this is a standard fact from metric spaces). Next, we must show that $x_n\to x$ in $X$. For $\varepsilon > 0$, there is a positive integer $N$ such that $\|x_m - x_n\| < \varepsilon$ whenever $m,n\ge N$. Then, by Fatou's Lemma, for $n\ge N$, we have 
+	\begin{equation*}
+		\|x - x_n\|^p = \int_I \liminf_{m\to\infty}\|x_m(i) - x_n(i)\|^p~d\mu(i)\le\liminf_{m\to\infty}\int_I \|x_m(i) - x_n(i)\| = \liminf_{m\to\infty}\|x_m - x_n\|^p\le\varepsilon^p,
+	\end{equation*}
+	that is, $\|x - x_n\|\le\varepsilon$. This shows that $x_n\to x$ in $X$, and hence $X$ is a Banach space for $1\le p < \infty$.
+
+	Next, let $p = \infty$. First, we show that $x\in X$. Indeed, there is a positive integer $N$ such that $\|x_m - x_n\| < 1$ for all $m,n\ge N$. In particular, $\|x_n - x_N\| < 1$ for all $n\ge N$, whence $\|x_n(i) - x_N(i)\| < 1$ for all $i\in I$. Consequently, $\|x_n(i)\| < \|x_N(i)\| + 1\le \|x_N\| + 1$ for all $i\in I$. Since $x_n(i)\to x(i)$ in $X_i$, we have that 
+	\begin{equation*}
+		\|x(i)\| = \lim_{n\to\infty}\|x_n(i)\|\le \|x_N\| + 1.
+	\end{equation*}
+	Taking a supremum over $i\in I$, we get that $\|x\|\le \|x_N\| + 1$, that is, $x\in X$. Finally, we show that $x_n\to x$ in $X$. Let $\varepsilon > 0$. Then there is a positive integer $N$ such that $\|x_m - x_n\| < \varepsilon$ whenever $m,n\ge N$. Since $x_m(i)\to x(i)$ in $X_i$, we see that for $n\ge N$,
+	\begin{equation*}
+		\|x(i) - x_n(i)\| = \lim_{m\to\infty}\|x_m(i) - x_n(i)\|\le\varepsilon.
+	\end{equation*}
+	Taking a supremum over $i\in I$, we have $\|x - x_n\|\le\varepsilon$ for all $n\ge N$, whence $x_n\to x$ in $X$. This shows that $X$ is a Banach space when $p = \infty$.
+
+	Conversely, suppose $X$ is Banach; we shall show that each $X_i$ is Banach. Let $(x_n)$ be a Cauchy sequence in $X_i$. Define a sequence $(y_n)$ in $X$ by 
+	\begin{equation*}
+		y_n(j) = 
+		\begin{cases}
+			x_n & j = i\\
+			0 & \text{otherwise}.
+		\end{cases}
+	\end{equation*}
+	We claim that $(y_n)$ is a Cauchy sequence in $X$. Indeed, for $p < \infty$, and positive integers $m,n$, we have 
+	\begin{equation*}
+		\|y_m - y_n\| = \left(\int_I \|y_m(j) - y_n(j)\|^p~d\mu(j)\right)^{1/p} = \|x_m - x_n\|,
+	\end{equation*}
+	and for $p = \infty$, 
+	\begin{equation*}
+		\|y_m - y_n\| = \sup_{j\in I}\|y_m(j) - y_n(j)\| = \|x_m - x_n\|.
+	\end{equation*}
+	Thus, $(y_n)$ is a Cauchy sequence in $X$, since $(x_n)$ is a Cauchy sequence in $X_i$. Thus, there is some $y = (y(j))$ such that $y_n\to y$ in $X$. Then, as we have observed at the beginning, $\|y_n(i) - y(i)\|\le \|y_n - y\|$, whence $y_n(i)\to y(i)$ in $X_i$, that is, $x_n\to y(i)$ in $X_i$. This shows that $X_i$ is a Banach space, thereby completing the proof.
+
+	\item We first show that the image of a ball $B_X(0, r)$ centered at $0$ in $X$ is open under $P_i: X\to X_i$. In fact, we claim that the image of this ball is $B_{X_i}(0, r)$. Indeed, if $x = (x(i))\in B_{X}(0, r)$, then $\|x(i)\|\le \|x\| < r$, whence the image of $B_X(0,r)$ under $P_i$ is contained in $B_{X_i}(0, r)$. Conversely, if $x_i\in X_i$ with $\|x_i\| < r$, then setting $y = y(i)\in X$ where 
+	\begin{equation*}
+		y(j) = 
+		\begin{cases}
+			x_i & j = i\\
+			0 & \text{otherwise},
+		\end{cases}
+	\end{equation*}
+	we note that $\|y\| = \|x_i\|$ in both cases $p < \infty$ and $p = \infty$. Therefore, $y\in B_X(0, r)$. It follows that $B_{X_i}(0, r)$ is contained in the image of $B_X(0, r)$ under $P_i$, whence $P\left(B_X(0, r)\right) = B_{X_i}(0, r)$.
+
+	Now, obviously $P_i: X\to X_i$ is a linear map, for if $c\in\bbC$ and $x = (x(j))\in X$, then $P_i\left(cx\right) = P_i\left((cx(j))\right) = cx(j)$ and if $y = (y(j))\in X$, then 
+	\begin{equation*}
+		P_i(x + y) = P_i\left((x(j)) + (y(j))\right) = P_i\left((x(j) + y(j))\right) = P_i(x) + P_i(y).
+	\end{equation*}
+	Let $U\subseteq X$ be an open set. Then, for each $x = (x(i))\in U$, there is an $r_x > 0$ such that $B_X(x, r_x)\subseteq U$, whence $U = \bigcup_{x\in U} B_X(x, r_x)$. Note that for any $y\in X$ and $r > 0$,
+	\begin{equation*}
+		P_i\left(B_X(y, r)\right) = P_i\left(y + B_X(0, r)\right) = P_i(y) + P_i\left(B_X(0,r)\right) = y(i) + B_{X_i}(0, r) = B_{X_i}(y(i), r).
+	\end{equation*}
+	
+	Consequently, 
+	\begin{equation*}
+		P_i(U) = P_i\left(\bigcup_{x\in U} B_X(x, r_x)\right) = \bigcup_{x\in U} P_i\left(B_X(x, r_x)\right) = \bigcup_{x\in U} B_{X_i}(x(i), r_x),
+	\end{equation*}
+	which is an open subset of $X_i$, as desired.
+\end{enumerate}
+
+\section{Problem 6}
+
+That the dual space of $c_0$ is isometrically isomorphic to $\ell^1$ has been argued in class and I shall not reproduce that argument.
+We show that the dual space of $c$ isometrically isomorphic to $\ell^1$. In this case, we denote an element $x\in\ell^1$ by a sequence indexed by $n\ge 0$. This is in contrast to the standard indexing of $n\ge 1$. It will be clear why this is done.
+
+Define a map $T: \ell^1\to c^\ast$ given by $a = (a(n))_{n\ge 0}\longmapsto T_a$ where 
+\begin{equation*}
+	T_a(x) = a(0)x_\infty + \sum_{n = 1}^\infty a(n)x(n),
+\end{equation*}
+where $x_\infty = \lim_{n\to\infty} x(n)$. Obviously, we must have $|x_\infty|\le \|x\|$. We must show that this sum converges, for which it suffices to show absolute convergence. Indeed, every partial sum (of the absolute value sum) is bounded as 
+\begin{equation*}
+	|a(0)x_\infty| + \sum_{n = 1}^N |a(n)x(n)|\le \|x\|\left(\sum_{n = 0}^N |a(n)|\right)\le \|a\|\|x\|,
+\end{equation*}
+and hence, must converge. It follows that $T_a$ is a well-defined function. That $T_a$ is linear is clear from the definition. To see that it is bounded, we again have that 
+\begin{align*}
+	|T_a(x)| &= \left|a(0)x_\infty + \sum_{n = 1}^\infty a(n)x(n)\right|\\
+	&\le |a(0)||x_\infty| + \sum_{n = 1}^\infty |a(n)||x(n)|\\
+	&\le \|x\|\left(\sum_{n = 0}^\infty |a(n)|\right) = \|a\|\|x\|.
+\end{align*}
+Thus, $T_a\in c^\ast$ and $\|T_a\|\le \|a\|$. We claim that the map $T$ is linear. Indeed, if $a, b\in\ell^1$ and $\alpha\in\K$, then 
+\begin{align*}
+	T_{a + \alpha b}(x) &= \left(a(0) + \alpha b(0)\right)x_\infty + \sum_{n = 1}^\infty\left(a(n) + \alpha b(n)\right)x(n)\\
+	&= a_0 x_\infty + \sum_{n = 1}^\infty a(n)x(n) + \alpha\left(b_0x_\infty + \sum_{n = 1}^\infty b(n)x(n)\right)\\
+	&= T_a(x) + \alpha T_b(x)
+\end{align*}
+for all $x\in c$. This shows that $T(a + \alpha b) = T(a) + \alpha T(b)$, whence $T$ is linear. Further, since $\|T_a\|\le\|a\|$, the map $T: \ell^1\to c^\ast$ is a bounded linear functional.
+
+Next, we show that $T$ is an isometry. Let $a\in\ell^1$. If $a = 0$, then it is clear that $T_a = 0$, whence $\|T_a\| = 0$. Suppose now that $a\ne 0$. For every $j\ge 0$, let 
+\begin{equation*}
+	z_j = 
+	\begin{cases}
+		\frac{\overline{a(j)}}{a(j)} & a(j)\ne 0\\
+		0 & a(j) = 0,
+	\end{cases}
+\end{equation*}
+whereby $|z_j|\le 1$. Note that the $z_j$'s are chosen so that $z_ja(j) = |a(j)|$. For every positive integer $N$, let $x_N\in c$ be given by 
+\begin{equation*}
+	x_N(n) = 
+	\begin{cases}
+		z_n & n\le N\\
+		z_0 & n > N.
+	\end{cases}
+\end{equation*}
+Since the sequence $x_N(n)$ eventually stabilizes, it lies in $c$ and $\|x_N\|\le 1$. According to our definition, 
+\begin{align*}
+	|T_a(x_N)| &= \left||a(0)| + \sum_{j = 1}^N |a(j)| + \sum_{j = N + 1}^\infty a(j) z_0\right|\\
+	&\ge |a(0)| + \sum_{j = 1}^N |a(j)| - |z_0|\left|\sum_{j = N + 1}^\infty a(j)\right|\\
+	&\ge |a(j)| + \sum_{j = 1}^N |a(j)| - \left|\sum_{j = N + 1}^\infty a(j)\right|,
+\end{align*}
+since $|z_0|\le 1$. But since $\|x_N\|\le 1$, we have 
+\begin{equation*}
+	\|T_a\|\ge |T_a(x_N)|\ge |a(0)| + \sum_{j = 1}^N |a(j)| - \left|\sum_{j = N + 1}^\infty a(j)\right|\ge |a(0)| + \sum_{j = 1}^N |a(j)| - \sum_{j = N + 1}^\infty |a(j)| = \|a\| - 2\sum_{j = N + 1}^\infty |a(j)|.
+\end{equation*}
+Since the sum $\sum_{j = 0}^\infty |a(j)|$ converges, the tail sum goes to $0$. In particular, taking $N\to\infty$ in the above inequality, we get 
+\begin{equation*}
+	\|T_a\|\ge \|a\|\implies\|T_a\| = \|a\|,
+\end{equation*}
+that is, $T$ is an isometry, whence $T$ is injective, as the kernel is trivial; for if $T(x) = 0$, then $\|x\| = \|T(x)\| = 0$, i.e., $x = 0$.
+
+Finally, to show that $T$ is an isometric isomorphism, we must show that $T$ is surjective. Indeed, let $\Lambda\in c^\ast$ and let the $e_i$'s denote the ``standard basis vectors'' for $c$, that is, 
+\begin{equation*}
+	e_i(j) = 
+	\begin{cases}
+		1 & i = j\\
+		0 & \text{otherwise}.
+	\end{cases}
+\end{equation*}
+Set $a(n) = \Lambda(e_n)$ and $a(0) = T(\xi)$, where $\xi(j) = 1$ for all $j\ge 1$. We contend that $a\in\ell^1$ and $\Lambda = T_a$. Indeed, for $x = (x(n))_{n\ge 1}\in c$, set $x_\infty = \lim_{n\to\infty} x(n)$ and $y = x - x_\infty\xi\in c$. Obviously, we have that 
+\begin{equation*}
+	\lim_{n\to\infty} y(n) = 0.
+\end{equation*}
+Let $y_N\in c$ be given by 
+\begin{equation*}
+	y_N = y(1)e_1 + \dots + y(N)e_N\in c.
+\end{equation*}
+Then 
+\begin{equation*}
+	y - y_N = \left(\underbrace{0,\dots,0}_{N\text{ times}}, y(N + 1), y(N + 2),\dots\right).
+\end{equation*}
+Note that 
+\begin{equation*}
+	\|y - y_N\| = \sup_{n\ge N + 1}|y(n)|\to 0
+\end{equation*}
+as $N\to\infty$, since $\lim_{n\to\infty} y(n) = 0$. Since $\Lambda$ is continuous, we have 
+\begin{equation*}
+	\Lambda y = \lim_{N\to\infty}\Lambda y_N = \lim_{N\to\infty}\sum_{i = 1}^N y(i)\Lambda(e_i) = \lim_{N\to\infty}\sum_{i = 1}^N a(i)y(i) = \sum_{n = 1}^\infty a(n)y(n).
+\end{equation*}
+Hence, 
+\begin{equation*}
+	\Lambda x = \Lambda y + x_\infty\Lambda\xi = a(0)x_\infty + \sum_{n = 1}^\infty a(n)x(n).
+\end{equation*}
+Finally, we must show that $a\in\ell^1$. Again, for $n\ge 1$, set 
+\begin{equation*}
+	z_n = 
+	\begin{cases}
+		\frac{\overline a(n)}{|a(n)|} & a(n)\ne 0\\
+		0 & \text{otherwise},
+	\end{cases}
+\end{equation*}
+and let 
+\begin{equation*}
+	w_N = z_1e_1 + \dots + z_Ne_N\in c.
+\end{equation*}
+Since $\lim_{n\to\infty} w_N(n) = 0$, we see that 
+\begin{equation*}
+	|\Lambda w_N| = \left|\sum_{n = 1}^N z_na(n)\right| = \sum_{n = 1}^N |a(n)|.
+\end{equation*}
+Since each $|z_n|\le 1$, we see that $\|w_N\|\le 1$, consequently, 
+\begin{equation*}
+	\sum_{n = 1}^N |a(n)| = |\Lambda w_N|\le \|\Lambda\|\|w_N\|\le \|\Lambda\|.
+\end{equation*}
+Since the sum is bounded independent of $N$ and the left hand side is a monotonically increasing sequence, it must converge, that is, 
+\begin{equation*}
+	\sum_{n = 1}^\infty |a(n)| < \infty\implies\sum_{n = 0}^\infty |a(n)| < \infty,
+\end{equation*}
+equivalently, $a\in\ell^1$, as desired. Thus, we have shown that $\Lambda = T_a$ for some $a\in\ell^1$. This proves surjectivity of $T$ and establishes the isometric isomorphism.
+
+Now, we show that $c_0$ and $c$ are not isometrically isomorphic. Suppose there was an isometric isomorphism $T: c\to c_0$. Set $\xi = (1,1,\dots)\in c$. Since $T$ is an isometry, $x = T(\xi)$ must have norm $1$. But since $\lim_{n\to\infty} x(n) = 0$, there is a positive integer $N$ such that for all $n\ge N$, $|x(n)| < \frac{1}{2}$. But since 
+\begin{equation*}
+	\sup_{n\in\N} |x(n)| = 1,
+\end{equation*}
+there is an $n_0 < N$ with $|x(n_0)| = 1$. Define $y, z$ as 
+\begin{equation*}
+	y(n) = 
+	\begin{cases}
+		x(n) & n < N\\
+		x(n) + \frac{1}{4n} & n\ge N
+	\end{cases}
+	\qquad\text{and}\qquad
+	z(n) = 
+	\begin{cases}
+		x(n) & n < N\\ 
+		x(n) - \frac{1}{4n} & n\ge N.
+	\end{cases}
+\end{equation*}
+Note that $y(n_0) = z(n_0) = 1$ since $n_0 < N$. Further, for $n\ge N$, we have 
+\begin{equation*}
+	|y(n)|\le |x(n)| + \frac{1}{4n} < \frac{1}{2} + \frac{1}{4} < 1\qquad |z(n)|\le |x(n)| + \frac{1}{4n} < \frac{1}{2} + \frac{1}{4} < 1,
+\end{equation*}
+and 
+\begin{equation*}
+	\lim_{n\to\infty} y(n) = \lim_{n\to\infty}x(n) = 0 = \lim_{n\to\infty} z(n).
+\end{equation*}
+It follows that $y, z\in c_0$, $\|y\| = \|z\| = 1$, and $x = \frac{1}{2}\left(y + z\right)$. Since $T$ is an isometric isomorphism, there exist $\zeta,\eta\in c$ such that $T(\zeta) = y$ and $T(\eta) = z$ and $\|\zeta\| = \|\eta\| = 1$. We also have that 
+\begin{equation*}
+	T(\xi) = x = \frac{1}{2}\left(y + z\right) = \frac{1}{2}\left(T(\zeta)  + T(\eta)\right) = T\left(\frac{\zeta + \eta}{2}\right),
+\end{equation*}
+consequently, $\xi = \frac{1}{2}\left(\zeta + \eta\right)$, in other words, 
+\begin{equation*}
+	\zeta(n) + \eta(n) = 2\quad\forall~n\in\N.
+\end{equation*}
+But since $|\zeta(n)|,|\eta(n)|\le 1$, we have that $\zeta(n) = \eta(n) = 1$ for all $n\in\N$, i.e., $\zeta = \eta = \xi$, a contradiction, since $x\ne y$ and $x\ne z$. It follows that $c$ and $c_0$ are not isometric, thereby completing the proof.
+
+\section{Problem 7}
+
+First, consider the case when $\mu$ is a positive measure. Then, 
+\begin{equation*}
+	\mu\left([0, 1]\right) = \int_0^1 ~d\mu = 0,
+\end{equation*}
+and hence, $\mu(E) = 0$ for all Borel sets $E\subseteq[0, 1]$, that is, $\mu = 0$.
+
+Next, suppose $\mu$ is a complex measure. We claim that $\mu$ is a regular Borel measure. To this end, we use the following theorem: 
+
+\begin{theorem}
+	Let $X$ be a locally compact Hausdorff space in which every open set is $\sigma$-compact. Let $\lambda$ be any positive Borel measure on $X$ such that $\lambda(K) < \infty$ for every compact set $K$. Then $\lambda$ is regular.
+\end{theorem}
+\begin{proof}
+	See \cite[Theorem 2.17]{papa-rudin}
+\end{proof}
+
+Obviously every open set in $[0, 1]$ is $\sigma$-compact and for every compact set $K\subseteq[0, 1]$, $|\mu|(K) < \infty$, since $|\mu|([0, 1]) < \infty$, where $|\mu|$ is the total variation measure. It follows that $|\mu|$ is a positive regular Borel measure on $[0, 1]$, and hence, $\mu$ is a regular complex Borel measure on $[0, 1]$. Thus, the map $T_\mu: C[0, 1]\to\bbC$ given by 
+\begin{equation*}
+	T_\mu f = \int_0^1 f~d\mu
+\end{equation*}
+is a bounded linear functional on $[0, 1]$, since the dual space of $C[0, 1]$ is identified with the Banach space of all complex regular Borel measures on $[0, 1]$. Further, we know that $T_\mu(x^n) = 0$ for all $n\ge 0$, and hence by taking finite linear combinations, $T_\mu(p(x)) = 0$ for all polynomials $p(x)\in\bbC[x]$. Due to Weierstrass' Theorem, the space $\bbC[x]$ is dense in $C[0, 1]$ with respect to the $\sup$-norm. Thus, $T_\mu$ is identically zero on a dense subspace of $C[0, 1]$, consequently, $T_\mu$ must be identically $0$. That is, $T_\mu f = 0$ for all $f\in C[0, 1]$.
+
+Recall that there is an isometric isomorphism (in particular, a bijection) $\mathscr M([0, 1])\to \left(C[0, 1]\right)^\ast$ given by $\lambda\mapsto T_\lambda$, where $T_\lambda$ is as defined above and $\mathscr M([0, 1])$ is the space of all regular complex Borel measures on $[0, 1]$ equipped with the total variation norm. Since $\mu\in\mathscr M([0, 1])$ maps to $0\in\left(C[0, 1]\right)^\ast$, we see that $\mu = 0$, as desired.
+
+\section{Problem 8}
+
+We have seen in class and it is a standard fact from real analysis that the space $Y = C[0, 1]$ is complete with respect to the $\sup$-norm. We claim that $X$ is not complete. Note that $X = C^1[0, 1]$ is a subspace of $Y$ with the same norm. Thus to show that $X$ is not complete, it suffices to exhibit a sequence in $X$ converging to an element of $Y\setminus X$. Take $f\in Y\setminus X$ given by 
+\begin{equation*}
+	f(x) = \left|x - \frac{1}{2}\right| \qquad 0\le x\le 1.
+\end{equation*}
+This is obviously not an element of $X$ since $f$ is not differentiable at $\frac{1}{2}$. Due to a theorem of Weierstra\ss, we know that there is a sequence of polynomials $p_n\in Y$, which converge uniformly to $f$ on $[0, 1]$, that is, $p_n\to f$ in $Y$. Since polynomials are infinitely differentiable, they are elements of $X$. Thus, we have found a sequence of elements of $X$ which converges to an element of $Y\setminus X$. Since every convergent sequence is Cauchy, the sequence $\{p_n\}$ is Cauchy in $Y$, and hence in $X$ (since the norm on $X$ is the restriction of the norm on $Y$). But $p_n$ cannot converge to some $g\in X$ since that would imply $f = g$ due to the uniqueness of limits in $Y$; indeed, since convergence in $X$ is the same as convergence in $Y$. This argument shows that $X$ is not complete.
+
+Now, we show that the map $A : X\to Y$ given by $Af = f'$ has a closed graph but is not continuous. We shall need the following result which is usually covered in a first course on real analysis:
+\begin{lemma}\thlabel{lem:from-baby-rudin}
+	Suppose $\{f_n\}$ is a sequence of functions, differentiable on $[a, b]$ and such that $\{f_n(x_0)\}$ converges for some $x_0\in [a, b]$. If $\{f_n'\}$ converges uniformly on $[a, b]$, then $\{f_n\}$ converges uniformly on $[a, b]$, to a function $f$, and 
+	\begin{equation*}
+		f'(x) = \lim_{n\to\infty} f_n'(x)\qquad a\le x\le b.
+	\end{equation*}
+\end{lemma}
+\begin{proof}
+	See \cite[Theorem 7.17]{baby-rudin}.
+\end{proof}
+
+First, we show that the graph of $A$ is closed in $X\times Y$. Since $X\times Y$ is a metric space, it suffices to show that the graph of $A$ is sequentially closed. To this end, let $(f_n, Af_n)$ be a sequence in $\Graph(A)$ converging to some $(f, g)\in X\times Y$, that is, $f\in C^1[0, 1]$ and $g\in C[0, 1]$. Let $Af_n = g_n\in Y$. Since $(f_n, g_n)\to (f, g)$, we have that $f_n\to f$ in $X$ and $g_n\to g$ in $Y$ (this is a standard fact about the product topology on metric spaces). Since both $X$ and $Y$ are equipped with the $\sup$-norm on $[0, 1]$, we have that $f_n\to f$ and $g_n\to g$ uniformly on $[0, 1]$. Hence, \thref{lem:from-baby-rudin} applies and we get that 
+\begin{equation*}
+	f'(x) = \lim_{n\to\infty} f_n'(x) = \lim_{n\to\infty} g_n(x) = g(x).
+\end{equation*}
+That is, $g = Af$, equivalently, $(f, g)\in\Graph(A)$. This shows that $\Graph(A)$ is closed.
+
+We show that $A$ is not continuous. Clearly $A$ is linear (since taking the derivative is a linear operation). Consider, for positive integers $n\ge 1$,  the functions $f_n(x) = x^n$. Then $f_n\in X = C^1[0, 1]$ and $g_n = Af_n\in Y$ are given by $g_n(x) = nx^{n - 1}$. Obviously, $\|f_n\| = 1$ and $\|Af_n\| = n$, whence 
+\begin{equation*}
+	\|A\| = \sup_{\|f\|\le 1}\|Af\|\ge\sup_{n\in\N} n = \infty,
+\end{equation*}
+i.e., $A$ is not bounded and hence not continuous.
+
+
+\section{Problem 9}
+
+Define the map $T: V\to C(E)$ given by $Tf = f|_E$. Obviously, $T$ is a linear map, for if $f,g\in V$ and $c\in\K$, then 
+\begin{equation*}
+	T(f + cg) = (f + cg)|_E = f|_E + cg|_E = Tf + cTg.
+\end{equation*}
+Further, for any $g\in C(E)$, according to the hypothesis of the question, there is an $f\in V$ such that $g = f|_E$, whence $T: V\to C(E)$ is a surjective linear map. Finally, for any $f\in V$, 
+\begin{equation*}
+	\|Tf\| = \|f|_E\|\le \|f\|,
+\end{equation*}
+consequently, $T$ is a bounded linear functional, that is, $T$ is continuous.
+
+\begin{lemma}\thlabel{lem:application-open-mapping}
+	Let $T: X\to Y$ be a surjective linear map between Banach spaces. Then there is a constant $c > 0$ such that for every $y\in Y$, there is an $x\in X$ with $\|x\|\le c\|y\|$ such that $Tx = y$.
+\end{lemma}
+\begin{proof}
+	Due to the open mapping theorem, $T$ is an open map, consequently, $T\left(B_X(0, 1)\right)$ is an open set in $Y$ containing $0$. Thus, there is an $r > 0$ such that $B_Y(0, r)\subseteq T\left(B_X(0, 1)\right)$. Let $y\in Y$. If $y = 0$, then set $x = 0$. If $y\ne 0$, then consider $z = \frac{ry}{2\|y\|}$, where $\|z\| < r$. Hence, there is a $w\in B_X(0, 1)$ such that $Tw = z$. Set $x = \frac{2\|y\|}{r}w\in X$ and note that 
+	\begin{equation*}
+		Tx = \frac{2\|y\|}{r}Tw = y,
+	\end{equation*}
+	and 
+	\begin{equation*}
+		\|x\| = \frac{2\|y\|}{r}\|w\|\le \frac{2}{r}\|y\|.
+	\end{equation*}
+	Pick $c = \frac{2}{r}$. We have shown that for every $y\in Y$, there is an $x\in X$ with $\|x\|\le c\|y\|$.
+\end{proof}
+
+Since both $V$ and $C(E)$ are Banach spaces, the conclusion follows immediately from \thref{lem:application-open-mapping}.
+
+\section{Problem 10}
+Let $J: X\to X^{\ast\ast}$ denote the canonical isometry given by $x\mapsto\ev_x$, the evaluation map at $x$. That this is indeed an isometry has been argued in class. Let $x^{\ast\ast}\in X^{\ast\ast}$ denote the image of $x\in X$ under the map $J$. 
+
+Let $f\in X^\ast$, then for any $x\in S$, we have 
+\begin{equation*}
+	|x^{\ast\ast}(f)| = |f(x)|\le M_f
+\end{equation*}
+for some constant $M_f > 0$, since $f(S)$ is a bounded subset of $\bbC$ according to the hypothesis. Due to the \emph{Uniform Boundedness Principle} (or Banach-Steinhaus Theorem), there is a constant $M > 0$ such that $\|x^{\ast\ast}\|\le M$ for all $x\in S$. Note that the theorem applies since $X^\ast$ is a Banach space as we have argued in class. Finally, since $J$ is an isometry, for every $x\in S$, we have 
+\begin{equation*}
+	\|x\| = \|J(x)\| = \|x^{\ast\ast}\|\le M,
+\end{equation*}
+that is, 
+\begin{equation*}
+	\sup\left\{\|x\|\colon x\in S\right\}\le M < \infty,
+\end{equation*}
+as desired.
+
+\section{Problem 10}
+
+For each $x\in X$, since the sequence $(T_n(x))$ converges, it is bounded in $Y$, that is, there is an $M_x > 0$ such that $\|T_n x\|\le M_x$ for all $n\ge 1$. Since $X$ is Banach space, the \define{Uniform Boundedness Principle} applies and there is an $M > 0$ such that $\|T_n\|\le M$ for all $n\ge 1$. In particular, this means that $\|T_n(x)\|\le M\|x\|$ for all $x\in X$. As a result, for all $x\in X$,
+\begin{equation*}
+	\|T(x)\| = \left\|\lim_{n\to\infty} T_n(x)\right\| = \lim_{n\to\infty} \|T_n(x)\|\le M\|x\|.
+\end{equation*}
+Finally, we show that $T$ is a linear functional. Indeed, if $x,y\in X$ and $\alpha,\beta\in\K$, then 
+\begin{equation*}
+	T(\alpha x + \beta y) = \lim_{n\to\infty} T_n(\alpha x + \beta y) = \lim_{n\to\infty} \alpha T_n(x) + \beta T_n(y) = \alpha T(x) + \beta T(y).
+\end{equation*}
+This shows that $T: X\to Y$ is a bounded linear functional, as desired.
+
+\bibliographystyle{alpha}
+\bibliography{references}
+\end{document}
