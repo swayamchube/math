@@ -42,6 +42,7 @@
 \hypersetup{
     pdfauthor={Lots of People},
     colorlinks=true,
+	citecolor=blue
 }
 
 \newtheoremstyle{thmstyle}%               % Name
@@ -772,7 +773,7 @@ Next, suppose $\mu$ is a complex measure. We claim that $\mu$ is a regular Borel
 	See \cite[Theorem 2.17]{papa-rudin}
 \end{proof}
 
-Obviously every open set in $[0, 1]$ is $\sigma$-compact and for every compact set $K\subseteq[0, 1]$, $|\mu|(K) < \infty$, since $|\mu|([0, 1]) < \infty$, where $|\mu|$ is the total variation measure. It follows that $|\mu|$ is a positive regular Borel measure on $[0, 1]$, and hence, $\mu$ is a regular complex Borel measure on $[0, 1]$. Thus, the map $T_\mu: C[0, 1]\to\bbC$ given by 
+Obviously every open set in $[0, 1]$ is $\sigma$-compact\footnote{This follows from the fact that every locally compact Hausdorff space admits an exhaustion; since the open subsets of a locally compact Hausdorff (in this case, compact Hausdorff) space are locally compact Hausdorff, we are done.} and for every compact set $K\subseteq[0, 1]$, $|\mu|(K) < \infty$, since $|\mu|([0, 1]) < \infty$, where $|\mu|$ is the total variation measure. It follows that $|\mu|$ is a positive regular Borel measure on $[0, 1]$, and hence, $\mu$ is a regular complex Borel measure on $[0, 1]$. Thus, the map $T_\mu: C[0, 1]\to\bbC$ given by 
 \begin{equation*}
 	T_\mu f = \int_0^1 f~d\mu
 \end{equation*}
@@ -848,7 +849,7 @@ Let $f\in X^\ast$, then for any $x\in S$, we have
 \begin{equation*}
 	|x^{\ast\ast}(f)| = |f(x)|\le M_f
 \end{equation*}
-for some constant $M_f > 0$, since $f(S)$ is a bounded subset of $\bbC$ according to the hypothesis. Due to the \emph{Uniform Boundedness Principle} (or Banach-Steinhaus Theorem), there is a constant $M > 0$ such that $\|x^{\ast\ast}\|\le M$ for all $x\in S$. Note that the theorem applies since $X^\ast$ is a Banach space as we have argued in class. Finally, since $J$ is an isometry, for every $x\in S$, we have 
+for some constant $M_f > 0$, since $f(S)$ is a bounded subset of $\bbC$ according to the hypothesis. Due to the \define{Uniform Boundedness Principle} (or Banach-Steinhaus Theorem), there is a constant $M > 0$ such that $\|x^{\ast\ast}\|\le M$ for all $x\in S$. Note that the theorem applies since $X^\ast$ is a Banach space as we have argued in class. Finally, since $J$ is an isometry, for every $x\in S$, we have 
 \begin{equation*}
 	\|x\| = \|J(x)\| = \|x^{\ast\ast}\|\le M,
 \end{equation*}
