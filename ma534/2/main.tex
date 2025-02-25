@@ -482,6 +482,15 @@ where the last equality follows from the fact that $\wh{\varphi^\vee} = \varphi$
 
 \section{Problem 7}
 
+Taking the Fourier transform, we have that $P(\xi)\wh u(\xi) = 0$ where $\wh u(\xi)\in\scrS'(\R^n)$. I assume now that $P$ is a homogeneous polynomial, so that $P(\xi)\ne 0$ whenever $\xi\ne 0$. Thus, for $\xi_0\ne 0$, take a neighborhood $U$ of $\xi_0$ which does not contain $0$, so that $\frac{1}{P(\xi)}$ is a smooth function on that neighborhood. Hence, for all $\varphi\in\mathscr D'(U)$, we have 
+\begin{equation*}
+    (\wh u, \varphi) = \left(P(\xi)\wh u, \frac{\varphi(\xi)}{P(\xi)}\right) = 0.
+\end{equation*}
+Thus, $\Supp\wh u\subseteq\{0\}$. As we have seen in class, this implies that $u$ is a polynomial.
+
+
+Note that if we do not assume that $P$ is homogeneous, then we can only conclude that the variety of $P$ is compact in $\R^n$, since the top homogeneous component of $P$ is non-vanishing for non-zero inputs. Consequently, for all points outside this compact variety, $\wh u$ is zero in a neighborhood of those points. It follows that $\wh u$ is compactly supported. Usin the Fourier inversion formula, since $\wh u$ is compactly supported, we can write $u = (\wh u, e^{ix\cdot\xi})$, whence $u$ is given by a smooth function.
+
 \section{Problem 8}
 
 Since $A$ is a symmetric positive definite matrix, there is an orthogonal matrix $U$ such that $A = U^\top D U$ where $D$ is a diagonal matrix consisting of the eigenvalues of $A$, repeated according to their multiplicity. We can then compute the Fourier transform of this function as 
@@ -514,9 +523,45 @@ Suppose $\Lambda$ is such a distribution, then the seminorm estimate on the comp
     \left|(\Lambda,\varphi)\right|\le C\sup_{\substack{\alpha\le m\\ x\in K}}|\partial^\alpha\varphi(x)|\qquad\forall~\varphi\in C_c^\infty(K).
 \end{equation*}
 
-Let $\rho$ be a non-negative compactly supported function on the real line that is identically $1$ on $[-1, 1]$ and has support contained inside $(-2, 2)$.
+Let $\rho$ be a non-negative compactly supported function on the real line taking values in $[0, 1]$ that is identically $1$ on $[-1, 1]$ and has support contained inside $(-2, 2)$. Set $\rho_N\in C_c^\infty(0, \infty)$ as 
+\begin{equation*}
+    \rho_N(x) = \rho\left(4N\left(x - \frac{1}{N}\right)\right).
+\end{equation*}
+
+Henceforth, suppose $N$ is a very large positive integer, say $N > m + 100$. Then $\rho_N$ is supported inside the open interval $\left(\frac{1}{2N}, \frac{3}{2N}\right)\subseteq[0, 1]$ and $\rho_N$ is identically $1$ on the interval $\left[\frac{3}{4N}, \frac{5}{4N}\right]$. Therefore, 
+\begin{equation*}
+    (u, \rho_N)\ge\int_{\frac{3}{4N}}^{\frac{5}{4N}}\exp\left(\frac{1}{4x^2}\right)~dx\ge\frac{1}{2N}\times\exp\left(\frac{4N^2}{25}\right).
+\end{equation*}
+
+On the other hand, for $\alpha\le m$, we have 
+\begin{equation*}
+    \partial^\alpha\rho_N(x) = (4N)^\alpha\partial^\alpha\rho\left(4N\left(x - \frac{1}{N}\right)\right).
+\end{equation*}
+Since $\rho$ is compactly supported, there is an $M > 0$ such that 
+\begin{equation*}
+    \left|\partial^\alpha\rho(x)\right|\le M\qquad\forall~x\in\R,~\forall~0\le\alpha\le m.
+\end{equation*}
+Thus, for all $x\in\R$ and $0\le\alpha\le m$, we get 
+\begin{equation*}
+    \left|\partial^\alpha\rho_N(x)\right|\le (4N)^\alpha M\le (4N)^m M.
+\end{equation*}
+Finally, using the seminorm estimate, we get that 
+\begin{equation*}
+    \frac{1}{2N}\exp\left(\frac{4N^2}{25}\right)\le (4N)^m CM\implies\exp\left(\frac{4N^2}{25}\right)\le 2^m (2N)^{m + 1} CM,
+\end{equation*}
+for all positive integers $N > m + 100$. This is absurd, since the left hand side grows exponentially, while the right hand side is a polynomial of degree at most $m + 1$. It follows that there is no such distribution $\Lambda\in\mathscr D'(\R)$ which restricts to $u$ on $(0,\infty)$.
+
+Hence, there is no such distribution $\Lambda\in\mathscr D'(\R)$ restricting to $c\exp\left(\frac{1}{4x^2}\right)$ on $(0,\infty)$ for some constant $c\ne 0$. As a result, the only solution to the differential equation in the problem is the identically $0$ distribution.
 
 \section{Problem 10}
+
+The Fourier transform of $u$ is a continuous function on $\bbC^n$ and the Fourier transform of $v$ is an analytic function on $\bbC^n$ since $v$ is compactly supported. Further, we have 
+\begin{equation*}
+    0 = \wh{u\ast v}(\xi) = \wh u(\xi)\wh v(\xi)\qquad\forall~\xi\in\bbC^n.
+\end{equation*}
+If $\wh u$ is not identically $0$, then there is a $\xi_0\in\bbC^n$ such that $\wh u(\xi_0)\ne 0$. Consequently, there is a neighborhood $U$ of $\xi_0$ in $\bbC^n$ on which $\wh u$ is nonzero. But since $\wh u\wh v = 0$, we must have that $\wh v = 0$ on $U$. The identity theorem for complex analytic functions then yields that $\wh v = 0$ on all of $\bbC^n$, whence by Fourier inversion, $v = 0$ as a distribution.
+
+On the other hand if $\wh u = 0$, then again by Fourier inversion, $u = 0$ as a distribution and hence as an element of $L^1$. This completes the proof.
 
 \section{Problem 11}
 Note that $u = e^x\cos(e^x)$ is the derivative of $\cos(e^x)$. Thus, for any $\varphi\in\scrS(\R)$, using integration by parts, we have 
