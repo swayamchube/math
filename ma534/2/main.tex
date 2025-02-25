@@ -1,0 +1,563 @@
+\documentclass[10pt]{amsart}
+
+\title{MA 534: Homework 2}
+\author{Swayam Chube (200050141)}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem*{claim}{Claim}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{notation}{Notation}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\frakM}{\mathfrak{M}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbI}{\mathbb{I}}
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakF}{\mathfrak{F}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakP}{\mathfrak{P}} % nilradical 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakT}{\mathfrak{T}} % tensor algebra
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{#1}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\ind}{\operatorname{ind}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\Lip}{\operatorname{Lip}}
+\newcommand{\lip}{\operatorname{lip}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\pv}{\operatorname{p.v.}}
+
+\geometry {
+    margin = 1in
+}
+
+\begin{document}
+\maketitle 
+
+\section{Problem 1}
+
+Let $\rho\in C_c^\infty(\R)$ be identically $1$ on a neighborhood of $0$. Let $Q$ be a compact subset of $\R$ containing the support of $\rho$. Identify $\R^{n - 1}$ with the subspace $\{x\in\R^n\colon x_n = 0\}\subseteq\R^n$. First note that the support of $u$ is contained in the hyperplane $\R^{n - 1}$. Indeed, if $x\notin\R^{n - 1}$, then $x_n > 0$. Choose an open ball $U$ containing $x$ and disjoint from $\R^{n - 1}$. Then, $x_n\ne 0$ on all of $U$ and hence, for every $\varphi\in C_c^\infty(U)$, we have 
+\begin{equation*}
+    (u, \varphi) = \left(x_n u, \frac{\varphi(x)}{x_n}\right) = 0,
+\end{equation*}
+which makes sense because $\varphi(x)/x_n$ is well-defined, smooth and compactly supported on $U$. It follows that the support of $u$ is contained in the hyperplane $\R^{n - 1}$.
+
+% \begin{claim}
+%     If $f\in C_c^\infty(\R^n)$ is such that $f|_{\R^{n - 1}}$, then $(u, f) = 0$.
+% \end{claim}
+% \begin{proof}
+%     Define the function $g:\R^{n - 1}\to\R$ by 
+%     \begin{equation*}
+%         g(x) = 
+%         \begin{cases}
+%             \frac{f(x)}{x_n} & x_n\ne 0\\
+%             \partial_n f(x_1,\dots,x_{n - 1}, 0) & x_n = 0.
+%         \end{cases}
+%     \end{equation*}
+%     Obviously $g$ is smooth on $\R^n\setminus \R^{n - 1}$. Now, fix some $\xi = (\xi_1,\dots,\xi_{n - 1}, 0)\in\R^{n - 1}$ and consider a sequence $x^n\in\R^n\setminus\R^{n - 1}$ converging to $\xi$. Then, 
+%     \begin{equation*}
+%         \lim_{n\to\infty}g(x^n) = \lim_{n\to\infty} \frac{f(x^n)}{x^n_n} = \partial_n f(\xi),
+%     \end{equation*}
+%     since $f$ is smooth. Thus $g$ is well-defined and smooth on $\R^n$. Further, if $R > 0$ is such that $f$ is supported inside the open set $B(0, R)$, then for all $x\notin B(0, R)$, we obviously have that both $f(x) = 0$ and $\partial_n f(x) = 0$. Hence, $g$ is also supported inside $B(0, R)$. This shows that $g$ is compact. Finally, note that $x_ng(x) = f(x)$ for all $x\in\R^n$; indeed, this equality is obvious for $x\notin\R^{n - 1}$ and for $x\in\R^{n - 1}$, since $x_n = 0$, we have $x_ng(x) = 0 = f(x)$. Thus, we have 
+%     \begin{equation*}
+%         (u, f) = (u, x_ng) = (x_nu, g) = 0, 
+%     \end{equation*}
+%     as desired.
+% \end{proof}
+
+Next, define $v\in\mathscr D'(\R^{n - 1})$ by 
+\begin{equation*}
+    (v, \varphi) = \left(u, \rho(x_n)\varphi(x_1,\dots,x_{n - 1})\right)\qquad\forall~\varphi\in C_c^\infty(\R^{n - 1}).
+\end{equation*}
+To see that $v$ is indeed a distribution, let $K\subseteq\R^{n - 1}$ and suppose $\varphi\in C_c^\infty(K)$. Then, $\rho(x_n)\varphi(x_1,\dots,x_{n - 1})$ is supported inside the compact set $K\times Q$. Since $u$ is a distribution, there is a positive integer $N$ and a constant $C > 0$ such that 
+\begin{equation*}
+    |(u, \psi)|\le C\sup_{\substack{|\alpha|\le N\\ x\in K\times Q}} |\partial^\alpha\psi(x)|
+\end{equation*}
+Thus, 
+\begin{equation*}
+    |(v,\varphi)|\le C\sup_{\substack{|\alpha|\le N\\ x\in K\times Q}}|\partial^\alpha \rho(x_n)\varphi(x_1,\dots,x_{n - 1})|.
+\end{equation*}
+Let $M > 0$ be such that $|\partial^\alpha \rho|\le M$ on $\R$ for all $\alpha\le N$, and set 
+\begin{equation*}
+    \wt M = \sup_{\substack{|\alpha|\le N\\ x\in K}}|\partial^\alpha\varphi(x)|.
+\end{equation*}
+Now, for $x\in K\times Q$, we have 
+\begin{align*}
+    \left|\partial^\alpha\rho(x_n)\varphi(x_1,\dots,x_{n - 1})\right| &= \left|\sum_{|\beta + \gamma|\le N}\frac{(\beta + \gamma)!}{\beta!\gamma!}\partial^\beta\rho(x_n)\partial^\gamma\varphi(x_1,\dots,x_{n - 1})\right|\\
+    &\le\sum_{|\beta + \gamma|\le N}\frac{(\beta + \gamma)!}{\beta!\gamma!}\left|\partial^\beta\rho(x_n)\right|\left|\partial^\gamma\varphi(x_1,\dots,x_{n - 1})\right|\\
+    &\le M\wt M\underbrace{\sum_{|\beta + \gamma|\le N}\frac{(\beta + \gamma)!}{\beta!\gamma!}}_{\wt C} = M\wt M\wt C.
+\end{align*}
+Hence, 
+\begin{equation*}
+    |(v, \varphi)|\le C\wt C M\sup_{\substack{|\alpha|\le N\\ x\in K}}|\partial^\alpha\varphi(x)|,
+\end{equation*}
+whence $v$ is a distribution. Finally, for any $\varphi\in C_c^\infty(\R^n)$, we have 
+\begin{equation*}
+    (v\otimes\delta, \varphi) = \left(v(x'), \left(\delta(x_n),\varphi\right)\right) = (v(x'), \varphi(x', 0)) = (u, \rho(x_n)\varphi(x_1,\dots,x_{n - 1}, 0)).
+\end{equation*}
+Note that $\psi(x) = \varphi(x) - \rho(x_n)\varphi(x_1,\dots,x_{n - 1}, 0)$ vanishes in a neighborhood of the hyperplane $\{x\in\R^{n - 1}\colon x_n = 0\}$. Thus, the supports of $\psi$ and $u$ are disjoint subsets of $\R^n$,  consequently, $(u, \psi) = 0$. This gives
+\begin{equation*}
+    (u, \rho(x_n)\varphi(x_1,\dots,x_{n - 1}, 0)) = (u, \varphi).
+\end{equation*}
+It follows that $v(x')\otimes\delta(x_n) = u$, as desired.
+
+\section{Problem 2}
+
+First, we claim that $\Supp u\subseteq\{0\}$. Indeed, if $\varphi\in C_c^\infty(\R^2\setminus\{0\})$, then 
+\begin{equation*}
+    \left(u, \varphi\right) = \left((x_1 + ix_2)u, \frac{\varphi}{x_1 + ix_2}\right) = 0,
+\end{equation*}
+since $\varphi/(x_1 + ix_2)\in C_c^\infty(\R^2\setminus\{0\})$ as $x_1 + ix_2\ne 0$ for all $(x_1,x_2)\in\R^2\setminus\{0\}$. Thus, $\Supp u\subseteq\{0\}$. It follows that $u$ has an expression of the form 
+\begin{equation*}
+    u = \sum_{\alpha,\beta\ge 0}c_{\alpha\beta}\partial_1^\alpha\partial_2^\beta\delta,
+\end{equation*}
+where the above sum is finite. We shall now identify $\R^2$ with $\bbC$ and define the differential operators 
+\begin{equation*}
+    \partial = \partial_z  = \frac{1}{2}\left(\partial_1 - i\partial_2\right)\quad\text{ and }\quad\overline\partial = \partial_{\overline z} = \frac{1}{2}\left(\partial_1 + i\partial_2\right).
+\end{equation*}
+Using a simple change of variables formula, we can write our expression for $u$ as 
+\begin{equation*}
+    u = \sum_{\alpha,\beta\ge 0} a_{\alpha\beta} \partial^\alpha\overline\partial^\beta\delta,
+\end{equation*}
+where the above sum is finite. Our initial condition on $u$ translates to $zu = 0$. Recall that we have 
+\begin{equation*}
+    \partial z = 1\quad \overline\partial z = 0\quad\partial\overline z = 0\quad\overline\partial\overline z = 1.
+\end{equation*}
+This shows that 
+\begin{equation*}
+    \partial^\alpha\overline\partial^\beta (z^m\overline z^n) = 
+    \begin{cases}
+        \alpha!\beta! & \alpha = m,~\beta = n\\
+        0 & \text{otherwise}.
+    \end{cases}
+\end{equation*}
+
+Let $\rho$ be a cutoff function that is identically $1$ in a neighborhood of $0$. For $k\ge 1$ and $l\ge 0$, we have 
+\begin{equation*}
+    (u, z^k\overline z^l\rho) = \sum_{\alpha,\beta\ge 0}a_{\alpha\beta}(\partial^\alpha\overline\partial^\beta\delta, z^k\overline z^l\rho) = (-1)^{k + l} k!l!a_{kl}
+\end{equation*}
+due to what we noted above. But since $k\ge 1$ we have 
+\begin{equation*}
+    (u, z^k\overline z^l\rho) = (zu, z^{k - 1}\overline z^l\rho) = 0,
+\end{equation*}
+whence $a_{kl} = 0$. This leaves 
+\begin{equation*}
+    u = \sum_{\beta\ge 0}a_\beta\overline\partial^\beta\delta,
+\end{equation*}
+where the above sum is finite and $a_\beta$ are constants. Conversely, if $u$ is of the above form, then for any $\varphi\in C_c^\infty(\bbC)$, we have 
+\begin{equation*}
+    (zu, \varphi) = (u, z\varphi) = \sum_{\beta\ge 0}(-1)^\beta a_\beta\left(u, \overline\partial^\beta(z\varphi)\right).
+\end{equation*}
+If $\beta = 0$, then $(\delta, z\varphi) = 0$ since the function vanishes at $0$. On the other hand, if $\beta\ge 1$, then using the fact that $\overline{\partial}z = 0$, we get $\overline\partial^\beta(z\varphi) = z\overline\partial^\beta\varphi$, which vanishes at $0$ again. Consequently, we see that $zu = 0$.
+
+Hence, $zu = 0$ if and only if $u = \sum_{\beta\ge 0}a_\beta\overline\partial^\beta\delta$ for some constants $a_\beta$ and the sum being finite. Substituting the expression for $\overline\partial$ in the above equation, we have our desired expression for $u$: 
+\begin{equation*}
+    u = \sum_{0\le \beta\le N}a_\beta\left(\frac{\partial_1 + i\partial_2}{2}\right)^\beta\delta,
+\end{equation*}
+for some $N\ge 0$ and $a_\beta\in\bbC$.
+
+
+\section{Problem 3}
+
+Let $\varphi\in C_c^\infty(\R^n)$. Then we have 
+\begin{equation*}
+    \left(f_j, \varphi\right) = \frac{1}{(2\pi)^n}\int_{\R^{n}}\varphi(x)\int_{[-j, j]^n}e^{ix\cdot\xi}~d\xi~dx.
+\end{equation*}
+Since $\varphi$ is compactly supported, its support is contained in some compact cube $Q$. So the above integral is essentially equal to 
+\begin{equation*}
+    \left(f_j,\varphi\right) = \frac{1}{(2\pi)^n}\int_{Q}\int_{[-j, j]^n}\varphi(x)e^{ix\cdot\xi}~d\xi~dx = \frac{1}{(2\pi)^n}\int_{[-j , j]^n}\int_Q \varphi(x)e^{ix\cdot\xi}~dx~d\xi = \frac{1}{(2\pi)^n}\int_{[-j, j]}\wh\varphi(-\xi)~d\xi.
+\end{equation*}
+Note that the second equality follows from Fubini's theorem which applies since we are integrating an $L^1$ function on a finite measure space. Making the change of variables $\xi = -\eta$, we have 
+\begin{equation*}
+    (f_j,\varphi) = \frac{1}{(2\pi)^n}\int_{[-j, j]^n}\wh\varphi(\eta)~d\eta.
+\end{equation*}
+Using the dominated convergence theorem (since $\wh\varphi\in\mathscr S(\R^n)$) on the functions $\chi_{[-j, j]^n}(x)\wh\varphi(x)$, we have 
+\begin{equation*}
+    \lim_{j\to\infty}(f_j,\varphi) = \frac{1}{(2\pi)^n}\int_{\R^n}\wh\varphi(\eta)~d\eta = \varphi(0),
+\end{equation*}
+where the last equality follows from the Fourier inversion formula. This shows that $f_j\to\delta$ as $j\to\infty$, as desired.
+
+\section{Problem 4}
+Let $\varphi\in\scrS(\R)$. Then there is a constant $M > 0$ such that 
+\begin{equation*}
+    (1 + x^2)|\varphi(x)|\le M\qquad\forall~x\in\R.
+\end{equation*}
+As a result, for $j > 1$, 
+\begin{equation*}
+    |(f_j,\varphi)| = \left|\int_{j - 1}^{j}\varphi(x)~dx\right|\le\int_{j - 1}^j |\varphi(x)|~dx\le M\int_{j - 1}^j \frac{1}{1 + x^2}~dx = M\arctan\left(\frac{1}{j^2 - j + 1}\right),
+\end{equation*}
+obviously the quantity on the right goes to $0$ as $j\to\infty$. Thus, $(f_j,\varphi)\to 0$ as $j\to\infty$, that is, $f_j\to 0$ in $\scrS'(\R)$.
+
+On the other hand, for $m < n$, we have 
+\begin{equation*}
+    |f_m - f_n| = \chi_{[m - 1, m]} + \chi_{[n - 1, n]},
+\end{equation*}
+so that 
+\begin{equation*}
+    \|f_m - f_n\|_p = 
+    \begin{cases}
+        2^{1/p} & 1\le p < \infty \\
+        1 & p = \infty.
+    \end{cases}
+\end{equation*}
+Thus, $(f_j)$ does not converge in $L^p$ for $1\le p\le\infty$.
+
+\section{Problem 5}
+
+Let $\varphi\in\scrS(\R)$ and $u = |x|^{- a}$ where $0 < a < n$. Then 
+\begin{equation*}
+    ( \wh u, \varphi) = ( u, \wh\varphi) = \int_{\R^n} \frac{1}{|x|^a}\wh\varphi(x)~dx.
+\end{equation*}
+
+Recall the definition of the Gamma function: 
+\begin{equation*}
+    \Gamma(s) = \int_{0}^\infty t^{s - 1}e^{-t}~dt.
+\end{equation*}
+Performing the substitution $t = |x|^2y$, we get 
+\begin{equation*}
+    \Gamma(s) = \int_{0}^\infty |x|^{2s} y^{s - 1} e^{-|x|^2 y}~dy.
+\end{equation*}
+Taking $s = \frac{a}{2}$, we get 
+\begin{equation*}
+    \frac{1}{|x|^a} = \frac{1}{\Gamma\left(\frac{a}{2}\right)}\int_{0}^\infty y^{\frac{a}{2} - 1}e^{-|x|^2 y}~dy.
+\end{equation*}
+Thus, 
+\begin{equation*}
+    (u, \wh\varphi) = \frac{1}{\Gamma\left(\frac{a}{2}\right)}\int_{\R^n}\wh\varphi(x)\int_0^\infty y^{\frac{a}{2} - 1}e^{-|x|^2 y}~dy~dx = \frac{1}{\Gamma\left(\frac{a}{2}\right)}\int_0^\infty y^{\frac{a}{2} - 1}\int_{\R^n}\wh\varphi(x)e^{-|x|^2 y}~dx~dy.
+\end{equation*}
+
+Recall that for $\alpha > 0$, we have 
+\begin{equation*}
+    \wh{x\mapsto e^{-\alpha |x|^2}} = \left(\frac{\pi}{\alpha}\right)^{\frac{n}{2}}e^{-\frac{|x|^2}{4\alpha}}.
+\end{equation*}
+Taking $\alpha = \frac{1}{4y}$, we get that 
+\begin{equation*}
+    \wh{x\mapsto e^{-\frac{|x|^2}{4y}}} = (4\pi y)^{\frac{n}{2}} e^{-|x|^2y},
+\end{equation*}
+that is, 
+\begin{equation*}
+    \wh{x\mapsto \frac{1}{(4\pi y)^{\frac{n}{2}}}e^{-\frac{|x|^2}{4y}}} = e^{-|x|^2y}.
+\end{equation*}
+Now, using Parseval's theorem and the above expression, we can write 
+\begin{equation*}
+    \int_{\R^n}\wh\varphi(x)e^{-|x|^2y}~dx = (2\pi)^n\int_{\R^n} \frac{1}{(4\pi y)^{\frac{n}{2}}}e^{-\frac{|x|^2}{4y}}\varphi(x)~dx = \int_{\R^n} \left(\frac{\pi}{y}\right)^{\frac{n}{2}}e^{-\frac{|x|^2}{4y}}\varphi(x)~dx
+\end{equation*}
+Substituting this in our original equation, we have 
+\begin{equation*}
+    (u, \wh\varphi) = \frac{1}{\Gamma\left(\frac{a}{2}\right)}\int_0^\infty y^{\frac{a}{2} - 1}\left(\frac{\pi}{y}\right)^{\frac{n}{2}}\int_{\R^n} e^{-\frac{|x|^2}{y}}\varphi(x)~dx~dy = \frac{1}{\Gamma\left(\frac{a}{2}\right)}\int_{\R^n} \pi^{\frac{n}{2}}\varphi(x)\int_0^\infty y^{\frac{a - n}{2} - 1}e^{-\frac{|x|^2}{4y}}~dy~dx.
+\end{equation*}
+Perform the substitution $s = \frac{|x|^2}{4y}$, so that 
+\begin{align*}
+    (u,\wh\varphi) &= \frac{\pi^{\frac{n}{2}}}{\Gamma\left(\frac{a}{2}\right)}\int_{\R^n} \varphi(x)\int_0^\infty\left(\frac{|x|^2}{4s}\right)^{\frac{a - n}{2} - 1}e^{-s}\frac{|x|^2}{4s^2}~ds\\
+    &= \frac{\pi^{\frac{n}{2}}}{\Gamma\left(\frac{a}{2}\right)}\int_{\R^n}\varphi(x)|x|^{a - n}2^{n - a}\int_0^\infty s^{\frac{n - a}{2} - 1}e^{-s}~ds~dx\\
+    &= \frac{\pi^{\frac{n}{2}}}{\Gamma\left(\frac{a}{2}\right)}2^{n - a}\Gamma\left(\frac{n - a}{2}\right)\int_{\R^n} \frac{1}{|x|^{n - a}}\varphi(x)~dx.
+\end{align*}
+Thus, 
+\begin{equation*}
+    \wh u = \frac{\Gamma\left(\frac{n - a}{2}\right)}{\Gamma\left(\frac{a}{2}\right)}\pi^{\frac{n}{2}}2^{n - a}\frac{1}{|x|^{n - a}}.
+\end{equation*}
+
+\section{Problem 6}
+
+First, we compute the Fourier transform of $u = \pv\frac{1}{x}$. Note that $xu = 1$, which is a fact we have seen in the last assignment. If $1\in\scrS'(\R)$ denotes the constant function $1$, then 
+\begin{equation*}
+    (\wh 1, \varphi) = (1,\wh\varphi) = 2\pi\varphi(0)\qquad~\forall\varphi\in\scrS(\R),
+\end{equation*}
+where the last equality follows from the Fourier inversion formula. Thus $\wh 1 = 2\pi\delta$. This gives 
+\begin{equation*}
+    (2\pi\delta, \varphi) = (\wh 1, \varphi) = (\wh{xu},\varphi) = (xu,\wh\varphi) = (u, x\wh\varphi) = (u, -i\wh{\varphi'}) = (\wh u, -i\varphi') = (\wh u', i\varphi).
+\end{equation*}
+Thus, it follows that $\wh u' = -2\pi i\delta$. Consider the distribution $\sgn\in\scrS'(\R)$, given by 
+\begin{equation*}
+    \sgn(\xi) = 
+    \begin{cases}
+        1 & x > 0\\
+        -1 & x < 0.
+    \end{cases}
+\end{equation*}
+Note that the derivative of this distribution is given by 
+\begin{equation*}
+    (\sgn', \varphi) = -(\sgn, \varphi') = -\left(\int_0^\infty\varphi' - \int_{-\infty}^0 \varphi'\right) = -\left(-\varphi(0) - \varphi(0)\right) = 2\varphi(0),
+\end{equation*}
+wehnce $\sgn' = 2\delta$. Consequently, $(\wh u + i\pi\sgn)' = 0$. As we have seen in the last assignment, this means that $\wh u + i\pi\sgn$ is a constant, say $c\in\bbC$. Now, if $\varphi\in\scrS'(\R)$ is an even function, then 
+\begin{equation*}
+    (\wh u, \varphi) = (u,\wh\varphi) = 0,
+\end{equation*}
+since $\wh\varphi$ is an even function too; recall that 
+\begin{equation*}
+    (u,\psi) = \lim_{\varepsilon\to0^+}\int_{\varepsilon}^\infty\frac{\psi(x) - \psi(-x)}{x}~dx = 0.
+\end{equation*}
+Further, it is not hard to see that $(i\pi\sgn, \varphi) = 0$. Hence, we must have that $(c,\varphi) = 0$ for every even function in the Schwartz class, whence $c = 0$. It follows that $\wh u = -i\pi\sgn$. Now, 
+\begin{equation*}
+    \wh{u\ast u} = \wh u\cdot\wh u = -\pi^2\sgn^2 = -\pi^2\cdot 1,
+\end{equation*}
+since $\sgn^2 = 1$ a.e. on $\R$. Now, taking the inverse Fourier transform, we have 
+\begin{equation*}
+    (u\ast u, \varphi) = (\wh{u\ast u}^\vee,\varphi) = (\wh{u\ast u}, \varphi^\vee) = (-\pi^2\cdot 1, \varphi^\vee) = -\pi^2\int_{\R}\varphi^\vee = -\pi^2\varphi(0),
+\end{equation*}
+where the last equality follows from the fact that $\wh{\varphi^\vee} = \varphi$ and evaluation of the Fourier transform at $\xi = 0$. This shows that $u\ast u = -\pi^2\delta$, as desired.
+
+\section{Problem 7}
+
+\section{Problem 8}
+
+Since $A$ is a symmetric positive definite matrix, there is an orthogonal matrix $U$ such that $A = U^\top D U$ where $D$ is a diagonal matrix consisting of the eigenvalues of $A$, repeated according to their multiplicity. We can then compute the Fourier transform of this function as 
+\begin{align*}
+    \wh\varphi(\xi) = \int_{\R^n} e^{-(x, Ax)}e^{-ix\cdot\xi}~dx = \int_{\R^n} e^{-(Ux, DUx)}e^{-i(x,\xi)}~dx.
+\end{align*}
+Performing the substitution $x = U^\top y$, we have 
+\begin{equation*}
+    \wh\varphi(\xi) = \int_{\R^n} e^{-(y, Dy)} e^{-i(y, U\xi)}~dy.
+\end{equation*}
+Let $\psi(x) = e^{-(x, Dx)}$. Then $\wh\varphi(\xi) = \wh\psi(U\xi)$. Thus, it suffices to compute $\wh\psi$. Let $D = \operatorname{diag}(\lambda_1,\dots,\lambda_n)$ where $\lambda_j > 0$ for $1\le j\le n$. Set $y_i = \sqrt{\lambda_i}x_i$ to get 
+\begin{equation*}
+    \wh\psi(\xi) = \int_{\R^n} e^{-(x, Dx)}e^{-(x, \xi)}~dx = \frac{1}{\sqrt{\lambda_1\cdots\lambda_n}}\int_{\R^n} e^{-\|y\|^2} e^{y\cdot\left(\frac{\xi_1}{\sqrt{\lambda_1}},\cdots,\frac{\xi_n}{\sqrt{\lambda_n}}\right)}~dy = \frac{\pi^{\frac{n}{2}}}{\sqrt{\lambda_1\cdots\lambda_n}}\exp\left(-\frac{1}{4}\sum_{j = 1}^n\frac{\xi_j^2}{\lambda_j}\right),
+\end{equation*}
+where we have used the fact that the Fourier transform of the Gaussian $e^{-\|x\|^2}$ is 
+\begin{equation*}
+    \pi^{\frac{n}{2}}\exp\left(-\frac{1}{4}\|\xi\|^2\right).
+\end{equation*}
+
+\section{Problem 9}
+
+Suppose there is such a $\Lambda\in\mathscr D'(\R)$. Let $u$ denote the localization of $\Lambda$ to $(0,\infty)$. Since $u\in\mathscr D'(0,\infty)$, we can wwrite 
+\begin{equation*}
+    u' + \frac{1}{2x^2}u = 0\implies \left(\exp\left(-\frac{1}{4x^2}\right)u\right)' = 0.
+\end{equation*}
+As we have seen in the first assignment, this means that $\exp\left(-\frac{1}{4x^2}\right)u$ is a constant; consequently, $u = c\exp\left(\frac{1}{4x^2}\right)$. We shall show that there is no distribution $\Lambda\in\mathscr D'(\R)$ that localizes to $u = \exp\left(\frac{1}{4x^2}\right)$ on $(0, \infty)$.
+
+Suppose $\Lambda$ is such a distribution, then the seminorm estimate on the compact set $K = [0, 1]$ furnishes a constant $C > 0$ and a non-negative integer $m$ such that 
+\begin{equation*}
+    \left|(\Lambda,\varphi)\right|\le C\sup_{\substack{\alpha\le m\\ x\in K}}|\partial^\alpha\varphi(x)|\qquad\forall~\varphi\in C_c^\infty(K).
+\end{equation*}
+
+Let $\rho$ be a non-negative compactly supported function on the real line that is identically $1$ on $[-1, 1]$ and has support contained inside $(-2, 2)$.
+
+\section{Problem 10}
+
+\section{Problem 11}
+Note that $u = e^x\cos(e^x)$ is the derivative of $\cos(e^x)$. Thus, for any $\varphi\in\scrS(\R)$, using integration by parts, we have 
+\begin{equation*}
+    (u,\varphi) = \int_{\R} e^x\cos (e^x)\varphi(x)~dx = \int_{\R}\varphi(x)\frac{d}{dx}\sin(e^x)~dx = - \int_{\R} \varphi'(x)\sin(e^x)~dx.
+\end{equation*}
+Let 
+\begin{equation*}
+    M = \sup_{x\in\R}(1 + x^2)|\varphi'(x)|.
+\end{equation*}
+Note that 
+\begin{equation*}
+    M\le \sup_{x\in\R} |\varphi'(x)| + \sup_{x\in\R} x^2|\varphi'(x)|\le 2\sup_{\substack{|\alpha|\le 2\\|\beta|\le 1}} |x^\alpha\partial^\beta\varphi(x)|.
+\end{equation*}
+Further, 
+\begin{equation*}
+    |(u,\varphi)|\le\int_{\R} |\varphi'(x)\sin(e^x)|~dx\le\int_R|\varphi'(x)|~dx\le M\int_{\R}\frac{1}{1 + x^2}~dx = \pi M\le 2\pi\sup_{\substack{|\alpha|\le 2\\|\beta|\le 1}} |x^\alpha\partial^\beta\varphi(x)|.
+\end{equation*}
+This shows that $u$ is a tempered distribution.
+
+\section{Problem 12}
+
+Let $x = (x_1,\dots,x_n)\in\R^n$ with $x_i\ne 0$. Then due to the mean value property, there is a constant $c$ between $0$ and $x_i$ such that 
+\begin{equation*}
+    \frac{f(x_1,\dots,x_i, \dots, x_n) - f(x_1,\dots, 0,\dots, x_n)}{x_i} = \partial_i f(x_1,\dots,c,\dots,x_n) = 0.
+\end{equation*}
+Thus, $f(x_1,\dots,x_i,\dots,x_n) = f(x_1,\dots,0,\dots,x_n)$ for all $x = (x_1,\dots,x_n)\in\R^n$. But since $f$ is in Schwartz class, we must have 
+\begin{equation*}
+    0 = \lim_{x_i\to\infty} f(x_1,\dots,x_n) = \lim_{x_i\to\infty}f(x_1,\dots,0,\dots,x_n).
+\end{equation*}
+This shows that $f$ vanishes on the hyperplane $\{x\in\R^n\colon  x_i = 0\}$. But because of our first observation, we see that for any $x = (x_1,\dots,x_n)\in\R^n$, we have 
+\begin{equation*}
+    f(x) = f(x_1,\dots,0,\dots, x_n) = 0,
+\end{equation*}
+that is, $f = 0$.
+
+\section{Problem 13}
+
+Note that $C_c^\infty(\R^n)\subseteq\scrS(\R^n)\subseteq C^\infty(\R^n)$. We shall show that $C_c^\infty(\R^n)$ is dense in $C^\infty(\R^n)$, whence it would immediately follow that $\scrS(\R^n)$ is dense in $C^\infty(\R^n)$.
+
+Let $\varphi\in C^\infty(\R^n)$. For every positive integer $n$, let $\rho_n\in C_c^\infty(\R^n)$ be identically $1$ on the open ball $B(0, n)$ with support contained in the open ball $B(0, 2n)$. Define $\varphi_n = \rho_n\varphi$. We claim that $\varphi_n\to\varphi$ in the topology of $C^\infty(\R^n)$.
+
+Indeed, if $K\subseteq\R^n$ is a compact set, then there is a positive integer $N$ such that $K\subseteq B(0, N)$. Then for all $n\ge N$, $\varphi - \varphi_n$ is identically $0$ in a neighborhood of $K$. Thus, $\partial^\alpha\varphi - \partial^\alpha\varphi_n$ is identically $0$ on a neighborhood of $K$ for all $n\ge N$. It follows that $\partial^\alpha\varphi_n\to\partial^\alpha\varphi$ uniformly on $K$. Thus $\varphi_n\to\varphi$ in the topology of $C^\infty(\R^n)$. This shows that $C_c^\infty(\R^n)$ is dense in $C^\infty(\R^n)$.
+\end{document}
