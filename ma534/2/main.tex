@@ -225,28 +225,28 @@ Let $\rho\in C_c^\infty(\R)$ be identically $1$ on a neighborhood of $0$. Let $Q
 \end{equation*}
 which makes sense because $\varphi(x)/x_n$ is well-defined, smooth and compactly supported on $U$. It follows that the support of $u$ is contained in the hyperplane $\R^{n - 1}$.
 
-% \begin{claim}
-%     If $f\in C_c^\infty(\R^n)$ is such that $f|_{\R^{n - 1}}$, then $(u, f) = 0$.
-% \end{claim}
-% \begin{proof}
-%     Define the function $g:\R^{n - 1}\to\R$ by 
-%     \begin{equation*}
-%         g(x) = 
-%         \begin{cases}
-%             \frac{f(x)}{x_n} & x_n\ne 0\\
-%             \partial_n f(x_1,\dots,x_{n - 1}, 0) & x_n = 0.
-%         \end{cases}
-%     \end{equation*}
-%     Obviously $g$ is smooth on $\R^n\setminus \R^{n - 1}$. Now, fix some $\xi = (\xi_1,\dots,\xi_{n - 1}, 0)\in\R^{n - 1}$ and consider a sequence $x^n\in\R^n\setminus\R^{n - 1}$ converging to $\xi$. Then, 
-%     \begin{equation*}
-%         \lim_{n\to\infty}g(x^n) = \lim_{n\to\infty} \frac{f(x^n)}{x^n_n} = \partial_n f(\xi),
-%     \end{equation*}
-%     since $f$ is smooth. Thus $g$ is well-defined and smooth on $\R^n$. Further, if $R > 0$ is such that $f$ is supported inside the open set $B(0, R)$, then for all $x\notin B(0, R)$, we obviously have that both $f(x) = 0$ and $\partial_n f(x) = 0$. Hence, $g$ is also supported inside $B(0, R)$. This shows that $g$ is compact. Finally, note that $x_ng(x) = f(x)$ for all $x\in\R^n$; indeed, this equality is obvious for $x\notin\R^{n - 1}$ and for $x\in\R^{n - 1}$, since $x_n = 0$, we have $x_ng(x) = 0 = f(x)$. Thus, we have 
-%     \begin{equation*}
-%         (u, f) = (u, x_ng) = (x_nu, g) = 0, 
-%     \end{equation*}
-%     as desired.
-% \end{proof}
+\begin{claim}
+    If $f\in C_c^\infty(\R^n)$ is such that $f|_{\R^{n - 1}}$, then $(u, f) = 0$.
+\end{claim}
+\begin{proof}
+    Define the function $g:\R^{n - 1}\to\R$ by 
+    \begin{equation*}
+        g(x) = 
+        \begin{cases}
+            \frac{f(x)}{x_n} & x_n\ne 0\\
+            \partial_n f(x_1,\dots,x_{n - 1}, 0) & x_n = 0.
+        \end{cases}
+    \end{equation*}
+    Obviously $g$ is smooth on $\R^n\setminus \R^{n - 1}$. Now, fix some $\xi = (\xi_1,\dots,\xi_{n - 1}, 0)\in\R^{n - 1}$ and consider a sequence $x^n\in\R^n\setminus\R^{n - 1}$ converging to $\xi$. Then, 
+    \begin{equation*}
+        \lim_{n\to\infty}g(x^n) = \lim_{n\to\infty} \frac{f(x^n)}{x^n_n} = \partial_n f(\xi),
+    \end{equation*}
+    since $f$ is smooth. Thus $g$ is well-defined and smooth on $\R^n$. Further, if $R > 0$ is such that $f$ is supported inside the open set $B(0, R)$, then for all $x\notin B(0, R)$, we obviously have that both $f(x) = 0$ and $\partial_n f(x) = 0$. Hence, $g$ is also supported inside $B(0, R)$. This shows that $g$ is compact. Finally, note that $x_ng(x) = f(x)$ for all $x\in\R^n$; indeed, this equality is obvious for $x\notin\R^{n - 1}$ and for $x\in\R^{n - 1}$, since $x_n = 0$, we have $x_ng(x) = 0 = f(x)$. Thus, we have 
+    \begin{equation*}
+        (u, f) = (u, x_ng) = (x_nu, g) = 0, 
+    \end{equation*}
+    as desired.
+\end{proof}
 
 Next, define $v\in\mathscr D'(\R^{n - 1})$ by 
 \begin{equation*}
@@ -278,7 +278,7 @@ whence $v$ is a distribution. Finally, for any $\varphi\in C_c^\infty(\R^n)$, we
 \begin{equation*}
     (v\otimes\delta, \varphi) = \left(v(x'), \left(\delta(x_n),\varphi\right)\right) = (v(x'), \varphi(x', 0)) = (u, \rho(x_n)\varphi(x_1,\dots,x_{n - 1}, 0)).
 \end{equation*}
-Note that $\psi(x) = \varphi(x) - \rho(x_n)\varphi(x_1,\dots,x_{n - 1}, 0)$ vanishes in a neighborhood of the hyperplane $\{x\in\R^{n - 1}\colon x_n = 0\}$. Thus, the supports of $\psi$ and $u$ are disjoint subsets of $\R^n$,  consequently, $(u, \psi) = 0$. This gives
+Note that $\psi(x) = \varphi(x) - \rho(x_n)\varphi(x_1,\dots,x_{n - 1}, 0)$ vanishes on the hyperplane $\{x\in\R^n\colon x_n = 0\}$ and hence, due to the claim above, $(u, \psi) = 0$. This gives
 \begin{equation*}
     (u, \rho(x_n)\varphi(x_1,\dots,x_{n - 1}, 0)) = (u, \varphi).
 \end{equation*}
