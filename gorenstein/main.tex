@@ -4,7 +4,7 @@
 
 \title{Gorenstein Rings\\\small{Notes for the course MA 842: Topics in Algebra II}}
 \author{H. Ananthnarayan\\\small\textsc{Scribe:} Swayam Chube}
-\date{Last Updated: March 7, 2025}
+\date{Last Updated: \today}
 
 \usepackage[utf8]{inputenc} % allow utf-8 input
 \usepackage[T1]{fontenc}    % use 8-bit T1 fonts
@@ -34,6 +34,7 @@
 \usepackage{marvosym}
 \usepackage{geometry}
 \usepackage{titlesec}
+\usepackage{mathtools}
 \usepackage{tikz}
 \usetikzlibrary{cd}
 
@@ -132,6 +133,8 @@
 % Commutative and Homological Algebra
 \newcommand{\spec}{\operatorname{spec}}
 \newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
 \newcommand{\Tor}{\operatorname{Tor}}
 \newcommand{\tor}{\operatorname{tor}}
 \newcommand{\Ann}{\operatorname{Ann}}
@@ -241,6 +244,11 @@
 \newcommand{\sminus}{\setminus}
 \newcommand{\diam}{\operatorname{diam}}
 \newcommand{\Ass}{\operatorname{Ass}}
+\newcommand{\projdim}{\operatorname{proj~dim}}
+\newcommand{\injdim}{\operatorname{inj~dim}}
+\newcommand{\gldim}{\operatorname{gl~dim}}
+\newcommand{\embdim}{\operatorname{emb~dim}}
+\newcommand{\hght}{\operatorname{ht}}
 
 % \renewcommand{\familydefault}{\sfdefault} % Do you want this font? 
 
@@ -270,10 +278,199 @@
 
 \begin{document}
 \maketitle
+\tableofcontents
 
 \section{Injective Modules}
 
-\subsection{Essential Extensions}
+\subsection{Basic Properties of Injective Modules}
+
+\begin{definition}
+    Let $R$ be a ring. An $R$-module $E$ is said to be \define{injective} if for every inclusion of $R$-modules $N\into M$ and an $R$-linear map $N\to E$, there is an $R$-linear map $M\to E$ making
+    \begin{equation*}
+        \xymatrix {
+            0\ar[r] & N\ar[r]\ar[d] & M\ar@{.>}[ld]^{\exists}\\
+            & E & 
+        }
+    \end{equation*}
+    commute.
+
+    An $R$-module $M$ is said to be \define{divisible} if 
+    \begin{equation*}
+        \mu_a: M\longrightarrow M\qquad m\longmapsto am
+    \end{equation*}
+    is surjective for each non-zerodivisor $a\in R$.
+\end{definition}
+
+\begin{remark}
+    It is easy to see that $E$ is injective if and only if given any inclusion of $R$-modules $N\into M$, the induced map $\Hom_R(M, E)\to\Hom_R(N, E)$ is surjective. Further, since $\Hom_R(-, E)$ is always left-exact, we have: 
+    \begin{quotation}
+        An $R$-module $E$ is injective if and only if $\Hom_R(-, E)$ is an exact functor.
+    \end{quotation}
+\end{remark}
+
+\begin{proposition}
+    Every injective $R$-module is divisible. 
+\end{proposition}
+\begin{proof}
+    Let $E$ be $R$-injective, $x\in E$, and $a\in R$ a non-zerodivisor. Let $\varphi: R\to E$ be the unique $R$-linear map sending $1\mapsto x$. Since $R\xrightarrow{\mu_a^R} R$ is injective, there is a map $\wt\varphi: R\to E$ such that $\wt\varphi\circ\mu_a^R = \varphi$. In particular, $a\wt\varphi(1) = x$, whence $\mu_a^E: E\to E$ is surjective, as desired.
+\end{proof}
+
+\begin{theorem}[Baer's Criterion]\thlabel{thm:baer-criterion}
+    Let $R$ be a ring and $E$ an $R$-module. Then $E$ is injective if and only if for every ideal $I\noreq R$ and an $R$-linear map $f: I\to E$, there is an $R$-linear map $F: R\to E$ such that $F|_I = f$.
+\end{theorem}
+\begin{proof}
+    The forward implication is clear. We shall prove the converse. Let $0\to N\to M$ be exact and $f: N\to E$ be an $R$-linear map. Consider the poset 
+    \begin{equation*}
+        \Omega = \left\{(P, g)\colon N\le P\le M\text{ and }g: P\to E\text{ is $R$-linear extending $f$}\right\},
+    \end{equation*}
+    where $(P, g)\leqq(P', g')$ if $P\le P'$ and $g'|_P = g$.
+    Using Zorn's lemma, choose a maximal element $(P, g)\in\Omega$. We claim that $P = M$. Suppose now and choose some $x\in M\setminus P$. Set $I = (P :_R x)\noreq R$ and consider the map 
+    \begin{equation*}
+        I\longrightarrow E\qquad a\mapsto g(ax).
+    \end{equation*}
+    This is well-defined and $R$-linear, whence it extends to an $R$-linear map $\varphi: R\to E$. Let $\alpha = \varphi(1)$ and define $F: P + Rx \to E$ by $F(p + ax) = g(p) + a\alpha$ for all $p\in P$ and $a\in R$. To see that this is well-defined, note that if $p_1 + a_1 x = p_2 + a_2 x$, then $a_1 - a_2\in I$, so that 
+    \begin{equation*}
+        g(p_2) - g(p_1) = g((a_1 - a_2)x) = (a_1 - a_2)\alpha\implies g(p_1) + a_1\alpha = g(p_2) + a_2\alpha.
+    \end{equation*}
+    The map $F$ is obviously $R$-linear and extends $g$, thereby contradicting the maximality of $(P, g)$. Hence, $P = M$ and $E$ is injective.
+\end{proof}
+
+\begin{corollary}
+    An $R$-module $E$ is injective if and only if $\Ext^1_R\left(R/I, E\right) = 0$ for all ideals $I\noreq R$. \hfill\qedsymbol
+\end{corollary}
+
+\begin{remark}
+    We note that it is not sufficient to check the equivalent condition of \thref{thm:baer-criterion} for finitely generated ideals. Indeed, let $R = \scrO(\bbC)$ the ring of entire functions, or $R = \calO_{\overline\Q}$ the ring of algebraic integers in $\bbC$. It is known that $R$ is a non-Noetherian B\'ezout domain. As such, due to \thref{inter:bass-papp-construction}, there is a family of $R$-injectives $\{E_i\}_{i = 1}^\infty$ such that $E = \bigoplus_i E_i$ is not injective.
+
+    Since each $E_i$ is injective, it is divisible, consequently, $E$ is a divisible $R$-module. Moreover, since $R$ is a B\'ezout domain, every finitely generated ideal $I$ in $R$ is principal. It follows now that the equivalent condition of \thref{thm:baer-criterion} holds for $E$ but $E$ is not injective.
+\end{remark}
+
+\begin{proposition}
+    Let $R$ be a PID. An $R$-module $E$ is injective if and only if it is divisible.
+\end{proposition}
+\begin{proof}
+    % TODO: Add in later
+\end{proof}
+
+\begin{lemma}
+    Let $S$ be an $R$-algebra and $E$ an injective $R$-module. Then $\Hom_R(S, E)$ is an injective $S$-module.
+\end{lemma}
+\noindent\emph{Note.} $\Hom_R(S, E)$ is naturally an $S$-module under the action 
+\begin{equation*}
+    (s\cdot f)(s') = f(ss') \qquad\forall~s, s'\in S,~f\in\Hom_R(S, E).
+\end{equation*}
+\begin{proof}
+    Let $0\to M'\to M\to M''\to 0$ be a short exact sequence of $S$-modules. Using the Hom-Tensor adjunction, we have 
+    \begin{equation*}
+        \xymatrix {
+            0\ar[r] & \Hom_S\left(M'',\Hom_R(S, E)\right)\ar[r]\ar@{=}[d] & \Hom_S\left(M,\Hom_R(S, E)\right)\ar[r]\ar@{=}[d] & \Hom_S\left(M', \Hom_R(S, E)\right)\ar[r]\ar@{=}[d] & 0\\
+            0\ar[r] & \Hom_R(M'\otimes_S S, E)\ar@{=}[d]\ar[r] & \Hom_R(M\otimes_S S, E)\ar@{=}[d]\ar[r] & \Hom_R(M''\otimes_S S, E)\ar@{=}[d]\ar[r] & 0\\
+            0\ar[r] & \Hom_R(M', E)\ar[r] & \Hom_R(M, E)\ar[r] & \Hom_R(M'', E)\ar[r] & 0
+        }
+    \end{equation*}
+    The exactness of the bottom row is a consequence of the $R$-injectivity of $E$. Thus the top row is exact and we have our desideratum.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:embed-inside-injective}
+    Every $R$-module can be embedded inside an $R$-injective.
+\end{theorem}
+\begin{proof}
+    First, we show this for $R = \Z$. Let $M$ be a $\Z$-module, then $M\cong \bigoplus_I \Z/N$ for some submodule $N$ of $\bigoplus_I \Z$. There is a natural inclusion of $\Z$-modules $\bigoplus_I\Z\into\bigoplus_I\Q$ which induces an inclusion
+    \begin{equation*}
+        M\cong\frac{\bigoplus_I\Z}{N}\into \frac{\bigoplus_I\Q}{N}\eqcolon E
+    \end{equation*}
+    Being a quotient of a divisible module, $E$ is divisible and hence $\Z$-injective. 
+
+    Now, let $R$ be any ring and $M$ an $R$-module. Then $M$ is naturally a $\Z$-module and admits a $\Z$-linear inclusion $\iota: M\into E$, where $E$ is a $\Z$-injective. Consider the map 
+    \begin{equation*}
+        \varphi: M\longrightarrow\Hom_{\Z}(R, E)\qquad m\longmapsto\varphi_m,
+    \end{equation*}
+    where $\varphi_m: R\to E$ is given by $\varphi_m(r) = f(rm)$. The map $\varphi$ is obviously $R$-linear and if $\varphi_m = 0$, then $f(m) = \varphi_m(1) = 0$, i.e., $m = 0$. As a result, $\varphi$ is injective and we have embedded $M$ inside an injective $R$-module.
+\end{proof}
+
+\begin{corollary}
+    Let $E$ be an $R$-module. Then $E$ is injective if and only if every $R$-linear inclusion $E\into M$ splits.
+\end{corollary}
+\begin{proof}
+    Suppose $E$ is injective.
+    \begin{equation*}
+        \xymatrix {
+            0\ar[r] & E\ar[r]\ar@{=}[d] & M\ar@{.>}[ld]^{\exists}\\
+            & E & 
+        }
+    \end{equation*}
+    The above diagram constructs a splitting of $E\into M$.
+
+    Conversely, suppose every $R$-linear inclusion $E\into M$ splits. Due to \thref{thm:embed-inside-injective}, we may choose $M$ to be injective, so that $E$ is a direct summand of $M$, whence $E$ is injective.
+\end{proof}
+
+\begin{proposition}
+    Let $R$ be a Noetherian ring. A direct sum of injective $R$-modules is injective.
+\end{proposition}
+\begin{proof}
+    Let $\{E_\lambda\}_{\lambda\in\Lambda}$ be a collection of $R$-injectives and $E = \bigoplus_{\lambda\in\Lambda} E_\lambda$. Let $I\noreq R$ be a non-zero proper ideal and $f: I\to E$ an $R$-linear map. Since $I$ is finitely generated, its image under $f$ is finitely generated in $E$. Consequently, there is a finite subset $\Lambda_0\subseteq\Lambda$ such that $f(I)\subseteq\bigoplus_{\lambda\in\Lambda_0} E_\lambda = E_0$. Being a finite direct sum of injectives, $E_0$ is injective and hence there is a map $F: R\to E_0$ extending $f: I\to E_0$. Composing $F$ with the natural inclusion $E_0\into E$, we obtain our desired extension of $f$. It now follows from \thref{thm:baer-criterion} that $E$ is an injective $R$-module.
+\end{proof}
+
+\begin{interlude}[Bass-Papp Construction]\thlabel{inter:bass-papp-construction}
+    Let $R$ be a non-Noetherian ring. Choose a strictly increasing chain of proper non-zero ideals 
+    \begin{equation*}
+        0\ne I_1\subsetneq I_2\subsetneq\cdots.
+    \end{equation*}
+    For each $n\ge 1$, choose an injective module $E_n$ containing $R/I_n$, and set $E = \bigoplus_n E_n$. We contend that $E$ is not $R$-injective. 
+
+    Let $I = \bigcup_n I_n$. Since each $I_n$ is proper, so is $I$. Let $f: I\to E$ be the map given by 
+    \begin{equation*}
+        f(x) = \left(x\mod I_1, x\mod I_2, \dots\right).
+    \end{equation*}
+    If $E$ were injective, then there must exist a map $F: R\to E$ extending $f$. Suppose $F(1) = (x_1, x_2, \dots)$. There is a positive integer $N$ such that $x_n = 0$ for all $n\ge N$. Choose $x\in I_{N + 1}\setminus I_N$. Since $x\in I$, we have 
+    \begin{equation*}
+        (xx_1, xx_2, \dots) = F(x) = f(x) = \left(x\mod I_1, x\mod I_2, \dots\right).
+    \end{equation*}
+    In particular, $x\mod I_N = xx_N = 0$, a contradiction. Thus $E$ is not $R$-injective.
+\end{interlude}
+
+\begin{proposition}\thlabel{prop:finite-injective-artinian}
+    Let $(R,\frakm, k)$ be a Noetherian local ring. If $E\ne 0$ is an finitely generated injective $R$-module, then $R$ is Artinian.
+\end{proposition}
+\begin{proof}
+    We shall show that $\dim R = 0$. Suppose not; we contend that there is a prime $\frakp\subsetneq\frakm$ such that $\Hom_{R}\left(R/\frakp, E\right)\ne 0$. Indeed, if there is a non-maximal prime $\frakp\in\Ass_R(E)$, then $R/\frakp\into E$, giving us the desideratum. On the other hand, if $\Ass_R(E) = \{\frakm\}$, then the composition 
+    \begin{equation*}
+        R/\frakp\onto R/\frakm\into E
+    \end{equation*}
+    gives a non-zero map $R/\frakp\to E$.
+
+    Choose $a\in\frakm\setminus\frakp$; this is a non-zerodivisor on $R/\frakp$ and furnishes an exact sequence 
+    \begin{equation*}
+        0\to R/\frakp\xrightarrow{\cdot a} R/\frakp.
+    \end{equation*}
+    Applying $\Hom_{R}(-, E)$, we get a surjection 
+    \begin{equation*}
+        \Hom_{R}(R/\frakp, E)\xrightarrow{\cdot a} \Hom_R(R/\frakp, E)\to 0.
+    \end{equation*}
+    Note that $\Hom_R(R/\frakp, E)\cong (0:_E\frakp)\subseteq E$, is a finite $R$-module. Due to Nakayama's lemma, we must have that $\Hom_R(R/\frakp, E) = 0$, a contradiction. Thus $\dim R = 0$, i.e. $R$ is Artinian.
+\end{proof}
+
+\begin{remark}
+    One cannot drop the local condition in \thref{prop:finite-injective-artinian}. This construction makes use of injective hulls. Let $k$ be an algebraically closed field and 
+    \begin{equation*}
+        R = \frac{k[X, Y]}{(X - X^2, Y - XY)}.
+    \end{equation*}
+    Note that $R$ is the coordinate ring of the disjoint union of the origin and the line $x = 1$ in $\bbA_k^2$. In particular, $\dim R = 1$, and $R$ is not Artinian.
+    
+    Let $\frakm = (x, y)$ be the maximal ideal corresponding to the origin. Then $R_{\frakm}\cong k$, since it is the local ring of an isolated point. Now, 
+    \begin{equation*}
+        E_R(k)\cong E_{R_\frakm}(k)\cong E_k(k) = k,
+    \end{equation*}
+    so that $k$ is a finitely generated injective $R$-module.
+\end{remark}
+
+\subsection{Essential Extensions and Injective Hulls}
+
+\begin{definition}
+    A containment of $R$-modules $N\subseteq M$ is said to be \define{essential} if every non-zero submodule of $M$ intersects $N$ non-trivially.
+
+    An injective map $\iota: N\into M$ is said to be essential if $\iota(N)\subseteq M$ is essential.
+\end{definition}
 
 \begin{remark}\thlabel{rem:extension-of-injection}
     Let $M\subseteq N$ be an essential extension of $R$-modules and $\varphi: M\into P$ be an $R$-linear injective map. If $\varphi$ extends to an $R$-linear map $\wt\varphi: N\to P$, then $\wt\varphi$ is injective too. Indeed, if $K = \ker\wt\varphi\ne 0$, then $K\cap M\ne 0$, a contradiction.
@@ -452,7 +649,7 @@ In particular, taking $I = \frakm$, we see that $k^\vee \cong k$ as $R$-modules.
     \end{equation*}
     where all maps are $\wh R$-linear. It follows that $E\into E_{\wh R}(k)$ is an essential extension of $\wh R$-modules, and consequently, an essential extension of $R$-modules. Since $E$ is $R$-injective, we must have that the inclusion is an isomorphism of $R$-modules. Finally, due to \thref{inter:maps-between-m-power-torsion-modules}, this is an isomorphism of $\wh R$-modules.
 
-    \item \textcolor{red}{TODO: Write this out in gory detail.}
+    \item % TODO: Write this out in gory detail
 
     \item Let $M_1\supseteq M_2\supseteq\cdots$ be a chain of $R$-submodules in $E$. There are commutative diagrams 
     \begin{equation*}
@@ -504,5 +701,160 @@ In particular, taking $I = \frakm$, we see that $k^\vee \cong k$ as $R$-modules.
     Conversely, suppose $M$ is a finite $\wh R$-module. Thus, there is a surjection $\wh R^{\oplus n}\onto M$. Taking the Matlis dual, we obtain an injection $M^\vee\into\left(\wh R^\vee\right)^{\oplus n}$.
     
     There is a natural ``evaluation map'' $\ev: M\to M^{\vee\vee}$, which we shall show is an isomorphism. That $\ev$ is injective follows in the same way as \thref{thm:properties-of-E-artinian} (3). Next, since $\lambda_R(M) < \infty$, we have that $\lambda_R(M) = \lambda_R(M^\vee) = \lambda_R(M^{\vee\vee})$, whence $\ev$ is an isomorphism.
+\end{proof}
+
+\begin{theorem}
+    Let $(R,\frakm, k, E)$ be a Noetherian local ring. Then the following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $R$ is self-injective
+        \item $R\cong E$ as $R$-modules. 
+        \item $R$ is Artinian and $\dim_k\Soc_R(R) = 1$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+$(1)\implies(2)$ Due to \thref{prop:finite-injective-artinian}, $R$ must be an Artinian local ring, and hence, from \thref{prop:essential-over-socle}, $\Soc_R(R)\subseteq R$ is an essential extension. It follows that $R$ is the injective hull of $\Soc_R(R)\cong k^{\oplus d}$ for some positive integer $d$. Hence, $R\cong E^{\oplus d}$ as $R$-modules, and comparing lengths, we have 
+\begin{equation*}
+    \lambda_R(R) = d\lambda_R(E) = d\lambda_R(R^\vee) = d\lambda_R(R),
+\end{equation*}
+whence $d = 1$ and $R\cong E$. 
+
+$(2)\implies(3)$ Due to \thref{thm:properties-of-E-noetherian} (4), $R$ is Artinian. Using a length argument as above, we can show that $\dim_k\Soc_R(R) = 1$. 
+
+$(3)\implies(1)$ Again, since $k = \Soc_R(R)\subseteq R$ is essential, we have that $R\into E = E_R(k)$. Using a length argument, it follows that this inclusion must be an isomorphism, whence $R$ is self-injective.
+\end{proof}
+
+\section{Injective Resolutions}
+
+\begin{definition}
+    Let $M$ be an $R$-module. An \define{injective resolution} for $M$ is an exact complex 
+    \begin{equation*}
+        0\to M\to E^0\to E^1\to E^2\to\cdots,
+    \end{equation*}
+    where each $E^n$ is an injective $R$-module. The resolution is often denoted succinctly as $0\to M\to E^\bullet$.
+
+    We say that $M$ has finite injective dimension if $M$ has an injective resolution $0\to M\to E^\bullet$ and an integer $N\ge 0$ such that $E^n = 0$ for $n\ge N$. We define 
+    \begin{equation*}
+        \injdim_R M = \inf\left\{n\colon 0\to M\to E^0\to\cdots\to E^n\to 0\text{ is an injective resolution of } M\right\}.
+    \end{equation*}
+    If $M$ does not have finite injective dimension, then set $\injdim_R M = \infty$.
+\end{definition}
+
+\begin{remark}\thlabel{rem:minimal-injective-resolution}
+    It is possible to create a ``canonical'' injective resolution by successively taking injective hulls. Set $E^0 = E_R(M)$ and for $i\ge 0$, define 
+    \begin{equation*}
+        E^{i + 1} = E_R\left(\coker\left(E^{i - 1}\to E^i\right)\right),
+    \end{equation*}
+    with the convention that $E^{-1} = M$. We call this the \define{minimal injective resolution} of $M$.
+\end{remark}
+
+\begin{lemma}\thlabel{lem:condition-to-be-injective-hull}
+    Let $R$ be a Noetherian ring and $0\to M\xrightarrow{\theta} E$ be an inclusion of $R$-modules with $E$ injective. Then the inclusion is an injective hull of $M$ if and only if 
+    \begin{equation*}
+        \Hom_R\left(R/\frakp, M\right)_\frakp\xrightarrow{\theta_\frakp}\Hom_R\left(R/\frakp, E\right)_\frakp
+    \end{equation*}
+    is an isomorphism for all $\frakp\in\Spec(R)$.
+\end{lemma}
+\begin{proof}
+    Owing to the left exactness of $\Hom_R(R/\frakp, -)$ and the exactness of localization, the map $\theta_\frakp$ is injective for each $\frakp\in\Spec(R)$. Hence, it suffices to show that $E$ is injective if and only if $\theta_\frakp$ is surjective for each $\frakp\in\Spec (R)$. 
+
+    Recall that there are canonical isomorphisms 
+    \begin{equation*}
+        \Hom_R(R/\frakp, M)_\frakp\xrightarrow{\sim}\Hom_{R_\frakp}(\kappa(\frakp), M_\frakp)\qquad\frac{\psi}{s}\longmapsto\left(\frac{a}{t}\mapsto \frac{\psi(a)}{st}\right),
+    \end{equation*}
+    where we are identifying $\kappa(\frakp)$ with the quotient field of $R/\frakp$. Hence, surjectivity of $\theta_\frakp$ is equivalent to the surjectivity of 
+    \begin{equation*}
+        \Hom_{R_\frakp}(\kappa(\frakp), M_\frakp)\to\Hom_{R_\frakp}(\kappa(\frakp), E_\frakp).
+    \end{equation*}
+    Henceforth, we shall identify $M$ with a submodule of $E$, so that $\theta$ is simply the inclusion map.
+
+    Suppose first that $M\xrightarrow{\theta} E$ is an injective hull and let $0\ne\varphi\in\Hom_{R_\frakp}(\kappa(\frakp), E_\frakp)$. Using the above isomorphism, we can write $\varphi = \psi/s$ for some $\psi\in\Hom_R(R/\frakp, E)$ and $s\in R\setminus\frakp$. Let $\psi(\overline 1) = z\in E$ and $a\in R$ such that $0\ne az\in M$. Note that $a\in R\setminus\frakp$, since $\frakp\subseteq\Ann_R(z)$\footnote{Note that $\frakp = \Ann_R(z)$, for if not, then $\varphi = 0$.}. Define
+    \begin{equation*}
+        \overline\varphi: R/\frakp\longrightarrow M\qquad \overline 1\longmapsto az.
+    \end{equation*}
+    This is well-defined, since $\frakp$ annihilates $az\in M$. We claim that 
+    \begin{equation*}
+        \varphi = \frac{\overline\varphi}{as}\in\Hom_{R_\frakp}\left(\kappa(\frakp), E_\frakp\right).
+    \end{equation*}
+    Indeed, for $x/t\in\kappa(\frakp)$ we have 
+    \begin{equation*}
+        \left(\frac{\overline\varphi}{as}\right)\left(\frac{x}{t}\right) = \frac{\overline\varphi(x)}{ast} = \frac{xaz}{ast} = \frac{xz}{st} = \left(\frac{\psi}{s}\right)\left(\frac{x}{t}\right) = \varphi\left(\frac{x}{t}\right),
+    \end{equation*}
+    as desired. This shows that $\Hom_{R_\frakp}(\kappa(\frakp), M_\frakp)\to\Hom_{R_\frakp}(\kappa(\frakp), E_\frakp)$ is surjective. 
+
+    Conversely, suppose the aforementioned map is surjective. We shall show that $E$ is the injective hull of $M$. To this end, it suffices to show that the inclusion $M\subseteq E$ is essential. Let $0\ne N\subseteq E$ be a submodule and $\frakp\in\Ass_R(N)$. There is an injective map 
+    \begin{equation*}
+        0\to R/\frakp\longrightarrow N\qquad \overline 1\longmapsto z.
+    \end{equation*}
+    Since $\frakp = \Ann_R(z)$, it suffices to find $a\in R\setminus\frakp$ such that $az\in M$. Consider the map 
+    \begin{equation*}
+        \varphi: \kappa(\frakp)\longrightarrow E_\frakp\qquad \overline 1\longmapsto z/1.
+    \end{equation*}
+    The surjectivity of $\theta_\frakp$ furnishes a $\psi: \kappa(\frakp)\to M_\frakp$ such that $\theta_\frakp(\psi) = \varphi$. In particular, this means that 
+    \begin{equation*}
+        \frac{z}{1} = \varphi(\overline 1) = \psi(\overline 1)\in M_\frakp,
+    \end{equation*}
+    whence there is some $a\in R\setminus\frakp$ such that $az\in M$, as desired.
+\end{proof}
+
+\begin{corollary}
+    Let $R$ be a Noetherian ring and $0\to M\to E^\bullet$ be an injective resolution of an $R$-module $M$. Then $E^\bullet$ is minimal if and only if the natural maps 
+    \begin{equation*}
+        \Hom_{R_\frakp}\left(\kappa(\frakp), E^n_\frakp\right)\longrightarrow\Hom_{R_\frakp}\left(\kappa(\frakp), E^{n + 1}_\frakp\right)
+    \end{equation*}
+    are identically zero for all $n\ge 0$ and for all $\frakp\in\Spec(R)$.
+\end{corollary}
+\begin{proof}
+    Let $K^n = \ker\left(E^n\to E^{n + 1}\right)$. Then there is an exact sequence $0\to K^n\to E^n\to E^{n + 1}$. Using \thref{lem:condition-to-be-injective-hull}, $E^n$ is the injective hull of $C^n$ if and only if 
+    \begin{equation*}
+        \Phi: \Hom_{R_\frakp}\left(\kappa(\frakp), C^n_\frakp\right)\to \Hom_{R_\frakp}\left(\kappa(\frakp), E^{n}_\frakp\right)\text{ is an isomorphism}.
+    \end{equation*}
+    But the left-exactness of $\Hom$ and exactness of localization implies that the sequence 
+    \begin{equation*}
+        0\to\Hom_{R_\frakp}\left(\kappa(\frakp), C^n_\frakp\right)\to\Hom_{R_\frakp}\left(\kappa(\frakp), E^{n}_\frakp\right)\to\Hom_{R_\frakp}\left(\kappa(\frakp), E^{n + 1}_\frakp\right)
+    \end{equation*}
+    is exact. Thus $\Phi$ is an isomorphism if and only if the map $\Hom_{R_\frakp}\left(\kappa(\frakp), E^{n}_\frakp\right)\to\Hom_{R_\frakp}\left(\kappa(\frakp), E^{n + 1}_\frakp\right)$ is the zero map, as desired.
+\end{proof}
+
+\begin{corollary}
+    Let $R$ be a Noetherian ring and $M$ an $R$-module. Let $0\to M\to E^\bullet$ be \emph{the} minimal injective resolution of $M$. Then 
+    \begin{equation*}
+        E^j = \bigoplus_{\frakp}E_R\left(R/\frakp\right)^{a_j(\frakp)}\quad\text{ and }\quad a_j(\frakp) = \dim_{\kappa(\frakp)} \Ext^j_{R_\frakp}\left(\kappa(\frakp), M_\frakp\right).
+    \end{equation*}
+    In particular, if $M$ is a finite $R$-module, $a_j(\frakp) < \infty$ for all $j\ge 0$ and $\frakp\in\Spec(R)$.
+\end{corollary}
+\begin{proof}
+    % TODO: Add in later
+\end{proof}
+
+\begin{definition}
+    Let $R$ be a Noetherian ring and $M$ a finite $R$-module. For $j\ge 0$ and $\frakp\in\Spec(R)$, define the \define{$j$-th Bass number} as 
+    \begin{equation*}
+        \mu_j\left(\frakp, M\right) = \dim_{\kappa(\frakp)}\Ext_{R_\frakp}^j\left(\kappa(\frakp), M_\frakp\right).
+    \end{equation*}
+\end{definition}
+
+\begin{lemma}[Bass]
+    Let $R$ be a Noetherian ring and $M$ a finite $R$-module. Let $\frakp\subsetneq\frakq$ be primes in $R$ such that $\hght(\frakq/\frakp) = 1$. If for some $j\ge 0$, $\mu_j(\frakp, M)\ne 0$, then $\mu_{j + 1}(\frakq, M)\ne 0$.
+\end{lemma}
+\begin{proof}
+    Localizing at $\frakq$, we may assume that $(R,\frakm, k)$ is a Noetherian local ring and $\hght(\frakm/\frakp) = 1$. If $a\in\frakm\setminus\frakp$, then $\sqrt{\frakp + (a)} = \frakm$, and we have a short exact sequence 
+    \begin{equation*}
+        0\to R/\frakp\xrightarrow{\cdot a} R/\frakp\to R/(\frakp + (a)) \to 0.
+    \end{equation*}
+    This gives rise to a long exact sequence 
+    \begin{equation*}
+        \cdots\to \Ext^j_R(R/\frakp, M)\xrightarrow{\cdot a}\Ext^j_R(R/\frakp, M)\to\Ext^{j + 1}_R(R/(\frakp + (a)), M)\to\cdots,
+    \end{equation*}
+    for all $j\ge 0$.
+    \begin{equation*}
+        \mu_j(\frakp, M)\ne 0\implies\Ext^j_{R_\frakp}\left(\kappa(\frakp), M_\frakp\right)\ne 0\implies \Ext^j_R(R/\frakp, M)\ne 0.
+    \end{equation*}
+    Since the $\Ext$'s are finite $R$-modules, Nakayama's lemma implies that $\Ext^{j + 1}_R(R/(\frakp + (a)), M)\ne 0$. 
+    
+    Since $\sqrt{\frakp + (a)} = \frakm$, the $R$-module $R/(\frakp + (a))$ is finite Artinian, so that it has a composition series with successive quotients isomorphic to $R/\frakm = k$. Now, if $\Ext^{j + 1}_R(k, M)\ne 0$, then through the short exact sequences induced by the composition series, it would follow that $\Ext^{j + 1}_R(R/(\frakp + (a)), M) = 0$, a contradiction. But since $R\setminus\frakm$ consists of only units, we have that 
+    \begin{equation*}
+        0\ne\Ext^{j + 1}_R(k, M) = \Ext^{j + 1}_{R_\frakm}(\kappa(\frakm), M_\frakm),
+    \end{equation*}
+    and hence $\mu_{j + 1}(\frakm, M)\ne 0$.
 \end{proof}
 \end{document}

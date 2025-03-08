@@ -1,0 +1,5 @@
+\contentsline {section}{\numberline {1}Injective Modules}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Basic Properties of Injective Modules}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Essential Extensions and Injective Hulls}{4}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Matlis Duality}{5}{section.2}%
+\contentsline {section}{\numberline {3}Injective Resolutions}{8}{section.3}%
