@@ -1,0 +1,374 @@
+\begin{center}
+\textbf{Throughout this section, we shall assume that $k$ is an algebraically closed field of characteristic $0$.}
+\end{center}
+
+The end goal of this section is to establish the root space decomposition and the corresponding Euclidean root system.
+
+\subsection{Lie's Theorem}
+
+\begin{theorem}
+    Let $\frakg$ be a solvable subalgebra of $\gl(V)$ where $V$ is finite-dimensional. If $V\ne 0$, then $V$ contains a common eigenvector for all the endomorphisms in $\frakg$.
+\end{theorem}
+\begin{proof}
+    We induct on $\dim\frakg$. The base case $\dim\frakg = 0$ is trivial. Suppose now that $\dim\frakg > 0$. Since $\frakg$ properly contains $[\frakg,\frakg]$, and the quotient $\frakg/[\frakg,\frakg]$ is abelian, we can choose an ideal $\frakh\subsetneq\frakg$ of codimension $1$ by pulling back any subspace of $\frakg/[\frakg,\frakg]$ of codimension $1$.
+
+    By the inductive hypothesis, there is a common eigenvector $v\in V$ for $\frakh$, whence, there is a linear functional $\lambda:\frakh\to k$ such that $x\cdot v = \lambda(x)v$ for every $x\in\frakh$. Consider the subspace 
+    \begin{equation*}
+        W = \{w\in V\colon x\cdot w = \lambda(x)w,~\forall~x\in\frakh\}.
+    \end{equation*}
+    Since $v\in W$, $W\ne 0$.
+
+    We contend that $W$ is $\frakg$-invariant. Let $w\in W$ and $x\in\frakg$. To show that $x\cdot w\in W$, we must show that for every $y\in\frakh$, 
+    \begin{equation*}
+        \lambda(y) x\cdot w = y\cdot(x\cdot w) = (xy)\cdot w - [x, y]\cdot w = \lambda(y) x\cdot w - \lambda([x, y]) w.
+    \end{equation*}
+    That is, we must show that $\lambda([x, y]) = 0$ whenever $x\in\frakg$ and $y\in\frakh$. Let $n > 0$ be the smallest integer for which $w, x\cdot w, \dots, x^n\cdot w$ are linearly dependent. Let $W_i$ be the subspace of $V$ spanned by $w, x\cdot w,\dots, x^{i - 1}\cdot w$ with the convention that $W_0 = 0$, so that 
+    \begin{equation*}
+        W_0\subsetneq W_1\subsetneq\cdots\subsetneq W_n.
+    \end{equation*}
+    Obviously, $y$ leaves $W_0$ and $W_1$ invariant. For $1\le i\le n - 1$, we have
+    \begin{equation*}
+        y\cdot(x^i\cdot w) = x^i\cdot(y\cdot w) - [x^i, y]\cdot w = \lambda(y) x^i\cdot w - \lambda([x^i - y])\cdot w.
+    \end{equation*}
+    Hence, $y$ leaves every $W_i$ invariant. Relative to the basis $\{w, x\cdot w,\dots, x^{n - 1}\cdot w\}$ of $W_n$, due to the above equation, $y$ is represented by an upper triangular matrix with every diagonal entry equal to $\lambda(y)$. Hence, $\Tr_{W_n}(y) = n\lambda(y)$ and this equality holds for all $y\in\frakh$.
+
+    But note that $x$ stabilizes $W_n$ (due to our choice of $n$), and hence, $x$ is an endomorphism of $W_n$ too. As a result, $\Tr_{W_n}([x, y]) = 0$, consequently, $n\lambda([x, y]) = 0$, that is, $\lambda([x, y]) = 0$ since we are in characteristic $0$. Hence, we have shown that $W$ is $\frakg$-invariant.
+
+    Finally, write $\frakg = \frakh + \langle z\rangle$ as vector spaces. Since $k$ is algebraically closed, there is an eigenvector $v_0\in W$ for $z$. Then, $v_0$ is a common eigenvector for all of $\frakg$.
+\end{proof}
+
+\begin{corollary}[Lie's Theorem]
+    Let $\frakg$ be a solvable subalgebra of $\gl(V)$, where $V$ is a finite-dimensional $k$-vector space. Then $\frakg$ stabilizes a complete flag in $V$.
+\end{corollary}
+\begin{proof}
+    Induct on $\dim V$. Choose a common eigenvector $v_1\in V$ for $\frakg$ and set $V_1 = \langle v_1\rangle$. Note that $V_1$ is $\frakg$-invariant and hence, $\frakg$ acts naturally on $V/V_1$. The image of $\frakg$ in $\gl(V/V_1)$ is a solvable subalgebra, whence stabilizes a complete flag 
+    \begin{equation*}
+        \frac{V_2}{V_1}\subsetneq\cdots\frac{V_n}{V_1},
+    \end{equation*}
+    due to the inductive hypothesis. It follows that $\frakg$ stabilizes the complete flag 
+    \begin{equation*}
+        V_1\subsetneq V_2\subsetneq\dots\subsetneq V_n.\qedhere
+    \end{equation*}
+\end{proof}
+
+\begin{corollary}
+    Let $\frakg$ be solvable. Then there exists a chain of ideals of $\frakg$, 
+    \begin{equation*}
+        0 = \frakg_0\subsetneq\frakg_1\subsetneq\dots\subsetneq\frakg_n = \frakg,
+    \end{equation*}
+    such that $\dim\frakg_i = i$.
+\end{corollary}
+\begin{proof}
+    Consider the adjoint representation $\ad:\frakg\to\gl(\frakg)$. Due to the preceding result, there is a complete flag 
+    \begin{equation*}
+        0 = \frakg_0\subsetneq\frakg_1\subsetneq\dots\subsetneq\frakg_n = \frakg,
+    \end{equation*}
+    stabilized by $\frakg$. That is, each $\frakg_i$ is an ideal in $\frakg$. This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    Let $\frakg$ be solvable. Then for every $x\in[\frakg,\frakg]$, $\ad_{\frakg} x$ is nilpotent. In particular, $[\frakg,\frakg]$ is nilpotent.
+\end{corollary}
+\begin{proof}
+    Due to the preceding result, there is a basis of $\frakg$ with respect to which $\ad_\frakg x$ is upper triangular for every $x\in\frakg$. Consequently, $\ad_\frakg [x, y] = [\ad_\frakg x, \ad_\frakg y]$ is strictly upper triangular, whence, is nilpotent. This proves the first assertion. Since $\ad_{\frakg} x$ is nilpotent, so is $\ad_{[\frakg,\frakg]} x$. Due to Engel's theorem, $[\frakg,\frakg]$ is nilpotent.
+\end{proof}
+
+\subsection{Jordan-Chevalley Decomposition}
+
+\begin{definition}
+    Let $V$ be a finite-dimensional $k$-vector space. An element $x\in\End V$ is called \define{semisimple} if its minimal polynomial over $k$ is separable. Equivalently, since $k$ is separable, $x$ is semisimple if and only if it is diagonalizable.
+\end{definition}
+
+\begin{remark}
+    Two commuting semisimple endomorphisms of $V$ are simultaneously diagonalizable. Further, if $x$ is semisimple and stabilizes a subspace $W$ of $V$, then the restriction of $x$ to $W$ is semisimple, since the minimal polynomial of $x$ restricted to $W$ divides the minimal polynomial of $x$.
+\end{remark}
+
+\begin{theorem}
+    Let $V$ be a finite-dimensional vector space over $k$ and $x\in\End V$. 
+    \begin{enumerate}[label=(\alph*)]
+        \item There exist unique $x_s, x_n\in\End V$ such that $x = x_s + x_n$, $x_s$ is semisimple, $x_n$ is nilpotent, and $x_sx_n = x_nx_s$.
+        \item There exist polynomials $p(T), q(T)\in k[T]$ without constant term, such that $x_s = p(x)$ and $x_n = q(x_n)$.
+        \item If $A\subseteq B\subseteq V$ are subspaces, and $x$ maps $B$ into $A$, then $x_s$ and $x_n$ also map $B$ into $A$.
+    \end{enumerate}
+    The decomposition $x = x_s + x_n$ is called the (additive) \define{Jordan-Chevalley decomposition} of $x$; $x_s$ and $x_n$ are called (respectively) the \define{semisimple part} and the \define{nilpotent part} of $x$.
+\end{theorem}
+\begin{proof}
+    Let $a_1,\dots,a_r$ be the distinct eigenvalues of $x$ with multiplicities $m_1,\dots,m_r$, that is, the characteristic polynomial of $x$ is $\prod\limits_{i = 1}^r (T - a_i)^{m_i}$. Set $V_i = \ker(x - a_i\cdot 1)^{m_i}$ (the generalized eigenspaces), and note that it is stable under the action $x$. It is not hard to argue that $V = V_1 + \dots + V_r$. Further, since $\prod\limits_{j\ne i} (x - a_j\cdot 1)$ annihilates every $V_j$ for $j\ne i$ and acts on $V_i$ by $\prod\limits_{j\ne i} (a_j - a_i)\ne 0$, we see that the sum is direct, that is, $V = V_1\oplus\dots\oplus V_r$.
+
+    Note that the restriction of $x$ to $V_i$ has characteristic polynomial $(T - a_i)^{m_i}$. Using the Chinese Remainder Theorem, we can find a polynomial $p(T)\in k[T]$ satisfying 
+    \begin{equation*}
+        p(T)\equiv a_i\mod (T - a_i)^{m_i}\quad\forall~1\le i\le r,\qquad p(T)\equiv 0\pmod T.
+    \end{equation*}
+    Set $q(T) = T - p(T)$, $x_s = p(x)$, and $x_n = q(x)$. Since they are polynomials in $x$, $x_sx_n = x_nx_s$, and they stabilize each $V_i$. Since $(T - a_i)^{m_i}$ divides $p(T) - a_i$, we note that the restriction of $x_s - a_i\cdot 1$ to $V_i$ is zero, whence $x_i$ acts by scalars on each $V_i$ for $1\le i\le r$. By definition, $x_n = x - x_s$, and hence, $x_n$ acts on $V_i$ by $(x - a_i\cdot 1)$. It follows that $x_n$ is nilpotent on each $V_i$, and hence, on $V$.
+
+    It remains to establish the uniqueness of the decomposition in (a). Suppose $x = s + n$ is another such decomposition. Let $W_1\oplus\dots\oplus W_r$ be the eigenspace decomposition of $W$ with respect to $s$ (which exists because $s$ is semisimple). Note that $x - a_i\cdot 1$ and $x - s = n$ restrict to the same endomorphism of $W_i$. Hence, $x - \lambda_i$ restricts to a nilpotent endomorphism of $W_i$. It follows that $W_i\subseteq V_i$. On the other hand, because $V = W_1 + \dots + W_r$, we see that $W_i = V_i$. Since both $x_s$ and $s$ have the same eigenspaces (and are semisimple), they must be equal. It follows that $x_n = n$, thereby establishing uniqueness.
+\end{proof}
+
+
+\begin{proposition}
+    Let $V$ be a finite-dimensional $k$-vector space. If $x\in\gl(V)$ is semisimple (resp. nilpotent), then $\ad_{\gl(V)} x$ is semisimple (resp. nilpotent) as an element of $\gl(\gl(V))$.
+\end{proposition}
+\begin{proof}
+    Suppose $x$ is semisimple. Choose a basis $v_1,\dots,v_n$ of $V$ with respect to which $x$ is given by the matrix $\mathrm{diag}(a_1,\dots,a_n)$. Let $\{e_{ij}\}$ denote the standard basis of $\gl(V)$ with respect to this basis, that is, $e_{ij}(v_k) = \delta_{jk}v_i$. It is then easy to check that $\ad x(e_{ij}) = (a_i - a_j)e_{ij}$. Hence, $\ad x$ is semisimple as an element of $\gl(\gl(V))$.
+
+    Next, suppose $x$ is nilpotent. We can write $\ad x = \lambda - \rho$, where $\lambda: y\mapsto xy$ and $\rho: y\mapsto yx$. Since $\lambda$ and $\rho$ are commuting nilpotent endomorphisms of $\gl(V)$, we have that $\ad x = \lambda - \rho$ is a nilpotent endomorphism of $\gl(\gl(V))$.
+\end{proof}
+
+\begin{corollary}
+    Let $V$ be a finite-dimensional $k$-vector space, $x\in\gl(V)$, and $x = x_s + x_n$ be its Jordan decomposition. Then $\ad x = \ad x_s + \ad x_n$ is the Jordan decomposition of $\ad x$ in $\gl(\gl(V))$.
+\end{corollary}
+\begin{proof}
+    Due to the preceding result, $\ad x_s$ is semisimple and $\ad x_n$ is nilpotent. Further, they commute because 
+    \begin{equation*}
+        [\ad x_s, \ad x_n] = \ad[x_s, x_n] = 0.
+    \end{equation*}
+    By uniqueness, $\ad x = \ad x_s + \ad x_n$ is the Jordan decomposition in $\gl(\gl(V))$.
+\end{proof}
+
+\begin{lemma}
+    Let $\frakA$ be a $k$-algebra, $\delta\in\Der\frakA$, $a,b\in k$, and $x,y\in\frakA$. Then 
+    \begin{equation*}
+        \left(\delta - (a + b)\cdot 1\right)^n(x y) = \sum_{i = 0}^n \binom{n}{i}\left((\delta - a\cdot 1)^{n - i} x\right)\cdot\left((\delta - b\cdot 1)^{i}y\right)
+    \end{equation*}
+    for all $n > 0$.
+\end{lemma}
+\begin{proof}
+    We prove this by induction on $n$. The base case with $n = 1$ is trivial. For $n > 1$, write 
+    \begin{align*}
+        (\delta - (a + b)\cdot 1)^n (xy) = (\delta - (a + b)\cdot 1)^{n - 1}\left((\delta - a\cdot 1) x\cdot y + x\cdot (\delta - b\cdot 1)y\right).
+    \end{align*}
+    Now use the inductive hypothesis and the fact that 
+    \begin{equation*}
+        \binom{n}{i} = \binom{n - 1}{i - 1} + \binom{n - 1}{i}.\qedhere
+    \end{equation*}
+\end{proof}
+
+\begin{proposition}
+    Let $\frakA$ be a finite-dimensional $k$-algebra. Then $\Der\frakA$ contains the semisimple and nilpotent parts (in $\End\frakA$) of all its elements.
+\end{proposition}
+\begin{proof}
+    Let $\delta\in\Der\frakA$, and let $\sigma,\nu\in\End\frakA$ be its semisimple and nilpotent parts respectively. We shall show that $\sigma\in\Der\frakA$. Let $\frakA_a$ denote the generalized eigenspace of $\delta$ corresponding to $a\in k$, which is also the eigenspace corresponding to $\sigma$, by construction. Using the preceding proposition, it is easy to see that $\frakA_a\frakA_b\subseteq\frakA_{a + b}$ for all $a, b\in k$. For $x\in\frakA_a$ and $y\in\frakA_b$, we have 
+    \begin{equation*}
+        \sigma(xy) = (a + b)xy = \sigma(x)y + x\sigma(y).
+    \end{equation*}
+    Finally, since $\frakA = \bigoplus\frakA_a$, the above equality holds for all $x,y\in\frakA$, whence $\sigma$ is a derivation as desired.
+\end{proof}
+
+\subsection{Cartan's Criterion}
+
+\begin{lemma}
+    Let $A\subseteq B$ be two subspaces of $\gl(V)$, $\dim V < \infty$. Let 
+    \begin{equation*}
+    M = \left\{x\in\gl(V)\colon [x, B]\subseteq A\right\}. 
+    \end{equation*}
+    Suppose $x\in M$ satisfies $\Tr(xy) = 0$ for all $y\in M$, then $x$ is nilpotent.
+\end{lemma}
+\begin{proof}
+    Let $s$ be the semisimple part of $x$. Fix a basis $v_1,\dots, v_n$ of $V$ relative to which $s$ has matrix form $\mathrm{diag}(a_1,\dots, a_n)$. Let $E$ be the $\Q$-vector subspace of $k$ spanned by $a_1,\dots,a_n$. We shall show that $E = 0$, for which it would suffice to show that the dual space $E^\ast = 0$. 
+
+    Let $f: E\to\Q$ be a linear transformation. Let $y\in\gl(V)$ be such that the matrix representation of $y$ with respect to the basis $v_1,\dots,v_n$ is $\diag(f(a_1),\dots,f(a_n))$. If $\{e_{ij}\}$ is the standard basis of $\gl(V)$ with respect to the aforementioned basis, then $\ad s(e_{ij}) = (a_i - a_j)e_{ij}$ and $\ad y(e_{ij}) = (f(a_i) - f(a_j))e_{ij}$.
+
+    Now, let $r(T)\in k[T]$ be a polynomial such that $r(a_i - a_j) = f(a_i) - f(a_j)$ and $r(0) = 0$. Note that this data is consistent, for if $a_i - a_j = a_k - a_l$, then due to the linearity of $f$, we have 
+    \begin{equation*}
+        f(a_i) - f(a_j) = f(a_i - a_j) = f(a_k - a_l) = f(a_k) - f(a_l).
+    \end{equation*}
+    It follows that $\ad y = f(\ad s)$ as a linear transformation $\gl(V)\to\gl(V)$.
+
+    Now, $\ad s$ is the semisimple part of $\ad x$, and hence it can be written as a polynomial in $\ad x$ without constant term. Therefore, $\ad y$ is also a polynomial in $\ad x$ without constant term (since $r(T)$ does not have a constant term). By the hypothesis, $\ad x$ maps $B$ into $A$, consequently, $\ad y$ also maps $B$ into $A$, consequently, $y\in M$. Thus, 
+    \begin{equation*}
+        0 = \Tr(xy) = \Tr(sy) + \Tr(x_ny) = \Tr(sy) = \sum_{i = 1}^n a_i f(a_i).\qquad\qquad (??) % TODO: Justify this
+    \end{equation*}
+    Applying $f$, we get $\sum_{i = 1}^n f(a_i)^2 = 0$, that is, $f(a_i) = 0$ for $1\le i\le n$, in particular, $f = 0$. This proves that $E = 0$, and consequently, each $a_i = 0$, whence $s = 0$ and $x = x_n$ is nilpotent.
+\end{proof}
+
+\begin{theorem}[Cartan's Criterion]
+    Let $\frakg$ be a subalgebra of $\gl(V)$ where $V$ is a finite-dimensional $k$-vector space. Suppose $\Tr(xy) = 0$ for all $x\in [\frakg,\frakg]$ and $y\in\frakg$. Then $\frakg$ is solvable.
+\end{theorem}
+\begin{proof}
+    It suffices to show that $[\frakg,\frakg]$ is nilpotent, since $\frakg/[\frakg,\frakg]$ being abelian, is solvable. Due to Engel's theorem, it suffices to show that $\ad_{[\frakg,\frakg]} x$ is nilpotent, for which it suffices to show that $\ad_{\frakg} x$ is nilpotent. We shall show that every $x\in[\frakg,\frakg]$ is nilpotent as an endomorphism of $V$, whence it would follow that $\ad_{\frakg} x$ is nilpotent.
+
+    To this end, we would like to invoke the preceding result with $A = [\frakg,\frakg]$, and $B = \frakg$ and 
+    \begin{equation*}
+        M = \{x\in\gl(V)\colon [x,\frakg]\subseteq[\frakg,\frakg]\}\supseteq\frakg.
+    \end{equation*}
+    It remains to show that $\Tr(xy) = 0$ for every $x\in[\frakg,\frakg]$ and $y\in M$.
+
+    Now, $[\frakg,\frakg]$ is generated by $[x, y]$ where $x,y\in\frakg$. For any $z\in M$, we have 
+    \begin{equation*}
+        \Tr([x, y]z) = \Tr(x[y, z]) = \Tr([y, z]x).
+    \end{equation*}
+    By definition of $M$, $[y, z]\in[\frakg,\frakg]$, whence by our hypothesis, $\Tr([y, z]x) = 0$. The conclusion now follows.
+\end{proof}
+
+\begin{corollary}
+    Let $\frakg$ be a Lie algebra such that $\Tr(\ad x\ad y) = 0$ for all $x\in[\frakg,\frakg]$ and $y\in\frakg$. Then $\frakg$ is solvable.
+\end{corollary}
+\begin{proof}
+    Let $\frakh$ denote the image of the adjoint representation of $\frakg$ in $\gl(\frakg)$. Note that $[\frakh,\frakh] = \ad[\frakg,\frakg]$, and hence, $\frakh$ is solvable due to Cartan's criterion. Since $\frakh\cong\frakg/ Z(\frakg)$ and $Z(\frakg)$ is solvable owing to it being abelian, we have that $\frakg$ is solvable.
+\end{proof}
+
+\subsection{Killing Form}
+
+\begin{definition}
+    Let $\frakg$ be a Lie algebra over $k$. Define $\kappa:\frakg\times\frakg\to k$ by $\kappa(x, y) = \Tr(\ad x\ad y)$, where the trace is taken as an element of $\gl(\frakg)$. Then $\kappa$ is a symmetric bilinear form and is called the \define{Killing form}.
+\end{definition}
+
+\begin{remark}
+    The Killing form is also \define{associative}, that is, $\kappa([x, y], z) = \kappa(x, [y, z])$. Indeed, we have 
+    \begin{align*}
+        \kappa([x, y], z) = \Tr\left([\ad x, \ad y]\ad z\right) = \Tr(\ad x[\ad y,\ad z]) = \kappa(x, [y, z]).
+    \end{align*}
+\end{remark}
+
+\begin{lemma}
+    Let $\fraka$ be an ideal of $\frakg$. If $\kappa$ is the killing form of $\frakg$, and $\kappa_{\fraka}$ is the Killing form of $\fraka$ (viewed as a Lie algebra), then $\kappa_\fraka = \kappa|_{\fraka\times\fraka}$.
+\end{lemma}
+\begin{proof}
+    If $x,y\in\fraka$, then $(\ad_\frakg x)(\ad_\frakg y)$ maps $\frakg$ into $\fraka$, so its trace as an endomorphism of $\frakg$ is equal to the trace of the map viewed as an endomorphism of $\fraka$. 
+\end{proof}
+
+\begin{remark}
+    We have tacitly used the fact that if $T: V\to W\subseteq V$ is a linear transformation, then $\Tr_V(T) = \Tr_W(T)$. To see this, choose a basis of $W$ and extend it to a basis of $V$. With respect to this basis, the diagonal elements corresponding to the basis elements of $V$ not in $V$ are $0$. Hence, the trace can be computed over $W$.
+\end{remark}
+
+\begin{definition}
+    Let $\beta: V\times V\to k$ be a bilinear form. We define its \define{radical} to be 
+    \begin{equation*}
+        S = \{x\in V\colon \beta(x, y) = 0~\forall~y\in V\},
+    \end{equation*}
+    which is obviously a subspace of $V$. We say that $\beta$ is \define{nondegenerate} if $S = 0$.
+\end{definition}
+
+\begin{remark}
+    If $V = \frakg$, a Lie algebra, and $\beta$ is associative, then the radical $\fraka$ is an ideal of $\frakg$. Indeed, if $x\in\fraka$, and $y\in\frakg$, then for every $z\in\frakg$, we have 
+    \begin{equation*}
+        \beta([x, y], z) = \beta(x, [y, z]) = 0.
+    \end{equation*}
+\end{remark}
+
+\begin{theorem}
+    Let $\frakg$ be a Lie algebra. Then $\frakg$ is semisimple if and only if its Killing form is nondegenerate.
+\end{theorem}
+\begin{proof}
+    Let $\fraka$ be the radical of $\kappa$. Suppose first that $\frakg$ is semisimple, that is, $\rad\frakg = 0$. By definition, we have $\Tr(\ad_{\frakg} x\ad_{\frakg} y) = 0$ for every $x\in\fraka$ and $y\in\frakg$, in particular, for $y\in[\fraka,\fraka]$. Due to Cartan's criterion, it follows that $\ad_{\frakg}\fraka$ is solvable. The kernel of $\ad_{\frakg}$ when restricted to $\fraka$ is precisely $Z(\frakg)\cap\fraka$, which is abeilan, whence solvable. It follows that $\fraka$ is solvable, but due to semisimplicity, $\fraka = 0$.
+
+    Conversely, suppose the Killing form is nondegenerate and let $\fraka\nor\frakg$ be an abelian ideal. Suppose $x\in\fraka$ and $y\in\frakg$. Then $(\ad x)(\ad y)$ maps $\frakg\mapsto\frakg\mapsto\fraka$ and since $\fraka$ is abelian, $(\ad x\ad y)^2 = 0$. In particular, $\kappa(x, y) = \Tr(\ad x\ad y) = 0$. That is, $\fraka\subseteq\rad\kappa$. Hence, $\fraka = 0$, and $\frakg$ is semisimple since it contains no nontrivial abelian ideals.
+\end{proof}
+
+\begin{definition}
+    A Lie algebra $\frakg$ is said to be the \define{direct sum} of ideals $\fraka_1,\dots,\fraka_r$ provided $\frakg = \fraka_1\oplus\dots\oplus\fraka_r$ .
+\end{definition}
+
+\begin{remark}
+    Note that the above condition implicitly forces $[\fraka_i,\fraka_j]\subseteq\fraka_i\cap\fraka_j = 0$.
+\end{remark}
+
+\begin{theorem}
+    Let $\frakg$ be semisimple. Then there exist ideal $\frakg_1,\dots,\frakg_r$ of $\frakg$, which are simple (as Lie algebras), such that $\frakg = \frakg_1\oplus\cdots\oplus\frakg_r$. Every simple ideal of $\frakg$ is one of the $\frakg_i$. Moreover the Killing form of $\frakg_i$ is the restriction of $\kappa$ to $\frakg_i\times\frakg_i$.
+\end{theorem}
+\begin{proof}
+    If $\fraka$ is an ideal of $\frakg$ and 
+    \begin{equation*}
+        \fraka^\perp = \{x\in\frakg\colon\kappa(x, y) = 0~\forall~y\in\fraka\},
+    \end{equation*}
+    then $\fraka^\perp$ is an ideal of $\frakg$. Further, due to Cartan's criterion, $\fraka\cap\fraka^{\perp}$ is solvable, whence $0$ due to semisimplicity. Also, by a dimension argument, it is easy to see that $\dim\fraka^{\perp}\ge\dim\frakg - \dim\fraka$ (choose a basis of $\fraka$ and proceed in the obvious fashion), whence $\frakg = \fraka\oplus\fraka^{\perp}$.
+
+    Next, we proceed by induction on $\dim\frakg$. If $\frakg$ has no nonzero proper ideal, then $\frakg$ Is simple, and we are done. Otherwise, let $\frakg_1$ be a minimal nonzero ideal of $\frakg$. By the preceding paragraph, $\frakg = \frakg_1\oplus\frakg_1^\perp$. Due to this decomposition, any ideal of $\frakg_1$ is an ideal of $\frakg$, consequently, $\frakg_1$ must be semisimple (since an abelian ideal in $\frakg_1$ is an abelian ideal in $\frakg$), therefore, $\frakg_1$ is simple. Similarly, any ideal of $\frakg_1^\perp$ is an ideal of $\frakg$, whence by the same reasoning, $\frakg_1^\perp$ is also semisimple. By the induction hypothesis, $\frakg_1^\perp$ splits into a direct sum of simple ideals; and since ideals of $\frakg_1$ are ideals of $\frakg$, we have proved the decomposition.
+
+    Next, we have to show that these simple ideals are unique. Suppose $\fraka$ is a simple ideal of $\frakg$. Then $[\frakg,\fraka]$ is an ideal of $\fraka$ (obvious), and is nonzero, because $Z(\frakg) = 0$. This forces $[\frakg,\fraka] = \fraka$. On the other hand, we have 
+    \begin{equation*}
+        [\fraka,\frakg] = [\fraka,\frakg_1]\oplus\dots\oplus[\fraka,\frakg_r], 
+    \end{equation*}
+    so all but one summand must be $0$. Say $[\fraka,\frakg_i] = \fraka$. Then $\fraka\subseteq\frakg_i$, whence $\fraka = \frakg_i$ due to simplicity. This completes the proof.
+\end{proof}
+
+\begin{porism}
+    Let $\frakg$ be semisimple and $\fraka$ an ideal of $\frakg$. Then $\frakg = \fraka\oplus\fraka^\perp$, where 
+    \begin{equation*}
+        \fraka^\perp = \{x\in\frakg\colon\kappa(x, y) = 0~\forall~y\in\fraka\}.
+    \end{equation*}
+\end{porism}
+
+\begin{corollary}
+    If $\frakg$ is semisimple, then $\frakg = [\frakg,\frakg]$, and all ideals and homomorphic images of $\frakg$ are semisimple. Moreover, each ideal of $\frakg$ is a sum of certain simple ideals of $\frakg$.
+\end{corollary}
+\begin{proof}
+    Let $\fraka$ be an ideal of $\frakg$. The porism above allows us to write $\frakg = \fraka\oplus\fraka^\perp$. Again, every ideal of $\fraka$ is an ideal of $\frakg$. Hence, $\fraka$ contains no abelian ideals, whence $\fraka$ is semisimple, and so is $\fraka^\perp$. It follows that $\fraka$ is a direct sum of simple ideals of $\fraka$, which are also simple ideals of $\frakg$, and hence, are a subset of $\{\frakg_1,\dots,\frakg_r\}$. Finally, note that $\frakg/\fraka\cong\fraka^\perp$ is semisimple.
+\end{proof}
+
+\begin{lemma}
+    Let $\frakg$ be a Lie algebra over $k$. Then $\ad\frakg$ is an ideal in $\Der\frakg\subseteq\gl(\frakg)$.
+\end{lemma}
+\begin{proof}
+    For $\delta\in\Der\frakg$ and $x\in\frakg$ 
+    \begin{equation*}
+        \delta(\ad x(y)) - \ad x(\delta y)  = [\delta x, y] = \ad\delta x(y).\qedhere
+    \end{equation*}
+\end{proof}
+
+\begin{theorem}
+    If $\frakg$ is semisimple, then $\ad\frakg = \Der\frakg$. 
+\end{theorem}
+\begin{proof}
+    Let $\frakM = \ad\frakg\subseteq\mathfrak{D} = \Der\frakg$, which is an ideal. Note that $\ad:\frakg\to\Der\frakg$ is injective, since $Z(\frakg) = 0$. Let $\frakI = \frakM^\perp$ with respect to the Killing form $\kappa_{\mathfrak D}$. If $\delta\in\frakM\cap\frakI$, then $\kappa_{\frakM}(\delta, \sigma) = 0$ for every $\sigma\in\frakM$. But since $\kappa_{\frakM}$ is the restriction of $\kappa_{\mathfrak{D}}$ to $\frakM$, and the former is nondegenerate, we see that $\delta = 0$. That is, $\frakM\cap\frakI = 0$.
+
+    Since $\frakM$ and $\frakI$ are both ideals, then $[\frakM,\frakI]\subseteq\frakM\cap\frakI = 0$. For any $x\in\frakg$ and $\delta\in\frakI$, we have $0 = [\delta,\ad x] = \ad\delta x$. Since $\ad$ is injective, $\delta x = 0$ for every $x\in\frakg$ and $\delta\in\frakI$. Hence, $\frakM^\perp = \frakI = 0$. In particular, this means that $\kappa_{\mathfrak D}$ is nondegenerate, and $\mathfrak D$ is semisimple, whence, $\mathfrak D = \frakM\oplus\frakM^\perp = \frakM$, thereby completing the proof.
+\end{proof}
+
+We use the above to define the \define{abstract Jordan decomposition}. Let $\frakg$ be a semisimple Lie algebra over $k$. The map $\ad:\frakg\to\Der\frakg$ is an isomorphism. Thus, for any $x\in\frakg$, $\ad x = (\ad x)_s + (\ad x)_n$ exists in $\Der\frakg\subseteq\gl(\frakg)$. There are unique $x_s,  x_n\in\frakg$ such that $\ad x_s = (\ad x)_s$ and $\ad x_n = (\ad x)_n$. These are (respectively) the \define{semisimple part} and \define{nilpotent part} of $x$ in $\frakg$.
+
+\subsection{Complete Reducibility of Representations}
+
+\begin{definition}
+    Let $\frakg$ be a (possibly infinite-dimensional) Lie algebra. A \define{$\frakg$-module} is a vector space $V$, endowed with an operation $\frakg\times V\to V$, denoted $(x, v)\mapsto x\cdot v$ satisfying the following: 
+    \begin{enumerate}[label=(M\arabic*)]
+        \item $(ax + by)\cdot v = a(x\cdot v) + b(y\cdot v)$. 
+        \item $x\cdot(av + bw) = a(x\cdot v) + b(x\cdot w)$.
+        \item $[x, y]\cdot v = x\cdot(y\cdot v) - y\cdot(x\cdot v)$
+    \end{enumerate}
+    for all $x,y\in\frakg$ and $v\in V$.
+
+    A \define{homomorphism} of $\frakg$-modules is a map $\phi: V\to W$ such that $\phi(x\cdot v) = x\cdot\phi(v)$. An $\frakg$-module $V$ is said to be \define{irreducible} if it has precisely two $\frakg$-submodules (itself and $0$). $V$ is called \define{completely reducible} if $V$ is a direct sum of irreducible $\frakg$-submodules.
+\end{definition}
+
+\begin{remark}
+    It is evident from the above definition that we do not regard a zero-dimensional vector space as an irreducible $\frakg$-module.
+\end{remark}
+
+Let $V$ and $W$ be $\frakg$-modules. We give $V\otimes_k W$ a $\frakg$-module structure as follows: 
+\begin{equation*}
+    x(v\otimes w) = (x\cdot v)\otimes w + v\otimes(x\cdot w)\qquad\forall~v\in V,~w\in W.
+\end{equation*}
+Further, we also give $\Hom_k(V, W)$ the structure of a $\frakg$-module by 
+\begin{equation*}
+    (x\cdot f)(v) = x\cdot f(v) - f(x\cdot v)\qquad\forall f\in\Hom_k(V, W),~v\in V.
+\end{equation*}
+Treating $k$ as a trivial $\frakg$-module, the above defines a natural $\frakg$-module structure on $V^\ast$ given by 
+\begin{equation*}
+    (x\cdot f)(v) = -f(x\cdot v)\qquad\forall~f\in V^\ast,~v\in V.
+\end{equation*}
+
+\begin{proposition}
+    The map $V^\ast\otimes_k W\to\Hom_k(V, W)$ given by 
+    \begin{equation*}
+        f\otimes w\longmapsto\left(v\mapsto f(v)w\right)
+    \end{equation*}
+    is an isomorphism of $\frakg$-modules.
+\end{proposition}
+\begin{proof}
+    Call the map $\Phi$. It is a standard fact from linear algebra that $\Phi$ is an isomorphism of vector spaces. It suffices to check that the map is $\frakg$-linear. Indeed, for $x\in\frakg$, $f\in V^\ast$, and $w\in W$, we have 
+    \begin{align*}
+        \Phi(x\cdot (f\otimes w))(v) &= \Phi\left((x\cdot f)\otimes w + f\otimes(x\cdot w)\right)(v)\\
+        &= (x\cdot f)(v)w + f(v)(x\cdot w)\\
+        &= -f(x\cdot v)w + f(v)(x\cdot w).
+    \end{align*}
+    On the other hand, 
+    \begin{align*}
+        (x\cdot\Phi(f\otimes w))(v) &= x\cdot\left(\Phi(f\otimes w)(v)\right) - \Phi(f\otimes w)(x\cdot v)\\
+        &= x\cdot\left(f(v) w\right) - f(x\cdot v)w\\ 
+        &= f(v)(x\cdot w) - f(x\cdot v)w.
+    \end{align*}
+    This completes the proof.
+\end{proof}
+
+Next, we define the \define{Casimir element} of a representation.

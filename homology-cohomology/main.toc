@@ -1,0 +1,11 @@
+\contentsline {part}{I\hspace {1em}Homology}{2}{part.1}%
+\contentsline {section}{\numberline {1}The Setup of Singular Homology}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Homotopy Invariance}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Relative Homology Groups}{6}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Excision and Mayer-Vietoris}{7}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Barycentric Subdivision and the Proof of Excision}{8}{subsection.2.1}%
+\contentsline {section}{\numberline {3}The Universal Coefficients}{10}{section.3}%
+\contentsline {section}{\numberline {4}Cellular Homology}{12}{section.4}%
+\contentsline {part}{II\hspace {1em}Cohomology}{13}{part.2}%
+\contentsline {section}{\numberline {5}Singular Cohomology}{13}{section.5}%
+\contentsline {section}{\numberline {6}The Cup Product}{14}{section.6}%

@@ -154,10 +154,10 @@
     It suffices to show that $x_n$ annihilates $H_p(\ub x, M)$ since the Koszul complex is invariant under permutation of the sequence $\ub x$. But this is obvious, since $K_\bullet(\ub x, M)$ is isomorphic to $K_\bullet(x_1,\dots,x_{n - 1}, M)\otimes K_\bullet(x_n)$ due to the commutativity of tensor products of complexes. We are done by invoking the preceding theorem with $C_\bullet = K_\bullet(x_1,\dots,x_{n - 1}, M)$ and $x = x_n$.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\thlabel{thm:koszul-homology-vanishes}
     Let $A$ be a ring, $M$ an $A$-module, and $x_1,\dots,x_n$ an $M$-sequence. Then 
     \begin{equation*}
-        H_P(\ub x, M) = 0\quad\forall~p > 0,\qquad H_0(\ub x, M) = M/(\ub x)M.
+        H_p(\ub x, M) = 0\quad\forall~p > 0,\qquad H_0(\ub x, M) = M/(\ub x)M.
     \end{equation*}
 \end{theorem}
 \begin{proof}
@@ -248,7 +248,7 @@
     Finally, suppose $n$ satisfies the conditions given in the theorem. Then, due to the preceding theorem, there is an $M$-sequence $\ub a = a_1,\dots,a_n$ in $I$. Further, since $\Ext^n_A(A/I, M)\ne 0$, this sequence must be maximal, else it could be extended and again, due to the preceding theorem $\Ext^n_A(A/I, M) = 0$. This completes the proof.
 \end{proof}
 
-\begin{remark}
+\begin{remark}\thlabel{rem:depth-in-terms-of-ext}
     The above theorem can be phrased more succinctly as 
     \begin{equation*}
         \depth(I, M) = \inf\left\{i\colon\Ext^i_A(A/I, M)\ne 0\right\}.
@@ -291,18 +291,89 @@
     \end{equation*}
 \end{remark}
 
-% \subsection{Cohen-Macaulay Rings}
+\subsection{Cohen-Macaulay Rings}
 
-% \begin{theorem}[Ischebeck]
-%     Let $(A,\frakm)$ be a Noetherian local ring, $M$ and $N$ be non-zero finite $A$-modules, and suppose $\depth M = k$ and $\dim N = r$. Then
-%     \begin{equation*}
-%         \Ext^i_A(N, M) = 0 \qquad\text{for }i < k - r.
-%     \end{equation*}
-% \end{theorem}
-% \begin{proof}
-% \end{proof}
+\begin{theorem}[Ischebeck]\thlabel{thm:ischebeck}
+    Let $(A,\frakm)$ be a Noetherian local ring, $M$ and $N$ be non-zero finite $A$-modules, and suppose $\depth M = k$ and $\dim N = r$. Then
+    \begin{equation*}
+        \Ext^i_A(N, M) = 0 \qquad\text{for }i < k - r.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    We shall first prove the statement of the theorem when $N = A/\frakp$. If $\dim N = r = 0$, then $N = A/\frakm$. Using \thref{rem:depth-in-terms-of-ext}, we have that 
+    \begin{equation*}
+        k = \depth M = \inf\left\{i\colon\Ext^i_A(N, M)\ne 0\right\}.
+    \end{equation*}
+    Hence, for all $i < k = k - r$, we have that $\Ext^i_A(N, M) = 0$.
 
-\subsection{Gorenstein Rings}
+    Suppose now that $r > 0$. Then $\frakp$ is not maximal, so we can choose some $x\in\frakm\setminus\frakp$. This gives us a short exact sequence 
+    \begin{equation*}
+        0\to N\xrightarrow{\cdot x} N\to N'\to 0,
+    \end{equation*}
+    where $N' = N/xN = A/(\frakp, x)$. Since $\dim N' < \dim N$, the induction hypothesis applies to $N'$. For each $i < k - r$, we obtain a long exact sequence 
+    \begin{equation*}
+        \Ext^i_A(N', M)\to\Ext^i_A(N, M)\xrightarrow{\cdot x}\Ext^i_A(N, M)\to\Ext^{i + 1}_A(N', M) = 0.
+    \end{equation*}
+    The induction hypothesis implies $\Ext^{i + 1}_A(N', M) = 0$, whence due to Nakayama's lemma, $\Ext^i_A(N, M) = 0$, as desired.
+\end{proof}
+
+\begin{corollary}
+    Let $(A,\frakm)$ be a Noetherian local ring, $M$ a finite $A$-module, and $\frakp\in\Ass_A(M)$. Then $\dim A/\frakp\ge\depth M$.
+\end{corollary}
+\begin{proof}
+    If $\dim A/\frakp < \dim M$, then due to \thref{thm:ischebeck} 
+    \begin{equation*}
+        \Hom_A\left(A/\frakp, M\right) = \Ext^0_A(A/\frakp, M) = 0,
+    \end{equation*}
+    which is absurd, since $\frakp\in\Ass_A(M)$.
+\end{proof}
+
+\begin{definition}
+    Let $(A,\frakm, k)$ be a Noetherian local ring, and $M$ a finite $A$-module. We say that $M$ is a \define{Cohen-Macaulay module} if $M\ne 0$ and $\depth M = \dim M$, or if $M = 0$. If $A$ is a Cohen-Macaulay module over itself, then it is said to be a Cohen-Macaulay (local) ring.
+\end{definition}
+
+\begin{theorem}
+    Let $A$ be a Noetherian local ring, and $M$ a finite $A$-module.
+    \begin{enumerate}[label=(\arabic*)]
+        \item If $M$ is a CM-module, then for any $\frakp\in\Ass_A(M)$ we have $$\dim A/\frakp = \dim M = \depth M.$$
+        Hence $M$ has no embedded associated primes.
+        \item If $a_1,\dots,a_r\in\frakm$ is an $M$-sequence and we set $M' = M/(a_1,\dots,a_r)$ then 
+        \begin{equation*}
+            M\text{ is a CM-module over }A\iff M'\text{ is a CM-module over }A.
+        \end{equation*}
+        \item If $M$ is a CM-module over $A$, then $M_\frakp$ is a CM-module over $A_\frakp$ for every $\frakp\in\Spec A$, and if $M_\frakp\ne 0$ then 
+        \begin{equation*}
+            \depth(\frakp, M) = \depth_{A_\frakp} M_\frakp.
+        \end{equation*}
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+    \item We have 
+    \begin{equation*}
+        \dim M = \sup\left\{\dim A/\frakp\colon \frakp\in\Ass_A(M)\right\}\ge\inf\left\{\dim A/\frakp\colon\frakp\in\Ass_A(M)\right\}\ge\depth M.
+    \end{equation*}
+    Since $\dim M = \depth M$, the conclusion follows.
+    \item This follows immediately from the fact that $\depth M' = \depth M - r$ and $\dim M' = \dim M - r$.
+    \item It suffices to consider the case $\frakp\in\Supp_A(M)$, that is, $\frakp\supseteq\Ann_A(M)$. Since every $M$-regular sequence contained in $\frakp$ is an $M_\frakp$-regular sequence contained in $\frakp A_\frakp$, we have the obvious inequalities 
+    \begin{equation*}
+        \dim M_\frakp\ge\depth_{A_\frakp} M_\frakp\ge\depth(\frakp, M_\frakp).
+    \end{equation*}
+    We shall show that $\dim M_\frakp = \depth(\frakp, M)$, whence all the desired conclusions would follow. The proof is by induction on $\depth(\frakp, M)$. For the base case, we have $\depth(\frakp, M) = 0$, which, due to prime avoidance, means that $\frakp$ is contained in an associated prime of $M$. Since $M$ has no embedded associated primes, we must have that $\frakp$ is an associated prime. As a result, $\dim M_\frakp = 0 = \depth(\frakp, M)$.
+
+    Suppose now that $\depth(\frakp, M) > 0$; choose an $M$-regular element $a\in\frakp$ and set $M'= M/aM$. Then 
+    \begin{equation*}
+        \depth(\frakp, M') = \depth(\frakp, M) - 1,
+    \end{equation*}
+    and $M'$ is a CM-module over $A$ due to (2). Further, note that $M'_\frakp = M_\frakp/a M_\frakp\ne 0$ due to Nakayama's lemma. Thus, the induction hypothesis applies and using the fact that $a\in A_\frakp$ is $M_\frakp$-regular, we have 
+    \begin{equation*}
+        \dim M_\frakp - 1 = \dim M_{\frakp}/a M_\frakp = \dim M'_\frakp = \depth(\frakp, M') = \depth(\frakp, M) - 1,
+    \end{equation*}
+    whence the desideratum follows. \qedhere
+\end{enumerate}
+\end{proof}
+
+\subsection{Base Change Theorems}
 
 \begin{lemma}
     Let $A$ be a ring, $M$ an $A$-module, and $n\ge 0$ an integer. Then 
@@ -330,7 +401,7 @@
 \end{proof}
 
 
-\begin{lemma}
+\begin{lemma}\thlabel{lem:some-base-change-results}
     Let $A$ be a ring, $M$ and $N$ two $A$-modules, and $x\in A$. Suppose that $x$ is both $A$-regular and $M$-regular, and that $xN = 0$. Set $B = A/xA$ and $\overline M = M/xM$. Then 
     \begin{enumerate}[label=(\arabic*)]
         \item $\Hom_A(N, M) = 0$ and $\Ext_A^{n + 1}(N, M)\cong\Ext^n_B(N, \overline M)$ for all $n\ge 0$.
@@ -383,3 +454,7 @@ as desired.
 thereby completing the proof. \qedhere
 \end{enumerate}
 \end{proof}
+
+\begin{theorem}[First Base Change Theorem]
+    Let $A$ be a ring, $a\in A$ an $A$-regular element, and let $M$ be an $A/aA$-module. If $\projdim_{A/aA} M < \infty$, then 
+\end{theorem}

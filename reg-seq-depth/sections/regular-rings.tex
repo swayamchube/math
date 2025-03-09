@@ -15,7 +15,7 @@
 
 It is easy to see that a minimal free resolution exists for every finite module over a Noetherian local ring; at each stage simply take a minimal generating set of the kernel and continue.
 
-\begin{lemma}
+\begin{lemma}\thlabel{lem:proj-dim-char}
     Let $(A,\frakm, k)$ be a local ring, and $M$ a finite $A$-module. Suppose $L_\bullet$ is a minimal resolution of $M$; then 
     \begin{enumerate}[label=(\arabic*)]
         \item $\dim_k\Tor^A_i(M, k) = \rank L_i$ for all $i$.
@@ -38,12 +38,101 @@ It is easy to see that a minimal free resolution exists for every finite module 
 \end{enumerate}
 \end{proof}
 
-\begin{theorem}[Auslander-Buchsbaum]
+\begin{remark}
+    The above proof also shows that the minimal resolution is indeed the one that achieves the projective dimension of a module.
+\end{remark}
+
+\begin{theorem}[Auslander-Buchsbaum]\thlabel{thm:auslander-buchsbaum-formula}
     Let $A$ be a Noetherian local ring and $M\ne 0$ a finite $A$-module. If $\projdim_A M < \infty$, then 
     \begin{equation*}
         \projdim_A M + \depth M = \depth A.
     \end{equation*}
 \end{theorem}
 \begin{proof}
-    
+    We shall induct on $h = \projdim_A M$. If $h = 0$, then $M$ is a free module, and there is nothing to prove. If $h = 1$, then the minimal resolution looks like 
+    \begin{equation*}
+        0\to A^m\xrightarrow{\varphi} A^n\to M\to 0,
+    \end{equation*}
+    where $\varphi$ is given by an $n\times m$ matrix with entries in $\frakm$.
+\end{proof}
+
+\begin{lemma}\thlabel{lem:trivial-lemma}
+    Let $A$ be a ring and $n\ge 0$ an integer. Then the following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\projdim_A M\le n$ for every $A$-module $M$, 
+        \item $\projdim_A M\le n$ for every finite $A$-module $M$, 
+        \item $\injdim_A N\le n$ for every $A$-module $N$, and 
+        \item $\Ext^{n + 1}_A(M, N) = 0$ for all $A$-modules $M$ and $N$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    All implications are straightforward.
+\end{proof}
+
+\begin{definition}
+    The \define{global dimension} of a ring is defined as 
+    \begin{equation*}
+        \gldim A = \sup\left\{\projdim M\colon M\text{ is an $A$-module}\right\}.
+    \end{equation*}
+\end{definition}
+
+Due to \thref{lem:trivial-lemma}, the above supremum can also be taken over all finite $A$-modules. Further, if $(A,\frakm, k)$ is a Noetherian local ring, due to \thref{lem:proj-dim-char} (2), we have 
+\begin{equation*}
+    \gldim A = \projdim_A k.
+\end{equation*}
+
+Recall that the \define{embedding dimension} of a Noetherian local ring $(A,\frakm, k)$ is defined to be 
+\begin{equation*}
+    \embdim A = \dim_k \frakm/\frakm^2.
+\end{equation*}
+
+\begin{theorem}[Serre]
+    Let $(A,\frakm, k)$ be a Noetherian local ring. Then the following are equivalent 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $A$ is regular;
+        \item $\gldim A = \dim A$; 
+        \item $\gldim A < \infty$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    $(1)\implies(2)$ Choose a regular system of parameters $x_1,\dots,x_n\in\frakm$, so that $n = \dim A$. Since $\ub x = x_1,\dots,x_n$ is an $A$-sequence, it follows from \thref{thm:koszul-homology-vanishes} that $K_\bullet(\ub x)$ is exact, whence it is a free resolution of $k$. Note further that the transition matrices in the Koszul complex have entries lying in $\frakm$, whence the Koszul complex is a minimal free resolution of $\frakm$. Thus, 
+    \begin{equation*}
+        \gldim A = \projdim_A k = n = \dim A,
+    \end{equation*}
+    as desired. 
+
+    $(2)\implies(3)$ is clear. We shall show that $(3)\implies(1)$. Let $\gldim A = r < \infty$, and set $\embdim A = s$. We shall show that $A$ is regular by induction on $s$. If $s = 0$, then $\frakm = 0$, and hence, $A$ is a field, so it is regular. 
+
+    Suppose now that $s > 0$. We claim that $\frakm\notin\Ass_A(A)$. If not, then consider a minimal resolution of $k$, 
+    \begin{equation*}
+        0\to L_r\to L_{r - 1}\to\cdots\to L_0\to k\to 0,
+    \end{equation*}
+    where the maps are given by matrices with entries in $\frakm$. Now, there is some $0\ne a\in A$ such that $\frakm = \Ann_A(a)$. It follows that the element $(a,a,\dots,a)\in L_r$ lies in the kernel of the map $L_r\to L_{r - 1}$, a contradiction. 
+
+    Thus $\frakm\notin\Ass_A(A)$. Choose 
+    \begin{equation*}
+        x\in\frakm\setminus\left(\frakm^2\cup\bigcup_{\frakp\in\Ass_A(A)}\frakp\right).
+    \end{equation*}
+    using prime avoidance\footnote{TODO: Add in the statement}. Then $x$ is $A$-regular, hence also $\frakm$-regular. Setting $B = A/xA$, and using \thref{lem:some-base-change-results} (2), we have $\Ext^i_A(\frakm, N) = \Ext^i_B(\frakm/x\frakm, N)$ for all $B$-modules $N$. Hence, $\Ext^{r + 1}_B(\frakm/x\frakm, N) = 0$ for every $B$-module $N$; that is, $\projdim_B \frakm/x\frakm\le r$.
+
+    Next, we show that the natural surjection $\frakm/x\frakm\to \frakm/xA$ splits as $A$-modules (and hence as $B$-modules). First, choose a minimal generating set $x, x_2,\dots,x_s$ of $\frakm$ and set $\frakb = (x_2,\dots,x_s)$. Note that $\frakb\cap xA\subseteq x\frakm$. Indeed, if $y = a_2x_2 + \dots + a_nx_n = ax\in \frakb\cap xA$, then looking at the equality modulo $\frakm$, we see that $a\in\frakm$, whence $x\in\frakb\cap x\frakm\subseteq x\frakm$. Now, consider the chain of natural maps 
+    \begin{equation*}
+        \frac{\frakm}{xA} = \frac{\frakb + xA}{xA}\xrightarrow{\sim}\frac{\frakb}{\frakb\cap xA}\to\frac{\frakm}{x\frakm}\to\frac{\frakm}{xA}.
+    \end{equation*}
+    Their composition is the identity, and hence, the surjection $\frakm/x\frakm\to \frakm/xA$ splits. In particularly, this means that 
+    \begin{equation*}
+        \projdim_B \frakm/xA\le\projdim_B \frakm/x\frakm\le r.
+    \end{equation*}
+    Because of the exact sequence $0\to\frakm/xA\to B\to k\to 0$, we see that $\gldim B = \projdim_B k\le r + 1$. Since $\embdim B = r - 1$, the induction hypothesis gives that $B$ is a regular local ring. Now, since $x$ is $A$-regular, $\dim B = \dim A - 1$, and therefore, 
+    \begin{equation*}
+        \embdim A = \embdim B + 1 = \dim B + 1 = \dim A,
+    \end{equation*}
+    whence $A$ is a regular local ring, as desired.
+\end{proof}
+
+\begin{theorem}[Serre]
+    Let $A$ be a regular local ring and $\frakp$ a prime ideal of $A$. Then $A_\frakp$ is a regular local ring.
+\end{theorem}
+\begin{proof}
+
 \end{proof}

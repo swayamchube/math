@@ -1,0 +1,407 @@
+\documentclass[10pt]{article}
+
+% \usepackage{./arxiv}
+
+\title{Covering Spaces}
+\author{Swayam Chube}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrM}{\mathscr{M}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrO}{\mathscr{O}} % sheaf
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\diam}{\operatorname{diam}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\scshape}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+\begin{document}
+\maketitle
+
+\section{Covering Spaces}
+
+\begin{lemma}[Uniqueness of Lifts]\thlabel{lem:uniqueness-of-lift}
+    Let $p: E\to B$ be a covering map and $f: X\to B$ a continuous map from a connected topological space $X$. If $\wt f: X\to E$ is a lift of $f$, then it is unique.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\begin{lemma}[Path Lifting]
+    Let $p: E\to B$ be a covering map, let $p(e_0) = b_0$. Any path $f: [0, 1]\to B$ beginning at $b_0$ has a unique lifting to a path $\wt f: [0,1]\to E$ beginning at $e_0$.
+\end{lemma}
+\begin{proof}
+    The uniqueness of the lift follows from \thref{lem:uniqueness-of-lift}. Begin with an open cover $\mathscr U$ of $B$ such that each $U\in\mathscr U$ is evenly covered by $p$. The collection $\{f^{-1}U\colon U\in\mathscr U\}$ is an open cover of $[0, 1]$. Using the Lebesgue Number Lemma, we can subdivide $[0, 1]$ as
+    \begin{equation*}
+        0 = s_0 < s_1 < \dots < s_n = 1
+    \end{equation*}
+    such that $[s_i, s_{i + 1}]\in f^{-1}U$ for some $U\in\mathscr U$. 
+    
+    We construct the lift $\wt f$ inductively. Suppose $\wt f$ has been defined on $[s_0, s_i]$ for $0\le i\le n - 1$. Choose $U\in\mathscr U$ such that $[s_i, s_{i + 1}]\subseteq f^{-1}U$. There is a unique open set $V\subseteq p^{-1}U$ such that $\wt f(s_i)\in V$ and $p|_V: V\to U$ is a homeomorphism. Define $\wt f$ to be $p|_V^{-1}\circ f$ on $[s_i, s_{i + 1}]$, on which it is obviously continuous. Due to the pasting lemma, we obtain a continuous function $\wt f$ on $[s_0, s_{i + 1}]$.
+\end{proof}
+
+\begin{lemma}[Homotopy Lifting]
+    Let $p: E\to B$ be a covering map, $p(e_0) = b_0$, and $F: I\times I\to B$ be a homotopy with $F(0, 0) = b_0$. There is a unique lifting of $F$ to a continuous map $\wt F: I\times I\to E$ such that $\wt F(0, 0) = e_0$. If $F$ is a path homotopy, then $\wt F$ is a path homotopy.
+\end{lemma}
+\begin{proof}
+    Again, the uniqueness of the lift follows from \thref{lem:uniqueness-of-lift}. Begin with an oepn cover $\mathscr U$ of $B$ such that each $U\in\mathscr U$ is evenly covered by $p$. The collection $\{F^{-1}U\colon U\in\mathscr U\}$ is an open cover of $I\times I$. Using the Lebesgue Number Lemma, we can find subdivisions 
+    \begin{equation*}
+        0 = s_0 < s_1 < \dots < s_n = 1\quad\text{ and }\quad 0 = t_0 < t_1 < \dots < t_n = 1,
+    \end{equation*}
+    such that the image of each rectangle $R_{i, j} = [s_i, s_{i + 1}]\times[t_i, t_{i + 1}]$ under $f$ is contained in some $U\in\mathscr U$. As in the preceding proof, we shall construct the lift $\wt F$ inductively in the following fashion: 
+    \begin{equation*}
+        R_{0, 0},\dots, R_{n - 1, 0}, R_{0, 1},\dots, R_{n - 1, 1},\dots R_{n - 1, n - 1}.
+    \end{equation*}
+    First, using path lifting, we can define $\wt F$ on $I\times\{0\}$ and $\{0\}\times I$. Due to the pasting lemma, $\wt F$ is continuous on $I\times\{0\}\cup\{0\}\times I$. 
+
+    We shall now describe how to define $\wt F$ on $R_{i, j}$ given that $\wt F$ has been defined for all preceding rectangles in the sequence. Let $A$ denote the union of these rectangles and the left and bottom edges of $I\times I$. In particular, this means that $\wt F$ has been defined on the left and bottom edges of $R_{i, j}$; let their union be denoted by $L$. Let $U\in\mathscr U$ be such that $R_{i, j}\subseteq F^{-1}U$. Since $U$ is an evenly covered neighborhood, we can write $p^{-1}U = \bigsqcup V_\alpha$, where $p|_{V_\alpha}: V_\alpha\to U$ is a homeomorphism for each $\alpha$. The since $L$ is connected, its image under $\wt F$ is connected and contained in $\bigsqcup V_\alpha$. Let $V_\alpha$ be the unique slice over $U$ containing $\wt F(L)$. Finally, define $\wt F = p|_{V_\alpha}^{-1}\circ F$ on $R_{i, j}$. Due to the pasting lemma, it is clear that this extension of $\wt F$ is continuous on $A\cup R_{i, j}$. This constructs a lift $\wt F: I\times I\to E$, as required.
+
+    Finally, if $F$ is a path homotopy, then $F$ is constant on $\{0\}\times I$ and $\{1\}\times I$, both of which are connected. Further, since $\wt F$ lifts $F$, the image $\wt F\left(\{0\}\times I\right)$ is contained in $p^{-1}(b_0)$, which is a discrete, and in particular, totally disconnected set. It follows that $\wt F$ is constant on $\{0\}\times I$. Similarly one can argue that $\wt F$ is constant on $\{1\}\times I$. Hence, $\wt F$ is a path homotopy too.
+\end{proof}
+
+\begin{corollary}
+    Let $p: E\to B$ be a covering map and $p(e_0) = b_0$. Let $f, g: I\to B$ be two paths in $B$ from $b_0$ to $b_1$ and let $\wt f, \wt g: I\to B$ be their (unique) lifts to paths in $E$ beginning at $e_0$. If $f$ and $g$ are path homotopic, then $\wt f$ and $\wt g$ end at the same point and are path homotopic.
+\end{corollary}
+\begin{proof}
+    
+\end{proof}
+
+\section{Classification of Covering Spaces}
+
+\subsection{Existence of Covers}
+
+\begin{theorem}
+    Let $B$ be a path connected, locally path connected, semilocally simply connected topological space and $b_0\in B$ a basepoint. Given a subgroup $H\subseteq\pi_1(B, b_0)$, there is a path connected covering $p: E\to B$ and $e_0\in p^{-1}(b_0)$ such that 
+    \begin{equation*}
+        p_\ast\left(\pi_1(E_0, e_0)\right) = H.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+The construction proceeds in several bite-sized steps. 
+
+\noindent\emph{Step 1. Construction of $E$.} Let $\scrP$ denote the set of all paths in $B$ that begin at $b_0$. Define $\alpha\sim\beta$ in $\scrP$ if and only if 
+\begin{equation*}
+    \alpha(1) = \beta(1)\quad\text{ and }\quad [\alpha\ast\overline\beta]\in H.
+\end{equation*}
+It is clear that the relation $\sim$ is an equivalence relation. Let $E = \scrP/\sim$ be the set of all equivalence classes under this relation. For $\alpha\in\scrP$, we use $\alpha^\sharp$ to denote its equivalence class in $E$. Define the map $p: E\to B$ by $p(\alpha^\sharp) = \alpha(1)$.
+
+Before we proceed, we note two observations:
+\begin{enumerate}[label=(\arabic*)]
+    \item If $[\alpha] = [\beta]$ as elements of the fundamental groupoid, then $\alpha^\sharp = \beta^\sharp$. Indeed, since $[\alpha\ast\overline\beta] = e_{b_0}\in H$.
+    \item If $\alpha^\sharp = \beta^\sharp$, then $(\alpha\ast\delta)^\sharp = (\beta\ast\delta)^\sharp$ for any path $\delta$ beginning at $\alpha(1) = \beta(1)$. Again, this is straightforward, since 
+    \begin{equation*}
+        \left[(\alpha\ast\delta)\ast\overline{(\beta\ast\delta)}\right] = [\alpha\ast\overline\beta]\in H.
+    \end{equation*}
+\end{enumerate}
+
+\noindent\emph{Step 2. Topologizing $E$.} Let $\alpha\in\scrP$ and let $U$ be a path connected neighborhood of $\alpha(1)$. Define 
+\begin{equation*}
+    B(U,\alpha) = \left\{(\alpha\ast\delta)^\sharp\colon \delta\text{ is a path in $U$ beginning at }\alpha(1)\right\}.
+\end{equation*}
+Obviously, $\alpha^\sharp\in B(U,\alpha)$, which can be seen by taking $\delta$ to be the constant path at $\alpha(1)$. We contend that the sets $B(U,\alpha)$ form a basis for a topology on $E$.
+
+First, if $\beta^\sharp\in B(U,\alpha)$, then $\beta^\sharp = (\alpha\ast\delta)^\sharp$ for some path $\delta$ in $U$ beginning at $\alpha(1)$. Now, using the aforementioned observations, 
+\begin{equation*}
+    (\beta\ast\overline\delta)^\sharp = \left(\alpha\ast\delta\ast\overline\delta\right)^\sharp = \alpha^\sharp,
+\end{equation*}
+where the first equality follows from (2) while the second equality follows from (1). Consequently, $\alpha^\sharp\in B(U,\beta)$. Next, we show that $B(U,\beta)\subseteq B(U,\alpha)$. Indeed, any element of $B(U,\beta)$ is of the form $(\beta\ast\gamma)^\sharp$ for some path $\gamma$ in $U$ beginning at $\beta(1)$. But since $\beta^\sharp = (\alpha\ast\delta)^\sharp$, using observation (2) above, we have 
+\begin{equation*}
+    (\beta\ast\gamma)^\sharp = (\alpha\ast\delta\ast\gamma)^\sharp\in B(U,\alpha).
+\end{equation*}
+Hence $B(U,\beta)\subseteq B(U,\alpha)$. But we argued that $\alpha^\sharp\in B(U,\beta)$, and hence, $B(U,\alpha)\subseteq B(U,\beta)$, whence $B(U,\beta) = B(U,\alpha)$, whenever $\beta^\sharp\in B(U,\alpha)$.
+
+Finally, we show that the sets $B(U,\alpha)$ form a basis for a topology on $E$. Indeed, suppose $\beta^\sharp\in B(U_1,\alpha_1)\cap B(U_2,\alpha_2)$. Then, by definition, $\beta(1)\in U_1\cap U_2$. Since $B$ is locally path connected, there is a path connected neighborhood $V$ of $\beta(1)$ contained in $U_1\cap U_2$. It is clear that $B(V,\beta)\subseteq B(U_i,\beta) = B(U_i,\alpha_i)$ for $i\in\{1, 2\}$ due to the conclusion of the preceding paragraph. It follows hence that the $B(U,\alpha)$'s form a basis for a topology on $E$.
+
+\noindent\emph{Step 3. $p$ is a continuous open map.} It is easy to see that the image of $B(U, \alpha)$ lies in $U$, conversely, given any $x\in U$, there is a path $\delta$ in $U$ from $\alpha(1)$ to $x$, whence the image of $(\alpha\ast\delta)^\sharp$ under $p$ is $x$. It follows that the image of $B(U,\alpha)$ under $p$ is all of $U$. Hence $p$ is an open map.
+
+To show continuity of $p$, we show that it is continuous at each $\alpha^\sharp\in E$. Let $b = p(\alpha^\sharp)$ and let $W$ be a neighborhood of $b$ in $B$. Since $B$ is locally path connected, there is a path connected neighborhood $U$ of $b$ contained in $W$. Then as we have seen, $B(U, \alpha)$ is a neighborhood of $\alpha^\sharp$ that maps to $U$ under $p$, whence $p$ is continuous at $\alpha^\sharp$; consequently, $p$ is a continuous open map, as desired. 
+
+\noindent\emph{Step 4. $p$ is a covering map.} We shall show that every $b\in B$ has an evenly covered neighborhood. Since $B$ is semilocally simply connected, there is a neighborhood $U$ of $b$ such that the induced map $\pi_1(U, b)\to\pi_1(B,b)$ is trivial. Let $S$ denote the set of all paths in $B$ from $b_0$ to $b$. We shall show that $p^{-1}(U)$ is the union of all $B(U,\alpha)$ where $\alpha\in S$.
+
+Obviously, the inclusion $\displaystyle\bigcup_{\alpha\in S} B(U,\alpha)\subseteq p^{-1}(U)$. Conversely, if $\beta^\sharp\in p^{-1}(U)$, then $\beta(1)\in U$. Choose a path $\delta$ in $U$ from $b$ to $\beta(1)$, and let $\alpha$ be the path $\beta\ast\overline\delta\in\scrP$. Then $[\beta] = [\alpha\ast\delta]$, so that $\beta^\sharp = (\alpha\ast\delta)^\sharp$, that is, $\beta\in B(U,\alpha)$. It follows that 
+\begin{equation*}
+    p^{-1}(U) = \bigcup_{\alpha\in S} B(U,\alpha).
+\end{equation*}
+Further, note that if $B(U,\alpha_1)\cap B(U,\alpha_2)$ is non-empty, then as we have seen in \emph{Step 2}, $B(U, \alpha_1) = B(U, \alpha_2)$. It follows that $p^{-1}(U)$ is a disjoint union of $B(U, \alpha)$ where $\alpha$ ranges over a suitable subset of $S$.
+
+Finally to show that $p$ is a covering map, we must show that the restriction $p: B(U, \alpha)\to U$ is a homeomorphism, where $\alpha\in S$. Since we know that it is a continuous open map, it suffices to show that it is a bijection. Surjectivity has already been shown so we must only establish injectivity. Indeed, suppose 
+\begin{equation*}
+    p\left((\alpha\ast\delta_1)^\sharp\right) = p\left((\alpha\ast\delta_2)^\sharp\right)
+\end{equation*}
+for some paths $\delta_1,\delta_2$ in $U$ that begin at $b = \alpha(1)$. Of course, we must have $\delta_1(1) = \delta_2(1)$. Further, since the inclusion induced map $\pi_1(U, b)\to \pi_1(B, b)$ is trivial, the loop $\delta_1\ast\overline\delta_2$ is path homotopic to the constant loop $e_b$ in $B$ based at $b$; consequently, $[\delta_1] = [\delta_2]$ in $B$, and hence $[\alpha\ast\delta_1] = [\alpha\ast\delta_2]$ in $B$. Using observation (1), we get that $(\alpha\ast\delta_1)^\sharp = (\alpha\ast\delta_2)^\sharp$, thereby proving injectivity. This gives us our original desideratum.
+
+\emph{Step 5. Lifting paths to $E$.} Let $e_0\in E$ denote $(e_{b_0})^\sharp$, the equivalence class of the constant path at $b_0$. Let $\alpha: I\to B$ be a path in $B$ beginning at $b_0$. We shall construct a continuous lift $\wt\alpha: I\to E$ beginning at $e_0$. 
+
+For $c\in[0, 1]$, let $\alpha_c: I\to B$ be given by $\alpha_c(t) = \alpha(ct)$. This is a path in $B$ beginning at $b_0$ and ending at $\alpha(c)$. Set $\wt\alpha(c) = (\alpha_c)^\sharp\in E$. Note that 
+\begin{equation*}
+    p\left(\wt\alpha(c)\right) = \alpha_c(1) = \alpha(c)\implies\alpha = p\circ\wt\alpha,
+\end{equation*}
+whence $\wt\alpha$ is indeed a lifting of $\alpha$. It remains to show that $\wt\alpha$ is a continuous map.
+
+Indeed, let $c\in [0, 1]$ and choose a basic neighborhood $B(U,\alpha_c)$ of $\wt\alpha(c) = (\alpha_c)^\sharp$; where $U$ is a path connected neighborhood of $\alpha_c(1) = \alpha(c)$. Since $\alpha$ is continuous, there is an $\varepsilon > 0$ such that $\alpha(t)\in U$ whenever $|c - t| < \varepsilon$. Now, for any $d\in[0, 1]$ with $|c - d| < \varepsilon$, let $\delta: I\to B$ be the path given by 
+\begin{equation*}
+    \delta(t) = \alpha\left((1 - t)c + td\right).
+\end{equation*}
+It is easy to see that $[\alpha_c\ast\delta] = [\alpha_d]$, since the former is just a reparametrization of the latter. Consequently, using observation (1), 
+\begin{equation*}
+    \wt\alpha(d) = (\alpha_d)^\sharp = (\alpha_c\ast\delta)^\sharp = \alpha_d^\sharp\implies\alpha_d^\sharp\in B(U,\alpha_c).
+\end{equation*}
+This shows that $\wt\alpha$ is continuous, as desired.
+
+\emph{Step 6. $E$ is path connected.} If $\alpha^\sharp\in E$, then the path $\alpha: I\to B$ lifts to a path $\wt\alpha: I\to E$ from $e_0$ to $\alpha^\sharp$, thereby establishing path connectedness.
+
+\emph{Step 7. $p_\ast\left(\pi_1(E, e_0)\right) = H$.} Due to the uniqueness of path liftings (given an initial point), any loop in $E$ based at $e_0$ is of the form $\wt\alpha$ for some loop $\alpha$ in $B$ based at $b_0$. Note that $$(e_{b_0})^\sharp = e_0 = \wt\alpha(1) = \alpha^\sharp,$$
+and hence, $[\alpha\ast\overline e_{b_0}]\in H$, that is, $[\alpha]\in H$. This shows that $p_\ast\left(\pi_1(E, e_0)\right)\subseteq H$.
+
+Conversely, if $[\alpha]\in H$, then again $\alpha^\sharp = (e_{b_0})^\sharp$, since $[\alpha\ast\overline e_{b_0}]\in H$. Consequently, $\wt\alpha$ is a loop in $E$ based at $e_0$. It follows hence that $[\alpha]\in p_\ast\left(\pi_1(E, e_0)\right)$, consequently, $H = p_\ast\left(\pi_1(E, e_0)\right)$, as desired.
+\end{proof}
+\end{document}

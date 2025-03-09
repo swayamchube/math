@@ -42,6 +42,13 @@ Obviously, every valuation defines a natural metric on the field given by
     \end{equation*}
     thereby completing the proof.
 \end{proof}
+\begin{remark}
+    As a consequence of the above proof, we note that $|\cdot|_1$ and $|\cdot|_2$ are equivalent if and only if 
+    \begin{equation*}
+        |x|_1 < 1\implies |x|_2 < 1,
+    \end{equation*}
+    for all $x\in K$.
+\end{remark}
 
 \begin{theorem}[Approximation Theorem]\thlabel{lem:approximation-theorem}
     Let $|\cdot|_1,\dots,|\cdot|_n$ be pairwise inequivalent valuations of the field $K$ and let $a_1,\dots,a_n\in K$. Then for every $\varepsilon > 0$ there is an $x\in K$ such that 
@@ -103,12 +110,133 @@ Obviously, every valuation defines a natural metric on the field given by
     whence $|x + y| = |x|$, that is, $|x + y| = \max\{|x|, |y|\}$ whenever $|x|\ne |y|$.
 \end{remark}
 
-\begin{theorem}[Ostrowski]
-    Every valuation of $\Q$ is equivalent to one of the valuatiosn $|\cdot|_p$ or $|\cdot|_\infty$.
+\begin{theorem}[Ostrowski]\thlabel{thm:ostrowski-q}
+    Every valuation of $\Q$ is equivalent to one of the valuations $|\cdot|_p$ or $|\cdot|_\infty$.
 \end{theorem}
 \begin{proof}
-    
+    Let $\|\cdot\|$ be a non-archimedean valuation of $\Q$. Then $\|n\|\le 1$ for every integer $n$. If $\|p\| = 1$ for all primes $p$, then owing to unique factorization of integers, $\|x\| = 1$ for all $x\in\Q^\times$. Thus, there is a prime $p$ such that $\|p\| < 1$. Let 
+    \begin{equation*}
+        \fraka = \left\{a\in\Z\colon \|a\| < 1\right\},
+    \end{equation*}
+    which is obviously a proper ideal in $\Z$ containing $p\Z$ and hence, must be equal to $p\Z$. If $a\in\Z$ and $a = bp^m$ with $p\nmid b$, then $b\notin\fraka$ and 
+    \begin{equation*}
+        \|a\| = \|b\|\|p\|^m = \|p\|^m = |a|_p^s,
+    \end{equation*}
+    where $s = - \log\|p\|/\log p$. Consequently, $\|\cdot\|$ is equivalent to $|\cdot|_p$.
+
+    Now, let $\|\cdot\|$ be an archimedean valuation of $\Q$. We shall show that if $\|x\| < 1$, then $|x|_\infty < 1$, whence it would follow that $\|\cdot\|$ is equivalent to $|\cdot|\infty$. Let $x\in\Q$ and $x > 0$. Then $x = \frac mn$ for some positive integers $m, n$ with $\gcd(m, n) = 1$. Suppose $v(x) < 1$ and $x > 1$, then $m\ge 2$. We claim that every natural number can be written in the form 
+    \begin{equation*}
+        k = \sum_{i = 0}^{r} a_i\left(\frac{m}{n}\right)^i 
+    \end{equation*}
+    with $a_i\in\{0,1,\dots, m - 1\}$. This is easy to see by induction on $k$. The base case with $k = 1$ is obvious. Now, suppose $k > 1$. Let $a_0\in\{0,\dots, m - 1\}$ be such that $m\mid k - a_0$. Then $l = \frac{n}{m}(k - a_0) < k$ has an expansion of the above form and hence, so does $k$.
+
+    Next, for every natural number $k$, the triangle inequality gives
+    \begin{equation*}
+        \|k\|\le\sum_{i = 0}^r a_i\left\|\frac{m}{n}\right\|^i\le\frac{m - 1}{1 - \|x\|},
+    \end{equation*}
+    which means, $\|\cdot\|$ must be non-archimedean, a contradiction. Therefore, $|x|_\infty\le 1$. Note that $x\ne 1$ else $\|x\| = 1$, and so $\|x\| < 1$ implies $|x|_\infty < 1$, thereby completing the proof.
 \end{proof}
+
+\begin{definition}
+    Let $K$ be a field. A function $v: K\to\R\cup\{\infty\}$ is said to be an \define{exponential valuation} if 
+    \begin{itemize}
+        \item $v(x) = \infty$ if and only if $x = 0$,
+        \item $v(xy) = v(x) + v(y)$, and 
+        \item $v(x + y)\ge\min\{v(x), v(y)\}$
+    \end{itemize}
+    for all $x,y\in K$. As is the case with valuations, we tacitly exclude the ``identically $0$'' valuation.
+\end{definition}
+
+\begin{remark}
+    If $|\cdot|$ is a non-archimedean valuation on $K$, then $v := -\log |\cdot|$ is an exponential valuation. Conversely, if $v$ is an exponential valuation on $K$, then for any $q > 1$, the function $|\cdot| = q^{-v}$ is a non-archimedean valuation. This sets up a bijection between the exponential valuations and non-archimedean valuations on a field.
+\end{remark}
+
+In light of the above remark, we have:
+
+\begin{definition}
+    Two exponential valuations $v_1, v_2$ on $K$ are said to be \define{equivalent} if there is an $s > 0$ such that $v_1 = sv_2$.
+\end{definition}
+
+\begin{proposition}
+    If $v$ is an exponential valuation on $K$ with corresponding valuation $|\cdot|$, then 
+    \begin{equation*}
+        \frako = \{x\in K\colon v(x)\ge 0\} = \{x\in K\colon |x|\le 1\}
+    \end{equation*}
+    is a ring with group of units 
+    \begin{equation*}
+        \frako^\times = \{x\in K\colon v(x) = 0\} = \{x\in K\colon |x| = 1\},
+    \end{equation*}
+    and the unique maximal ideal 
+    \begin{equation*}
+        \frakp = \{x\in K\colon v(x) > 0\} = \{x\in K\colon |x| < 1\}.
+    \end{equation*}
+    The field $\kappa = \frako/\frakp$ is called the \define{residue class field} of $\frako$.
+\end{proposition}
+\begin{proof}
+    That $\frako$ is a ring follows immediately from the properties of an exponential valuation. If $x$ is a unit in $\frako$, then there is a $y\in\frako$ such that $xy = 1$, hence $v(x) + v(y) = 0$. But since $v(x), v(y)\ge 0$, we have that $v(x) = v(y) = 0$. Conversely, if $x\in\frako$ is such that $v(x) = 0$, then $v(x^{-1}) = -v(x) = 0$ and hence $x^{-1}\in\frako$, that is, $x\in\frako^\times$.
+
+    Finally, note that $\frakp$ is indeed an ideal of $\frako$ and $\frakp = \frako\setminus\frako^\times$, i.e., the non-units in $\frako$ form an ideal, whence $\frako$ is a local ring with unique maximal ideal $\frakp$.
+\end{proof}
+
+\begin{definition}
+    An exponential valuation $v: K\to\R\cup\{0\}$ is said to be \define{discrete} if it admits a smallest positive value $s$. In this case, it is not hard to show that $v(K^\times) = s\Z\subseteq\R$. Further, it is said to be \define{normalized} if $s = 1$. Note that every discrete exponential valuation is equivalent to a normalized discrete exponential valuation, which is obtained from it by simply dividing by $s$. An element $\pi\in\frako$ such that $v(\pi) = s$ is said to be a \define{uniformizer}.
+\end{definition}
+
+\begin{remark}
+    Note that the discreteness of an exponential valuation is equivalent to $0$ being an isolated point of $v(K^\times)\subseteq\R$. Similarly, one can define a valuation $|\cdot|$ to be discrete if $1\in |\cdot|(K^\times)\subseteq\R_{> 0}$ is an isolated point.
+    
+    With this definition of a discrete valuation, one easily sees that every discrete valuation is non-archimedean. Indeed, if it were not, then the field $K$ would have characteristic $0$ and hence, $\Q$ sits as a subfield of $K$. The restriction of $|\cdot|$ to $\Q$ is a discrete valuation. Due to \thref{thm:ostrowski-q}, the only discrete valuations of $\Q$ are the non-archimedean ones, a contradiction.
+\end{remark}
+
+\begin{proposition}
+    If $v$ is a discrete exponential valuation on $K$, then $\frako$ is a principal ideal domain. The nonzero ideals of $\frako$ are given by $\{\frakp^n = (\pi^n)\colon n\ge 0\}$, where $\pi$ is a uniformizer. One has 
+    \begin{equation*}
+        \frakp^n/\frakp^{n + 1}\cong\frako/\frakp
+    \end{equation*}
+    as $\frako$-modules.
+\end{proposition}
+\begin{proof}
+    Let $\fraka\ne 0$ be an ideal of $\frako$ and $x\ne 0$ an element in $\fraka$ with the smallest exponential valuation, say $v(x) = n$.  Then $x = u\pi^n$, $u\in\frako^\times$, so that $\pi^n\frako\subseteq\fraka$. On the other hand, if $y\in\fraka$, then we can write $y = w\pi^m$ for some $w\in\frako^\times$ so that $m\ge n$ by our choice of $n$. It follows that $y\in\pi^n\frako$, that is, $\fraka = \pi^n\frako$, as desired. 
+
+    Next, consider the composite map 
+    \begin{equation*}
+        \frako\xrightarrow{x\mapsto\pi^n x}\frakp^n\onto\frakp^n/\frakp^{n + 1}.
+    \end{equation*}
+    It is easy to see that this map is a surjective $\frako$-linear map with kernel $\frakp$, whence the second assertion follows.
+\end{proof}
+
+\begin{remark}
+    Let $K$ be a discretely valued field. The chain
+    \begin{equation*}
+        \frako\supseteq\frakp\supseteq\frakp^2\supseteq\dots
+    \end{equation*}
+    forms a local base at $0$. Indeed, if $v$ a normalized exponential valuation with associated valuation $|\cdot| = q^{-v}$ where $q > 1$, then 
+    \begin{equation*}
+        \frakp^n = \left\{x\colon v(x)\ge n\right\} = \left\{x\colon v(x) > n - 1\right\} = \left\{x\colon |x| < \frac{1}{q^{n - 1}}\right\}
+    \end{equation*}
+    is open and forms a local base at $0$ since $q^{-(n - 1)}\to 0$ as $n\to\infty$.
+
+    Similarly, note that $K^\times$ is a metrizable topological group. Define for $n\ge 1$, 
+    \begin{equation*}
+        U^{(n)} = \underbrace{1 + \frakp^n}_{\subseteq\frako^\times} = \left\{x\colon |1 - x| < \frac{1}{q^{n - 1}}\right\},
+    \end{equation*}
+    which is an open subset of $K$ and hence of $K^\times$. Set $U^{(n)} = \frako^\times$, which is an open subset of $K$, since $\frako$ is open and $\frakp$ is closed in $K$. Thus, the $U^{(n)}$'s form a local base at $1$ for the induced topology on $K^\times$.
+\end{remark}
+
+\begin{proposition}
+    With the notation as above, $\frako^\times/U^{(n)}\cong(\frako/\frakp^n)^\times$ and $U^{(n)}/U^{(n + 1)}\cong\frako/\frakp = \kappa$ as groups for $n\ge 1$.
+\end{proposition}
+\begin{proof}
+    The map $u\mapsto u\mod\frakp^n$ from $\frako^\times\to(\frako/\frakp^n)^\times$ is a homomorphism of groups with kernel $U^{(n)}$. It is surjective because $\frako/\frakp^n$ is a local ring with units 
+    \begin{equation*}
+        \left(\frac{\frako}{\frakp^n}\right)^\times = \frac{\frako}{\frakp^n}\setminus\frac{\frakp}{\frakp^n} = \frac{\frako\setminus\frakp}{\frakp^n},
+    \end{equation*}
+    where the last equality is as sets. This proves the first isomorphism.
+
+    For the second isomorphism, choose a uniformizer $\pi\in\frako$ and define the map $U^{(n)}t\frako/\frakp$ sending $1 + \pi^n a\mapsto a\mod\frakp$. That this is surjective is obvious. The kernel of this map is $U^{(n + 1)}$, whence the conclusion follows.
+\end{proof}
+
+\subsection{Completions}
 
 \subsection{Hensel's Lemma}
 
@@ -240,14 +368,18 @@ Obviously, every valuation defines a natural metric on the field given by
 \end{proof}
 
 \begin{lemma}[Krasner]
-    Let $(K, |\cdot|)$ be a complete valued field, $\alpha\in K^{sep}$ and $\beta\in\overline K$. Let $\alpha_1,\dots,\alpha_n$ be the distinct conjugates of $\alpha$ in $\overline K$ with $\alpha\ne\alpha_i$ for $1\le i\le n$. If 
+    Let $(K, |\cdot|)$ be a complete non-archimedean valued field, $\alpha\in K^{sep}$ and $\beta\in\overline K$. Let $\alpha_1,\dots,\alpha_n$ be the distinct conjugates of $\alpha$ in $\overline K$ with $\alpha\ne\alpha_i$ for $1\le i\le n$. If 
     \begin{equation*}
         |\alpha - \beta| < |\alpha - \alpha_i|\qquad\forall~1\le i\le n,
     \end{equation*}
     then $K[\alpha]\subseteq K[\beta]$.
 \end{lemma}
 \begin{proof}
-    Suppose $K[\alpha]\not\subseteq K[\beta]$. Since $\alpha$ is separable over $K[\beta]$, there is an automorphism $\sigma\in\Aut(\overline K/K[\beta])$ such that $\sigma\alpha\ne\alpha$ but $\sigma\beta = \beta$.
+    Suppose $K[\alpha]\not\subseteq K[\beta]$. Since $\alpha$ is separable over $K[\beta]$, there is an automorphism $\sigma\in\Aut(\overline K/K[\beta])$ such that $\sigma\alpha\ne\alpha$ but $\sigma\beta = \beta$. Then 
+    \begin{equation*}
+        |\alpha - \beta| = |\sigma\alpha - \sigma\beta| = \left|(\sigma\alpha - \alpha) + (\alpha - \beta)\right| = |\sigma\alpha - \alpha|,
+    \end{equation*}
+    a contradiction. Note that the first equality follows from the formula for the extension of a complete valuation. This completes the proof.
 \end{proof}
 
 \begin{theorem}
@@ -270,8 +402,7 @@ Obviously, every valuation defines a natural metric on the field given by
     \begin{equation*}
         |s_n - s| = \left|\sum_{k = n}^\infty a_k x_k\right| = |a_nx_n| < d_n,
     \end{equation*}
-    whence, due to Krasner's Lemma, % TODO: Krasner's lemma
-    $s_n\in K(s)$ for all $n\ge 1$. But since the $s_n$'s are linearly independet, we see that $[K(s) : K] = \infty$, which is absurd. Thus, $L$ cannot be complete.
+    whence, due to Krasner's Lemma, $s_n\in K(s)$ for all $n\ge 1$. But since the $s_n$'s are linearly independet, we see that $[K(s) : K] = \infty$, which is absurd. Thus, $L$ cannot be complete.
 \end{proof}
 
 \begin{remark}
@@ -343,7 +474,27 @@ Obviously, every valuation defines a natural metric on the field given by
     is a homeomorphism.
 \end{theorem}
 \begin{proof}
-    
+    It suffices to show that for every norm $|\cdot|$ on $V$, there exist constants $\rho, \rho' > 0$ such that 
+    \begin{equation*}
+        \rho\|x\|\le |x|\le\rho'\|x\|\qquad\forall~x\in V.
+    \end{equation*}
+    Once this is shown, the norm $|\cdot|$ defines the same topology on $V$ as the norm $\|\cdot\|$, and the map $K^n\to V$ defined above is a homeomorphism. To see the completeness of $(V, |\cdot|)$ it suffices to show the completeness of $(V, \|\cdot\|)$, which is done by successively choosing subsequences for each of the $n$ components.
+
+    For $\rho'$, we can obviously take $|v_1| + \dots + |v_n|$, since 
+    \begin{equation*}
+        |x_1v_1 + \dots + x_nv_n|\le |x_1||v_1| + \dots + |x_n||v_n|\le\|x\|\cdot\left(|v_1| + \dots + |v_n|\right).
+    \end{equation*}
+    We prove the existence of $\rho$ by induction on $n$. For $n = 1$, we may take $\rho = |v_1|$. Let $V_i = Kv_1 + \dots + Kv_{i - 1} + Kv_{i + 1} + \dots + Kv_n$. Since $v_i\notin V_i$, we have $0\notin v + V_i$ and hence, $0\notin\bigcup\limits_{i = 1}^n (v_i + V_i)$. By the induction hypothesis, each $V_i$ is complete, and hence, closed in $V$, consequently, the union $\bigcup\limits_{i = 1}^n(v_i + V_i)$ is also closed in $V$. Thus, there is a $\rho > 0$ such that $B(0,\rho)$ is disjoint from the aforementioned union.
+
+    This means, 
+    \begin{equation*}
+        |w_i + v_i|\ge \rho\quad\forall~w_i\in V_i,~\text{and } 1\le i\le n.
+    \end{equation*}
+    For $x = x_1v_1 + \dots + x_nv_n\ne 0$ and $|x_r| = \|x\|$, we get 
+    \begin{equation*}
+        |x_r^{-1}x| = \left|\frac{x_1}{x_r}v_1 + \dots + v_r + \dots + \frac{x_n}{x_r}v_n\right|\ge\rho,
+    \end{equation*}
+    that is, $|x|\ge\rho\|x\|$, thereby completing the proof.
 \end{proof}
 
 \begin{corollary}
@@ -430,5 +581,4 @@ In particular, the balls centered at $0$ in $X$ are balanced and this is the onl
     The local fields are precisely the finite extensions of the fields $\Q_p$ and $\F_p(\!(t)\!)$.
 \end{theorem}
 \begin{proof}
-    
 \end{proof}

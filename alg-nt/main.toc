@@ -7,5 +7,6 @@
 \contentsline {subsection}{\numberline {2.2}Dirichlet's Unit Theorem}{12}{subsection.2.2}%
 \contentsline {section}{\numberline {3}Valuation Theory}{13}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Valuations}{13}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Hensel's Lemma}{15}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Local Fields}{20}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.2}Completions}{18}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Hensel's Lemma}{18}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Local Fields}{24}{subsection.3.4}%

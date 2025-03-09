@@ -2,7 +2,130 @@
     Let $\scrF$ and $\scrG$ be sheaves of abelian groups on $X$. The association $U\mapsto\Hom(\scrF|_U, \scrG|_U)$ is a sheaf on $X$. It is called the \define{sheaf Hom} and is denoted by $\sheafHom(\scrF, \scrG)$.
 \end{definition}
 
-\setcounter{exercise}{14}
+\setcounter{exercise}{1}
+
+\begin{remark}
+    Let $\scrF$ be a presheaf and $\scrG\subseteq\scrF$ a sub-presheaf. For any $P\in X$, there is a natural map $\scrG_P\to\scrF_P$ sending an equivalence class $[\langle U, s\rangle]\in\scrF_P$ to the equivalence class $[\langle U, s\rangle]\in\scrG_P$, which is a homomorphism of groups. If $[\langle U, s\rangle]$ is in the kernel of this map, then there is a $V\subseteq U$ containing $P$ such that $\res^U_V(s) = 0\in\scrF(V)$, consequently, $\res^U_V(s) = 0\in\scrG(V)$, since $\scrG$ is a sub-presheaf. It follows that the induced map is injective and we can identify $\scrG_P$ with a subgroup of $\scrF_P$. We shall tacitly make this identification throughout.
+\end{remark}
+
+\begin{exercise}\thlabel{exer:1.2}
+\begin{enumerate}[label=(\alph*)]
+    \item Let $[\langle U, s\rangle]\in\ker\varphi_P$, that is, $[\langle U,\varphi_U(s)\rangle] = 0\in\scrG_P$. Hence, there is a neighborhood $V\subseteq U$ of $P$ such that $\res^U_V\varphi_U(s) = 0$, consequently, $\varphi_V(\res^U_V(s)) = 0\in\scrG(V)$. It follows that $\res^U_V(s)\in(\ker\varphi)(U)$, and hence, $[\langle U, s\rangle] = [\langle V,\res^U_V(s)\rangle]\in(\ker\varphi)_P$. This shows that $\ker\varphi_P\subseteq(\ker\varphi)_P$.
+
+    Conversely, if $[\langle U, s\rangle]\in(\ker\varphi)_P$, then $s\in\ker\varphi_U$, and hence, $\varphi_P([\langle U, s\rangle]) = 0$, as desired. Hence, $\ker\varphi_P = (\ker\varphi)_P$.
+
+    Next, we show that $\im\varphi_P = (\im\varphi)_P$. There is a commutative diagram 
+    \begin{equation*}
+        \xymatrix {
+            \scrF\ar[r]^\varphi\ar[d]_\varphi & \scrG\\
+            \im_{\pre}\varphi\ar[r]_\theta\ar@{^{(}->}[ru]& \im\varphi\ar[u]
+        }
+    \end{equation*}
+    Note that sheafification $\theta$ induces an isomorphism of stalks, and hence, we have a commutative diagram 
+    \begin{equation*}
+        \xymatrix {
+            \scrF_P\ar[r]^{\varphi_P}\ar[d]_{\varphi_P} & \scrG_P\\
+            (\im_{\pre}\varphi)_P\ar[r]_{\theta_P}\ar@{^{(}->}[ru] & (\im\varphi)_P\ar[u]
+        }
+    \end{equation*}
+    Since $\theta_P$ is an isomorphism, $(\im\varphi)_P = (\im_{\pre}\varphi)_P\subseteq\scrG_P$. But the above commutative diagram implies 
+    \begin{equation*}
+        \im\varphi_P\subseteq(\im_\pre\varphi)_P\subseteq\im\varphi_P,
+    \end{equation*}
+    thereby completing the proof.
+
+    \item We have 
+    \begin{equation*}
+        \ker\varphi = 0\iff(\ker\varphi)_P = 0~\forall P\in X\iff\ker\varphi_P = 0~\forall P\in X.
+    \end{equation*}
+    Thus, $\varphi$ is injective if and only if $\varphi_P$ is injective for all $P\in X$.
+
+    Next, let $\scrH = \im\varphi\subseteq\scrG$. If $\varphi$ is surjective, then $\scrH = \scrG$ and since $\im\varphi_P = (\im\varphi)_P = \scrH_P = \scrG_P$, we are done. On the other hand, if $\varphi_P$ is surjective for all $P$, then $\scrH_P = \scrG_P$ for all $P$, that is, the inclusion map $\iota:\scrH\into\scrG$ is a stalk-local isomorphism and hence, an isomorphism of sheaves. It follows that $\scrH = \scrG$. To see this, note that there is a map $\sigma:\scrG\to\scrH$ that is an inverse to the inclusion. In particular, the composition $\iota\circ\sigma:\scrG\to\scrG$ is an isomorphism of sheaves. But the image of this map lies inside $\scrG$, whence $\scrH = \scrG$. This completes the proof.
+
+    \item This is immediate from (a).
+\end{enumerate}
+\end{exercise}
+
+\begin{remark}
+    In \thref{exer:1.2}, we are implicitly using the fact that the sheafification of an injective map of presheaves is injective. This is the content of \thref{exer:1.4}. Once this is established, we may simply treat $\im\varphi$ as a subsheaf of $\scrG$ and thus, $(\im\varphi)_P$ as a subgroup of $\scrG_P$ for each $P\in X$.
+\end{remark}
+
+\begin{exercise}\thlabel{exer:1.3}
+\begin{enumerate}[label=(\alph*)]
+    \item Due to \thref{exer:1.2}, we know that $\varphi$ is surjective if and only if $\varphi_P$ is surjective for all $P\in X$. Suppose now that $\varphi$ is surjective, $U\subseteq X$ is an open set and $s\in\scrG(U)$. We can find $[\langle V_P, t_P\rangle]\in\scrF_P$ such that 
+    \begin{equation*}
+        [\langle U,s\rangle] = \varphi_P\left([\langle V_P, t_P\rangle]\right) = [\langle V_P, \varphi_{V_P}(t_P)],
+    \end{equation*}
+    where $t_P\in\scrF(V_P)$. Hence, there is a neighborhood $W_P$ of $P$ contained in $U\cap V_P$ such that 
+    \begin{equation*}
+    \res^U_{W_P}(s) = \res^{V_P}_{W_P}\left(\varphi_{V_P}(t_P)\right) = \varphi_{W_P}\left(\res^{V_P}_{W_P}(t_P)\right).
+    \end{equation*}
+    Replace $V_P$ by $W_P$ and $t_P$ by $\res^{V_P}_{W_P}(t_P)$ to obtain the desired conclusion.
+
+    Conversely, suppose the conclusion holds. We shall show that $\varphi_P$ is surjective for all $P$. Let $[\langle U, s\rangle]\in\scrG_P$ for all $P\in X$. Then, there is an open cover $\{U_i\}$ of $U$ and $t_i\in\scrF(U_i)$ such that $\varphi_{U_i}(t_i) = \res^U_{U_i}(s)$. Let $U_j$ contain $P$, then $[\langle U_i, t_i\rangle]$ maps to $[\langle U, s\rangle]$, thereby establishing surjectivity.
+
+    \item Let $X = \bbC$, $\scrO$ the sheaf of holomorphic functions, and $\scrO^\ast$ the sheaf of nowhere vanishing holomorphic functions. The exponential map $\scrO\to\scrO^\ast$ is surjective because it is surjective on each stalk, indeed, every non-vanishing holomorphic function admits a holomorphic logarithm locally. 
+    
+    The induced map $\scrO(U)\to\scrO^\ast(U)$ is obviously not surjective on $U = \bbC\setminus\{0\}$, since the function $z\mapsto z$ does not admit a holomorphic logarithm on $U$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}\thlabel{exer:1.4}
+\begin{enumerate}[label=(\alph*)]
+    \item To avoid circular reasoning, we must prove this without the aid of \thref{exer:1.2}. We describe the unique map $\scrF^+(U)\to\scrG^+(U)$. Let $s\in\scrF^+(U)$. For every $P\in U$, there is a neighborhood $V$ of $P$ contained in $U$ and a $t\in\scrF(V)$ such that $s(Q) = t_Q\in\scrF_Q$ for all $Q\in V_P$. Send $s\mapsto\wt s\in\scrG^+(U)$, where $\wt s(P) = \varphi_Q(s(P))\in\scrG_P$ for all $P\in X$. To see that this is indeed an element of $\scrG^+(U)$, consider some $P\in U$ and $V_P$ as before; then, for all $Q\in V_P$, we have 
+    \begin{equation*}
+        \wt s(Q) = \varphi_Q(t_Q) = \varphi_Q\left([\langle V_P, t\rangle]\right) = [\langle V_P, \varphi_{V_P}(t)\rangle]\in\scrG_Q.
+    \end{equation*}
+
+    Finally, to show injectivity, we must show injectivity over every open set $U$. Indeed, suppose $s\in\scrF^+(U)$ maps to $0$, that is, $\wt s = 0$, that is, $\varphi_P(s(P)) = 0$ for all $P\in X$. But since each $\varphi_P$ is injective, we see that $s(P) = 0$ for all $P\in X$, that is, $s = 0$, as desired.
+
+    \item That the image presheaf of an injective morphism of sheaves is a subsheaf is trivial.
+\end{enumerate}
+\end{exercise}
 
 \begin{exercise}
+    Hartshorne proves that a morphism of sheaves is an isomorphism if and only if it is an isomorphism stalk locally. But a morphism of stalks is a morphism of abelian groups, and hence, is an isomorphism if and only if it is both injective and surjective. Finally, due to \thref{exer:1.2} (b), the stalk local maps are both injective and surjective if and only if the morphism of sheaves is as such. This completes the proof.
+\end{exercise}
+
+\begin{exercise}
+    
+\end{exercise}
+
+\setcounter{exercise}{15}
+
+\begin{exercise}[Flasque Sheaves]
+\begin{enumerate}[label=(\alph*)]
+    \item A subspace of an irreducible space is irreducible, and hence, is connected. It follows that $\scrF(U)$ is the set of constant functions for all open $U\subseteq X$. It follows that $\scrF$ is flasque. 
+
+    \item Let $U\subseteq X$ be an open set. We shall show that $\scrF(U)\to\scrF''(U)$ is surjective. Since $\scrF\to\scrF''$ is surjective, by \thref{exer:1.3}(a), for each $s\in\scrF''(U)$, there is an open cover $\{U_i\}_{i\in A}$ of $U$ and $t_i\in\scrF(U_i)$ such that $\varphi_{U_i}(t_i) = \res^{U}_{U_i}(s)$. Let $\scrP$ denote the set 
+    \begin{equation*}
+        \left\{(U_I, t_I)\colon I\subseteq A,~U_I = \bigcup_{i\in I} U_i,~t_I\in\scrF(U_I),~\res^{U_I}_{U_i} = t_i~\forall~i\in I\right\}.
+    \end{equation*}
+    Endow this with the structure of a poset $(U_I, t_I)\leqq(U_J, t_J)$ if and only if $I\subseteq J$ and $\res^{U_J}_{U_I} t_J = t_I$. It is obvious that every chain in $\scrP$ has an upper bound, whence it follows that $\scrP$ has a maximal element, say $(V, t)$. If $V = U$, then we are done. If not, then there is some index $i\in A$ such that $U_i\not\subset V$. Then, 
+    \begin{equation*}
+        \res^{U_i}_{U_i\cap U_I}t_i = \res^{U_I}_{U_i\cap U_I} t_I\implies \res^{U_i}_{U_i\cap U_I}t_i - \res^{U_I}_{U_i\cap U_I} t_I\in\scrF'(U_i\cap U_I).
+    \end{equation*}
+    Since $\scrF'$ is flasque, there is an $r\in\scrF'(U_i\cup U_I)$ such that 
+    \begin{equation*}
+        \res^{U_i\cup U_{I}}_{U_i\cap U_I}r = \res^{U_i}_{U_i\cap U_I}t_i - \res^{U_I}_{U_i\cap U_I} t_I.
+    \end{equation*}
+    Set $t^\ast = \res^{U_i\cup U_I}_{U_I} r + t_I$ and note that $\res^{U_I}_{U_i\cap U_I} t_I = \res^{U_i}_{U_i\cap U_I} t_i$, and hence, there is some $\wt t\in\scrF(U_i\cup U_I)$ that restricts to $t_i$ on $U_i$ and $t_I$ on $U_I$, whence $(U_i\cup U_I, \wt t)\in\scrP$. This contradicts the maximality of $(U_I, t_I)$, and thus $U_I = U$, thereby completing the proof. 
+
+    \item Let $V\subseteq U\subseteq X$ be open sets. Then there is a commutative diagram 
+    \begin{equation*}
+        \xymatrix {
+            0\ar[r] & \scrF'(U)\ar[r]\ar[d] & \scrF(U)\ar[r]\ar[d] & \scrF''(U)\ar[r]\ar[d] & 0\\
+            0\ar[r] & \scrF'(V)\ar[r] & \scrF(V)\ar[r] & \scrF''(V)\ar[r] & 0
+        }
+    \end{equation*}
+    with the first two vertical arrows as surjections. It follows from the Snake Lemma that the map $\scrF''(U)\to\scrF''(V)$ is surjective, that is, $\scrF''$ is flasque.
+
+    \item If $V\subseteq U\subseteq X$ are open sets, then the restriction map $f_\ast\scrF(U)\to f_\ast\scrF(V)$ is the same as the restriction map $\scrF(f^{-1}V)\to\scrF(f^{-1}U)$, which is surjective, since $\scrF$ is flasque. 
+    
+    \item This is trivial.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[Support]
+    If $P\in U$ is such that $s_P = [\langle U, s\rangle] = 0$, then there is a neighborhood $V$ of $P$ contained in $U$ such that $\res^U_V(s) = 0$. Hence, for all $Q\in V$, $s_Q = [\langle V, \res^U_V s\rangle] = 0$. This shows that the complement of $\Supp s$ is open, as desired.
 \end{exercise}

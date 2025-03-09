@@ -1,0 +1,1192 @@
+\documentclass[10pt]{article}
+
+% \usepackage{./arxiv}
+
+\title{Homology Theory}
+\author{Swayam Chube}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrM}{\mathscr{M}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrO}{\mathscr{O}} % sheaf
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\diam}{\operatorname{diam}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\scshape}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+    This is meant to be a quick review of Homology Theory. We closely follow \cite{rotman-algtop}.
+\end{abstract}
+
+\tableofcontents
+
+\newpage
+
+\part{Homology}
+
+\section{The Setup of Singular Homology}
+\begin{definition}
+    The \define{standard $n$-simplex} is the ``convex hull'' of the standard basis vectors $e_0,\dots,e_n$ in $\R^{n + 1}$ and is denoted by $\Delta^n$. That is, 
+    \begin{equation*}
+        \Delta^{n} = \left\{t_0e_0 + \dots + t_ne_n\mid 0\le t_i\le 1,~t_0 + \dots + t_n = 1\right\}.
+    \end{equation*}
+
+    An \define{orientation} of $\Delta^n$ is a linear ordering of its vertices. Two orientations are said to be the same if, as permutations of $e_0,\dots,e_n$, they have the same parity.
+
+    Given an orientation of $\Delta^n$, there is an \define{induced orientation} of its faces, defined by orienting the $i$-th face in the sense $(-1)^i [e_0,\dots, \wh e_i,\dots, e_n]$.
+
+    For each $n\ge 1$ and $0\le i\le n$, define the \define{$i$-th face map} 
+    \begin{equation*}
+        \varepsilon_i = \varepsilon_i^n: \Delta^{n - 1}\to\Delta^n
+    \end{equation*}
+    to be the affine map taking the vertices $\{e_0,\dots, e_{n - 1}\}$ to the vertices $\{e_0,\dots,\wh e_i,\dots, e_n\}$ preserving the displayed orderings.
+
+    Let $X$ be a topological space. For each $n\ge 0$, let $S_n(X)$ denote the \important{free abelian group} generated by 
+    \begin{equation*}
+        \left\{\sigma:\Delta^n\to X\mid \sigma\text{ is continuous}\right\}.
+    \end{equation*}
+\end{definition}
+
+\begin{definition}
+    If $\sigma: \Delta^n\to X$ is continuous, and $n > 0$, then its \define{boundary} is given by 
+    \begin{equation*}
+        \partial_n\sigma = \sum_{i = 0}^n (-1)^i \sigma\circ\varepsilon_i^{n}\in S_{n - 1}(X).
+    \end{equation*}
+    If $n = 0$, define $\partial_0\sigma = 0$. The universal property of free abelian groups allows us to define group homomorphisms $\partial_n: S_n(X)\to S_{n - 1}(X)$ with the convention that $S_{-1} = 0$.
+\end{definition}
+
+\begin{proposition}
+    If $0\le k < j\le n + 1$, the face maps satisfy 
+    \begin{equation*}
+        \varepsilon_j^{n + 1}\circ\varepsilon_k^{n} = \varepsilon_k^{n + 1}\circ\varepsilon^n_{j - 1}
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Both maps agree on the $e_i$'s for $0\le i\le n - 1$.
+\end{proof}
+
+\begin{theorem}
+    For all $n\ge 0$, we have $\partial_n\circ\partial_{n + 1} = 0$.
+\end{theorem}
+\begin{proof}
+    Let $\sigma:\Delta^{n + 1}\to X$ be continuous and $n\ge 1$.
+    \begin{align*}
+        \partial_n\partial_{n + 1}\sigma &= \partial_n\left(\sum_{j = 0}^{n + 1} (-1)^j\sigma\circ\varepsilon^{n + 1}_j\right)\\
+        &= \sum_{j = 0}^{n + 1}\sum_{k = 0}^{n} (-1)^{j + k}\sigma\circ\varepsilon_j^{n + 1}\circ\varepsilon_k^{n}\\
+        &= \sum_{0\le j\le k\le n}(-1)^{j + k}\sigma\circ\varepsilon_j^{n + 1}\circ\varepsilon_k^{n} + \sum_{n + 1\ge j > k\ge 0}(-1)^{j + k}\sigma\circ\varepsilon_k^{n + 1}\circ\varepsilon^n_{j - 1}
+    \end{align*}
+
+    We can change the indexing in the second sum by setting $j = p + 1$ and $k = q$ to get 
+    \begin{equation*}
+        \partial_n\partial_{n + 1}\sigma = \sum_{0\le j\le k\le n}(-1)^{j + k}\sigma\circ\varepsilon^{n + 1}_j\circ\varepsilon^n_k + \sum_{0\le q\le p\le n}(-1)^{p + q  + 1}\sigma\circ\varepsilon^{n + 1}_q\circ\varepsilon^{n}_p.
+    \end{equation*}
+    It is easy to see that the above sum is $0$. This completes the proof.
+\end{proof}
+
+This gives us the \important{singular chain complex}, 
+\begin{equation*}
+    \cdots\longrightarrow S_{n}(X)\stackrel{\partial_n}{\longrightarrow} S_{n - 1}(X)\longrightarrow\cdots S_0(X)\longrightarrow 0.
+\end{equation*}
+The homology groups of the above complex are called the \define{singular homology groups}, and are denoted by 
+\begin{equation*}
+    H_n(X) = \frac{\ker\partial_n}{\im\partial_{n + 1}}.
+\end{equation*}
+It is customary to denote $\ker\partial_n$ by $Z_n(X)$ and $\im\partial_{n + 1}$ by $B_n(X)$. 
+
+\begin{notation}
+    Let $f: X\to Y$ be a continuous. For every $n$-simplex $\sigma: \Delta^n\to X$ in $X$, the composition $f\circ\sigma: \Delta^n\to Y$ is an $n$-simplex in $Y$. There is a unique group homomorphism extending $\sigma\mapsto f\circ\sigma$. We denote this map by $f_\sharp: S_n(X)\to S_n(Y)$.
+\end{notation}
+
+\begin{proposition}
+    $f_\sharp$ is a chain map.
+\end{proposition}
+\begin{proof}
+    We must show that the following diagram commutes. 
+    \begin{equation*}
+        \xymatrix {
+            S_n(X)\ar[r]^{\partial_n}\ar[d]_{f_\sharp} & S_{n - 1}(X)\ar[d]^{f_\sharp}\\
+            S_n(Y)\ar[r]_{\partial_n} & S_{n - 1}(Y)
+        }
+    \end{equation*}
+    Let $\sigma\in S_n(X)$. Then, 
+    \begin{equation*}
+        f_\sharp\partial_n\sigma = f_\sharp\left(\sum_{j = 0}^{n}(-1)^j\sigma\circ\varepsilon^n_j\right) = \sum_{j = 0}^n(-1)^j f\circ\sigma\circ\varepsilon^n_{j}.
+    \end{equation*}
+    On the other hand, 
+    \begin{equation*}
+        \partial_nf_\sharp\sigma = \partial_n(f\circ\sigma) = \sum_{j = 0}^n(-1)^j f\circ\sigma\circ\varepsilon^n_j.\qedhere
+    \end{equation*}
+\end{proof}
+
+\begin{notation} 
+    Therefore, $f_\sharp: S_\bullet(X)\to S_\bullet(Y)$ is a chain map and hence, induces a map on the homology groups, $H_n(f): H_n(X)\to H_n(Y)$ given by 
+    \begin{equation*}
+        H_n(f)(\zeta + B_n(X)) = f_\sharp(\zeta) + B_n(Y),
+    \end{equation*}
+    for $\zeta\in Z_n(X)$.
+\end{notation}
+
+It is not hard to see that $g_\sharp\circ f_\sharp = (g\circ f)_\sharp$, and hence, $H_n(g\circ f) = H_n(g)\circ H_n(f)$, that is, $H_n$ is a \important{functor} from the category of topological spaces to the category of (abelian) groups.
+
+\subsection{Homotopy Invariance}
+
+\begin{theorem}\thlabel{thm:convex-has-no-homology}
+    If $X$ is a bounded convex subspace of Euclidean space, then $H_n(X) = 0$ for all $n\ge 1$.
+\end{theorem}
+\begin{proof}
+    Fix a point $b\in X$. For every $n$-simplex $\sigma:\Delta^n\to X$, define the ``cone over $\sigma$ with vertex $b$'' to be the $n + 1$-simplex $b\cdot\sigma:\Delta^{n + 1}\to X$ as follows 
+    \begin{equation*}
+        (b\cdot\sigma)(t_0,\dots, t_{n + 1}) = 
+        \begin{cases}
+            b & t_0 = 1\\
+            t_0b + (1 - t_0)\sigma\left(\frac{t_1}{1 - t_0},\dots,\frac{t_{n + 1}}{1 - t_0}\right) & t_0\ne 1.
+        \end{cases}
+    \end{equation*}
+    A routine argument shows that $b\cdot\sigma$ is continuous.
+
+    Define $c_n: S_n(X)\to S_{n + 1}(X)$ to be the unique group homomorphism extending $\sigma\mapsto b\cdot\sigma$. We claim that for all $n\ge 1$ and every $n$-simplex $\sigma$ in $X$, 
+    \begin{equation*}
+        \partial_{n + 1}c_n(\sigma) + c_{n - 1}\partial_n(\sigma) = \sigma.
+    \end{equation*}
+
+    We must first compute the faces of $c_n(\sigma)$ for $n\ge 1$ and $0\le i\le n + 1$. If $i = 0$, then 
+    \begin{equation*}
+        ((b\cdot\sigma)\varepsilon_0^{n + 1})(t_0,\dots,t_n) = (b\cdot\sigma)(0,t_0,\dots,t_n) = \sigma(t_0,\dots, t_n).
+    \end{equation*}
+    On the other hand, if $1\le i\le n + 1$, then 
+    \begin{equation*}
+        ((b\cdot\sigma)\varepsilon^{n + 1}_i)(t_0,\dots, t_n) = (b\cdot\sigma)(t_0,\dots, t_{i - 1},0,t_i,\dots, t_n).
+    \end{equation*}
+    If $t_0 = 1$, then the right hand side is equal to $b$. Otherwise, 
+    \begin{align*}
+        ((b\cdot\sigma)\varepsilon^{n + 1}_i)(t_0,\dots, t_n) &= (b\cdot\sigma)(t_0,\dots,t_{i - 1}, 0,t_i,\dots, t_n)\\
+        &= t_0b + (1 - t_0)\sigma\left(\frac{t_1}{1 - t_0}, \dots,\frac{t_{i - 1}}{1 - t_0},0,\frac{t_i}{1 - t_0},\dots,\frac{t_n}{1 - t_0}\right)\\
+        &= t_0b + (1 - t_0)\sigma\varepsilon_{i - 1}^n \left(\frac{t_1}{1 - t_0},\dots,\frac{t_n}{1 - t_0}\right)\\
+        &= c_{n - 1}(\sigma\varepsilon_{i - 1}^n)(t_0,\dots, t_n).
+    \end{align*}
+
+    Thus, 
+    \begin{equation*}
+        (c_n\sigma)\varepsilon^{n + 1}_0 = \sigma \quad\text{and}\quad(c_n\sigma)\varepsilon^{n + 1}_i = c_{n - 1}(\sigma\varepsilon^{n}_{i - 1})\quad i > 0.
+    \end{equation*}
+
+    This gives us 
+    \begin{align*}
+        \partial_{n + 1}c_n(\sigma) &= \sum_{i = 0}^{n + 1}(-1)^i (c_n\sigma)\varepsilon_i^{n + 1}\\
+        &= \sigma + \sum_{i = 1}^{n + 1}(-1)^i c_{n - 1}(\sigma\varepsilon^n_{i - 1})\\
+        &= \sigma - \sum_{j = 0}^{n} (-1)^j c_{n - 1}(\sigma\varepsilon^n_j)\\
+        &= \sigma - c_{n - 1}\partial_n\sigma,
+    \end{align*}
+    thereby completing the proof.
+\end{proof}
+
+\begin{porism}\thlabel{porism:boundary-cone-construction}
+    Let $X$ be convex and let $\gamma = \sum m_i\sigma_i\in S_n(X)$. If $b\in X$, then 
+    \begin{equation*}
+        \partial(b\cdot\gamma) = 
+        \begin{cases}
+            \gamma - b\cdot\partial\gamma & n > 0\\
+            \left(\sum m_i\right)b - \gamma & n = 0.
+        \end{cases}
+    \end{equation*}
+\end{porism}
+
+\begin{lemma}\thlabel{lem:technical-homotopy-invariance}
+    Let $X$ be a space and for $i = 0, 1$, let $\lambda^X_i: X\to X\times I$ be defined by $x\mapsto(x, i)$. If $H_n(\lambda^X_0) = H_n(\lambda^X_1)$, then $H_n(f) = H_n(g)$ whenever $f,g: X\to Y$ are homotopic.
+\end{lemma}
+\begin{proof}
+    Let $F: X\times I\to Y$ be a homotopy between $f$ and $g$. Then, $F\circ\lambda^X_0 = f$ and $F\circ\lambda^X_1 = g$. This gives us 
+    \begin{equation*}
+        H_n(f) = H_n(F\lambda_0^X) = H_n(F)H_n(\lambda^X_0) = H_n(F)H_n(\lambda^X_1) = H_n(F\lambda^X_1) = H_n(g),
+    \end{equation*}
+    for all $n\ge 0$.
+\end{proof}
+
+\begin{theorem}[Homotopy Invariance of $H_n$]
+    If $f, g: X\to Y$ are homotopic, then $H_n(f) = H_n(g)$ for all $n\ge 0$.
+\end{theorem}
+\begin{proof}
+    Due to \thref{lem:technical-homotopy-invariance}, it suffices to show that $H_n(\lambda^X_0) = H_n(\lambda^X_1)$ for all $n\ge 0$. To this end, we construct a chain homotopy $P_n^X: S_n(X)\to S_{n + 1}(X\times I)$ satisfying 
+    \begin{equation*}
+        {\lambda^X_{1\sharp}} - \lambda^X_{0\sharp} = \partial_{n + 1}P_n^X + P_{n - 1}^X\partial_n
+    \end{equation*}
+    for all spaces $X$. Further, we require it to satisfy a ``naturality'' condition, that is, for every $\sigma:\Delta^n\to X$
+    \begin{equation*}
+        \xymatrix {
+            S_n(\Delta^n)\ar[r]^-{P_n^{\Delta^n}}\ar[d]_{\sigma_\sharp} & S_{n + 1}(\Delta^n\times I)\ar[d]^{(\sigma\times 1)_\sharp}\\
+            S_n(X)\ar[r]_-{P_n^{X}} & S_{n + 1}(X\times I)
+        }
+    \end{equation*}
+    commutes.
+
+    Obviously $P_{-1}^X = 0$, since $S_{-1}(X) = 0$. For $\sigma:\Delta^0\to X$, define $P^X_0(\sigma): \Delta^1\to X\times I$ by $t\mapsto(\sigma(e_0), t)$ where we use $t$ to parametrize $\Delta^1$ through $t\mapsto (1 - t)e_0 + te_1$, which is obviously a homeomorphism. It is a routine exercise to verify that this defnition satisfies both conditions we needed.
+
+    Suppose now that $n\ge 1$. Henceforth, $\Delta$ denotes $\Delta^n$. First, we show that for every $\gamma\in S_n(X)$, $(\lambda^\Delta_{1\sharp} - \lambda^\Delta_{0\sharp} - P^{\Delta}_{n - 1}\partial_n)(\gamma)\in Z_n(\Delta^n\times I)$. Indeed,
+    \begin{align*}
+        \partial_n(\lambda^\Delta_{1\sharp} - \lambda^\Delta_{0\sharp} - P^{\Delta}_{n - 1}\partial_n) &= \lambda^\Delta_{1\sharp}\partial_n - \lambda^\Delta_{0\sharp}\partial_n - \partial_nP^\Delta_{n - 1}\partial_n\\
+        &= \lambda^\Delta_{1\sharp}\partial_n - \lambda^\Delta_{0\sharp}\partial_n - \left(\lambda^\Delta_{1\sharp} - \lambda^\Delta_{0\sharp} - P^{\Delta}_{n - 2}\partial_{n - 1}\right)\partial_n\\
+        &= 0,
+    \end{align*}
+    where we have used the induction hypothesis to obtain the second equality.
+
+    Let $\delta: \Delta^n\to\Delta^n$ denote the identity map. Then, $\delta\in S_n(\Delta^n)$ whence $(\lambda^\Delta_{1\sharp} - \lambda^\Delta_{0\sharp} - P^{\Delta}_{n - 1}\partial_n)(\delta)\in Z_n(\Delta^n\times I)$. We have seen in \thref{thm:convex-has-no-homology} that $Z_n(\Delta^n\times I) = B_n(\Delta^n\times I)$, consequently, there is $\beta_{n + 1}\in S_{n + 1}(\Delta^n\times I)$ such that
+    \begin{equation*}
+        \partial_{n + 1}\beta_{n + 1} = (\lambda^\Delta_{1\sharp} - \lambda^\Delta_{0\sharp} - P^{\Delta}_{n - 1}\partial_n)(\delta).
+    \end{equation*}
+
+    Define $P^X_n: S_n(X)\to S_{n + 1}(X\times I)$ to be the unique group homomorophism extending 
+    \begin{equation*}
+        P_n^X(\sigma) = (\sigma\times 1)_\sharp(\beta_{n + 1}),
+    \end{equation*}
+    where $\sigma: \Delta^n\to X$ is an $n$-simplex in $X$. It remains to verify the two conditions for $P_n$. Before we proceed, we note that 
+    \begin{equation*}
+        (\sigma\times 1)\lambda^\Delta_i = \lambda^X_i\sigma: \Delta^n\to X\times I.
+    \end{equation*}
+
+    Now, let $\sigma$ be an $n$-simplex in $X$. Then, 
+    \begin{align*}
+        \partial_{n + 1}P_n^X(\sigma) &= \partial_{n + 1}(\sigma\times 1)_\sharp(\beta_{n + 1})\\
+        &= (\sigma\times 1)_{\sharp}\partial_{n + 1}(\beta_{n + 1})\\
+        &= (\sigma\times 1)_\sharp\left(\lambda^\Delta_{1\sharp} - \lambda^\Delta_{0\sharp} - P^{\Delta}_{n - 1}\partial_n\right)(\delta)\\
+        &= (\sigma\times 1)_{\sharp}\left(\lambda^\Delta_1 - \lambda^\Delta_0 - P_{n - 1}^\Delta\partial_n(\delta)\right)\\
+        &= (\sigma\times 1)\lambda^\Delta_1 - (\sigma\times 1)\lambda^\Delta_0 - (\sigma\times 1)_\sharp P^\Delta_{n - 1}\partial_n(\delta)\\
+        &= \lambda^\Delta_1\sigma - \lambda^\Delta_0\sigma - P^X_{n - 1}\partial_n\sigma(\delta)\\
+        &= \left(\lambda_1^\Delta - \lambda^X_0 - P^X_{n - 1}\partial_n\right)(\sigma).
+    \end{align*}
+    This verifies the first equation.
+
+    Next, we verify ``naturality''. Let $\tau:\Delta^n\to\Delta^n$ be an $n$-simplex. Then, for every $\sigma: \Delta^n\to X$,
+    \begin{equation*}
+        (\sigma\times 1)_{\sharp} P^\Delta_n(\tau) = (\sigma\times 1)_{\sharp}(\tau\times 1)_{\sharp}(\beta_{n + 1}) = (\sigma\tau\times 1)_{\sharp}(\beta_{n + 1}).
+    \end{equation*}
+    On the other hand, 
+    \begin{equation*}
+        P^X_n\sigma_\sharp(\tau) = P^X_n(\sigma\tau) = (\sigma\tau\times 1)_{\sharp}(\beta_{n + 1}).
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{porism}
+    If $f: X\to Y$ is continuous, then the following diagram commutes. 
+    \begin{equation*}
+        \xymatrix {
+            S_n(X)\ar[r]^-{P^X_n}\ar[d]_{f_\sharp} & S_{n + 1}(X\times I)\ar[d]^{(f\times 1)_\sharp}\\
+            S_n(Y)\ar[r]_-{P^Y_n} & S_{n + 1}(Y\times I)
+        }
+    \end{equation*}
+\end{porism}
+\begin{proof}
+    Let $\sigma$ be an $n$-simplex in $X$. We know that the outer rectangle and the upper square in the following diagram commute.  
+    \begin{equation*}
+        \xymatrix {
+            S_n(\Delta^n)\ar[r]^-{P_n^{\Delta^n}}\ar[d]_{\sigma_\sharp} & S_{n + 1}(\Delta^n\times I)\ar[d]^{(\sigma\times 1)_\sharp}\\
+            S_n(X)\ar[r]_-{P_n^{X}}\ar[d]_{f_\sharp} & S_{n + 1}(X\times I)\ar[d]^{(f\times 1)_\sharp}\\
+            S_n(Y)\ar[r]_-{P^Y_n} & S_{n + 1}(Y\times I)
+        }
+    \end{equation*}
+    This would, after a straightforward diagram chase, imply that the lower square also commutes.
+\end{proof}
+
+\subsection{Relative Homology Groups}
+
+\begin{definition}
+    Let $X$ be a topological space and $A\subseteq X$ a subspace. The inclusion $j: A\into X$ defines an inclusion $j_\sharp: S_\bullet(A)\into S_\bullet(X)$. This gives us an induced complex, $S_\bullet(X)/S_\bullet(A)$,
+    \begin{equation*}
+        \xymatrix {
+        \cdots\ar[r] & S_n(A)\ar[r]\ar@{^{(}->}[d] & S_{n - 1}(A)\ar[r]\ar@{^{(}->}[d] & \cdots\\
+        \cdots\ar[r] & S_n(X)\ar[r]\ar[d] & S_{n - 1}(X)\ar[r]\ar[d] & \cdots\\
+        \cdots\ar[r] & S_n(X)/S_n(A)\ar[r] & S_{n - 1}(X)/S_{n - 1}(A)\ar[r] & \cdots\\
+        }
+    \end{equation*}
+    The homology groups of the induced complex are denoted by $H_n(X, A)$. These are known as the \define{relative homology groups}. We often denote the boundary maps of the induced complex by $\overline\partial_n$.
+\end{definition}
+
+\begin{lemma}[Exact Triangle Lemma]\thlabel{lem:exact-triangle-lemma}
+    If $0\to (S_\bullet', \partial')\stackrel{i}{\to} (S_\bullet, \partial)\stackrel{p}{\to} (S_\bullet'', \partial'')\to 0$ is exact, then there is a long exact sequence 
+    \begin{equation*}
+        \cdots\to H_n(S_\bullet')\stackrel{i_\ast}{\to} H_n(S_\bullet)\stackrel{p_\ast}{\to} H_n(S_\bullet'')\stackrel{d}{\to} H_{n - 1}(S_\bullet')\to\cdots.
+    \end{equation*}
+    where the map $d_n: H_n(S_\bullet'')\to H_{n - 1}(S_\bullet'')$ is given by 
+    \begin{equation*}
+        [z_n'']\mapsto \left[i_{n - 1}^{-1}\partial_np_n^{-1}z_n''\right],
+    \end{equation*}
+    where $[\cdot]$ denotes the equivalence class of a cycle in the homology group. Diagramatically, we pull back $z_n''$ as follows: 
+    \begin{equation*}
+        \xymatrix {
+        & & S_n\ar[r]^{p_n}\ar[d]^{\partial_n} & S_n''\ar[r] & 0\\
+        0\ar[r] & S_{n - 1}'\ar[r]_{i_n} & S_{n - 1} & & 
+        }
+    \end{equation*}
+    Further, the maps $d$ are natural.
+\end{lemma}
+\begin{proof}
+    This is a relatively straightforward diagram chase. I'll probably add the details in someday.
+\end{proof}
+
+\begin{definition}
+    A \define{map of pairs} $f: (X, A)\to (Y, B)$ is a continuous map $f: X\to Y$ such that $f(A)\subseteq B$.
+\end{definition}
+
+From the defintion, $f$ induces maps $f_\sharp: S_\bullet(A)\to S_\bullet(B)$ and $f_\sharp: S_\bullet(X)\to S_\bullet(Y)$ making the following diagram commute. 
+\begin{equation*}
+    \xymatrix {
+        S_n(A)\ar[r]\ar[d]_{f_\sharp} & S_n(X)\ar[d]^{f_\sharp}\\
+        S_n(B)\ar[r] & S_n(Y)
+    }
+\end{equation*}
+Consequently, there is an induced map, $\overline f_\sharp: S_\bullet(X, A)\to S_\bullet(Y, B)$, which follows from the universal property of the cokernel. This, in turn makes the following diagram commute: 
+\begin{equation*}
+    \xymatrix {
+        0\ar[r] & S_n(A)\ar[r]\ar[d]_{f_\sharp} & S_n(X)\ar[d]^{f_\sharp}\ar[r] & S_n(X, A)\ar[r]\ar[d]_{f_\sharp} & 0\\
+        0\ar[r] & S_n(B)\ar[r] & S_n(Y)\ar[r] & S_n(Y, B)\ar[r] & 0
+    }
+\end{equation*}
+
+\begin{theorem}[Exact Sequence for Pairs]
+    If $A$ is a subspace of $X$, then there is a long exact sequence 
+    \begin{equation*}
+        \cdots\to H_n(A)\stackrel{i_\ast}{\to} H_n(X)\stackrel{p_\ast}{\to} H_n(X, A)\stackrel{d}{\to} H_{n - 1}(A)\to\cdots.
+    \end{equation*}
+    Moreover, if $f: (X, A)\to (Y, B)$ then there is the following commutative diagram (naturality).
+    \begin{equation*}
+        \xymatrix {
+        \cdots\ar[r] & H_n(A)\ar[r]\ar[d]_{f_\ast} & H_n(X)\ar[r]\ar[d]_{f_\ast} & H_n(X, A)\ar[r]\ar[d]_{f_\ast} & H_{n - 1}(A)\ar[r]\ar[d]_{f_\ast} & \cdots\\
+        \cdots\ar[r] & H_n(B)\ar[r] & H_n(Y)\ar[r] & H_n(Y, B)\ar[r] & H_{n - 1}(B)\ar[r] & \cdots
+        }
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Follows from the discussion above and \thref{lem:exact-triangle-lemma}.
+\end{proof}
+
+\begin{theorem}[Exact Sequence for Triples]
+    If $A'\subseteq A\subseteq X$ are subspaces, then there is a long exact sequence 
+    \begin{equation*}
+        \cdots\to H_n(A, A')\to H_n(X, A')\to H_n(X, A)\to H_{n - 1}(X, A)\to\cdots,
+    \end{equation*}
+    where the maps (other than the connecting map) are induced by $(A, A')\to (X, A')$ and $(X, A')\to (X, A)$. 
+
+    Moreover, if $f: (X, A, A')\to (Y, B, B')$ is a map of pairs, then there is a commutative diagram 
+    \begin{equation*}
+        \xymatrix {
+        \cdots\ar[r] & H_n(A, A')\ar[r]\ar[d]_{f_\ast} & H_n(X, A')\ar[r]\ar[d]_{f_\ast} & H_n(X, A)\ar[r]\ar[d]_{f_\ast} & H_{n - 1}(A, A')\ar[r]\ar[d]_{f_\ast} & \cdots\\
+        \cdots\ar[r] & H_n(B, B')\ar[r] & H_n(Y, B')\ar[r] & H_n(Y, B)\ar[r] & H_{n - 1}(B, B')\ar[r] & \cdots
+        }
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Using the third isomorphism theorem, there is a short exact sequence 
+    \begin{equation*}
+        0\to S_\bullet(A)/S_\bullet(A')\to S_\bullet(X)/S_\bullet(A')\to S_\bullet(X)/S_\bullet(A)\to 0.
+    \end{equation*}
+    The first map is induced by the inclusion $(A, A')\into(X, A')$ and it is easy to see that the second map is induced by the inclusion $(X, A')\into(X, A)$. The remainder follows from \thref{lem:exact-triangle-lemma}.
+\end{proof}
+
+\section{Excision and Mayer-Vietoris}
+
+\begin{theorem}[Excision I]
+    Let $U\subseteq \overline U\subseteq A^\circ\subseteq\subseteq A\subseteq X$. Then, the inclusion $i: (X\sminus U, A\sminus U)\into (X, A)$ induces an isomorphism of relative homology groups for all $n\ge 0$.
+\end{theorem}
+
+\begin{theorem}[Excision II]\thlabel{thm:excision-2}
+    Let $X_1$ and $X_2$ be subspaces of $X$ with $X = X_1^\circ\cup X_2^\circ$. Then, the inclusion $j: (X_1, X_1\cap X_2)\into(X, X_2) = (X_1\cup X_2, X_2)$ induces isomorphisms $j_\ast: H_n(X_1, X_1\cap X_2)\to H_n(X, X_2)$.
+\end{theorem}
+
+\subsection{Barycentric Subdivision and the Proof of Excision}
+
+\begin{definition}
+    Let $n\ge 1$. Points $p_0,\dots, p_n\in\R^n$ are said to be \define{affine independent} if $\{p_1 - p_0,\dots, p_n - p_0\}$ is a linearly independent subset of $\R^n$.
+
+    An \define{affine $n$-simplex} $\Sigma^n$ in $\R^n$ is the convex hull of an affine independent set $\{p_0,\dots, p_n\}\subseteq\R^n$. The \define{barycenter} of $\Sigma^n$ is defined to be 
+    \begin{equation*}
+        b = \frac{p_0 + \dots + p_n}{n + 1}.
+    \end{equation*}
+    An \define{$i$-face} of $\Sigma^n$ is a simplex spanned by some $i + 1$ elements of $\{p_0,\dots, p_n\}$.
+\end{definition}
+
+\begin{definition}
+    The \define{barycentric subdivision} of an affine $n$-simplex $\Sigma^n$, denoted by $\Sd\Sigma^n$ is a family of affine $n$-simplexes defined inductively for $n\ge 0$ as follows:
+    \begin{enumerate}[label=(\alph*)]
+        \item $\Sd\Sigma^0 = \Sigma^0$. 
+        \item If $\varphi_0,\dots,\varphi_{n + 1}$ are the $n$-faces of $\Sigma^{n + 1}$ and if $b$ is the barycenter of $\Sigma^{n + 1}$, then $\Sd\Sigma^{n + 1}$ consists of all the $(n + 1)$-simplexes spanned by $b$ and $n$-simplexes in $\Sd\varphi_i$, $0\le i\le n + 1$.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Let $E$ be a convex subset of Euclidean space. Then, \define{barycentric subdivision} is a homomorphism $\Sd_n: S_n(E)\to S_n(E)$ defined inductively on $n$-simplexes $\tau:\Delta^n\to E$ as follows: 
+    \begin{enumerate}[label=(\alph*)]
+        \item If $n = 0$, then $\Sd_0(\tau) = \tau$. 
+        \item If $n > 0$, then $\Sd_n(\tau) = \tau(b_n)\cdot\Sd_{n - 1}(\partial\tau)$, where $b_n$ is the barycenter of $\Delta^n$.
+    \end{enumerate}
+    where $b\cdot\sigma$ refers to the ``cone construction'' from the proof of \thref{thm:convex-has-no-homology}.
+\end{definition}
+
+\begin{definition}
+    If $X$ is any topological space, then the $n$-th \define{barycentric subdivision}, for $n\ge 0$, is the homomorphism $\Sd_n: S_n(X)\to S_n(X)$ extending the map on $n$-simplexes $\sigma: \Delta^n\to X$ given by 
+    \begin{equation*}
+        \Sd_n(\sigma) = \sigma_\sharp\Sd_n(\delta^n),
+    \end{equation*}
+    where $\delta^n: \Delta^n\to\Delta^n$ is the identity map and $\sigma_\sharp: S_n(\Delta^n)\to S_n(X)$ is the induced map.
+\end{definition}
+
+\begin{remark}
+    It is easy to see that both definitions agree when $X$ is a convex subset of Euclidean space. 
+\end{remark}
+
+\begin{lemma}
+    If $f: X\to Y$ is continuous, then 
+    \begin{equation*}
+        \xymatrix {
+            S_n(X)\ar[r]^{\Sd}\ar[d]_{f_\sharp} & S_n(X)\ar[d]^{f_\sharp}\\
+            S_n(Y)\ar[r]_{\Sd} & S_n(Y)
+        }
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Immediate from the above definition.
+\end{proof}
+
+\begin{proposition}
+    $\Sd: S_\bullet(X)\to S_\bullet(X)$ is a chain map.
+\end{proposition}
+\begin{proof}
+    First, suppose $X$ is a convex subset of Euclidean space and let $\tau:\Delta^n\to X$ be an $n$-simplex. We shall prove, by induction on $n\ge 0$, that $\Sd_{n - 1}\partial_n\tau = \partial_n\Sd_n\tau$. If $n = 0$, then there is nothing to prove. If $n > 0$, then 
+    \begin{align*}
+        \partial_n\Sd_n\tau &= \partial_n\left(\tau(b_n)\cdot\Sd_{n - 1}\partial_n\tau\right)\\
+        &= \Sd_{n - 1}\partial_n\tau - \tau(b_n)\cdot\left(\partial_{n - 1}\Sd_{n - 1}\partial_n\tau\right)\\
+        &= \Sd_{n - 1}\partial_n\tau - \tau(b_n)\cdot\left(\Sd_{n - 2}\partial_{n - 1}\partial_n\tau\right)\\
+        &= \Sd_{n - 1}\partial_n\tau,
+    \end{align*}
+    where the second equality follows from \thref{porism:boundary-cone-construction}
+
+    Now, let $X$ be any topological space. Let $\sigma:\Delta^n\to X$ be an $n$-simplex.
+    \begin{align*}
+        \partial_n\Sd_n(\sigma) &= \partial_n\sigma_\sharp\Sd_n(\delta^n)\\
+        &= \sigma_\sharp\partial_n\Sd_{n}(\delta^n)\\
+        &= \sigma_\sharp\Sd_{n - 1}\partial_n(\delta^n)\\
+        &= \Sd_{n - 1}\sigma_\sharp\partial_n(\delta^n)\\
+        &= \Sd_{n - 1}\partial_n\sigma_\sharp(\delta^n)\\
+        &= \Sd_{n - 1}\partial_n\sigma.
+    \end{align*}
+    This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    For each $n\ge 0$, $H_n(\Sd): H_n(X)\to H_n(X)$ is the identity.
+\end{proposition}
+\begin{proof}
+    We shall construct a chain homotopy between $\Sd$ and $1$. First, suppose $X$ is a convex subset of Euclidean space. We chall construct a chain homotopy $T_n: S_n(X)\to S_{n + 1}(X)$ by induction on $n$. If $n = 0$, define $T_0$ to be the zero map. It is obvious that 
+    \begin{equation*}
+        \partial_1T_0 = 1 - \Sd_0,
+    \end{equation*}
+    since $\Sd_0$ is the identity map.
+
+    Let $n\ge 1$ and $\gamma\in S_n(X)$. Note that $\gamma - \Sd_n\gamma - T_{n - 1}\partial_n\gamma$ is a cycle. Indeed, 
+    \begin{align*}
+        \partial_n\left(\gamma - \Sd_n\gamma - T_{n - 1}\partial_n\gamma\right) &= \partial_n\gamma - \Sd_{n - 1}\partial_n\gamma - \partial_nT_{n - 1}\partial_n\gamma\\
+        &= \partial_n\gamma - \Sd_{n - 1}\partial_n\gamma - \left(1 - \Sd_{n - 1} - T_{n - 2}\partial_{n - 1}\right)\partial_n\gamma\\
+        &= 0,
+    \end{align*}
+    where the second equality uses the induction hypothesis.
+
+    Define $T_n\gamma = b\cdot(\gamma - \Sd_{n}\gamma - T_{n - 1}\partial_n\gamma)$ where $b$ is a a fixed point in $X$. Uing \thref{porism:boundary-cone-construction},
+    \begin{equation*}
+        \partial_{n + 1}T_n\gamma = \gamma - \Sd_n\gamma - T_{n - 1}\partial_n\gamma.
+    \end{equation*}
+    This proves the statement for the case when $X$ is convex.
+
+    Suppose now that $X$ is any topological space. If $\sigma:\Delta^n\to X$ is an $n$-simplex, define $T_n$ to be the unique group homomorphism $T_n: S_n(X)\to S_{n + 1}(X)$ extending
+    \begin{equation*}
+        T_n(\sigma) = \sigma_\sharp T_n(\delta^n)\in S_{n + 1}(X),
+    \end{equation*}
+    where $\delta^n:\Delta^n\to\Delta^n$ is the identity map. 
+
+    First, we show a ``naturality'' of $T_n$. Let $f: X\to Y$ be continuous. We contend that 
+    \begin{equation*}
+        \xymatrix {
+            S_n(X)\ar[r]^{f_\sharp}\ar[d]_{T_n} & S_n(Y)\ar[d]^{T_n}\\
+            S_{n + 1}(X)\ar[r]_{f_\sharp} & S_{n + 1}(Y)
+        }
+    \end{equation*}
+    commutes. Let $\sigma:\Delta^n\to X$ be an $n$-simplex in $X$. Then,
+    \begin{equation*}
+        T_nf_\sharp\sigma = T_n(f\circ\sigma) = (f\circ\sigma)_\sharp T_n(\delta^n) = f_\sharp\sigma_\sharp T_n(\delta^n) = f_\sharp T_n(\sigma).
+    \end{equation*}
+
+    Finally, we show that $T_n$ is the desired chain homotopy. Let $\sigma:\Delta^n\to X$ be an $n$-simplex. Then, 
+    \begin{align*}
+        \partial_{n + 1}T_n\sigma &= \partial_{n + 1}\sigma_\sharp T_n(\delta^n)\\
+        &= \sigma_\sharp\partial_{n + 1}T_n(\delta^n)\\
+        &= \sigma_\sharp\left(\delta^n - \Sd_n\delta^n - T_{n - 1}\partial_n\delta^n\right)\\
+        &= \sigma - \sigma_\sharp\Sd_n\delta^n - \sigma_\sharp T_{n - 1}\partial_n\delta^n\\
+        &= \sigma - \Sd_n\sigma - T_{n - 1}\partial_n\sigma.
+    \end{align*}
+    This completes the proof.
+\end{proof}
+
+\begin{definition}
+    If $E$ is a subspace of Euclidean space, and if $\gamma = \sum_j m_j\sigma_j\in S_n(E)$, where all $m_j\ne 0$, then define the \define{mesh} of $\gamma$ to be 
+    \begin{equation*}
+        \mesh\gamma = \sup_j\left(\diam\sigma_j(\Delta^n)\right).
+    \end{equation*}
+
+    The chain $\gamma$ is said to be \define{affine} if each $\sigma_j:\Delta^n\to E$ is affine.
+\end{definition}
+
+\begin{theorem}
+    If $E$ is a subspace of some Euclidean space and $\gamma$ is an affine $n$-chain in $E$, then for all integers $q\ge 1$, 
+    \begin{equation*}
+        \mesh\Sd^q\gamma = \left(\frac{n}{n + 1}\right)^q\mesh\gamma.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Straightforward induction. The base case is an exercise in triangle inequalities.
+\end{proof}
+
+\begin{lemma}
+    If $X_1, X_2\subseteq X$ with $X = X_1^\circ\cup X_2^\circ$, and if $\sigma$ is an $n$-simplex in $X$, then there is an integer $q\ge 1$ with 
+    \begin{equation*}
+        \Sd^q\sigma\in S_n(X_1) + S_n(X_2),
+    \end{equation*}
+    where we treat $S_n(X_1)$ and $S_n(X_2)$ as submodules of $S_n(X)$.
+\end{lemma}
+\begin{proof}
+    Let $\sigma:\Delta^n\to X$ be an $n$-simplex in $X$. Then, $\{\sigma^{-1}X_1^\circ, \sigma^{-1}X_2^\circ\}$ forms an open cover for $\Delta^n$ and hence, admits a Lebesgue number $\lambda > 0$. Thus, there is a $q\ge 1$ with $\mesh\Sd^q_n(\delta^n) < \lambda$.
+
+    Note that $\Sd_n^q(\sigma) = \sigma_\sharp\Sd^q(\delta^n)$. Let $\Sd^q(\delta^n) = \sum_{j} m_j\tau_j$. Then, for each $j$, $\diam\tau_j(\Delta^n) < \lambda$, whence, $\sigma\tau_j(\Delta^n)\subseteq X_i$ for some $i\in\{1,2\}$. Consequently, $\sigma_\sharp\Sd^q(\delta^n)\in S_n(X_1) + S_n(X_2)$.
+\end{proof}
+
+\begin{lemma}
+    Let $X_1, X_2\subseteq X$. If the inclusion $S_\bullet(X_1) + S_\bullet(X_2)\into S_\bullet(X)$ induces isomorphisms in homology, then excision holds for the subspaces $X_1$ and $X_2$ of $X$.
+\end{lemma}
+\begin{proof}
+    We have a commutative diagram: 
+    \begin{equation*}
+        \xymatrix {
+            \frac{S_\bullet(X_1)}{S_\bullet(X_1\cap X_2)}\ar[rr]^k\ar[rd]_\ell & & \frac{S_\bullet(X)}{S_\bullet(X_2)}\\
+            & \frac{S_\bullet(X_1) + S_\bullet(X_2)}{S_\bullet(X_2)}\ar[ru]_j & 
+        }
+    \end{equation*}
+    where $k$ is induced by $(X_1, X_1\cap X_2)\into(X_1, X_2)$ and $\ell$ and $j$ are the obvious natural maps. Since $S_\bullet(X_1\cap X_2) = S_\bullet(X_1)\cap S_\bullet(X_2)$, the map $\ell$ is an isomorphism and hence, so is $H_n(\ell)$.
+
+    It remains to show that $H_n(j)$ is an isomorphism. Indeed, we have a short exact sequence of complexes: 
+    \begin{equation*}
+        0\longrightarrow\frac{S_\bullet(X_1) + S_\bullet(X_2)}{S_\bullet(X_2)}\stackrel{j}{\longrightarrow}\frac{S_\bullet(X)}{S_\bullet(X_2)}\longrightarrow\frac{S_\bullet(X)}{S_\bullet(X_1) + S_\bullet(X_2)}\longrightarrow 0.
+    \end{equation*}
+    Since $H_n(S_\bullet(X)/S_\bullet(X_1) + S_\bullet(X_2)) = 0$ for all $n\ge 0$, from the long exact sequence for homology, we deduce that $H_n(j)$ is an isomorphism. This completes the proof.
+\end{proof}
+
+\begin{proof}[Proof of \thref{thm:excision-2}]
+    
+\end{proof}
+
+\section{The Universal Coefficients}
+
+\begin{theorem}[Universal Coefficient Theorem for Homology]\thlabel{thm:uct-homology}
+    Let $X$ be a topological space and $G$ an abelian group. Then, there are \important{split exact sequences} for all $n\ge 0$:
+    \begin{equation*}
+        0\to H_n(X)\otimes_{\Z}G\stackrel{\alpha}{\longrightarrow} H_n(X; G)\longrightarrow\Tor^{\Z}_1(H_{n - 1}(X); G)\to 0,
+    \end{equation*}
+    where $\alpha$ is defined on the pure tensors by $[z]\otimes g\mapsto [z\otimes g]$.
+
+    In particular, 
+    \begin{equation*}
+        H_n(X; G)\cong \left(H_n(X)\otimes_{\Z} G\right)\oplus\Tor^{\Z}_1(H_{n - 1}(X), G).
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    We prove this in a more general setting, for any complex $(C_\bullet, \partial)$ of free abelian groups. Let $B_n, Z_n$ have their usual meanings. Then, we have a short exact sequence 
+    \begin{equation*}
+        0\to Z_n\stackrel{i_n}{\longrightarrow} C_n\stackrel{d_n}{\longrightarrow} B_{n - 1}\to 0,
+    \end{equation*}
+    where $d_n$ is just $\partial_n$ with the codomain restricted to $B_{n - 1}$. Since $B_{\bullet}$ is a complex of flat (in fact, free) $\Z$-modules, we have a short exact sequence of complexes: 
+    \begin{equation*}
+        \xymatrix {
+        0\ar[r] & \mathscr{Z}_\bullet\otimes_{\Z} G\ar[r]^-{i_\bullet\otimes 1} & C_\bullet\otimes_\Z G\ar[r]^-{d_\bullet\otimes 1} & \mathscr{B}_\bullet\times_{\Z} G\ar[r] & 0
+        }
+    \end{equation*}
+    where $\mathscr Z_n = Z_n$ and $\mathscr B_n = B_{n - 1}$. The boundary maps in both complexes $\mathscr Z_\bullet$ and $\mathscr B_\bullet$ are the zero maps and hence, the homology groups are readily computed. This gives us a long exact sequence 
+    \begin{equation*}
+        \cdots\rightarrow B_n\otimes G\xrightarrow{\Delta_{n + 1}} Z_n\otimes G\xrightarrow{(i_n\otimes 1)_\ast} H_n(C_\bullet\otimes G)\xrightarrow{(d_n\otimes 1)_\ast} B_{n - 1}\otimes G\rightarrow\cdots
+    \end{equation*}
+
+    We shall now explicitly compute the connecting homomorphism. It is given by the following diagram: 
+    \begin{equation*}
+        \xymatrix{
+        & & C_n\otimes G\ar[r]^-{d_n\otimes 1}\ar[d]_-{\partial_n\otimes 1} & B_{n - 1}\otimes G\ar[r] & 0\\
+        0\ar[r] & Z_{n - 1}\otimes G\ar[r]_-{i_{n - 1}\otimes 1} & C_{n - 1}\otimes G
+        }
+    \end{equation*}
+    The image of $b_{n - 1}\otimes g\in B_{n - 1}\otimes G$ under the connecting homomorphism is given by 
+    \begin{equation*}
+        \Delta_n(b_{n - 1}\otimes g) = (i_{n - 1}\otimes 1)^{-1}(\partial_n\otimes 1)(d_n\otimes 1)^{-1}(b_{n - 1}\otimes g) = i_{n -1}^{-1}\partial_n d_n^{-1}b_{n - 1}\otimes g.
+    \end{equation*}
+    But $d_n$ is the codomain restriction of $\partial_n$ and hence, the above simplifies to $i_{n - 1}b_{n - 1}$ where $b_{n - 1}$ is treated as an element of $C_{n - 1}$, and hence, the entire calculation above gives $(j_{n - 1}\otimes 1)(b_{n - 1}\otimes g)$, where $j_{n - 1}: B_{n - 1}\into Z_{n - 1}$ is the inclusion.
+
+    The long exact sequence now looks like
+    \begin{equation*}
+        \cdots\rightarrow B_n\otimes G\xrightarrow{j_n\otimes 1} Z_n\otimes G\xrightarrow{(i_n\otimes 1)_\ast} H_n(C_\bullet\otimes G)\xrightarrow{(d_n\otimes 1)_\ast} B_{n - 1}\otimes G\rightarrow\cdots
+    \end{equation*}
+    This gives a short exact sequence 
+    \begin{equation*}
+    \xymatrix{
+    0\ar[r] & Z_n\otimes G/\im(j_n\otimes 1)\ar[r]^-\alpha & H_n(C_\bullet\otimes G)\ar[r]\ar[rd]_-{(d_n\otimes 1)_\ast} & \ker(j_n\otimes 1)\ar[r]\ar@{^{(}->}[d] & 0\\
+    & Z_{n}\otimes G\ar@{->>}[u]\ar[ru]_{(i_n\otimes 1)_\ast} & & B_{n - 1}\otimes G & 
+    }
+    \end{equation*}
+    where $\alpha$ is given by $z_n\otimes g + \im(j_n\otimes 1)\mapsto [z_n\otimes g]$ where $[\cdot]$ denotes the equivalence class in $H_n(C_\bullet\otimes G)$.
+
+    We have the canonical short exact sequence 
+    \begin{equation*}
+        0\to B_{n - 1}\to Z_{n - 1}\to H_{n - 1}(C_\bullet)\to 0.
+    \end{equation*}
+    Tensoring this with $G$, and using the $\Tor$ long exact sequence, we have an exact sequence
+    \begin{equation*}
+        0\to Tor^\Z_1(H_{n - 1}(C_\bullet), G)\to B_{n - 1}\otimes G\xrightarrow{j_{n - 1}\otimes 1} Z_{n - 1}\otimes G\xrightarrow{p_{n - 1}\otimes 1} H_{n - 1}(C_\bullet)\otimes G\to 0,
+    \end{equation*}
+    since $\Tor(Z_{n - 1}, G) = 0$, owing to $Z_{n - 1}$ being flat. Note that $p_{n - 1}(z_{n - 1}) = [z_{n - 1}]$ where $[\cdot]$ denotes the equivalence class of $z_{n - 1}$ in $H_{n - 1}(C_\bullet)$.
+
+    This, in particular, gives us isomorphisms
+    \begin{align*}
+        Z_{n - 1}\otimes G/\im(j_n\otimes 1)\stackrel{\sim}{\longrightarrow} H_{n - 1}(C_\bullet)\otimes G,\\
+        \ker(j_n\otimes 1)\stackrel{\sim}{\longrightarrow} \Tor^\Z_1(H_{n - 1}(C_\bullet), G).
+    \end{align*}
+    where the first isomorphism is induced by $p_{n - 1}\otimes 1$. Substituting this into the short exact sequence we had obtained earlier, we get 
+    \begin{equation*}
+        0\to H_{n - 1}(C_\bullet)\otimes G\xrightarrow{\beta} H_n(C_\bullet\otimes G)\to\Tor^\Z_1(H_{n - 1}, G)\to 0.
+    \end{equation*}
+    where the map $\beta$ is given by 
+    \begin{equation*}
+        \beta([z_{n - 1}]\otimes g) = \alpha\left(z_{n - 1}\otimes g\right) = [z_{n - 1}\otimes g]\in H_{n - 1}(C_\bullet\otimes G).
+    \end{equation*}
+    This proves the first assertion. \todo{prove the second assertion}
+\end{proof}
+
+\section{Cellular Homology}
+
+\begin{lemma}\thlabel{lem:properties-cw-homology}
+    Let $X$ be a CW-complex.
+    \begin{enumerate}[label=(\alph*)]
+        \item $H_k(X^n, X^{n - 1})$ is zero for $k\ne n$ and is free abelian for $k = n$, with a basis in one-to-one correspondence with the $n$-cells of $X$.
+        \item $H_k(X^n) = 0$ for $k > n$. In particular, if $X$ is finite-dimensional then $H_k(X) = 0$ for $k > \dim X$.
+        \item The map $H_k(X^n)\xrightarrow{i_\ast} H_k(X)$ induced by the inclusion $i: X^n\into X$ is an isomorphism for $k < n$ and surjective for $k = n$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item This follows from the fact that $(X^n, X^{n - 1})$ is a \important{good pair} and hence, $H_k(X^n, X^{n - 1}) = H_k(X^{n}/X^{n - 1})$, where $X^n/X^{n - 1}$ is a wedge of $n$-spheres.
+
+    \item Consider the long exact sequence for the pair $(X^n, X^{n - 1})$, 
+    \begin{equation*}
+        \cdots\to H_{k + 1}(X^n, X^{n - 1})\to H_k(X^{n - 1})\to H_k(X^n)\to H_k(X^n, X^{n - 1})\to\cdots.
+    \end{equation*}
+    Hence, for $k > n$, we have an isomorphism $H_{k}(X^{n - 1})\xrightarrow{\sim} H_k(X^n)$, since both the relative homology groups on the ends vanish.
+
+    Consider the following sequence of inclusion-induced homomorphisms
+    \begin{equation*}
+        H_k(X^0)\xrightarrow{\sim} H_k(X^1)\xrightarrow{\sim}\dots\xrightarrow{\sim} H_k(X^{k - 1})\to H_k(X^k)\to\dots
+    \end{equation*}
+    where all maps other than those into and out of $H_k(X^k)$ are isomorphisms. The map into $H_k(X^k)$ is injective while the map out of $H_k(X^k)$ is surjective. Since $H_k(X^0) = 0$ for $k\ge 1$, the conclusion follows.
+
+    \item Suppose first that $X$ is finite-dimensional, that is, 
+    \begin{equation*}
+        \emptyset = X^{-1}\subseteq X^0\subseteq\dots\subseteq X^{N} = X.
+    \end{equation*}
+    Then, for $k < n$, we have seen in the proof of (b) that $H_k(X^n)$ is isomorphic to $H_k(X^N) = H_k(X)$. On the other hand, if $k = n$, the map $H_k(X^n)\to H_k(X^N)$ is a composition of a surjection and a sequence of isomorphisms and hence, is a surjection.
+
+    Now, suppose $X$ is not finite-dimensional.\todo{infinite proof}\qedhere
+\end{enumerate}
+\end{proof}
+
+We now construct the \define{cellular chain complex} using portions of the long exact sequence for pairs as follows: 
+\begin{equation*}
+    \xymatrix {
+    & & & H_n(X^{n + 1})\cong H_n(X)\\
+    & & H_n(X^n)\ar@{^{(}->}[rd]^{j_n}\ar@{->>}[ru]\\
+    {}\ar[r] & H_{n + 1}(X^{n + 1}, X^n)\ar[rr]^{d_{n + 1}}\ar[ru]^{\Delta_{n + 1}} & & H_n(X^{n}, X^{n - 1})\ar[rr]^{d_n}\ar[rd]_{\Delta_{n}} & & H_{n - 1}(X^{n - 1}, X^{n - 2})\ar[r] & {}\\
+    & & & & H_{n - 1}(X^{n - 1})\ar@{^{(}->}[ru]_{j_{n - 1}}\ar@{->>}[rd]\\
+    & & & & & H_{n - 1}(X^n)\cong H_{n - 1}(X)
+    }
+\end{equation*}
+
+Note that the groups in the cellular chain complex are all free abelian due to \thref{lem:properties-cw-homology} (a).
+
+\begin{definition}
+    The homology groups of the {cellular chain complex} are called the \define{cellular homology groups}, denoted by $H^{CW}_n(X)$.
+\end{definition}
+
+\begin{theorem}
+    For a CW-complex $X$, $H^{CW}_n(X)\cong H_n(X)$ for all $n\ge 0$.
+\end{theorem}
+\begin{proof}
+    From the chain complex diagram drawn above, $H_n(X)$ is isomorphic to $H_n(X^n)/\im\Delta_{n + 1}$. Further, since $j_n$ is injective, $H_n(X^n)$ is mapped isomorphically onto $\im j_n$ and $\im\Delta_{n + 1}$ is mapped isomorphically onto $\im d_{n + 1}$. Therefore, 
+    \begin{equation*}
+        H_n(X)\cong\frac{\im j_n}{\im d_{n + 1}}.
+    \end{equation*}
+    Note that $\ker d_n = \ker\Delta_n$ and from the long exact sequence for the pair $(X^n, X^{n - 1})$, we deduce that $\ker\Delta^n = \im j_n$. This completes the proof.
+\end{proof}
+
+\part{Cohomology}
+
+\section{Singular Cohomology}
+
+\begin{definition}
+    Fix an abelian group $G$. Let $X$ be a topological space and $(S_\bullet(X),\partial)$ the singular chain complex. We define the \define{singular cochain complex} to be 
+    \begin{equation*}
+        \cdots\to\Hom_{\Z}\left(S_n(X), G)\right)\xrightarrow{\Hom_{\Z}(\partial_{n + 1}, G)}\Hom_{\Z}\left(S_{n + 1}(X), G\right)\to\cdots.
+    \end{equation*}
+    We denote the ``differentials'' of the above complex by $\delta_\cdot$ and the groups by $S^n(X)$.
+    
+    The ``cohomology groups'' corresponding to the above chain complex are known as the \define{singular cohomology groups}, denoted by $H^n(X; G)$
+\end{definition}
+
+Let $f: X\to Y$ be a continuous map. Then, $f_\sharp: S_\bullet(X)\to S_\bullet(Y)$ is a chain map, whence, there is an induced map $f^\sharp = \Hom(f_\sharp, G): S^\bullet(Y)\to S^\bullet(X)$ and since the former was a chain map, so is the latter. 
+
+Now, if we have a sequence of maps $X\xrightarrow{f} Y\xrightarrow{g} Z$, then it is easy to see that $f^\sharp\circ g^\sharp = (g\circ f)^\sharp$. We have proved:
+\begin{proposition}
+    $H^n(-;G)$ is a contravariant functor from the category of topological spaces to the category of abelian groups.\qed
+\end{proposition}
+
+ \begin{definition}
+     Let $A\subseteq X$. We define the \define{relative cohomology groups} to be those associated to the chain complex 
+     \begin{equation*}
+         \cdots\to \Hom_{\Z}\left(S_n(X)/S_n(A), G\right)\xrightarrow{\Hom_{\Z}(\overline\partial_{n + 1}, G)}\Hom_\Z\left(S_{n + 1}(X)/S_{n + 1}(A), G\right)\to\cdots.
+     \end{equation*}
+     These are denoted by $H^n(X, A; G)$, for $n\ge 0$. The above chain complex is denoted by $(S^\bullet(X, A; G), \overline\delta^n)$
+ \end{definition}
+
+\begin{theorem}
+    If $A$ is a subspace of $X$, then there is a long exact sequence 
+    \begin{equation*}
+        \cdots\to H^n(X, A; G)\xrightarrow{p^\ast_n} H^n(X; G)\xrightarrow{i^\ast_n} H^n(A; G)\xrightarrow{d_n} H^{n + 1}(X, A; G)\to\cdots,
+    \end{equation*}
+    where the connecting homomorphisms, namely the $d_n$'s are natural.
+\end{theorem}
+\begin{proof}
+    We have a short exact sequence of complexes 
+    \begin{equation*}
+        0\to S_\bullet(A)\xrightarrow{i_\sharp} S_\bullet(X)\xrightarrow{p_\sharp} S_\bullet(X)/S_\bullet(A)\to 0.
+    \end{equation*}
+    We know that all groups in the above exact sequence are free and hence, $\Hom_{\Z}(-,G)$ gives us another short exact sequence of complexes 
+    \begin{equation*}
+        0\to S^\bullet(X, A; G)\xrightarrow{p^\sharp} S^\bullet(X; G)\xrightarrow{i^\sharp} S^\bullet(X; G)\to 0.
+    \end{equation*}
+    The conclusion follows from \thref{lem:exact-triangle-lemma}.
+\end{proof}
+
+\begin{theorem}[Excision]
+    Let $X_1$ and $X_2$ be subspaces of $X$ with $X = X_1^\circ\cup X_2^\circ$. Then, the inclusion $j: (X_1, X_1\cap X_2)\into (X, X_2)$ induces isomorphisms for all $n\ge 0$,
+    \begin{equation*}
+        j^\ast: H^n(X, X_2; G)\xrightarrow{\sim} H^n(X_1, X_1\cap X_2; G).
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    \important{TODO: First write up for homology and then the same idea works for cohomology.}
+\end{proof}
+
+\section{The Cup Product}
+
+\begin{definition}
+    For $0\le i\le d$, define maps $\lambda^d_i,\mu^d_i:\Delta^i\to\Delta^d$ by 
+    \begin{equation*}
+        \lambda_i^d(t_0,\dots, t_i) = (t_0,\dots,t_i,0,\dots,0)\quad\text{and}\quad\mu_i^d(t_0,\dots, t_i) = (0,\dots, 0, t_0,\dots, t_i).
+    \end{equation*}
+    These maps are called the \define{front face} and \define{back face} maps respectively.
+\end{definition}
+
+\begin{proposition}\thlabel{prop:face-map-properties}
+    \begin{enumerate}[label=(\alph*)]
+        \item $\lambda_d^{d + 1} = \varepsilon_{d + 1}^{d + 1}$ and $\mu_d^{d + 1} = \varepsilon_0^{d + 1}$.
+        \item $\lambda^d_{n + m}\lambda^{n + m}_n = \lambda^d_n$ and $\mu^d_{n + m}\mu^{n + m}_n = \mu^d_n$.
+        \item $\mu^{n + m + k}_{m + k}\lambda^{m + k}_m = \lambda^{n + m + k}_{n + m}\mu^{n + m}_m$.
+        \item 
+        \begin{align*}
+            \varepsilon_i^{d + 1}\lambda^d_p &= 
+            \begin{cases}
+                \lambda^{d + 1}_{p + 1}\varepsilon^{p + 1}_i & i\le p\\
+                \lambda^{d + 1}_p & i\ge p + 1
+            \end{cases}\\
+            \varepsilon_i^{d + 1}\mu^d_q &= 
+            \begin{cases}
+                \mu^{d + 1}_q & i\le d - q\\
+                \mu^{d + 1}_{q + 1}\varepsilon^{q + 1}_{i + q - d} & i\ge d - q + 1.
+            \end{cases}
+        \end{align*}
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    Omitted owing to its obviousness.
+\end{proof}
+
+\begin{notation}
+    Henceforth, for $\varphi\in S^n(X, G)$ and $c\in S_n(X)$, we write $(c,\varphi)$ for $\varphi(c)\in G$. In this notation, we have 
+    \begin{equation*}
+        (c, f^\sharp\varphi) = (f_\sharp c, \varphi)\quad\text{in particular,}\quad (\sigma, f^\sharp\varphi) = (f\sigma, \varphi).
+    \end{equation*}
+    Further, if $c\in S_{n + 1}(X)$, then 
+    \begin{equation*}
+        (c, \delta_n\varphi) = (\partial_{n + 1}c, \varphi).
+    \end{equation*}
+\end{notation}
+
+\begin{definition}
+    Let $X$ be a topological space and $R$ a ring, which is naturally a $\Z$-module. If $\varphi\in S^n(X; R)$ and $\theta\in S^m(X; R)$, define their \define{cup product} $\varphi\smile\theta\in S^{n + m}(X; R)$ by 
+    \begin{equation*}
+        (\sigma, \varphi\smile\theta) = (\sigma\lambda_n^{n + m}, \varphi)(\sigma\mu_m^{n + m}, \theta).
+    \end{equation*}
+    Extend this to a map $\smile: S(X; R)\times S(X; R)\to S(X; R)$ by defining 
+    \begin{equation*}
+        \left(\sum_i\varphi_i\right)\smile\left(\sum_j\theta_j\right) = \sum_{i, j}\varphi_i\smile\theta_j
+    \end{equation*}
+    where $\varphi_i\in S^i(X; R)$ and $\theta_j\in S^j(X; R)$.
+\end{definition}
+
+\begin{proposition}
+    $S(X; R)$ is a graded ring with multiplication given by the cup product.
+\end{proposition}
+\begin{proof}
+    Verifying distributivity is straightforward. We show associativity next. Let $\varphi\in S^n(X; R)$, $\theta\in S^m(X; R)$ and $\psi\in (S^k(X; R)$. Then, for any $(n + m + k)$-simplex $\sigma$,
+    \begin{align*}
+        (\sigma, \varphi\smile(\theta\smile\psi)) &= (\sigma\lambda^{n + m + k}_{n}, \varphi)(\sigma\mu^{n + m + k}_{m + k}, \theta\smile\psi)\\
+        &= (\sigma\lambda_n^{n + m + k}, \varphi)(\sigma\mu_{m + k}^{n + m + k}\lambda^{m + k}_m)(\sigma\mu^{n + m + k}_{m + k}\mu^{m + k}_k, \psi).
+    \end{align*}
+
+    On the other hand, 
+    \begin{align*}
+        (\sigma, (\varphi\smile\theta)\smile\psi) &= (\sigma\lambda^{n + m + k}_{n + m}, \varphi\smile\theta)(\sigma\mu^{n + m + k}_k, \psi)\\
+        &= (\sigma\lambda^{n + m + k}_{n + m}\lambda^{n + m}_{n}, \varphi)(\sigma\lambda^{n + m + k}_{n + m}\mu^{n + m}_m, \theta)(\sigma\mu^{n + m + k}_k, \psi)
+    \end{align*}
+    Using \thref{prop:face-map-properties}, we see that the the above quantity is the same as the one derived earlier.
+
+    Let $e\in S^0(X; R)$ be such that $(\sigma, e) = 1$ for all $\sigma\in S_0(X)$. It is easy to see that $e$ is a multiplicative identity for $\cup$, thereby completing the proof.
+\end{proof}
+
+\begin{proposition}
+    If $f: X\to Y$ is a continuous map, then $f^\sharp: S(Y; R)\to S(X; R)$ is a graded ring homomorphism.
+\end{proposition}
+\begin{proof}
+    Let $\varphi\in S^n(Y; R)$ and $\theta\in S^m(Y; R)$. Then, for any $(m + n)$-simplex $\sigma$ in $X$, 
+    \begin{align*}
+        (\sigma, f^\sharp(\varphi\smile\theta)) &= (f\sigma, \varphi\smile\theta)\\
+        &= (f\sigma\lambda^{n + m}_n, \varphi)(f\sigma\mu^{n + m}_m, \theta)\\
+        &= (\sigma\lambda^{n + m}_n, f^\sharp\varphi)(\sigma\mu^{n + m}_m, f^\sharp\theta)\\
+        &= (\sigma, f^\sharp\varphi\smile f^\sharp\theta).
+    \end{align*}
+
+    Finally, we must show that the identity maps to the identity. Indeed, let $e'$ denote the identity of $S(Y; R)$.
+\end{proof}
+
+\begin{lemma}
+    If $\varphi\in S^n(X; R)$ and $\theta\in S^m(X; R)$, then 
+    \begin{equation*}
+        \delta(\varphi\smile\theta) = \delta\varphi\smile\theta + (-1)^n\varphi\smile\delta\theta.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    For any $(n + m + 1)$-simplex $\sigma$ in $X$, 
+    \begin{align*}
+        (\sigma, \delta(\varphi\smile\theta)) &= (\partial\sigma, \varphi\smile\theta)\\
+        &= \sum_{i = 0}^{n + m + 1} (-1)^i (\sigma\varepsilon_i^{n + m + 1}, \varphi\smile\theta)\\
+        &= \sum_{i = 0}^{n + m + 1}(-1)^i(\sigma\varepsilon_i^{n + m + 1}\lambda^{n + m}_n, \varphi)(\sigma\varepsilon_i^{n + m + 1}\mu^{n + m}_n\theta).
+    \end{align*}
+    We invoke \thref{prop:face-map-properties} (d) with $d = n + m$, $p = n$ and $q = m$ to get 
+    \begin{align*}
+        &=\sum_{i = 0}^{n}(-1)^i(\sigma\lambda^{n + m + 1}_{n + 1}\varepsilon^{n + 1}_i)(\sigma\mu^{n + m + 1}_m) + \sum_{i = n + 1}^{n + m + 1}(-1)^i(\sigma\lambda^{n + m + 1}_n, \varphi)(\sigma\mu^{n + m + 1}_{m + 1}\varepsilon^{m + 1}_{i - n}, \theta)\\
+        &=\sum_{i = 0}^{n}(-1)^i(\sigma\lambda^{n + m + 1}_{n + 1}\varepsilon^{n + 1}_i)(\sigma\mu^{n + m + 1}_m) + (-1)^n\sum_{j = 1}^{m + 1}(-1)^j(\sigma\lambda^{n + m + 1}_n, \varphi)(\sigma\mu^{n + m + 1}_{m + 1}\varepsilon^{m + 1}_{j}, \theta).
+    \end{align*}
+
+    On the other hand, the right hand side of the theorem gives us
+    \begin{align*}
+        &= (\sigma\lambda^{n + m +1}_{n + 1}, \delta\varphi)(\sigma\mu^{n + m + 1}_m, \theta) + (-1)^n(\sigma\lambda^{n + m + 1}_n, \varphi)(\sigma\mu^{n + m + 1}_{m + 1}, \delta\theta)\\
+        &= \sum_{i = 0}^{n + 1}(-1)^i(\sigma, \lambda^{n + m + 1}_{n + 1}\varepsilon^{n + 1}_i, \varphi)(\sigma\mu^{n + m + 1}_m, \theta) + (-1)^n(\sigma\lambda^{n + m + 1}_n, \varphi)\sum_{j = 0}^{m + 1}(-1)^j(\sigma\mu^{n + m + 1}_{m + 1}\varepsilon^{m + 1}_j, \theta).
+    \end{align*}
+    Note that 
+    \begin{align*}
+        (\sigma, \lambda^{n + m + 1}_{n + 1}\varepsilon^{n + 1}_{n + 1}, \varphi)(\sigma\mu^{n + m + 1}_m, \theta) - (\sigma\lambda^{n + m + 1}_n, \varphi)\sum_{j = 0}^{m + 1}(-1)^j(\sigma\mu^{n + m + 1}_{m + 1}\varepsilon^{m + 1}_{0}, \theta) = 0.
+    \end{align*}
+    This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    The cup product descends to a map $\smile: H(X; R)\times H(X; R)\to H(X; R)$, thereby giving $H(X; R)$ the structure of a ring.
+\end{proposition}
+\begin{proof}
+    Let $Z(X; R)$ denote $\displaystyle\bigoplus_{n\ge 0} Z^n(X; R)$ and $B(X; R)$ denote $\displaystyle\bigoplus_{n\ge 0} B^n(X; R)$. Let $n, m\ge 0$, and consider $\smile: H^n(X; R)\times H^m(X; R)\to H^{n + m}(X; R)$ given by
+    \begin{equation*}
+        [\varphi]\smile[\theta] = [\varphi\smile\theta].
+    \end{equation*}
+    First, we show that this is well defined. Indeed, let $\varphi' = \varphi + \alpha$ and $\theta' = \theta + \beta$ where $\alpha\in B^n(X; R)$ and $\beta\in B^m(X; R)$. Then, 
+    \begin{equation*}
+        \varphi'\smile\theta' = \varphi\smile\theta + \alpha\smile\theta + \varphi\smile\beta + \alpha\smile\beta.
+    \end{equation*}
+    Let $\alpha = \delta\omega$ and $\beta = \delta\eta$ for some $\omega\in S^{n + 1}(X; R)$ and $\eta\in S^{m + 1}(X; R)$. The above is 
+    \begin{equation*}
+        \varphi\smile\theta + \delta\omega\smile\theta + \varphi\smile\delta\eta + \delta\omega\smile\delta\eta.
+    \end{equation*}
+    It is easy to see that 
+    \begin{align*}
+        \delta\omega\smile\theta &= \delta(\omega\smile\theta)\\
+        \varphi\smile\delta\eta &= (-1)^n\delta(\varphi\smile\eta)\\
+        \delta\omega\smile\delta\eta &= \delta(\omega\smile\delta\eta).
+    \end{align*}
+    This shows that $\smile$ is well-defined and bilinear. The remaining proof proceeds just as before.
+\end{proof}
+
+% BIBLIOGRAPHY
+\newpage
+\bibliographystyle{alpha}
+\bibliography{references}
+\end{document}

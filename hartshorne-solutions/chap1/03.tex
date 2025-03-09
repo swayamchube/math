@@ -1,0 +1,31 @@
+\begin{definition}
+    A \define{variety over $k$} is any affine, quasi-affine, projective, or quasi-projective variety as defined above. If $X, Y$ are two varieties, a \define{morphism} $\varphi: X\to Y$ is a \emph{continuous} map such that for every open set $V\subseteq Y$, and for every regular function $f: V\to k$, the function $f\circ\varphi: \varphi^{-1}(V)\to k$ is regular.
+\end{definition}
+
+\setcounter{exercise}{16}
+\begin{exercise}[Normal Varieties]
+\begin{enumerate}[label=(\alph*)]
+    \item
+    \item
+    \item The coordinate ring $k[t^2, t^3]$ is not integrally closed in its fraction field $k(t)$, whence due to (d), the variety is not normal.
+    \item This is immediate from the fact that being integrally closed is a local property, see \cite[Chapter V]{atiyah}.
+    \item The construction of $\wt Y$ is obvious. Consider $A(Y)\subseteq K(Y)$ and let $\overline{A(Y)}$ denote the integral closure of the former in the latter. By \textbf{Theorem I.3.9A}, this is an affine $k$-domain, consequently, there is an affine variety $\wt Y$ such that $\overline{A(Y)}\cong A(\wt Y)$ and the \emph{integral} morphism $A(Y)\to A(\wt Y)$ corresponds to a surjection $\wt Y\onto Y$.
+    
+    Due to \textbf{Theorem I.4.3}, we we may first assume that $Z$ is affine and $\varphi: Z\to Y$ is dominant. Since $\varphi(Z)$ is dense in $Y$, the map $\varphi^\ast: K(Y)\to K(X)$ is well-defined and injective since it is a morphism of fields. The restriction of this map to $A(\wt Y)$ must have image contained in $A(Z)$, since $A(\wt Y)$ is integral over $A(Y)$ and $A(Z)$ is integrally closed in $K(Z)$. This gives a (unique) map $A(\wt Y)\to A(Z)$ extending $\varphi^\ast: A(Y)\to A(Z)$, where uniqueness follows from the fact that $A(\wt Y)\subseteq K(Y)$, the fraction field of $A(Y)$. 
+
+    Once we have shown that a uique lift exists for each affine open in $Z$, it is obvious that these morphisms glue to a global morphism on all of $Z$, where to glue the morphisms on intersections, we make use of the uniqueness on affine opens; recall again that affine opens constitute a base for the topology on $Z$.
+\end{enumerate}
+\end{exercise}
+
+\setcounter{exercise}{19}
+\begin{exercise}
+\begin{enumerate}[label=(\alph*)]
+    \item Since every variety has a basis of open affine sets (\textbf{Theorem I.4.3}), we may assume that $Y$ is affine. Since $A(Y)_{\frakm_P}$ is an integrally closed domain in its fraction field $K(Y)$, we have 
+    \begin{equation*}
+        A(Y)_{\frakm_P} = \bigcap_{\frakq\text{ height $1$ in }A(Y)_{\frakm_P}} \left(A(Y)_{\frakm_P}\right)_{\frakq} = \bigcap_{\substack{\hght\frakq = 1\\\frakq\subseteq\frakm_P}} A(Y)_{\frakq}.
+    \end{equation*}
+    Now, $f$ is a rational function and hence, is equal to $\frac gh$ where $g,h\in A(Y)$ and $h\ne 0$ on $Y\setminus P$. We contend that $h$ is not in any height $1$ prime $\frakq\subseteq\frakm_P$. For if it were, then we could choose a $Q\ne P$ with $\frakq\subseteq\frakm_Q$, since $\frakq\ne\frakm_P$, owing to $\hght\frakm_P = 2$. It follows that $h$ vanishes at $Q$, a contradiction. Hence, $h\notin\frakq$ for all height $1$ primes $\frakq\subseteq\frakm_P$. Consequently, in the above intersection, $\frac gh\in A(Y)_{\frakq}$ for every such $\frakq$, and thus $f\in A(Y)_{\frakm_P}$, that is, $f$ is regular at $P$, as desired.
+
+    \item The rational function $\frac{1}{x}$ on $\bbA^1$ is regular on $\bbA^1\setminus\{0\}$ but does not have a regular extension to $\bbA^1$. Another way to see this is that the inclusion $\bbA^1\setminus\{0\}\into\bbA^1$ correponds to the ring homomorphism $k[x]\to k[x, x^{-1}]$.
+\end{enumerate}
+\end{exercise}

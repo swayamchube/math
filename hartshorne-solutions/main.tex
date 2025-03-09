@@ -75,7 +75,7 @@
 \theoremstyle{defstyle}
 \newtheorem*{definition}{Definition}
 \newtheorem*{corollary}{Corollary}
-\newtheorem{remark}[theorem]{Remark}
+\newtheorem*{remark}{Remark}
 \newtheorem{example}[theorem]{Example}
 \newtheorem*{notation}{Notation}
 \newtheorem{exercise}{Exercise}[section]
@@ -214,6 +214,8 @@
 
 \newcommand{\sheafHom}{\mathscr{H}\kern-3.5pt \text{\calligra\Large om}\,}
 \newcommand{\hght}{\operatorname{ht}}
+\newcommand{\pre}{\mathrm{pre}}
+\newcommand{\scrH}{\mathscr{H}}
 
 \geometry {
     margin = 1in
@@ -252,9 +254,11 @@
 \section{Affine Varieties}
 \input{chap1/01.tex}
 
+\newpage
 \section{Projective Varieties}
 \input{chap1/02.tex}
 
+\newpage
 \section{Morphisms}
 \input{chap1/03.tex}
 
@@ -281,4 +285,7 @@
 
 \section{Sheaves of Modules}
 \input{chap2/05.tex}
+
+\bibliographystyle{alpha}
+\bibliography{references}
 \end{document}

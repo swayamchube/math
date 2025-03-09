@@ -1,8 +1,6 @@
-\documentclass[10pt]{article}
+\documentclass[12pt]{article}
 
-% \usepackage{./arxiv}
-
-\title{Homological methods in Commutative Algebra}
+\title{Lie Algebras}
 \author{Swayam Chube}
 \date{\today}
 
@@ -24,7 +22,6 @@
 \usepackage{xcolor}
 \usepackage{theoremref}
 \usepackage{enumitem}
-\usepackage{moreenum}
 \usepackage{mathpazo}
 % \usepackage{euler}
 \usepackage{mathrsfs}
@@ -76,6 +73,7 @@
 \theoremstyle{defstyle}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{porism}[theorem]{Porism}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{example}[theorem]{Example}
 \newtheorem*{notation}{Notation}
@@ -111,6 +109,8 @@
 \newcommand{\catAlg}{\mathbf{Alg}}
 \newcommand{\catRep}{\mathbf{Rep}} % representations 
 \newcommand{\catVec}{\mathbf{Vec}}
+\newcommand{\ob}{\operatorname{ob}}
+
 
 % Group and Representation Theory
 \newcommand{\chr}{\operatorname{char}}
@@ -127,12 +127,13 @@
 \newcommand{\Alt}{\operatorname{Alt}}
 
 % Commutative and Homological Algebra
-\newcommand{\spec}{\operatorname{spec}}
-\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\spec}{\operatorname{spec}} % Refrain from using lowercase
+\newcommand{\mspec}{\operatorname{m-spec}} % Refrain from using lowercase
 \newcommand{\Tor}{\operatorname{Tor}}
-\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\tor}{\operatorname{tor}} % subscript
 \newcommand{\Ann}{\operatorname{Ann}}
-\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Supp}{\operatorname{Supp}} % Support
+\newcommand{\Ass}{\operatorname{Ass}} % Associated Primes
 \newcommand{\Hom}{\operatorname{Hom}}
 \newcommand{\End}{\operatorname{End}}
 \newcommand{\coker}{\operatorname{coker}}
@@ -151,21 +152,22 @@
 \newcommand{\frakh}{\mathfrak{h}}
 \newcommand{\frakm}{\mathfrak{m}} % maximal ideal
 \newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frako}{\mathfrak{o}} % dedekind domain
 \newcommand{\frakp}{\mathfrak{p}} % prime ideal
 \newcommand{\frakq}{\mathfrak{q}} % qrime ideal
-\newcommand{\fraks}{\mathfrak{s}}
-\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\fraks}{\mathfrak{s}} % solvable radical
+\newcommand{\frakt}{\mathfrak{t}} % some lie algebra
 \newcommand{\frakz}{\mathfrak{z}}
 \newcommand{\frakA}{\mathfrak{A}}
 \newcommand{\frakI}{\mathfrak{I}}
 \newcommand{\frakJ}{\mathfrak{J}}
 \newcommand{\frakK}{\mathfrak{K}}
 \newcommand{\frakL}{\mathfrak{L}}
-\newcommand{\frakN}{\mathfrak{N}} % nilradical 
-\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakN}{\mathfrak{N}} % Nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % Dedekind domain
 \newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
 \newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
-\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakR}{\mathfrak{R}} % Jacobson radical
 \newcommand{\frakU}{\mathfrak{U}}
 \newcommand{\frakX}{\mathfrak{X}}
 
@@ -213,21 +215,26 @@
 \newcommand{\bfG}{\mathbf{G}}
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\calo}{\mathcal{o}}
-\newcommand{\frako}{\mathfrak{o}}
 \newcommand{\Cl}{\operatorname{Cl}}
 
 \newcommand{\idim}{\operatorname{idim}}
 \newcommand{\pdim}{\operatorname{pdim}}
 \newcommand{\Ext}{\operatorname{Ext}}
 \newcommand{\co}{\operatorname{co}}
-\newcommand{\depth}{\operatorname{depth}}
-\newcommand{\projdim}{\operatorname{proj~dim}}
-\newcommand{\injdim}{\operatorname{inj~dim}}
-\newcommand{\gldim}{\operatorname{gl~dim}}
-\newcommand{\embdim}{\operatorname{emb~dim}}
-\newcommand{\ub}[1]{\underbar{#1}}
-\newcommand{\Ass}{\operatorname{Ass}}
 \newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+\newcommand{\scrG}{\mathscr{G}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\pr}{\operatorname{pr}}
+\newcommand{\Der}{\operatorname{Der}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\rad}{\operatorname{rad}}
 
 \geometry {
     margin = 1in
@@ -257,10 +264,10 @@
 \maketitle
 \tableofcontents
 
-\section{Regular Sequences}
-\input{sections/reg-koszul.tex}
+\newpage
+\section{Semisimple Lie Algebras}
+\input{sections/semisimple.tex}
 
-\section{Regular Rings}
-\input{sections/regular-rings.tex}
-
+% \section{Isomorphism and Conjugacy Theorems}
+% \input{sections/iso-conj.tex}
 \end{document}

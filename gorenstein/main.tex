@@ -1,5 +1,4 @@
 \documentclass[10pt]{article}
-
 % \usepackage{./arxiv}
 
 \title{Gorenstein Rings\\\small{Notes for the course MA 842: Topics in Algebra II}}
@@ -259,7 +258,7 @@
 \titleformat
 {\section}
 [block]
-{\Large\bfseries\scshape}
+{\Large\bfseries\sffamily}
 {\S\thesection}
 {0.5em}
 {\centering}
@@ -725,6 +724,8 @@ $(3)\implies(1)$ Again, since $k = \Soc_R(R)\subseteq R$ is essential, we have t
 
 \section{Injective Resolutions}
 
+\subsection{Bass's Lemma and ramifications}
+
 \begin{definition}
     Let $M$ be an $R$-module. An \define{injective resolution} for $M$ is an exact complex 
     \begin{equation*}
@@ -833,7 +834,7 @@ $(3)\implies(1)$ Again, since $k = \Soc_R(R)\subseteq R$ is essential, we have t
     \end{equation*}
 \end{definition}
 
-\begin{lemma}[Bass]
+\begin{lemma}[Bass]\thlabel{lem:bass}
     Let $R$ be a Noetherian ring and $M$ a finite $R$-module. Let $\frakp\subsetneq\frakq$ be primes in $R$ such that $\hght(\frakq/\frakp) = 1$. If for some $j\ge 0$, $\mu_j(\frakp, M)\ne 0$, then $\mu_{j + 1}(\frakq, M)\ne 0$.
 \end{lemma}
 \begin{proof}
@@ -857,4 +858,37 @@ $(3)\implies(1)$ Again, since $k = \Soc_R(R)\subseteq R$ is essential, we have t
     \end{equation*}
     and hence $\mu_{j + 1}(\frakm, M)\ne 0$.
 \end{proof}
+
+\begin{remark}
+Let $(R,\frakm, k)$ be a Noetherian local ring and $M$ a finite $R$-module.
+\begin{enumerate}[label=(\roman*)]
+    \item If $\mu_i(\frakp, M)\ne 0$ and $h = \hght(\frakq/\frakp)$, then $\mu_{i + h}(\frakq, M)\ne 0$. In particular, 
+\end{enumerate}
+\end{remark}
+
+\begin{corollary}
+    Let $(R, \frakm, k)$ be a Noetherian local ring and $M$ a finite $R$-module. Then 
+    \begin{equation*}
+        \injdim_R M = \infty \iff \mu_j(\frakm, M)\ne 0 \text{ for infinitely many }j\ge 0.
+    \end{equation*}
+\end{corollary}
+
+
+\begin{theorem}\thlabel{thm:ext-characterization-inj-dim}
+    Let $(R,\frakm, k)$ be a Noetherian local ring and $M$ a finite $R$-module. Then 
+    \begin{equation*}
+        \injdim_R M = \sup\left\{j\colon \Ext^j_R(k, M)\ne 0\right\}.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+\end{proof}
+
+\subsection{Modules of finite injective dimension}
+
+\begin{definition}
+    A Noetherian local ring $(R,\frakm, k)$ is said to be a \define{Gorenstein local ring} if $\injdim_R R < \infty$.
+\end{definition}
+
+
+
 \end{document}

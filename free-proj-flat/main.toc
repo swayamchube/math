@@ -1,0 +1,9 @@
+\contentsline {section}{\numberline {1}Projective Modules}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Kaplansky's Theorem}{1}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Flat Modules}{1}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Cartier's Theorem}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Finitely Presented Modules and Flatness}{5}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Injective Modules}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Injective Hulls}{7}{subsection.3.1}%
+\contentsline {section}{\numberline {4}Uncategorized}{11}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Eakin-Nagata Theorem}{11}{subsection.4.1}%
