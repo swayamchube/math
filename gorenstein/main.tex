@@ -915,11 +915,57 @@ $(3)\implies(1)$ Again, since $k = \Soc_R(R)\subseteq R$ is essential, we have t
     as desired.
 \end{proof}
 
+\begin{corollary}
+    Let $(R,\frakm, k)$ be a regular local ring. If $M$ is a finite $R$-module, then $\injdim_R M < \infty$.
+\end{corollary}
+\begin{proof}
+    Since $R$ is regular local, $\projdim_R k < \infty$ and hence for any finite $R$-module $M$, $\Ext^j_R(k, M) = 0$ for $j\gg 0$. It follows from \thref{thm:ext-characterization-inj-dim} that $\injdim_R M < \infty$.
+\end{proof}
+
+\begin{corollary}
+    Let $(R,\frakm, k)$ be a Noetherian local ring. If $\injdim_R k < \infty$, then $R$ is a regular local ring.
+\end{corollary}
+\begin{proof}
+    If $\injdim_R k < \infty$, then $\Ext^j_R(k, k) = 0$  for $j\gg 0$. Hence, the Betti numbers $\beta_j(k) = \dim_k\Ext^j_R(k, k) = 0$ for $j\gg 0$, whence $\projdim_R k < \infty$, that is, $R$ is a regular local ring.
+\end{proof}
+
 \subsection{Modules of finite injective dimension}
 
 \begin{definition}
     A Noetherian local ring $(R,\frakm, k)$ is said to be a \define{Gorenstein local ring} if $\injdim_R R < \infty$.
 \end{definition}
+
+\begin{proposition}\thlabel{prop:localization-gorenstein-local}
+    If $(R,\frakm, k)$ is a Gorenstein local ring and $\frakp\in\Spec(R)$, then $R_\frakp$ is a Gorenstein local ring.
+\end{proposition}
+\begin{proof}
+    Since $\injdim_R R < \infty$, the minimal injective resolution of $R$ is finite, say of length $n$: 
+    \begin{equation*}
+        0\to R\to E^0\to\cdots\to E^n\to 0.
+    \end{equation*}
+    Localizing at $\frakp$, one obtains a finite injective resolution of $R_\frakp$ as an $R_\frakp$-module. Thus $R_\frakp$ is a Gorenstein local ring.
+\end{proof}
+
+This allows us to make the following 
+\begin{definition}
+    A Noetherian ring $R$ is said to be \define{Gorenstein} if $R_\frakp$ is a Gorenstein local ring for all $\frakp\in\Spec(R)$.
+\end{definition}
+Due to \thref{prop:localization-gorenstein-local}, every Gorenstein local ring is a Gorenstein ring.
+
+\begin{proposition}
+    A regular ring is Gorenstein.
+\end{proposition}
+\begin{proof}
+    It suffices to show this in the local case. Let $(R,\frakm, k)$ be a regular local ring. Then $\gldim R = \projdim_R k < \infty$. This means that $\Ext^j_R(k, M) = 0$ for $j\gg 0$; which due to \thref{thm:ext-characterization-inj-dim} implies $\injdim_R M < \infty$ for each finite $R$-module $M$. In particular, $\injdim_R R < \infty$, whence $R$ is a Gorenstein local ring, as desired.
+\end{proof}
+
+\begin{remark}
+    Note that if $R$ is a Noetherian ring such that $\injdim_R R < \infty$, then 
+    \begin{equation*}
+        \injdim_{R_\frakp} R_\frakp\le\injdim_R R < \infty,
+    \end{equation*}
+    so that $R$ is a Gorenstein ring. \textcolor{red}{What about the converse?}
+\end{remark}
 
 
 

@@ -4,4 +4,4 @@
 \contentsline {section}{\numberline {2}Matlis Duality}{5}{section.2}%
 \contentsline {section}{\numberline {3}Injective Resolutions}{8}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Bass's Lemma and ramifications}{8}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Modules of finite injective dimension}{11}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.2}Modules of finite injective dimension}{12}{subsection.3.2}%
