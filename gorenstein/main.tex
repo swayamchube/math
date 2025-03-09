@@ -249,6 +249,8 @@
 \newcommand{\embdim}{\operatorname{emb~dim}}
 \newcommand{\hght}{\operatorname{ht}}
 \newcommand{\depth}{\operatorname{depth}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\type}{\operatorname{type}}
 
 % \renewcommand{\familydefault}{\sfdefault} % Do you want this font? 
 
@@ -465,6 +467,8 @@
 \end{remark}
 
 \subsection{Essential Extensions and Injective Hulls}
+
+% This section is very empty. Write about injective hulls and the decomposition theorem of Matlis (also ways to compute the multiplicity of each indecomposable factor).
 
 \begin{definition}
     A containment of $R$-modules $N\subseteq M$ is said to be \define{essential} if every non-zero submodule of $M$ intersects $N$ non-trivially.
@@ -695,7 +699,7 @@ In particular, taking $I = \frakm$, we see that $k^\vee \cong k$ as $R$-modules.
         \right\}.
     \end{equation*}
 \end{theorem}
-\begin{proof}
+\begin{proof} % TODO: There is something wrong here. Figure it out!!!
     Let $M$ be an Artinian $R$-module and let $d = \dim_k\Soc_R(M)$. Due to \thref{cor:inj-hull-artinian}, $E_R(M)\cong E^{\oplus d}$, so that there is an inclusion $M\into E^{\oplus d}$, which upon taking the Matlis dual furnishes an $\wh R$-linear surjection $\wh R^{\oplus d}\onto M^{\vee}$. Thus $M^{\vee}$ is a finite $\wh R$-module. 
 
     Conversely, suppose $M$ is a finite $\wh R$-module. Thus, there is a surjection $\wh R^{\oplus n}\onto M$. Taking the Matlis dual, we obtain an injection $M^\vee\into\left(\wh R^\vee\right)^{\oplus n}$.
@@ -722,6 +726,8 @@ $(2)\implies(3)$ Due to \thref{thm:properties-of-E-noetherian} (4), $R$ is Artin
 
 $(3)\implies(1)$ Again, since $k = \Soc_R(R)\subseteq R$ is essential, we have that $R\into E = E_R(k)$. Using a length argument, it follows that this inclusion must be an isomorphism, whence $R$ is self-injective.
 \end{proof}
+
+% TODO: There is a version of Matlis duality for m-primary ideals. Write that up
 
 \section{Injective Resolutions}
 
@@ -1035,5 +1041,119 @@ Due to \thref{prop:localization-gorenstein-local}, every Gorenstein local ring i
 \end{corollary}
 \begin{proof}
     Due to \thref{cor:finite-injdim-equals-depth}, $\injdim_R R = \depth R = 0$.
+\end{proof}
+
+\begin{definition}\thlabel{def:socle-general}
+    Let $(R,\frakm,k)$ be a Noetherian local ring, $M$ a Cohen-Macaulay $R$-module, and $\ul a = a_1,\dots,a_s\in\frakm$ a maximal $M$-sequence. Then $M/\ul aM$ is Artinian and we  can define 
+    \begin{equation*}
+        \type(M) = \dim_k\left(\Soc_R\left(M/\ul a M\right)\right).
+    \end{equation*}
+\end{definition}
+
+We must argue that this defintion is independent of the chosen maximal $M$-sequence. We begin with a 
+\begin{lemma}
+    Let $R$ be a ring, $M$ and $N$ be $R$-modules, and $a\in\Ann_R(M)$ be a non-zerodivisor on $N$. Then 
+    \begin{equation*}
+        \Ext^{j + 1}_R(M, N)\cong\Ext^j_R(M, N/aN)\qquad\forall~j\ge 0.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Consider the short exact sequence 
+    \begin{equation*}
+        0\to N\xrightarrow{\cdot a} N\to N/aN\to 0.
+    \end{equation*}
+    This gives rise to a long exact sequence 
+    \begin{equation*}
+        \cdots\to\Ext^j_R(M, N)\xrightarrow{\cdot a}\Ext^j_R(M, N)\to\Ext^j_R(M, N/aN)\to\Ext^{j + 1}_R(M, N)\xrightarrow{\cdot a}\Ext^{j + 1}_R(M, N)\to\cdots.
+    \end{equation*}
+    Since $a$ annihilates $M$, both the above ``multiplication by $a$'' maps have zero image. In particular, this gives an exact sequence 
+    \begin{equation*}
+        0\to\Ext^j_R(M, N/aN)\to\Ext^{j + 1}_R(M, N)\to 0,
+    \end{equation*}
+    as desired.
+\end{proof}
+
+We return to the setup of \thref{def:socle-general}. Using the above Lemma, we have 
+\begin{equation*}
+    \Soc_R(M/\ul aM)\cong\Hom_R(R/\frakm, M/\ul a M)\cong\Ext^0_R(k, M)\cong\Ext^s_R(k, M).
+\end{equation*}
+This characterization is independent of the maximal regular sequence, as desired.
+
+\begin{interlude}[Constructing the minimal injective resolution of $M/aM$ over $R/aR$]\thlabel{inter:constructing-new-minimal-injective-resolution}\hfill
+    
+    \noindent Let $R$ be a Noetherian ring, $M$ a finite $R$-module, and $a\in R$ a non-zerodivisor on both $M$ and $R$. Let $0\to M\to E^\bullet$ be the minimal injective resolution of $M$ over $R$. Set $\overline R = R/aR$ and $\overline M = M/aM$. Consider the short exact sequence
+    \begin{equation*}
+        0\to R\xrightarrow{\cdot a} R\to\overline R\to 0
+    \end{equation*}
+    of $R$-modules. Then $\projdim_R\overline R\le 1$ so that $\Ext^j_R(\overline R, M) = 0$ for all $j > 1$. The above sequence also gives 
+    \begin{equation*}
+        0\to\Hom_R(\overline R, M)\to\Hom_R(R, M)\xrightarrow{\cdot a}\Hom_R(R, M)\to\Ext^1_R(\overline R, M)\to 0.
+    \end{equation*}
+    It follows that $\Ext^1_R(\overline R, M)\cong\overline M$.
+
+    Now, consider the complex 
+    \begin{equation*}
+        0\to\underbrace{\Hom_R(\overline R, M)}_{= 0}\to\Hom_R(\overline R, E^0)\to\Hom_R(\overline R, E^1)\to\Hom_R(\overline R, E^2)\to\cdots.
+    \end{equation*}
+    Since $\Ext^j_R(\overline R, M) = 0$ for $j\ge 2$, the above complex is exact at $\Hom_R(\overline R, E^j)$ for $j\ge 2$. Further, since $\Ass_R(M) = \Ass_R(E^0)$, it follows that $a$ is a non-zerodivisor on $E^0$, so that $\Hom_R(\overline R, E^0) = 0$. Therefore, 
+    \begin{equation*}
+        \ker\left(\Hom_R(\overline R, E^1)\to\Hom_R(\overline R, E^2)\right)\cong\Ext^1_R(\overline R, M)\cong\overline M.
+    \end{equation*}
+    Set $I^j = \Hom_R(\overline R, E^j)$. Then $I^j$ is an injective $\overline R$-module and 
+    \begin{equation*}
+        0\to \overline M\to I^1\to I^2\to\cdots
+    \end{equation*}
+    is an injective resolution of $\overline M$ over $\overline R$.
+
+    Finally, we claim that the above resolution is the minimal resolution of $\overline M$ over $\overline R$. Let $\overline\frakp$ be a prime in $\overline R$. We must show that the map 
+    \begin{equation*}
+        \Hom_{\overline R_{\overline\frakp}}\left(\kappa(\overline\frakp), I^j_{\overline\frakp}\right)\longrightarrow\Hom_{\overline R_{\overline\frakp}}\left(\kappa(\overline\frakp), I^{j + 1}_{\overline\frakp}\right)
+    \end{equation*}
+    is the zero map. But note that the above is the localization of the map 
+    \begin{equation*}
+        \Hom_{\overline R}\left(\overline R/\overline\frakp, I^j\right)\longrightarrow\Hom_{\overline R}\left(\overline R/\overline\frakp, I^{j + 1}\right),
+    \end{equation*}
+    which, due to the Hom-Tensor adjunction is canonically isomorphic to 
+    \begin{equation*}
+        \Hom_R\left(\overline R/\overline\frakp\otimes_{\overline R}\overline R, I^j\right)\longrightarrow
+        \Hom_R\left(\overline R/\overline\frakp\otimes_{\overline R}\overline R, I^{j + 1}\right).
+    \end{equation*}
+    Finally, since $\overline R/\overline\frakp$ is the same as $R/\frakp$ as $R$-modules, the above map is the same as 
+    \begin{equation*}
+        \Hom_R\left(R/\frakp, E^j\right)\to\Hom_R\left(R/\frakp, E^{j + 1}\right).
+    \end{equation*}
+    But it is known that this map is identically zero when localized at $\frakp$, as desired.
+\end{interlude}
+
+\begin{theorem}
+    Let $(R,\frakm, k, E)$ be a Noetherian local ring, $M$ a finite $R$-module, and $a\in R$ a non-zerodivisor on both $M$ and $R$. Set $\overline M = M/aM$ and $\overline R = R/aR$. Then 
+    \begin{equation*}
+        \injdim_R M < \infty \iff \injdim_{\overline R}\overline M < \infty.
+    \end{equation*}
+    In this case, $\injdim_R M = \injdim_{\overline R}\overline M + 1$.
+\end{theorem}
+\begin{proof}
+    Suppose first that $\injdim_R M < \infty$. It is clear from \thref{inter:constructing-new-minimal-injective-resolution} that $\injdim_{\overline R}\overline M < \infty$ and $\injdim_{\overline R}\overline M = \injdim_R M - 1$.
+
+    On the other hand, if $\injdim_R M = \infty$, then $\mu_j(\frakm, M)\ne 0$ for infinitely many $j\ge 0$. But recall that $\Hom_R(\overline R, E) = E_{\overline R}(k)$. Hence, if $E\mid E^j$ for some $j\ge 0$, then $E_{\overline R}(k)\mid I^j$. That is, for $j\ge 1$,
+    \begin{equation*}
+        \mu_j(\frakm, M)\ne 0\implies\mu_{j - 1}(\overline\frakm,\overline M)\ne 0.
+    \end{equation*}
+    Hence, $\injdim_{\overline R}\overline M = \infty$. This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    Let $(R,\frakm,k)$ be a Noetherian local ring and $a\in R$ a non-zerodivisor. Then $R$ is Gorenstein if and only if $R/aR$ is Gorenstein.\hfill\qedsymbol
+\end{corollary}
+
+\begin{proposition}
+    Let $(R,\frakm,k)$ be a Noetherian local ring. Then the following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $R$ is Gorenstein 
+        \item $R$ is Cohen-Macaulay and $\type(R) = 1$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    % TODO: Add in later
 \end{proof}
 \end{document}
