@@ -29,7 +29,7 @@
 \setlength{\marginparwidth}{2cm}
 \usepackage{todonotes}
 \usepackage{stmaryrd}
-\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd-Mitchell theorem 
 \usepackage{marvosym}
 \usepackage{geometry}
 \usepackage{titlesec}
@@ -816,7 +816,7 @@ $(3)\implies(1)$ Again, since $k = \Soc_R(R)\subseteq R$ is essential, we have t
     is exact. Thus $\Phi$ is an isomorphism if and only if the map $\Hom_{R_\frakp}\left(\kappa(\frakp), E^{n}_\frakp\right)\to\Hom_{R_\frakp}\left(\kappa(\frakp), E^{n + 1}_\frakp\right)$ is the zero map, as desired.
 \end{proof}
 
-\begin{corollary}
+\begin{corollary}\thlabel{cor:bass-numbers-dim-ext}
     Let $R$ be a Noetherian ring and $M$ an $R$-module. Let $0\to M\to E^\bullet$ be \emph{the} minimal injective resolution of $M$. Then 
     \begin{equation*}
         E^j = \bigoplus_{\frakp}E_R\left(R/\frakp\right)^{a_j(\frakp)}\quad\text{ and }\quad a_j(\frakp) = \dim_{\kappa(\frakp)} \Ext^j_{R_\frakp}\left(\kappa(\frakp), M_\frakp\right).
@@ -826,6 +826,18 @@ $(3)\implies(1)$ Again, since $k = \Soc_R(R)\subseteq R$ is essential, we have t
 \begin{proof}
     % TODO: Add in later
 \end{proof}
+
+\begin{remark}
+    We can now justify the name ``minimal injective resolution''. In particular, we shall show that the length of the minimal injective resolution is precisely the injective dimension of a module. 
+    
+    Let $R$ be a Noetherian ring and $M$ a finite $R$-module. Let $0\to M\to E^\bullet$ be \emph{the} minimal injective resolution in the sense of \thref{rem:minimal-injective-resolution}. Let $0\le\ell\le\infty$ denote the length of the resolution. Clearly $\injdim_R M\le\ell$. If $\injdim_R M = \infty$, then $\ell\le\injdim_R M$ so that $\ell = \injdim_R M$. 
+
+    On the other hand, if $\injdim_R M = n < \infty$, then using this injective resolution to compute the $\Ext$'s, we see that for $j > n$, and $\frakp\in\Spec(R)$, 
+    \begin{equation*}
+        \Ext^{j}_R(R/\frakp, M) = 0\implies\mu_j(\frakp, M) = \dim_{\kappa(\frakp)}\Ext^{j}_{R_\frakp}\left(\kappa(\frakp), M_\frakp\right) = 0.
+    \end{equation*}
+    That is, $E^j = 0$ for all $j > n$ and hence, $\ell\le n$. It follows that $\ell = \injdim_R M$.
+\end{remark}
 
 \begin{definition}
     Let $R$ be a Noetherian ring and $M$ a finite $R$-module. For $j\ge 0$ and $\frakp\in\Spec(R)$, define the \define{$j$-th Bass number} as 
@@ -862,7 +874,7 @@ $(3)\implies(1)$ Again, since $k = \Soc_R(R)\subseteq R$ is essential, we have t
 \begin{remark}
 Let $(R,\frakm, k)$ be a Noetherian local ring and $M$ a finite $R$-module.
 \begin{enumerate}[label=(\roman*)]
-    \item If $\mu_i(\frakp, M)\ne 0$ and $h = \hght(\frakq/\frakp)$, then $\mu_{i + h}(\frakq, M)\ne 0$. In particular, 
+    \item If $\mu_i(\frakp, M)\ne 0$ and $h = \hght(\frakq/\frakp)$, then $\mu_{i + h}(\frakq, M)\ne 0$. 
 \end{enumerate}
 \end{remark}
 
