@@ -248,6 +248,7 @@
 \newcommand{\gldim}{\operatorname{gl~dim}}
 \newcommand{\embdim}{\operatorname{emb~dim}}
 \newcommand{\hght}{\operatorname{ht}}
+\newcommand{\depth}{\operatorname{depth}}
 
 % \renewcommand{\familydefault}{\sfdefault} % Do you want this font? 
 
@@ -834,7 +835,7 @@ $(3)\implies(1)$ Again, since $k = \Soc_R(R)\subseteq R$ is essential, we have t
     \end{equation*}
 \end{definition}
 
-\begin{remark}
+\begin{remark}\thlabel{rem:justification-minimal-injective-resolution}
     We can now justify the name ``minimal injective resolution''. In particular, we shall show that the length of the minimal injective resolution is precisely the injective dimension of a module. 
     
     Let $R$ be a Noetherian ring and $M$ a finite $R$-module. Let $0\to M\to E^\bullet$ be \emph{the} minimal injective resolution in the sense of \thref{rem:minimal-injective-resolution}. Let $0\le\ell\le\infty$ denote the length of the resolution. Clearly $\injdim_R M\le\ell$. If $\injdim_R M = \infty$, then $\ell\le\injdim_R M$ so that $\ell = \injdim_R M$. 
@@ -875,6 +876,10 @@ $(3)\implies(1)$ Again, since $k = \Soc_R(R)\subseteq R$ is essential, we have t
     Let $R$ be a Noetherian ring and $M$ a finite $R$-module. 
     \begin{enumerate}[label=(\roman*)]
         \item If $\mu_i(\frakp, M)\ne 0$, then for all primes $\frakq\supseteq\frakp$ with $\hght(\frakq/\frakp) = h < \infty$, $\mu_{i + h}(\frakq, M)\ne 0$.
+        \item Since $\mu_0(\frakp, M)\ne 0$ if and only if $\frakp\in\Ass_R(M)$, using (i) and \thref{rem:justification-minimal-injective-resolution}, we conclude that 
+        \begin{equation*}
+            \injdim_R M\ge\sup\left\{\dim R/\frakp\colon\frakp\in\Ass_R(M)\right\} = \dim M.
+        \end{equation*}
         \item If $(R,\frakm, k, E)$ is a Noetherian local ring with $0\to M\to E^\bullet$ as \emph{the} minimal injective resolution. If $E^n\ne 0$ and $E^j = 0$ for all $j > n$, then we must have that 
         \begin{equation*}
             \mu_n(\frakp, M)\ne 0 \iff \frakp = \frakm.
@@ -923,10 +928,12 @@ $(3)\implies(1)$ Again, since $k = \Soc_R(R)\subseteq R$ is essential, we have t
 \end{proof}
 
 \begin{corollary}
-    Let $(R,\frakm, k)$ be a Noetherian local ring. If $\injdim_R k < \infty$, then $R$ is a regular local ring.
+    Let $(R,\frakm, k)$ be a Noetherian local ring. Then $\injdim_R k < \infty$ if and only if $R$ is a regular local ring.
 \end{corollary}
 \begin{proof}
     If $\injdim_R k < \infty$, then $\Ext^j_R(k, k) = 0$  for $j\gg 0$. Hence, the Betti numbers $\beta_j(k) = \dim_k\Ext^j_R(k, k) = 0$ for $j\gg 0$, whence $\projdim_R k < \infty$, that is, $R$ is a regular local ring.
+
+    Conversely, if $R$ is a regular local ring, then $\projdim_R k < \infty$, so that $\Ext^j_R(k, k) = 0$ for $j\gg 0$, consequently, $\injdim_R k < \infty$.
 \end{proof}
 
 \subsection{Modules of finite injective dimension}
@@ -967,6 +974,66 @@ Due to \thref{prop:localization-gorenstein-local}, every Gorenstein local ring i
     so that $R$ is a Gorenstein ring. \textcolor{red}{What about the converse?}
 \end{remark}
 
+\begin{theorem}[Ischebeck's Formula]\thlabel{thm:ischebeck-formula}
+    Let $(R,\frakm, k)$ be a Noetherian local ring and $M$, $N$ be finite $R$-modules. If $\injdim_R N < \infty$, then 
+    \begin{equation*}
+        \injdim_R N = \depth M + \sup\left\{i\colon\Ext^i_R(M, N)\ne 0\right\}.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Due to \thref{thm:ext-characterization-inj-dim}, we know that Ischebeck's formula is true for $M = k$. Next, we prove this by induction on $\depth M$.
 
+    Suppose first that $\depth M = 0$. Then $\frakm\in\Ass_R(M)$, and hence there is a short exact sequence
+    \begin{equation*}
+        0\longrightarrow k\longrightarrow M\longrightarrow C\longrightarrow 0.
+    \end{equation*}
+    Let $t = \injdim_R N$ and consider the long exact sequence induced:
+    \begin{equation*}
+        \cdots\to\Ext^t_R(C, N)\to\Ext^t_R(M, N)\to\Ext^t_R(k, N)\to \Ext^{t + 1}_R(C, N) = 0.
+    \end{equation*}
+    Due to \thref{thm:ext-characterization-inj-dim}, $\Ext^t_R(k, N)\ne 0$, and hence $\Ext^t_R(M, N)\ne 0$ since it surjects onto the former. It follows that $\sup\left\{i\colon\Ext^i_R(M, N)\ne 0\right\} = t = \injdim_R N$. This shows that Ischebeck's formula holds when $\depth M = 0$. 
 
+    Suppose now that $\depth M > 0$. Let $a\in\frakm$ be a non-zerodivisor on $M$; this gives a short exact sequence 
+    \begin{equation*}
+        0\to M\xrightarrow{\cdot a} M\to\overline M\to 0,
+    \end{equation*}
+    where $\overline M = M/aM$. Set $t = \injdim_R N$ and $d = \depth M > 0$. Then $\depth\overline M = d - 1$. The induction hypothesis gives 
+    \begin{equation*}
+        \sup\left\{i\colon\Ext^i_R(\overline M, N)\ne 0\right\} = t - d + 1.
+    \end{equation*}
+    The short exact sequence above gives a long exact sequence
+    \begin{equation*}
+        \cdots\to\Ext^i_R(M, N)\xrightarrow{\cdot a}\Ext^i_R(M, N)\to\Ext^{i + 1}_R(\overline M, N)\to\Ext^{i + 1}_R(M, N)\to\cdots.
+    \end{equation*}
+    If $i > t - d$, then $\Ext^{i + 1}_R(\overline M, N) = 0$, and due to Nakayama's lemma, $\Ext^i_R(M, N) = 0$. On the other hand, for $i = t -d$, $\Ext^{i + 1}_R(\overline M, N)\ne 0$ but $\Ext^{i + 1}_R(M, N) = 0$. Thus $\Ext^i_R(M, N)$ surjects onto a non-zero module, whence it must be non-zero too. We have shown 
+    \begin{equation*}
+        \sup\left\{i\colon\Ext^i_R(M, N)\ne 0\right\} = t - d = \injdim_R N - \depth M, 
+    \end{equation*}
+    as desired.
+\end{proof}
+
+\begin{corollary}\thlabel{cor:finite-injdim-equals-depth}
+    Let $(R,\frakm,k)$ be a Noetherian local ring and $M$ a finite $R$-module. If $\injdim_R M < \infty$, then $\injdim_R M = \depth R$.
+\end{corollary}
+\begin{proof}
+    Using Ischebeck's formula, 
+    \begin{equation*}
+        \injdim_R M = \depth R + \sup\left\{i\colon\Ext^i_R(R, M)\ne 0\right\} = \depth R,
+    \end{equation*}
+    as desired.
+\end{proof}
+
+\begin{corollary}
+    A Gorenstein ring is Cohen-Macaulay.
+\end{corollary}
+\begin{proof}
+    It suffices to prove this in the local case $(R,\frakm,k)$. Due to \thref{cor:finite-injdim-equals-depth}, $\injdim_R R = \depth R$. But due to \thref{rem:ramifications-bass-lemma} (ii), $\injdim_R R\ge\dim R$. It follows that $\depth R = \dim R$ and hence $R$ is Cohen-Macaulay.
+\end{proof}
+
+\begin{corollary}
+    A Gorenstein Artinian local ring is self-injective.
+\end{corollary}
+\begin{proof}
+    Due to \thref{cor:finite-injdim-equals-depth}, $\injdim_R R = \depth R = 0$.
+\end{proof}
 \end{document}
