@@ -827,6 +827,13 @@ $(3)\implies(1)$ Again, since $k = \Soc_R(R)\subseteq R$ is essential, we have t
     % TODO: Add in later
 \end{proof}
 
+\begin{definition}
+    Let $R$ be a Noetherian ring and $M$ a finite $R$-module. For $j\ge 0$ and $\frakp\in\Spec(R)$, define the \define{$j$-th Bass number} as 
+    \begin{equation*}
+        \mu_j\left(\frakp, M\right) = \dim_{\kappa(\frakp)}\Ext_{R_\frakp}^j\left(\kappa(\frakp), M_\frakp\right).
+    \end{equation*}
+\end{definition}
+
 \begin{remark}
     We can now justify the name ``minimal injective resolution''. In particular, we shall show that the length of the minimal injective resolution is precisely the injective dimension of a module. 
     
@@ -838,13 +845,6 @@ $(3)\implies(1)$ Again, since $k = \Soc_R(R)\subseteq R$ is essential, we have t
     \end{equation*}
     That is, $E^j = 0$ for all $j > n$ and hence, $\ell\le n$. It follows that $\ell = \injdim_R M$.
 \end{remark}
-
-\begin{definition}
-    Let $R$ be a Noetherian ring and $M$ a finite $R$-module. For $j\ge 0$ and $\frakp\in\Spec(R)$, define the \define{$j$-th Bass number} as 
-    \begin{equation*}
-        \mu_j\left(\frakp, M\right) = \dim_{\kappa(\frakp)}\Ext_{R_\frakp}^j\left(\kappa(\frakp), M_\frakp\right).
-    \end{equation*}
-\end{definition}
 
 \begin{lemma}[Bass]\thlabel{lem:bass}
     Let $R$ be a Noetherian ring and $M$ a finite $R$-module. Let $\frakp\subsetneq\frakq$ be primes in $R$ such that $\hght(\frakq/\frakp) = 1$. If for some $j\ge 0$, $\mu_j(\frakp, M)\ne 0$, then $\mu_{j + 1}(\frakq, M)\ne 0$.
@@ -871,20 +871,29 @@ $(3)\implies(1)$ Again, since $k = \Soc_R(R)\subseteq R$ is essential, we have t
     and hence $\mu_{j + 1}(\frakm, M)\ne 0$.
 \end{proof}
 
-\begin{remark}
-Let $(R,\frakm, k)$ be a Noetherian local ring and $M$ a finite $R$-module.
-\begin{enumerate}[label=(\roman*)]
-    \item If $\mu_i(\frakp, M)\ne 0$ and $h = \hght(\frakq/\frakp)$, then $\mu_{i + h}(\frakq, M)\ne 0$. 
-\end{enumerate}
+\begin{remark}\thlabel{rem:ramifications-bass-lemma}
+    Let $R$ be a Noetherian ring and $M$ a finite $R$-module. 
+    \begin{enumerate}[label=(\roman*)]
+        \item If $\mu_i(\frakp, M)\ne 0$, then for all primes $\frakq\supseteq\frakp$ with $\hght(\frakq/\frakp) = h < \infty$, $\mu_{i + h}(\frakq, M)\ne 0$.
+        \item If $(R,\frakm, k, E)$ is a Noetherian local ring with $0\to M\to E^\bullet$ as \emph{the} minimal injective resolution. If $E^n\ne 0$ and $E^j = 0$ for all $j > n$, then we must have that 
+        \begin{equation*}
+            \mu_n(\frakp, M)\ne 0 \iff \frakp = \frakm.
+        \end{equation*}
+        In particular, $E^n = E^{\mu_j(\frakm, M)}$.
+    \end{enumerate}
 \end{remark}
 
-\begin{corollary}
+\begin{corollary}\thlabel{cor:infinite-inj-dim}
     Let $(R, \frakm, k)$ be a Noetherian local ring and $M$ a finite $R$-module. Then 
     \begin{equation*}
         \injdim_R M = \infty \iff \mu_j(\frakm, M)\ne 0 \text{ for infinitely many }j\ge 0.
     \end{equation*}
 \end{corollary}
+\begin{proof}
+    Let $0\to M\to E^\bullet$ denote \emph{the} minimal injective resolution. Since $\mu_j(\frakm, M) = \dim_k\Ext^j_R(k, M)$, it is clear that if the supremum on the right hand side is infinite, then so is the length of the minimal injective resolution, which is the injective dimension of $M$.
 
+    Conversely, if $\injdim_R M = \infty$, then $E^j\ne 0$ for infinitely many $j\ge 0$. We claim that for every integer $N\ge 0$, there is a $j\ge N$ with $\mu_j(\frakm, M)\ne 0$. Indeed, there is an index $i\ge N$ with $E^i\ne 0$. Choose $\frakp\in\Spec(R)$ with $\mu_i(\frakp, M)\ne 0$. Using \thref{lem:bass}, setting $j = i + \hght(\frakm/\frakp)$, we must have that $\mu_j(\frakm, M)\ne 0$, as desired.
+\end{proof}
 
 \begin{theorem}\thlabel{thm:ext-characterization-inj-dim}
     Let $(R,\frakm, k)$ be a Noetherian local ring and $M$ a finite $R$-module. Then 
@@ -893,6 +902,17 @@ Let $(R,\frakm, k)$ be a Noetherian local ring and $M$ a finite $R$-module.
     \end{equation*}
 \end{theorem}
 \begin{proof}
+    If $\injdim_R M = \infty$, then due to \thref{cor:infinite-inj-dim}, $\Ext^j_R(k, M)\ne 0$ for infinitely may $j\ge 0$, so that the supremum on the right hand side is infinite.
+
+    Suppose now wthat $\injdim_R M = n < \infty$. Clearly, $\Ext^j_R(k, M) = 0$ for $j > n$ and hence, 
+    \begin{equation*}
+        \sup\left\{j\colon \Ext^j_R(k, M)\right\}\le n = \injdim_R M.
+    \end{equation*}
+    Let $0\to M\to E^\bullet$ denote \emph{the} minimal injective resolution. Due to \thref{rem:ramifications-bass-lemma} (ii), we know that $\Ext^n_R(k, M)\ne 0$, and hence, 
+    \begin{equation*}
+        \sup\left\{j\colon\Ext^j_R(k, M)\right\} = n = \injdim_R M,
+    \end{equation*}
+    as desired.
 \end{proof}
 
 \subsection{Modules of finite injective dimension}
