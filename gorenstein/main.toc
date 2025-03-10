@@ -6,4 +6,4 @@
 \contentsline {subsection}{\numberline {3.1}Bass's Lemma and ramifications}{8}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Modules of finite injective dimension}{12}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}A closer look at the Artinian case}{15}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Fibres of a flat map}{16}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.4}Fibres of a flat map}{17}{subsection.3.4}%

@@ -730,8 +730,37 @@ $(3)\implies(1)$ Again, since $k = \Soc_R(R)\subseteq R$ is essential, we have t
 % TODO: There is a version of Matlis duality for m-primary ideals. Write that up
 
 \begin{theorem}[Matlis Duality, version 2]\thlabel{thm:matlis-duality-version-2}
-    
+    Let $(R,\frakm,k)$ be a Noetherian local ring. Then there is a bijective correspondence
+    \begin{equation*}
+        \left\{
+        \begin{tabular}{@{} c @{}}
+            $\frakm$-primary ideals\\
+            in $R$ 
+        \end{tabular}
+        \right\}
+        \;
+        \begin{gathered}
+            \overset{\left(0 :_E -\right)}{\longrightarrow}\\[-2ex]
+            \underset{\left(0 :_R -\right)}{\longleftarrow}
+        \end{gathered}
+        \;
+        \left\{
+        \begin{tabular}{@{} c @{}}
+            finitely generated\\
+            $R$-submodules of $E$
+        \end{tabular}
+        \right\}.
+    \end{equation*}
 \end{theorem}
+\begin{proof}
+    We must first show that the above maps are indeed defined between those sets. Let $I$ be $\frakm$-primary in $R$. Then 
+    \begin{equation*}
+        \left(0 :_E I\right)\cong\Hom_R\left(R/I, E\right) = \left(R/I\right)^\vee.
+    \end{equation*}
+    As a result, $\lambda_R\left(\left(0 :_E I\right)\right) = \lambda_R(R/I) < \infty$, so that $(0:_E I)$ is a finite $R$-module. 
+
+    On the other hand, let $W\subseteq E$ be a finite $R$-submodule. Taking the Matlis dual of the exact sequence $0\to W\to E$, one obtains 
+\end{proof}
 
 \section{Injective Resolutions}
 
