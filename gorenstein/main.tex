@@ -82,6 +82,7 @@
 \newtheorem{interlude}[theorem]{Interlude}
 \newtheorem{example}[theorem]{Example}
 \newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
 
 % Common Algebraic Structures
 \newcommand{\R}{\mathbb{R}}
@@ -590,6 +591,13 @@ In particular, taking $I = \frakm$, we see that $k^\vee \cong k$ as $R$-modules.
 \end{enumerate}
 \end{proof}
 
+\begin{porism}\thlabel{por:matlis-reflexivity-of-finite-length}
+    Let $(R,\frakm,k)$ be a Noetherian local ring and $M$ a finite-length $R$-module. Then the ``evaluation map'' $\ev: M\to M^{\vee\vee}$ is an isomorphism of $R$-modules.
+\end{porism}
+\begin{proof}
+    As in the preceding proof, $\ev$ is injective and due to \thref{lem:properties-of-cech}, $\lambda_R(M) = \lambda_R(M^{\vee\vee})$, whence $\ev$ is an isomorphism.
+\end{proof}
+
 \begin{interlude}[On $\wh R$-modules]\thlabel{inter:modules-over-completion}
     Let $(R,\frakm, k)$ be a local ring and $M$ an $R$-module such that $\Gamma_\frakm(M) = M$. We contend that $M$ is an $\wh R$-module in a natural way. To this end, we need only define $\wh a\cdot m$ for $\wh a\in\wh R$ and $m\in M$. 
 
@@ -634,15 +642,15 @@ In particular, taking $I = \frakm$, we see that $k^\vee \cong k$ as $R$-modules.
 \begin{theorem}\thlabel{thm:properties-of-E-noetherian}
     Let $(R,\frakm, k, E)$ be a Noetherian local ring. 
     \begin{enumerate}[label=(\arabic*)]
-        \item $\Gamma_{\frakm}(E) = E$, and hence $E$ is an $\wh R$ module and for every $R$-module $M$, $M^\vee$ is $\frakm$-power torsion.
+        \item $\Gamma_{\frakm}(E) = E$, and hence $E$ is an $\wh R$ module and for every $R$-module $M$.
         \item $E\cong E_{\wh R}(k)$ as $\wh R$-modules.
-        \item $R^{\vee\vee} = \Hom_R(E, E)\cong\wh R$ as $R$-modules.
+        \item $R^{\vee\vee} = \Hom_R(E, E)\cong\wh R$ as $R$-algebras.
         \item $E$ is an Artinian $R$-module.
     \end{enumerate}
 \end{theorem}
 \begin{proof}
 \begin{enumerate}[label=(\arabic*)]
-    \item That $E$ is an $\wh R$-module follows immediately from \thref{inter:modules-over-completion}. Finally, $M^\vee = \Hom_R(M, E)$ is $\frakm$-power torsion because $E$ is so.
+    \item That $E$ is an $\wh R$-module follows immediately from \thref{inter:modules-over-completion}.
 
     \item The containment $k\subseteq E$ is an essential extension of $R$-modules, both of which are $\frakm$-power torsion. Due to \thref{inter:modules-over-completion}, it follows that it is an essential extension of $\wh R$-modules too. Now, due to \thref{rem:extension-of-injection}, there is a commutative diagram of inclusions 
     \begin{equation*}
@@ -653,7 +661,27 @@ In particular, taking $I = \frakm$, we see that $k^\vee \cong k$ as $R$-modules.
     \end{equation*}
     where all maps are $\wh R$-linear. It follows that $E\into E_{\wh R}(k)$ is an essential extension of $\wh R$-modules, and consequently, an essential extension of $R$-modules. Since $E$ is $R$-injective, we must have that the inclusion is an isomorphism of $R$-modules. Finally, due to \thref{inter:maps-between-m-power-torsion-modules}, this is an isomorphism of $\wh R$-modules.
 
-    \item % TODO: Write this out in gory detail
+    \item For every positive integer $n\ge 1$, set $E_n = \left(0 :_E \frakm^n\right)$. Note that $E_1\subseteq E_2\subseteq\cdots$, and $E = \bigcup_n E_n$. Define $\Phi: \wh R\to\End_R(E)$ as follows: for $\wh a = (a_1, a_2,\dots)\in\wh R$, let $\Phi(\wh a) = f\in\End_R(E)$ where $f$ is given by 
+    \begin{equation*}
+        f(x) = a_n x\quad\text{ if } x\in E_n.
+    \end{equation*}
+    First we must show that the above map is well-defined. Indeed, if $m < n$ and $x\in E_m\subseteq E_n$, then $a_m - a_n\in\frakm^m$, whence $(a_m - a_n) x = 0$, i.e., $a_m x = a_n x$. That the map $f$ is $R$-linear is clear from its definition. 
+
+    That the map $\Phi$ is $R$-linear is also clear. We claim that $\Phi$ is a ring homomorphism. Let $\wh a = (a_1,a_2,\dots), \wh b = (b_1,b_2,\dots)\in\wh R$ and set $f = \Phi(\wh a)$, $g = \Phi(\wh b)$, and $h = \Phi(\wh a\wh b)$. If $x\in E_n$, then
+    \begin{equation*}
+        h(x) = (a_nb_n)x = f(g(x))\implies h = f\circ g,
+    \end{equation*}
+    thus $\Phi$ is a ring homomorphism.
+
+    Finally, we show that $\Phi$ is bijective, so that it is an isomorphism of $R$-algebras. If $\wh a\in\wh R$ is such that $\Phi(\wh a) = 0$, then $a_n\in\Ann_R(E_n)$ for every positive integer $n$. But recall that 
+    \begin{equation*}
+        E_n\cong\Hom_{R}\left(R/\frakm^n, E\right)\cong E_{R/\frakm^n}(k),
+    \end{equation*}
+    which is a faithful $R/\frakm^n$-module due to \thref{thm:properties-of-E-artinian}. As a result, $\Ann_R(E_n) = \frakm^n$, i.e., $a_n\in\frakm^n$ for all $n\ge 1$; in other words, $\wh a = 0$. This proves the injectivity of $\Phi$. 
+
+    Next, we must show surjectivity of $\Phi$. Let $f\in\End_R(E)$, then $f$ restricts to an $R$-linear endomorphism of $E_n\cong E_{R/\frakm^n}(k)$. Due to \thref{thm:properties-of-E-artinian}, the restriction of $f$ to each $E_n$ is multiplication by some element $a_n\in R/\frakm^n$. Further, it is clear that under the canonical surjection $R/\frakm^n\onto R/\frakm^{n - 1}$, $a_n$ maps to $a_{n - 1}$, so that $\wh a = (a_1,a_2,\dots)\in\wh R$ and $\Phi(\wh a) = f$. Thus $\Phi$ is surjective, as desired.
+
+    As a final subtle point, we must check that the $R$-algebra structure on $\wh R$ is the canonical one. The natural map $R\to\End_R(E)$ is $a\mapsto\mu_a$, the ``multiplication by $a$'' map. From our definition of $\Phi$, it is clear that $\Phi^{-1}(\mu_a) = (a, a, \dots)$, which is precisely the image of $a$ under the canonical map $R\to\wh R$.
 
     \item Let $M_1\supseteq M_2\supseteq\cdots$ be a chain of $R$-submodules in $E$. There are commutative diagrams 
     \begin{equation*}
@@ -674,6 +702,16 @@ In particular, taking $I = \frakm$, we see that $k^\vee \cong k$ as $R$-modules.
     Then due to the first isomorphism theorem, $M_j^\vee\onto M_{j + 1}^\vee$ is an isomorphism for all $j\ge n$. Let $C_j = \coker\left(M_{j + 1}\into M_j\right)$. The exactness of the Matlis dual gives $C_j^\vee = 0$, which, due to \thref{lem:properties-of-cech}, implies that $C_j = 0$, that is, $M_{j + 1}\into M_j$ is an isomorphism for all $j\ge n$, i.e., the descending chain stabilizes, as desired. \qedhere
 \end{enumerate}
 \end{proof}
+
+\begin{interlude}[The Matlis Dual is a module over $\wh R$]\thlabel{inter:matlis-dual-module-over-completion}
+    Let $(R,\frakm, k, E)$ be a Noetherian local ring and $M$ an $R$-module. The Matlis dual $M^\vee = \Hom_R(M, E)$ is naturally a $\wh R = \End_R(E)$-module: for $f\in M^\vee$ and $\varphi\in\End_R(E)$, define $\varphi\cdot f = \varphi\circ f$. It is easy to check that this $\wh R$-module structure on $M^\vee$ extends the $R$-module structure through the canonical map $R\to\End_R(E)$, $a\mapsto\mu_a$.
+
+    Now, if $f: M\to N$ is an $R$-linear map of $R$-modules, then $f^\vee: N^\vee\to M^\vee$ is $\wh R$-linear. Indeed, for $\varphi\in N^\vee$, and $\psi\in\wh R = \End_R(E)$, we have 
+    \begin{equation*}
+        f^\vee\left(\psi\cdot\varphi\right) = f^\vee\left(\psi\circ\varphi\right) = \psi\circ\varphi\circ f = \psi\cdot f^\vee\left(\varphi\right),
+    \end{equation*}
+    as desired.
+\end{interlude}
 
 \begin{theorem}[Matlis Duality, version 1]\thlabel{thm:matlis-duality-version-1}
     Let $(R,\frakm,k,E)$ be a Noetherian local ring. Then there is a bijective correspondence 
@@ -759,7 +797,17 @@ $(3)\implies(1)$ Again, since $k = \Soc_R(R)\subseteq R$ is essential, we have t
     \end{equation*}
     As a result, $\lambda_R\left(\left(0 :_E I\right)\right) = \lambda_R(R/I) < \infty$, so that $(0:_E I)$ is a finite $R$-module. 
 
-    On the other hand, let $W\subseteq E$ be a finite $R$-submodule. Taking the Matlis dual of the exact sequence $0\to W\to E$, one obtains 
+    On the other hand, let $W\subseteq E$ be a finite $R$-submodule. Taking the Matlis dual of the exact sequence $0\to W\to E$, one obtains an $\wh R$-linear (due to \thref{inter:matlis-dual-module-over-completion}) surjection $\varphi: \wh R\onto W^\vee$. Further, since $\lambda_R(W) < \infty$, we have $\lambda_R(W^\vee) = \lambda_R(W) < \infty$. Set $I = (0:_R W)$ and $J = (0 :_R W^\vee)$; note that both $I$ and $J$ are $\frakm$-primary. This shows that both the maps maps in the theorem are well-defined.
+    \begin{claim}
+        $I = J$
+    \end{claim}
+    \noindent Since $I$ annihilates $W$, it must also annihilate $W^\vee$, so that $I\subseteq J$. Now, since $J$ annihilates $W^\vee$, it annihilates $W^{\vee\vee}\cong W$ (due to \thref{por:matlis-reflexivity-of-finite-length}), so that $J\subseteq I$; as a result, $I = J$. $\spadesuit$
+
+    Finally, we show that the given maps are inverses to one another. Let $I\noreq R$ be $\frakm$-primary. Then $(0 :_E I)\cong\Hom_R(R/I, E)\cong E_{R/I}(k)$, whence due to \thref{thm:properties-of-E-artinian} (1), $\left(0:_R\left(0:_E I\right)\right) = I$. Next, let $W\subseteq E$ be a finite $R$-submodule. Clearly $W\subseteq (0:_E (0:_R W))$. Further, recall that $\wh R\onto W^\vee$ and $\lambda_{\wh R}(W^\vee) = \lambda_R(W) < \infty$\footnote{Since every $\wh R$-submodule of $W^\vee$ is also an $R$-submodule, it follows that $W^\vee$ is both Noetherian and Artinian as an $\wh R$-module.}, the kernel of the surjection is $\wh\frakm$-primary, and hence, factors through $\wh R/\wh\frakm^n$ for some positive integer $n$. But since $\wh R/\wh\frakm^n\cong R/\frakm^n$ as $R$-modules, it follows that $W^\vee$ is a cyclic $R$-module. In particular, $W^\vee\cong R/J = R/I$. In particular, 
+    \begin{equation*}
+        \lambda_R\left(\left(0 :_E\left(0:_R W\right)\right)\right) = \lambda_R\left((R/I)^\vee\right) = \lambda_R(R/I) = \lambda_R(R/J) = \lambda_R(W^\vee) = \lambda_R(W),
+    \end{equation*}
+    whence $W = \left(0:_E\left(0:_R W\right)\right)$, thereby completing the proof.
 \end{proof}
 
 \section{Injective Resolutions}

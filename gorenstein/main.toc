@@ -2,8 +2,8 @@
 \contentsline {subsection}{\numberline {1.1}Basic Properties of Injective Modules}{1}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Essential Extensions and Injective Hulls}{4}{subsection.1.2}%
 \contentsline {section}{\numberline {2}Matlis Duality}{5}{section.2}%
-\contentsline {section}{\numberline {3}Injective Resolutions}{8}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Bass's Lemma and ramifications}{8}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Modules of finite injective dimension}{12}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}A closer look at the Artinian case}{15}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Fibres of a flat map}{17}{subsection.3.4}%
+\contentsline {section}{\numberline {3}Injective Resolutions}{10}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Bass's Lemma and ramifications}{10}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Modules of finite injective dimension}{13}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}A closer look at the Artinian case}{17}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Fibres of a flat map}{18}{subsection.3.4}%
