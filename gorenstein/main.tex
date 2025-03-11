@@ -312,6 +312,16 @@
 \end{remark}
 
 \begin{proposition}
+    A direct product of injective modules is injective.
+\end{proposition}
+\begin{proof}
+    This follows from the natural isomorphism of functors
+    \begin{equation*}
+        \Hom_R\left(-,\prod_{\lambda\in\Lambda} E_\lambda\right)\cong\prod_{\lambda\in\Lambda} \Hom_R(-, E_\lambda).\qedhere
+    \end{equation*}
+\end{proof}
+
+\begin{proposition}\thlabel{prop:injective-is-divisible}
     Every injective $R$-module is divisible. 
 \end{proposition}
 \begin{proof}
@@ -352,7 +362,18 @@
     Let $R$ be a PID. An $R$-module $E$ is injective if and only if it is divisible.
 \end{proposition}
 \begin{proof}
-    % TODO: Add in later
+    The forward direction is clear from \thref{prop:injective-is-divisible}. Conversely, let $E$ be a divisible $R$-module and let $f: I\to E$ be $R$-linear where $I\noreq R$ is an ideal. If $I = 0$, then $f = 0$ and the zero map $R\to E$ extends $f$. If $I\ne 0$, then there is some $0\ne a\in R$ such that $I = (a)$. If $x = f(a)$, then choose $y\in E$ with $ay = x$ and let $F: R\to E$ be the unique $R$-linear map sending $1$ to $y$. It is clear that $R$ extends $f$ and hence $E$ is an injective $R$-module.
+\end{proof}
+
+\begin{proposition}
+    Let $R$ be an integral domain. A torsion-free and divisible $R$-module is injective.
+\end{proposition}
+\begin{proof}
+    Let $E$ be a torsion-free and divisible $R$-module. We shall use \thref{thm:baer-criterion} to show that $E$ is injective. Let $0\ne I\nor R$ be a proper ideal and $f: I\to E$ be $R$-linear. Choose some $0\ne a\in I$ and let $x\in E$ be the unique (since $E$ is torsion-free) element such that $ax = f(a)$. Let $F: R\to E$ be the unique $R$-linear map sending $1\mapsto x$. We contend that $F$ extends $f$. Indeed, for $0\ne b\in I$, 
+    \begin{equation*}
+        af(b) = bf(a) = abx\implies f(b) = bx = F(b),
+    \end{equation*}
+    as desired.
 \end{proof}
 
 \begin{lemma}
@@ -765,7 +786,6 @@ $(2)\implies(3)$ Due to \thref{thm:properties-of-E-noetherian} (4), $R$ is Artin
 $(3)\implies(1)$ Again, since $k = \Soc_R(R)\subseteq R$ is essential, we have that $R\into E = E_R(k)$. Using a length argument, it follows that this inclusion must be an isomorphism, whence $R$ is self-injective.
 \end{proof}
 
-% TODO: There is a version of Matlis duality for m-primary ideals. Write that up
 
 \begin{theorem}[Matlis Duality, version 2]\thlabel{thm:matlis-duality-version-2}
     Let $(R,\frakm,k)$ be a Noetherian local ring. Then there is a bijective correspondence
