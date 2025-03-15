@@ -287,7 +287,7 @@
 
 \section{Coxeter Systems}
 
-Let $W$ denote a group and $S\subseteq W$ a generating set such that $1\in S$ and $S = S^{-1}$. Fix this pair throughout this section.
+Let $W$ denote a group and $S\subseteq W$ a generating set such that $1\in S$ and $S = S^{-1}$. Fix this pair throughout this section, and we refer to such a pair as a \define{generating pair}.
 
 \begin{definition}
     Let $w\in W$. The length of $w$ with respect to $S$, denoted by $\ell_S(w)$ (often abbreviated to $\ell(w)$) is the smallest integer $q\ge 0$ such that $w$ is the product of a sequence of $q$ elements of $S$. A \define{reduced representation} of $W$ with respect to $S$ is any sequence $\mathbf s = (s_1,\dots,s_q)$ of elements of $S$ such that $w = s_1\cdots s_q$ and $q = \ell_S(w)$.
@@ -462,7 +462,7 @@ Clearly, if $w, w'\in W$, then
     Then $w = ss_1\cdots s_{j - 1}s_{j + 1}\cdots s_q$. Since $\ell(w')\ge q - 1$, we must have $\ell(w') = q - 1$ and that the above representation is reduced.
 \end{proof}
 
-\begin{lemma}
+\begin{lemma}\thlabel{lem:conditions-for-constant-function}
     Let $(W, S)$ be a pair as in \thref{def:exchange-condition} and satisfying \ref{exchange-condition}. Let $w\in W$ have length $q\ge 1$, let $D$ be the set of all reduced representations of $w$, and let $F: D\to E$.
 
     Assume that $F(\mathbf s) = F(\mathbf s')$ if the elements $\mathbf s = (s_1,\dots,s_q)$ and $\mathbf s' = (s_1',\dots,s_q')$ of $D$ satisfy one of the following: 
@@ -495,8 +495,8 @@ Let $(H_j)$ denote the assertion:
 Due to \textbf{Step 1}, $(H_j)\implies(H_{j + 1})$ for $0\le j\le q$, and due to condition (ii), $(H_q)$ is false. Hence $(H_0)$ is false, so that $F(\mathbf s) = F(\mathbf s')$, thereby completing the proof.
 \end{proof}
 
-\begin{proposition}
-    Let $M$ be a monoid and $f: S\to M$. Ste 
+\begin{proposition}\thlabel{prop:map-to-monoid-well-defined}
+    Let $M$ be a monoid and $f: S\to M$. Set 
     \begin{equation*}
         a(s, s') = 
         \begin{cases}
@@ -509,14 +509,93 @@ Due to \textbf{Step 1}, $(H_j)\implies(H_{j + 1})$ for $0\le j\le q$, and due to
     \begin{equation*}
         g(w) = f(s_1)\cdots f(s_q)
     \end{equation*}
-    for every reduced decomposition $w = s_1\cdots s_q$ of $w\in W$.
+    for every reduced representation $w = s_1\cdots s_q$ of $w\in W$.
 \end{proposition}
 \begin{proof}
+    For $w\in W$, let $D_w$ be the set of all reduced representations of $w$ and $F_w: D_w\to M$ given by 
+    \begin{equation*}
+        F_w(s_1,\dots,s_q) = f(s_1)\cdots f(s_q).
+    \end{equation*}
+    We shall argue by induction on $\ell(w)$ that $F_w$ is a constant function. The base cases $\ell(w) = 0, 1$ are trivial. Suppose now that $q = \ell(w)\ge 2$ and the inductive hypothesis has been proven for all lengths $< q$. In light of \thref{lem:conditions-for-constant-function}, it suffices to show that $F_w(\mathbf s) = F_w(\mathbf s')$ in both conditions of the aforementioned lemma. 
+    \begin{enumerate}[label=(\roman*)]
+        \item This is quite straightforward using the inductive hypothesis and the equality
+        \begin{equation*}
+            F_w(s_1,\dots,s_q) = f(s_1)F_{w'}(s_2,\dots,s_q) = F_{w''}(s_1,\dots,s_{q - 1})f(s_q).
+        \end{equation*}
+        \item \todo{Dihedral groups}\qedhere
+    \end{enumerate}
 \end{proof}
 
 \begin{theorem}
     Let $(W, S)$ be a pair such that $S$ generates $W$, $1\in S$, $S^{-1} = S$ and every element in $S$ has order at most $2$. Then $(W, S)$ is a Coxeter system if and only if it satisfies \ref{exchange-condition}.
 \end{theorem}
+\begin{proof}
+    We have already seen that a Coxeter system satisfies \ref{exchange-condition}. Conversely, suppose $(W, S)$ is a pair as in \ref{def:exchange-condition} and satisfies \ref{exchange-condition}. To show that $(W, S)$ is a Coxeter system, it suffices to show that it has the desired \emph{universal property} of its presentation.
+
+    Indeed, let $G$ be a group and $f: S\to G$ be a map such that $\left(f(s)f(s')\right)^{m(s, s')} = 1$ whenever $m(s, s') < \infty$. Due to \thref{prop:map-to-monoid-well-defined}, there exists a map $g: W\to G$ such that 
+    \begin{equation*}
+        g(w) = f(s_1)\cdots f(s_q)
+    \end{equation*}
+    whenever $w = s_1\cdots s_q$ is a reduced representation of $w$. It suffices to show that $g$ is a group homomorphism. To this end, since $S$ generates $W$, it suffices to show that 
+    \begin{equation*}
+        g(sw) = f(s)g(w)\qquad \forall~s\in S,~\forall~w\in W.
+    \end{equation*}
+    Due to \thref{prop:about-lengths-of-exchange-systems}, there are two possible cases: 
+    \begin{enumerate}[label=(\roman*)]
+        \item If $\ell(sw) = \ell(w) + 1$ then choosing a reduced representation $w = s_1\cdots s_q$, it follows that $sw = ss_1\cdots s_q$ is a reduced representation of $sw$. Hence 
+        \begin{equation*}
+            g(sw) = f(s)f(s_1)\cdots f(s_q) = f(s)g(w).
+        \end{equation*}
+
+        \item If $\ell(sw) = \ell(w) - 1$ put $w' = sw$. Then $w = sw'$ and $\ell(sw') = \ell(w') + 1$. Due to case (i), $g(sw') = f(s)g(w')$, i.e., $f(s)g(w) = g(sw)$ since $f(s)^2 = 1$. \qedhere
+    \end{enumerate}
+\end{proof}
+
+\subsection{Families of Partitions and Subgroups of Coxeter Groups}
+
+\begin{proposition}
+    Let $(W, S)$ be a Coxeter system. For $s\in S$, set 
+    \begin{equation*}
+        P_s = \left\{w\in W\colon \ell(sw) > \ell(w)\right\}.
+    \end{equation*}
+    \begin{enumerate}[label=(\Roman*)]
+        \item $\displaystyle\bigcap_{s\in S} P_s = \{1\}$.
+        \item For any $s\in S$, the sets $P_s$ and $sP_s$ form a partition of $W$. 
+        \item Let $s, s'\in S$ and let $w\in W$. If $w\in P_s$ and $ws'\notin P_s$ then $sw = ws'$. \label{condition-for-next-proposition}
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\Roman*)]
+    \item Let $1\ne w\in W$ and let $w = s_1\cdots s_q$ be a reduced representation of $w$ with $q\ge 1$. Clearly $s_1w = s_2\cdot s_q$ is a reduced representation of $s_1w$, so that $w\notin P_{s_1}$. 
+    
+    \item Let $w\in W$ and $s\in S$. Due to \thref{prop:about-lengths-of-exchange-systems}, there are two cases to handle: 
+    \begin{enumerate}[label=(\roman*)]
+        \item $\ell(sw) = \ell(w) + 1$: then $w\in P_s$. 
+        \item $\ell(sw) = \ell(w) - 1$: then setting $w' = sw$, we see that $\ell(sw') = \ell(w') + 1$, so that $w'\in P_s$ and $w\in sP_s$.
+    \end{enumerate}
+    To see that $P_s\cap sP_s = \emptyset$, suppose $w\in P_s\cap sP_s$. Then $w = sw'$ where $w'\in P_s$, so that $\ell(w) = \ell(sw') > \ell(w')$. But since $w' = sw$ and $w\in P_s$, we must have $\ell(w') = \ell(sw) > \ell(w)$, a contradiction.
+
+    \item Let $q = \ell(w)$. Since $w\in P_s$, it follows that $\ell(sw) = q + 1$ and from $ws'\notin P_s$ it follows that $sws'\in P_s$, so that $q + 1\ge\ell(ws') = \ell(sws') + 1$ and hence $\ell(sws')\le q$. Further, since $\ell(sws') = \ell(sw) \pm 1$, we must have $\ell(sws') = q$ and $\ell(ws') = q + 1$.
+
+    Let $w = s_1\cdots s_q$ be a reduced representation of $w$ and set $s_{q + 1} = s'$. Then $ws' = s_1\cdots s_{q + 1}$ is a reduced decomposition of $ws'$. Due to \ref{exchange-condition} and the fact that $\ell(sws')\le\ell(ws')$, there is an index $1\le j\le q + 1$ such that 
+    \begin{equation*}
+        ss_1\cdots s_{j - 1} = s_1\cdots s_j.
+    \end{equation*}
+    If $1\le j\le q$, we would have $sw = s_1\cdots s_{j - 1}s_{j + 1}\cdot s_q$, contradicting the fact that $\ell(sw) = q + 1$. Thus $j = q + 1$, i.e., $sw = ws'$, as desired. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    Let $(W, S)$ be a generating pair such that every element in $S$ has order at most $2$. Let $(P_s)_{s\in S}$ be a family of subsets of $W$ satisfying \ref{condition-for-next-proposition} and the following additional conditions: 
+    \begin{enumerate}[label=(\Roman*')]
+        \item $1\in P_s$ for all $s\in S$.
+        \item The sets $P_s$ and $sP_s$ are disjoint for all $s\in S$.
+    \end{enumerate}
+    Then $(W, S)$ is a Coxeter system and 
+    \begin{equation*}
+        P_s = \left\{s\in S\colon \ell(sw) > \ell(w)\right\}.
+    \end{equation*}
+\end{proposition}
 \begin{proof}
     
 \end{proof}
