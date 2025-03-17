@@ -287,7 +287,7 @@
 
 \section{Coxeter Systems}
 
-Let $W$ denote a group and $S\subseteq W$ a generating set such that $1\in S$ and $S = S^{-1}$. Fix this pair throughout this section, and we refer to such a pair as a \define{generating pair}.
+Let $W$ denote a group and $S\subseteq W$ a generating set such that $1\notin S$ and $S = S^{-1}$. Fix this pair throughout this section, and we refer to such a pair as a \define{generating pair}.
 
 \begin{definition}
     Let $w\in W$. The length of $w$ with respect to $S$, denoted by $\ell_S(w)$ (often abbreviated to $\ell(w)$) is the smallest integer $q\ge 0$ such that $w$ is the product of a sequence of $q$ elements of $S$. A \define{reduced representation} of $W$ with respect to $S$ is any sequence $\mathbf s = (s_1,\dots,s_q)$ of elements of $S$ such that $w = s_1\cdots s_q$ and $q = \ell_S(w)$.
@@ -522,12 +522,12 @@ Due to \textbf{Step 1}, $(H_j)\implies(H_{j + 1})$ for $0\le j\le q$, and due to
         \begin{equation*}
             F_w(s_1,\dots,s_q) = f(s_1)F_{w'}(s_2,\dots,s_q) = F_{w''}(s_1,\dots,s_{q - 1})f(s_q).
         \end{equation*}
-        \item \todo{Dihedral groups}\qedhere
+        \item This is a bit cumbersome. See \cite[pg. 9]{bourbaki-lie-4-6}\qedhere
     \end{enumerate}
 \end{proof}
 
-\begin{theorem}
-    Let $(W, S)$ be a pair such that $S$ generates $W$, $1\in S$, $S^{-1} = S$ and every element in $S$ has order at most $2$. Then $(W, S)$ is a Coxeter system if and only if it satisfies \ref{exchange-condition}.
+\begin{theorem}\thlabel{thm:coxeter-iff-exchange-condition}
+    Let $(W, S)$ be a pair such that $S$ generates $W$, $1\notin S$, $S^{-1} = S$ and every element in $S$ has order at most $2$. Then $(W, S)$ is a Coxeter system if and only if it satisfies \ref{exchange-condition}.
 \end{theorem}
 \begin{proof}
     We have already seen that a Coxeter system satisfies \ref{exchange-condition}. Conversely, suppose $(W, S)$ is a pair as in \ref{def:exchange-condition} and satisfies \ref{exchange-condition}. To show that $(W, S)$ is a Coxeter system, it suffices to show that it has the desired \emph{universal property} of its presentation.
@@ -577,7 +577,7 @@ Due to \textbf{Step 1}, $(H_j)\implies(H_{j + 1})$ for $0\le j\le q$, and due to
 
     \item Let $q = \ell(w)$. Since $w\in P_s$, it follows that $\ell(sw) = q + 1$ and from $ws'\notin P_s$ it follows that $sws'\in P_s$, so that $q + 1\ge\ell(ws') = \ell(sws') + 1$ and hence $\ell(sws')\le q$. Further, since $\ell(sws') = \ell(sw) \pm 1$, we must have $\ell(sws') = q$ and $\ell(ws') = q + 1$.
 
-    Let $w = s_1\cdots s_q$ be a reduced representation of $w$ and set $s_{q + 1} = s'$. Then $ws' = s_1\cdots s_{q + 1}$ is a reduced decomposition of $ws'$. Due to \ref{exchange-condition} and the fact that $\ell(sws')\le\ell(ws')$, there is an index $1\le j\le q + 1$ such that 
+    Let $w = s_1\cdots s_q$ be a reduced representation of $w$ and set $s_{q + 1} = s'$. Then $ws' = s_1\cdots s_{q + 1}$ is a reduced representation of $ws'$. Due to \ref{exchange-condition} and the fact that $\ell(sws')\le\ell(ws')$, there is an index $1\le j\le q + 1$ such that 
     \begin{equation*}
         ss_1\cdots s_{j - 1} = s_1\cdots s_j.
     \end{equation*}
@@ -585,11 +585,11 @@ Due to \textbf{Step 1}, $(H_j)\implies(H_{j + 1})$ for $0\le j\le q$, and due to
 \end{enumerate}
 \end{proof}
 
-\begin{proposition}
+\begin{proposition}\thlabel{prop:equivalent-conditions-for-coxeter-system}
     Let $(W, S)$ be a generating pair such that every element in $S$ has order at most $2$. Let $(P_s)_{s\in S}$ be a family of subsets of $W$ satisfying \ref{condition-for-next-proposition} and the following additional conditions: 
     \begin{enumerate}[label=(\Roman*')]
-        \item $1\in P_s$ for all $s\in S$.
-        \item The sets $P_s$ and $sP_s$ are disjoint for all $s\in S$.
+        \item $1\in P_s$ for all $s\in S$. \label{one-dash}
+        \item The sets $P_s$ and $sP_s$ are disjoint for all $s\in S$. \label{two-dash}
     \end{enumerate}
     Then $(W, S)$ is a Coxeter system and 
     \begin{equation*}
@@ -597,6 +597,385 @@ Due to \textbf{Step 1}, $(H_j)\implies(H_{j + 1})$ for $0\le j\le q$, and due to
     \end{equation*}
 \end{proposition}
 \begin{proof}
-    
+    Let $s\in S$ and $w\in W$. There are two cases: 
+    \begin{enumerate}[label=(\roman*)]
+        \item $w\notin P_s$. Clearly, $w\ne 1$, so $q = \ell(w)\ge 1$. Let $w = s_1\cdots s_q$ be a reduced representation of $w$. Set 
+        \begin{equation*}
+            w_j = s_1\cdots s_j\qquad 1\le j\le q,
+        \end{equation*}
+        and $w_0 = 1$. Since $w_0\in P_s$ and $w_q\notin P_s$, there is an index $1\le j\le q$ such that $w_{j - 1}\in P_s$ but $w_j\notin P_s$. Since $w_j = w_{j - 1}s_j$, using \ref{condition-for-next-proposition}, $sw_{j - 1} = w_{j - 1}s_j = w_j$. Therefore, 
+        \begin{equation*}
+            sw = s_1\cdots s_{j - 1}s_{j + 1}\cdots s_q
+        \end{equation*}
+        so that $\ell(sw) < \ell(w)$.
+
+        \item $w\in P_s$. Put $w'= sw$, so that $w'\notin P_s$ due to (II'). Then by (i), we have $\ell(w) = \ell(sw') < \ell(w') = \ell(sw)$.
+    \end{enumerate}
+    In particular, this shows that $P_s = \left\{w\in W\colon \ell(sw) > \ell(w)\right\}$. Finally, to show that $(W, S)$ is a Coxeter system, in light of \thref{thm:coxeter-iff-exchange-condition}, we shall show that it satisfies \ref{exchange-condition}. Indeed, let $w\in W$ and $s\in S$ such that $\ell(sw)\le\ell(w)$. Then $w\notin P_s$ and repeating the same argument as in (i), we see that \ref{exchange-condition} is satisfied.
 \end{proof}
+
+Henceforth, let $(W, S)$ be a Coxeter system. For any subset $X\subseteq S$, we denote by $W_X$ the subgroup of $W$ generated by $X$.
+
+\begin{proposition}
+    Let $w\in W$. There exists a subset $S_w$ of $S$ such that $S_w = \{s_1,\dots,s_q\}$ for \emph{any} reduced representation $w = s_1\cdots s_q$.
+\end{proposition}
+\begin{proof}
+    Let $M$ denote the monoid of subsets of $S$ with the union operation. Set $f(s) = \{s\}$ for $s\in S$. In the notation of \thref{prop:map-to-monoid-well-defined}, if $m(s, s') < \infty$, then $a(s, s') = \{s, s'\} = a(s', s)$. And if $m(s, s') = \infty$, then $a(s, s') = a(s', s) = 1$. Thus, the map $f$ extends to a map $g: W\to M$ with the properties stated in the Proposition. It is clear now that the proof is complete.
+\end{proof}
+
+\begin{corollary}
+    For any subset $X\subseteq S$, 
+    \begin{equation*}
+        W = \left\{w\in W\colon S_w\subseteq X\right\}.
+    \end{equation*}
+\end{corollary}
+\begin{proof}
+    Clearly $S_{w^{-1}} = S_w$ and due to \thref{prop:about-lengths-of-exchange-systems}, $S_{sw}\subseteq \{s\}\cup S_{w}$ for $s\in S$ and $w\in W$; so that $S_{ww'}\subseteq S_w\cup S_{w'}$. Therefore, the set 
+    \begin{equation*}
+        U = \left\{w\in W\colon S_w\subseteq X\right\}
+    \end{equation*}
+    is a subgroup of $W$ containing $X$ and hence must be equal to $W_X$.
+\end{proof}
+
+\begin{corollary}
+    For any subset $X\subseteq S$, we have $W_X\cap S = X$.
+\end{corollary}
+\begin{proof}
+    This follows from the fact that $S_s = \{s\}$ for every $s\in S$.
+\end{proof}
+
+\begin{corollary}
+    The set $S$ is a minimal generating set of $W$.
+\end{corollary}
+\begin{proof}
+    Follows from the preceding Corollary.
+\end{proof}
+
+\begin{corollary}\thlabel{cor:length-wrt-subgroup}
+    For any subset $X\subseteq S$ and $w\in W_X$, $\ell_{X}(w) = \ell_S(w)$.
+\end{corollary}
+\begin{proof}
+    Any reduced representation of $w$ must have all elements contained in $X$.
+\end{proof}
+
+\begin{theorem}
+\begin{enumerate}[label=(\arabic*)]
+    \item For any subset $X\subseteq S$, the pair $(W_X, X)$ is a Coxeter system. 
+    \item Let $(X_i)_{i\in I}$ be a family of subsets of $S$. If $X =\bigcap_{i\in I} X_i$, then $W_X = \bigcap_{i\in I} W_{X_i}$.
+    \item Let $X$ and $X'$ be two subsets of $S$. Then $W_X\subseteq W_{X'}$ (resp. $W_X = W_{X'}$) if and only if $X\subseteq X'$ (resp. $X = X'$).
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+    To see (1), it suffices to show that $(W_X, X)$ satisfies \ref{exchange-condition}. Indeed, let $x\in X$ and $w\in W_X$ such that $\ell_X(xw)\le\ell_X(w)$ and let $w = x_1\cdots x_q$ be a reduced representation of $w$. Due to \thref{cor:length-wrt-subgroup}, there is an index $1\le j\le q$ such that 
+    \begin{equation*}
+        xx_1\cdots x_{j - 1} = x_1\cdots x_{j - 1}x_j.
+    \end{equation*}
+    Thus $(X, W_X)$ satisfies \ref{exchange-condition} and thus is a Coxeter system due to \thref{thm:coxeter-iff-exchange-condition}.
+
+    As for (2), any $w\in\bigcap_{i\in I} W_{X_i}$, $S_w\subseteq X_i$ for each $i\in I$ and hence $S_w\subseteq X$, so that $w\in W_X$. The inclusion $W_X\subseteq\bigcap_{i\in I} W_{X_i}$ trivial and hence, we have equality.
+
+    Finally, for (3), if $W_X\subseteq W_{X'}$, then 
+    \begin{equation*}
+        X = W_X\cap S\subseteq W_{X'}\cap S = X',
+    \end{equation*}
+    and conversely, if $X\subseteq X'$, then the inclusion $W_X\subseteq W_{X'}$ is clear. Once this has been established, the assertion about equality is trivial.
+\end{proof}
+
+\section{Tits Systems}
+
+\begin{definition}
+    A \define{Tits system} is a tuple $(G, B, N, S)$, where $G$ is a group, $B$ and $N$ are two subgroups of $G$ and $S$ is a subset of $W\coloneq N/(B\cap N)$, satisfying the following axioms: 
+    \begin{enumerate}[label=(Tits \arabic*)]
+        \item The set $B\cup N$ generates $G$ and $T\coloneq B\cap N$ is a normal subgroup of $N$. \label{tits1}
+        \item The set $S$ generates the group $W$ and every element of $S$ has order at most $2$. \label{tits2}
+        \item $sBw\subseteq BwB\cup BswB$ for $s\in S$ and $w\in W$. \label{tits3}
+        \item For all $s\in S$, $sBs\not\subseteq B$. \label{tits4}
+    \end{enumerate}
+    The group $W$ is called the \define{Weyl group} of the Tits system.
+\end{definition}
+
+\begin{remark}
+    Note that every $w\in W$ denotes a coset and as such, is a subset of $B$. Therefore, all products $wB$ and $Bw$ are defined to be products of sets, that is, 
+    \begin{equation*}
+        wB = \bigcup_{a\in w} aB,\quad Bw = \bigcup_{a\in W} Ba,\quad\text{and}\quad BwB = \bigcup_{a\in w} BaB.
+    \end{equation*}
+    Since $T\subseteq B$, we clearly have $wB = aB$ for each $a\in w$, therefore, it suffices to interpret the above formulas by treating $W\subseteq B$ through a (likely non-canonical) lift.
+\end{remark}
+
+For any $w\in W$, let $C(w)$ denote the double coset $BwB$. It is clear that 
+\begin{equation*}
+    C(1) = B,\quad B(ww')\subseteq C(w)C(w'),\quad\text{and}\quad C(w^{-1}) = C(w)^{-1}.
+\end{equation*}
+Due to \ref{tits3}, we have 
+\begin{equation*}
+    C(s)C(w)\subseteq C(w)\cup C(sw).
+\end{equation*}
+Moreover, since $C(sw)\subseteq C(s)C(w)$, and the latter is a union of double cosets, there are only two possibilities 
+\begin{equation}\label{product-two-double-cosets}
+    C(s)C(w) = 
+    \begin{cases}
+        C(sw) & C(w)\not\subseteq C(s)C(w)\\
+        C(w)\cup C(sw) & C(w)\subseteq C(s)C(w).
+    \end{cases}
+\end{equation}
+Due to \ref{tits4}, $B\neq C(s)C(s)$, so that 
+\begin{equation*}
+    C(s)C(s) = B\cup C(s).
+\end{equation*}
+It follows that $B\cup C(s)$ is closed under inversion and multiplication, and hence is a subgroup of $G$. Multiplying both sides of the above by $C(w)$, and using \eqref{product-two-double-cosets}, 
+\begin{equation}
+    C(s)C(s)C(w) = BC(w)\cup C(s)C(w) = C(w)\cup C(s)C(w) = C(w)\cup C(sw).\label{product-three-double-cosets}
+\end{equation}
+
+Taking inverses of all the above formulas and replacing $w^{-1}$ by $w$, we obtain  
+\begin{align*}
+    C(w)C(s) &\subseteq C(w)\cup C(ws)\\
+    C(w)C(s) &= 
+    \begin{cases}
+        C(ws) & C(w)\not\subseteq C(w)C(s)\\
+        C(w)\cup C(ws) & C(w)\subseteq C(w)C(s)
+    \end{cases}\\
+    C(w)C(s)C(s) &= C(w)\cup C(ws).
+\end{align*}
+
+\begin{lemma}\thlabel{lem:products-of-double-cosets}
+    Let $s_1,\dots,s_q\in S$ and let $w\in W$. We have
+    \begin{equation*}
+        C(s_1\cdots s_q) C(w)\subseteq\bigcup_{\substack{1\le i_1 < \dots < i_p\le q\\ 0\le p\le q}} C(s_{i_1}\cdots s_{i_p}w).
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Argue by induction on $q\ge 0$. The base case $q = 0$ is trivial. For the induction step, use
+    \begin{equation*}
+        C(s_1\cdots s_q)C(w)\subseteq C(s_1)C(s_2\cdots s_q) C(w),
+    \end{equation*}
+    the induction hypothesis, and 
+    \begin{equation*}
+        C(s_1)C(s_{j_1}\cdots s_{j_p}w)\subseteq C(s_1s_{j_1}\cdots s_{j_p}w)\cup C(s_{j_1}\cdots s_{j_p}w)
+    \end{equation*}
+    to complete the proof.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:bijection-between-W-and-double-cosets}
+    \big(\cite[2.3.1]{macdonald-spherical-functions}\big) $G = BWB$. The map $w\mapsto C(w)$ is a bijection between $W$ and $B\backslash G/B$, the set of double cosets of $G$ with respect to $B$.
+\end{theorem}
+\begin{proof}
+    Clearly $BWB$ is stable under inversion and due to \thref{lem:products-of-double-cosets}, it is stable under products too. It follows that $BWB$ is a subgroup of $G$ containing $B$ and $N$, therefore, $BWB = G$ due to \ref{tits1}.
+
+    Surjectivity of the map $C: W\to B\backslash G/B$ is clear from the fact that $G = BWB$. It remains to show that $C$ is injective. We shall argue by induction on $q\ge 0$ that: 
+    \begin{center}
+        ``if $w\ne w'\in W$ and $\ell(w)\ge \ell(w') = q$, then $C(w)\ne C(w')$''.
+    \end{center}
+    In the base case $q = 0$, $w' = 1$. If $BwB = B$, then $w\in B$, so that $w = 1$. Suppose now that $q\ge 1$ and $\ell(w)\ge\ell(w') = q$. There exists $s\in S$ such that $\ell(sw') = q - 1$. Thus, 
+    \begin{equation*}
+        \ell(w) > \ell(sw')\qquad \ell(sw)\ge\ell(w) - 1\ge q - 1 = \ell(sw').
+    \end{equation*}
+    As a result of the inductive hypothesis, $C(w)\ne C(sw')$ and $C(sw)\ne C(sw')$; hence 
+    \begin{equation*}
+        C(sw')\cap\left(C(s)C(w)\right)\subseteq C(sw')\cap\left(C(sw)\cup C(w)\right) = \emptyset,
+    \end{equation*}
+    and $C(sw')\subseteq C(s)C(w')$, in particular, $C(sw')\cap \left(C(s)C(w)\right)\ne\emptyset$. It follows that $C(w)\ne C(w')$.
+\end{proof}
+
+\begin{theorem}\big(\cite[2.3.7]{macdonald-spherical-functions}\big)
+    The pair $(W, S)$ is a Coxeter system. Moreover, for $s\in S$ and $w\in W$, 
+    \begin{equation*}
+        C(s)C(w) = C(sw)\iff\ell(sw) > \ell(w).
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    For $s\in S$, set 
+    \begin{equation*}
+        P_s = \left\{w\in W\colon C(sw) = C(s)C(w)\right\}.
+    \end{equation*}
+    We shall verify that the $P_s$ satisfy the conditions of \thref{prop:equivalent-conditions-for-coxeter-system}. Condition \ref{one-dash} is clearly satisfied. 
+
+    To verify \ref{two-dash}, suppose $w\in P_s\cap sP_s$, we would then have $w, sw\in P_s$, so that 
+    \begin{equation*}
+        C(s)C(w) = C(sw)\qquad C(s)C(sw) = C(w),
+    \end{equation*}
+    that is, $C(s)C(s)C(w) = C(w)$, which in light of \eqref{product-three-double-cosets} implies $C(sw) = C(w)$, a contradiction to \thref{thm:bijection-between-W-and-double-cosets}.
+
+    Finally, we verify \ref{condition-for-next-proposition}. Let $s, s'\in S$ and $w,w'\in W$ with $w' = ws'$ and $w\in P_s$ but $w'\notin P_s$. Hence 
+    \begin{equation*}
+        C(sw) = C(s)C(w)\quad\text{ and }\quad C(w')\subseteq C(s)C(w') = C(s)w' B,
+    \end{equation*}
+    due to \ref{product-two-double-cosets}. As a result, there exist $b,b',b''\in B$ such that $bw'B = b'sb'' w'B$, whence $w'^{-1}b'sb''w'\in B$, in particular, $w'B = b'sb''w'B$, therefore, $C(w')\cap C(s)w'\ne\emptyset$.
+    
+    The relation $w = w's'$ implies 
+    \begin{equation*}
+        C(sw) = C(s)w's'B.
+    \end{equation*}
+    We have seen that $C(w')C(s')\subseteq C(w')\cup C(w's')$, which implies 
+    \begin{equation*}
+        C(w')s'B\subseteq C(ws')\cup C(w).
+    \end{equation*}
+    Since $C(s)w'$ meets $C(w')$, it follows that $C(sw) = C(s)w's'B$ meets $C(w')s'B\subseteq C(ws')\cup C(w)$. Therefore, $C(sw)$ is equal to one of the double cosets $C(ws')$ or $C(w)$. Since $sw\ne w$, in conjunction with \thref{thm:bijection-between-W-and-double-cosets}, we must have $sw = ws'$, as desired.
+\end{proof}
+
+\begin{corollary}\thlabel{cor:condition-for-product-of-double-cosets}
+    Let $w_1,\dots,w_q\in W$ and let $w = w_1\cdots w_q$. If 
+    \begin{equation*}
+        \ell(w) = \ell(w_1) + \dots + \ell(w_q),
+    \end{equation*}
+    then 
+    \begin{equation*}
+        C(w) = C(w_1)\cdots C(w_q).
+    \end{equation*}
+\end{corollary}
+\begin{proof}
+    Take reduced representations for each of the $w_i$'s. The concatenation of these representations must form a reduced representation of $w$. It is clear from the theorem that given a reduced representation $s_1\cdots s_n$ of $w$, we must have $C(w) = C(s_1)\cdots C(s_n)$. The corollary follows hence.
+\end{proof}
+
+\begin{corollary}\thlabel{cor:some-technical-containment}
+    For each $w\in W$, let $T_w$ be as in \thref{lem:equivalent-condition-for-reduced-representation}. If $t\in T_w$, then $C(t)\subseteq C(w) C(w^{-1})$.
+\end{corollary}
+\begin{proof}
+    Choose a reduced representation $w = s_1\cdots s_q$, then due to \thref{lem:equivalent-condition-for-reduced-representation}, $T_w = \{t_1,\dots,t_q\}$, where 
+    \begin{equation*}
+        t_j = (s_1\cdots s_{j - 1})s_j(s_1\cdots s_{j - 1})^{-1}
+    \end{equation*}
+    and we have $s_1\cdots s_j = t_j\cdots t_1$. 
+
+    Let $t\in T_w$ and say $1\le j\le q$ is such that $t = t_j$. Set $w' = s_1\dots s_{j - 1}$ and $w'' = s_{j + 1}\cdots s_{q}$. Then we have 
+    \begin{equation*}
+        w = w'sw'',\quad \ell(w) = \ell(w') + \ell(w'') + 1,\quad\text{and}\quad t = w'sw'^{-1}.
+    \end{equation*}
+    Due to \thref{cor:condition-for-product-of-double-cosets},
+    \begin{equation*}
+        C(w)C(w^{-1}) = C(w')C(s)C(w'')C(w''^{-1})C(s)C(w'^{-1})\supseteq C(w')C(s)C(s)C(w'^{-1}).
+    \end{equation*}
+    But we know that $C(s)\subseteq B\cup C(s) = C(s)C(s)$, and hence 
+    \begin{equation*}
+        C(t)\subseteq C(w')C(s)C(w'^{-1}) = C(w')C(s)C(s)C(w'^{-1})\subseteq C(w)C(w^{-1}),
+    \end{equation*}
+    as desired.
+\end{proof}
+
+\begin{corollary}\thlabel{cor:another-technical-containment}
+    Let $w\in W$ and let $H_w$ be the subgroup of $G$ generated by $C(w)C(w^{-1})$. Then 
+    \begin{enumerate}[label=(\roman*)]
+        \item For any reduced representation $w = s_1\cdots s_q$, $C(s_j)\subseteq H_w$ for $1\le j\le q$. 
+        \item The group $H_w$ contains $C(w)$ and is generated by $C(w)$.
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+\begin{enumerate}[label=(\roman*)]
+    \item We induct on $j\ge 1$. The base case is clear from \thref{cor:some-technical-containment}. Suppose now that $j > 1$. Let $t = (s_1\cdots s_{j - 1})s_j(s_1\cdots s_{j - 1})^{-1}$. Then due to \thref{lem:equivalent-condition-for-reduced-representation} $t\in T_w$ and $C(t)\subseteq H_w$ due to \thref{cor:some-technical-containment}. Using the induction hypothesis and 
+    \begin{equation*}
+        C(s_j)\subseteq C((s_1\cdots s_{j - 1})^{-1})C(t)C(s_{1}\cdots s_{j - 1})\subseteq H_w,
+    \end{equation*}
+    as desired.
+
+    \item By \thref{cor:condition-for-product-of-double-cosets}, we have that $C(w) = C(s_1)\cdots C(s_q)$, and hence $C(w)\subseteq H_w$. This completes the proof. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{definition}
+    For any subset $X\subseteq S$, denote by $W_X$ the subgroup of $W$ generated by $X$ and by $G_X$ the set $BW_XB\subseteq G$. Set $G_\emptyset = B$.
+\end{definition}
+
+\begin{theorem}\thlabel{thm:subgroups-containing-B}
+\begin{enumerate}[label=(\roman*)]
+    \item \big(\cite[2.3.2]{macdonald-spherical-functions}\big)For $X\subseteq X$, $G_X$ is a subgroup of $G$ generated by $\bigcup_{s\in X} C(s)$.
+    \item \big(\cite[2.3.3]{macdonald-spherical-functions}\big) The map $X\mapsto G_X$ is a bijection from $\scrP(S)$ to the set of subgroups of $G$ containing $B$.
+    \item Let $(X_i)_{i\in I}$ be a family of subsets of $X$. If $X = \bigcap_{i\in I} X_i$, then $G_X = \bigcap_{i\in I} G_{X_i}$.
+    \item Let $X$ and $Y$ be two subsets of $X$. Then $G_X\subseteq G_Y$ (resp. $G_X = G_Y$) if and only if $X\subseteq Y$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\roman*)]
+    \item Clearly $G_X = G_X^{-1}$ and \thref{lem:products-of-double-cosets} shows that $G_X G_X\subseteq G_X$. Hence, $G_X$ is a subgroup of $G$. Further, due to \thref{cor:condition-for-product-of-double-cosets} it is clear that $G_X$ is generated by $\bigcup_{s\in X} C(s)$.
+
+    \item Since the map $X\mapsto W_X$ is injective and there is a bijection between $W$ and $B\backslash G/B$, it follows that the map $X\mapsto G_X$ is injective. 
+
+    Conversely, let $H$ be a subgroup of $G$ containing $B$. Let 
+    \begin{equation*}
+        U = \left\{w\in W\colon C(w)\subseteq H\right\},
+    \end{equation*}
+    and let $X = U\cap S$. Clearly $U$ is a subgroup of $W$ so that $W_X\subseteq U$ and $G_X\subseteq H$. On the other hand, let $u\in U$ and $u = s_1\cdots s_q$ bea reduced representation of $u$. By \thref{cor:another-technical-containment}, $C(s_j)\subseteq H$, and hence $s_j\in X$ for $1\le j\le q$. Thus, $u\in W_X$, and since $H = \bigcup_{u\in U} C(u)$, it follows that $H\subseteq G_X$, thereby proving (ii).
+
+    \item Clear.
+    \item Clear. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}\thlabel{cor:S-determined-by-B-N}
+    $S = \left\{w\in W\colon w\ne 1,~B\cup C(w)\text{ is a subgroup of }G\right\}$.
+\end{corollary}
+\begin{proof}
+    Clearly, for any $s\in S$, $B\cup C(s)$ forms a subgroup of $G$ because we have already shown that $C(s)C(s)\subseteq B\cup C(s)$. Conversely, if $w\in W$ is such that $B\cup C(w)$ forms a subgroup of $G$, then this subgroup is equal to $BW_XB$, where $W_X = \{1, w\}$ (recall the bijection between $W$ and double cosets). Thus, $X$ generates the group $\{1, w\}$, and hence $\# X = 1$ i.e., $w\in S$.
+\end{proof}
+
+\begin{proposition}\big(\cite[2.3.5]{macdonald-spherical-functions}\big)
+    Let $X, Y\subseteq X$ and $w\in W$. Then
+    \begin{equation*}
+        G_X w G_Y = BW_XwW_YB.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Clearly $BW_XwW_YB\subseteq G_XwG_Y$. We prove the other inclusion. Let $s_1,\dots,s_q\in X$ and $t_1,\dots,t_p\in Y$. Then, due to \thref{lem:products-of-double-cosets}, it follows that 
+    \begin{equation*}
+        C(s_1\cdots s_q)C(w)C(t_1\cdots t_p)\subseteq BW_XwW_YB,
+    \end{equation*}
+    and therefore 
+    \begin{equation*}
+        G_XwG_Y\subseteq BW_XwW_YB,
+    \end{equation*}
+    thereby completing the proof.
+\end{proof}
+
+\begin{proposition}\thlabel{prop:conjuagte-contained-in-GX}
+    Let $g\in G$ and $X\subseteq S$. If $gBg^{-1}\subseteq G_X$, then $g\in G_X$.
+\end{proposition}
+\begin{proof}
+    Let $w\in W$ be such that $g\in C(w)$. Since $B$ is a subgroup of $G$, the fact that $gBg^{-1}\subseteq G_X$ implies $C(w)C(w^{-1})\subseteq G_X$. In the notation of \thref{cor:another-technical-containment}, we have $H_w\subseteq G_X$, so that $C(w)\subseteq G_X$, whence $g\in G_X$.
+\end{proof}
+
+\begin{definition}
+    A subgroup of $G$ is said to be \define{parabolic} if it contains a conjugate of $B$.
+\end{definition}
+
+\begin{proposition}\thlabel{prop:properties-of-parabolics}
+    Let $P$ be a subgroup of $G$.
+    \begin{enumerate}[label=(\roman*)]
+        \item $P$ parabolic if and only if there exists a subset $X\subseteq S$ such that $P$ is conjugate to $G_X$. 
+        \item \big(\cite[2.3.4]{macdonald-spherical-functions}\big) Let $X, X'\subseteq S$ and $g,g'\in G$ be such that $P = gG_X g^{-1} = g' G_{X'}g'^{-1}$. Then $X = X'$ and $g'g^{-1}\in P$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\roman*)]
+\item Immediate from \thref{thm:subgroups-containing-B}.
+\item We have 
+\begin{equation*}
+    g^{-1}g' Bg'^{-1}g\subseteq g^{-1}g' G_{X'}g'^{-1}g = G_X,
+\end{equation*}
+and hence, due to \thref{prop:conjuagte-contained-in-GX}, it follows that $g^{-1}g'\in G_X$, whence $G_X' = G_X$, so that $X = X'$ due to \thref{thm:subgroups-containing-B}. Finally,
+\begin{equation*}
+    g'g^{-1} = gg^{-1}g'g^{-1}\in gG_Xg^{-1} = P,
+\end{equation*}
+thereby completing the proof. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}\thlabel{thm:conjugacy-property-of-parabolics}
+\begin{enumerate}[label=(\roman*)]
+    \item Let $P_1$ and $P_2$ be two parabolic subgroups of $G$ whose intersection is parabolic and let $g\in G$ be such that $gP_1g^{-1}\subseteq P_2$. Then $g\in P_2$ and $P_1\subseteq P_2$.
+    \item Two parabolic subgroups whose intersection is parabolic are not conjugate unless they are equal.
+    \item Let $Q_1$ and $Q_2$ be two parabolic subgroups of $G$ contained in a subgroup $Q$ of $G$. Then any $g\in G$ such that $gQ_1g^{-1} = Q_2$ belongs to $Q$.
+    \item \big(\cite[2.3.6]{macdonald-spherical-functions}\big) Every parabolic subgroup is self-normalizing.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+    For (i), since the intersection is parabolic, there is an $h\in G$ such that $hBh^{-1}\subseteq P_1\cap P_2$. As a result, $h^{-1}P_1h = G_{X_1}$ and $h^{-1}P_2h = G_{X_2}$ for some $X_1, X_2\subseteq S$. Our hypothesis implies 
+    \begin{equation*}
+        ghG_{X_1}(gh)^{-1}\subseteq hG_{X_2}h^{-1}\implies (h^{-1}gh)G_{X_1}(h^{-1}gh)^{-1}\subseteq G_{X_2}\implies (h^{-1}gh)B(h^{-1}gh)\subseteq G_{X_2},
+    \end{equation*}
+    so that $h^{-1}gh\in G_{X_2}$ due to \thref{prop:conjuagte-contained-in-GX}, i.e., $G_{X_1}\subseteq G_{X_2}$, therefore, $P_1\subseteq P_2$. Finally, since $h^{-1}gh\in G_{X_2}$, we must have $g\in P_2$, proving (i).
+
+    Assersion (ii) is immediate from (i). Assersion (iii) follows from (i) because $Q$ is a parabolic such that $Q_1\cap Q = Q_1$ is parabolic and $gQ_1g^{-1}\subseteq Q$. Assersion (iv) is an immediate consequence of (iii).
+\end{proof}
+
+\bibliographystyle{alpha}
+\bibliography{references}
 \end{document}
