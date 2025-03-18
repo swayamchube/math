@@ -23,7 +23,10 @@
 \usepackage{xcolor}
 \usepackage{theoremref}
 \usepackage{enumitem}
-\usepackage{mathpazo}
+\usepackage{lmodern}
+% \usepackage{mathpazo}
+\usepackage{sfmath}
+\usepackage{sansmath}
 % \usepackage{euler}
 \usepackage{mathrsfs}
 \setlength{\marginparwidth}{2cm}
@@ -38,6 +41,7 @@
 \usetikzlibrary{cd}
 
 \renewcommand{\qedsymbol}{$\blacksquare$}
+\renewcommand{\familydefault}{\sfdefault} % Do you want this font? 
 
 % Uncomment to override  the `A preprint' in the header
 % \renewcommand{\headeright}{}
@@ -253,7 +257,6 @@
 \newcommand{\ul}[1]{\underline{#1}}
 \newcommand{\type}{\operatorname{type}}
 
-% \renewcommand{\familydefault}{\sfdefault} % Do you want this font? 
 
 \geometry {
     margin = 1in
@@ -1043,6 +1046,7 @@ $(3)\implies(1)$ Again, since $k = \Soc_R(R)\subseteq R$ is essential, we have t
     Conversely, if $R$ is a regular local ring, then $\projdim_R k < \infty$, so that $\Ext^j_R(k, k) = 0$ for $j\gg 0$, consequently, $\injdim_R k < \infty$.
 \end{proof}
 
+\section{Gorenstein Rings}
 \subsection{Modules of finite injective dimension}
 
 \begin{definition}
@@ -1339,5 +1343,131 @@ This characterization is independent of the maximal regular sequence, as desired
         \item $S$ is Gorenstein if and only if $R$ and $S/\frakm_R S$ are so.
     \end{enumerate}
 \end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+    \item Induct on $\dim R$. If $R$ is Artinian, then $\frakm_R S$ is nilpotent and hence $\frakm_R S\subseteq\frakN(S)$, so that $\dim S/\frakm_R S = \dim S$. This prove the assertion when $\dim R = 0$. 
+
+    Suppose now that $\dim R > 0$ and let $\frakN = \frakN(R)$. The map $R/\frakN\to S/\frakN S$ is flat and $\frakN S\subseteq\frakN(S)$, so that 
+    \begin{equation*}
+        \dim R = \dim R/\frakN\quad\text{and}\quad\dim S = \dim S/\frakN S.
+    \end{equation*}
+    Replacing $R$ and $S$ by $R/\frakN$ and $S/\frakN S$ respectively, we may assume that $R$ is reduced. In particular, this means that the zero ideal in $R$ is the intersection of all its (finitely many) minimal primes. Since $\dim R > 0$, the maximal ideal is not minimal and using prime avoidance, choose a non-zerodivisor $a\in\frakm_R$. The map $R/aR\to S/aS$ is flat, $\dim R/aR = \dim R - 1$ and the fibre of this map is still $S/\frakm_R S$. The induction hypothesis implies 
+    \begin{equation*}
+        \dim S = \dim S/aS + 1 = \dim R/aR + \dim S/\frakm_R S + 1 = \dim R + \dim S/\frakm_R S.
+    \end{equation*}
+
+    \item Let $n = \lambda_R(M)$. If $n = 0$, then $M = 0$, and there is nothing to prove. Suppose $n > 0$. Then, there is a composition series
+    \begin{equation*}
+        M = M_0\supsetneq M_1\supsetneq\cdots\supsetneq M_n = 0,
+    \end{equation*}
+    giving rise to short exact sequences 
+    \begin{equation*}
+        0\to M_{i + 1}\to M_i\to k\to 0\qquad 0\le i\le n - 1.
+    \end{equation*}
+    Applying the functor $-\otimes_R S$ and using the fact that $\frakm_R S = \frakm_S$ so that $k\otimes_R S = \ell$ (as $S$-modules), we obtain 
+    \begin{equation*}
+        0\to M_{i + 1}\otimes_R S\to M_i\otimes_R S\to \ell\to 0,
+    \end{equation*}
+    therefore, $\lambda_S(M\otimes_R S) = \lambda_R(M)$.
+
+    \item It is clear that it suffices to prove the assertion for $n = 1$. Let $a\in\frakm_S$ be $S/\frakm_R S$-regular. We must show that $a$ is $S$-regular and $R\to S/aS$ is flat.
+
+    Set $d_n = \dim_k \frakm_R^n/\frakm_R^{n + 1}$. There are short exact sequences 
+    \begin{equation*}
+        0\to \frakm_R^n/\frakm_R^{n + 1}\to R/\frakm_R^{n + 1}\to R/\frakm_R^n\to 0.
+    \end{equation*}
+    Applying $-\otimes_R S$, we obtain short exact sequences
+    \begin{equation*}
+        0\to\left(S/\frakm_R S\right)^{\oplus d_n}\to S/\frakm_R^{n + 1}S\to S/\frakm_R^n S\to 0
+    \end{equation*}
+    of $S$-modules. Inducting on $n$, it is easy to show that $a$ is a non-zerodivisor on $S/\frakm_R^n S$ for all $n\ge 1$\footnote{If $0\to M'\to M\to M''\to 0$ is a short exact sequence of modules and $a$ is a non-zerodivisor on $M'$ and $M''$, then it is a non-zerodivisor on $M$. This follows from the fact that $\Ass_R(M)\subseteq\Ass_R(M')\cup\Ass_R(M'')$.}. Suppose $a$ is a zerodivisor on $S$, then there exists $0\ne s\in S$ such that $as = 0$. By Krull's Intersection Theorem,
+    \begin{equation*}
+        \bigcap_{n\ge 1}\frakm_R^n S\subseteq\bigcap_{n\ge 1}\frakm_S^n = 0,
+    \end{equation*}
+    consequently, there is some $n\ge 1$ such that $s\notin\frakm_R^n S$. In particular, $0\ne\overline s\in S/\frakm_R^n S$. But since $a$ is a non-zerodivisor on $S$, we cannot have $a\overline s = 0$, a contradiction. Thus $a$ is a non-zerodivisor on $S$.
+
+    It remains to show that $R\to S/aS$ is flat, i.e., we must show that 
+    \begin{equation*}
+        \Tor^R_1\left(M, S/aS\right) = 0\quad\text{for all $R$-modules $M$},
+    \end{equation*}
+    equivalently (using standard reduction techniques), since $R$ is Noetherian, it suffices to show that 
+    \begin{equation*}
+        \Tor^R_1\left(R/\frakp, S/aS\right) = 0\quad\text{for all }\frakp\in\Spec(R).
+    \end{equation*}
+    Set $\overline R = R/\frakp$ and $\overline S = S/\frakp S$ and note that $\overline R\to \overline S$ is flat and a morphism of local rings, further $\overline S/\frakm_{\overline R}\overline S\cong S/\frakm_R S$ as rings and $S$-modules. Now, $a$ is a non-zerodivisor on $S/\frakm_R S$, and hence is a non-zerodivisor on $\overline S/\frakm_{\overline R}\overline S$. Thus, $\overline s\in\overline S$ is a non-zerodivisor on $\overline S/\frakm_{\overline R}\overline S$ and because of what we have argued in the preceding paragraph, $\overline a\in\overline S$ is a non-zerodivisor.
+
+    Consider the short exact sequence 
+    \begin{equation*}
+        0\to S\xrightarrow{\cdot a} S\to S/aS\to 0,
+    \end{equation*}
+    and applying $-\otimes_R R/\frakp$, we obtain 
+    \begin{equation*}
+        0 = \Tor^R_1(S, R/\frakp)\to\Tor^R_1(S/aS, R/\frakp)\to\overline S\xrightarrow{\cdot a}\overline S\to S/aS\otimes_R R/\frakp\to 0.
+    \end{equation*}
+    Thus $\Tor^R_1(S/aS, R/\frakp) = 0$, as desired. This completes the proof of (3).
+
+    \item Let $\ul a = a_1,\dots,a_s\in\frakm_R$ be a maximal $R$-sequence. Since $R\to S$ is flat, $\ul a$ is an $S$-sequence, therefore, replacing $R$ and $S$ by $R/\ul aR$ and $S/\ul aS$, we may assume $\depth_R R = 0$. Note that the fibre of the map does not change during this reduction. Now, let $\ul b = b_1,\dots, b_r\in S$ be $S/\frakm_R S$-regular. Using (3), we know that $\ul b$ is $S$-regular and the map $R\to S/\ul b S$ is flat. Let $\overline S = S/\ul b S$, then 
+    \begin{equation*}
+        \depth S - \depth S/\frakm_R S = \depth\overline S - \depth\overline S/\frakm_R\overline S,
+    \end{equation*}
+    and hence, we may replace $S$ by $S/\ul bS$ and assume that $\depth_R R = \depth_S S/\frakm_R S = 0$. It remains to show that $\depth_S S = 0$ in this situation.
+
+    Since $\depth_R R = 0$, there is an injection $S/\frakm_R \into R$, which upon tensoring with $S$ and using flatness, gives an injection $S/\frakm_R S\into S$ as $S$-modules. But $\depth S/\frakm_R S = 0$ implies there is an injection $S/\frakm_S\into S/\frakm_R S$, and hence there is an injection $S/\frakm_S\into S$. Thus $\frakm_S\in\Ass_S(S)$, i.e., $\depth_S S = 0$, as desired.
+
+    \item Immediate from (1) and (4).
+
+    \item In light of (5), we can assume that $S$, $R$, and $S/\frakm_R S$ are all Cohen-Macaulay. Let $\ul a\in R$ be a maximal $R$-sequence. Replacing $R$ and $S$ by $R/\ul aR$ and $S/\ul aS$, we may assume that $R$ is Artinian (recall that $\depth = \dim$ for Cohen-Macaulay rings). Now let $\ul b = b_1,\dots,b_s\in\frakm_S$ be $S/\frakm_R S$-regular. Then due to (3), $\ul b$ is $S$-regular and $R\to S/\ul bS$. Again replacing $S$ by $S/\ul bS$, we may assume that $S/\frakm_R S$ is Artinian too. Due to (1), we conclude that $S$ is Artinian too.
+
+    We shall show that 
+    \begin{equation*}
+        \type(S) = \type(R)\type\left(S/\frakm_R S\right),
+    \end{equation*}
+    which implies the desideratum. Let $r = \type(R)$, then 
+    \begin{equation*}
+        k^{\oplus r} = \Soc_R(R)\cong\Hom_R\left(R/\frakm_R/ R\right).
+    \end{equation*}
+    Applying $-\otimes_R S$, we obtain\footnote{If $M$ is a finitely presented $R$-module and $N$ is any $R$-module, then for every flat algebra $R\to S$, there is a canonical isomorphism $$\Hom_R(M, N)\otimes_R S\cong \Hom_S(M\otimes_R S, N\otimes_R S).$$}
+    \begin{equation*}
+        \left(S/\frakm_RS\right)^{\oplus r}\cong\Hom_S\left(S/\frakm_R S, S\right)\cong\left(0 :_S\frakm_R S\right).
+    \end{equation*}
+    Observe that $\Soc_S(S)\subseteq\left(0 :_S \frakm_R S\right)$, and hence 
+    \begin{equation*}
+        \Soc_S(S)\subseteq\Soc_S\left((0:_S\frakm_R S)\right)\subseteq\Soc_S(S),
+    \end{equation*}
+    consequently, 
+    \begin{equation*}
+        \Soc_S\left(S/\frakm_R S\right)^{\oplus r}\cong\Soc_S\left(\left(S/\frakm_R S\right)^{\oplus r}\right)\cong\Soc_S(S) 
+    \end{equation*}
+    therefore, 
+    \begin{equation*}
+        r\type\left(S/\frakm_R S\right) = \type(S),
+    \end{equation*}
+    as desired. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}
+    Let $(R,\frakm, k)$ be a Noetherian local ring. Then $R$ is Gorenstein if and only if $\wh R$ is so.
+\end{corollary}
+\begin{proof}
+    This follows immediately from \thref{thm:fibres-faithfully-flat-map} (6), since $\wh R/\frakm\wh R\cong k$, which is always Gorenstein.
+\end{proof}
+
+\begin{corollary}
+    If $R$ is Gorenstein, then so is $R[X]$.
+\end{corollary}
+\begin{proof}
+    Let $\frakP\in\Spec\left(R[X]\right)$ and set $\frakp = R\cap\frakP$. It is clear that $\left(R[X]\right)_\frakP\cong\left(R_\frakp[X]\right)_\frakP$, and hence we can assume that $(R,\frakm, k)$ is a Noetherian local ring and $\frakP\cap R = \frakm$. The map $R\to\left(R[X]\right)_{\frakP}$ is a flat local homomorphism, since a composition of flat maps is flat. Thus, it suffices to show that 
+    \begin{equation*}
+        \frac{\left(R[X]\right)_{\frakP}}{\frakm\left(R[X]\right)_{\frakP}}
+    \end{equation*}
+    is a Gorenstein ring. But the above is isomorphic to 
+    \begin{equation*}
+        \left(R[X]/\frakm[X]\right)_{\overline\frakP}\cong\left(k[X]\right)_{\overline\frakP},
+    \end{equation*}
+    which is obviously Gorenstein. This completes the proof.
+\end{proof}
+
+\subsection{Quotients of Regular Local Rings}
 
 \end{document}
