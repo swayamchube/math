@@ -8,4 +8,4 @@
 \contentsline {subsection}{\numberline {4.1}Modules of finite injective dimension}{13}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}A closer look at the Artinian case}{17}{subsection.4.2}%
 \contentsline {subsection}{\numberline {4.3}Fibres of a flat map}{18}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Quotients of Regular Local Rings}{20}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.4}Canonical Module}{20}{subsection.4.4}%

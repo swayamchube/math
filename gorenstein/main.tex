@@ -256,7 +256,7 @@
 \newcommand{\depth}{\operatorname{depth}}
 \newcommand{\ul}[1]{\underline{#1}}
 \newcommand{\type}{\operatorname{type}}
-
+\newcommand{\CM}{\operatorname{CM}}
 
 \geometry {
     margin = 1in
@@ -1468,6 +1468,88 @@ This characterization is independent of the maximal regular sequence, as desired
     which is obviously Gorenstein. This completes the proof.
 \end{proof}
 
-\subsection{Quotients of Regular Local Rings}
+\subsection{Canonical Module}
 
+\begin{lemma}[Depth Lemma]\thlabel{lem:depth-lemma}
+    Let $R$ be a Noetherian ring, $I\noreq R$ a proper ideal and $0\to M'\to M\to M''\to 0$ a short exact sequence of finite $R$-modules such that $IM\ne M'\ne M'$, $IM\ne M$, and $IM''\ne M''$. Let $m = \depth(I, M)$, $m' = \depth(I, M')$, and $m'' = \depth(I, M'')$.
+    \begin{enumerate}[label=(\arabic*)]
+        \item $m < m''\implies m' = m$. 
+        \item $m > m''\implies m' = m'' + 1$. 
+        \item $m = m''\implies m'\ge m$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+Let $T^i$ denote the functor $\Ext^i_R(R/I, -)$. We shall use Rees's characterization of depth as 
+\begin{equation*}
+    \depth(I, N) = \sup\left\{i\colon\Ext^i_R(R/I, N)\ne 0\right\},
+\end{equation*}
+where $N$ is a finite $R$-module. The given short exact sequence gives rise to a long exact sequence 
+\begin{equation*}
+    \cdots\to T^{i - 1}(M'')\to T^i(M')\to T^i(M)\to T^i(M'')\to T^{i + 1}(M')\to\cdots,
+\end{equation*}
+with the convention that $T^i = 0$ for $i < 0$.
+\begin{enumerate}[label=(\arabic*)]
+    \item Let $i < m$, then a part of the long exact sequence looks like $T^{i - 1}(M'')\to T^i(M')\to T^i(M)$ where both $T^{i - 1}(M'')$ and $T^i(M)$ are zero, so that $T^i(M') = 0$. If $i = m$, then we have an exact sequence 
+    \begin{equation*}
+        0 = T^{m - 1}(M'')\to T^m(M')\to T^m(M)\to T^m(M'') = 0,
+    \end{equation*}
+    whence $T^{m}(M')\cong T^m(M)\ne 0$, i.e., $m' = m$. 
+
+    \item Let $i\le m'' < m$. Then the exact sequence $0 = T^{i - 1}(M'')\to T^i(M')\to T^i(M) = 0$ gives $T^i(M') = 0$. On the other hand, there is an exact sequence $0 = T^{m''}(M)\to T^{m''}(M'')\to T^{m'' + 1}(M')$ and since $T^{m''}(M'')\ne 0$< we must have $T^{m'' + 1}(M')\ne 0$, i.e., $m' = m'' + 1$. 
+    
+    \item Let $i < m = m''$, then the exact sequence $0  T^{i - 1}(M'')\to T^i(M')\to T^i(M) = 0$ gives $T^i(M') = 0$, i.e., $m'\ge m$, thereby completing the proof \qedhere
+\end{enumerate}
+\end{proof}
+    
+
+\begin{theorem}
+    Let $(S,\frakm, k)$ be a Gorenstein local ring with $d = \dim S$. Let $\CM_S(i)$ denote the class of Cohen-Macaulay $S$-modules of dimension $i$. Then for $M\in \CM_S(i)$, 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\Ext^j_S(M, S) = 0$ for $j\ne d - i$. 
+        \item $\Ext^{d - i}_S(M, S)\in\CM_S(i)$. 
+        \item $\Ext^{d - i}_S\left(\Ext^{d - i}_S(M, S), S\right)\cong M$ as $S$-modules.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Since $M\in\CM_S(i)$, 
+    \begin{equation*}
+        i = \dim\left(S/\Ann_S(M)\right) = \dim S - \hght\Ann_S(M)\implies \hght(\Ann_S(M)) = d - i,
+    \end{equation*}
+    where we used the fact that Gorenstein rings are Cohen-Macaulay. Again, since $S$ is Cohen-Macaulay, there is an $S$-regular sequence $a_1,\dots, a_{d - i}\in\Ann_S(M)$. A standard ``$\Ext$-shifting'' argument then gives that for $j < d - i$, 
+    \begin{equation*}
+        \Ext^j_S(M, S)\cong\Hom_S\left(M, S/(a_1,\dots, a_j)S\right) = 0,
+    \end{equation*}
+    since $a_{j + 1}$ is a non-zerodivisor on $S/(a_1,\dots,a_j)S$ but annihilates $M$. Further, we also have that 
+    \begin{equation*}
+        \Ext^{d - i}_S(M, S)\cong\Hom_{\overline S}(M, \overline S),
+    \end{equation*}
+    where $\overline S = S/(a_1,\dots,a_{d - i})S$.
+
+    Now, since $\injdim_S S = d < \infty$, using \thref{thm:ischebeck-formula}, we have 
+    \begin{equation*}
+        \depth_S M + \sup\left\{j\colon\Ext^j_S(M, S)\ne 0\right\} = d,
+    \end{equation*}
+    so that $\Ext^j_S(M, S) = 0$ for $j > d - i$. This completes the proof of (1).
+
+    Note that $\overline S$ is Gorenstein and $M$ is a maximal Cohen-Macaulay $\overline S$-module. Replacing $S$ by $\overline S$, we can assume that $M$ is a maximal Cohen-Macaulay $S$-module, and we would like to show that 
+    \begin{enumerate}[label=(\arabic*)]
+        \setcounter{enumi}{1}
+        \item $M^\ast \coloneq\Hom_S(M, S)\in\CM_S(d)$, and 
+        \item $M^{\ast\ast}\cong M$ as $S$-modules.
+    \end{enumerate}
+    If $M$ is free, then both the above conclusions are trivial. Suppose now that $M$ is not free; then we must have $\projdim_S M = \infty$, else, due to the Auslander-Buchsbaum Formula, $\projdim_S M = \depth S - \depth M = 0$, a contradiction to our assumption that $M$ is not free.
+
+    Let $\cdots\to F_1\xrightarrow{\varphi_1} F_0\to M\to 0$ be a free resolution of $M$ and set $N = \ker\varphi_1$. This gives a short exact sequence 
+    \begin{equation*}
+        0\to N\to F_0\to M\to 0.
+    \end{equation*}
+    Due to \thref{lem:depth-lemma}, since $\depth_S M = \depth_S F_0$,
+    \begin{equation*}
+        \depth_S N\ge\depth_S M = \dim S,
+    \end{equation*}
+    so that $N$ is a maximal Cohen-Macaulay $S$-module. Due to (1),  $\Ext^j_S(M, S) = 0$ for $j > 0$ and we get an exact complex 
+    \begin{equation*}
+        0\to M^\ast\to F_0^\ast\xrightarrow{\varphi_1^\ast} F_1^\ast\to\cdots.
+    \end{equation*}
+\end{proof}
 \end{document}
