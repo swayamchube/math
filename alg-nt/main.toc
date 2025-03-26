@@ -1,12 +1,13 @@
 \contentsline {section}{\numberline {1}Algebraic Integers}{2}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Integrality}{2}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Dedekind Domains}{3}{subsection.1.2}%
-\contentsline {subsection}{\numberline {1.3}Extensions of Dedekind Domains}{6}{subsection.1.3}%
-\contentsline {section}{\numberline {2}Minkowski and Dirichlet's Theorems}{7}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Minkowski's Bound}{7}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Dirichlet's Unit Theorem}{12}{subsection.2.2}%
-\contentsline {section}{\numberline {3}Valuation Theory}{13}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Valuations}{13}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Completions}{18}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Hensel's Lemma}{18}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Local Fields}{24}{subsection.3.4}%
+\contentsline {subsection}{\numberline {1.3}Extensions of Dedekind Domains}{5}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Minkowski and Dirichlet's Theorems}{6}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Minkowski's Bound}{6}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Dirichlet's Unit Theorem}{10}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Valuation Theory}{10}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Valuations}{10}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Completions}{14}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Hensel's Lemma}{14}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Local Fields}{19}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Extensions of Local Fields}{20}{subsection.3.5}%

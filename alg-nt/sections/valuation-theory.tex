@@ -238,6 +238,8 @@ In light of the above remark, we have:
 
 \subsection{Completions}
 
+
+
 \subsection{Hensel's Lemma}
 
 \begin{definition}
@@ -314,7 +316,7 @@ In light of the above remark, we have:
     If $\max\{|a_0|, |a_n|\} < 1$, then $0 < r < n$, and hence, due to Hensel's Lemma, could lift the above factorization a non-trivial factorization in $\frako[X]$, contradicting the irreducibility of $f(X)\in K[X]$. This completes the proof.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\thlabel{thm:extension-valuation}
     Let $K$ be complete with respect to the valuation $|\cdot|$, and suppose $L/K$ is an algebraic extension. Then, there is a unique extension of $|\cdot|$ to $L$. Further, if $L$ is finite over $K$, then the extension is given by 
     \begin{equation*}
         |\alpha| = \sqrt[n]{\left|N^L_K(\alpha)\right|},
@@ -581,4 +583,37 @@ In particular, the balls centered at $0$ in $X$ are balanced and this is the onl
     The local fields are precisely the finite extensions of the fields $\Q_p$ and $\F_p(\!(t)\!)$.
 \end{theorem}
 \begin{proof}
+    % TODO: Add in. All the lemmas are already there
 \end{proof}
+
+\subsection{Extensions of Local Fields}
+
+\begin{definition}
+    Let $L/K$ be a finite extension of local fields. Let $v: K^\times\to\Z$ denote the exponential valuation of $K$ and $w: L^\times\to\Q$ the unique extension of $v$ to $L$. From \thref{thm:extension-valuation}, we know that 
+    \begin{equation*}
+        w(\alpha) = \frac{1}{n}v\left(N^L_K(\alpha)\right)\qquad\forall~\alpha\in L.
+    \end{equation*}
+    The \define{ramification index} of this extension is defined to be
+    \begin{equation*}
+        e\coloneq \left[w\left(L^\times\right) : v\left(K^\times\right)\right],
+    \end{equation*}
+    and the \define{inertia degree} is defined to be $[\lambda : \kappa]$, where $\lambda$ and $\kappa$ are the residue fields of $L$ and $K$ respectively.
+\end{definition}
+
+\begin{remark}
+    Let $L/K$ be a finite extension of local fields with ramification index $e$. Let $(\frako,\frakp,\kappa)$ and $(\frakO,\frakP,\lambda)$ be the valuation rings of $K$ and $L$ respectively. Let $\pi$ be a uniformizer of $K$ and $\Pi$ a uniformizer of $L$. Then it is clear that $e = \left(w(\Pi)\Z : v(\pi)\Z\right)$. Thus, $ew(\Pi) = v(\pi)$, so that $\Pi^e = \varepsilon \pi$, where $\varepsilon$ is a unit in $L$. This means that $\frakp\frakO = \frakP^e$, which agrees with our previous definition of ramification index.
+\end{remark}
+
+\begin{proposition}[Fundamental Identity]\thlabel{prop:fundamental-identity}
+    Let $L/K$ be a finite extension of local fields of ramification index $e$ and inertia degree $f$. Then $[L : K] = ef$.
+\end{proposition}
+\begin{proof}
+    % TODO: Add in later. It's a bit long
+\end{proof}
+
+\begin{definition}
+    A finite extension $L/K$ of local fields is said to be \define{unramified} if $e(L/K) = 1$, or equivalently, in light of \thref{prop:fundamental-identity}  $[L : K] = [\lambda :\kappa]$.
+\end{definition}
+
+\begin{theorem}
+\end{theorem}
