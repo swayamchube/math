@@ -1,0 +1,484 @@
+\documentclass{article}
+% \usepackage{./arxiv}
+
+\title{Buildings}
+\author{Swayam Chube}
+\date{Last Updated: \today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+% \usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+% \usepackage{lmodern}
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+% \usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd-Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{sansmath}
+\usepackage{sfmath}
+\usepackage[scr=boondox, cal=esstix]{mathalpha}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}~2.\thmnumber{#2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{interlude}[theorem]{Interlude}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrb}{\mathscr{b}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrI}{\mathscr{I}}
+\newcommand{\scrM}{\mathscr{M}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrO}{\mathscr{O}} % sheaf
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\Ass}{\operatorname{Ass}}
+\newcommand{\projdim}{\operatorname{proj~dim}}
+\newcommand{\injdim}{\operatorname{inj~dim}}
+\newcommand{\gldim}{\operatorname{gl~dim}}
+\newcommand{\embdim}{\operatorname{emb~dim}}
+\newcommand{\hght}{\operatorname{ht}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\type}{\operatorname{type}}
+
+
+
+\geometry {
+    margin = 0.8in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\sffamily}
+{\S 2.\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+\begin{document}
+\maketitle
+
+\setcounter{section}{3}
+\section{Buildings}
+
+Let $(G, B, N, R)$ be a Tits system with $H = B\cap N$. Suppose there is a reduced and irreducible root system $\Sigma_0$ on a Euclidean space $A$, a chamber $C$ of the associated root system $\Sigma$, and a surjective homomorphism $\nu: N\onto W$ such that 
+\begin{enumerate}[label=(\roman*)]
+    \item $\ker\nu = H$, so that we may identify the Weyl group $N/H$ of the Tits system with the affine Weyl group $W$ of $\Sigma$. We shall implicitly make this identification henceforth.
+    \item under this identification, the distinguished generators of $N/H$ are the reflections in the walls of the cmaber $C$, i.e., 
+    \begin{equation*}
+        R = \left\{w_\alpha\colon\alpha\in\Pi\right\}.
+    \end{equation*}
+\end{enumerate}
+Following the notation of \cite{macdonald-spherical-functions}, the conjugats of $B$ in $G$ are called the \define{Iwahori subgroups} of $G$ and a \define{parahoric} subgroup of $G$ is a \emph{proper} subgroup containing an Iwahori subgroup. We have seen last time that that every Iwahori subgroup of $G$ is conjugate to a unique $P_S \coloneq BW_SW$, where $S\subseteq R$. In particular, each parahoric subgroup of $G$ uniquely determines a subset $S$ of $R$.
+
+This sets up a bijective correspondence $S\longleftrightarrow F$ between the subsets $S$ of $R$ and the facets $F$ of the chamber $C$: to a facet $F$ corresponds the set of all $w_\alpha\in R$ which fix $F$. Under this correspondence, $\emptyset\longleftrightarrow C$, and $R\longleftrightarrow\emptyset$. If $S\longleftrightarrow F$, then we write $P_F$ for $P_S$. Clearly, each parahoric subgroup $P$ uniquely determines a facet $F(P)$ of $C$: namely $F(P) = F$ if and only if $P$ is conjugate to $P_F$.
+
+The \define{building} associated with the Tits system structure on $G$ is the set 
+\begin{equation*}
+    \scrI = \left\{(P, x)\colon x\in F(P)\right\}.
+\end{equation*}
+With each parahoric subgroup $P$ associate 
+\begin{equation*}
+    \scrF(P) = \left\{(P, x)\colon x\in F(P)\right\}\subseteq\scrI.
+\end{equation*}
+The set $\scrF(P)$ is called a \define{facet} of $\scrI$ of \define{type} $F(P)$. In particular, if $P$ is an Iwahori subgroup, $\scrF(P)$ is called a \define{chamber} of $\scrI$. We define the \define{closure of a facet} as 
+\begin{equation*}
+    \overline{\scrF(P)} = \bigcup_{\substack{Q\supseteq P\\ Q\le G}} \scrF(Q).
+\end{equation*}
+The group $G$ acts on $\scrI$ as 
+\begin{equation*}
+    g\cdot(P, x) = \left(gPg^{-1}, x\right).
+\end{equation*}
+
+\subsection{Apartments}
+
+Set 
+\begin{equation*}
+    \scrA_0 \coloneq \bigcup_{w\in W}\overline{\scrF(wBw^{-1})}\subseteq\scrI.
+\end{equation*}
+Since $\overline{\scrF(w Bw^{-1})}$ is the union of $\scrF(P)$'s for all parahorics containing $wBw^{-1}$ and conjugation by $w$ is the same as conjugation by some $n\in N$ for which $\nu(n) = w$, it follows that 
+\begin{equation*}
+    \scrA_0 = \bigcup_{n\in N}n\scrF(P).
+\end{equation*}
+
+\begin{proposition}
+    There exists a \emph{unique} bijection $j: A\to\scrA_0$ such that 
+    \begin{enumerate}[label=(\arabic*)]
+        \item for each facet $F$ of $C$ and each $x\in F$, 
+        \begin{equation*}
+            j(x) = (P_F, x),
+        \end{equation*}
+        \item $j\circ w = w\circ j$ for all $w\in W$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    Let $y\in A$. Then there is a unique $x\in\overline C$ such that there exists a $w\in W$ such that $y = wx$. Let $F$ be the facet of $C$ containing $x$. Define $j(y) = (wP_Fw^{-1}, x)\in\scrA_0$. We must check that $j$ is well-defined. Suppose $w'\in W$ is such that $y = w'x$. Then $w^{-1}w'$ fixes $x$ and hence, belongs to the subgroup of $W$ generated by $\{w_\alpha\colon\alpha\in\Pi,~w_\alpha\text{ fixes }x\}$ (\cite[last line on pg. 16]{macdonald-spherical-functions}). That is, $w^{-1}w'\in W_S$, where $S\longleftrightarrow F$. In particular, $w^{-1}w'\in P_F = P_S$, therefore, $wP_Fw^{-1} = w'P_Fw'^{-1}$. Hence, $j$ is well-defined and clearly satisfies (1). As for (2), let $w''\in W$ and $y\in Y$ as before. Then $w''y$ is conjugate to $x$ under $w''w$, therefore, $j(w''y) = \left(w''wP_Fw^{-1}w''^{-1}, x\right) = w''\left(P_F, x\right) = w''j(y)$. The uniqueness is clear since the conjugates of $\overline C$ cover $A$.
+\end{proof} 
+
+\begin{lemma}\thlabel{lem:bijection-lies-in-W}
+    If $g\scrA_0 = \scrA_0$, then $j^{-1}\circ\left(g|_{\scrA_0}\right)\circ j\in W$.
+\end{lemma}
+\begin{proof}
+    Let $\scrb_0\subseteq\scrA_0$ denote the chamber $\scrF(B) = j(C)$ of $\scrI$. Note that $g\scrb_0$ is another chamber of $\scrI$ and is contained in $\displaystyle\scrA_0 = \bigcup_{n\in N}\bigcup_{P\supseteq B} n\scrF(P)$, therefore there exists $n_0\in N$ such that $g\scrb_0 = n_0\scrb_0$. Hence, $g_0 = n_0^{-1}g$ normalizes $B$, and hence, lies in $B$ as we have seen last time. Notice that $g_0\scrA_0 = n_0^{-1}g\scrA_0 = n_0^{-1}\scrA_0 = \scrA_0$, since $\nu(n_0)\in W$. It is also clear that $g_0$ fixes $\scrb_0$ and each of its facets. It is clear that the map $j^{-1}\circ\left(g|_{\scrA_0}\right)\circ j$ is a bijection from $A$ to $A$ which fixes the chamber $C$ and each of its facets. Now, since $w\in W$, and $j$ commutes with the action fo the affine Weyl group on $A$, we have 
+    \begin{equation*}
+        \left(j^{-1}\circ\left(g_0|_{\scrA_0}\right)\circ j\right)(wx) = w \left(j^{-1}\circ\left(g_0|_{\scrA_0}\right)\circ j\right)(x) = wx.
+    \end{equation*}
+    \todo{idk why} In particular, $j^{-1}\circ\left(g_0|_{\scrA_0}\right)\circ j$ is the identity map. Hence, 
+    \begin{equation*}
+        j^{-1}\circ\left(g|_{\scrA_0}\right)\circ j = j^{-1}\circ\left(n_0|_{\scrA_0}\right)\circ j = \nu(n_0)\in W, 
+    \end{equation*}
+    as desired.
+\end{proof}
+
+The subsets $g\scrA_0$ of $\scrI$ for $g\in G$ are called the \define{apartments} of the building $\scrI$. If $\scrA = g\scrA_0$ is an apartment, transport the Euclidean structure of $A$ onto $\scrA$ via the bijection $\left(g|_{\scrA_0}\right)\circ j: A\to\scrA$. We must check that this structure is well-defined. Indeed, if $\scrA = g'\scrA_0$, then 
+\begin{equation*}
+    \left[\left(g'|_{\scrA_0}\right)\circ j\right]^{-1}\circ\left[\left(g|_{\scrA_0}\circ j\right)\right] = j^{-1}\circ\left(g'^{-1}g|_{\scrA_0}\right)\circ j 
+\end{equation*}
+is an element of the affine Weyl group, in particular, it is an affine transformation that preserves lengths. Therefore, there is a well-defined Euclidean structure on $\scrA$.
+
+\begin{lemma}\thlabel{lem:facets-contained-in-apartment}
+    Any two facets of $\scrI$ are contained in a single apartment.
+\end{lemma}
+\begin{proof}
+    Consider two facets $\scrF(P_1)$ and $\scrF(P_2)$ where $P_1, P_2$ are parahoric subgroups of $G$, say $P_i - g_iP_{F_i}g_i^{-1}$ for $i\in\{1,2\}$, where $F_1, F_2$ are facets of the chamber $C$ in $A$. Since $G = BWB$, we can write $g_1^{-1}g_2 = b_1nb_2$ for some $b_1,b_2\in B$ and $n\in N$. Setting $g= g_1b_1$, then 
+    \begin{equation*}
+        P_1 = gP_{F_1}g^{-1}\quad\text{and}\quad P_2 = g\left(nP_{F_2}n^{-1}\right)g^{-1},
+    \end{equation*}
+    whence $\scrF(P_1)$ and $\scrF(P_2)$ are both contained in $g\scrA_0$.
+\end{proof}
+
+\begin{lemma}\thlabel{lem:G-acts-transitively}
+    $G$ acts transitively on the set 
+    \begin{equation*}
+        \left\{(\scrb, \scrA)\colon\scrb\text{ is a chamber in }\scrA\right\}.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Since $\scrb = g\scrb_0$ where $\scrb_0 = \scrF(B)$ for some $g\in G$, we may suppose without loss of generality that $\scrb = \scrb_0$. If $\scrA = g\scrA_0$ contains $\scrb_0$, then $g^{-1}\scrb_0 = n\scrb_0$ for some $n\in N$. Setting $g_1 = gn$, we see that $A = g_1\scrA_0$ and $\scrb_0 = g_1\scrb_0$.
+\end{proof}
+
+\begin{proposition}\thlabel{prop:bijection-preserving-stuff}
+    Let $\scrA$, $\scrA'$ be two apartments and let $\scrb$ be a chamber contained in $\scrA\cap\scrA'$. Then there exists a unique bijection $\rho:\scrA'\to\scrA$ such that 
+    \begin{enumerate}[label=(\arabic*)]
+        \item There exists $g\in G$ such that $\rho x = gx$ for all $x\in\scrA'$, and 
+        \item $\rho x = x$ for all $x\in\scrb$.
+    \end{enumerate}
+    Moreover, $\rho x = x$ for all $x\in\scrA\cap\scrA'$, and $d_{\scrA'}(x, y) = d_{\scrA}(\rho x, \rho y)$ for all $x,y\in\scrA'$.
+\end{proposition}
+\begin{proof}
+    Due to \thref{lem:G-acts-transitively}, there exists $g\in G$ which sends the pair $(\scrb, \scrA')$ to the pair $(\scrb, \scrA)$. Note that $g\scrb = \scrb$ and $\scrb = \scrF(B')$ for some Iwahori subgroup $B'$ of $G$. This means that $g$ normalizes $B'$, and hence, $g\in B'$. Thus, this map fixes every element of $\scrb$, and hence, satisfies the desired conditions.
+
+    Next, we argue uniqueness. If $\rho_1, \rho_2:\scrA'\to\scrA$ are two such maps, then $\rho_1\circ\rho_2^{-1}$ is a bijection from $\scrA$ to $\scrA$ which fixes $\scrb$. There exists $h\in G$ such that $h$ maps $(\scrb_0,\scrA_0)$ to the pair $(\scrb,\scrA)$. Therefore, $h^{-1}gh\scrA_0 = \scrA_0$ and fixes $\scrb_0$. Due to \thref{lem:bijection-lies-in-W}, it follows that $h^{-1}gh$ is the identity on $\scrA_0$, whence $g$ is the identity on $\scrA$. The assertion $d_{\scrA}(\rho x ,\rho y) = d_{\scrA'}(x, y)$ is clear from the definition of the metric.
+
+    It remains to show that $\rho x = x$ for all $x\in\scrA\cap\scrA'$. Due to \thref{lem:G-acts-transitively}, we may assume $\scrA' = \scrA_0$, $\scrA = g\scrA_0$ and $\scrb = \scrb_0 = \scrF(B)$. Since $g\scrb_0 = \scrb_0$, it follows that $b\in B$ as before. Now let $\scrF = \scrF(P)$ be a facet contained in $\scrA\cap\scrA'$. 
+
+    Since $\scrF(P)\subseteq\scrA_0\cap g\scrA_0$, we have 
+    \begin{equation*}
+        P = n_1Pn_1^{-1} = g\left(n_2P_Fn_2^{-1}\right)g^{-1}
+    \end{equation*}
+    for some facet $F$ of $C$ and $n_1, n_2\in N$. The above equality implies $n_1^{-1}gn_2$ normalizes $P_F$ and hence lies in $P_F$, therefore, $Bn_1P_F = Bn_2P_F$. But due to \cite[2.3.5]{macdonald-spherical-functions},
+    \begin{equation*}
+        Bn_1P_F = Bn_1W_FB = Bn_2W_FB = Bn_2P_F,
+    \end{equation*}
+    where $W_F$ is the subgroup of $W$ fixing $F$. Recall again (\cite[2.3.1]{macdonald-spherical-functions}) that there is a bijection between $N/H$ and $B\backslash G/B$. Hence $n_1W_F = n_2W_F$, in other words, $n_1P_Fn_1^{-1} = n_2P_Fn_2^{-1}$, consequently, $\scrF(P) = g\scrF(P) = \rho\scrF$, as desired.
+\end{proof}
+
+\subsection{Retraction of the building onto an apartment}
+\begin{theorem}\thlabel{thm:retraction-of-building} 
+    Let $\scrA$ be an apartment and $\scrb$ a chamber in $\scrA$. Then there exists a unique mapping $\rho:\scrI\to\scrA$ such that for all apartments $\scrA'$ containing $\scrb$, $\rho|_{\scrA'}$ is the bijection $\scrA'\to\scrA$ of \thref{prop:bijection-preserving-stuff}.
+\end{theorem}
+\begin{proof}
+    Let $x\in\scrI$. By \thref{lem:facets-contained-in-apartment}, there exists an apartment $\scrA_1$ containing $x$ and $\scrb$. Let $\rho_1: \scrA_1\to\scrA$ be the bijection of \thref{prop:bijection-preserving-stuff} and define $\rho(x)\coloneq\rho_1(x)$. We must show that this map is well-defined first. Indeed, suppose $\scrA_2$ is another apartment of $\scrI$ containing $x$ and $\scrb$ and $\rho_2: \scrA_2\to\scrA$ be the bijectio nof \thref{prop:bijection-preserving-stuff}, then $\rho_1^{-1}\circ\rho_2: \scrA_2\to\scrA_1$ is again the bijection of \thref{prop:bijection-preserving-stuff} for the apartments $\scrA_2$, $\scrA_1$, and the chamber $\scrb$. Thus, $\rho_1^{-1}\circ\rho_2$ fixes $x\in\scrA_1\cap\scrA_2$, i.e., $\rho_1(x) = \rho_2(x)$. This shows the existence of a desired retraction. 
+
+    To see uniqueness, again use the fact that for any $x\in\scrI$, there exists an apartment containing $x$ and $\scrb$. This completes the proof.
+\end{proof}
+
+The mapping $\rho$ defined above is called the \define{retraction of $\scrI$ onto $\scrA$ with centre $\scrb$}.
+
+\begin{proposition}
+Let $\rho$ be the retraction of \thref{thm:retraction-of-building}. Then 
+\begin{enumerate}[label=(\arabic*)]
+    \item $\rho x = x$ for all $x\in\scrA$. 
+    \item For each facet $\scrF$ in $\scrI$, $\rho|_{\overline{\scrF}}$ is a surjective affine isometry of $\overline{\scrF} \onto \overline{\rho\scrF}$.
+    \item If $x\in\overline\scrb$, then $\rho^{-1}(x) = \{x\}$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+    \item According to \thref{thm:retraction-of-building}, $\rho|_{\scrA}$ is the unique bijection of \thref{prop:bijection-preserving-stuff}, which is just the identity map, and hence $\rho x = x$ for all $x\in\scrA$.
+    \item Let $\scrA'$ be an apartment containing $\scrF$ and $\scrb$, which exists due to \thref{lem:facets-contained-in-apartment}. Note that $\overline\scrF\subseteq\scrA'$. Since $\rho:\scrA'\to\scrA$ is an isometry due to \thref{prop:bijection-preserving-stuff}, the assertion follows.
+    \item Let $\scrF'$ be a facet of $\scrI$ mapping to $\scrF$ under $\rho$. Note that $\rho:\scrA'\to\scrA$ is multiplication by some $g\in G$ which leaves $\scrb$ fixed, therefore, must leave all its facets fixed too, after all the facets are those corresponding to the parahorics containing the Iwahori corresponding to $\scrb$. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}
+\begin{enumerate}[label=(\arabic*)]
+    \item There exists a unique function $d:\scrI\times\scrI\to\R_{+}$ such that $d|_{\scrA\times\scrA}$ is the metric $d_{\scrA}$ for each apartment $\scrA$ of $\scrI$.
+    \item If $\rho$ is a retraction of $\scrI$ onto an apartment $\scrA$ as in \thref{thm:retraction-of-building}, then $d(\rho(x), \rho(y))\le d(x, y)$ for all $x,y\in\scrI$.
+    \item $d$ is a $G$-invariant metric on $\scrI$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+\item Let $x,y\in\scrI$, then due to \thref{lem:facets-contained-in-apartment}, there is an apartment $\scrA$ containing $x$ and $y$. We define $d(x, y)\coloneq d_{\scrA}(x, y)$. Suppose $\scrA'$ is another apartment containing $x$ and $y$. We must show that $d_{\scrA}(x, y) = d_{\scrA'}(x, y)$.
+
+Let $\scrb$ be a chamber in $\scrA$ such that $x\in\overline\scrb$, this can be done, since every facet corresponds to a parahoric, which contains an Iwahori. Similarly, let $\scrb'$ be a chamber in $\scrA'$ such that $y\in\overline\scrb'$. Again by \thref{lem:facets-contained-in-apartment}, there is an apartment $\scrA''$ containing $\scrb$ and $\scrb'$. From \thref{prop:bijection-preserving-stuff}, we have that $d_{\scrA}(x, y) = d_{\scrA''}(x, y)$ because $\scrA$ and $\scrA''$ share the chamber $\scrb$. Analogously, $d_{\scrA'}(x, y) = d_{\scrA''}(x, y)$. Thus, the distance $d$ is well-defined. That it is $G$-invariant follows from the definition of $d_{\scrA}$ as $\left(g|_{\scrA_0}\right)\circ j: A\to\scrA$.
+
+\item This is cumbersome to write out formally but here's the main idea: Choose an apartment $\scrA'$ in $\scrI$ containing $x$ and $y$. This apartment is in bijection with $A$, through which its metric is defined. The affine line joining $x$ to $y$ in $A$ will intersect finitely many facets in the tessellation of $A$. Thus, this line segment can be broken into a union of smaller closed line segments, each lying in the closure of a facet. Under $\rho$, the image of each such line segment is a line segment of the same length. In particular, the image of $[xy]$ under $\rho$ is a polygonal line, whose ``total length'' is $d_{\scrA'}(x, y)$. The triangle inequality implies the desired conclusion.
+
+\item Let $x, y, z\in\scrI$ and let $\scrA$ be an apartment containing $x$ and $y$. Let $\rho$ be a retraction of $\scrI$ onto $\scrA$ as in \thref{thm:retraction-of-building}. Then keeping in mind that $\rho(x) = x$ and $\rho(y) = y$, we have 
+\begin{equation*}
+    d(x, y) = d_{\scrA}(\rho(x), \rho(y))\le d(\rho(x), \rho(z)) + d(\rho(z), \rho(y))\le d(x, z) + d(z, y),
+\end{equation*}
+where the last equality follows from (2). \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    Let $x, y\in\scrI$. Then there is a unique geodesic joining $x$ to $y$.
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\begin{proposition}
+    $\scrI$ is complete with respect to the metric $d$.
+\end{proposition}
+\begin{proof}
+    Let $(x_n)_{n\ge 1}$ be a Cauchy sequence in $\scrI$ with respect to the metric $d$.
+\end{proof}
+
+\subsection*{Fixed point theorem}
+
+\bibliographystyle{alpha}
+\bibliography{references}
+\end{document}
