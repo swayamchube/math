@@ -471,7 +471,7 @@ where the last equality follows from (2). \qedhere
     Let $x, y\in\scrI$. Then there is a unique geodesic joining $x$ to $y$.
 \end{proposition}
 \begin{proof}
-    % TODO: Add in this proof.
+    % TODO: Add in this proof. I have no idea what a geodesic is.
 \end{proof}
 
 \begin{proposition}
@@ -511,6 +511,15 @@ A subset $X\subseteq\scrI$ is said to be \define{convex} if whenever $x, y\in X$
         d(z, x)^2 + d(z, y)^2\ge 2d(z, m)^2 + \frac{1}{2}d(x, y)^2.
     \end{equation*}
 \end{lemma}
+\begin{proof}
+    If $x, y, z$ lie in the same apartment, then upon moving to the Euclidean space $A$, this is just a restatement of the well-known Apollonius' theorem. In the general case, let $\scrA$ be an apartment containing $x$ and $y$ and choose a chamber $\scrb$ in $\scrA$ such that $m\in\overline\scrb$. Let $\rho: \scrI\to\scrA$ be the retraction with centre $\scrb$ as in \thref{thm:retraction-of-building}. Note that due to \thref{lem:facets-contained-in-apartment}, we can choose an apartment $\scrA'$ containing $\scrb$ and $z$. Then, using \thref{prop:bijection-preserving-stuff}, it is clear that $d(\rho(z), m) = d(z, m)$. Hence, we have 
+    \begin{align*}
+        d(z, x)^2 + d(z, y)^2 &\ge d(\rho(z), x)^2 + d(\rho(z), y)^2\\
+        &= 2d(\rho(z), m)^2 + \frac{1}{2}d(x, y)^2\\
+        &= 2d(z, m)^2 + \frac{1}{2}d(x, y)^2,
+    \end{align*}
+    as desired.
+\end{proof}
 
 \begin{theorem}
     Let $X$ be a bounded non-empty subset of $\scrI$. Then the group of isometries $\gamma$ of $\scrI$ such that $\gamma(X)\subseteq X$ has a fixed point in the convex hull of $X$.
@@ -519,7 +528,6 @@ A subset $X\subseteq\scrI$ is said to be \define{convex} if whenever $x, y\in X$
 \end{proof}
 
 A subset $M\subseteq G$ is said to be \define{bounded} if $MX$ is bounded for all bounded subsets $X\subseteq\scrI$.
-
 
 \bibliographystyle{alpha}
 \bibliography{references}
