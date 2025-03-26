@@ -40,6 +40,7 @@
 \usepackage{sansmath}
 \usepackage{sfmath}
 \usepackage[scr=boondox, cal=esstix]{mathalpha}
+\usepackage{mdframed}
 
 \renewcommand{\qedsymbol}{$\blacksquare$}
 \renewcommand{\familydefault}{\sfdefault}
@@ -360,11 +361,13 @@ Since $\overline{\scrF(w Bw^{-1})}$ is the union of $\scrF(P)$'s for all parahor
     as desired.
 \end{proof}
 
+\begin{mdframed}
 The subsets $g\scrA_0$ of $\scrI$ for $g\in G$ are called the \define{apartments} of the building $\scrI$. If $\scrA = g\scrA_0$ is an apartment, transport the Euclidean structure of $A$ onto $\scrA$ via the bijection $\left(g|_{\scrA_0}\right)\circ j: A\to\scrA$. We must check that this structure is well-defined. Indeed, if $\scrA = g'\scrA_0$, then 
 \begin{equation*}
     \left[\left(g'|_{\scrA_0}\right)\circ j\right]^{-1}\circ\left[\left(g|_{\scrA_0}\circ j\right)\right] = j^{-1}\circ\left(g'^{-1}g|_{\scrA_0}\right)\circ j 
 \end{equation*}
 is an element of the affine Weyl group, in particular, it is an affine transformation that preserves lengths. Therefore, there is a well-defined Euclidean structure on $\scrA$.
+\end{mdframed}
 
 \begin{lemma}\thlabel{lem:facets-contained-in-apartment}
     Any two facets of $\scrI$ are contained in a single apartment.
@@ -468,16 +471,55 @@ where the last equality follows from (2). \qedhere
     Let $x, y\in\scrI$. Then there is a unique geodesic joining $x$ to $y$.
 \end{proposition}
 \begin{proof}
+    % TODO: Add in this proof.
 \end{proof}
 
 \begin{proposition}
     $\scrI$ is complete with respect to the metric $d$.
 \end{proposition}
 \begin{proof}
-    Let $(x_n)_{n\ge 1}$ be a Cauchy sequence in $\scrI$ with respect to the metric $d$.
+    Let $(x_n)_{n\ge 1}$ be a Cauchy sequence in $\scrI$ with respect to the metric $d$. Let $\rho$ be a retraction of $\scrI$ onto an apartment $\scrA_0$ as in \thref{thm:retraction-of-building}. Then $\left(\rho x_n\right)_{n\ge 1}$ is a Cauchy sequence in $\scrA_0$, and as such, converges to some $x\in\scrA_0$. Let $x = (P, a)\in\scrA_0$ where $a\in A$. Then there is a $\mu > 0$ such that $d(x, wx)\ge\mu$ for all $w\in W$, the affine Weyl group. Let $g\in G$ be such that $x\ne gx$. We claim that $d(x, gx)\ge\mu$. Indeed, there is an apartment $\scrA' = h\scrA_0$ containing both $x$ and $gx$ for some $h\in G$. Then, from the $G$-invariance of $d$, 
+    \begin{equation*}
+        d(x, gx) = d(h^{-1}x, h^{-1}gx)\ge\mu,
+    \end{equation*}
+    which is clear from the bijection $A\leftrightarrow\scrA_0$. Again, since $d$ is $G$-invariant, it follows that $d(gx, g'x)\ge\mu$ for all $g,g'\in G$ such that $gx\ne g'x$.
+
+    Now, let $N > 0$ be a positive integer such that for all $m,n\ge N$, 
+    \begin{equation*}
+        d(\rho x_n, x) < \frac{1}{3}\mu\quad\text{ and }\quad d(x_m, x_n) < \frac{1}{3}\mu.
+    \end{equation*}
+    By definition, each $\rho x_n$ is of the form $g_nx_n$ for some $g_n\in G$. Set $y_n = g_n^{-1}x$. Then for $n\ge N$, using the $G$-invariance of $d$, we have 
+    \begin{align*}
+        d(y_n, y_{n + 1}) &\le d(y_n, x_n) + d(x_n, x_{n + 1}) + d(x_{n + 1}, y_{n + 1})\\
+        &= d(x, \rho x_n) + d(x_n, x_{n + 1}) + d(x_{n + 1}, y_{n + 1})\\
+        &< \frac{1}{3}\mu + \frac{1}{3}\mu + \frac{1}{3}\mu < \mu.
+    \end{align*}
+    Hence, $y_N = y_{N + 1} = \cdots \eqcolon y$. Finally, for $n\ge N$, we have 
+    \begin{equation*}
+        d(x_n, y) = d(x_n, y_n) = d(g_nx_n, g_ny_n) = d(\rho x_n, x)\to 0,
+    \end{equation*}
+    as $n\to\infty$.
 \end{proof}
 
 \subsection*{Fixed point theorem}
+
+A subset $X\subseteq\scrI$ is said to be \define{convex} if whenever $x, y\in X$, $[xy]\subseteq X$.
+
+\begin{lemma}
+    Let $x, y, z\in\scrI$ and let $m$ be the midpoint of $[xy]$ Then 
+    \begin{equation*}
+        d(z, x)^2 + d(z, y)^2\ge 2d(z, m)^2 + \frac{1}{2}d(x, y)^2.
+    \end{equation*}
+\end{lemma}
+
+\begin{theorem}
+    Let $X$ be a bounded non-empty subset of $\scrI$. Then the group of isometries $\gamma$ of $\scrI$ such that $\gamma(X)\subseteq X$ has a fixed point in the convex hull of $X$.
+\end{theorem}
+\begin{proof}
+\end{proof}
+
+A subset $M\subseteq G$ is said to be \define{bounded} if $MX$ is bounded for all bounded subsets $X\subseteq\scrI$.
+
 
 \bibliographystyle{alpha}
 \bibliography{references}
