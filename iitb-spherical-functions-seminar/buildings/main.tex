@@ -295,12 +295,12 @@
 Let $(G, B, N, R)$ be a Tits system with $H = B\cap N$. Suppose there is a reduced and irreducible root system $\Sigma_0$ on a Euclidean space $A$, a chamber $C$ of the associated root system $\Sigma$, and a surjective homomorphism $\nu: N\onto W$ such that 
 \begin{enumerate}[label=(\roman*)]
     \item $\ker\nu = H$, so that we may identify the Weyl group $N/H$ of the Tits system with the affine Weyl group $W$ of $\Sigma$. We shall implicitly make this identification henceforth.
-    \item under this identification, the distinguished generators of $N/H$ are the reflections in the walls of the cmaber $C$, i.e., 
+    \item under this identification, the distinguished generators of $N/H$ are the reflections in the walls of the chamber $C$, i.e., 
     \begin{equation*}
         R = \left\{w_\alpha\colon\alpha\in\Pi\right\}.
     \end{equation*}
 \end{enumerate}
-Following the notation of \cite{macdonald-spherical-functions}, the conjugats of $B$ in $G$ are called the \define{Iwahori subgroups} of $G$ and a \define{parahoric} subgroup of $G$ is a \emph{proper} subgroup containing an Iwahori subgroup. We have seen last time that that every Iwahori subgroup of $G$ is conjugate to a unique $P_S \coloneq BW_SW$, where $S\subseteq R$. In particular, each parahoric subgroup of $G$ uniquely determines a subset $S$ of $R$.
+Following the notation of \cite{macdonald-spherical-functions}, the conjugates of $B$ in $G$ are called the \define{Iwahori subgroups} of $G$ and a \define{parahoric} subgroup of $G$ is a \emph{proper} subgroup containing an Iwahori subgroup. We have seen last time that that every Iwahori subgroup of $G$ is conjugate to a unique $P_S \coloneq BW_SW$, where $S\subseteq R$. In particular, each parahoric subgroup of $G$ uniquely determines a subset $S$ of $R$.
 
 This sets up a bijective correspondence $S\longleftrightarrow F$ between the subsets $S$ of $R$ and the facets $F$ of the chamber $C$: to a facet $F$ corresponds the set of all $w_\alpha\in R$ which fix $F$. Under this correspondence, $\emptyset\longleftrightarrow C$, and $R\longleftrightarrow\emptyset$. If $S\longleftrightarrow F$, then we write $P_F$ for $P_S$. Clearly, each parahoric subgroup $P$ uniquely determines a facet $F(P)$ of $C$: namely $F(P) = F$ if and only if $P$ is conjugate to $P_F$.
 
@@ -354,7 +354,7 @@ Since $\overline{\scrF(w Bw^{-1})}$ is the union of $\scrF(P)$'s for all parahor
     \begin{equation*}
         \left(j^{-1}\circ\left(g_0|_{\scrA_0}\right)\circ j\right)(wx) = w \left(j^{-1}\circ\left(g_0|_{\scrA_0}\right)\circ j\right)(x) = wx.
     \end{equation*}
-    \todo{idk why} In particular, $j^{-1}\circ\left(g_0|_{\scrA_0}\right)\circ j$ is the identity map. Hence, 
+    In particular, $j^{-1}\circ\left(g_0|_{\scrA_0}\right)\circ j$ is the identity map. Hence, 
     \begin{equation*}
         j^{-1}\circ\left(g|_{\scrA_0}\right)\circ j = j^{-1}\circ\left(n_0|_{\scrA_0}\right)\circ j = \nu(n_0)\in W, 
     \end{equation*}
@@ -467,12 +467,12 @@ where the last equality follows from (2). \qedhere
 \end{enumerate}
 \end{proof}
 
-\begin{proposition}
-    Let $x, y\in\scrI$. Then there is a unique geodesic joining $x$ to $y$.
-\end{proposition}
-\begin{proof}
-    % TODO: Add in this proof. I have no idea what a geodesic is.
-\end{proof}
+% \begin{proposition}
+%     Let $x, y\in\scrI$. Then there is a unique geodesic joining $x$ to $y$.
+% \end{proposition}
+% \begin{proof}
+%     % TODO: Add in this proof. I have no idea what a geodesic is.
+% \end{proof}
 
 \begin{proposition}
     $\scrI$ is complete with respect to the metric $d$.
@@ -505,7 +505,7 @@ where the last equality follows from (2). \qedhere
 
 A subset $X\subseteq\scrI$ is said to be \define{convex} if whenever $x, y\in X$, $[xy]\subseteq X$.
 
-\begin{lemma}
+\begin{lemma}\thlabel{lem:apollonius}
     Let $x, y, z\in\scrI$ and let $m$ be the midpoint of $[xy]$ Then 
     \begin{equation*}
         d(z, x)^2 + d(z, y)^2\ge 2d(z, m)^2 + \frac{1}{2}d(x, y)^2.
@@ -521,13 +521,54 @@ A subset $X\subseteq\scrI$ is said to be \define{convex} if whenever $x, y\in X$
     as desired.
 \end{proof}
 
-\begin{theorem}
-    Let $X$ be a bounded non-empty subset of $\scrI$. Then the group of isometries $\gamma$ of $\scrI$ such that $\gamma(X)\subseteq X$ has a fixed point in the convex hull of $X$.
+\begin{theorem}\thlabel{thm:fixed-point-theorem}
+    Let $X$ be a bounded non-empty subset of $\scrI$. Then the group of \textcolor{red}{(affine?)} isometries $\gamma$ of $\scrI$ such that $\gamma(X)\subseteq X$ has a fixed point in the closure of the convex hull of $X$.
 \end{theorem}
 \begin{proof}
+    Let $\delta(X)$ denote the diameter of the set $X$. Fix a real number $k\in (0, 1)$ and let 
+    \begin{equation*}
+    fX\coloneq\left\{m\in\scrI\colon m\text{ is the midpoint of }[xy]\text{ with }x,y\in X\text{ and }d(x, y)\ge k\delta(X)\right\}.
+    \end{equation*}
+    If $m\in fX$ and $z\in X$, then $m$ is the midpoint of $[xy]$ for some $x,y\in X$ with $d(x, y)\ge k\delta(X)$. Using \thref{lem:apollonius}, 
+    \begin{equation*}
+    d(z, m)^2\le\frac{1}{2}d(z, x)^2 + d(z, y)^2 - \frac{1}{4}d(x, y)^2\le\underbrace{\left(1 - \frac{1}{4}k^2\right)}_{k_1}\delta(X)^2.
+    \end{equation*}
+    Next, if $m, z\in fX$, then $m$ is the midpoint of $[xy]$ for some $x,y\in X$ with $d(x, y)\ge k\delta(X)$.  Again, using \thref{lem:apollonius}, 
+    \begin{equation*}
+        d(z, m)^2\le\frac{1}{2}d(z, x)^2 + \frac{1}{2}d(z, y)^2 - \frac{1}{4}d(x, y)^2\le\underbrace{\left(1 - \frac{1}{2}k^2\right)}_{k_2}\delta(X)^2.
+    \end{equation*}
+    That is, $\delta(fX)\le k_2\delta(X)$. Hence, $\delta(f^nX)\to 0$ as $n\to\infty$. For each positive integer $n$, pick $x_n\in f^nX$. Then, it is clear that 
+    \begin{equation*}
+        d(x_n, x_{n + 1})\le k_2\delta\left(f^n X\right)\le k_1k_2^n\delta(X).
+    \end{equation*}
+    Hence $(x_n)_{n\ge 1}$ is a Cauchy sequence in $\scrI$, so that it converges to some $x\in\scrI$. Clearly $x$ lies in the closure of the convex hull of $X$, since each $f^nX$ is contained in the convex hull of $X$. We claim that $x$ is the desired fixed point.
+
+    Finally, let $\gamma$ be an isometry of $\scrI$ such that $\gamma X\subseteq X$. Then $\gamma f^nX\subseteq f^nX$. Let $x_n' = \gamma(x_n)$. Then $(x_n')_{n\ge 1}$ is a Cauchy sequence with $x_n'\in f^nX$ for all $n\ge 1$ and converges to $\gamma x$. But since $\delta(f^n X)\to 0$, it follows that $d(x_n, x_n')\to 0$ as $n\to\infty$. Hence $\gamma x = x$, as desired.
 \end{proof}
 
 A subset $M\subseteq G$ is said to be \define{bounded} if $MX$ is bounded for all bounded subsets $X\subseteq\scrI$.
+
+\begin{lemma}\thlabel{lem:bounded-iff-finite-double-cosets}
+    $M$ is bounded if and only if $M$ (non-trivially) intersects only finitely any double cosets in $B\backslash G/B$.
+\end{lemma}
+\begin{proof}
+    Let $\rho$ be the retraction of $\scrI$ onto the apartment $\scrA_0$ with centre $\scrb_0 = \scrF(B)$. Then $X\subseteq\scrI$ is bounded if and only if $\rho X$ is bounded. Indeed, it is clear that if $X$ is bounded, then so is $\rho X$; conversely, suppose $\rho X$ is bounded and pick some $x\in X$ and fix a $b_0\in\scrb_0$. Then there is an apartment containing $x$ and $\scrb_0$ on which $\rho$ acts by some element $g\in G$. But since $d$ is a $G$-invariant metric, it follows that 
+    \begin{equation*}
+        d(x, b_0) = d(gx, gb_0)\le d(gx, b_0) + d(b_0, gb_0)\le d(\rho x, b_0) + \diam\scrb_0.
+    \end{equation*}
+    Note that $\rho X$ is bounded if and only if it is contained in a finite union o closed chambers $\overline\scrb$ of $\scrA_0$. Hence $M$ is bounded if and only if $M\scrb$ is bounded for each chamber $\scrb$ of $\scrA_0$ which is possible if and only if $M\scrb_0$ is bounded.
+
+    For each $m\in M$, let $w_m\in W$ denote the unique element such that $m\in Bw_mB$. Then $M\scrb_0$ is bounded if and only if $\bigcup_{m\in M}w_m\scrb_0$ is bounded if and only if the set $\{w_m\colon m\in M\}$ is finite, that is, $M$ intersects only finitely many double cosets in $B\setminus G/B$.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:bounded-iff-contained-in-parahoric}
+    A subgroup $\Gamma$ of $G$ is bounded if and only if $\Gamma$ is contained in a parahoric subgroup.
+\end{theorem}
+\begin{proof}
+    Suppose $\Gamma$ is bounded and let $x\in\scrI$. Then $X = \Gamma x$ is bounded and is stable under the action of $\Gamma$ which acts through affine isometries. Thus, using \thref{thm:fixed-point-theorem}, there exists a fixed point $y\in\scrI$, i.e., $\Gamma y = y$. If $y$ lies in the facet $\scrF(P)$, then $\Gamma$ must normalize the parahoric subgroup $P$, whene $\Gamma\subseteq P$ due to \cite[2.3.6]{macdonald-spherical-functions}.
+
+    Conversely suppose $\Gamma$ is contained in a parahoric subgroup, which by conjugating can be assumed to be of the form $P_S$, where $S$ is a \emph{proper} subset of $R$. Now note that $P_S = BW_SB$ where $W_S$ is finite because $S\ne R$. Hence $\Gamma$ is bounded due to \thref{lem:bounded-iff-finite-double-cosets}.
+\end{proof}
 
 \bibliographystyle{alpha}
 \bibliography{references}
