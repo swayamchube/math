@@ -1,0 +1,635 @@
+\documentclass[10pt]{amsart}
+
+\title{MA 534: Homework 2}
+\author{Swayam Chube (200050141)}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+% \usepackage{mathpazo}
+% \usepackage{mlmodern}
+% \usepackage{euler}
+\usepackage{mathrsfs}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{fouriernc}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem*{claim}{Claim}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{notation}{Notation}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\frakM}{\mathfrak{M}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbI}{\mathbb{I}}
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakF}{\mathfrak{F}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakP}{\mathfrak{P}} % nilradical 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakT}{\mathfrak{T}} % tensor algebra
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+% \newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{#1}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\ind}{\operatorname{ind}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\Lip}{\operatorname{Lip}}
+\newcommand{\lip}{\operatorname{lip}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\pv}{\operatorname{p.v.}}
+\newcommand{\scrL}{\mathscr{L}}
+
+\geometry {
+    margin = 1in
+}
+
+\begin{document}
+\maketitle 
+
+\section{Problem 1}
+
+For $\varepsilon > 0$, define the functions $F_\varepsilon: \R\to\R$ by 
+\begin{equation*}
+    F_\varepsilon(z) \coloneq
+    \begin{cases}
+        \sqrt{z^2 + \varepsilon^2} - \varepsilon & z > 0\\
+        0 & z\le 0.
+    \end{cases}
+\end{equation*}
+It is clear that $F_\varepsilon$ is a continuously differentiable function on $\R$ with 
+\begin{equation*}
+    F_\varepsilon'(z) = 
+    \begin{cases}
+        \frac{z}{\sqrt{z^2 + \varepsilon^2}} & z > 0\\
+        0 & z\le 0.
+    \end{cases}
+\end{equation*}
+Furthermore, 
+\begin{equation*}
+    \lim_{\varepsilon\to 0^+} F_\varepsilon(z) = 
+    \begin{cases}
+        z & z > 0\\
+        0 & z\le 0,
+    \end{cases}
+\end{equation*}
+and 
+\begin{equation*}
+    \lim_{\varepsilon\to 0^+} F_\varepsilon'(z) = 
+    \begin{cases}
+        1 & z > 0\\
+        0 & z\le 0.
+    \end{cases}
+\end{equation*}
+
+Now, for any test function $\varphi\in C_c^\infty(\Omega)$, we have, using integration by parts with respect to the variable $x_j$ with $1\le j\le n$, 
+\begin{equation*}
+    \int_{\Omega}F_\varepsilon(u)\frac{\partial\varphi}{\partial x_j}~dx = -\int_{\Omega}F_\varepsilon'(u)\frac{\partial u}{\partial x_j}\varphi~dx
+\end{equation*}
+
+Note that $\frac{\partial\varphi}{\partial x_j}$ is of compact support in $\Omega$, and since $|F_\varepsilon(z)|\le |z|$, it is clear from the dominated convergence theorem that 
+\begin{equation*}
+    \lim_{\varepsilon\to 0^+}\int_\Omega F_\varepsilon(u)\frac{\partial\varphi}{\partial x_j}~dx = \int_\Omega\lim_{\varepsilon\to 0^+} F_\varepsilon(u)\frac{\partial\varphi}{\partial x_j}~dx = \int_\Omega u^+\frac{\partial\varphi}{\partial x_j}~dx.
+\end{equation*}
+
+Next, note that $|F_\varepsilon'(z)|\le 1$ and hence, the dominated convergence theorem applies again to give 
+\begin{equation*}
+    \lim_{\varepsilon\to 0^+}\int_{\Omega} F_\varepsilon'(u)\frac{\partial u}{\partial x_j}\varphi~dx = \int_{\Omega}\lim_{\varepsilon\to 0^+} F_\varepsilon'(u)\frac{\partial u}{\partial x_j}\varphi~dx = \int_{\left\{u > 0\right\}}\frac{\partial u}{\partial x_j}\varphi~dx.
+\end{equation*}
+In conclusion, 
+\begin{equation*}
+    \int_\Omega u^+\frac{\partial\varphi}{\partial x_j}~dx = -\int_{u > 0}\frac{\partial u}{\partial x_j}\varphi~dx.
+\end{equation*}
+Hence, 
+\begin{equation*}
+    \frac{\partial u^+}{\partial x_j} = 
+    \begin{cases}
+        \frac{\partial u}{\partial x_j} & u > 0\\
+        0 & u\le 0,
+    \end{cases}
+\end{equation*}
+almost everywhere. Similarly, using the fact that $u^- = (-u)^+$, we get 
+\begin{equation*}
+    \frac{\partial u^-}{\partial x_j} = 
+    \begin{cases}
+        -\frac{\partial u}{\partial x_j} & -u > 0\\
+        0 & -u\le 0
+    \end{cases}
+    =
+    \begin{cases}
+        -\frac{\partial u}{\partial x_j} & u < 0\\
+        0 & u\ge 0,
+    \end{cases}
+\end{equation*}
+almost everywhere. Finally, note that 
+\begin{equation*}
+    \left|\frac{\partial u^+}{\partial x_j}\right|\le\left|\frac{\partial u}{\partial x_j}\right|,
+\end{equation*}
+almost everywhere, therefore, 
+\begin{equation*}
+    \int_\Omega |u^+|^2~dx + \int_\Omega|Du^+|^2~dx\le\int_\Omega |u|^2~dx + \int_\Omega |Du|^2~dx < \infty,
+\end{equation*}
+i.e., $u^+\in H^1(\Omega)$. Similarly, $u^-\in H^1(\Omega)$; and since $|u| = u^+ + u^-$, it follows that $|u|\in H^1(\Omega)$.
+
+\section{Problem 2}
+
+Suppose first that $p = \infty$, then $u\in L^\infty(\R^n)$, i.e., $u$ is bounded on $\R^n$. It follows from Liouville's theorem that $u$ must be constant. Conversely, note that every constant function on $\R^n$ is trivially harmonic and in $L^\infty$. Thus, a harmonic function on $\R^n$ is in $L^\infty(\R^n)$ if and only if it is constant.
+
+Next, let $1\le p < \infty$. Let $x\in\R^n$. Then, using the mean value property of harmonic functions, we have 
+\begin{align*}
+    |u(x)| &= \frac{n}{\omega_n}\left|\int_{B(x, 1)} u(y)~dy\right|\\
+    &\le\frac{n}{\omega_n}\int_{B(x, 1)}|u(y)|~dy.
+\end{align*}
+If $p = 1$, then the above inequality shows that 
+\begin{equation*}
+    |u(x)|\le\frac{n}{\omega_n}\int_{\R^n}|u(y)|~dy = \frac{n}{\omega_n}\|u\|_{L^1(\R^n)}.
+\end{equation*}
+Thus, $u$ is a bounded harmonic function on $\R^n$, whence, due to Liouville's theorem, $u$ must be a constant function. But a constant function is in $L^1(\R^n)$ if and only if it is identically zero, so $u\equiv 0$. Clearly, if $u\equiv 0$, then $u$ is a harmonic function in $L^1(\R^n)$.
+
+Finally, suppose $1 < p < \infty$ and let $q$ denote its conjugate exponent, that is, $\displaystyle\frac{1}{p} + \frac{1}{q} = 1$. Then, using H\"older's inequality we have 
+\begin{align*}
+    |u(x)|&\le\frac{n}{\omega_n}\int_{B(x, 1)}|u(y)|~dy\\
+    &\le\frac{n}{\omega_n}\left(\int_{B(x, 1)}|u(y)|^p~dy\right)^{\frac{1}{p}}\left(\int_{B(x, 1)}1~dy\right)^\frac{1}{q}\\
+    &\le\left(\frac{n}{\omega_n}\right)^{\frac{1}{p}}\left(\int_{\R^n}|u(y)|^p\right)^{\frac{1}{p}}\\
+    &=\left(\frac{n}{\omega_n}\right)^{\frac{1}{p}}\|u\|_{L^p(\R^n)}.
+\end{align*}
+Thus, $u$ is a bounded harmonic function on $\R^n$, whence due to Liouville's theorem, $u$ must be a constant function. But a constant function is in $L^p(\R^n)$ for $1 < p < \infty$ if and only if it is identically zero, so $u\equiv 0$. Clearly if $u\equiv 0$, then it is a harmonic function in $L^p(\R^n)$.
+
+\section{Problem 3}
+
+I shall assume $\displaystyle\mathscr{L}\coloneq - \sum_{1\le i,j\le n} a_{ij}\partial_{ij}$ is uniformly elliptic and that the derivatives of the coefficinet functions $a_{ij}$ are bounded on $\Omega$. Note that $\scrL u = 0$, and hence
+\begin{equation*}
+    0 = D\left(\scrL u\right) = -\sum_{1\le i,j\le n} u_{ij}Da_{ij} - \sum_{1\le i,j\le n} a_{ij}Du_{ij}.
+\end{equation*}
+Set $v: \Omega\to\R$ to be 
+\begin{equation*}
+    v(x) = |Du(x)|^2 + \lambda u(x)^2,
+\end{equation*}
+where $\lambda > 0$ will be fixed later. Then 
+\begin{align*}
+    \scrL v&= -\sum_{1\le i,j \le n}a_{ij}\partial_{ij}\left(Du\cdot Du + \lambda u^2\right)\\
+    &= -\sum_{1\le i,j\le n}a_{ij}\left(2Du_{ij}\cdot Du + 2Du_i\cdot Du_j + 2\lambda uu_{ij} + 2\lambda u_iu_j\right)\\
+    &= -2\sum_{1\le i,j\le n} a_{ij}Du_{ij}\cdot Du - 2\sum_{1\le i,j\le n}a_{ij} Du_i\cdot Du_j - 2\lambda u\underbrace{\sum_{1\le i,j\le n}a_{ij}u_{ij}}_{ = 0} - 2\lambda\sum_{1\le i,j\le n}a_{ij}u_iu_j\\
+    &= 2\sum_{1\le i,j\le n} u_{ij}Da_{ij}\cdot Du - 2\sum_{1\le i,j\le n}a_{ij}Du_i\cdot Du_j - 2\lambda\sum_{1\le i,j\le n}a_{ij}u_iu_j.
+\end{align*}
+Since the derivatives of $a_{ij}$, the Hessain of $u$, and the gradient of $u$ are bounded, the sum of the first two terms in the above expression are bounded in absolute value. Finally, since $\scrL$ is uniformly elliptic, the matrix $\left(a_{ij}\right)$ is uniformly positive definite, in the sense that there is a $\theta > 0$ such that 
+\begin{equation*}
+    \sum_{1\le i,j\le n}a_{ij}u_iu_j\ge\theta|Du|^2.
+\end{equation*}
+In particular, this means that the last term is at most $-2\lambda\theta|Du|^2$. Thus, we can choose $\lambda\gg 0$ such that $\scrL u\le 0$. Finally, we invoke the weak maximum principle to obtain 
+\begin{align*}
+    \||Du|^2\|_{L^\infty(\Omega)}&\le \||Du|^2 + \lambda u^2\|_{L^\infty(\Omega)}\\
+    &\le \|v\|_{L^\infty(\Omega)}^2\\
+    &=\|v\|_{L^\infty(\partial\Omega)}^2\\
+    &=\||Du|^2 + \lambda u^2\|_{L^\infty(\partial\Omega)}\\
+    &\le\|Du\|_{L^\infty(\partial\Omega)}^2 + \lambda\|u\|_{L^\infty(\partial\Omega)}^2\\
+    &\le C\left(\|Du\|_{L^\infty(\partial\Omega)} + \|u\|_{L^\infty(\partial\Omega)}\right)^2,
+\end{align*}
+where $C\coloneq\max\{1, \lambda\}$. This implies the desired conclusion.
+
+\section{Problem 4}
+
+Define the quantities $H, D, N: (0, 1)\to (0,\infty)$ as 
+\begin{align*}
+    H(r) &\coloneq \int_{\partial B_r} |u(x)|^2~dx\\
+    D(r) &\coloneq \int_{\partial B_r} u(x)\frac{\partial u}{\partial\nu}(x)~ds(x) = \int_{B_r}|\nabla u(x)|^2~dx\\
+    N(r) &\coloneq\frac{rD(r)}{H(r)}.
+\end{align*}
+Note that the equality in the definition of $D(r)$ follows from Green's first identity, since $u$ is harmonic, and thus $\Delta u = 0$.
+
+\begin{claim}
+        $\displaystyle D'(r) = \frac{n - 2}{r}D(r) + 2\int_{\partial B_r}\left|\frac{\partial u}{\partial\nu}(x)\right|^2~ds(x)$.
+\end{claim}
+\begin{proof}
+Performing the substitution $x = ry$ and using
+\begin{equation*}
+    \frac{\partial u}{\partial\nu}(x) = \nabla u(x)\cdot\frac{x}{r},
+\end{equation*}
+we can write 
+\begin{equation*}
+    D(r) = \int_{\partial B_1}u(ry)\left(\nabla u(ry)\cdot y\right)r^{n - 1}~ds(y).
+\end{equation*}
+Differentiating using the product rule, we obtain 
+\begin{align*}
+    D'(r) &= \int_{\partial B_1}\left(\nabla u(ry)\cdot y\right)^2 r^{n - 1} + (n - 1)\int_{\partial B_1} u(ry)\left(\nabla u(ry)\cdot y\right)r^{n - 2}~ds(y) + \int_{\partial B_1}u(ry)\frac{d}{dr}\left(\nabla u(ry)\cdot y\right)r^{n - 1}~ds(y)\\
+    &= \int_{\partial B_r}\left|\frac{\partial u}{\partial\nu}(x)\right|^2~ds(x) + \frac{n - 1}{r}\underbrace{\int_{\partial B_r}u(x)\frac{\partial u}{\partial\nu}(x)~ds(x)}_{D(r)} + \int_{\partial B_1} u(ry)\frac{d}{dr}\left(\nabla u(ry)\cdot y\right)r^{n - 1}~ds(y).
+\end{align*}
+We now simplify the last term on the right hand side. Indeed, we can write 
+\begin{equation*}
+    \nabla u(ry)\cdot y = \sum_{i = 1}^n \partial_i u(ry) y_i,
+\end{equation*}
+and thus, 
+\begin{equation*}
+    \frac{d}{dr}\left(\nabla u(ry)\cdot y\right) = \frac{d}{dr}\sum_{i = 1}^n \partial_i u(ry)y_i = \sum_{1\le i,j\le n} y_iy_j\partial_i\partial_j u(ry).
+\end{equation*}
+Hence, we have that the last term is equal to 
+\begin{equation*}
+    \int_{\partial B_1} u(ry)\left(\sum_{1\le i, j\le n}y_iy_j\partial_i\partial_j u(ry)\right)r^{n - 1}~ds(y) = \frac{1}{r^2}\int_{\partial B_r}u(x)\left(\sum_{1\le i,j\le n} x_ix_j u_{ij}(x)\right)~ds(x),
+\end{equation*}
+where we shall use the shorthand $u_{ij}$ to denote $\partial_i\partial_j u$ henceforth. Note that since $u$ is harmonic, it is $C^\infty$, and hence, the order of differentiation does not really matter. 
+
+We can write the above quantity as follows, and then using Green's first identity, we obtain
+\begin{equation*}
+    \int_{\partial B_r}\sum_{i = 1}^n \frac{x_i}{r}u(x)\frac{\partial u_i}{\partial\nu}(x)~ds(x) = \sum_{i = 1}^n \left(\int_{B_r}\nabla\left(\frac{x_i}{r}u(x)\right)\cdot\nabla u_i(x)~dx - \int_{B_r}\frac{x_i}{r}u(x)\Delta u_i(x)~dx\right).
+\end{equation*}
+Since each $u_i$ is harmonic, the second term is zero and we are left with only the first term, which is equal to 
+\begin{align*}
+    \sum_{i = 1}^n \int_{B_r}\sum_{j = 1}^n \partial_j\left(\frac{x_i}{r}u(x)\right)\partial_j u_i(x)~dx &= \sum_{i = 1}^n \int_{B_r}\sum_{j = 1}^n\left(\frac{x_i}{r}u_j(x) + \frac{1}{r}\delta_{ij}u(x)\right)u_{ij}(x)~dx,
+\end{align*}
+where $\delta_{ij}$ denotes the Kronecker symbol. The above is equal to 
+\begin{equation*}
+    \sum_{1\le i,j\le n}\int_{B_r}\frac{x_i}{r} u_{ij}(x)u_j(x)~dx + \sum_{i = 1}^n \int_{B_r}\frac{1}{r}u_{ii}(x)u(x)~dx.
+\end{equation*}
+The second integral is equal to $\frac{1}{r}\int_{B_r}\Delta u(x)u(x)~dx = 0$, since $u$ is harmonic. Hence, we are left with 
+\begin{equation}
+    \sum_{1\le i,j\le n}\int_{B_r}\frac{x_i}{r}u_{ij}(x)u_j(x)~dx.\tag{$\clubsuit$}\label{intermediate-conclusion}
+\end{equation}
+
+Consider the function 
+\begin{equation*}
+    w(x) = \sum_{i = 1}^n\frac{x_i}{r}u_i(x)
+\end{equation*}
+defined on the unit ball $B_1$. Note that $w(x) = \frac{\partial u}{\partial\nu}(x)$ on $\partial B_r$. Thus, we can write 
+\begin{align*}
+    \int_{\partial B_r}\left|\frac{\partial u}{\partial\nu}(x)\right|^2~ds(x) &= \int_{\partial B_r} w(x)\frac{\partial u}{\partial\nu}(x)~ds(x)\\ 
+    &= \int_{B_r}\nabla w(x)\cdot\nabla u(x) - w(x)\Delta u(x)~dx\\ 
+    &= \int_{B_r}\nabla w(x)\cdot\nabla u(x)~dx\\
+    &= \int_{B_r}\sum_{j = 1}^n\partial_j\left(\sum_{i = 1}^n \frac{x_i}{r}u_i(x)\right)\cdot u_j(x)~dx\\
+    &= \int_{B_r}\sum_{j = 1}^n\sum_{i = 1}^n\left(\frac{1}{r}\delta_{ij}u_i(x) + \frac{x_i}{r}u_{ij}(x)\right)u_j(x)~dx\\
+    &= \sum_{1\le i,j\le n}\int_{B_r}\frac{x_i}{r}u_{ij}(x)u_j(x)~dx + \sum_{i = 1}^n\frac{1}{r}\int_{B_r}\left(u_i(x)\right)^2~dx\\
+    &= \sum_{1\le i,j\le n}\int_{B_r}\frac{x_i}{r}u_{ij}(x)u_j(x)~dx + \sum_{i = 1}^n\frac{1}{r}\int_{B_r}(u_i(x))^2~dx.
+\end{align*}
+Thus, the quantity in \eqref{intermediate-conclusion} is equal to 
+\begin{equation*}
+    \int_{\partial B_r}\left|\frac{\partial u}{\partial\nu}(x)\right|^2~ds(x) - \frac{1}{r}\int_{B_r}|\nabla u(x)|^2~dx = \int_{\partial B_r}\left|\frac{\partial u}{\partial\nu}(x)\right|^2~ds(x) - \frac{1}{r}D(r).
+\end{equation*}
+Substituting this back into the expression for $D'(r)$, we get 
+\begin{equation*}
+    D'(r) = \frac{n - 2}{r}D(r) + 2\int_{\partial B_r}\left|\frac{\partial u}{\partial\nu}(x)\right|^2~ds(x),
+\end{equation*}
+as desired.
+\end{proof}
+
+\begin{claim}
+    $\displaystyle H'(r) = \frac{n - 1}{r}H(r) + 2D(r)$.
+\end{claim}
+\begin{proof}
+Performing the substitution $x = ry$, we have 
+\begin{equation*}
+    H(r) = \int_{\partial B_1}|u(ry)|^2 r^{n - 1}~ds(y).
+\end{equation*}
+Differentiating, we obtain 
+\begin{align*}
+    H'(r) &= (n - 1)\int_{\partial B_1}|u(ry)|^2 r^{n - 2}~ds(y) + 2\int_{\partial B_1} r^{n - 1}u(ry)\left(\nabla u(ry)\cdot y\right)~ds(y)\\
+    &= \frac{n - 1}{r}\int_{\partial B_1}|u(x)|^2~ds(x) + 2\int_{\partial B_r}u(x)\left(\nabla u(x)\cdot\frac{x}{r}\right)~ds(x)\\
+    &= \frac{n - 1}{r}\int_{\partial B_1}|u(x)|^2~ds(x) + 2\int_{\partial B_r}u(x)\frac{\partial u}{\partial\nu}(x)~ds(x)\\
+    &= \frac{n - 1}{r} H(r) + 2D(r),
+\end{align*}
+as desired.
+\end{proof}
+
+Coming back to the problem at hand, we would like to show that 
+\begin{equation*}
+    N(r) = \frac{rD(r)}{H(r)}
+\end{equation*}
+is an increasing function of $r$. To this end, we shall show that $N'(r)\ge 0$ for $r\in (0, 1)$. Indeed,
+\begin{align*}
+    N'(r) &= \frac{\left(D(r) + rD'(r)\right)H(r) - rD(r)H'(r)}{H(r)^2}\\
+    &= \frac{\left((n - 1)D(r) + 2r\int_{\partial B_r}\left|\frac{\partial u}{\partial\nu}(x)\right|^2~ds(x)\right)H(r) - D(r)\bigg((n - 1)H(r) + 2rD(r)\bigg)}{H(r)^2}\\
+    &= \frac{2rH(r)\int_{\partial B_r}\left|\frac{\partial u}{\partial\nu}(x)\right|^2~ds(x) - 2rD(r)^2}{H(r)^2}.
+\end{align*}
+Using the Cauchy Schwarz inequality, we have 
+\begin{equation*}
+    H(r)\int_{\partial B_r}\left|\frac{\partial u}{\partial\nu}(x)\right|^2~ds(x)\ge\left(\int_{\partial B_r}\left|u(x)\frac{\partial u}{\partial\nu}(x)\right|~ds(x)\right)^2\ge D(r)^2,
+\end{equation*}
+whence $N'(r)\ge 0$, thereby completing the proof. \todo{limit computation}
+
+\section{Problem 5}
+
+For $R > r$, let $A(r)$ denote the annulus 
+\begin{equation*}
+    A(r) \coloneq \left\{x\in\R^n\colon r < |x| < R\right\}.
+\end{equation*}
+Note that 
+\begin{equation*}
+    \partial A(r) = \left\{x\in\R^n\colon |x| = r\right\} \cup\left\{x\in\R^n\colon |x| = R\right\}.
+\end{equation*}
+The (weak) maximum principle gives us 
+\begin{equation*}
+    \sup_{r\le |x|\le R} |u(x)| = \sup_{x\in\partial A(r)}|u(x)| = \sup_{|x| = R} |u(x)|,
+\end{equation*}
+where the last equality follows from the fact that $u\equiv 0$ on $\partial B_r$. 
+
+Let $x_0\in\R^n\setminus\overline B_r$. We shall show that $u(x_0) = 0$. Indeed, for $R > |x_0|$, we have 
+\begin{equation*}
+    |u(x_0)|\le\sup_{r\le |x|\le R} |u(x)| = \sup_{|x| = R} |u(x)|.
+\end{equation*}
+But according to the hypothesis on $u$, we have 
+\begin{equation*}
+    \lim_{R\to\infty}\sup_{|x| = R} |u(x)| = 0,
+\end{equation*}
+so that $0\le |u(x_0)|\le 0$, that is, $u(x_0) = 0$. It follows that $u$ is identically $0$ on $\R^n\setminus B_r$, as desired.
+
+\section{Problem 7}
+
+Define the function $\varphi: (0,\infty)\to\R$ by 
+\begin{equation*}
+    \varphi(r) = \frac{1}{|\partial B(x_0, r)|}\int_{\partial B(x_0, r)} u(y)~dy.
+\end{equation*}
+Performing the substitution $y = x_0 + rz$, we obtain 
+\begin{equation*}
+    \varphi(r) = \frac{1}{\omega_n r^{n - 1}}\int_{\partial B(0, 1)} u(x_0 + rz) r^{n - 1}~dz = \frac{1}{\omega_n}\int_{\partial B(0, 1)} u(x_0 + rz)~dz.
+\end{equation*}
+Differentiating the above, 
+\begin{equation*}
+    \varphi'(r) = \frac{1}{\omega_n}\int_{\partial B(0, 1)} \nabla u(x_0 + rz)\cdot z~dz = \frac{1}{\omega_n r^{n - 1}}\int_{\partial B(x_0, r)} \nabla u(y)\cdot\frac{y - x_0}{r}~dy = \frac{1}{\omega_n r^{n - 1}}\int_{\partial B(x_0, r)}\frac{\partial u}{\partial\nu}(y)~ds(y).
+\end{equation*}
+Using Green's first identity, we have 
+\begin{equation*}
+    \varphi'(r) = \frac{1}{\omega_n r^{n - 1}}\int_{B(x_0, r)}\Delta u(y)~dy = \frac{1}{\omega_n r^{n - 1}}\int_{B(x_0, r)}1~dy = \frac{r}{n}.
+\end{equation*}
+Solving this ordinary differential equation, we obtain 
+\begin{equation*}
+    \varphi(r) = \frac{r^2}{2n} + C
+\end{equation*}
+for all $r\in (0,\infty)$, where $C\in\R$ is a constant. Note that $u\ge 0$, and hence $\varphi(r)\ge 0$ for all $r > 0$. Hence, $\displaystyle C = \lim_{r\to 0^+}\varphi(r)\ge 0$, in particular, 
+\begin{equation*}
+    \varphi(r)\ge\frac{r^2}{2n}\qquad\forall~r > 0.
+\end{equation*}
+Let 
+\begin{equation*}
+    M(r)\coloneq\sup_{|x - x_0| = r} u(x).
+\end{equation*}
+Then 
+\begin{equation*}
+    M(r) - \varphi(r) = \frac{1}{\omega_n r^{n - 1}} \int_{\partial B(x_0, r)} M(r) - u(y)~ds(y)\ge 0,
+\end{equation*}
+so that $M(r)\ge\frac{r^2}{2n}$. Finally, using the weak maximum principle for subharmonic functions, and recalling that $u\ge 0$, we get 
+\begin{equation*}
+    \sup_{\overline{B(x_0, r)}} u = \sup_{|x - x_0| = r} u(x) = M(x)\ge\frac{r^2}{2n},
+\end{equation*}
+as desired.
+
+\section{Problem 8}
+
+Let $x^\ast\in\overline\Omega$ be a point of maxima, i.e., 
+\begin{equation*}
+    u(x^\ast) = \sup_{x\in\overline\Omega} u(x)\ge 0,
+\end{equation*}
+where the inequality follows since $u|_{\partial\Omega}\equiv 0$.  
+Suppose $u(x^\ast) > 1$. Then $x^\ast\notin\partial\Omega$, since $u$ vanishes identically there. Thus $x^\ast\in\Omega$, whence $\Delta u(x^\ast)\le 0$. This forces 
+\begin{equation*}
+    u(x^\ast)^3 - u(x^\ast)\le 0\implies u(x^\ast)\in (-\infty, -1]\cup[0, 1].
+\end{equation*}
+But since $u(x^\ast)\ge 0$, we must have that $u(x^\ast)\in [0, 1]$, in particular, $u(x^\ast)\le 1$, a contradiction. Thus $u(x^\ast)\le 1$.
+
+Similarly, let $x_\ast\in\overline\Omega$ be a point of minima, i.e., 
+\begin{equation*}
+    u(x_\ast) = \inf_{x\in\overline\Omega} u(x)\le 0,
+\end{equation*}
+where the inequality follows since $u|_{\partial\Omega}\equiv 0$. Suppose $u(x_\ast) < -1$. Then $x_\ast\notin\partial\Omega$, since $u$ vanishes identically there. Thus $x_\ast\in\Omega$, whence $\Delta u(x_\ast)\ge 0$. This forces 
+\begin{equation*}
+    u(x_\ast)^3 - u(x_\ast) \ge 0\implies u(x_\ast)\in[-1, 0]\cup[1,\infty).
+\end{equation*}
+But since $u(x_\ast)\le 0$, we must have that $u(x_\ast)\in[-1, 0]$, in particular, $u(x_\ast)\ge -1$, a contradiction. Thus $u(x_\ast)\ge -1$. In conclusion, we have that for any $x\in\Omega$, 
+\begin{equation*}
+    -1\le u(x_\ast)\le u(x)\le u(x^\ast)\le 1,
+\end{equation*}
+as desired.
+
+Suppose now that there is some point $x_0\in\Omega$ with $u(x_0) = 1$. This is clearly a point of maxima because $-1\le u\le 1$ on $\Omega$. Let 
+\begin{equation*}
+    \omega \coloneq\left\{x\in\Omega\colon u(x) = 1\right\}.
+\end{equation*}
+Since $u$ is a continuous function, $\omega$ is closed in $\Omega$ and is non-empty as it contains $x_0$. We claim that $\omega$ is open in $\Omega$. \todo{last part}
+
+\section{Problem 9}
+
+\begin{enumerate}[label=(\alph*)]
+\item This is an immediate consequence of the mean value property. Indeed, since $u$ is harmonic, for $x\in\R^n$, we have 
+\begin{equation*}
+    |u(x)| = \left|\frac{n}{\omega_n}\int_{B(x, 1)}u(y)~dy\right|\le\frac{n}{\omega_n}\int_{B(x, 1)} |u(y)|~dy\le \frac{nC}{\omega_n}.
+\end{equation*}
+That is, $u$ is a bounded harmonic function on $\R^n$, and hence is constant due to Liouville's theorem. 
+
+\item Suppose $u(x) = \phi(|x|)$ is indeed a harmonic function on $\R^n$, where $\phi: [0,\infty)\to\R$. Using the mean value property, for $r > 0$, we can write 
+\begin{equation*}
+    u(0) = \frac{1}{\omega_n r^{n - 1}}\int_{\partial B(0, r)}u(y)~ds(y) = \frac{1}{\omega_n r^{n - 1}}\int_{\partial B(0, r)}\phi(r)~ds(y) = \phi(r).
+\end{equation*}
+Thus, $\phi(r) = u(0)$ for all $r > 0$. Thus, $u$ is constant on $\R^n\setminus\{0\}$. But since $u$ is continuous, $u$ must be constant on all of $\R^n$, as desired.
+\end{enumerate}
+
+\section{Problem 10}
+
+Let 
+\begin{equation*}
+    M = \sup_{\partial\Omega} |\varphi|.
+\end{equation*}
+Then $-M\le\varphi(x)\le M$ for all $x\in\partial\Omega$.
+
+Let $x^\ast\in\overline\Omega$ be a point of maxima, i.e., 
+\begin{equation*}
+    u(x^\ast) = \sup_{x\in\overline\Omega} u(x).
+\end{equation*} 
+If $x^\ast\in\Omega$, then it is an interior point, and hence $u(x^\ast)^3 = \Delta u(x^\ast)\le 0$, that is, $u(x^\ast)\le 0$. Else if $x^\ast\in\partial\Omega$, then we must have that 
+\begin{equation*}
+    \frac{\partial u}{\partial\nu}(x^\ast)\ge 0\implies a(x^\ast)u(x^\ast)\le\varphi(x^\ast)\le M\implies u(x^\ast)\le\frac{M}{a(x^\ast)}\le\frac{M}{a_0}.
+\end{equation*}
+In either case, the inequality
+\begin{equation*}
+    u(x^\ast)\le\frac{M}{a_0}
+\end{equation*}
+holds true.
+
+On the other hand, let $x_\ast\in\overline\Omega$ be a point of minima, i.e., 
+\begin{equation*}
+    u(x_\ast) = \inf_{x\in\overline\Omega} u(x).
+\end{equation*}
+If $x_\ast\in\Omega$, then it is an interior point, and hence $u(x_\ast)^3 = \Delta u(x_\ast)\ge 0$, that is, $u(x_\ast)\ge 0$. Else if $x_\ast\in\partial\Omega$, then we must have that 
+\begin{equation*}
+    \frac{\partial u }{\partial\nu}(x_\ast)\le 0\implies a(x_\ast)u(x_\ast)\ge\varphi(x_\ast)\ge -M\implies u(x_\ast)\ge\frac{-M}{a(x_\ast)}\ge-\frac{M}{a_0}.
+\end{equation*}
+In either case, the inequality 
+\begin{equation*}
+    u(x_\ast)\ge-\frac{M}{a_0}
+\end{equation*}
+holds true. Hence, 
+\begin{equation*}
+    \sup_{\overline\Omega} |u| = \max\left\{|u(x^\ast)|, |u(x_\ast)|\right\}\le\frac{M}{a_0} = \frac{1}{a_0}\sup_{\partial\Omega}|\varphi|,
+\end{equation*}
+thereby completing the proof.
+\end{document}
