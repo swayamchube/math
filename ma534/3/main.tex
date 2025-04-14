@@ -1,6 +1,6 @@
 \documentclass[10pt]{amsart}
 
-\title{MA 534: Homework 2}
+\title{MA 534: Homework 3}
 \author{Swayam Chube (200050141)}
 \date{\today}
 
@@ -476,7 +476,13 @@ Using the Cauchy Schwarz inequality, we have
 \begin{equation*}
     H(r)\int_{\partial B_r}\left|\frac{\partial u}{\partial\nu}(x)\right|^2~ds(x)\ge\left(\int_{\partial B_r}\left|u(x)\frac{\partial u}{\partial\nu}(x)\right|~ds(x)\right)^2\ge D(r)^2,
 \end{equation*}
-whence $N'(r)\ge 0$, thereby completing the proof. \todo{limit computation}
+whence $N'(r)\ge 0$. Thus $N(r)$ is a non-decreasing function of $r$.
+
+As for the limit computation, note that the quotient can be written as 
+\begin{equation*}
+    N(r) = \frac{r^2}{n}\frac{\frac{n}{\omega_n r^n}\int_{B_r}|\nabla u|^2}{\frac{1}{\omega_n r^{n - 1}}\int_{\partial B_r} u^2}.
+\end{equation*}
+Since $u$ is $C^\infty$, we have that both $u^2$ and $|\nabla u|^2$ are continuous functions, and hence, the numerator converges to $|\nabla u(0)|^2$ and the denominator converges to $u(0)^2$. Again, since $r\to 0^+$, it is clear that $N(r)\to 0$.
 
 \section{Problem 5}
 
@@ -503,6 +509,57 @@ But according to the hypothesis on $u$, we have
     \lim_{R\to\infty}\sup_{|x| = R} |u(x)| = 0,
 \end{equation*}
 so that $0\le |u(x_0)|\le 0$, that is, $u(x_0) = 0$. It follows that $u$ is identically $0$ on $\R^n\setminus B_r$, as desired.
+
+\section{Problem 6}
+
+By translating, along the $Y$-axis, we may assume that $\Omega = \left\{(x, y)\in\R^2\colon 0 < y < \frac{\pi}{2}\right\}$. Next, set 
+\begin{equation*}
+    v(x, y) = u\left(\frac{x}{2}, \frac{y}{2}\right).
+\end{equation*}
+Then, $v$ is a function defined on the domain $\wt\Omega = \left\{(x, y)\in\R^2\colon 0 < y < \pi\right\}$. Further, 
+\begin{equation*}
+    \Delta v = 4\Delta u = 0,
+\end{equation*}
+and hence, $v$ is a harmonic function. The growth condition on $v$ is clearly $v(x) = o\left(e^{\frac{|x|}{2}}\right)$. Next, extend the function $v$ to the domain $\Gamma = \left\{(x, y)\in\R^2\colon -\pi < y < \pi\right\}$ using the Schwarz reflection principle. That is, define 
+\begin{equation*}
+    v(x, y) = -v(x, -y) \qquad\forall~x\in\R,~-\pi < y < 0.
+\end{equation*}
+Note that this does not change the growth condition on $v$. We contend that this extended $v$ is a harmonic function. It is clear by taking the Laplacian that $v$ is harmonic on $\Gamma\setminus\R\times\{0\}$, and thus has the mean value property here. Let $\mathbf x = (x_0, 0)\in\R\times\{0\}\subseteq\Gamma$. Consider a sufficiently small ball $B(\mathbf x, r)\subseteq\Gamma$. Then, 
+\begin{equation*}
+    \int_{B(\mathbf x, r)} v~dx = \int_{B(\mathbf x, r)\cap\{y > 0\}} v~dx + \int_{B(\mathbf x, r)\cap\{y < 0\}} v~dx = 0,
+\end{equation*}
+since the second term is the negative of the first term. Since $v(\mathbf x) = 0$, it is clear that $v$ satisfies the mean value property on all of $\Gamma$, therefore, it is harmonic on $\Gamma$.
+
+For a fixed $x\in\R$, the function $v(x,\cdot)$ is a $C^\infty$ function of $y$, and hence, the Fourier series and all its derivatives converge uniformly. We can then write 
+\begin{equation*}
+    v(x, y) = \sum_{k = 1}^\infty C_k(x)\sin(ky) + \sum_{k = 0}^\infty D_k(x)\cos(ky).
+\end{equation*}
+But since $v(x,\cdot)$ is an odd function of $y$, there is no cosine part in the Fourier expansion. We are left with 
+\begin{equation*}
+    v(x, y) = \sum_{k = 1}^{\infty}C_k(x)\sin(ky).
+\end{equation*}
+Recall that 
+\begin{equation*}
+    C_k(x) = \frac{1}{\pi}\int_{-\pi}^\pi v(x, y)\sin(ky)~dy = \frac{2}{\pi}\int_{0}^\pi v(x,y)\sin(ky)~dy.
+\end{equation*}
+In particular, since it is the integral of a $C^\infty$-function, it is a $C^\infty$-function of $x$. Therefore, we can differentiate under the integral sign to obtain 
+\begin{equation*}
+    C_k''(x) = \frac{2}{\pi}\int_0^\pi \partial_x^2 v(x,y)\sin(ky)~dy = -\frac{2}{\pi}\int_0^\pi \partial_y^2 v(x,y)\sin(ky)~dy.
+\end{equation*}
+Integrating by parts, we have 
+\begin{align*}
+    \int_0^\pi\partial_y^2 v(x,y)\sin(ky)~dy &= \partial_y v(x,y)\sin(ky)\bigg\vert_0^\pi - k\int_0^\pi \partial_y v(x,y)\cos(ky)~dy\\
+    &= v(x,y)\cos(ky)\bigg\vert_0^\pi + k^2\int_0^\pi v(x,y)\sin(ky)~dy.
+\end{align*}
+Hence, 
+\begin{equation*}
+    C_k''(x) = \frac{2k^2}{\pi}\int_0^\pi v(x,y)\sin(ky)~dy = k^2C_k(x).
+\end{equation*}
+Solving this ordinary differential equation, we note that 
+\begin{equation*}
+    C_k(x) = A_ke^{kx} + B_ke^{-kx}.
+\end{equation*}
+But since $v(x, y)$ is $o(e^{\frac{|x|}{2}})$, using the integral Representation of $C_k(x)$ as above, we have that $C_k(x)$ is also $o(e^{\frac{|x|}{2}})$ for all $k\ge 1$. This is possible if and only if $A_k = B_k = 0$ for all $k\ge 1$. That is, $C_k$ is identically $0$ for all $k\ge 1$, and hence, $v\equiv 0$ on $\Gamma$ so that $u\equiv 0$ on $\Omega$. This completes the proof.
 
 \section{Problem 7}
 
@@ -575,7 +632,7 @@ Suppose now that there is some point $x_0\in\Omega$ with $u(x_0) = 1$. This is c
 \begin{equation*}
     \omega \coloneq\left\{x\in\Omega\colon u(x) = 1\right\}.
 \end{equation*}
-Since $u$ is a continuous function, $\omega$ is closed in $\Omega$ and is non-empty as it contains $x_0$. We claim that $\omega$ is open in $\Omega$. \todo{last part}
+Since $u$ is a continuous function, $\omega$ is closed in $\Omega$ and is non-empty as it contains $x_0$. We claim that $\omega$ is open in $\Omega$, whence it would follow that $u\equiv 1$ on $\Omega$ since $\Omega$ is connected, a contradiction, since $u\equiv 0$ on $\partial\Omega$. 
 
 \section{Problem 9}
 
