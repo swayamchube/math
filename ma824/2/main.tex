@@ -184,6 +184,7 @@
 % Miscellaneous
 \newcommand{\wh}[1]{\widehat{#1}}
 \newcommand{\calM}{\mathcal{M}}
+\newcommand{\calN}{\mathcal{N}}
 \newcommand{\calP}{\mathcal{P}}
 \newcommand{\onto}{\twoheadrightarrow}
 \newcommand{\into}{\hookrightarrow}
@@ -253,8 +254,152 @@ converges, since the element $(\alpha_0,\alpha_1,\dots)$ is an element of $\calH
 \end{equation*}
 Thus, the sum $\sum_{n\ge 0}\alpha_n\lambda^n$ converges absolutely for $|\lambda| < 1$. Due to \thref{thm:radius-of-convergence}, it follows that the radius of convergence of the power series $\sum_{n\ge 0}a_nz^n$ is $\ge 1$.
 
-\item 
+\item Let $h_0$ denote the element $(1, \overline\lambda,\overline\lambda^2,\dots)\in\calH$. To see that this is indeed an element of $\calH$, note that 
+\begin{equation*}
+    \|h\|^2 = \sum_{n\ge 0}|\overline\lambda|^{2n} = \sum_{n\ge 0}|\lambda|^{2n} = \frac{1}{1 - |\lambda|^2} < \infty.
+\end{equation*}
+Then, for any $h = (\alpha_0,\alpha_1,\dots)\in\calH$, we have, by definition, 
+\begin{equation*}
+    \langle h, h_0\rangle = \sum_{n\ge 0}\alpha_n\overline{\overline\lambda^n} = \sum_{n\ge 0}\alpha_n\lambda^n = L(h),
+\end{equation*}
+as desired. 
+
+\item The following fact is well-known and has been proved in class: 
+\begin{lemma}
+    Let $\calH$ be a complex Hilbert space and $h_0\in\calH$. Let $\Lambda:\calH\to\bbC$ be the bounded linear functional given by $x\mapsto\langle x, h_0\rangle$. Then $\|\Lambda\| = \|h_0\|$.
+\end{lemma}
+
+Thus, 
+\begin{equation*}
+    \|L\| = \|h_0\| = \left(\sum_{n\ge 0}|\overline\lambda^n|^2\right)^{\frac{1}{2}} = \left(\sum_{n\ge 0}|\lambda|^{2n}\right)^{\frac{1}{2}} = \frac{1}{\sqrt{1 - |\lambda|^2}}.
+\end{equation*}
 \end{enumerate}
+
+\section{Problem 2}
+
+Let $\calH = H^2(\mathbb D)$. First, we argue that $\langle\cdot,\cdot\rangle$ is an inner product on $\calH$. Indeed, for $\alpha,\beta\in\bbC$ and $f,g, h\in\calH$, we have that 
+\begin{align*}
+    \langle\alpha f + \beta g, h\rangle &= \lim_{r\to 1}\int_{0}^{2\pi}(\alpha f + \beta g)(re^{it})\overline{h(re^{it})}~\frac{dt}{2\pi}\\
+    &= \lim_{r\to 1}\alpha\int_{0}^{2\pi}f(re^{it})\overline{h(re^{it})}~\frac{dt}{2\pi} + \beta\int_{0}^{2\pi}f(re^{it})\overline{h(re^{it})}~\frac{dt}{2\pi}\\
+    &=\alpha\langle f, h\rangle + \beta\langle g, h\rangle,
+\end{align*}
+and 
+\begin{equation*}
+    \langle g, f\rangle = \lim_{r\to 1}\int_{0}^{2\pi}\overline{f(re^{it})}g(re^{it})~\frac{dt}{2\pi} = \lim_{r\to 1}\overline{\int_{0}^{2\pi}f(re^{it})\overline{g(re^{it})}~\frac{dt}{2\pi}} = \overline{\langle f, g\rangle}.
+\end{equation*}
+Suppose $f\in\calH$ is such that $\langle f, f\rangle = 0$. That is,
+\begin{equation*}
+    \lim_{r\to 1}\int_0^{2\pi}|f(re^{it})|^2~\frac{dt}{2\pi} = 0.
+\end{equation*}
+Recall that $f(z)$ has an absolutely convergent power series expansion given by 
+\begin{equation*}
+    f(z) = \sum_{n\ge 0}a_n(f)z^n.
+\end{equation*}
+As a result, 
+\begin{equation*}
+    |f(re^{it})|^2 = f(re^{it})\overline{f(re^{it})} = \sum_{m\ge 0} a_m(f)r^me^{imt}\sum_{n\ge 0}\overline{a_n(f)}r^ne^{-int}.
+\end{equation*}
+Consequently, 
+\begin{equation*}
+    \int_{0}^{2\pi}|f(re^{it})|^2~\frac{dt}{2\pi} = \sum_{m,n\ge 0}\int_0^{2\pi}a_m(f)\overline{a_n(f)}r^{m + n}e^{i(m - n)t}~\frac{dt}{2\pi}.
+\end{equation*}
+Using the fact that for $n\in\Z$, 
+\begin{equation*}
+    \int_0^{2\pi}e^{int}~\frac{dt}{2\pi} = 
+    \begin{cases}
+        1 & n = 0\\
+        0 & \text{otherwise},
+    \end{cases}
+\end{equation*}
+we have 
+\begin{equation*}
+    \int_0^{2\pi}|f(re^{it})|^2~\frac{dt}{2\pi} = \sum_{n\ge 0}|a_n(f)|^2r^{2n},
+\end{equation*}
+whence 
+\begin{equation*}
+    0 = \langle f, f\rangle = \lim_{r\to 1}\sum_{n\ge 0}|a_n(f)|^2r^{2n} = \sum_{n\ge 0}|a_n(f)|^2.
+\end{equation*}
+This is possible if and only if $a_n(f) = 0$ for all $n\ge 0$, that is, $f\equiv 0$ on $\mathbb D$. Thus, $\langle\cdot,\cdot\rangle$ is an inner-product on $\calH$. Let $\|\cdot\|$ denote the induced norm. We also make an important observation, that because of the expression obtained above, we can write 
+\begin{equation}
+    \|f\|^2 = \lim_{r\to 1}\sum_{n\ge 0}|a_n(f)|^2r^{2n} = \sup_{0 < r < 1}\sum_{n\ge 0} |a_n(f)|^2r^{2n} = \sup_{0 < r < 1}\int_{0}^{2\pi}|f(re^{it})|^2~\frac{dt}{2\pi}.\tag{$\dagger$}\label{alternate-definition}
+\end{equation}
+
+Next, we show that $\calH$ is a Hilbert space. Let $(f_n)_{n\ge 1}$ be a Cauchy sequence. We claim that $f_n$ converges uniformly on compacta to a holomorphic function $f$ on $\mathbb D$. To this end, it suffices to show that $(f_n)_{n\ge 1}$ is uniformly Cauchy on compact subsets of $\mathbb D$. Since every compact subset is contained in some closed ball $\overline{B(0, r)}$ for some $r > 0$, it suffices to show that $(f_n)$ is uniformly Cauchy over these closed balls. 
+
+Let $0 < r < R < 1$ and $z\in\overline{B(0, r)}$. For $m,n\in\N$, using Cauchy's integral formula, 
+\begin{equation*}
+    |f_m(z) - f_n(z)| = \left|\frac{1}{2\pi i}\int_0^{2\pi}\frac{(f_m - f_n)(Re^{it})}{Re^{it} - z}~dt\right|\le\int_0^{2\pi}\frac{|f_m(Re^{it}) - f_n(Re^{it})|}{R - r}~\frac{dt}{2\pi}.
+\end{equation*}
+Using the Cauchy-Schwarz inequality, we have 
+\begin{equation*}
+    \left(\int_0^{2\pi}|(f_m - f_n)(Re^{it})|~\frac{dt}{2\pi}\right)^{2}\le\int_0^{2\pi}|(f_m - f_n)(Re^{it})|^2~\frac{dt}{2\pi}.
+\end{equation*}
+Thus 
+\begin{equation*}
+    (R - r)|f_m(z) - f_n(z)|\le\left(\int_0^{2\pi}|(f_m - f_n)(Re^{it})|^2~\frac{dt}{2\pi}\right)^{\frac{1}{2}}.
+\end{equation*}
+Taking the limit $R\to 1^-$, we have 
+\begin{equation*}
+    (1 - r)|f_m(z) - f_n(z)|\le\|f_m - f_n\|\implies\|f_m(z) - f_n(z)|\le\frac{1}{1 - r}\|f_m - f_n\|.
+\end{equation*}
+If $\varepsilon > 0$, then there is a positive integer $N > 0$ such that for all $m,n\ge N$, $\|f_m - f_n\| < (1 - r)\varepsilon$, and hence, $|f_m(z) - f_n(z)| < \varepsilon$ for all $z\in\overline{B(0, r)}$ and $m,n\ge N$. This shows that $(f_n)$ is uniformly Cauchy on compact subsets of $\mathbb D$, and as such, it converges uniformly on compact subsets to a holomorphic function $f:\mathbb D\to\mathbb C$.
+
+Let $0 < r < 1$. Since $f_n\to f$ uniformly on the compact subset $|z| = r$, we have 
+\begin{equation*}
+    \int_0^{2\pi} |f(re^{it}) - f_n(re^{it})|^2~\frac{dt}{2\pi} = \lim_{m\to\infty}\int_0^{2\pi}|f_m(re^{it}) - f_n(re^{it})|^2~\frac{dt}{2\pi}.
+\end{equation*}
+Let $\varepsilon > 0$, then there is a positive integer $N > 0$ such that for all $m,n\ge 0$, $\|f_n - f_m\| < \varepsilon$. Then, for every $0 < r < 1$, we have 
+\begin{equation*}
+    \int_0^{2\pi} |f(re^{it}) - f_n(re^{it})|^2~\frac{dt}{2\pi} = \lim_{m\to\infty}\int_0^{2\pi}|f_m(re^{it}) - f_n(re^{it})|^2~\frac{dt}{2\pi}\le\varepsilon^2,
+\end{equation*}
+where the inequality follows from \eqref{alternate-definition}. Taking the limit $r\to 1$ (or even taking the supremum), we have 
+\begin{equation*}
+    \|f - f_n\|^2\le\varepsilon^2\implies\|f - f_n\|\le\varepsilon,
+\end{equation*}
+for all $n\ge N$. This shows that $\calH$ is a Hilbert space. Finally, using the polarization identity, we have 
+\begin{align*}
+    \langle f, g\rangle &= \frac{1}{4}\sum_{k = 0}^3\iota^k\|f + \iota^k g\|^2 \\
+    &= \frac{1}{4}\sum_{k = 0}^3\iota^k\sum_{n\ge 0}|a_n(f) + \iota^k a_n(g)|^2 \\
+    &= \sum_{n\ge 0}\frac{1}{4}\sum_{k = 0}^3|a_n(f) + \iota^k a_n(g)|^2 \\
+    &= \sum_{n\ge 0} a_n(f)\overline{a_n(g)} \\
+    &= \left\langle\left(a_n(f)\right)_{n\ge 0}, \left(a_n(g)\right)_{n\ge 0}\right\rangle,
+\end{align*}
+as desired.
+
+As a final comment, it is worth noting that we must also argue the ``existence'' of the expression for the inner product, that is, the fact that the limit in the definition of the inner product indeed exists. This is clear by first showing that the expression for $\langle f, f\rangle$ exists because is it is precisely equal to 
+\begin{equation*}
+    \lim_{r\to 1}\sum_{n\ge 0} |a_n(f)|^2r^{2n} = \sum_{n\ge 0}|a_n(f)|^2,
+\end{equation*}
+and then using the polarization identity to show that the corresponding limit in the definition of $\langle f, g\rangle$ exists.
+
+\section{Problem 3}
+
+Using the given definition, we have 
+\begin{equation*}
+    \|(u_1, u_2)\|^2 = \langle (u_1, u_2), (u_1, u_2)\rangle = \|u_1\|^2 + \|u_2\|^2.
+\end{equation*}
+Clearly $A: \calH\to\calH$ is $\bbC$-linear, since for $\alpha,\beta\in\bbC$,
+\begin{equation*}
+    A\left(\alpha (u_1, u_2) + \beta(v_1, v_2)\right) = A\left(\alpha u_1 + \beta v_1, \alpha u_2 + \beta v_2\right) = A_1(\alpha u_1 + \beta v_1) + A_2(\alpha u_2 + \beta v_2) = \alpha A(u_1, u_2) + \beta A(v_1, v_2).
+\end{equation*}
+Now, for $(u_1, u_2)\in\calH$, we have 
+\begin{align*}
+    \|A(u_1, u_2)\| &= \|A_1u_1 + A_2u_2\|\\ 
+    &\le\left(\|A_1u_1\|^2 + \|A_2u_2\|^2\right)^{\frac{1}{2}}\\
+    &\le\left(\|A_1\|^2\|u_1\|^2 + \|A_2\|^2\|u_2\|^2\right)^{\frac{1}{2}}\\
+    &\le\max\left\{\|A_1\|, \|A_2\|\right\}\left(\|u_1\|^2 + \|u_2\|^2\right)^{\frac{1}{2}}\\
+    &= \max\left\{\|A_1\|, \|A_2\|\right\}\|(u_1, u_2)\|.
+\end{align*}
+As a result, $A$ is a bounded linear operator from $\calH$ to $\calH$ with 
+\begin{equation*}
+    \|A\|\le\max\left\{\|A_1\|, \|A_2\|\right\}.
+\end{equation*}
+We shall show that equality holds. Suppose, without loss of generality, that $\|A_1\|\ge\|A_2\|$. Then 
+\begin{equation*}
+    \|A\|\coloneq\sup_{\|(u_1, u_2)\| = 1}{\|A(u_1, u_2)\|}\ge\sup_{\|u_1\| = 1}\|A(u_1, 0)\| = \sup_{\|u_1\| = 1} \|A_1u_1\| = \|A_1\| = \max\left\{\|A_1\|, \|A_2\|\right\}.
+\end{equation*}
+This shows that $\|A\| = \max\left\{\|A_1\|, \|A_2\|\right\}$, as desired.
+
 
 \section{Problem 4}
 
@@ -294,6 +439,133 @@ Hence, $\langle Ax, y\rangle = 0 = \langle Ay, x\rangle$ for all $x, y\in\calH$.
     \langle Ax, Ax\rangle = \langle Ax, y\rangle = 0,
 \end{equation*}
 and hence $Ax = 0$, that is, $A = 0$.
+
+\section{Problem 6}
+
+I assume the problem wanted to say $\|I - T\| < 1$. Set $S = 1 - T$, so that $\|S\| < 1$. 
+
+First, we show that the sum $1 + S + S^2 + \dots$ converges in $\scrB(\calH)$. Indeed, let $S_n\coloneq 1 + S + \dots + S^n$. Then, for $m < n$, 
+\begin{equation*}
+    \|S_n - S_m\| = \left\|\sum_{k = n + 1}^m S^k\right\|\le\sum_{k = n + 1}^m \|S\|^k\le\sum_{k = n + 1}^\infty\|S\|^k = \frac{\|S\|^{n + 1}}{1 - \|S\|}.
+\end{equation*}
+Since $\|S\| < 1$, it follows that if $m,n\ge N$, then 
+\begin{equation*}
+    \|S_m - S_n\|\le\frac{\|S\|^{N + 1}}{1 - \|S\|}\to 0
+\end{equation*}
+as $N\to\infty$, i.e., the sequence $(S_n)_{n\ge 1}$ is Cauchy in $\scrB(\calH)$. But since $\scrB(\calH)$ is Cauchy, there is an operator $U\in\scrB(\calH)$ such that $S_n\to U$ as $n\to\infty$.
+
+
+Then, for $n\in\N$, we have 
+\begin{equation*}
+    (I - S)S_n = (I - S)(I + S + S^2 + \dots + S^n) = I - S^{n + 1},
+\end{equation*}
+and hence, 
+\begin{equation*}
+    \|I - (I - S)S_n\| = \|I - (I - S)(I + S + S^2 + \dots + S^n)\| = \|S^{n + 1}\|\le \|S\|^{n + 1}\to 0
+\end{equation*}
+as $n\to\infty$. Thus $(I - S)S_n\to I$ as $n\to\infty$. Finally, since 
+\begin{equation*}
+    \|(I - S)(U - S_n)\|\le\|I - S\|\|U - S_n\|\to 0
+\end{equation*}
+as $n\to\infty$, we see that $(I - S)S_n\to (I - S)U$ as $n\to\infty$. This shows that $(I - S)U = I$. Using the same argument with $S_n(I - S)$ in place of $(I - S)S_n$, one can show that $U(I - S) = I$. 
+
+In conclusion, we have shown that $T = I - S$ is invertible with inverse 
+\begin{equation*}
+    T^{-1} = (I - S)^{-1} = \sum_{n\ge 0} S^n = \sum_{n\ge 0}(I - T)^n,
+\end{equation*}
+as desired.
+
+\section{Problem 7}
+
+\subsection*{Part (a)} 
+
+$(a)\implies(b)$: For any $x\in\calH$, $Qx\in\calN\subseteq\calM$, and since $P$ acts as the identity operator on $\calM$, it follows that $P(Qx) = Qx$ for all $x\in\calH$, i.e., $PQ = Q$.
+
+$(b)\implies(c)$: Let $x\in\calM^\perp$. We shall show that $x\in\calN^\perp$. Indeed, for any $y\in\calN$, we have $Qy = y$, and hence, 
+\begin{equation*}
+    \langle x, y\rangle = \langle x, Qy\rangle = \langle x, PQy\rangle = \langle Px, y\rangle.
+\end{equation*}
+But since $x\in\calM^\perp$ and $P = P_{\calM}$, we have $Px = 0$, so that $\langle x, y\rangle = 0$. Thus $x\in\calN^\perp$.
+
+$(c)\implies(a)$: Clearly, 
+\begin{equation*}
+    \calN = \calN^{\perp\perp} = \left\{x\in\calH\colon \langle x, y\rangle = 0~\forall~y\in\calN^\perp\right\}\subseteq\left\{x\in\calH\colon \langle x, y\rangle = 0~\forall~y\in\calM^\perp\right\} = \calM^{\perp\perp} = \calM.
+\end{equation*}
+This establishes the equivalence of the first three assertions.
+
+$(c)\implies(d)$: Note that 
+\begin{equation*}
+    1 - P = 1 - P_{\calM} = P_{\calM^\perp}\quad\text{ and }\quad 1 - Q = 1 - P_{\calN} = P_{\calN^\perp}.
+\end{equation*}
+Since $\calM^\perp\subseteq\calN^\perp$, using the same argument as in the proof of $(a)\implies(b)$, it follows that 
+\begin{equation*}
+    (1 - Q)(1 - P) = P_{\calN^\perp}P_{\calM^\perp} = P_{\calM^\perp} = 1 - P.
+\end{equation*}
+
+$(d)\iff(e)$: We clearly have 
+\begin{equation*}
+    1 - P = (1 - Q)(1 - P) = 1 - Q - P + QP \iff Q = QP.
+\end{equation*}
+
+$(d)\implies(a)$: Note that (d) is the same as writing 
+\begin{equation*}
+    P_{\calN^\perp}P_{\calM^\perp} = P_{\calM^\perp}.
+\end{equation*}
+Using the same method of proof as $(b)\implies(c)$, it follows that 
+\begin{equation*}
+    \calN = \left(\calN^\perp\right)^\perp\subseteq\left(\calM^\perp\right)^\perp = \calM,
+\end{equation*}
+as desired. This establishes the equivalence of all five assertions. 
+
+\subsection{Part (b)}
+
+Due to part (a), we have the equivalences
+\begin{equation*}
+    \calN\subseteq\calM^\perp\iff P_{\calM^\perp}P_{\calN} = P_{\calN}\iff P_{\calN}P_{\calM^\perp} = P_{\calN}.
+\end{equation*}
+Next, using the fact that $P_{\calM^\perp} = 1 - P$ and $P_{\calN} = Q$, one sees that 
+\begin{equation*}
+    P_{\calM^\perp}P_{\calN} = P_{\calN}\iff (1 - P)Q = Q\iff PQ = 0
+\end{equation*}
+and 
+\begin{equation*}
+    P_{\calN}P_{\calM^\perp} = P_{\calN}\iff Q(1 - P) = Q\iff QP = 0.
+\end{equation*}
+This gives the desired equivalence of the three assertions.
+
+\section{Problem 8}
+
+Let $R = P + Q$. Then 
+\begin{equation*}
+    R^2 = (P + Q)(P + Q) = P^2 + PQ + QP + Q^2 = P + Q = R,
+\end{equation*}
+since $P^2 = P$, $Q^2 = Q$, $PQ = 0$, and $QP = 0$. Further, 
+\begin{equation*}
+    R^\ast = P^\ast + Q^\ast = P + Q,
+\end{equation*}
+since $P^\ast = P$ and $Q^\ast = Q$. We have seen in class that these two conditions are equivalent to stating that $R$ is a projection operator. We contend that the range of $R$ is precisely $\calM + \calN$. Indeed, for any $x\in\calH$, 
+\begin{equation*}
+    Rx = Px + Qx\in\calM + \calN,
+\end{equation*}
+since $Px\in\calM$ and $Qx\in\calN$. On the other hand, any element of $\calM + \calN$ looks like $z = x + y$ where $x\in\calM$ and $y\in\calN$. So 
+\begin{equation*}
+    Rz = (P + Q)(x + y) = Px + Py + Qx + Qy.
+\end{equation*}
+Now, since $\calM\perp\calN$, $y\in\calM^\perp$ and $x\in\calN^\perp$, so that $Py = 0 = Qx$, and thus 
+\begin{equation*}
+    Rz = Px + Qy = x + y = z
+\end{equation*}
+It follows that $\calM + \calN$ is precisely equal to the range of $R$. That is, $R = P_{\calM + \calN}$. This proves (b), and in turn gives that $\calM + \calN$ is a closed subspace of $\calH$.
+
+Finally, note that $\calM,\calN\subseteq\calM + \calN$, so that 
+\begin{equation*}
+    \Span\left(\calM\cup\calN\right)\subseteq\calM + \calN\implies\overline{\Span}\left(\calM\cup\calN\right)\subseteq\calM + \calN.
+\end{equation*}
+where the last containment follows from the fact that $\calM + \calN$ is a closed subspace of $\calH$. Conversely, it is clear from elementary linear algebra that $\calM + \calN\subseteq\Span\left(\calM\cup\calN\right)$, whence it follows that 
+\begin{equation*}
+    \overline{\Span}\left(\calM\cup\calN\right) = \calM + \calN,
+\end{equation*}
+thereby completing the proof.
 
 \section{Problem 9}
 
