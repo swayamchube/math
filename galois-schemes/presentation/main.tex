@@ -1,0 +1,448 @@
+\documentclass{beamer}
+\usetheme{Warsaw}
+
+\title{Galois Categories and the \'Etale Fundamental Group}
+\subtitle{or, what should be taught in MA 811}
+\author{Swayam Chube}
+\institute{Indian Institute of Technology, Bombay}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+% \usepackage{enumitem}
+% \usepackage{mathpazo}
+% \usepackage{euler}
+\usepackage{lmodern}
+\usepackage{sansmath, sfmath}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd-Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{mathtools}
+% \usepackage{fontspec}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+% \theoremstyle{thmstyle}
+% \newtheorem{theorem}{Theorem}[section]
+% \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+% \theoremstyle{defstyle}
+% \newtheorem{definition}[theorem]{Definition}
+% \newtheorem{corollary}[theorem]{Corollary}
+% \newtheorem{porism}[theorem]{Porism}
+% \newtheorem{remark}[theorem]{Remark}
+% \newtheorem{interlude}[theorem]{Interlude}
+% \newtheorem{example}[theorem]{Example}
+% \newtheorem*{notation}{Notation}
+% \newtheorem*{claim}{Claim}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\frakS}{\mathfrak{S}} % symmetric group
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSets}{\mathbf{Sets}}
+\newcommand{\sets}[1]{#1\text{-}\mathbf{sets}}
+\newcommand{\catFinSets}{\mathbf{FinSets}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr{A}} % abelian category
+\newcommand{\scrB}{\mathscr{B}} % bbelian category
+\newcommand{\scrC}{\mathscr{C}} % category
+\newcommand{\scrD}{\mathscr{D}} % dategory
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrM}{\mathscr{M}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrO}{\mathscr{O}} % sheaf
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\Ass}{\operatorname{Ass}}
+\newcommand{\projdim}{\operatorname{proj~dim}}
+\newcommand{\injdim}{\operatorname{inj~dim}}
+\newcommand{\gldim}{\operatorname{gl~dim}}
+\newcommand{\embdim}{\operatorname{emb~dim}}
+\newcommand{\hght}{\operatorname{ht}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\type}{\operatorname{type}}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Galois Theory \`{a} la Grothendieck}
+	Let $k$ be a field and fix its separable and algebraic closures $k_s\subseteq\overline k$. Let $G_k\coloneq\Gal(k_s\mid k)$, which is a profinite group through the isomorphism:
+	\begin{equation*}
+		\Gal(k_s\mid k)\cong\varprojlim_{\substack{k\subseteq K\subseteq k_s\\ [L : k] < \infty}}\Gal(L\mid k).
+	\end{equation*}\pause
+
+	If $L$ is a finite separable extension of $k$, then there is a natural action of $G_k$ on $\Hom_{k}(L, k_s)$ given by 
+	\begin{equation*}
+		G_k\times\Hom_{k}(L, k_s)\to\Hom_{k}(L, k_s)\qquad (g,\varphi)\mapsto g\circ\varphi.
+	\end{equation*}\pause
+	The stabilizer of $\varphi\in\Hom_k(L, k_s)$ is $\Gal(k_s\mid\varphi(L))$, i.e., an open subgroup of $G_k$, whence $\Hom_k(L, k_s)$ is a continuous $G_k$-set. \pause
+	
+	Clearly, this action is also transitive.
+\end{frame}
+
+\begin{frame}{\'Etale Algebras and the Fundamental Theorem}
+	\begin{definition}
+		A finite-dimensional $k$-algebra $A$ is said to be \define{\'etale} over $k$ if it is isomorphic to a finite direct product of separable extensions of $k$.
+	\end{definition}\pause
+
+	As in the preceding slide, there is a natural continuous action:
+	\begin{equation*}
+		G_k\times\Hom_{k}(A, k_s)\to\Hom_{k}(A, k_s)\qquad (g,\varphi)\mapsto g\circ\varphi.
+	\end{equation*}\pause
+
+	\begin{theorem}[Fundamental Theorem of Galois Theory]
+		The functor mapping a finite \'etale $k$-algebra $A$ to the finite $G_k$-set $\Hom_k(A, k_s)$ gives an anti-equivalence between the category of finite \'etale $k$-algebras and the category of finte sets with a continuous $G_k$-action. Here separable extensions correspond to transitive $G_k$-sets.
+	\end{theorem}
+\end{frame}
+
+\begin{frame}{Galois Theory of Covering Spaces}
+	Let $X$ be a path connected, locally path connected, semilocally simply connected topological space and fix a basepoint $x_0\in X$.  \pause 
+
+	If $p: Y\to X$ is a finite-sheeted covering space, there is a natural action of $\pi_1(X, x_0)$ on the (finite) fibre $p^{-1}(x_0)$, known as the \emph{monodromy action}.  \pause 
+
+	Since this action factors through a finite quotient of $\pi_1(X, x_0)$, it induces a natural continuous action of the profinite completion $\wh{\pi_1(X, x_0)}$ on $p^{-1}(x_0)$.  \pause 
+
+	\begin{theorem}[Classification of Covering Spaces]
+		The aforementioned fibre functor induces an equivalence between the category of finite-sheeted covers of $X$ and the category of continuous finite sets with a continuous $\wh{\pi_1(X, x_0)}$-action. Here connected covers correspond to transitive $\wh{\pi_1(X, x_0)}$-sets.
+	\end{theorem}
+\end{frame}
+
+\begin{frame}{The need for an ``algebraic'' fundamental group}
+	The Zariski topology on an algebraic variety is way too coarse. In fact: 
+	\begin{proposition}
+		Every irreducible algebraic variety over an uncountable algebraically closed field is contractible in the Zariski Topology.
+	\end{proposition}\pause 
+
+	It is therefore clear that the na\"ive definition of a fundamental group using homotopy classes of paths is bound to fail for algebraic varieties. \pause 
+
+	Motivated by the classification theorem for finite-sheeted covering spaces, Grothendieck envisioned a definition of an algebraic fundamental group. \pause 
+
+	To do this, he needed the ``right'' notion of a finite covering space in algebraic geometry. This purpose is served by the \define{finite \'etale morphisms}.  \pause 
+	
+	All that remains is to establish an equivalence of some suitable categories.
+\end{frame}
+
+\begin{frame}{Galois Categories}
+	\fontsize{10pt}{7.2}\selectfont
+	A \define{Galois category} is a pair $(\scrC, F)$ where $\scrC$ is a category and $F:\scrC\to\catSets$ is a functor with $F(a)$ a finite set for each object $a\in\scrC$, satisfying the following axioms: \pause 
+
+	\begin{enumerate}
+		\item[G1] There is a terminal object in $\scrC$ and all fibred products exist in $\scrC$. \pause 
+
+		\item[G2] An initial object exists in $\scrC$, finite coproducts exist in $\scrC$, and for any object in $\scrC$ the \caution{quotient} by a finite group of automorphisms exists. \pause 
+
+		\item[G3] Every morphism $u$ in $\scrC$ factors as $u = u'u''$ where $u'$ is a monomorphism and $u''$ is an epimorphism. Every monomorphism $f: X\to Y$ in $\scrC$ is an isomorphism of $X$ with a direct summand of $Y$. \pause 
+
+		\item[G4] The functor $F$ sends terminal objects to terminal objects and commutes with fibred products. \pause 
+
+		\item[G5] The functor F transforms initial objects into initial objects, commutes with finite sums, sends epimorphisms to epimorphisms and commutes with passage to the quotient by a finite group of automorphisms. \pause 
+
+		\item[G6] If $u$ is a morphism in $\scrC$ such that $F(u)$ is an isomorphism, then  $u$ is an isomorphism. \pause 
+	\end{enumerate}
+	In this case, the functor $F$ is called a \define{fundamental functor}.
+\end{frame}
+
+\begin{frame}{Examples of Galois Categories}
+	\begin{itemize}
+		\item Clearly, the category of finite sets $\catFinSets$ with the forgetful functor $U: \catFinSets\to\catSets$ is a Galois category. \pause 
+
+		\item Let $\pi$ be a profinite group. The pair $(\sets{\pi}, U)$, where $\sets{\pi}$ is the category of finite $\pi$-sets with a continuous action and $U: \sets{\pi}\to\catSets$ is the forgetful functor is a Galois category. \pause 
+
+		\item Let $X$ be a connected scheme. Let $\mathbf{FEt}_X$ denote the category of finite \'etale maps $Y\to X$ with morphisms $f: Y\to Z$ making 
+		\begin{equation*}
+			\xymatrix {
+				Y\ar[rr]^f\ar[rd] & & Z\ar[ld]\\
+				& X &
+			}
+		\end{equation*}
+		commute. Fix a geometric point $x_0: \Spec\Omega\to X$. This defines a fibre functor $\operatorname{Fib}_{x_0}: \mathbf{FEt}_X\to\catSets$. The pair $\left(\mathbf{FEt}_X, \operatorname{Fib}_{x_0}\right)$ forms a Galois category.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{The automorphism group of $F$}
+	Let $(\scrC, F)$ be a \caution{small} Galois category. \pause 
+	Note that $\Aut_{\scrC}(F)$ is a group of natural isomorphisms $\eta: F\to F$. \pause 
+
+	Each such natural isomorphism can be identified with a tuple $(\eta_X)_{X\in\scrC}$, where $\eta_X: F(X)\to F(X)$ is an isomorphism in $\catSets$, i.e., is a bijection of sets. \pause 
+	
+	This tuple is an element in the profinite group
+	\begin{equation*}
+		\Gamma \coloneq \prod_{X\in\scrC}\frakS_{F(X)}.
+	\end{equation*}\pause 
+	Further the tuple must be such that for each morphism $f: X\to Y$ in $\scrC$, the diagram 
+	\begin{equation*}
+		\xymatrix {
+			F(X)\ar[r]^{F(f)}\ar[d]_{\eta_X} & F(Y)\ar[d]^{\eta_Y}\\
+			F(X)\ar[r]_{F(f)} & F(Y)
+		}
+	\end{equation*}
+	commutes.
+\end{frame}
+
+\begin{frame}{The automorphism group of $F$, contd.}
+	We show that $\Aut_{\scrC}(F)$ is closed in $\Gamma$. \pause 
+
+	Fix $Y,Z\in\scrC$ and a morphism $f: Y\to Z$. Consider the set 
+	\begin{equation*}
+		C_f\coloneq\left\{\left(\eta_X\right)_{X\in\scrC}\in\Gamma\colon \eta_Y\circ F(f) = F(f)\circ\eta_X\right\}.
+	\end{equation*} \pause 
+	Note that 
+	\begin{equation*}
+		C_f = \bigcup\prod_{\substack{X\in\scrC\\ X\ne Y, Z}}\frakS_{F(X)}\times\{\eta_Y\}\times\{\eta_Z\},
+	\end{equation*} 
+	where the union ranges over all pairs $(\eta_Y,\eta_Z)$ satisfying $\eta_Y\circ F(f) = F(f)\circ\eta_Z$.  \pause 
+	Being a finite union of closed sets, $C_f$ is closed in $\Gamma$. \pause 
+	Finally, since
+	\begin{equation*}
+		\Aut_{\scrC}(F) = \bigcap_{\substack{Y\xrightarrow{f}Z\\\text{in }\scrC}} C_f,
+	\end{equation*}
+	the conclusion follows. \pause 
+	In particular, $\Aut_{\scrC}(F)$ is a profinite group. 
+\end{frame}
+
+\begin{frame}{The equivalence functor}
+	Next, let $Y\in\scrC$. There is a natural action of $\Aut_{\scrC}(F)$ on $F(Y)$ given by 
+	\begin{equation*}
+		\left(\eta_X\right)_{X\in\scrC}\cdot a = \eta_Y(a)\qquad \forall~a\in F(Y).
+	\end{equation*} \pause 
+	The stabilizer of $a\in F(Y)$ is 
+	\begin{equation*}
+		\Aut_{\scrC}(F)\cap\left(\prod_{\substack{X\in\scrC\\ X\ne Y}}\times\Stab_{\frakS_{F(X)}}(a)\right),
+	\end{equation*}
+	which is an open subgroup of $\Aut_{\scrC}(F)$. \pause 
+	Thus, each $F(Y)$ is a finite $\Aut_{\scrC}(F)$-set with a continuous action. \pause 
+	
+	This gives a natural functor $H: \scrC\to\sets{\Aut_{\scrC}(F)}$.
+\end{frame}
+
+\begin{frame}{The Main Theorem}
+	\begin{theorem}[Fundamental Theorem of Galois Categories]
+		Let $(\scrC, F)$ be an essentially small Galois category. Then 
+		\begin{enumerate}
+			\item The functor $H:\scrC\to\sets{\Aut_{\scrC}(F)}$ is an equivalence of categories. \pause 
+			\item If $\pi$ is a profinite group such that the categories $\scrC$ and $\sets{\pi}$ are equivalent through an equivalence such that the composition $\scrC\xrightarrow{\sim}\sets{\pi}\to\catSets$ yields the functor $F$, then $\pi$ is canonically isomorphic to $\Aut_{\scrC}(F)$. \pause 
+			\item If $F'$ is another fundamental functor on $\scrC$, then $F$ and $F'$ are naturally isomorphic. \pause 
+			\item If $\pi$ is a profinite group such that the categories $\scrC$ and $\pi$-sets are equivalent, then $\pi\cong\Aut_{\scrC}(F)$ as topological groups. \pause 
+		\end{enumerate}
+	\end{theorem}
+\end{frame}
+
+\begin{frame}{The \'Etale Fundamental Group}
+	\begin{definition}
+		Let $X$ be a connected scheme and $x_0: \Spec\Omega\to X$ be a geometric point. The \define{\'etale fundamental group} $\pi_1^{\acute{e}t}(X, x_0)$ to be $\Aut(\operatorname{Fib}_{x_0})$.
+	\end{definition}
+
+	Recall that there is an anti-equivalence between the category of commutative rings and the category of affine schemes. 
+
+	Therefore, there is an anti-equivalence between the category $\mathbf{FEt}_{\Spec k}$ and the category of \'etale $k$-algebras.
+
+	Choosing a geometric point in $\Spec k$ is tantamount to fixing a separable closure $k_s$ of $k$.
+
+	As we have seen earlier, $\mathbf{FEt}_{\Spec k}$ is equivalent to the category $\sets{G_k}$. 
+	In particular, $\pi_1^{\acute{e}t}(\Spec k, x_0)\cong\Gal(k_s\mid k)$.
+\end{frame}
+
+\end{document}
