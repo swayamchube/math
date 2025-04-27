@@ -616,10 +616,47 @@ where the second inequality follows from \thref{prop:injectivity-of-some-random-
 
 % In particular, if $A\in\scrC$ is a connected Galois object, then $F(A)/G$ is a terminal object, where $G = F\left(\Aut_{\scrC}(A)\right)$. Thus, $\Aut_{\scrC}(A)$ acts transitively on $F(A)$. Therefore, $\#\Aut_{\scrC}(A) = \#\scrC(A, A) = \# F(A)$.
 
-\begin{proposition}
+\begin{proposition}\thlabel{prop:bijectivity-of-some-random-map}
     Let $X\in\scrC$. There exists $(A, a)\in I$ with $A$ Galois such that the map $\scrC(A, X)\to F(X)$ given by $f\mapsto F(f)(a)$ is bijective.
 \end{proposition}
 \begin{proof}
-    
+    Let $Y = X^{\# F(X)}$ be the product of $\# F(X)$ copies of $X$. As $F$ commutes with products, we have $F(Y) = F(X)^{\# F(X)}$. Let us index the coordinates of $Y$ by the elements of $F(X)$, and let $a\in F(Y)$ % TODO: Complete this
+\end{proof}
+
+\begin{remark}
+    The above result shows that the subset $J\subseteq I$ corresponding to connected Galois objects is a cofinal subset of $I$, so 
+    \begin{equation*}
+        \varinjlim_{J}\scrC(A, -)\cong\varinjlim_{I}\scrC(A, -)\cong F.
+    \end{equation*}
+\end{remark}
+
+\subsection{Construction of the Equivalence}
+
+\begin{lemma}\thlabel{lem:action-is-transitive}
+    Let $A$ be a connected Galois object, and $B$ a connected object such that $\scrC(A, B)\ne\emptyset$. Then, the action 
+    \begin{equation*}
+        \Aut_{\scrC}(A)\times\scrC(, B)\to\scrC(A, B)\qquad (\sigma, f)\mapsto f\circ\sigma
+    \end{equation*}
+    is transitive.
+\end{lemma}
+\begin{proof}
+    Let $f\in\scrC(A, B)$, then we can factor $f = gh$ where $h$ is an epimorphism and $g$ is a monomorphism. Since $B$ is connected, $g$ must be an isomorphism since both $A$ and $B$ are connected. In particular, this means that $F(f)$ is an isomorphism. Thus, given $f': A\to B$, there exists an $a'\in F(A)$ such that $F(f)(a') = F(f')(a)$. Since $A$ is Galois, there exists a unique $\sigma\in\Aut_{\scrC}(A)$ such that $F(\sigma)(a) = a'$. Then $F(f\sigma)(a) = F(f')(a)$, and due to \thref{prop:injectivity-of-some-random-map}, we have that $f\circ\sigma = f'$.
+\end{proof}
+
+\begin{lemma}
+    Let $(A, a), (B, b)\in J$, $(A, a)\geqq_f (B, b)$. Given $\sigma\in\Aut_{\scrC}(A)$, there exists a unique $\tau\in\Aut_{\scrC}(B)$ such that $\tau\circ f = f\circ\sigma$ and the mapping $\sigma\mapsto\tau$ is a surjective group homomorphism $\Aut_{\scrC}(A)\to\Aut_{\scrC}(B)$.
+\end{lemma}
+\begin{proof}
+    Let $a'\coloneq F(\sigma)(a)$ and $b'\coloneq F(f)(a')$. Then, since $B$ is Galois, there exists a unique $\tau\in\Aut_{\scrC}(B)$ such that $F(\tau)(b) = b'$ due to \thref{prop:bijectivity-of-some-random-map}. So, we have 
+    \begin{equation*}
+        F(f\sigma)(a) = b' = F(\tau f)(a)\implies f\circ\sigma = \tau\circ f
+    \end{equation*}
+    due to \thref{prop:injectivity-of-some-random-map}. It remains to show that such a $\tau\in\Aut_{\scrC}(B)$ is unique. Indeed, if there were two automorphisms $\tau_1,\tau_2\in\Aut_{\scrC}(B)$ satisfying the property, i.e., $\tau_1\circ f = f\circ\sigma = \tau_2\circ f$, then $F(\tau_1)(b) = F(\tau_2)(b)$. Due to \thref{prop:injectivity-of-some-random-map}, it follows that $\tau_1 = \tau_2$. 
+
+    Finally, we must show that the association $\sigma\mapsto\tau$ is a surjective group homomorphism $\Aut_{\scrC}(A)\to\Aut_{\scrC}(B)$. Indeed, if $\sigma_1\mapsto\tau_1$ and $\sigma_2\mapsto\tau_2$, then we have 
+    \begin{equation*}
+        f\sigma_1\sigma_2 = \tau_1 f\sigma_2 = \tau_1\tau_2 f,
+    \end{equation*}
+    and so $\sigma_1\sigma_2\mapsto\tau_1\tau_2$. This proves that the association $\sigma\mapsto\tau$ is a group homomorphism. Further, due to \thref{lem:action-is-transitive}, the action of $\Aut_{\scrC}(A)$ on $\scrC(A, B)$ is transitive, and hence, given $\tau\in\Aut_{\scrC}(B)$, there exists a $\sigma\in\Aut_{\scrC}(A)$ such that $\tau\circ f = f\circ\sigma$, whence the association $\sigma\mapsto\tau$ is surjective, thereby completing the proof.
 \end{proof}
 \end{document}
