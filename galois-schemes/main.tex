@@ -1,7 +1,7 @@
 \documentclass[10pt]{article}
 % \usepackage{./arxiv}
 
-\title{Galois Categories and the \'Etale Fundamental Group}
+\title{Galois Categories}
 \author{Swayam Chube}
 \date{\today}
 
@@ -292,6 +292,10 @@
 
 \section{Preliminaries on Profinite Groups}
 
+\begin{definition}
+    A profinite group is an inverse limit of finite discrete topological groups. Note that a profinite group is always compact, Hausdorff, and totally disconnected.
+\end{definition}
+
 \begin{proposition}\thlabel{prop:profinite-action-properties}
     Let $\pi$ be a profinite group acting on a set $E$. Then 
     \begin{enumerate}[label=(\arabic*)]
@@ -313,7 +317,13 @@
         A^{-1}(e) = \bigcup_{e'\in\pi\cdot e} \left\{(\sigma, e')\colon \sigma e' = e\right\} = \bigcup_{e'\in\pi\cdot e}\tau_{e'}^{-1}\Stab_\pi(e')\times\{e'\}
     \end{equation*}
     is an open subset of $\pi\times E$, as desired.
-    \item % TODO: Add in the rest of the proof
+    \item The kernel of the action (denoted $\pi'$) is the intersection of all the stabilizers. If $E$ is finite, then since the stabilizers are open, the kernel is also open. Conversely, any open subgroup of $\pi$ must have finite index, i.e., $\pi'$ has finite index in $\pi$. Let $\tau_1,\dots,\tau_n$ be a collection of left coset representatives of $\pi'$ in $\pi$, and supopse that for $1\le i\le m$, we have $\tau_i e = e$, which implies 
+    \begin{equation*}
+        \pi_e = \bigcup_{i = 1}^m\tau_i\pi',
+    \end{equation*}
+    and so the stabilizers of each $e\in E$ are open. 
+
+    \item This is trivial from (a) and (b). \qedhere
 \end{enumerate}
 \end{proof}
 
@@ -466,7 +476,7 @@ The quotient of an object by a group need not exist in a category, but when it d
     Two monomorphisms $Y\xrightarrow{f} X$ and $Y'\xrightarrow{f'} X$ are representative of the same subobject of $X$ if and only if $F(f)\left(F(Y)\right) = F(f')\left(F(Y')\right)$ as subsets of $F(X)$.
 \end{lemma}
 \begin{proof}
-    Suppose the two objects represent the same subobject of $X$. Then there is an isomorphism $\theta: Y\xrightarrow{\sim} Y'$ such that $f = f'\circ\theta$. Then, $F(f)\left(F(Y)\right) = F(f')\circ F(\theta)\left(F(Y)\right)$ but $F(\theta)$ is an isomorphism, so is surjectiv,e and hence $F(f)\left(F(Y)\right) = F(f')\left(F(Y')\right)$.
+    Suppose the two objects represent the same subobject of $X$. Then there is an isomorphism $\theta: Y\xrightarrow{\sim} Y'$ such that $f = f'\circ\theta$. Then, $F(f)\left(F(Y)\right) = F(f')\circ F(\theta)\left(F(Y)\right)$ but $F(\theta)$ is an isomorphism, so is surjective and hence $F(f)\left(F(Y)\right) = F(f')\left(F(Y')\right)$.
 
     Conversely, suppose $F(f)\left(F(Y)\right) = F(f')\left(F(Y')\right)$. As $F$ commutes with fibred products, we have the following pullback squares 
     \begin{equation*}
@@ -620,7 +630,11 @@ where the second inequality follows from \thref{prop:injectivity-of-some-random-
     Let $X\in\scrC$. There exists $(A, a)\in I$ with $A$ Galois such that the map $\scrC(A, X)\to F(X)$ given by $f\mapsto F(f)(a)$ is bijective.
 \end{proposition}
 \begin{proof}
-    Let $Y = X^{\# F(X)}$ be the product of $\# F(X)$ copies of $X$. As $F$ commutes with products, we have $F(Y) = F(X)^{\# F(X)}$. Let us index the coordinates of $Y$ by the elements of $F(X)$, and let $a\in F(Y)$ % TODO: Complete this
+    Let $Y = X^{\# F(X)}$ be the product of $\# F(X)$ copies of $X$. As $F$ commutes with products, we have $F(Y) = F(X)^{\# F(X)}$. Let us index the coordinates of $Y$ by the elements of $F(X)$, and let $a\in F(Y)$ be the element having in the $x$-th coordinate the element $x\in F(X)$. Let $A$ be the connected component of $Y$ suc tthat $a\in F(A)$ and $f_x: A\to Y\to X$ be the composition of the monomorphism $A\to Y$ and the projectio on the $x$-th coordinate $p_x: Y\to X$. Then $f_x\in\scrC(A, X)$ and $F(f_x)(a) = x$. As $a$ has all the elements of $F(X)$ in its coordinates, then as $f_x$ varies, we obtain all the elements $x\in F(X)$, and so the map is bijective (since we already know about injectivity from \thref{prop:injectivity-of-some-random-map}).
+
+    Moreover, we have also obtained that the only morphisms in $\scrC(A, X)$ are the ones of the form $f_x$ for a certain $x\in f(X)$. We contend that $A$ is Galois. Let $a'\in F(A)$, $a'\ne a$. The map $\scrC(A, X)\to F(X)$ given by $f\mapsto F(f)(a')$ is bijective as it is injective and we have just seen that the two sets cardinality. As for all $g\in\scrC(A, X)$, $g = f_x$ for a certain $x$, this proves that $a'$ has all the elements of $F(X)$ in its coordinates. 
+
+    We shall show that there is an automorphism of $Y$ sending $a$ to $a'$. Let $a = (a_x)_{x\in F(X)}$ and $a' = (a_{\sigma(x)})_{x\in F(X)}$ where $\sigma$ is a permutation of the set $F(X)$. Note that $\scrC(Y, Y) = \prod_{x\in F(X)}\scrC(Y, X)$ and consider the map $f = \prod_{x\in F(X)}p_{\sigma(x)}$. Then $F(f)(a) = \prod_{x\in F(X)} F(p_{\sigma(x)})(a) = (a_{\sigma(x)})_{x\in F(X)} = a'$. Taking the inverse permutation to $\sigma$ we see that $f$ is an isomorphism. Then the map $A\to Y\xrightarrow{\sigma} Y$ is a monomorphism, which induces an automorphism $A\xrightarrow{\tau} A'$ from $A$ to another connected component $A'$ of $Y$. Moreover, as $a'\in F(A)\cap F(A')$, and $A, A'$ are connected, we must have $F(A) = F(A')$, so that $A = A'$ and therefore $\tau$ is an automorphism of $A$ which sends $a$ to $a'$. In  conclusion $\Aut_{\scrC}(A)$ acts transitively on $F(A)$, and therefore $A$ is Galois.
 \end{proof}
 
 \begin{remark}
@@ -658,5 +672,260 @@ where the second inequality follows from \thref{prop:injectivity-of-some-random-
         f\sigma_1\sigma_2 = \tau_1 f\sigma_2 = \tau_1\tau_2 f,
     \end{equation*}
     and so $\sigma_1\sigma_2\mapsto\tau_1\tau_2$. This proves that the association $\sigma\mapsto\tau$ is a group homomorphism. Further, due to \thref{lem:action-is-transitive}, the action of $\Aut_{\scrC}(A)$ on $\scrC(A, B)$ is transitive, and hence, given $\tau\in\Aut_{\scrC}(B)$, there exists a $\sigma\in\Aut_{\scrC}(A)$ such that $\tau\circ f = f\circ\sigma$, whence the association $\sigma\mapsto\tau$ is surjective, thereby completing the proof.
+\end{proof}
+
+Note that the above result gives rise to an inverse system indexed by $J$. Set 
+\begin{equation*}
+    \pi\coloneq\varprojlim_J\Aut_{\scrC}(A)\subseteq\prod_{J}\Aut_{\scrC}(A).
+\end{equation*}
+
+\begin{proposition}
+    For all $X\in\scrC$, the action 
+    \begin{equation*}
+        \varprojlim_{J}\Aut_{\scrC}(A)\times\varinjlim_{J}\scrC(A, X)\longrightarrow\varinjlim_J\scrC(A, X)\qquad\left((\sigma_A)_{A\in J}, f\right)\longmapsto f\circ\sigma^{-1}
+    \end{equation*}
+    defines a functor $H':\scrC\to\sets{\pi}$.
+\end{proposition}
+\begin{proof}
+    First, we must check that this action is well-defined. Let $f_A\in\scrC(A, X)$ and $f_B\in\scrC(B, X)$ be representatives of the same element in $\varinjlim_J \scrC(A, X)$. This means that there exists a $(C, c)\in J$ such that $(C, c)\geqq_{f_1} (A, a)$ and $(C, c)\geqq_{f_2}(B, b)$ and $f_B\circ f_2 = f_C = f_A\circ f_1$. Let $(\sigma_A)_{A\in J}\in\varprojlim_J\Aut_{\scrC}(A)$. Then we have 
+    \begin{equation*}
+        f_Af_1\sigma_C^{-1} = f_C\sigma_C^{-1} = f_B f_2\sigma_C^{-1}.
+    \end{equation*}
+    But $\sigma_A^{-1} f_1 = f_1\sigma_C^{-1}$ and $\sigma_B^{-1}f_2 = f_2\sigma_C^{-1}$. Therefore, 
+    \begin{equation*}
+        f_C\sigma_C^{-1} = f_A\sigma_A^{-1}f_1 = f_B\sigma_B^{-1}f_2,
+    \end{equation*}
+    whence $f_A\sigma_A^{-1} = f_B\sigma_B^{-1}$ in $\varinjlim_{B}\scrC(A, X)$. 
+
+    It is easy to check that the above action is continuous. We shall show functoriality. Let $f: X\to Y$ be a morphism in $\scrC$, then $H'(f)$ maps $(f_A)_{A\in J}$ to $(f\circ f_A)_{A\in J}$. Then it is clear that $H'$ preserves compositions and maps the identity to the identity.
+\end{proof}
+
+\begin{remark}
+    We have defined a functor $H': \scrC\to\sets{\pi}$ by endowing the functor $\varinjlim_J\scrC(A, -)\cong F(-)$. This isomorphism of functors induces a $\pi$-action on $F(X)$ for each $X\in\scrC$, which induces a functor $\scrC\to\sets{\pi}$, which, upon composing with the forgetful functor $\sets{\pi}\to\catSets$ recovers $F$. All that remains is to show that $H'$ is an equivalence of categories.
+\end{remark}
+
+\begin{proposition}\thlabel{prop:quotient-of-galois}
+    Let $B$ be a connected object in $\scrC$. Then $B\cong A/G$ for some Galois object $A$ and $G$ a finite subgroup of $\Aut_{\scrC}(A)$.
+\end{proposition}
+\begin{proof}
+    Due to \thref{prop:bijectivity-of-some-random-map} there exists a Galois object $A$ and $a\in F(A)$ such that the map 
+    \begin{equation*}
+        \scrC(A, B)\longrightarrow F(B)\qquad f\longmapsto F(f)(a)
+    \end{equation*}
+    is bijective. But since $F(B)\cong\varinjlim_J\scrC(A, B)$ and $\Aut_{\scrC}(A)$ acts transitively on $\scrC(A, B)$, we have that $\Aut_{\scrC}(A)$ acts transitively on $H'(B)$, and therefore, $H'(B)\cong\Aut_{\scrC}(A)/G$, where $G$ is the stabilizer of a certain element $f\in H'(B)$.
+
+    In particular, we have $\# F(B) = \#\Aut_{\scrC}(A)/G$. Further, for each $\sigma\in G$, we have $f\circ\sigma = \sigma$, consequently, there is a morphism $g: A/G\to B$ induced by $f$. Since $F(f)$ is surjective, so is $F(g)$. Moreover, $\# F(A/G) = \# F(A)/G = \#\Aut_{\scrC}(A)/G$, so that $F(g)$ is an isomorphism. It follows from \ref{G6} that $B\cong A/G$, as desired.
+\end{proof}
+
+\begin{proposition}
+    The functor $H'$ maps connected objects to connected objects.
+\end{proposition}
+\begin{proof}
+    For every connected object $B$, choose a Galois object $A$ such that $\scrC(A, B)\cong F(B)$. Then $\Aut_{\scrC}(A)$ acts transitively on $\scrC(A, B)$. Further, since the maps in the inverse system $(\Aut_{\scrC}(A))_{A\in J}$ are surjective, it follows that $\pi$ acts transitively on $H'(B)$, so that $H'(B)$ is a connected object in the category $\sets{\pi}$.
+\end{proof}
+
+\begin{lemma}\thlabel{lem:some-connectedness-thing}
+    Let $f: X\to Z$ be an epimorphism in $\scrC$ and $g: W\to Z$ a non-trivial subobject. Then $W\times_Z X\to Z$ is a non-trivial subobject. In particular, if $X\to Z$ is an epimorphism and $X$ is connected, then $Z$ is connected.
+\end{lemma}
+\begin{proof}
+    First, we show that the map $p_2: W\times_Z X\to X$ is a monomorphism. Indeed, let $s, t: Y\to W\times_Z X$ satisfy $p_2 s = p_2 t$.
+    \begin{equation*}
+        \xymatrix {
+            Y\ar@{.>}[rd]\ar[rrd]^{p_1s = p_1 t}\ar[rdd]_{p_2s = p_2t} & & \\
+            & W\times_Z X\ar[r]^{p_1}\ar[d]_{p_2} & W\ar[d]^g\\
+            & X\ar[r]_f & Z
+        }
+    \end{equation*}
+    Composing with $f$, we have $fp_2s = fp_2t$, and hence $gp_1s = gp_2t$. As $g$ is a monomorphism, this implies that $p_1s = p_1t$. Thus $s,t: Y\to W\times_Z X$ makes the above diagram commute. Hence, $s = t$ by uniqueness. This proves that $p_2$ is a monomorphism. 
+
+    It remains to check that it is a non-trivial subobject. For this, it is enough to check that $F(W\times_Z X)$ is neither the empty set, nor all of $F(X)$. Note that 
+    \begin{equation*}
+        F(W\times_Z X) = F(W)\times_{F(Z)} F(X) = \left\{(a, b)\in F(W)\times F(X)\colon F(f)(b) = F(g)(a)\right\}.
+    \end{equation*}
+    \begin{itemize}
+        \item If $F(W\times_Z X) = F(X)$, then since $f$ is an epimorphism, this means that for all $z\in F(Z)$, there exists a pair $(a, b)\in F(W)\times F(X)$ such that $F(f)(b) = z$, and $F(g)(a) = z$, so that $F(g)$ is surjective. Since $F(g)$ is also injective, it must be an isomorphism, whence, due to \ref{G6}, so is $g$, i.e., $W\to Z$ is the full subobject, a contradiction. 
+        
+        \item If $F(W\times_Z X) = 0$, then there is no pair $(a, b)\in F(W)\times F(X)$ satisfying $F(g)(a) = F(f)(b)$. But as $f$ is an epimorphism, we must have that $F(W) = 0$, so that $W$ is the initial object in $\scrC$, a contradiction. \qedhere
+    \end{itemize}
+\end{proof}
+
+\begin{lemma}
+    If $f,g: X\to Y$ are two morphisms in $\scrC$ satisfying $F(f) = F(g)$, then $f = g$.
+\end{lemma}
+\begin{proof}
+    Let $E\to X$ denote the equalizer of $(f,g)$. As we have seen earlier, $F(E)\to F(X)$ is the equalizer of $(F(f), F(g))$. But since $F(f) = F(g)$, we must have that $F(E)\to F(X)$ is an isomorphism, whence due to \ref{G6}, $E\to X$ is an isomorphism, so that $f = g$, as desired.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:equivalence-of-categories}
+    The functor $H':\scrC\to\sets{\pi}$ is an equivalence of categories. 
+\end{theorem}
+\begin{proof}
+    It suffices to show that $H'$ is fully-faithful and essentially surjective. Any $\pi$-set is a disjoint union of transitive orbits, so it suffices to show that every transitive $\pi$-set is of the form $H'(X)$ for some $X\in\scrC$ (this is because $H'$ preserves coproducts).
+
+    Note that every trasitiv e$\pi$-set is of the form $\Aut_{\scrC}(A)/G$ for some $G\subseteq\Aut_{\scrC}(A)$ and $A$ connected Galois. Note that the map 
+    \begin{equation*}
+        \Aut_{\scrC}(A)\longrightarrow H'(A)\qquad f\longmapsto F(f)(a)
+    \end{equation*}
+    is bijective. Therefore the map 
+    \begin{equation*}
+        H'(A)\longrightarrow\Aut_{\scrC}(A)\qquad F(f)(a)\longmapsto f^{-1}
+    \end{equation*}
+    is a bijection, and $F(f\sigma^{-1})\longmapsto\sigma f^{-1}$, so the map respects the $\pi$-action, and it is therefore an isomorphism of $\pi$-sets. Thus 
+    \begin{equation*}
+        H'(A/G)\cong H'(A)/G\cong\Aut_{\scrC}(A)/G,
+    \end{equation*}
+    thereby proving essential surjectivity.
+
+    As for fully-faithfulness, we already know that $\scrC(X, Y)\to\sets{\pi}\left(H'(X), H'(Y)\right)$ is injective due to \thref{prop:injectivity-of-some-random-map}. Therefore it would suffice to show that the sets have the same cardinality. First, we reduce this to the case of connected objects. 
+
+    \begin{itemize}
+        \item For all $X\in\scrC$, wecan write a decomposition $X = \coprod_{i = 1}^n X_i$, and due to the universal property of coproducts, we have 
+        \begin{equation*}
+            \scrC(X, Y)\cong\prod_{i = 1}^n\scrC(X_i, Y).
+        \end{equation*}
+        As $H'$ commutes with finite coproducts, we also have that 
+        \begin{equation*}
+            \sets{\pi}(H'(X), H'(Y))\cong\prod_{i = 1}^n\sets{\pi}\left(H'(X_i), H'(Y)\right),
+        \end{equation*}
+        whence we can reduce to the case that $X$ is connected. 
+
+        \item Let $X\to Y$ be a morphism. Using \ref{G3}, we can factor it as $X\xrightarrow{\mathrm{epi}} Z\xrightarrow{\mathrm{mono}} Y$. If $X$ is connected, due to \thref{lem:some-connectedness-thing}, we know that $Z$ is connected too, and hence $Z\to Y$ is a connected component of $Y$. This shows that any morphism $X\to Y$ factors through connected components of $Y$, so that 
+        \begin{equation*}
+            \scrC(X, Y)\cong\coprod_{i = 1}^n\scrC(X, Y_i)
+        \end{equation*}
+        for $X$ connected. Using that $H'$ maps connected components to connected components, we also have that 
+        \begin{equation*}
+            \sets{\pi}\left(H'(X), H'(Y)\right)\cong\coprod_{i = 1}^n\sets{\pi}\left(H'(X), H'(Y_i)\right).
+        \end{equation*}
+    \end{itemize}
+
+    Now choose $A\in\scrC$ so that $X\cong A/G_1$ and $Y\cong A/G_2$. This can always be done: For example, one can take $A$ a connected component of $X^{\# F(X)}\times Y^{\# F(Y)}$ and repeat the same proof of \thref{prop:bijectivity-of-some-random-map}, and then use \thref{prop:quotient-of-galois}. 
+
+    Then we have that $H'(X)\cong\Aut_{\scrC}(A)/G_1$ and $H'(Y)\cong\Aut_{\scrC}(A)/G_2$. Consider a morphism of $\pi$-sets, $f: \Aut_{\scrC}(A)/G_1\to\Aut_{\scrC}(A)/G_2$. Then, $f(\tau G_1) = \tau\sigma G_2$, for a certain $\sigma$ that completely characterizes $f$. The morphism is well-defined $\iff$ two representatives of the same class are mapped to the same element $\iff$ for all $g\in G_1$, $gG_1\mapsto\sigma G_2$ $\iff$ for all $g\in G_1$, $g\sigma G_2 = \sigma G_2$ $\iff$ for all $g\in G_1$, $g\sigma\in\sigma G_2$ $\iff$ $G_1\sigma\subseteq\sigma G_2$. Then 
+    \begin{equation*}
+        \#\sets{\pi}\left(H'(X), H'(Y)\right) = \#\left\{\sigma G_2\colon G_1\sigma\subseteq\sigma G_2\right\}.
+    \end{equation*}
+    On the other hand, the choice of $A$ implies that $\Aut_{\scrC}(A)$ acts transitively on both $\scrC(A, X)$ and $\scrC(A, Y)$. Then, cosnider the projection morphisms $A\xrightarrow{h_1} A/G_1$ and $A\xrightarrow{h_2} A/G_2$. Given $f: X\to Y$, there exists a $\sigma\in\Aut_{\scrC}(A)$ such that $h_2\sigma = fh_1$. 
+
+    \begin{equation*}
+        \xymatrix {
+            A\ar[r]^-{h_1}\ar[d]_{\sigma} & A/G_1 = X\ar[d]^f\\
+            A\ar[r]_-{h_2} & A/G_2 = Y
+        }
+    \end{equation*}
+    Note that $h_2\sigma = h_2\sigma'$ $\iff$ $\sigma'\sigma^{-1}\in G_2$ $\iff$ $G_2sigma = G_2\sigma'$, so $f$ uniquely determines the coset $G_2\sigma$. Reciprocially, an element $\sigma\in\Aut_{\scrC}(A)$ gives rise to a morphism $f: X\to Y$ ifa nd only if $h_2\sigma$ factors through $A/G_1$, that is, if and only if $h_2\sigma\tau = h_2\sigma$, for all $\tau\in G_1$ if and only if $\sigma G_2\subseteq G_2\sigma$. This proves that 
+    \begin{equation*}
+        \#\scrC(X, Y) = \#\left\{G_2\sigma\colon \sigma G_2\subseteq G_2\sigma\right\}.
+    \end{equation*}
+    In conclusion, $\#\scrC(X, Y) = \#\sets{\pi}(H'(X), H'(Y))$, thereby completing the proof.
+\end{proof}
+
+\subsection{Proof of the Main Theorem}
+
+\begin{lemma}\thlabel{lem:automorphism-of-forgetful-functor}
+    Let $\pi$ be a profinite group, $F:\sets{\pi}\to\catSets$ the forgetful functor. Then $\Aut(F)\cong\pi$.
+\end{lemma}
+\begin{proof}
+    Note that given $\theta\in\Aut(F)$, the action of $\theta$ on every $\pi$-set is determined by its action on the transitive $\pi$-sets, and as every transitive $\pi$-set is isomorphic to one of the form $\pi/\pi'$, with $\pi'$ an open subgroup of $\pi$, the action of $\theta$ is totally determined by the action on the sets of this form. 
+
+    Moreover, we know that in a compact totally disconnected group, every neighborhood of $1$ contains an open normal subgroup. Therefore, there exists $\pi''$ an open normal subgroup of $\pi$ such that $\pi''\subseteq\pi'$. Consider the natural morphism of $\pi$-sets $f: \pi/\pi''\onto\pi/\pi'$. The automorphism $\theta$ of $F$ has to commute with $f$. Let $\sigma\in\pi$ be such that $\theta_{\pi/\pi''}(\tau\pi'') = \tau\sigma\pi''$. Then we have $f\circ\theta_{\pi/\pi''}(\tau\pi'') = \tau\sigma\pi'$, and so $\theta_{\pi/\pi'}\circ f(\tau\pi') = \tau\sigma\pi'$. As $f(\tau\pi'') = \tau\pi'$, we have then $\sigma_{\pi/\pi'}(\tau\pi') = \tau\sigma\pi'$. Thus, the action of $\theta\in\Aut(F)$ is totally determined by the morphisms $\theta_{\pi/\pi'}$ where $\pi'$ runs over open (and hence, finite index) normal subgroups of $\pi$.
+
+    Let $\pi'$ be an open normal subgroup of $\pi$. Note that $\sets{\pi}(\pi/\pi')\cong\pi/\pi'$, with the following isomorphism 
+    \begin{equation*}
+        \Aut_{\sets{\pi}}(\pi/\pi')\to\pi/\pi'\qquad f\mapsto\tau^{-1}\pi'\text{ if } f(\pi') = \tau\pi'.
+    \end{equation*}
+    Now let $f:\pi/\pi'\to\pi/\pi$ be a set theoretic map commuting with all $\pi$-set automorphisms. Then $f(\tau\pi')\sigma = f(\tau\pi'\sigma)$ if and only if $f(\pi'\tau)\sigma = f(\pi'\tau\sigma)$. Let $f(\pi') = a\pi'$. Then $f(\pi'\sigma) = f(\sigma\pi') = f(\pi')\sigma = a\pi'\sigma$, so $f$ is given by left multiplication by an element of $\pi/\pi'$. Therefore, we can define a map $\psi: \pi\to\Aut(F)$ given by 
+    \begin{equation*}
+        \psi(\sigma)_{\pi/\pi'}(\pi') = \sigma\pi'
+    \end{equation*}
+    for every open normal subgroup of $\pi$. We shall now show that this is an isomorphism of groups.
+
+    \begin{description}
+        \item[Well-defined:] To see that $\psi(\sigma)\in\Aut(F)$, it is enough to check that it commutes with every morphism of $\pi$-sets, and this can clearly be reduced to proving that it commutes with every morphism $\pi/\pi'\to\pi/\pi''$, where $\pi'$ and $\pi''$ are open normal subgroups of $\pi$. Let $f: \pi/\pi'\to\pi/\pi''$ be given by $f(\pi') = a\pi''$. Let $x\in\pi'\setminus\pi''$. Then $xa\pi'' f(x\pi') = f(\pi') = a\pi''$ and hence $x\pi'' a = \pi''a$ for all $x\in\pi'$. This implies $\pi''\supseteq\pi'$, and it is clear that $\psi(\sigma)$ commutes with $f$, so $\psi$ is well-defined. 
+        
+        \item[Injectivity:] This is clear because an element $\theta\in\Aut(F)$ is totally characterized by the coordinates $\theta_{\pi/\pi'}\in\pi/\pi'$, and 
+        \begin{equation*}
+            \pi\cong\varprojlim_{\pi'\text{ open normal}}\pi/\pi'.
+        \end{equation*}
+
+        \item[Surjective:] The fact that every morphism $\pi/\pi'\to\pi/\pi'$ commuting with $\pi$-set automorphisms is given by left product by an element of $\pi/\pi'$ implies that every element of $\Aut(F)$ ha to be defined by left product by an element of $\varprojlim\pi/\pi'\cong\pi$. 
+    \end{description}
+    This completes the proof.
+\end{proof}
+
+\begin{proof}[Proof of \thref{thm:fundamental-theorem}]
+\begin{enumerate}
+\item[(b)] Let $\pi$ be a profinite group, and $H:\scrC\to\sets{\pi}$ an equivalence that composed with the forgetful functor $F_1: \sets{\pi}\to\catSets$ yields $F$. Then we have $\Aut(F_1)\cong\pi$ by \thref{lem:automorphism-of-forgetful-functor}. Therefore, it would be enough to check that $\Aut(F)\cong\Aut(F_1)$.
+
+Note that an automorphism $\varepsilon\in\Aut(F_1)$ induces naturally an automorphism of $F$, $\psi(\varepsilon) = \left(\varepsilon_{H(X)}\right)_{X\in\scrC}$. Indeed, for $A, B\in\sets{\pi}$ and $f: A\to B$, there is a commutative diagram 
+\begin{equation*}
+    \xymatrix {
+        F_1(A)\ar[r]^{F_1(g)}\ar[d]_{\varepsilon_A} & F_1(B)\ar[d]^{\varepsilon_B}\\
+        F_1(A)\ar[r]_{F_1(g)} & F_1(B)
+    }
+\end{equation*}
+Given $Y, Z\in\scrC$ and $f: Y\to X$, we can take $A = H(X)$, $B = H(Y)$, and $g = H(f)$ and substituting into the diagram above, taking into account that $F_1\circ H = F$, it yields 
+\begin{equation*}
+    \xymatrix {
+        F(Y)\ar[r]^{F(f)}\ar[d]_{\varepsilon_{H(Y)}} & F(Z)\ar[d]^{\varepsilon_{H(Z)}}\\
+        F(Y)\ar[r]_{F(f)} & F(Z)
+    }
+\end{equation*}
+Reciprocially, we shall show that every automorphism of $F$ will induce an automorphism of $F_1$. As $H$ is an equivalence of categories, we have that there exists a functor $G:\sets{\pi}\to\scrC$, and an isomorphism of functors $\theta: \id\Rightarrow HG$: 
+\begin{equation*}
+    \xymatrix {
+        A\ar[r]^g\ar[d]_{\theta_A} & B\ar[d]^{\theta_B}\\
+        HG(A)\ar[r]_{HG(g)} & HG(B)
+    }
+\end{equation*}
+Then let $\sigma\in\Aut(F)$, and take $Y = G(A)$, $Z = G(B)$, $f = G(g)$. We have commutative diagrams: 
+\begin{equation*}
+    \xymatrix {
+        F(Y)\ar[r]^{F(f)}\ar[d]_{\sigma_Y} & F(Z)\\
+        F(Y)\ar[r]_{F(f)} & F(Z)
+    }
+    \qquad
+    \xymatrix {
+        F_1HG(A)\ar[r]^{F_1HG(g)}\ar[d]_{\theta_{G(A)}} & F_1HG(B)\ar[d]^{\theta_{G(B)}}\\
+        F_1HG(A)\ar[r]_{F_1HG(g)} & F_1HG(B)
+    }
+\end{equation*}
+Then, we can define $\varphi(\sigma)\coloneq\left(\varphi(\sigma)_A\right)_{A\in\sets{\pi}} = \left(F_1(\theta_A^{-1})\sigma_{G(A)}F_1(\theta_A)\right)_A$. We contend that $\varphi(\sigma)$ is an automorphism of functors. Indeed, $F_1(g) = F_1(\theta^{-1}_B\circ HG(g)\circ\theta_A)$ by the diagram of the equivalence of categories. Then 
+\begin{equation*}
+    F_1(g)\circ\varphi(\sigma)_A = F_1\left(\theta_B^{-1}\circ HG(g)\circ\theta_A\right)F_1(\theta_A^{-1})\sigma_{G(A)}F_1(\theta_A) = F_1(\theta_B^{-1})\circ F_1(HG(g))\circ\sigma_{G(A)}\circ F_1(\theta_A),
+\end{equation*}
+and similarly, 
+\begin{equation*}
+    \varphi(\sigma)_BF_1(g) = F_1(\theta_B^{-1})\circ\sigma_{G(B)}\circ F_1(HG(g))\circ F_1(\theta_A).
+\end{equation*}
+Using that $\sigma$ is a natural transformation, we have that $\sigma_{G(B)}F_1HG(g) = F_1HG(g)\sigma_{G(A)}$, and so $F_1(g)\circ\varphi(\sigma)_A = \varphi(\sigma)_B\circ F_1(g)$ and hence $\varphi(\sigma)$ is a well-defined automorphism of the functor $F_1$.
+
+It remains to show that $\varphi\psi$ and $\psi\varphi$ are identities. Let $\sigma\in\Aut(F)$, then 
+\begin{equation*}
+    \psi\varphi(\sigma) = \left(\psi\varphi(\sigma)_X\right)_X = \left(F_1(\theta^{-1}_{H(X)})\sigma_{GH(X)}F_1(\theta_{H(X)})\right).
+\end{equation*}
+As $\sigma$ is a natural isomorphism, it commutes with the morphism $\theta_{H(X)}$, and hence $\sigma_{GH(X)}F_1(\theta_{H(X)}) = F_1(\theta_{H(X)})\sigma_X$, and therefore $\psi\varphi(\sigma)_X = \sigma_X$, i.e., $\psi\varphi(\sigma) = \id_{\Aut(F)}$. Similarly, one can show that $\varphi\psi = \id_{\Aut(F_1)}$. This completes the proof of (b).
+
+\item[(a)] Applying (b) to the profinite group $\pi = \varprojlim_{(A, a)\in J}\Aut_{\scrC}(A)$ and recall the functor $H'$ constructed earlier which we have shown is an equivalence of categories in \thref{thm:equivalence-of-categories} which when composed with the forgetful functor $F_1$ yields $F$. Then $\pi\cong\Aut(F)$ and via this isomorphism we can identify $H'$ and the previously defined $H:\scrC\to\sets{\Aut(F)}$. Therefore, $H$ is an equivalence of categories.
+
+\item[(c)] Let $F':\scrC\to\catSets$ be a second fundamental functor. Then we have $\varinjlim_J\scrC(A, -)\cong F$, $\varinjlim_{J'}\scrC(A, -)\cong F'$. Note that all the pairs $(A, a)\in J$ with the same $A$ are isomorphic so we can replace $J$ by $J_0\subseteq J$ with exactly one pair $(A, a)$ for each $A$ Galois; similarly, we replace $J'$ by $J_0'\subseteq J$ with exactly one pair $(A, a)$ for each $A$ Galois. Note here that the notion of Galois objects is independent of the fundamental functor. 
+
+Now given $(A, a), (B, b)\in J_0$ and $g: A\to B$ a morphism, there exists a unique $\beta\in\Aut_{\scrC}(B)$ such that $F(\beta)(F(g)(a)) = b$. Then $f \coloneq \beta g$ satisfies $F(f)(a) = b$, so $(A, a)\geqq_f (B, b)$ in $J_0$, and this happens if and only if $(A, a')\geqq_{f'} (B, b')$ in $J_0'$ but the morphisms $f, f': A\to B$ are not necessarily the same. 
+
+But it is true that for all $\alpha\in\Aut_{\scrC}(A)$, there exists a $\gamma\in\Aut_{\scrC}(B)$ making the following diagram commute: 
+\begin{equation*}
+    \xymatrix {
+        A\ar[r]^f\ar[d]_{\alpha} & B\ar[d]^\gamma\\
+        A\ar[r]_{f'} & B
+    }
+\end{equation*}
+Now mapping $\alpha\mapsto\gamma$ we obtain a system of morphisms between the finite non-empty groups $\Aut_{\scrC}(A)$ giving rise to a projective sstem. Thsi limit is non-empty. This implies that we can make a simultaneous choice $(\alpha_A)_{(A, a)\in J_0}$ such that all the diagrams commute. This induces an isomorphism 
+\begin{equation*}
+    \varinjlim_{J_0}\scrC(A, -)\cong\varinjlim_{J_0'}\scrC(A, -),
+\end{equation*}
+so that $F\cong F'$.
+
+\item[(d)] Let $H': \scrC\to\sets{\pi}$ be an equivalence, and $F'$ the composite of $H'$ with the forgetful functor. Then $\pi\cong\Aut(F')$ by (b) and $F'\cong F$ by (c). The isomorphism between the functors $F$ and $F'$ induces an isomorphism $\sigma:\Aut(F)\to\Aut(F')$ by letting $\varepsilon'\in\Aut(F')$ correspond to $\varepsilon\coloneq\sigma\varepsilon'\sigma^{-1}$. In conclusion, $\pi\cong\Aut(F)$ canonically, thereby completing the proof. \qedhere
+\end{enumerate}
 \end{proof}
 \end{document}
