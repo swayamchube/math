@@ -39,6 +39,7 @@
 % \usepackage{fontspec}
 \usepackage{tikz}
 \usetikzlibrary{cd}
+\usepackage{url}
 
 \renewcommand{\qedsymbol}{$\blacksquare$}
 \renewcommand{\familydefault}{\sfdefault}
@@ -290,6 +291,43 @@
 \begin{document}
 \maketitle
 
+\tableofcontents
+
+\section{Introduction}
+
+Let $k$ be a field and fix a separable closure $k_s$ of $k$ and let $G_k\coloneq\Gal(k_s/k)$. If $L$ is a finite separable extension of $k$, then there is a natural action of $G_k$ on $\Hom_k(L, k_s)$ given by 
+\begin{equation*}
+    G_k\times\Hom_k(k_s, L)\to \Hom_k(L, k_s)\qquad (g,\varphi)\mapsto g\circ\varphi.
+\end{equation*}
+It is straightforward to check that this is a continuous group action and $\Hom_k(L, k_s)$ is a transitive $G_k$-set. 
+\begin{definition}
+    A finite-dimensional $k$-algebra $A$ is said to be \define{\'etale} over $k$ if it is isomorphic to a finite direct product of separable extensions of $k$. 
+\end{definition}
+For an \'etale $k$-algebra $A$, there is a natural action 
+\begin{equation*}
+    G_k\times\Hom_k(A, k_s)\to\Hom_k(A, k_s)\qquad (g,\varphi)\mapsto g\circ\varphi.
+\end{equation*}
+
+\begin{theorem}[Fundamental Theorem of Galois Theory \`a la Grothendieck]
+    The functor mapping a finite \'etale $k$-algebra $A$ to the finite $G_k$-set $\Hom_k(A, k_s)$ gives an anti-equivalence between the category of finite \'etale $k$-algebras and finite (continuous) $G_k$-sets.
+\end{theorem}
+\begin{proof}
+    \cite[Theorem 1.5.4]{szamuely-galois}.
+\end{proof}
+
+Recall from basic algebraic topology that there is a similar ``Galois correspondence'' of covering spaces. Indeed, let $X$ be a path connected, locally path connected, and semi-locally simply connected topological space and choose a base point $x_0\in X$. 
+
+If $p: Y\to X$ is a finite-sheeted covering, then there is a natural action of $\pi_1(X, x_0)$ on the fibre $p^{-1}(x_0)$, known as the \emph{monodromy action}. Since the fibre is finite, this action factors through a finite quotient of $\pi_1(X, x_0)$, thereby inducing a natural action of $\wh{\pi_1(X, x_0)}$ on $p^{-1}(x_0)$.
+
+\begin{theorem}[Classification of Covering Spaces]
+    The above functor sending a path connected covering space $p: Y\to X$ to the finite $\wh{\pi_1(X, x_0)}$-set $p^{-1}(x_0)$ induces an equivalence of categories between the category of finite sheeted path connected covering spaces of $X$ and the category of finite (continuous) $\wh{\pi_1(X, x_0)}$-sets.
+\end{theorem}
+\begin{proof}
+    \cite[Corollary 2.3.9]{szamuely-galois}.
+\end{proof}
+
+Both the above results fit into the broad framework of ``Galois categories'' which this short essay attempts to explain. We shall mainly prove the fundamental theorem of Galois categories and be content with that. For further applications to the theory of schemes and the \'etale fundamental group, the reader is referred to \cite{lenstra-gschemes}.
+
 \section{Preliminaries on Profinite Groups}
 
 \begin{definition}
@@ -327,7 +365,6 @@
 \end{enumerate}
 \end{proof}
 
-\newpage
 \section{Galois Categories}
 
 \subsection{Statement of the Main Theorem}
@@ -591,7 +628,7 @@ If $(A, a)\geqq_f (B, b)$, then the morphism $f: A\to B$ induces a natural trans
         \varinjlim_{(A, a)\in I}\scrC(A, -)\longrightarrow F(-)\qquad f\longmapsto F(f)(a)
     \end{equation*}
 \end{theorem}
-\begin{proof} % TODO: May be add some more detail regarding the direct limit of set-valued functors
+\begin{proof} 
     Consider the maps $\phi_{(A, a)}: \scrC(A, X)\to F(X)$ given by $f\mapsto F(f)(a)$. If $(A, a)\geqq_\psi (B, b)$, then it is clear that the diagram 
     \begin{equation*}
         \xymatrix {
@@ -928,4 +965,7 @@ so that $F\cong F'$.
 \item[(d)] Let $H': \scrC\to\sets{\pi}$ be an equivalence, and $F'$ the composite of $H'$ with the forgetful functor. Then $\pi\cong\Aut(F')$ by (b) and $F'\cong F$ by (c). The isomorphism between the functors $F$ and $F'$ induces an isomorphism $\sigma:\Aut(F)\to\Aut(F')$ by letting $\varepsilon'\in\Aut(F')$ correspond to $\varepsilon\coloneq\sigma\varepsilon'\sigma^{-1}$. In conclusion, $\pi\cong\Aut(F)$ canonically, thereby completing the proof. \qedhere
 \end{enumerate}
 \end{proof}
+
+\bibliographystyle{alpha}
+\bibliography{references}
 \end{document}

@@ -1,0 +1,8 @@
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}%
+\contentsline {section}{\numberline {2}Preliminaries on Profinite Groups}{2}{section.2}%
+\contentsline {section}{\numberline {3}Galois Categories}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Statement of the Main Theorem}{2}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Subobjects and connected objects}{4}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Galois Objects}{8}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Construction of the Equivalence}{8}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Proof of the Main Theorem}{12}{subsection.3.5}%
