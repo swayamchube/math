@@ -1,0 +1,32 @@
+\setcounter{exercise}{27}
+
+\begin{exercise}
+    \textbf{\emph{Part 1.}} Let $f(X_1,\dots,X_n)$ be a homogeneous polynomial of degree $2$ over $k$, i.e., a quadratic form. Suppose $f$ is \emph{anisotropic} over $k$, i.e., the only non-trivial zero of $f$ over $k$ is the vector $(0,\dots,0)$. Let $K/k$ be an extension of odd degree. Using induction on the degree we shall show that $f$ is anisotropic when viewed as a quadratic form over $K$. In literature, this is a theorem attributed to Springer.
+
+    Throughout, we shall fix an algebraic closure $k^a$ of $k$ and consider all extensions to be embedded inside $k^a/k$. The base case $K = k$ is clear. Suppose now that $[K : k]\ge 3$ and that the hypothesis has been proven for all odd degrees less than $[K : k]$. If the extension $K/k$ admits a proper intermediate field, say $L$, then due to the inductive hypothesis, $f$ is anisotropic when viewed over $L$ and then again due to the inductive hypothesis, $f$ is anisotropic when viewed over $K$. Suppose henceforth that $K/k$ admits no proper intermediate fields. In particular, due to the Primitive Element Theorem, this means that the extension $K/k$ is simple, i.e., there exists $\alpha\in K$ such that $K = k(\alpha)$.
+
+    Let $d = [K : k]\ge 3$ and let $p(X)$ be the minimal polynomial of $\alpha$ over $k$. Suppose $f$ is not anisotropic over $K$, which means that there is a non-zero vector in $K^n$ on which $f$ vanishes. Thus, there exist polynomials $g_1,\dots,g_n\in k[T]$ such that $\deg g_i\le d - 1$ for $1\le i\le n$ and 
+    \begin{equation*}
+        f\left(g_1(\alpha),\dots,g_n(\alpha)\right) = 0.
+    \end{equation*}
+    Consider the polynomial 
+    \begin{equation*}
+        h(T) = f\left(g_1(T),\dots,g_n(T)\right).
+    \end{equation*}
+    Since $k[T]$ is a PID, we can further impose the condition that $\left(g_1(T),\dots,g_n(T)\right) = (1)$. Indeed, if their gcd is some polynomial $g(T)$, then $g(\alpha)\ne 0$, and hence, dividing all the $g_i$'s by $g(T)$, we obtain the desired tuple.
+
+    Let $M = \max\deg g_i\le d - 1$. The coefficient of $T^{2M}$ on the left hand side is $f(a_{1m},\dots,a_{nm})$ where $a_{im}$ is the coefficient of $T^m$ in $g_i(T)$. Since the vector $(a_{1m},\dots,a_{nm})$ is not identically zero, and $f$ is anisotropic over $k$, it is clear that $\deg h(T) = 2M\le 2d - 2$. 
+
+    Next, since $h(\alpha) = 0$, we can write $h(T) = p(T)q(T)$ for some polynomial $q(T)\in k[T]$. Note that $\deg q = 2M - d\le d - 2$ and is an odd number. As a result, $q$ has an irreducible factor $\wt q$ of odd degree, and let $\beta\in k^a$ be a root of $\wt q$. Due to the inductive hypothesis and the fact that $h(\beta) = 0$, we must have that $g_1(\beta) = \dots = g_n(\beta) = 0$, and hence, $\wt q$ divides $g_1,\dots, g_n$ in $k[T]$, which is absurd. Thus $f$ is anisotropic over $K$.
+
+    \textbf{\emph{Part 2.}} Let $f(X_1,\dots,X_n)$ be a homogeneous polynomial of degree $3$ over $k$ and $K/k$ a quadratic extension. Note that $K = k(\alpha)$ for any $\alpha\in K\setminus k$. Let $p(T)\in k[T]$ be the minimal polynomial of $\alpha$ over $k$. This is clearly a quadratic polynomial. Suppose $f$ were isotropic over $K$, then one can find linear polynomials $g_1,\dots, g_n\in k[T]$ such that 
+    \begin{equation*}
+        f(g_1(\alpha),\dots,g_n(\alpha)) = 0.
+    \end{equation*}
+    As in Part 1, since $k[T]$ is a PID, we can further impose the condition that $(g_1(T),\dots,g_n(T)) = (1)$. Let 
+    \begin{equation*}
+        h(T) = f(g_1(T),\dots,g_n(T))\in k[T].
+    \end{equation*}
+    Again, since $f$ is anisotropic over $k$, just as argued in Part 1, it follows that $h(T)$ is a cubic polynomial in $k[T]$. Note that $h(\alpha) = 0$, and thus $h(T) = A p(T)(T - \beta)$ for some $A,\beta\in k$. It follows that $h(\beta) = 0$, i.e., $g_i(\beta) = 0$ for all $1\le i\le n$. But this is absurd, since $T - \beta$ cannot divide all the $g_i$'s simultaneously. Thus $f$ is anisotropic over $K$, as desired.
+\end{exercise}
+

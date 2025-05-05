@@ -1,0 +1,91 @@
+\setcounter{exercise}{20}
+\begin{exercise}\thlabel{5.21}
+    
+\end{exercise}
+
+\setcounter{exercise}{22}
+
+\begin{exercise}
+\begin{enumerate}[label=(\alph*)]
+\item The standard way to do this is to first write 
+\begin{equation*}
+    G\cong\bigoplus_{i = 1}^r \Z/n_i\Z,
+\end{equation*}
+where $n_i\ge 2$. Using either Dirichlet's theorem on primes in AP or \thref{5.21}(b), choose primes $p_i\equiv 1\pmod{n_i}$. Set $\displaystyle N = \prod_{i = 1}^{r}p_i$ and note that 
+\begin{equation*}
+    \Gal\left(\Q\left(\zeta_N\right)/\Q\right)\cong\left(\Z/N\Z\right)^\times\cong\bigoplus_{i = 1}^r \Z/(p_i - 1)\Z.
+\end{equation*}
+Since $G$ is a quotient of the above group, it is clear that $G$ can be realized as a Galois group over $\Q$.
+
+\item Again, begin by writing 
+\begin{equation*}
+    G\cong\bigoplus_{i = 1}^r \Z/n_i\Z.
+\end{equation*}
+Using either Dirichlet's theorem on primes in AP or \thref{5.21}, for each positive integer $i\ge 1$, choose a tuple of primes $(p_{i1},\dots,p_{ir})$ such that $p_{ij}\equiv 1\pmod{n_j}$. Further, setting $N_i = \displaystyle\prod_{j = 1}^r p_{ij}$, we may further impose the condition that $\gcd(N_i, N_j) = 1$ whenever $i\ne j$. In particular, this means that $\Q(\zeta_{N_i})\cap\Q(\zeta_{N_j}) = \Q$. As in part (a), we can find a subfield $E_i\subseteq\Q(\zeta_{N_i})$ such that $\Gal(E_i/\Q)\cong G$.
+\begin{equation*}
+    \xymatrix {
+        & kE_i & \\
+        k\ar@{-}[ru] & & E_i\ar@{-}[lu]\\
+        & k\cap E_i\ar@{-}[lu]\ar@{-}[ru] & \\
+            & \Q\ar@{-}[u] & 
+    }
+\end{equation*}
+We know that $\Gal(kE_i/k)\cong\Gal(E_i/k\cap E_i)$ for all $i\ge 1$. We contend that $k\cap E_i = \Q$ for infinitely many $i\ge 1$. Indeed, since $k/\Q$ is separable, due to the Primitive Element Theorem, there are only finitely many intermediate fields in the extension $k/\Q$. Thus, there is an infinite subset $I\subseteq\N$ such that $k\cap E_i = k\cap E_j$ for all $i,j\in I$. Then, for $i,j\in I$, we have 
+\begin{equation*}
+    k\cap E_i = (k\cap E_i)\cap(k\cap E_i) = k\cap (E_i\cap E_j) = k\cap\Q = \Q.
+\end{equation*}
+Thus, $\Gal(kE_i/k)\cong\Gal(E_i/\Q)\cong G$.
+
+All that remains to be shown is that the set $\{kE_i\colon i\in I\}$ is infinite. Suppose not, then there is an extension $F/k$ and an infinite subset $J\subseteq I$ such that $kE_j = F$ for all $j\in J$. In particular, $E_j\subseteq F$ for all $j\in J$. Note that $F/\Q$ is a finite separable extension, and hence, due to the Primitive Element Theorem, has at most finitely many intermediate fields, but this is absurd, since $E_i\ne E_j$ for $i,j\in J$. Thus, the set $\{kE_i\colon i\in I\}$ is infinite, as desired.
+\end{enumerate}
+\end{exercise}
+
+
+\setcounter{exercise}{24}
+
+\begin{exercise}
+    First note that every finite extension of $k$ is Galois, and hence $k$ is perfect. Further, since any algebraic extension of $k$ is a union of finite subextensions (each of which is Galois), we have that every algebraic extension of $k$ is Galois so we can freely talk about its Galois group. Finally, we make note of the fact that $k$ can have at most one finite extension of a given degree in $k^a$. Indeed, if $E$ and $F$ are two finite extensions of $k$ in $k^a$ of the same degree, then $\Gal(EF/E)$ and $\Gal(EF/F)$ are subgroups of $\Gal(EF/k)$ of the same order. Since $\Gal(EF/k)$ is cyclic, it has at most one subgroup of a given order, and hence, $\Gal(EF/E) = \Gal(EF/F)$, i.e., $E = F$.
+    
+    Let 
+    \begin{equation*}
+        \Sigma \coloneq \left\{(E, \sigma_E)\colon k\subseteq E\subseteq k^a\text{ and }\sigma_E\in\Gal(E/k)\text{ such that } E^{\sigma_E} = k\right\}.
+    \end{equation*}
+    This is clearly a poset under the relation $(F,\sigma_F)\leqq(E,\sigma_E)$ if and only if $F\subseteq E$ and $\sigma_E|_F = \sigma_F$. Clearly, Zorn's lemma is applicable and let $(M,\sigma_M)$ be a maximal element in $\Sigma$. We contend that $M = k^a$. 
+
+    Suppose $M\subsetneq k^a$ and choose an element $\alpha\in k^a\setminus M$ of minimum degree over $M$. Since $M(\alpha)/k$ is Galois, we can extend $\sigma_M$ to an automorphism $\sigma_1\in\Gal(M(\alpha)/k)$. The maximality of $(M,\sigma_M)$ implies the existence of some $\beta\in M(\alpha)\setminus M$ which is fixed by $\sigma_1$. Note that the minimality of the degree of $\alpha$ over $M$ further implies that $M(\alpha) = M(\beta)$.
+
+    \begin{equation*}
+        \xymatrix {
+            & M(\alpha) = M(\beta)\ar@{-}[rd] & \\
+            M\ar@{-}[ru]\ar@{-}[rd] & & k(\beta)\\
+            & k\ar@{-}[ru] & 
+        }
+    \end{equation*}
+
+    We contend that $[M(\beta) : M] = [k(\beta) : k]$. Indeed, let $f(X) = \mathrm{Irr}(\beta, M, X)$ be the irreducible polynomial of $\beta$ over $M$. Since $\sigma_1$ fixes $\beta$, we see that $\beta$ is a root of $f^{\sigma_1}\in M[X]$. Again, since $\deg f = \deg f^{\sigma_1}$, it follows that $f = f^{\sigma_1}$. In particular, the coefficients of $f$ lie in the fixed field $M^{\sigma_1} = M^{\sigma_M} = k$. Thus, $f(X) = \mathrm{Irr}(\beta, k, X)$, so that $[k(\beta) : k] = [M(\beta) : M]$.
+
+    Now note that $f(X)$ is a separable polynomial and has degree at least $2$. Let $\beta'\ne\beta$ be another root of $f(X)$ in $k^a$ and extend the automorphism $\sigma_M$ to an automorphism $\sigma_2$ of $M(\beta)$ sending $\beta\mapsto\beta'$. Again, due to maximality, $\sigma_2$ must fix some $\gamma\in M(\beta)\setminus M$. Furthermore, as we argued above, we must have $M(\beta) = M(\gamma)$ and $[k(\gamma) : k] = [M(\gamma) : M] = [M(\beta) : M] = [k(\beta) : k]$. 
+
+    Note that we cannot have $k(\beta) = k(\gamma)$, else $\beta\in k(\gamma)$ would be fixed by $\sigma_2$, which is absurd, since $\sigma_2\beta = \beta'$. Thus, $k(\beta)$ and $k(\gamma)$ are distinct Galois extensions of $k$ having the same degree, a contradiction. In conclusion, $M = k^a$, and we have our desired automorphism in $\Gal(k^a/k)$.
+\end{exercise}
+
+\begin{exercise}
+    Let $\alpha\in\Q^a\setminus\Q$ be an algebraic irrational and $E$ a maximal subfield of $\Q^a$ not containing $\alpha$. We shall show that every finite extension of $E$ contained in $\Q^a$ is cyclic. Since every finite extension of $E$ is contained in a finite Galois extension, and quotients of cyclic groups are cyclic, it suffices to show that every finite Galois extension of $E$ is cyclic.
+
+    Let $K$ be a finite Galois extension of $E$ contained in $\Q^a$ and let $G =\Gal(K/E)$. If $F$ is an intermediate field properly containing $E$, then it must contain $\alpha$ due to maximality of $E$, i.e., $E(\alpha)\subseteq F$. Let $H = \Gal(K/E(\alpha))$. From the Galois correspondence, it is clear that $H$ is \emph{the} unique maximal subgroup of $G$. We shall be done by proving the following:
+
+    \begin{claim}
+        Let $G$ be a finite group. If $G$ admits a unique maximal subgroup $H$, then $G$ is cyclic.\footnote{We can further say that $G$ must be a $p$-group. This follows immediately from the fact that it has a \emph{unique} maximal subgroup.}
+    \end{claim}
+    To see this, let $a\in G\setminus H$. If $G\ne\langle a\rangle$, then $\langle a\rangle$ is contained in a maximal subgroup $M$ of $G$. But since $H$ is the unique maximal subgroup of $G$, we must have $M = H$, that is, $a\in H$, a contradiction. Thus $G = \langle a\rangle$, as desired. 
+\end{exercise}
+
+\begin{exercise}
+
+\end{exercise}
+
+\setcounter{exercise}{33}
+
+\begin{exercise}
+    Consider two automorphisms $\sigma\colon x\mapsto -x$ and $\tau\colon x\mapsto 1 - x$ of $K\coloneq\bbC(X)$ over $\bbC$. Let $E$ and $F$ denote the fixed fields of $\sigma$ and $\tau$ respectively. Since both $\sigma$ and $\tau$ are order $2$ automorphisms, we have that $[K : E] = [K : F] = 2$. Let $k = E\cap F$. Note that $k$ is invariant under the action of $\varphi = \tau\circ\sigma\colon x\mapsto 1 + x$. It is clear that $\varphi$ is an infinite order automorphism of $K$ and that $k$ is contained in the fixed field $K^{\varphi}$. Finally, since $K$ is finite degree over any intermediate field properly containing $\bbC$, it follows that the fixed field $K^\varphi = \bbC$. Hence, $k = \bbC$, so that $K$ is not algebraic over $k$.
+\end{exercise}
