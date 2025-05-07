@@ -1,0 +1,154 @@
+\subsection{The Fundamental Theorem}
+
+\subsection{Cyclotomic Extensions}
+
+\subsection{Norm and Trace}
+
+\subsection{Hilbert's Theorem \texorpdfstring{$90$}{90} and Applications}
+
+\begin{theorem}[Hilbert's Theorem $90$, Multiplicative Form]
+    Let $K/k$ be a cyclic Galois extension of degree $n$ with Galois group $G$. Let $\sigma$ be a generator of $G$ and $\beta\in K$. Then $N^K_k(\beta) = 1$ if and only if there exists an element $\alpha\ne 0$ in $K$ such that $\beta = \alpha/\sigma\alpha$.
+\end{theorem}
+
+\begin{proposition}\thlabel{prop:structure-of-cyclic-extensions}
+    Let $k$ be a field and $n$ be a positive integer prime to the characteristic of $k$, and assume that there is a primitive $n$-th root of unity in $k$. 
+    \begin{enumerate}[label=(\arabic*)]
+        \item Let $K/k$ be a cyclic extension of degree $n$. Then there exists an $\alpha\in K$ such that $K = k(\alpha)$, and $\alpha$ satisfies an equation $X^n - a = 0$ for some $a\in k$. 
+        \item Conversely, let $a\in k$ and let $\alpha$ be a root of $X^n - a$. Then $k(\alpha)/k$ is cyclic of degree $d\mid n$, and $\alpha^d\in k$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{theorem}[Hilbert's Theorem $90$, Additive Form]
+    Let $k$ be a field and $K/k$ a cyclic extension of degree $n$ with Galois group $G$. Let $\sigma$ be a generator of $G$ and $\beta\in K$. Then $\Tr^K_k(\beta) = 0$ if and only if there exists an element $\alpha\in K$ such that $\beta = \alpha - \sigma\alpha$.
+\end{theorem}
+
+\begin{theorem}[Artin-Schreier]\thlabel{thm:artin-schreier-extensions}
+    Let $k$ be a field of characteristic $p > 0$. 
+    \begin{enumerate}[label=(\arabic*)]
+        \item Let $K/k$ be a cyclic extension of degree $p$. Then there exists an $\alpha\in K$ such that $K = k(\alpha)$ and $\alpha$ satisfies an equation $X^p - X - a = 0$ for some $a\in k$. 
+        \item Conversely, given $a\in k$, the polynomial $f(X) = X^p - X - a$ either has one root in $k$, in which case, all its roots are in $k$, or it is irreducible. In the latter case, if $\alpha$ is a root, then $k(\alpha)/k$ is a cyclic extension of degree $p$.
+    \end{enumerate}
+\end{theorem}
+
+\subsection{The Artin-Schreier Theorem}
+
+\begin{definition}
+    A field $F$ is said to be \define{formally real} if $-1$ cannot be written as a sum of squares in $F$. It is said to be \define{real closed} if it is formally real and does not admit a proper formally real algebraic extension.
+\end{definition}
+
+\begin{remark}
+    First, note that any formally real field must be characteristic $0$, because we can write 
+    \begin{equation*}
+        -1 = \underbrace{1 + 1 + \cdots + 1}_{p - 1\text{ times}}
+    \end{equation*}
+    in a field of characteristic $p > 0$. 
+    
+    A standard argument using Zorn's lemma shows that every formally real field is contained in a real closed field which is algebraic over it. Further, it is an easy consequence of \cite[Chapter V, Exercise 28]{lang-algebra} that an odd degree extension of a formally real field is formally real.
+\end{remark}
+
+\begin{theorem}[Artin-Schreier]\thlabel{thm:artin-schreier-algebraically-closed}
+    Let $F\subseteq L$ be an extension of fields with $L$ algebraically closed and $1 < [L : F] < \infty$. Then 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $[L : F] = 2$ and $L = F[\iota]$ where $\iota\in L$ and $\iota^2 = -1$.\label{artin-schreier-first-part}
+        \item if $S$ denotes the set of non-zero squares in $F$, then $S$ is closed under addition. \label{artin-schreier-second-part}
+        \item $F = S\sqcup\{0\}\sqcup -S$, where $-S = \left\{-s\colon s\in S\right\}$. \label{artin-schreier-third-part}
+        \item $F$ is real closed. \label{artin-schreier-fourth-part}
+    \end{enumerate}
+\end{theorem}
+
+We shall deduce this theorem as a result of several lemmas. 
+
+\begin{lemma}
+    Suppose $\chr F = p > 0$ and $F$ is not perfect. Then there exist irreducible polynomials of degree $p^e$ in $F[X]$ for each integer $e\ge 0$.
+\end{lemma}
+\begin{proof}
+    Since $F$ is not perfect, there exists some $a\in F\setminus F^p$. We contend that $X^{p^e} - a$ is irreducible for each $e\ge 0$. This is clear for $e = 0$, so assume $e\ge 1$. Let $\alpha\in F^a$ denote the unique root of $X^{p^e} - a$. If $f(X)\in F[X]$ denotes the irreducible polynomial of $\alpha$ over $F$, then $X^{p^e} - a = f(X)^m$ for some positive integer $m$. Comparing degrees, it is clear that $m$ is a prime power. If $m > 1$, then $p\mid m$, whence looking at constant terms, $a\in F^p$, a contradiction.
+\end{proof}
+
+In particular, this shows that under the hypothesis of \thref{thm:artin-schreier-algebraically-closed}, $F$ must be perfect.
+
+\begin{lemma}\thlabel{lem:if-hypothesis-fails}
+    Under the hypothesis of \thref{thm:artin-schreier-algebraically-closed}. Then either $[L : F] = 2$ and $L = F[\iota]$ where $\iota^2 = -1$, or there exists an intermediate field $F\subseteq K\subseteq L$ such that 
+    \begin{enumerate}[label=(\roman*)]
+        \item $L/K$ is Galois, 
+        \item $[L : K] = p$ a prime, and 
+        \item $-1$ is a square in $K$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    As we remarked, $F$ must be perfect. Hence, $L/F$ is Galois. Let $\iota\in L$ be a root of $X^2 + 1\in L[X]$. If $F[\iota] = L$, then we are done. Else suppose $F\subseteq F[\iota]\subsetneq L$. Let $G = \Gal(L/F[\iota])$. Since $G$ is a non-trivial finite group, it is possible to choose a subgroup of $G$ having prime order, say $\Gal(L/K)$. This completes the proof.
+\end{proof}
+
+
+\begin{lemma}\thlabel{lem:K-contains-primitive-root}
+    Let $K\subseteq L$ be a field extension with $L$ algebraically closed, and $[L : K] = p$ a prime. If $\chr K\ne p$, then $K$ contains a primitive $p$-th root of unity.
+\end{lemma}
+\begin{proof}
+    Since $\chr K\ne p$, the polynomial $X^p - 1\in K[X]$ is separable. Choose a root $1\ne\zeta\in L$. Clearly $\zeta$ is a primitive $p$-th root of unity in $L$. Then $[K(\zeta) : K]\le p - 1$. Since $L/K$ admits no proper intermediate fields, we must have $K(\zeta) = K$, i.e., $\zeta\in K$.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:can-extend-extension}
+    Let $K\subseteq E$ be a Galois extension of degree $p$ a prime and $K$ contains a primitive $p$-th root of unity. If $p = 2$, assume further that $-1$ is a square in $K$. Then there exists an $\alpha\in E$ such that the polynomial $X^p - \alpha\in E[X]$ is irreducible. In particular, $E$ is not algebraically closed.
+\end{theorem}
+\begin{proof}
+    Due to \thref{prop:structure-of-cyclic-extensions}, there exists an $\alpha\in E$ such that $E = K(\alpha)$ where $\alpha^p = a\in K$. We shall show that $X^p - \alpha\in E[X]$ is irreducible. Let $\zeta\in K$ be a primitive $p$-th root of unity. If $\beta\in E^a$ is a root of $X^p - \alpha$, then due to \thref{prop:structure-of-cyclic-extensions}, $E(\beta)/E$ is cyclic of degree $d\mid p$ and hence $d\in\{1, p\}$. If $[E(\beta) : E] = p$, then we are done. Suppose now that $E(\beta) = E$, i.e., $\beta\in E$. We shall derive a contradiction. 
+
+    Let $\Gal(E/K) = \langle\sigma\rangle$. Note that $\beta^{p^2} = \alpha^p = a \in K$, so that $\sigma(\beta)^{p^2} = a = \beta^{p^2}$. Set $\delta = \sigma(\beta)/\beta$. Then $\delta^{p^2} = 1$, so that $\delta^p$ is a $p$-th root of unity. Set $\varepsilon = \sigma(\delta)/\delta$. Then $\varepsilon^p = \sigma(\delta^p)/\delta^p = 1$, since the $p$-th roots of unity are contained in the base field $K$. Thus $\varepsilon$ is a $p$-th root of unity, in particular, $\varepsilon\in K$.
+
+    It is easy to show using induction on $i\ge 1$ that 
+    \begin{equation*}
+        \sigma^i(\beta) = \beta\delta^i\varepsilon^{\frac{i(i - 1)}{2}}.
+    \end{equation*}
+    Hence 
+    \begin{equation*}
+        \beta = \sigma^p(\beta) = \beta\delta^p\varepsilon^{\frac{p(p - 1)}{2}}.
+    \end{equation*}
+    Thus 
+    \begin{equation*}
+        \delta^p\varepsilon^{\frac{p(p - 1)}{2}} = 1.
+    \end{equation*}
+    Now, if $p$ is odd, then $\varepsilon^{\frac{p(p - 1)}{2}} = 1$, therefore $\delta^p = 1$, i.e., $\delta$ is a $p$-th root of unity. So 
+    \begin{equation*}
+        \sigma(\alpha) = \sigma(\beta^p) = \sigma(\beta)^p = \delta^p\beta^p = \alpha\implies\alpha\in K, 
+    \end{equation*}
+    a contradiction.
+
+    Next, if $p = 2$, then $\delta^2\varepsilon = 1$ so $\delta^4 = \varepsilon^{-2} = 1$, and hence $\delta^2 = \pm 1$. And since $-1$ is a square in $K$, we have that $\delta\in K$. Consequently, $\varepsilon = \sigma(\delta)/\delta = 1$. It follows that $1 = \delta^2\varepsilon = \delta^2$. Thus 
+    \begin{equation*}
+        \sigma(\alpha) = \sigma(\beta^2) = \sigma(\beta)^2 = \delta^2\beta^2 = \alpha\implies\alpha\in K,
+    \end{equation*}
+    a contradiction again. This completes the proof.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:very-artin-schreier-esque}
+    Let $K\subseteq E$ be a Galois extension of prime degree $p$ where $\chr K = p > 0$. Then there exists an $\alpha\in E$ such that $X^p - X - \alpha\in E[X]$ is irreducible. In particular, $E$ is not algebraically closed.
+\end{theorem}
+\begin{proof}
+    Due to \thref{thm:artin-schreier-extensions}, thre exists some $\beta\in E$ such that $E = K(\beta)$ and the minimal polynomial of $\beta$ over $K$ is of the form $X^p - X - b$ for some $b\in K$. Set $\alpha = \beta^{p - 1}b$. We shall show that the polynomial $X^p - X - \alpha\in E[X]$ is irreducible. To this end, due to \thref{thm:artin-schreier-extensions}, it suffices to show that this polynomial has no roots in $E$. 
+
+    Suppose $\gamma\in E$ is a root. Then $\gamma = g(\beta)$ for some $g(X)\in K[X]$ with $\deg g \le p - 1$. Let $h(X)\in K[X]$ be such that $g(X)^p = h(X^p)$. Then 
+    \begin{equation*}
+        \alpha = b\beta^{p - 1} = \gamma^p - \gamma = h(\beta^p) - g(\beta) = h(\beta + b) - g(\beta).
+    \end{equation*}
+    Since $1,\beta,\dots,\beta^{p - 1}$ are linearly independent over $K$< we can equate the coefficients on both sides. Let $a$ be the coefficient of $X^{p - 1}$ in $g(X)$, then $a^p$ is the coefficient of $X^{p - 1}$ in $h(X)$. Thus $a^p - a = b$, which is absurd, since $X^p - X - b$ is irreducible. This completes the proof.
+\end{proof}
+
+\begin{proof}[Proof of \thref{thm:artin-schreier-algebraically-closed}]
+\begin{enumerate}[label=(\arabic*)]
+    \item If the conclusion fails, then due to \thref{lem:if-hypothesis-fails} there is a prime $p > 0$ and a subfield $F\subseteq K\subseteq L$ such that $L/K$ is Galois of degree $p$ and $-1$ is a square in $K$. Due to \thref{thm:very-artin-schreier-esque}, $\chr F\ne p$. Hence, by \thref{lem:K-contains-primitive-root}, $K$ contains a primitive $p$-th root of unity. Finally, in this case, due to \thref{thm:can-extend-extension} $L$ is not algebraically closed, a contradiction. Thus $[L : F] = 2$ and $L = F[\iota]$ where $\iota^2 = -1$.
+    \item Then $\Gal(L/F) = \{1,\tau\}$, where $\tau(\iota) = -\iota$. Let $r,s\in F$ be non-zero. Note that $r^2 + s^2 = 0$ would imply $(r/s)^2 = -1$, which is not possible. Thus, it suffices to show that $r^2 + s^2$ is a square in $F$. Indeed, $r + \iota s\in L$ and hence, $r + \iota s = (a + \iota b)^2$ for some $a,b\in F$. Applying $\tau$, we get that $r - \iota s = (a - \iota b)^2$. Multiplying these two, we get 
+    \begin{equation*}
+        r^2 + s^2 = (r + \iota s)(r - \iota s) = (a^2 + b^2)^2.
+    \end{equation*}
+    Thus, a sum of squares in $F$ is a square. 
+    \item By definition, $0\notin S$. If $S\cap -S$ were non-empty, then $-r^2 = s^2\ne 0$ for some non-zero elements $r,s\in F$. But then again, this would mean $(s/r)^2 = -1$ in $F$, a contradiction. Thus, the sets $S, \{0\}, -S$ are pairwise disjoint. Let $0\ne r\in F$. Since $r$ is a square in $L$, we can write 
+    \begin{equation*}
+        r = (a +\iota b)^2 = (a^2 - b^2) + 2ab\iota.
+    \end{equation*}
+    Thus $2ab = 0$, whence $a = 0$ or $b = 0$\footnote{We are implicitly using the fact that $\chr F\ne 2$, for if $\chr F = 2$, then $X^2 + 1$ would have the unique solution $X = 1$.}, in either case, $r\in S$ or $r\in -S$, which shows that $F = S\sqcup\{0\}\sqcup -S$.
+    \item From (2) and (3) it is clear that $F$ is formally real. Any proper algebraic extension of $F$ in $L$ must be $L$, which is not formally real, therefore, $F$ is real closed.\qedhere
+\end{enumerate}
+\end{proof}
+
+\subsection{Cyclic Kummer Theory}
+\subsection{Abelian Kummer Theory}
