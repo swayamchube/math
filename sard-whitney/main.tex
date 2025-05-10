@@ -1,0 +1,545 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{lmodern}
+% \usepackage{mathpazo}
+\usepackage{fouriernc}
+% \usepackage{euler}
+% \usepackage{sansmath}
+% \usepackage{sfmath}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd-Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+% \renewcommand{\familydefault}{\sfdefault} % Do you want this font? 
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+	citecolor=blue
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{interlude}[theorem]{Interlude}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrM}{\mathscr{M}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrO}{\mathscr{O}} % sheaf
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+% \newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\Ass}{\operatorname{Ass}}
+\newcommand{\projdim}{\operatorname{proj~dim}}
+\newcommand{\injdim}{\operatorname{inj~dim}}
+\newcommand{\gldim}{\operatorname{gl~dim}}
+\newcommand{\embdim}{\operatorname{emb~dim}}
+\newcommand{\hght}{\operatorname{ht}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\CM}{\operatorname{CM}}
+\newcommand{\Irr}{\operatorname{Irr}}
+\newcommand{\scrC}{\mathscr{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\FV}{\operatorname{FV}}
+\newcommand{\Th}{\operatorname{Th}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\sffamily}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+\begin{document}
+\title{The Theorems of Sard and Whitney}
+\author{Swayam Chube}
+\date{Last Updated: \today}
+\maketitle
+\tableofcontents
+
+\section{Sard's Theorem}
+
+We begin by proving Sard's theorem for smooth functions between Euclidean spaces. As is customary in differential topology, it will be quite easy to port these results to smooth maps between arbitrary differentiable manifolds. The following is taken from \cite{milnor-differentiable}.
+
+\begin{theorem}\thlabel{local-sard}
+    Let $F\colon U(\subseteq\R^n)\to\R^p$ be a smooth map, with $U$ open in $\R^n$. Let $C\subseteq U$ be the set of critical points of $F$. Then $F(C)\subseteq\R^p$ has measure zero.
+\end{theorem}
+\begin{proof}
+    The proof will be by induction on $n\ge 0$. The base case with $n = 0$ and $p\ge 1$ is trivial. Define 
+    \begin{equation*}
+        C_i\coloneq\left\{x\in U\colon\text{all partial derivatives of order $\le i$ vanish at $x$}\right\}\subseteq C.
+    \end{equation*}
+    This gives us a descending chain of closed subsets of $U$: 
+    \begin{equation*}
+        C\supseteq C_1\supseteq C_2\supseteq C_3\supseteq\cdots.
+    \end{equation*}
+    We shall prove the theorem in three steps. 
+
+    \noindent{\scshape\bfseries Step 1.} \emph{The image $F(C\setminus C_1)$ has measure zero.}
+
+	We may assume that $p\ge 2$, since $C = C_1$ when $p = 1$. For each $x\in C\setminus C_1$, we will find an open neighborhood $V\subseteq U$ so tht $F(V\cap C)$ has measure zero. Since $C\setminus C_1$ is covered by countably many of these neighborhoods, this will prove that $F(C\setminus C_1)$ has measure zero.
+
+	Since $x\notin C_1$, there is some partial derivative which is not zero at $x$. We may suppose without loss of generality that $\partial F_1/\partial x_1$ is non-zero at $x$. Consider the map $h\colon U\to\R^n$ defined by 
+	\begin{equation*}
+		h(y) = \left(F_1(y), y_2,\dots, y_n\right).
+	\end{equation*}
+	The Jacobian matrix of the above function at $x$ is clearly non-singular, and hence, $h$ maps some neighborhood $V$ of $x$ contained in $U$ diffeomorphically onto an open set $V'$. The composition $G = F\circ h^{-1}\colon V'\to\R^p$ will then map $V'$ into $\R^p$. Note that the set $C'$ of critical points of $G$ is precisely $h(V\cap C)$, and hence, the set $G(C')$ of critical values of $G$ is equal to $F(V\cap C)$.
+
+	For each $(t, y_2,\dots, y_n)\in V'$, note that $G(t, y_2,\dots, y_n)$ belongs to the hyperplane $\{t\}\times\R^{p - 1}\subseteq\R^p$: thus $G$ carries hyperplanes into hyperplanes. Let 
+	\begin{equation*}
+		G^t\colon \left(\{t\}\times\R^{p - 1}\right)\cap V'\to\{t\}\times\R^{p - 1}
+	\end{equation*}
+	denote the restriction of $G$. Note that a point of $\{t\}\times\R^{n - 1}$ is critical for $G^t$ if and only if it is critical for $G$, since the Jacobian matrix of $G$ has the form 
+	\begin{equation*}
+		\left(\frac{\partial G_i}{\partial x_j}\right) = 
+		\begin{pmatrix}
+			1 & 0\\
+			\ast & \left(\frac{\partial G_i^t}{\partial x_j}\right)
+		\end{pmatrix}.
+	\end{equation*}
+	According to the induction hypothesis, the set of critical values of $G^t$ has measure zero in $\{t\}\times\R^{p - 1}$. Therefore the set of critical values of $G$ intersects each hyperplane $\{t\}\times\R^{p - 1}$ in a set of measure zero. Hence, by Fubini's theorem, the set $G(C') = F(V\cap C)$ has measure zero in $\R^p$, thereby completing the proof of this step.
+
+	\noindent{\scshape\bfseries Step 2.} \emph{The image $F(C_i\setminus C_{i + 1})$ has measure zero for $i\ge 1$.}
+
+	For each $x\in C_k\setminus C_{k + 1}$, there is some $(k + 1)$-st derivative 
+	\begin{equation*}
+		\frac{\partial^{k + 1} F_r}{\partial x_{s_1}\cdots\partial x_{s_{k + 1}}}
+	\end{equation*}
+	which is non-zero at $x$. Thus the function 
+	\begin{equation*}
+		w = \frac{\partial^k F_r}{\partial x_{s_2}\cdots\partial s_{k + 1}}
+	\end{equation*}
+	vanishes at $x$ but $\partial w/\partial x_{s_1}$ does not. Suppose, without loss of generality that $s_1 = 1$. Then the map $h\colon U\to\R^n$ defined by 
+	\begin{equation*}
+		h(y) = \left(w(y), y_2,\dots,y_n\right)
+	\end{equation*}
+	has non-singular Jacobian matrix at $y = x$ and thus carries some neighborhood $V$ of $x$ contained in $U$ diffeomorphically onto an open set $V'$ of $\R^n$. Note that $h$ carries $C_k\cap V$ into the hyperplane $\{0\}\times\R^{n - 1}$. Set 
+	\begin{equation*}
+		G = F\circ h^{-1}\colon V'\to\R^p
+	\end{equation*}
+	and let 
+	\begin{equation*}
+		\overline G\colon\left(\{0\}\times\R^{n - 1}\right)\cap V'\to\R^p
+	\end{equation*}
+	denote the restriction of $G$. By  induction, the set of critical values o $\overline G$ has measure zero in $\R^p$. But each point in $h(C_k\cap V)$ is clearly a critical point of $\overline G$, since all derivatives of order $\le k$ vanish. Therefore 
+	\begin{equation*}
+		\overline G\circ h\left(C_k\cap V\right) = F(C_k\cap V)
+	\end{equation*}
+	has measure zero in $\R^p$. Since $C_k\setminus C_{k + 1}$ is covered by countably many such sets $V$, it follows that $F(C_k\setminus C_{k + 1})$ has measure zero in $\R^p$.
+
+	\noindent{\scshape\bfseries Step 3.} \emph{The image $F(C_k)$ has measure zero for $k\gg 0$.}
+
+	Let $I^n\subseteq U$ be a cube with edge $\delta$. If $k$ is sufficiently large, we shall show that $F(C_k\cap I^n)$ has measure zero. Since $C_k$ can be covered by countably many such cubes, this will prove that $F(C_k)$ has measure zero.
+
+	Using Taylor's theorem, the compactness of $I^n$, and the definition of $C_k$, we see that 
+	\begin{equation}
+		F(x + h) = F(x) + R(x, h),\label{taylor}
+	\end{equation}
+	where 
+	\begin{equation*}
+		\|R(x, h)\|\le c\|h\|^{k + 1}
+	\end{equation*}
+	for $x\in C_k\cap I^n$ and $x+h\in I^n$, where $c$ is a constant which depends only on $F$ and the cube $I^n$. For a positive integer $r > 0$, subdivide $I^n$ into $r^n$ cubes of edge length $\delta/r$. Let $I_1$ be a cube of the subdivision which contains a point $x$ of $C_k$. Then any point of $I_1$ can be written as $x + h$ with $\|h\|\le\sqrt{n}\left(\delta/r\right)$. Hence, from \eqref{taylor}, it follows that $F(I_1)$ is contained in a cube of edge length $a/r^{k + 1}$ centered about $F(x)$, where $a = 2c\left(\sqrt n\delta\right)^{k + 1}$ is a constant. Hence $F(C_k\cap I^n)$ is contained in a union of at most $r^n$ cubes having total volume 
+	\begin{equation*}
+		{\rm Volume }\le r^n\left(\frac{a}{r^{k + 1}}\right)^p = a^p r^{n - (k + 1)p}.
+	\end{equation*}
+	For sufficiently large $k$, it is clear that the above volume tends to zero as $r\to\infty$, so $F(C_k\cap I^n)$ must have measure zero, thereby completing the proof of the theorem.
+\end{proof}
+
+Next, we define the notion of ``measure zero'' on an arbitrary manifold.
+
+\begin{definition}
+	A subset $A$ of a smooth $n$-manifold is said to have \define{measure zero} if for every smooth chart $(U,\varphi)$ of $M$, the set $\varphi(A\cap U)$ has measure zero in $\R^n$.
+\end{definition}
+
+\begin{lemma}\thlabel{smooth-image-of-measure-zero}
+	Let $A\subseteq\R^n$ have measure zero and $F\colon A\to\R^n$ be a smooth map. Then $F(A)\subseteq\R^n$ has measure zero.
+\end{lemma}
+\begin{proof}
+	By definition, for each point $p\in A$, there is a neighborhood $U$ of $p$ on which $F$ extends to a smooth function. Choose a compact ball $\overline B$ contained in $U$. Note that $A$ can be covered by countably many such balls, and as such, it suffices to show that $F(A\cap\overline B)$ has measure zero in $\R^n$.
+
+	Since $\overline B$ is compact, the (Frobenius) norm of the Jacobian matrix 
+	\begin{equation*}
+		DF = 
+		\begin{pmatrix}
+			\frac{\partial F_1}{\partial x_1} & \cdots & \frac{\partial F_1}{\partial x_n}\\
+			\vdots & \ddots & \vdots\\
+			\frac{\partial F_n}{\partial x_1} & \cdots & \frac{\partial F_n}{\partial x_n}
+		\end{pmatrix}
+	\end{equation*}
+	is bounded by some constant $C > 0$. Then, for $x, y\in\overline B$, we have, using the mean value theorem that 
+	\begin{align*}
+		\|F(y) - F(x)\| &= \left\|\int_{0}^1\frac{d}{dt}F(ty + (1 - t)x)~dt\right\|\\
+		&\le\int_0^1\|DF\left(ty + (1 - t)x\right)\|\|y - x\|~dt\\
+		&\le C\|y - x\|.
+	\end{align*}
+	Now, given $\delta > 0$, we can choose a countable cover $\{B_j\}$ of $A\cap\overline B$ by open balls satisfying 
+	\begin{equation*}
+		\sum_{j}\mu\left(B_j\right) < \delta,
+	\end{equation*}
+	where $\mu$ denotes the standard Lebesgue measure on $\R^n$. Then due to our computations above, $F(\overline{B}\cap B_j)$ is contained in a ball $\wt B_j$ whose diameter is no more than $C$ times that of $B_j$. In particular, this means that 
+	\begin{equation*}
+		\sum_{j}\mu\left(\wt B_j\right) < C^n\delta.
+	\end{equation*}
+	Since this quantity can be made as small as desired, it follows that $F(A\cap\overline B)$ has measure zero in $\R^n$, thereby completing the proof.
+\end{proof}
+
+\begin{lemma}
+	Suppose $A$ is a subset of a smooth $n$-manifold $M$, and for some collection $\{(U_\alpha, \varphi_\alpha)\}$ of smooth charts whose domains cover $A$, $\varphi_\alpha(A\cap U_\alpha)$ has measure zero in $\R^n$ for each $\alpha$. Then $A$ has measure zero in $M$.
+\end{lemma}
+\begin{proof}
+	Let $(V,\psi)$ be an arbitrary smooth chart. We would like to show that $\psi(A\cap V)$ has measure zero in $\R^n$. Since the manifold is second countable, there is a countable subset $\{U_\beta\}$ of $\{U_\alpha\}$ which covers $V$. Note that 
+	\begin{equation*}
+		\psi(A\cap V) = \bigcup_\beta (\psi\circ\varphi_\beta^{-1})\left[\varphi_\beta\left(A\cap V\cap U_\beta\right)\right],
+	\end{equation*}
+	which is clearly measure zero due to \thref{smooth-image-of-measure-zero}
+\end{proof}
+
+\begin{theorem}[Sard]
+	Let $F\colon M\to N$ be a smooth map between manifolds. Then the set of critical values of $F$ in $N$ has measure zero.
+\end{theorem}
+\begin{proof}
+	Follows immediately from \thref{local-sard} and the discussion above.
+\end{proof}
+
+\begin{corollary}\thlabel{brown-corollary-to-sard}
+	Let $m < n$, $M$ a smooth $m$-manifold and $N$ a smooth $n$-manifold. If $F\colon M\to N$ is a smooth map, then the image of $F$ is of measure zero in $N$.
+\end{corollary}
+\begin{proof}
+	The image of $F$ is precisely the set of critical values in $N$. 
+\end{proof}
+
+\section{Whitney's Theorems}
+
+\subsection{The Immersion and Embedding Theorems}
+
+\begin{theorem}\thlabel{perturbing-to-get-immersions}
+	Let $F\colon M\to\R^m$ be any smooth map, where $M$ is a smooth $n$-manifold, and $m\ge 2n$. For any $\varepsilon > 0$, there is a smooth immersion $\wt F\colon M\to\R^m$ such that 
+	\begin{equation*}
+		\sup_{M}|\wt F - F|\le\varepsilon.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	Let $\{W_i\}$ be a regular\footnote{
+		An open cover $\{W_i\}$ of $M$ is said to be \define{regular} if it satisfies the following properties: 
+		\begin{itemize}
+			\item The cover $\{W_i\}$ is countable and locally finite;
+			\item Each $W_i$ is the domain of a smooth coordinate map $\varphi_i\colon W_i\to B_3(0)\subseteq\R^n$;
+			\item The collection $\{U_i\}$ still covers $M$, where $U_i = \varphi^{-1}\left(B_1(0)\right)$.
+		\end{itemize}
+	} open cover of $M$, which exists due to \cite[Proposition 2.24]{lee-smooth-manifolds}. Then each $W_i$ is the domain of a smooth chart $\psi_i\colon W_i\to B_3(0)$ and the precompact sets $U_i = \psi_i^{-1}\left(B_1(0)\right)$ still cover $M$. For each integer $k\ge 1$, set $M_k = \bigcup_{i = 1}^k U_i$ which is an open submanifold of $M$. We interpret $M_0$ to be the empty set. We shall modify $F$ inductively on one set $W_i$ at a time.
+
+	For each $i\ge 1$, let $\varphi_i\in C^\infty(M)$ be a smooth bump function supported in $W_i$ tht is equal to $1$ on $\overline U_i$. Let $F_0 = F$, and suppose by induction we have defined smooth maps $F_j\colon M\to\R^m$ for $0\le j\le k - 1$ satisfying 
+	\begin{enumerate}[label=(\roman*)]
+		\item $\displaystyle\sup_{M}|F_j - F|\le\varepsilon$; \label{closeness}
+		\item If $j\ge 1$, $F_j(x) = F_{j - 1}(x)$ for all $x\in M\setminus W_j$; \label{second-condition}
+		\item The differential $(F_j)_\ast$ is injective at each point of $\overline M_j$. \label{third-condition}
+	\end{enumerate}
+
+	For any $m\times n$ matrix $A$, define a new map $F_A\colon M\to\R^m$ as follows: On $M\setminus\Supp\varphi_k$, $F_A = F_{k - 1}$, and on $W_k$, $F_A$ is the map given in coordinates (through the chart $\psi_k$) by 
+	\begin{equation*}
+		F_A(x) = F_{k - 1}(x) + \varphi_k(x) Ax,
+	\end{equation*}
+	i.e., for $\xi\in W_k$, set $x = \psi_k(\xi)$ in the above equation. Since both definitions agree on the set $W_k\setminus\Supp\varphi_k$, the map $F_A$ is smooth.
+
+	Because \ref{closeness} holds for $j = k - 1$, there is a constant $\varepsilon_0 < \varepsilon$ such that $|F_{k - 1}(x) - F(x)|\le\varepsilon_0$ on the compact set $\Supp\varphi_k$. By continuity, there is some $\delta > 0$ such that 
+	\begin{equation*}
+		\sup_M|F_A - F_{k - 1}| = \sup_{x\in\Supp\varphi_k}\left|\varphi_k(x)Ax\right| < \varepsilon - \varepsilon_0,
+	\end{equation*}
+	and therefore, 
+	\begin{equation*}
+		\sup_M|F_A - F|\le\sup_M |F_A - F_{k - 1}| + \sup_{M} |F_{k - 1} - F| < \varepsilon.
+	\end{equation*}
+	Let $P\colon W_k\times\mathbb{M}(m\times n, \R)\to\mathbb M(m\times n, \R)$ be the matrix-valued function 
+	\begin{equation*}
+		P(x, A) = DF_A(x).
+	\end{equation*}
+	According to the inductive hypothesis, the matrix $P(x, A)$ has rank $n$ when $(x, A)$ is in the compact set $\left(\Supp\varphi_k\cap\overline M_{k - 1}\right)\times\{0\}$. Again, by choosing $\delta$ even smaller if necessary, we may also ensure that $\rank P(x, A) = n$ whenever $x\in\Supp\varphi_k\cap M_{k - 1}$ and $|A| < \delta$\footnote{This follows from a ``tube lemma'' type argument.}.
+
+	Finally, we need to ensure that $\rank(F_A)_\ast = n$ on $\overline U_k$ and therefore on $\overline M_k = \overline{M}_{k - 1}\cup\overline U_k$. Note that 
+	\begin{equation*}
+		DF_A(x) = DF_{k - 1}(x) + A
+	\end{equation*}
+	for $x\in\overline U_k$ because $\varphi_k\equiv 1$ on that set. Hence, $DF_A(x)$ has rank $n$ in $\overline U_k$ if and only if $A$ is not of the form $B - DF_{k - 1}(x)$ or any $x\in\overline U_k$ and any matrix $B\in\mathbb M(m\times n, \R)$ of rank less than $n$. 
+
+	To this end, let $Q\colon W_k\times\mathbb M(m\times n,\R)\to\mathbb M(m\times n, \R)$ be the smooth map 
+	\begin{equation*}
+		Q(x, B) = B - DF_{k - 1}(x).
+	\end{equation*}
+	We need to show that there is some matrix $A$ with $|A| < \delta$ that is not of the form $Q(x, B)$ for any $x\in\overline U_k$ and any matrix $B\in\mathbb M(m\times n, \R)$ of rank less than $n$.
+
+	For $0\le j\le n - 1$, the set $\mathbb M_j(m\times n, \R)$ of $m\times n$ matrices of rank $j$ is an embedded submanifold of $\mathbb M(m\times n, \R)$ of codimension $(m - j)(n - j)$\footnote{See \cite[Example 8.14]{lee-smooth-manifolds}.}. Due to \thref{brown-corollary-to-sard}, the image under $Q$ of $W_k\times\mathbb M_j(m\times n, \R)$ has measure zero provided that the dimension of $W_k\times\mathbb M_j(m\times n, \R)$ is strictly less than that of $\mathbb M(m\times n, \R)$, i.e., 
+	\begin{equation*}
+		n + mn - (m - j)(n - j) < mn\iff n < (m - j)(n - j).
+	\end{equation*}
+	For $j < n$, note that $(m - j) > n$ and $n - j\ge 1$, therefore, $n < (m - j)(n - j)$. Thus, the image of each $W_k\times\mathbb M_j(m\times n, \R)$ under $Q$ has measure zero in $\mathbb M(m\times n, \R)$. Thus, choosing $A\in\mathbb M(m\times n, \R)$ with $|A| < \delta$ and not in the union of those image sets, and setting $F_k = F_A$, we obtain a map satisfying \ref{closeness}, \ref{second-condition}, and \ref{third-condition} for $j = k$.
+
+	Now let 
+	\begin{equation*}
+		\wt F(x) = \lim_{k\to\infty} F_k(x).
+	\end{equation*}
+	Note that due to the local finiteness of the cover $\{W_i\}$, for each $k$, the sequence $\{\wt F_k(x)\}$ is locally constant and equal to some $F_N$ in a neighborhood of each point. In particular, the limit $\wt F$ clearly exists and is smooth because it agrees locally with smooth functions. Furthermore, due to \ref{third-condition}, $\wt F$ is an immersion.
+\end{proof}
+
+\begin{corollary}[Whitney Immersion Theorem]
+	Every smooth $n$-manifold admits an immersion into $\R^{2n}$.
+\end{corollary}
+\begin{proof}
+	Apply \thref{perturbing-to-get-immersions} to the constant map $F\equiv 0\colon M\to\R^{2n}$.
+\end{proof}
+
+\begin{theorem}\thlabel{perturbing-to-get-injectivity}
+	Let $F\colon M\to\R^m$ be a smooth immersion, where $M$ is a smooth $n$-manifold, and $m\ge 2n + 1$. Then for any $\varepsilon > 0$ there is an injective immersion $\wt F\colon M\to\R^m$ such that 
+	\begin{equation*}
+		\sup_M |\wt F - F|\le\varepsilon.
+	\end{equation*}
+\end{theorem}
+
+
+\subsection{The Approximation Theorems}
+
+\subsection{Tubular Neighborhoods}
+
+\subsection{Smooth Approximations of Continuous Functions}
+\bibliographystyle{alpha}
+\bibliography{references}
+\end{document}
