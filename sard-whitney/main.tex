@@ -533,9 +533,81 @@ Next, we define the notion of ``measure zero'' on an arbitrary manifold.
 		\sup_M |\wt F - F|\le\varepsilon.
 	\end{equation*}
 \end{theorem}
+\begin{proof}
+	Since immersions are locally injective\footnote{This is due to the constanat rank theorem, because immersions are of constant rank.}, there is an open cover $\{W_i\}$. Passing to a refinement, using \cite[Proposition 2.24]{lee-smooth-manifolds}, we may suppose that it is a regular cover. Again, let $\psi_i\colon W_i\to B_3(0)$ be the associated chart, let $U_i = \psi_i^{-1}\left(B_1(0)\right)$, and let $\varphi_i\in C^\infty(M)$ be a smooth bump function supported in $W_i$ that is identically $1$ on $\overline U_i$. Let $M_k = \bigcup_{i = 1}^k U_i$.
 
+	We shall modify $F$ inductively to make it injective on successively larger sets. Let $F_0 = F$, and suppose by induction we have defined smooth maps $F_j\colon M\to\R^m$ for $0\le j\le k - 1$ satisfying: 
+	\begin{enumerate}[label=(\roman*)]
+		\item $F_j$ is an immersion; \label{(i)}
+		\item $\displaystyle\sup_M |F_j - F| < \varepsilon$;\label{(ii)}
+		\item For $j\ge 1$, $F_j(x) = F_{j - 1}(x)$ when $x\in M\setminus  W_j$; \label{(iii)}
+		\item $F_j$ is injective on $\overline M_j$; \label{(iv)}
+		\item $F_j$ is injective on $W_i$ for each $i$.\label{(v)}
+	\end{enumerate}
+	Define the next map $F_k\colon M\to\R^m$ by 
+	\begin{equation*}
+		F_k(x) = F_{k - 1}(x) + \varphi_k(x)b,
+	\end{equation*}
+	where $b\in\R^m$ is to be determined. Using standard continuity arguments as in the proof of \thref{perturbing-to-get-immersions}, we can choose a $\delta > 0$ such that whenever $|b| < \delta$, 
+	\begin{equation*}
+		\sup_{M} |F_k - F|\le\sup_{\Supp\varphi_k} |F_k - F_{k - 1}| + \sup_{M} |F_{k - 1} - F| < \varepsilon
+	\end{equation*}
+	and that $(F_k)_\ast$ is injective at each point of the compact set $\Supp\varphi_k$. Since $(F_k)_\ast = (F_{k - 1})_\ast$ on $M\setminus\Supp\varphi_k$, we see that $F_k$ is an immersion.
 
-\subsection{The Approximation Theorems}
+	We further wish to choose $b$ such that $F_k(x)\ne F_k(y)$ whenever $x,y\in\overline M_k$ are distinct. If $F_k(x) = F_k(y)$, then exactly one of the following two cases must hold: 
+	\begin{description}
+		\item[{\scshape Case I}:] $\varphi_k(x)\ne \varphi_k(y)$ and 
+		\begin{equation*}
+			b = -\frac{F_{k - 1}(x) - F_{k - 1}(y)}{\varphi_k(x) - \varphi_k(y)}.
+		\end{equation*}
+		\item[{\scshape Case II}:] $\varphi_k(x) = \varphi_k(y)$ and therefore also $F_{k - 1}(x) = F_{k - 1}(y)$.
+	\end{description}
+	Let 
+	\begin{equation*}
+		U = \left\{(x, y)\in M\times M\colon \varphi_k(x)\ne\varphi_k(y)\right\}
+	\end{equation*}
+	which is an open subset of $M\times M$ because the diagonal $\{(x, x)\colon x\in \R\}$ is closed in $\R\times\R$ and the above set is the inverse image of the complement of the diagonal under the map $(x, y)\mapsto(\varphi_k(x), \varphi_k(y))$. Thus, $U$ is naturally a manifold of dimension $\dim M = 2n < m$. Due to \thref{brown-corollary-to-sard}, the image of $U$ under the smooth map 
+	\begin{equation*}
+		(x, y)\mapsto-\frac{F_{k - 1}(x) - F_{k - 1}(y)}{\varphi_k(x) - \varphi_k(y)}
+	\end{equation*}
+	is a measure zero subset of $\R^m$. Hence, it is possible to choose $b\in\R^m$, not in the image of the above map and with $|b| < \delta$. With this choice of $b$, clearly conditions \ref{(i)}, \ref{(ii)}, and \ref{(iii)} are satisfied.
+
+	Suppose $F_j(x) = F_j(y)$ for distinct points $x, y\in\overline M_k = \overline U_k\cup\overline M_{k - 1}$. Since {\scshape Case I} is ruled out by our choice of $b$, we must be in {\scshape Case II}, that is, $\varphi_k(x) = \varphi_k(y)$ and $F_{k - 1}(x) = F_{k - 1}(y)$. If $\varphi_k(x) = \varphi_k(y) = 0$, then $x$ and $y$ must lie outside $\overline M_k\setminus\overline U_k\subseteq\overline M_{k - 1}$, on which $F_{k - 1}$ is injective, a contradiction. Thus $\varphi_k(x) = \varphi_k(y)\ne 0$ but that would mean $F_{k - 1}(x) = F_{k - 1}(y)$ for $x, y\in \Supp\varphi_k\subseteq W_{k}$, a contradiction to condition \ref{(v)} of the inductive hypothesis. Thus, $F_k$ is injective on $\overline M_k$. A similar argument would show that $F_k$ is injective on $\overline W_i$ for each $i\ge 1$. Thus, all conditions of the inductive hypothesis are satisfied by $F_k$.
+
+	Finally, define $\wt F\colon M\to\R^m$ by 
+	\begin{equation*}
+		\wt F(x) = \lim_{k\to\infty} F_k(x).
+	\end{equation*}
+	As in the proof of \thref{perturbing-to-get-immersions}, $\wt F$ is a smooth immersion. Furthermore, any pair $x, y\in M$ is contained in some $M_k$ for $k\gg 0$. Since $F_j$ is injective there for each $j\ge k$, it follows that $\wt F$ must be injective too, thereby completing the proof.
+\end{proof}
+
+\begin{corollary}[Whitney Embedding Theorem]\thlabel{whitney-embedding-theorem}
+	Every smooth $n$-manifold admits a proper smooth embedding into $\R^{2n} + 1$.
+\end{corollary}
+\begin{proof}
+	Let $f\colon M\to\R$ be a smooth exhaustion function\footnote{For a topological space $X$, an \define{exhaustion function} is a continuous function $f\colon X\to\R$ with the property that for each $c\in\R$, the set $X_c\coloneq\{x\in X\colon f(x)\le c\}$ is compact.}, which exists due to \cite[Proposition 2.28]{lee-smooth-manifolds}. Define $F\colon M\to\R^{2n + 1}$ 
+	\begin{equation*}
+		F(x) = \left(f(x), 0,\dots, 0\right).
+	\end{equation*}
+	Clearly $F$ is a proper smooth map. Using \thref{perturbing-to-get-immersions} and \thref{perturbing-to-get-injectivity}, there exists an injective immersion $\wt F\colon M\to\R^{2n + 1}$ such that 
+	\begin{equation*}
+		\sup_{M} |\wt F - F|\le 1.
+	\end{equation*}
+	We contend that $\wt F$ is proper. Indeed, let $K$ be a compact subset of $\R^{2n + 1}$ and define $\wt K = K + \overline B_1(0)$. It is easy to see that 
+	\begin{equation*}
+		\wt F^{-1}(K)\subseteq\wt F^{-1}(\wt K),
+	\end{equation*}
+	and since the latter is compact (owing to $F$ being proper), the former must be compact too, whence $\wt F$ is proper. Finally, since a proper injective immersion is a smooth embedding (see \cite[Proposition 7.4]{lee-smooth-manifolds}), we are done.
+\end{proof}
+
+\begin{corollary}
+	Every smooth $n$-manifold is diffeomorphic to a closed embedded submanifold of $\R^{2n + 1}$.
+\end{corollary}
+\begin{proof}
+	Follows immediately from \thref{whitney-embedding-theorem} and the fact that proper maps between locally compact Hausdorff spaces are closed.
+\end{proof}
+
+\subsection{The Approximation Theorem}
 
 \subsection{Tubular Neighborhoods}
 

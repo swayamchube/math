@@ -1,6 +1,6 @@
 \contentsline {section}{\numberline {1}Sard's Theorem}{1}{section.1}%
 \contentsline {section}{\numberline {2}Whitney's Theorems}{4}{section.2}%
 \contentsline {subsection}{\numberline {2.1}The Immersion and Embedding Theorems}{4}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}The Approximation Theorems}{6}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Tubular Neighborhoods}{6}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Smooth Approximations of Continuous Functions}{6}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.2}The Approximation Theorem}{8}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Tubular Neighborhoods}{8}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Smooth Approximations of Continuous Functions}{8}{subsection.2.4}%
