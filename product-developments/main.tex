@@ -1,0 +1,658 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+% \usepackage{lmodern}
+\usepackage{mathpazo}
+\usepackage{fouriernc}
+% \usepackage{euler}
+% \usepackage{sansmath}
+% \usepackage{sfmath}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd-Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+% \renewcommand{\familydefault}{\sfdefault} % Do you want this font? 
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+	citecolor=blue
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{interlude}[theorem]{Interlude}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrM}{\mathscr{M}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrO}{\mathscr{O}} % sheaf
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+% \newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\Ass}{\operatorname{Ass}}
+\newcommand{\projdim}{\operatorname{proj~dim}}
+\newcommand{\injdim}{\operatorname{inj~dim}}
+\newcommand{\gldim}{\operatorname{gl~dim}}
+\newcommand{\embdim}{\operatorname{emb~dim}}
+\newcommand{\hght}{\operatorname{ht}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\CM}{\operatorname{CM}}
+\newcommand{\Irr}{\operatorname{Irr}}
+\newcommand{\scrC}{\mathscr{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\FV}{\operatorname{FV}}
+\newcommand{\Th}{\operatorname{Th}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\sffamily}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+\begin{document}
+\title{Prouct Developments}
+\author{Swayam Chube}
+\date{Last Updated: \today}
+\maketitle
+
+\section{The Space of Holomorphic Functions}
+
+\begin{theorem}\thlabel{exhaustion-of-open-set}
+    If $\Omega\subseteq\bbC$ is open, then there is a sequence $(K_n)_{n\ge 1}$ of compact subsets of $\Omega$ such that $\displaystyle\Omega = \bigcup_{n = 1}^\infty K_n$. Moreover, the sets $K_n$ can be chosen to satisfy the following conditions: 
+    \begin{enumerate}[label=(\roman*)]
+        \item $K_n\subseteq K_{n + 1}^\circ$.
+        \item If $K\subseteq\Omega$ is compact, then $K\subseteq K_n$ for some $n\ge 1$. 
+        \item For every $n\ge 1$, each component of $\bbC_\infty\setminus K_n$ contains a component of $\bbC_\infty\setminus\Omega$.
+    \end{enumerate}
+\end{theorem}
+
+\section{Product Developments}
+
+\subsection{Generalities}
+
+\begin{definition}
+    If $(z_n)_{n\ge 1}$ is a sequence of complex numbers, then $z\in\bbC$ is said to be the \define{infinite product} of the sequence $(z_n)_{n\ge 1}$ if 
+    \begin{equation*}
+        z = \lim_{n\to\infty}\prod_{k = 1}^n z_k.
+    \end{equation*}
+\end{definition}
+
+Suppose $z_n\ne 0$ for all $n\ge 1$ and $z\ne 0$. Then, setting 
+\begin{equation*}
+    p_n = \prod_{k = 1}^n z_k,
+\end{equation*}
+we have, by definition that $p_n\to z\ne 0$ in $\bbC$. But since $z_n = p_n/p_{n - 1}$ with the convention that $p_0 = 1$, we see that $z_n\to 1$ as $n\to\infty$.
+
+\begin{proposition}
+    Let $(z_n)_{n\ge 1}$ be a sequence of complex numbers with $\Re z_n > 0$ for all $n\ge 1$. Then $\displaystyle\prod_{n = 1}^\infty z_n$ converges to a \emph{non-zero} complex number if and only if the series $\displaystyle\sum_{n = 1}^\infty\log z_n$ converges.
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\begin{definition}
+    If $(z_n)_{n\ge 1}$ is a sequence of complex numbers with $\Re z_n > 0$ for all $n$, then the infinite product $\displaystyle\prod_{n = 1}^\infty z_n$ is said to \define{converge absolutely} if the series $\displaystyle\sum_{n = 1}^\infty\log z_n$ converges absolutely.
+\end{definition}
+
+\begin{lemma}\thlabel{bound-on-logarithm}
+    If $|z| < \frac{1}{2}$, then 
+    \begin{equation*}
+        \frac{1}{2}|z|\le |\log (1 + z)|\le\frac{3}{2}|z|.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Using the power series expansion of $\log(1 + z)$ about $z = 0$, we get 
+    \begin{equation*}
+        \left|1 - \frac{\log(1 + z)}{z}\right| = \left|\frac{1}{2}z - \frac{1}{3}z^2 + \cdots\right|\le\frac{1}{2}\left(|z| + |z|^2 + \cdots\right) = \frac{1}{2}\frac{|z|}{1 - |z|} < \frac{1}{2},
+    \end{equation*}
+    whence the conclusion follows.
+\end{proof}
+
+\begin{proposition}
+    Let $(z_n)_{n\ge 1}$ be a sequence of complex numbers with $\Re z_n > - 1$ for all $n\ge 1$. Then the series $\displaystyle\sum_{n = 1}^\infty\log(1 + z_n)$ converges absolutely if and only if the series $\displaystyle\sum_{n = 1}^\infty z_n$ converges absolutely.
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\begin{corollary}
+    If $(z_n)_{n\ge 1}$ is a sequence of complex numbers with $\Re z_n > 0$ for all $n\ge 1$, then the product $\displaystyle\prod_{n = 1}^\infty z_n$ converges absolutely if and only if the series $\displaystyle\sum_{n = 1}^\infty (z_n - 1)$ converges absolutely.
+\end{corollary}
+\begin{proof}
+\end{proof}
+
+\begin{proposition}\thlabel{exponential-of-uniform-convergence}
+    Let $X$ be a set, and $(f_n)_{n\ge 1}$ be a sequence of complex-valued functions on $X$ converging uniformly to $f\colon X\to\bbC$. Suppose there exists $a\in\R$ such that $\Re f_n(x)\le a$ for all $x\in X$ and $n\ge 1$, then the sequence of functions $\left(\exp(f_n)\right)_{n\ge 1}$ converges uniformly to $\exp(f)$.
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\begin{lemma}
+    Let $X$ be a compact topological space and $(g_n)_{n\ge 1}$ a sequence of complex-valued continuous functions on $X$ such that $\displaystyle\sum_{n = 1}^\infty |g_n(x)|$ converges uniformly on $X$. Then the product 
+    \begin{equation*}
+        f(x) = \prod_{n = 1}^\infty\left(1 + g_n(x)\right)
+    \end{equation*}
+    converges uniformly for all $x\in X$. Further there is an integer $n_0\ge 1$ such that $f(x) = 0$ if and only if $g_n(x) = -1$ for some $1\le n\le n_0$.
+\end{lemma}
+\begin{proof}
+    Since $\displaystyle\sum_{n = 1}^\infty |g_n(x)|$ converges uniformly on $X$, there is a positive integer $n_0\ge 1$ such that $|g_n(x)| < \frac{1}{2}$ for all $x\in X$ and $n > n_0$. Thus $\Re\left(1 + g_n(x)\right) > 0$ for all $x\in X$ and $n > n_0$, and hence due to \thref{bound-on-logarithm}
+    \begin{equation*}
+        \left|\log\left(1 + g_n(x)\right)\right|\le\frac{3}{2}|g_n(x)|\qquad\forall~x\in X,~\forall n > n_0.
+    \end{equation*}
+    Thus, the sum 
+    \begin{equation*}
+        h(x)\coloneq\sum_{n = n_0}^\infty \log(1 + g_n(x))
+    \end{equation*}
+    converges uniformly on $X$ so that $h$ is a continuous function. Since $X$ is compact, there is an $a\in\R$ such that $\Re h(x)\le a$ for all $x\in X$. In view of \thref{exponential-of-uniform-convergence}, 
+    \begin{equation*}
+        \exp h(x) = \prod_{n = n_0}^\infty \left(1 + g_n(x)\right)
+    \end{equation*}
+    converges uniformly on $X$. In particular, the product on the right is non-zero for all $x\in X$.
+
+    Finally, since 
+    \begin{equation*}
+        f(x) = (1 + g_1(x))\cdots(1 + g_{n_0}(x))\exp h(x),
+    \end{equation*}
+    it follows that if $f(x) = 0$, then $g_n(x) = -1$ for some $1\le n\le n_0$.
+\end{proof}
+
+\begin{theorem}
+    Let $\Omega\subseteq\bbC$ be a region and let $(f_n)_{n\ge 1}$ be a sequence of holomorphic functions such that no $f_n$ is identically zero. If $\displaystyle\sum_{n = 1}^\infty |f_n(z) - 1|$ converges uniformly on compact subsets of $\Omega$, then $\displaystyle\prod_{n = 1}^\infty f_n(z)$ converges uniformly on compact subsets of $\Omega$ to a holomorphic function $f(z)$.
+
+    If $a\in\Omega$ is a zero of $f$, then $a$ is a zero of only a finite number of functions $f_n$ , and the multiplicity of the zero of $f$ at $a$ is the sum of the multiplicities of the zeros of the functions $f_n$ at $a$.
+\end{theorem}
+
+\section{Runge's Theorem}
+
+\begin{theorem}[Runge]\thlabel{runge-theorem}
+    Let $K\subseteq\bbC$ be a compact set and let $E$ be a subset of $\bbC_\infty\setminus K$ meeting each connected component of $\bbC_\infty\setminus K$. If $f$ is a function holomorphic in an open set $\Omega\supseteq K$ and $\varepsilon > 0$, then there exists a rational function $R(z)$ whose only poles lie in $E$ such that 
+    \begin{equation*}
+        |f(z) - R(z)| < \varepsilon
+    \end{equation*}
+    for all $z\in K$.
+\end{theorem}
+
+Let $C(K)$ denote the Banach space of all complex-valued continuous functions on $K$ equipped with the supremum norm on $K$, that is, 
+\begin{equation*}
+    \|f\|_\infty\coloneq\sup\left\{|f(z)|\colon z\in K\right\}\qquad\forall f\in C(K).
+\end{equation*}
+Let $B(E)\subseteq C(K)$ denote the set of all functions $f\in C(K)$ such that for every $\varepsilon > 0$, there is a rational function $R(z)$ with poles only in $E$ such that 
+\begin{equation*}
+    \|f - R\|_\infty < \varepsilon.
+\end{equation*}
+\thref{runge-theorem} essentially states that $f|_K\in B(E)$ for every holomorphic function in a neighborhood of $K$.
+
+\begin{lemma}
+    $B(E)$ is a closed $\bbC$-subalgebra of $C(K)$ containing every rational function with all poles in $E$.
+\end{lemma}
+\begin{proof}
+    The latter part of the assertion is clear. To see that $B(E)$ is a subalgebra, suppose $f, g\in B(E)$ and $\alpha,\beta\in\bbC$. Let $\varepsilon > 0$ and choose rational functions $R(z), S(z)$ such that 
+    \begin{equation*}
+        \|f - R\|_\infty < \frac{\varepsilon}{|\alpha| + |\beta| + 1}\quad\text{ and }\quad |g - S| < \frac{\varepsilon}{|\alpha| + |\beta| + 1}.
+    \end{equation*}
+    Then 
+    \begin{equation*}
+        \left\|(\alpha f + \beta g) - (\alpha R + \beta S)\right\|_\infty < \frac{|\alpha| + |\beta|}{|\alpha| + |\beta| + 1}\varepsilon < \varepsilon,
+    \end{equation*}
+    whence $\alpha f + \beta g\in B(E)$. Next, we shall show that $fg\in B(E)$. Indeed, let $\varepsilon > 0$, and choose positive real numbers $M_1, M_2 > 0$ such that $\|f\|_\infty < M_1$ and $\|g\|_\infty < M_2$. Choose rational functions $R(z), S(z)$ such that 
+    \begin{equation*}
+        \|f - R\|_\infty < \frac{\varepsilon}{M_1 + M_2}\quad\text{ and }\quad\|g - S\|_\infty < \frac{\varepsilon}{M_1 + M_2}.
+    \end{equation*}
+    Then $R(z)S(z)$ is a rational function with poles only in $E$, and 
+    \begin{equation*}
+        \|fg - RS\|_\infty\le \|g(f - R) + R(g - S)\|_\infty\le M_2\|f - R\|_\infty + M_1\|g - S\|_\infty < \varepsilon,
+    \end{equation*}
+    as desired. Thus $B(E)$ is a subalgebra of $C(K)$. 
+
+    It remains to show that $B(E)$ is closed in the topology of $C(K)$. Indeed, let $f_n\to f$ in $C(K)$ and $\varepsilon > 0$. There is a positive integer $N$ such that $\|f - f_N\|_\infty < \frac{\varepsilon}{2}$, and further, a rational function $R(z)$ with poles only in $E$ such that $\|f_N - R\|_\infty < \frac{\varepsilon}{2}$. Thus 
+    \begin{equation*}
+        \|f - R\|_\infty < \|f - f_N\|_\infty + \|f_N - R\|_\infty < \varepsilon,
+    \end{equation*}
+    whence $f\in B(E)$, thereby completing the proof.
+\end{proof}
+
+The outline of the rest of the proof is as follows: 
+\begin{itemize}
+    \item First, we show that $\dfrac{1}{z - a}\in B(E)$ for each $a\in\bbC\setminus K$. 
+    \item Since $B(E)$ is an algebra containing all polynomials, using partial fractions, we conclude that every rational function with poles only in $\bbC\setminus K$ belongs to $B(E)$.
+    \item Finally, using Cauchy's integral formula, we show that every holomorphic function can be approximated arbitrarily well by rational functions with poles only in $\bbC\setminus K$.
+\end{itemize}
+
+\begin{lemma}\thlabel{component-contained-in-open-subset}
+    Let $V$ and $U$ be open subsets of $\bbC$ with $V\subseteq U$ and $\partial V\cap U = \emptyset$. If $H$ is a component of $U$ with $H\cap V\ne\emptyset$, then $H\subseteq V$.
+\end{lemma}
+\begin{proof}
+    Let $a\in H\cap V$ and let $G$ be the connected component of $V$ containing $a$; then $H\cup G$ is connected and contained in $U$. But since $H$ is a connected component, $H\cup G = H$, that is, $G\subseteq H$. Note that $\partial G\subseteq\partial V$\footnote{This is because $\bbC$ is locally connected.} and so $\partial G\cap H = \emptyset$, whence 
+    \begin{equation*}
+        H\setminus G = H\cap(\bbC\setminus G) = H\cap\left[(\bbC\setminus\overline G)\cup\partial G\right] = H\cap(\bbC\setminus\overline G),
+    \end{equation*}
+    whence $H\setminus G$ is open in $H$. But since $G$ is open, $H\setminus G$ is both closed and open in $H$, and since $H$ is connected and $G\ne\emptyset$, it follows that $H = G\subseteq V$, as desired.
+\end{proof}
+
+\begin{proposition}\thlabel{building-block-in-BE}
+    Let $a\in\bbC\setminus K$. Then $\dfrac{1}{z - a}\in B(E)$.
+\end{proposition}
+\begin{proof}
+    We split our analysis into two cases. 
+
+    \noindent\textbf{\scshape Case 1.} \emph{$\infty\notin E$.} Let $U = \bbC\setminus K$ and let 
+    \begin{equation*}
+        V = \left\{a\in\bbC\colon\frac{1}{z - a}\in B(E)\right\},
+    \end{equation*}
+    so that $E\subseteq V\subseteq U$. We first claim that $V$ is open. Indeed, suppose $a\in V$ and $|b - a| < d(a, K)$. Then there exists $0 < r < 1$ such that $|b - a| < r |z - a|$ for all $z\in K$. But 
+    \begin{equation*}
+        \frac{1}{z - b} = \frac{1}{z - a}\frac{1}{1 - \frac{b - a}{z - a}},
+    \end{equation*}
+    and since $|(b - a)/(z - a)| < r < 1$ for all $z\in K$, we note that the series 
+    \begin{equation*}
+        \frac{1}{1 - \frac{b - a}{z - a}} = \sum_{n = 0}^\infty\left(\frac{b - a}{z - a}\right)^n
+    \end{equation*}
+    converges uniformly on $K$ due to the Weierstra\ss\ $M$-test. Set 
+    \begin{equation*}
+        Q_n(z) = \sum_{n = 0}^\infty\left(\frac{b - a}{z - a}\right)^n,
+    \end{equation*}
+    then $\dfrac{1}{z - a}Q_n(z)\in B(E)$ since $a\in V$ and $B(E)$ is an algebra. Since $B(E)$ is closed, the uniform convergence of $\dfrac{1}{z - a}Q_n(z)$ to $\dfrac{1}{z - b}$ yields that the latter lies in $B(E)$, so that $V$ is open.
+
+    Now suppose $b\in\overline V\setminus V = \partial V$ and let $(a_n)_{n\ge 1}$ be a sequence in $V$ converging to $b$. We have that $|b - a_n|\ge d(a_n, K)$ and taking $n\to\infty$ and using the continuity of $d(\cdot, K)$, one obtains $d(b, K) = 0$, that is, $b\in K$. Thus $\partial V\cap U = \emptyset$. If $H$ is a component of $U$, then $H\cap E\ne\emptyset$, so $H\cap V\ne\emptyset$. By \thref{component-contained-in-open-subset}, $H\subseteq V$. But since $H$ was arbitrary, we have that $U\subseteq V$, i.e., $U = V$.
+
+    \noindent\textbf{\scshape Case 2.} \emph{$\infty\in E$.} Let $d_\infty$ denote the metric on $\bbC_\infty$. Choose $a_0$ in the unbounded component of $\bbC\setminus K$ (i.e., the component containing $\infty$) such that $d_\infty(a_0, \infty)\le\frac{1}{2}d_\infty(\infty, K)$ and $|a_0| > 2\max\left\{|z|\colon z\in K\right\}$. Let $E_0 = (E\setminus\{\infty\})\cup\{a_0\}$. Then $E_0$ meets each component of $\bbC_\infty\setminus K$, and $\infty\notin E_0$. 
+
+    If $a\in\bbC\setminus K$, then due to {\scshape Case 1}, $\dfrac{1}{z - a}\in B(E_0)$. We shall show that $\dfrac{1}{z - a_0}\in B(E_0)$. Once this is shown, we could approximate rational functions with poles only in $E_0$ by rational functions with poles only in $E$, since $E_0\setminus E = \{a_0\}$. This would then immediately give us that $\dfrac{1}{z - a}\in B(E_0)\subseteq B(E)$, as desired.
+
+    Note that for all $z\in K$, $|z / a_0|\le\frac{1}{2}$ and so 
+    \begin{equation*}
+        \frac{1}{z - a_0} = - \frac{1}{a_0}\frac{1}{1 - \frac{z}{a_0}} = -\frac{1}{a_0}\sum_{n = 0}^\infty\left(\frac{z}{a_0}\right)^n
+    \end{equation*}
+    converges uniformly on $K$ due to the Weierstra\ss\ $M$-test. Set 
+    \begin{equation*}
+        Q_n(z) = -\frac{1}{a_0}\sum_{k = 0}^n\left(\frac{z}{a_0}\right)^k,
+    \end{equation*}
+    which is a sequence of polynomials converging uniformly to $\dfrac{1}{z - a_0}$ on $K$. Since $Q_n\in B(E)$ for each $n\ge 1$, we have shown that $\dfrac{1}{z - a_0}\in B(E)$, thereby completing the proof.
+\end{proof}
+
+\begin{lemma}\thlabel{integral-representation-on-polygons}
+    Let $\Omega$ be a region contianing $K$. Then there are straight line segments $\gamma_1,\dots,\gamma_n$ in $\Omega\setminus K$ such that for every holomorphic function $f$ on $\Omega$, 
+    \begin{equation*}
+        f(z) = \frac{1}{2\pi\iota}\sum_{k = 1}^n\int_{\gamma_k}\frac{f(w)}{w - z}~dw
+    \end{equation*}
+    for all $z\in K$. The line segments form a finite number of closed polygons in $\Omega$.
+\end{lemma}
+\begin{proof}
+    Covering $K$ by finitely many compact disks (contained in $\Omega$), we can replace $K$ with the union of these disks and suppose that $K = \overline{K^\circ}$. Let $0 < \delta < \frac{1}{2}d(K, \bbC\setminus\Omega)$ and place a ``grid'' of horizontal and vertical lines in the plane with consecutive lines less than a distance $\delta$ apart. Let $R_1,\dots, R_m$ be the resulting rectangles intersecting $K$. These rectangles are finite in number because $K$ is compact. Consider $\partial R_j$, the boundary of $R_j$ as a polygon oriented in the counter-clockwise direction.  
+
+    If $z\in R_j$ for some $1\le j\le m$, then $d(z, K)\le\diam R_j = \sqrt 2\delta$, and hence $z\in\Omega$. This shows that every $R_j$ is contained in $\Omega$. Next, suppose $R_j$ and $R_j$ intersect in an edge $\sigma$. With respect to the two rectangles, $\sigma$ will have opposite orientations, and hence, for any continuous function $\varphi$ on $\sigma$, the sum of the integrals will cancel out.
+
+    Let $\gamma_1,\dots,\gamma_n$ be those directed line segments that constitute an edge of exactly one of the $R_j$'s. Then
+    \begin{equation}
+        \sum_{k = 1}^n \int_{\gamma_k}\varphi = \sum_{j = 1}^m \int_{\partial R_j}\varphi\label{integration-on-polygons}
+    \end{equation}
+    for any continuous function $\varphi$ on $\displaystyle\bigcup_{j = 1}^m\partial R_j$.
+
+    We contend that each $\gamma_k$ lies in $\Omega\setminus K$. Indeed, if one of the $\gamma_k$ intersects $K$, then there are two rectangles in the grid with $\gamma_k$ as a side, both of which intersect $K$, whence both of these rectangles must lie in the set $\{R_1,\dots,R_m\}$, which is absurd, since $\gamma_k$ is a side of exactly one of those rectangles. 
+
+    Now, if $\displaystyle z\in K\setminus\bigcup_{j = 1}^m \partial R_j$, then for any holomorphic function $f$ on $\Omega$, 
+    \begin{equation*}
+        \varphi(w) = \frac{1}{2\pi\iota} \frac{f(w)}{w - z}
+    \end{equation*}
+    is continuous on $\displaystyle\bigcup_{j = 1}^m\partial R_j$. From \eqref{integration-on-polygons}, it follows that 
+    \begin{equation*}
+        \sum_{j = 1}^m\frac{1}{2\pi\iota}\int_{\partial R_j}\frac{f(w)}{w - z}~dw = \sum_{k = 1}^n\frac{1}{2\pi\iota}\int_{\gamma_k}\frac{f(w)}{w - z}~dw.
+    \end{equation*}
+    But $z$ belongs to the interior of exactly one of the $R_j$'s whence the sum on the left is precisely $f(z)$ whenever $\displaystyle z\in K\setminus\bigcup_{j = 1}^m\partial R_j$. But both sides are continuous functions on $K$ (since $f(z)$ is clearly continuous and every $\gamma_k$ misses $K$) and because $K = \overline{K^\circ}$, the set $K\setminus\bigcup_{j = 1}^m\partial R_j$ is dense in $K$; it follows that both sides must be equal for all $z\in K$, as desired.
+\end{proof}
+
+Now that we have an integral representation of $f(z)$, we shall approximate it using rational functions having poles on the $\{\gamma_k\}$'s.
+
+\begin{lemma}\thlabel{estimating-integral-representation}
+    Let $\gamma$ be a rectifiable curve and $K$ a compact set such that $K\cap\{\gamma\} = \emptyset$. If $f$ is a continuous function on $\{\gamma\}$, and $\varepsilon > 0$, then there is a rational function $R(z)$ having all its poles on $\{\gamma\}$ such that 
+    \begin{equation*}
+        \left|\int_\gamma\frac{f(w)}{w - z}~dw - R(z)\right| < \varepsilon
+    \end{equation*}
+    for all $z\in K$.
+\end{lemma}
+\begin{proof}
+    We may assume that $\gamma\colon [0, 1]\to\bbC$. First, since $K$ and $\{\gamma\}$ are disjoint, there is a real number $0 < r < d(\{\gamma\}, K)$. For $0\le s < t\le 1$ and $z\in K$, 
+    \begin{align*}
+        \left|\frac{f(\gamma(t))}{\gamma(t) - z} - \frac{f(\gamma(s))}{\gamma(s) - z}\right| &= \left|\frac{\gamma(s)f(\gamma(t)) - \gamma(t)f(\gamma(s)) - z\left(f(\gamma(t)) - f(\gamma(s))\right)}{(\gamma(t) - z)(\gamma(s) - z)}\right|\\
+        &\le\frac{1}{r^2}\left|\gamma(s)f(\gamma(t)) - \gamma(t)f(\gamma(s)) - z\left(f(\gamma(t)) - f(\gamma(s))\right)\right|\\
+        &\le \frac{1}{r^2}\left|f(\gamma(t))\left(\gamma(s) - \gamma(t)\right) + \gamma(t)\left(f(\gamma(t)) - f(\gamma(s))\right) - z\left(f(\gamma(t)) - f(\gamma(s))\right)\right|\\
+        &\le\frac{1}{r^2}\left|f(\gamma(t))\right|\left|\gamma(s) - \gamma(t)\right| + \frac{1}{r^2}\left|\gamma(t) - z\right|\left|f(\gamma(t)) - f(\gamma(s))\right|.
+    \end{align*}
+    Using the compactness of $\{\gamma\}$ and $K$, there is a constant $C > 0$ such that $d(x, z)\le C$ for all $x\in \{\gamma\}$ and $z \in K$, and $f(x)\le C$ for all $x\in\{\gamma\}$. Thus 
+    \begin{equation*}
+        \left|\frac{f(\gamma(t))}{\gamma(t) - z} - \frac{f(\gamma(s))}{\gamma(s) - z}\right|\le\frac{C}{r^2}\left(\left|\gamma(s) - \gamma(t)\right| + \left|f(\gamma(t)) - f(\gamma(s))\right|\right).
+    \end{equation*}
+    Finally, using the uniform continuity of the functions $\gamma, f\circ\gamma\colon [0, 1]\to\bbC$, there is a $\delta > 0$ such that whenever $|s - t| < \delta$, 
+    \begin{equation*}
+        \left|\frac{f(\gamma(t))}{\gamma(t) - z} - \frac{f(\gamma(s))}{\gamma(s) - z}\right| < \frac{\varepsilon}{2V(\gamma)}
+    \end{equation*}
+    for all $z\in K$. Choose a partition $0 = t_0 < t_1 < \dots < t_n = 1$ of $[0, 1]$ such that $|t_j - t_{j - 1}| < \delta$ for $1\le j\le n$. Set 
+    \begin{equation*}
+        R(z) = \sum_{i = 1}^n \frac{f(\gamma(t_{j - 1}))\left(\gamma(t_j) - \gamma(t_{j - 1})\right)}{\gamma(t_{j - 1}) - z}.
+    \end{equation*}
+    Now, there is a partition $0 = s_0 < s_1 < \dots < s_m = 1$ of $[0 , 1]$ such that 
+    \begin{equation*}
+        \left|\int_\gamma\frac{f(w)}{w - z}~dw - \sum_{j = 1}^m\frac{f(\gamma(s_j))}{\gamma(s_j) - \gamma(s_{j - 1})}\right| < \frac{\varepsilon}{2}.
+    \end{equation*}
+    Thus 
+    \begin{equation*}
+        \left|\int_\gamma\frac{f(w)}{w - z }~dw - R(z)\right|\le\left|\int_\gamma\frac{f(w)}{w - z}~dw - \sum_{j = 1}^m\frac{f(\gamma(s_j))}{\gamma(s_j) - \gamma(s_{j - 1})}\right| + \left|\sum_{j = 1}^m\frac{f(\gamma(s_j))}{\gamma(s_j) - \gamma(s_{j - 1})} - \sum_{j = 1}^n\frac{f(\gamma(t_{j - 1}))\left(\gamma(t_j) - \gamma(t_{j - 1})\right)}{\gamma(t_{j - 1}) - z}\right|.
+    \end{equation*}
+    Taking a union of both partitions $\ul s$ and $\ul t$ and using the triangle inequality, it is clear that both terms are smaller than $\varepsilon/2$, therefore, 
+    \begin{equation*}
+        \left|\int_\gamma \frac{f(w)}{w - z}~dw - R(z)\right| < \varepsilon,
+    \end{equation*}
+    for all $z\in K$.
+\end{proof}
+
+\begin{proof}[Proof of \thref{runge-theorem}]
+    Due to \thref{building-block-in-BE} and the fact that $B(E)$ contains all polynomials, using partial fractions it follows that $B(E)$ contains all rational functions with all poles in $\bbC\setminus K$. Finally, using \thref{integral-representation-on-polygons} and \thref{estimating-integral-representation}, it follows that $f\in B(E)$, as desired.
+\end{proof}
+
+\subsection{Simply connected regions}
+
+\begin{theorem}
+    Let $\Omega\subseteq\bbC$ be a region. Then the following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\Omega$ is simply connected. 
+        \item $n(\gamma; a) = 0$ for every closed rectifiable curve $\gamma$ in $\Omega$ and every point $a\in\bbC\setminus\Omega$.
+        \item $\bbC_\infty\setminus\Omega$ is connected. 
+        \item For any $f\in\scrO(\Omega)$, there is a sequence of polynomials that converges to $f$ in $\scrO(\Omega)$. 
+        \item For any $f\in\scrO(\Omega)$ and any closed rectifiable curve $\gamma$ in $\Omega$, $\int_\gamma f = 0$. 
+        \item Every function $f\in\scrO(\Omega)$ has a primitive. 
+        \item For any nowhere-vanishing function $f\in\scrO(\Omega)$, there is a $g\in\scrO(\Omega)$ such that $f = \exp g$. 
+        \item For any nowhere-vanishing function $f\in\scrO(\Omega)$, there is a $g\in\scrO(\Omega)$ such that $f = g^2$. 
+        \item $\Omega$ is homeomorphic to the unit disk. 
+        \item If $u\colon\Omega\to\R$ is harmonic, then there is a harmonic function $v\colon\Omega\to\R$ such that $f = u + \iota v$ is holomorphic on $\Omega$.
+    \end{enumerate}
+\end{theorem}
+
+\subsection{Mittag-Leffler's Theorem}
+
+\begin{theorem}[Mittag-Leffler]\thlabel{mittag-leffler-theorem}
+    Let $\Omega\subseteq\bbC$ be a region and $(a_n)_{n\ge 1}$ a sequence of distinct points in $\Omega$ with no limit point in $\Omega$. Let $(S_n(z))_{n\ge 1}$ be a sequence of rational functions of the form 
+    \begin{equation*}
+        S_n(z) = \sum_{j = 1}^{m_n}\frac{c_{nj}}{(z - a_n)^j},
+    \end{equation*}
+    where $m_n$ is a positive integer and $c_{nj}\in\bbC$ for all $n\ge 1$ and $1\le j\le m_n$. Then there exists a meromorphic function $f$ on $\Omega$ which is holomorphic on $\Omega\setminus\{a_1,a_2,\dots\}$ and whose singular part at each $a_n$ is given by $S_n(z)$.
+\end{theorem}
+\begin{proof}
+    Choose an exhaustion $(K_n)_{n\ge 1}$ of $\Omega$ as in \thref{exhaustion-of-open-set} and as such, every component of $\bbC_\infty\setminus K_n$ contains a component of $\bbC_\infty\setminus\Omega$. Next, since each $K_n$ is compact, and $(a_k)_{k\ge 1}$ has no limit point in $\Omega$, only finitely many of the $a_k$'s can lie in each $K_n$. Define 
+    \begin{equation*}
+        I_n \coloneq\left\{k\colon a_k\in K_n\setminus K_{n - 1}\right\}
+    \end{equation*}
+    with the convention that $K_0 = \emptyset$. Define the functions 
+    \begin{equation*}
+        f_n(z) = \sum_{k\in I_n}S_k(z).
+    \end{equation*}
+    This is clearly a meromorphic function on $\Omega$ with all its poles in $K_n\setminus K_{n - 1}$. Using \thref{runge-theorem} with $E = \bbC_\infty\setminus\Omega$, there exists a rational function $R_n(z)$ with all its poles in $\bbC_\infty\setminus\Omega$ such that 
+    \begin{equation*}
+        |f_n(z) - R_n(z)| < \frac{1}{2^n}
+    \end{equation*}
+    for all $z\in K_{n - 1}$ and $n\ge 2$. For $n = 1$, we set $R_1 = 0$. Define 
+    \begin{equation*}
+        f(z) = \sum_{n = 1}^\infty \left(f_n(z) - R_n(z)\right).
+    \end{equation*}
+    We contend that this is our desired meromorphic function. We must first show that $f$ is holomorphic on $\Omega\setminus\{a_1,a_2,\dots\}$ and then show that its singular part at each $a_k$ is $S_k(z)$. 
+
+    Indeed, let $K\subseteq\Omega\setminus\{a_1,a_2,\dots\}$ be a compact set. Then there is a positive integer $N\ge 1$ such that $K\subseteq K_N$. For all $n\ge N + 1$, and $z\in K_N$, we have that 
+    \begin{equation*}
+        |f_n(z) - R_n(z)| < \frac{1}{2^n}.
+    \end{equation*}
+    Due to the Weierstra\ss\ $M$-test, the sum converges uniformly on $K$, whence the limiting function $f$ is a holomorphic function on $\Omega\setminus\{a_1,a_2,\dots\}$.
+
+    Let $k\ge 1$. Since the sequence $(a_n)_{n\ge 1}$ has no limit point, there is an $r > 0$ such that $|a_j - a_k| > r$ for all $j\ne k$. Then, the sum for $f(z) - S_k(z)$ converges uniformly on $\overline B(a_k, r)$ to a holomorphic function there, again due to the Weierstra\ss\ $M$-test. As a result, $f(z)$ has singular part $S_k(z)$ at $a_k$. This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    Let $\Omega\subseteq\bbC$ be a region. If $(a_n)_{n\ge 1}$ is a sequence of distinct points in $\Omega$ with no limit point in $\Omega$, and $(c_n)_{n\ge 1}$ is a sequence of complex numbers, then there is a holomorphic function $f\in\scrO(\Omega)$ such that $f(a_n) = c_n$ for all $n\ge 1$.
+\end{proposition}
+\begin{proof}
+    Let $g\in\scrO(\Omega)$ be a holomorphic function with simple zeros at only the $a_n$'s. Then we can write $g(z) = (z - a_n)g_n(z)$ for some holomorphic function $g_n\in\scrO(\Omega)$ with $g_n(a_n)\ne 0$. Using \thref{mittag-leffler-theorem} let $h$ be a meromorphic function on $\Omega$, holomorphic on $\Omega\setminus\{a_1, a_2,\dots\}$, and having singular part 
+    \begin{equation*}
+        \frac{c_n}{g_n(a_n)}\frac{1}{z - a_n}
+    \end{equation*}
+    at $a_n$ for each $n\ge 1$. Clearly $f(z) = g(z)h(z)$ has removable singularities at each $a_n$ and $f(a_n) = c_n$. 
+\end{proof}
+\end{document}
