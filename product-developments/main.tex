@@ -100,6 +100,7 @@
 \newcommand{\calO}{\mathcal{O}} % Ring of integers
 \newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
 \newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+\newcommand{\bbD}{\mathbb{D}} % Unit disk
 
 % Categories
 \newcommand{\catTopp}{\mathbf{Top}_*}
@@ -188,6 +189,7 @@
 \newcommand{\scrO}{\mathscr{O}} % sheaf
 \newcommand{\scrR}{\mathscr{R}}
 \newcommand{\scrS}{\mathscr{S}}
+\newcommand{\scrU}{\mathscr{U}}
 \newcommand{\bbH}{\mathbb H}
 \newcommand{\Int}{\operatorname{Int}}
 \newcommand{\psimeq}{\simeq_p}
@@ -202,6 +204,7 @@
 \newcommand{\calN}{\mathcal{N}}
 \newcommand{\calK}{\mathcal{K}}
 \newcommand{\calP}{\mathcal{P}}
+\newcommand{\calU}{\mathcal{U}}
 \newcommand{\onto}{\twoheadrightarrow}
 \newcommand{\into}{\hookrightarrow}
 \newcommand{\Gr}{\operatorname{Gr}}
@@ -293,10 +296,11 @@
 
 
 \begin{document}
-\title{Prouct Developments}
+\title{Product Developments}
 \author{Swayam Chube}
 \date{Last Updated: \today}
 \maketitle
+\tableofcontents
 
 \section{The Space of Holomorphic Functions}
 
@@ -306,6 +310,159 @@
         \item $K_n\subseteq K_{n + 1}^\circ$.
         \item If $K\subseteq\Omega$ is compact, then $K\subseteq K_n$ for some $n\ge 1$. 
         \item For every $n\ge 1$, each component of $\bbC_\infty\setminus K_n$ contains a component of $\bbC_\infty\setminus\Omega$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    % TODO: Add in proof.
+\end{proof}
+
+Let $\Omega\subseteq\bbC$ be an open set, and $(X, d)$ be a complete metric space. Let $C(\Omega, X)$ denote the set of all continuous functions from $\Omega$ to $X$. Our first goal will be to define a complete metric on this space. In particular, when $X = \bbC$, $C(\Omega, X)$ will be a Fr\'echet space (not that we shall ever use this fact seriously).
+
+
+Begin with an exhaustion $(K_n)_{n\ge 1}$ of $\Omega$. That is, 
+\begin{equation*}
+    \Omega = \bigcup_{n = 1}^\infty K_n\quad\text{ and }\quad K_n\subseteq K_{n + 1}^\circ\quad\forall~n\ge 1.
+\end{equation*}
+We may further assume that $K_n\ne\emptyset$ for all $n\ge 1$. For functions $f, g\in C(\Omega, X)$, define 
+\begin{equation*}
+    \rho_n(f, g) = \sup\left\{d(f(z), g(z))\colon z\in K_n\right\}.
+\end{equation*}
+Further, define 
+\begin{equation}
+    \rho(f, g) = \sum_{n = 1}^\infty \frac{1}{2^n}\frac{\rho_n(f, g)}{1 + \rho_n(f, g)}.\label{the-metric}\tag{$\clubsuit$}
+\end{equation}
+Clearly the right hand side converges for all $f, g\in C(\Omega, X)$. We shall show that $\rho$ is a metric on $C(\Omega, X)$.
+
+\begin{lemma}\thlabel{equivalent-metric}
+    If $(S, d)$ is a metric space then 
+    \begin{equation*}
+        \mu(s, t) = \frac{d(s, t)}{1 + d(s, t)}
+    \end{equation*}
+    is a metric on $S$ inducing the same topology. Further, a sequence in $S$ is Cauchy for $d$ if and only if it is Cauchy for $\mu$.
+\end{lemma}
+\begin{proof}
+    % TODO: Add proof later
+\end{proof}
+
+\begin{proposition}
+    $\left(C(\Omega, X), \rho\right)$ is a metric space. 
+\end{proposition}
+\begin{proof}
+    It is clear from the definition that $\rho(f, g) = \rho(g, f)$ for all $f,g\in C(\Omega, X)$. Further, due to \thref{equivalent-metric}, each factor in the infinite sum satisfies the triangle inequality, and so $\rho$ also satisfies the triangle inequality. Finally, suppose $\rho(f, g) = 0$. Since the infinite sum is a sum of positive terms, they must all be zero, consequently, $\rho_n(f, g) = 0$ for all $n\ge 1$. That is, $f(z) = g(z)$ for all $z\in K_n$ for all $n\ge 1$. But $\Omega = \displaystyle\bigcup_{n = 1}^\infty K_n$, and hence $f = g$ on $\Omega$.
+\end{proof}
+
+
+\begin{lemma}\thlabel{equivalent-conditions-small-distance}
+    Let $\rho$ be the metric as in \eqref{the-metric}. 
+    \begin{enumerate}[label=(\arabic*)]
+        \item If $\varepsilon > 0$ is given then there is a $\delta > 0$ and a compact set $K\subseteq\Omega$ such that for $f,g\in C(\Omega, X)$, 
+        \begin{equation*}
+            \sup\left\{d(f(z), g(z))\colon z\in K\right\} < \delta \implies \rho(f, g) < \varepsilon.
+        \end{equation*}
+        \item If $\delta > 0$ and a compact set $K$ are given, then there is an $\varepsilon > 0$ such that for $f, g\in C(\Omega, X)$, 
+        \begin{equation*}
+            \rho(f, g) < \varepsilon\implies\sup\left\{d(f(z), g(z))\colon z\in K\right\} < \delta.
+        \end{equation*}
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+    \item Since the sum $\displaystyle\sum_{n = 1}^\infty\frac{1}{2^n}$ converges, there is a positive integer $N$ such that 
+    \begin{equation*}
+        \sum_{n = N + 1}^\infty\frac{1}{2^n} < \frac{\varepsilon}{2}.
+    \end{equation*}
+    Set $K = K_N$ and choose $\delta > 0$ such that 
+    \begin{equation*}
+        \frac{\delta}{1 + \delta} < \frac{\varepsilon}{2}.
+    \end{equation*}
+    If $f, g\in C(\Omega, X)$ are such that $\sup\left\{d(f(z), g(z)) \colon z\in K\right\} < \delta$, then 
+    \begin{equation*}
+        \rho(f, g) = \sum_{n = 1}^N\frac{1}{2^n}\frac{\rho_n(f, g)}{1 + \rho_n(f, g)} + \sum_{n = N + 1}^\infty\frac{1}{2^n}\frac{\rho_n(f, g)}{1 + \rho_n(f, g)} < \frac{\varepsilon}{2}\sum_{n = 1}^N\frac{1}{2^n} + \sum_{n = N + 1}^\infty\frac{1}{2^n} < \varepsilon.
+    \end{equation*}
+
+    \item Choose a positive integer $N$ such that $K\subseteq K_N$. If $\rho(f, g) < \varepsilon$, then 
+    \begin{equation*}
+        \frac{1}{2^N}\frac{\rho_N(f, g)}{1 + \rho_N(f, g)}\le\rho(f, g) < \varepsilon.
+    \end{equation*}
+    Set $\varepsilon = \frac{1}{2^N}\frac{\delta}{1 + \delta}$. Then 
+    \begin{equation*}
+        \frac{\rho_N(f, g)}{1 + \rho_N(f, g)} < \frac{\delta}{1 + \delta}.
+    \end{equation*}
+    Since the function $t\mapsto\frac{t}{1 + t}$ is an increasing function, we have that $\rho_N(f, g) < \delta$, and hence 
+    \begin{equation*}
+        \sup\left\{d(f(z), g(z))\colon z\in K\right\}\le\rho_N(f, g) < \delta,
+    \end{equation*}
+    as desired. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}\thlabel{characterization-of-open-sets-and-convergence}
+\begin{enumerate}[label=(\arabic*)]
+    \item A set $\calU\subseteq C(\Omega, X)$ is open if and only if for each $f\in\calU$ there is a compact set $K\subseteq\Omega$ and a $\delta > 0$ such that 
+    \begin{equation*}
+        \{g\in C(\Omega, X)\colon d(f(z), g(z)) < \delta,~\forall~z\in K\}\subseteq\calU.
+    \end{equation*}
+    \item A sequence $(f_n)_{n\ge 1}$ in $C(\Omega, X)$ converges to $f\in C(\Omega, X)$ if and only if $(f_n)_{n\ge 1}$ converges to $f$ uniformly on all compact subsets of $\Omega$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+    \item Suppose $\calU$ is open. Then there is an $\varepsilon > 0$ such that whenever $\rho(f, g) < \varepsilon$, $g\in\calU$. Using \thref{equivalent-conditions-small-distance}, there is a compact set $K\subseteq\Omega$ and a $\delta > 0$ such that 
+    \begin{equation*}
+        \sup\left\{d(f(z), g(z))\colon z\in K\right\} < \delta \implies \rho(f, g) < \varepsilon\implies g\in\calU.
+    \end{equation*}
+    Conversely, suppose for every $f\in\calU$, there is a compact set $K\subseteq\Omega$ and a $\delta > 0$ such that 
+    \begin{equation*}
+        \{g\in C(\Omega, X)\colon d(f(z), g(z)) < \delta,~\forall~z\in K\}\subseteq\calU.
+    \end{equation*}
+    Again, using \thref{equivalent-conditions-small-distance}, there is an $\varepsilon > 0$ such that 
+    \begin{equation*}
+        \rho(f, g) < \varepsilon \implies\sup\left\{d(f(z), g(z))\colon z\in K\right\} < \delta\implies g\in\scrU.
+    \end{equation*}
+
+    \item Suppose $(f_n)_{n\ge 1}$ converges to $f$ in $C(\Omega, X)$ and let $K\subseteq\Omega$ be a compact set. For any $\delta > 0$, there exists an $\varepsilon > 0$ such that 
+    \begin{equation*}
+        \rho(f, g) < \varepsilon\implies\sup\left\{d(f(z), g(z))\colon z\in K\right\} < \delta.
+    \end{equation*}
+    But since $f_n\to f$ in $C(\Omega, X)$, there exists a positive integer $N$ such that $\rho(f_n, f) < \varepsilon$ for all $n\ge N$. As a result, $\sup\{d(f_n(z), f(z))\colon z\in K\} < \delta$ for all $n\ge N$. Hence $(f_n)_{n\ge 1}$ converges to $f$ uniformly on compact subsets of $\Omega$. 
+
+    Conversely, suppose $(f_n)_{n\ge 1}$ converges to $f$ uniformly on compact subsets of $\Omega$ and let $\varepsilon > 0$. Then there is a compact set $K\subseteq\Omega$ and $\delta > 0$ such that 
+    \begin{equation*}
+        \sup\left\{d(f(z), g(z))\colon z\in K\right\} < \delta\implies\rho(f, g) < \varepsilon.
+    \end{equation*}
+    Since $(f_n)_{n\ge 1}$ converges to $f$ uniformly on $K$, there is a positive integer $N$ such that 
+    \begin{equation*}
+    \sup\{d(f_n(z), f(z))\colon z\in K\} < \delta
+    \end{equation*}
+    for all $n\ge N$. As a result, $\rho(f_n, f) < \varepsilon$ for all $n\ge N$, i.e., $(f_n)_{n\ge 1}$ converges to $f$ in $C(\Omega, X)$, thereby completing the proof. \qedhere
+\end{enumerate}
+\end{proof}
+
+An upshot of the above result is that the topology on $C(\Omega, X)$ is independent of the chosen exhaustion of $\Omega$. That is, if 
+\begin{equation*}
+    G = \bigcup_{n = 1}^\infty K_n'\quad\text{ and }\quad K_n'\subseteq \left(K_{n + 1}'\right)^\circ,
+\end{equation*}
+and this induces the metric $\rho'$ on $C(\Omega, X)$, then the topology induced by $\rho$ is the same as the topology induced by $\rho'$. This is clear because the characterization of open sets in \thref{characterization-of-open-sets-and-convergence} is independent of the chosen exhaustion. This ``canonical'' topology on $C(\Omega, X)$ is called the \define{compact-open topology}.
+
+\begin{theorem}
+    $\left(C(\Omega, X),\rho\right)$ is a complete metric space.
+\end{theorem}
+\begin{proof}
+    % TODO: Add in proof.
+\end{proof}
+
+
+\subsection{The Arzel\`a-Ascoli Theorem and Normal Families}
+
+
+\section{The Riemann Mapping Theorem}
+
+\begin{theorem}[Riemann]
+    Let $\Omega\subsetneq\bbC$ be a proper simply connected region and let $a\in\Omega$. Then there is a unique holomorphic function $f\in\scrO(\Omega)$ with the properties: 
+    \begin{enumerate}[label=(\roman*)]
+        \item $f(a) = 0$ and $f'(a) > 0$. 
+        \item $f$ is injective.
+        \item The image of $f$ is the unit disk $\bbD$.
     \end{enumerate}
 \end{theorem}
 
@@ -402,6 +559,131 @@ we have, by definition that $p_n\to z\ne 0$ in $\bbC$. But since $z_n = p_n/p_{n
 
     If $a\in\Omega$ is a zero of $f$, then $a$ is a zero of only a finite number of functions $f_n$ , and the multiplicity of the zero of $f$ at $a$ is the sum of the multiplicities of the zeros of the functions $f_n$ at $a$.
 \end{theorem}
+
+\subsection{Jensen's Formula}
+
+\begin{theorem}[Jensen]\thlabel{jensen-formula}
+    Let $\Omega\subseteq\bbC$ be a region containing a closed disk $\overline B(0, R)$ for some $R > 0$. Let $f\in\scrO(\Omega)$ be a holomorphic function such that 
+    \begin{enumerate}[label=(\roman*)]
+        \item $f(0)\ne 0$, and 
+        \item $f$ has no zeros on the circle $\{z\colon |z| = R\}$.
+    \end{enumerate}
+    If $a_1,\dots, a_n$ are the zeros of $f$ in $B(0, R)$ repeated according to multiplicity, then 
+    \begin{equation*}
+        |f(0)|\prod_{k = 1}^n\frac{R}{|a_k|} = \exp\left(\frac{1}{2\pi}\int_0^{2\pi}\log|f(Re^{i\theta})|~d\theta\right).
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Define $g\in\scrO(\Omega)$ as 
+    \begin{equation*}
+        g(z) = \frac{f(z)}{(z - a_1)\cdots(z - a_n)}.
+    \end{equation*}
+    Then $g$ is a holomorphic function with no zeros in the closed ball $\overline B(0, R)$. To prove Jensen's formula for $f$, we shall prove it for $g$ and for functions of the form $z\mapsto z - a$ for some $a\in B(0, R)$. The conclusion would then follow because if $f_1$ and $f_2$ are two holomorphic functions for which Jensen's formula holds, then it must hold for $f_1f_2$.
+
+    Since $g$ does not vanish in a neighborhood of the compact set $\overline B(0, R)$, the function $z\mapsto\log|g(z)|$ is a harmonic function and as such, has the mean value property, that is, 
+    \begin{equation*}
+        \log |g(0)| = \frac{1}{2\pi}\int_0^{2\pi}\log|g(Re^{i\theta})|~d\theta.
+    \end{equation*}
+    Exponentiating both sides, $g$ satisfies Jensen's formula. 
+
+    Next, we claim that 
+    \begin{equation*}
+        \int_0^{2\pi}\log |e^{i\theta} - a|~d\theta = 0
+    \end{equation*}
+    whenever $|a| < 1$. Making the change of variables $\theta\mapsto -\theta$, this is equivalent to proving 
+    \begin{equation*}
+        \int_0^{2\pi}\log |1 - ae^{i\theta}|~d\theta = 0
+    \end{equation*}
+    whenever $|a| < 1$. Consider the function $h(z) = 1 - az$, which does not vanish in a neighborhood of closed unit disk $\overline\bbD$. Again, using the mean value property for the harmonic function $z\mapsto |h(z)|$ and integrating over the unit disk, we have 
+    \begin{equation*}
+        0 = \log|h(0)| = \frac{1}{2\pi}\int_0^{2\pi}\log|1 - ae^{i\theta}|~d\theta,
+    \end{equation*}
+    as desired. 
+
+    Finally, we must show that the function $F\colon z\mapsto z - a$ satisfies Jensen's formula when $a\in B(0, R)$. That is, we must show that 
+    \begin{equation*}
+        \log |F(0)| + \log R - \log |a| = \frac{1}{2\pi}\int_0^{2\pi}\log|Re^{i\theta} - a|~d\theta.
+    \end{equation*}
+    Note that $F(0) = -a$, and hence, the above is equivalent to showing that 
+    \begin{equation*}
+        \int_0^{2\pi}\log\left|e^{i\theta} - \frac{a}{R}\right|~d\theta = 0,
+    \end{equation*}
+    which has already been established.
+\end{proof}
+
+
+\begin{theorem}\thlabel{sum-of-distance-from-1}
+    Suppose $f$ is a bounded holomorphic function on $\bbD$ which is not identically zero, and $a_1, a_2, \dots$ are the zeros of $f$, repeated according to multiplicity and $|a_n|\le |a_{n + 1}|$ for all $n\ge 1$. Then 
+    \begin{equation*}
+        \sum_{n = 1}^\infty (1 - |a_n|) < \infty.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Replacing $f(z)$ by $f(z)/z^m$ if necessary, we may suppose without loss of generality that $f(0)\ne 0$. Since $f$ has only countably many zeros, there are uncountably many $0 < r < 1$ such that $|a_n|\ne r$ for any $n\ge 1$. Extract an increasing subsequence $(r_n)_{n\ge 1}$ from these values of $r$ such that $r_n\to 1^-$ as $n\to\infty$. For $0 < r < 1$, let $\frakn(r)$ denote the number of zeros of $f$ contained in the closed ball $\overline B(0, r)$.
+
+    Let $k > 0$ be a positive integer and let $N\ge 1$ be such that $\frakn(r_n)\ge k$ for all $n\ge N$. Then, due to \thref{jensen-formula}, 
+    \begin{equation*}
+        |f(0)|\prod_{j = 1}^k\frac{r_n}{|a_j|}\le|f(0)|\prod_{j = 1}^{\frakn(r_n)}\frac{r_n}{|a_j|} = \exp\left(\frac{1}{2\pi}\int_0^{2\pi}\log|f(r_n e^{i\theta})|~d\theta\right).
+    \end{equation*}
+    Since $f$ is bounded on $\bbD$, there is a constant $C > 0$ such that the right hand side of the above expression is bounded above by $C$ for every $n\ge 1$. Thus 
+    \begin{equation*}
+        \prod_{j = 1}^k |a_j|\ge C^{-1}|f(0)| r_n^k
+    \end{equation*}
+    for all $n\ge N$. Taking $n\to\infty$, we obtain 
+    \begin{equation*}
+        \prod_{j = 1}^k |a_j|\ge C^{-1}|f(0)| > 0.
+    \end{equation*}
+    Note that the partial products of $\displaystyle\prod_{j = 1}^\infty |a_j|$ form a decreasing sequence, and hence must converge. The above property implies that the product converges to a non-zero quantity. Finally, note that 
+    \begin{equation*}
+        C^{-1}|f(0)|\le\prod_{j = 1}^k |a_j|\le\exp\left(-\sum_{j = 1}^k (1 - |a_j|)\right),
+    \end{equation*}
+    so that 
+    \begin{equation*}
+        \sum_{j = 1}^k (1 - |a_j|)\le -\log\left(C^{-1}|f(0)|\right),
+    \end{equation*}
+    and hence, the sum $\displaystyle\sum_{j = 1}^k (1 - |a_j|)$ converges.
+\end{proof}
+
+\subsection{The Muntz-Szasz Theorem}
+
+Let $I$ denote the unit interval $[0, 1]$.
+
+\begin{theorem}[Muntz-Szasz]\thlabel{muntz-szasz-theorem}
+    Let $0 < \lambda_1 < \lambda_2 < \cdots$ be a sequence of positive real numbers and let $X$ be the closure in $C(I)$ of the span of $\{1, t^{\lambda_1}, t^{\lambda_2},\dots\}$. 
+    \begin{enumerate}[label=(\arabic*)]
+        \item If $\displaystyle\sum_{n = 1}^\infty \frac{1}{\lambda_n} = +\infty$, then $X = C(I)$. \label{diverging-sum}
+        \item If $\displaystyle\sum_{n = 1}^\infty \frac{1}{\lambda_n} < \infty$, and if $\lambda\notin(\lambda_n)_{n\ge 1}$, $\lambda\ne 0$, then $X$ does not contain the function $t^\lambda$. \label{converging-sum}
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Consider the case \ref{diverging-sum} first. If $X$ were not dense in $C(I)$, then there would exist a non-zero bounded linear functional $\Lambda\colon C(I)\to\bbC$ which vanishes on $X$. Due to the Riesz Representation Theorem, there exists a complex Borel measure $\mu$ on $I$ such that 
+    \begin{equation*}
+        \Lambda f = \int_I f~d\mu.
+    \end{equation*}
+    By our hypothesis, 
+    \begin{equation*}
+        \int_I t^{\lambda_n}~d\mu = 0
+    \end{equation*}
+    for all $n\ge 1$. Define the function $f\colon\{z\colon\Re z > 0\}\to \bbC$ by 
+    \begin{equation*}
+        f(z) = \int_{(0, 1]} t^z~d\mu(t) = \int_I t^z~d\mu(t).
+    \end{equation*}
+    The continuity of $f$ can be verified using the Dominated Convergence Theorem\footnote{Recall that $\mu = hd|\mu|$ for any complex Borel measure $\mu$, where $|\mu|$ is the total variation measure.}. Further, due to Morera's theorem, the integral of $t^z$ over any triangle contained in the right half plane is zero, whence, due to Fubini's theorem, the integral of $f(z)$ over any triagle contained in the right half plane is zero. Thus $f$ is holomorphic on the right half plane. For any $z = x + \iota y$ with $x > 0$, note that $|t^z| = t^x\le 1$ for any $t\in (0, 1]$, consequently $f$ is bounded on the right half plane. 
+
+    Suppose $f$ is not identically zero. Define $g\colon\bbD\to\bbC$ by 
+    \begin{equation*}
+        g(z) = f\left(\frac{1 + z}{1 - z}\right).
+    \end{equation*}
+    This is a bounded holomorphic function on $\bbD$ with zeros at $\dfrac{\lambda_n - 1}{\lambda_n + 1}$. But it is easy to see that the sum
+    \begin{equation*}
+        \sum_{n = 1}^\infty\left(1 - \frac{\lambda_n - 1}{\lambda_n + 1}\right) = +\infty,
+    \end{equation*}
+    and hence, in light of \thref{sum-of-distance-from-1}, $f$ must be identically zero, that is, 
+    \begin{equation*}
+        \int_{I} t^\lambda~d\mu = 0
+    \end{equation*}
+    for each $\lambda > 0$. But since the polynomials are dense in $C(I)$, we see that $\Lambda = 0$, a contradiction. Thus $X$ is dense in $C(I)$.  % TODO: Complete the proof of Case 2
+\end{proof}
 
 \section{Runge's Theorem}
 
