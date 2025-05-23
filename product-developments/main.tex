@@ -655,4 +655,66 @@ Now that we have an integral representation of $f(z)$, we shall approximate it u
     \end{equation*}
     at $a_n$ for each $n\ge 1$. Clearly $f(z) = g(z)h(z)$ has removable singularities at each $a_n$ and $f(a_n) = c_n$. 
 \end{proof}
+
+A significantly more general statement is true; instead of just specifying values of a function at countably many points, we can specify the tail of its power series representation at those points: 
+\begin{theorem}\thlabel{specify-tail-of-power-series}
+    Let $\Omega\subseteq\bbC$ be a region. Let $(a_n)_{n\ge 1}$ be a sequence of distinct points in $\Omega$ with no limit point in $\Omega$. For each $n\ge 1$, associate a non-negative integer $m_n\ge 0$, and complex numbers $w_{nj}$ for $0\le j\le m_n$. Then there exists a holomorphic function $f\in\scrO(\Omega)$ such that 
+    \begin{equation*}
+        f^{(j)}(a_n) = j! w_{nj}
+    \end{equation*}
+    for all $n\ge 1$ and $0\le j\le m_n$\footnote{That is, the power series representation of $f$ about $a_n$ is of the form 
+    \begin{equation*}f(z) = w_{n0} + w_{n1}(z - a_n) + \dots .\end{equation*}}.
+\end{theorem}
+\begin{proof}
+    Let $g\in\scrO(\Omega)$ have zeros at only the $a_n$'s with multiplicity $m_n + 1$ respectively. We shall use \thref{mittag-leffler-theorem} to find a meromorphic function $h$ on $\Omega$, which is holomorphic on $\Omega\setminus\{a_1, a_2,\dots\}$ and has singular part 
+    \begin{equation*}
+        S_n(z) = \frac{b_{n1}}{z - a} + \frac{b_{n2}}{(z - a)^2} + \dots + \frac{b_{n, m_n + 1}}{(z - a)^{m_n + 1}}
+    \end{equation*}
+    at each $a_n$, where $b_{nj}\in\bbC$ are complex numbers to be chosen later. Conisder the power series expansion of $g(z)$ about $z - a_n$: 
+    \begin{equation*}
+        g(z) = (z - a_n)^{m_n + 1}\left(c_{n0} + c_{n1}(z - a_n) + c_{n2}(z - a_n)^2 + \dots\right),
+    \end{equation*}
+    for some complex numbers $c_{nj}$, $j\ge 0$. Note that $c_{n0}\ne 0$. Then 
+    \begin{equation*}
+        g(z)S_n(z) = \left(b_{n, m_n + 1} + b_{n, m_n}(z - a) + \dots + b_{n1}(z - a)^{m_n}\right)\left(c_{n0} + c_{n1}(z - a_n) + \dots \right).
+    \end{equation*}
+    We would like to choose $b_{n1},\dots,b_{n, m_n + 1}$ such that the above product expands to 
+    \begin{equation*}
+        w_{n0} + w_{n1}(z - a_n) + w_{n2}(z - a_n)^2 + \dots.
+    \end{equation*}
+    The $b_{nj}$'s can be chosen inductively since $c_{n0}\ne 0$, so that we begin by setting $b_{n, m_n + 1} = w_{n0}c_{n0}^{-1}$. And at each stage, one obtains a linear equation in $b_{nj}$ with coefficient $c_{n0}$, which is again non-zero, and so that equation has a (unique) solution. 
+
+    Finally, using \thref{mittag-leffler-theorem} to choose a meromorphic function $h$ on $\Omega$ having poles at precisely the $a_n$'s with singular parts $S_n(z)$ respectively, it is clear that $f(z) = g(z)h(z)$ has the desired power series expansion at each $a_n$, thereby completing the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $\Omega\subseteq\bbC$ be a region. Then $\scrO(\Omega)$ is a B\'ezout domain, that is, every finitely generated ideal in $\scrO(\Omega)$ is principal.
+\end{theorem}
+\begin{proof}
+    Inductively, it suffices to show that $(f, g)$ is a principal ideal for $f, g\in\scrO(\Omega)$. First, we shall show that if $f$ and $g$ have no common zeros, then $(f, g) = (1)$. Let $a_1,a_2,\dots$ be the distict zeros of $f$ with multiplicities $m_1, m_2,\dots$ respectively (note that these zeros can be finite in number). We contend that there exists $\varphi\in\scrO(\Omega)$ such that $1 - \varphi g$ has zeros $a_1, a_2, \dots$ with multiplicities $m_1', m_2',\dots$ respectively such that $m_j'\ge m_j$ for all $j\ge 1$.
+
+    Let $k\ge 1$ and consider the power series representation of $g$ about $a_k$: 
+    \begin{equation*}
+        g(z) = b_{k0} + b_{k1}(z - a_k) + b_{k2}(z - a_k)^2 + \dots,
+    \end{equation*}
+    where $b_{k0}\ne 0$ since $f$ and $g$ do not share a zero. We want the power series representation of $\varphi$ about $a_k$ 
+    \begin{equation*}
+        \varphi(z) = w_{k0} + w_{k1}(z - a_k) + w_{k2}(z - a_k)^2 + \dots
+    \end{equation*}
+    to be such that 
+    \begin{equation*}
+        \varphi(z)g(z) = 1 + c_{m_k}(z - a_k)^{m_k} + \dots 
+    \end{equation*}
+    for some $c_{m_k}\in\bbC$. This can clearly be done inductively just as in the proof of \thref{specify-tail-of-power-series} since $b_{k0}\ne 0$. Further, the existence of such a $\varphi\in\scrO(\Omega)$ is guaranteed by \thref{specify-tail-of-power-series}. By construction, it is clear that there exists a holomorphic function $h\in\scrO(\Omega)$ such that $h(z)f(z) = 1 - \varphi(z)g(z)$, i.e., $1\in (f, g)$, as desired.
+
+    Finally, suppose $f$ and $g$ are arbitrary holomorphic functions in $\scrO(\Omega)$. Let $a_1,a_2,\dots$ be the common zeros of $f$ and $g$ with 
+    \begin{equation*}
+        m_n = \min\left\{m(f; a_n), m(g; a_n)\right\}\ge 1,
+    \end{equation*}
+    for all $n\ge 1$. Let $\varphi\in\scrO(\Omega)$ be a holomorphic function with zeros at precisely the $a_n$'s with multiplicities $m_n$ respectively. Then there exist holomorphic functions $\wt f, \wt g\in\scrO(\Omega)$ such that $f = \varphi\wt f$ and $g = \varphi\wt g$; further $f$ and $g$ do not have common zeros. As a result, 
+    \begin{equation*}
+        (f, g) = (\varphi\wt f, \varphi\wt g) = (\varphi)(\wt f, \wt g) = (\varphi),
+    \end{equation*}
+    thereby completing the proof.
+\end{proof}
 \end{document}
