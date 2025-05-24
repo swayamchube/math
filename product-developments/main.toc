@@ -1,10 +1,11 @@
 \contentsline {section}{\numberline {1}The Space of Holomorphic Functions}{1}{section.1}%
 \contentsline {subsection}{\numberline {1.1}The Arzel\`a-Ascoli Theorem and Normal Families}{4}{subsection.1.1}%
-\contentsline {section}{\numberline {2}The Riemann Mapping Theorem}{4}{section.2}%
-\contentsline {section}{\numberline {3}Product Developments}{4}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Generalities}{4}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Jensen's Formula}{6}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}The Muntz-Szasz Theorem}{8}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Runge's Theorem}{9}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Simply connected regions}{13}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Mittag-Leffler's Theorem}{14}{subsection.4.2}%
+\contentsline {subsection}{\numberline {1.2}Convergence of Holomorphic Functions and Montel's Theorem}{6}{subsection.1.2}%
+\contentsline {section}{\numberline {2}The Riemann Mapping Theorem}{6}{section.2}%
+\contentsline {section}{\numberline {3}Product Developments}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Generalities}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Jensen's Formula}{8}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}The Muntz-Szasz Theorem}{10}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Runge's Theorem}{11}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Simply connected regions}{16}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Mittag-Leffler's Theorem}{16}{subsection.4.2}%

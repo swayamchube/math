@@ -444,15 +444,140 @@ An upshot of the above result is that the topology on $C(\Omega, X)$ is independ
 \end{equation*}
 and this induces the metric $\rho'$ on $C(\Omega, X)$, then the topology induced by $\rho$ is the same as the topology induced by $\rho'$. This is clear because the characterization of open sets in \thref{characterization-of-open-sets-and-convergence} is independent of the chosen exhaustion. This ``canonical'' topology on $C(\Omega, X)$ is called the \define{compact-open topology}.
 
-\begin{theorem}
+\begin{theorem}\thlabel{continuous-functions-are-complete}
     $\left(C(\Omega, X),\rho\right)$ is a complete metric space.
 \end{theorem}
 \begin{proof}
-    % TODO: Add in proof.
+    Let $(f_n)_{n\ge 1}$ be a Cauchy sequence in $C(\Omega, X)$. First, we shall show that there is a function $f\colon\Omega\to X$ with the property that 
+    \begin{equation*}
+        \lim_{n\to\infty} f_n(z) =  f(z) \qquad\forall~z\in\Omega.
+    \end{equation*}
+    Indeed, for any $\delta > 0$ and $z\in \Omega$, the set $K = \{z\}$ is compact, so in view of \thref{equivalent-conditions-small-distance}, there is an $\varepsilon > 0$ such that 
+    \begin{equation*}
+        \rho(f, g) < \varepsilon\implies d(f(z), g(z)) < \delta.
+    \end{equation*}
+    Since $(f_n)_{n\ge 1}$ is Cauchy, the above implies that $(f_n(z))_{n\ge 1}$ is also Cauchy. Since $(X, d)$ is complete, there exists $f(z)\in X$ such that 
+    \begin{equation*}
+        \lim_{n\to\infty} f_n(z) = f(z).
+    \end{equation*}
+    This defines a function $f\colon\Omega\to X$ with the required property. It remains to show that $f$ is continuous and $f_n\to f$ in $C(\Omega, X)$. 
+
+    Note that $\displaystyle\Omega = \bigcup_{n = 1}^\infty K_n^\circ$, and just as we argued earlier using \thref{equivalent-conditions-small-distance} and $K = K_N$ for some $N\ge 1$, the sequence $(f_n)_{n\ge 1}$ is uniformly Cauchy on each $K_N$. Thus, $(f_n)_{n\ge 1}$ converges uniformly to $f$ on $K_N$, and hence on $K_N^\circ$. In particular, this means that $f$ is continuous on $K_N^\circ$. Since the $K_N^\circ$'s cover $\Omega$, it follows that $f$ is continuous on $\Omega$.
+
+    Next, we shall show that $f_n\to f$ in $C(\Omega, X)$. By \thref{characterization-of-open-sets-and-convergence}, $f_n\to f$ in $C(\Omega, X)$ if and only if $(f_n)_{n\ge 1}$ converges to $f$ uniformly on compact subsets $\Omega$. But since every compact subset of $\Omega$ is contained in some $K_N$, it follows from the preceding paragraph that $f_n\to f$ in $C(\Omega, X)$, thereby completing the proof.
 \end{proof}
 
-
 \subsection{The Arzel\`a-Ascoli Theorem and Normal Families}
+
+\begin{definition}
+    Let $(S, \mu)$ be a metric space. A subset $\scrF\subseteq S$ is said to be \define{normal} if each sequence in $\scrF$ has a subsequence that converges in $S$.
+\end{definition}
+
+\begin{proposition}\thlabel{normal-iff-relatively-compact}
+    Let $(S,\mu)$ be a metric space. A subset $\scrF\subseteq S$ is normal if and only if $\overline\scrF$ is compact in $S$.
+\end{proposition}
+\begin{proof}
+    Recall that a metric space is compact if and only if it is sequentially compact, that is, every sequence has a convergent subsequence. So if $\overline\scrF$ were compact, then every sequence in $\scrF$ would have a convergent subsequence in $\overline\scrF\subseteq S$. 
+
+    Conversely, suppose every sequence in $\scrF$ has a convergent subsequence in $S$. Let $(y_n)_{n\ge 1}$ be a sequence in $\overline\scrF$. There is a sequence $(x_n)_{n\ge 1}$ in $\scrF$ such that $\mu(x_n, y_n) < \frac{1}{n}$. According to our assumption, there exists an $x\in S$ and a subsequence $(x_{n_k})_{k\ge 1}$ such that $x_{n_k}\to x$ in $S$. Clearly $x\in\overline\scrF$ and 
+    \begin{equation*}
+        d(y_{n_k}, x)\le d(y_{n_k}, x_{n_k}) + d(x_{n_k}, x) < \frac{1}{n_k} + d(x_{n_k}, x)
+    \end{equation*}
+    for all $k\ge 1$. Taking $k\to\infty$, we get that $y_{n_k}\to x$, whence $\overline\scrF$ is sequentially compact and hence compact.
+\end{proof}
+
+\begin{lemma}\thlabel{totally-bounded-iff-closure-is}
+    Let $(S,\mu)$ be a metric space. A subset $\scrF\subseteq S$ is totally bounded if and only if $\overline\scrF$ is so.
+\end{lemma}
+\begin{proof}
+    Suppose $\scrF$ is totally bounded and let $\varepsilon > 0$. There exist $x_1,\dots,x_n\in\scrF$ such that 
+    \begin{equation*}
+        \scrF\subseteq\bigcup_{k = 1}^n B_S\left(x_k, \frac{\varepsilon}{2}\right)\subseteq\bigcup_{k = 1}^n\overline B_S\left(x_k, \frac{\varepsilon}{2}\right).
+    \end{equation*}
+    Since the latter union is closed, we have that 
+    \begin{equation*}
+        \overline\scrF\subseteq\bigcup_{k = 1}^n\overline B_S\left(x_k, \frac{\varepsilon}{2}\right)\subseteq\bigcup_{k = 1}^n B_S(x_k, \varepsilon).
+    \end{equation*}
+    Thus $\overline\scrF$ is totally bounded.
+
+    Conversely, suppose $\overline\scrF$ is totally bounded and let $\varepsilon > 0$. There exist $y_1,\dots, y_n\in\overline\scrF$ such that 
+    \begin{equation*}
+        \overline\scrF\subseteq\bigcup_{k = 1}^n B_S\left(y_k, \frac{\varepsilon}{2}\right).
+    \end{equation*}
+    For each $1\le k\le n$, there is some $x_k\in B_S\left(y_k,\frac{\varepsilon}{2}\right)\cap\scrF$, and hence 
+    \begin{equation*}
+        \overline\scrF\subseteq\bigcup_{k = 1}^n B_S\left(y_k, \frac{\varepsilon}{2}\right)\subseteq\bigcup_{k = 1}^n B_S(x_k, \varepsilon),
+    \end{equation*}
+    so that $\scrF$ is totally bounded, thereby completing the proof.
+\end{proof}
+
+\begin{proposition}
+    A set $\scrF\subseteq C(\Omega, X)$ is normal if and only if for each compact set $K\subseteq\Omega$ and $\delta > 0$, there are functions $f_1,\dots,f_n\in\scrF$ such that for any $f\in\scrF$, there is an index $1\le k\le n$ with 
+    \begin{equation*}
+        \sup\left\{d(f(z), f_k(z))\colon z\in K\right\} < \delta.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Recall that a metric space is compact if and only if it is complete and totally bounded. In view of \thref{continuous-functions-are-complete}, \thref{normal-iff-relatively-compact}, and \thref{totally-bounded-iff-closure-is}, $\scrF$ is normal if and only if it is totally bounded.
+
+    Suppose $\scrF$ is normal, then it is totally bounded. Let $K\subseteq\Omega$ be a compact set and $\delta > 0$. By \thref{equivalent-conditions-small-distance} there is a $\varepsilon > 0$ such that 
+    \begin{equation*}
+        \rho(f, g) < \varepsilon\implies\sup\left\{d(f(z), g(z))\colon z\in K\right\} < \delta.
+    \end{equation*}
+    There are $f_1,\dots, f_n\in\scrF$ such that 
+    \begin{equation*}
+        \scrF\subseteq \bigcup_{k = 1}^n B_\rho\left(f_k, \varepsilon\right).
+    \end{equation*}
+    Now, for any $f\in\scrF$, there is an index $1\le k\le n$ with $\rho(f, f_k) < \varepsilon$, and hence 
+    \begin{equation*}
+        \sup\left\{d(f(z), f_k(z))\colon z\in K\right\} < \delta.
+    \end{equation*}
+
+    Conversely, suppose the given condition holds and let $\varepsilon > 0$. Then by \thref{equivalent-conditions-small-distance} there is a compact set $K\subseteq\Omega$ and a $\delta > 0$ such that 
+    \begin{equation*}
+        \sup\left\{d(f(z), g(z))\colon z\in K\right\} < \delta\implies\rho(f, g) < \varepsilon.
+    \end{equation*}
+    We claim that $\displaystyle\scrF\subseteq\bigcup_{k = 1}^n B_\rho(f_k, \varepsilon)$. Indeed, if $f\in\scrF$, then there exists an index $1\le k\le n$ such that 
+    \begin{equation*}
+        \sup\left\{d(f(z), f_k(z))\colon z\in K\right\} < \delta \implies \rho(f, f_k) < \varepsilon,
+    \end{equation*}
+    that is, $f\in B_\rho(f_k, \varepsilon)$. This completes the proof.
+\end{proof}
+
+Our next goal is to prove the Arzel\`a-Ascoli theorem, which we shall adapt to normal families of holomorphic functions in order to prove Montel's theorem. 
+
+\begin{definition}
+    A set $\scrF\subseteq C(\Omega, X)$ is \define{equicontinuous at a point} $z_0\in\Omega$ if for every $\varepsilon > 0$, there is a $\delta > 0$ such that for all $z\in\Omega$ with $|z - z_0| < \delta$, $d(f(z), f(z_0)) < \varepsilon$ for all $f\in\scrF$.
+
+    The set $\scrF$ is said to be \define{equicontinuous over a set} $E\subseteq\Omega$ if for every $\varepsilon > 0$, there is a $\delta > 0$ such that for all pairs $z, z'\in E$ with $|z - z'| < \delta$, $d(f(z), f(z')) < \varepsilon$ for all $f\in\scrF$.
+\end{definition}
+
+Clearly every finite collection of functions in $C(\Omega, X)$ is equicontinuous. Furthermore, if a family $\scrF$ is equicontinuous over $E\subseteq\Omega$, then every element of the family is uiformly continuous on $E$.
+
+\begin{proposition}
+    If $\scrF\subseteq C(\Omega, X)$ is equicontinuous at each point of $\Omega$, then it is equicontinuous over every compact set of $\Omega$.
+\end{proposition}
+\begin{proof}
+    Let $K\subseteq\Omega$ be a compact set and let $\varepsilon > 0$. For each point $z\in K$, there is a $\delta_z > 0$ such that whenever $|\zeta - z| < \delta_z$, $d(f(\zeta), f(z)) < \frac{\varepsilon}{2}$ for all $f\in\scrF$. Note that the open balls $\{B(z, \delta_z)\colon z\in K\}$ form an open cover of $K$ and hence, has a corresponding Lebesgue number, say $\lambda > 0$. Thus if $z, z'\in K$ are such that $|z - z'| < \lambda$, then there is a $z_0\in K$ such that $z, z'\in B(z_0, \delta_{z_0})$. As a result, for any $f\in\scrF$.
+    \begin{equation*}
+        d(f(z), f(z'))\le d(f(z), f(z_0)) + d(f(z'), f(z_0)) < \varepsilon,
+    \end{equation*}
+    whence $\scrF$ is equicontinuous over $K$.
+\end{proof}
+
+\begin{theorem}[Arzel\`a-Ascoli]
+    A set $\scrF\subseteq C(\Omega, X)$ is normal if and only if 
+    \begin{enumerate}[label=(\arabic*)]
+        \item for each $z\in\Omega$, $\{f(z)\colon f\in\scrF\}$ has compact closure in $X$, and 
+        \item $\scrF$ is equicontinuous at each point of $\Omega$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    % TODO: Add in later.
+\end{proof}
+
+\subsection{Convergence of Holomorphic Functions and Montel's Theorem}
+
 
 
 \section{The Riemann Mapping Theorem}
