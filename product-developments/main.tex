@@ -554,7 +554,7 @@ Our next goal is to prove the Arzel\`a-Ascoli theorem, which we shall adapt to n
 
 Clearly every finite collection of functions in $C(\Omega, X)$ is equicontinuous. Furthermore, if a family $\scrF$ is equicontinuous over $E\subseteq\Omega$, then every element of the family is uiformly continuous on $E$.
 
-\begin{proposition}
+\begin{proposition}\thlabel{equicontinuous-over-compact}
     If $\scrF\subseteq C(\Omega, X)$ is equicontinuous at each point of $\Omega$, then it is equicontinuous over every compact set of $\Omega$.
 \end{proposition}
 \begin{proof}
@@ -565,6 +565,25 @@ Clearly every finite collection of functions in $C(\Omega, X)$ is equicontinuous
     whence $\scrF$ is equicontinuous over $K$.
 \end{proof}
 
+\begin{lemma}\thlabel{evaluation-map-is-continuous}
+    The evaluation map 
+    \begin{equation*}
+        \ev\colon\Omega\times C(\Omega, X)\to X\qquad (z, f)\mapsto f(z)
+    \end{equation*}
+    is continuous.
+\end{lemma}
+\begin{proof}
+    Fix some $(z_0, f_0)\mapsto f_0(z_0)$ and let $\varepsilon > 0$. There is an $r > 0$ such that whenever $|z - z_0|\le r$, $d(f_0(z), f_0(z_0)) < \frac{\varepsilon}{2}$. By using \thref{equivalent-conditions-small-distance} with $K = \overline B(z_0, r)$ and $\delta = \frac{\varepsilon}{2}$, there is an $\eta > 0$ such that
+    \begin{equation*}
+        \rho(f, g) < \eta \implies \sup\left\{d(f(z), g(z))\colon z\in K\right\} < \frac{\varepsilon}{2}.
+    \end{equation*}
+    Thus, for any $z\in\Omega$ with $|z - z_0| < r$ and $f\in C(\Omega, X)$ with $\rho(f, f_0) < \eta$, we have 
+    \begin{equation*}
+        d(f(z), f_0(z_0)) = d(f(z), f_0(z)) + d(f_0(z), f_0(z_0)) < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon,
+    \end{equation*}
+    whence $\ev$ is continuous.
+\end{proof}
+
 \begin{theorem}[Arzel\`a-Ascoli]
     A set $\scrF\subseteq C(\Omega, X)$ is normal if and only if 
     \begin{enumerate}[label=(\arabic*)]
@@ -573,7 +592,48 @@ Clearly every finite collection of functions in $C(\Omega, X)$ is equicontinuous
     \end{enumerate}
 \end{theorem}
 \begin{proof}
-    % TODO: Add in later.
+    First suppose $\scrF$ is normal, that is, $\overline\scrF$ is compact. For any $z\in\Omega$, by \thref{evaluation-map-is-continuous}, the map $\ev_z\colon C(\Omega, X)\to X$ given by $f\mapsto f(z)$ is continuous, and hence, 
+    \begin{equation*}
+        \overline{\{f(z)\colon f\in\scrF\}}\subseteq\{f(z)\colon f\in\overline\scrF\}
+    \end{equation*}
+    is compact since the latter is compact, being the image of the compact set $\overline\scrF$ under $\ev_z$. It remains to show that $\scrF$ is equicontinuous at each point of $\Omega$. Let $z_0\in\Omega$ and let $\varepsilon > 0$. % TODO: Add proof of equicontinuity
+
+    Conversely, suppose $\overline{\ev_z(\scrF)}$ is compact for each $z\in \Omega$ and that $\scrF$ is equicontinuous at each point of $\Omega$. We shall show that $\scrF$ is normal. To this end, let $Q\subseteq\Omega$ denote the set of all points with rational real and imaginary parts. Clearly $Q$ is dense in $\Omega$. Enumerate $Q$ as $\{z_1, z_2, \dots\}$. 
+    
+    Set $f_{0, n} = f_n$ for all $n\ge 1$. Since $(f_{0, n}(z_1))_{n\ge 0}$ is contained in a compact metric space $\overline{\ev_{z_1}(\scrF)}$, it contains a convergent subsequence. That is, we can extract a subsequence $(f_{1, n})_{n\ge 1}$ such that $(f_{1, n}(z_1))_{n\ge 1}$ converges. Again, $(f_{1, n}(z_2))_{n\ge 1}$ is contained in a compact metric space $\overline{\ev_{z_2}(\scrF)}$, and hence has a convergent subsequence, that is, we can extract a subsequence $(f_{2, n})_{n\ge 1}$ such that $(f_{2, n}(z_2))_{n\ge 1}$ converges. Continuing this way, at each stage we obtain a sequence $(f_{j, n})_{n\ge 1}$ such that $(f_{j, n}(z_j))_{n\ge 1}$ converges.
+    \begin{equation*}
+        \begin{array}{cccc}
+            f_{1, 1} & f_{1,2} & f_{1,3} & \cdots\\
+            f_{2, 1} & f_{2,2} & f_{2,3} & \cdots\\
+            f_{3, 1} & f_{3,2} & f_{3,3} & \cdots\\
+            \vdots & \vdots & \vdots & \ddots
+        \end{array}
+    \end{equation*}
+    We contend that $(f_{n, n})_{n\ge 1}$ converges pointwise on $Q$. Indeed, let $k\ge 1$ be a positive integer and $\varepsilon > 0$. Note that the sequence $(f_{k, n}(z_k))_{n\ge 1}$ converges. Therefore, there is a positive integer $N$ such that for all $m,n\ge N$, $d(f_{k, m}(z_k), f_{k, n}(z_k)) < \varepsilon$. For $m,n\ge N$, $f_{m,m}$ and $f_{n, n}$ are elements in the sequence $(f_{k, j})_{j\ge 1}$ appearing after $f_{k, N}$. As a result, $d(f_{m, m}(z_k), f_{n, n}(z_k)) < \varepsilon$ for $m,n\ge N$. That is, $(f_{n, n}(z_k))_{n\ge 1}$ is Cauchy for all $k\ge 1$, whence it converges.
+
+    Passing to a subsequence of $(f_n)_{n\ge 1}$ if necessary, we may assume that this sequence converges pointwise over $Q$. Next we shall show that this sequence is Cauchy in $C(\Omega, X)$. Due to \thref{equivalent-conditions-small-distance}, we would be done if we show that for every compact set $K\subseteq\Omega$ and $\varepsilon > 0$, there is a positive integer $N\ge 1$ such that for all $m,n\ge N$, 
+    \begin{equation*}
+        \sup\left\{d(f_m(z), f_n(z))\colon z\in K\right\} < \varepsilon.
+    \end{equation*}
+    Let $R = \operatorname{dist}(K, \bbC\setminus\Omega) > 0$ and define 
+    \begin{equation*}
+        \wt K = \left\{z\in\bbC\colon d(z, K) \le \frac{1}{2}R\right\}\subseteq\Omega.
+    \end{equation*}
+    Note that $\wt K$ is a closed and bounded subset of $\bbC$ and hence is compact. Since $\scrF$ is equicontinuous at each point of $\Omega$, due to \thref{equicontinuous-over-compact}, $\scrF$ is equicontinuous over $\wt K$, and as such, there exists a $0 < \delta < \frac{1}{2}R$ such that whenever $z, z'\in\wt K$ with $|z - z'| < \delta$, $d(f(z), f(z')) < \frac{\varepsilon}{3}$ for all $f\in\scrF$.
+
+    Let $D = Q\cap\wt K$. Note that $K$ has non-empty interior, and hence $D$ is non-empty. For any $z\in K$, the ball $B(z, \delta)$ is contained in $\wt K$ and hence contains an element, say $w$ of $D$. Consequently, $z\in B(w,\delta)$. That is, 
+    \begin{equation*}
+        K\subseteq\bigcup_{w\in D} B(w,\delta).
+    \end{equation*}
+    Since $K$ is compact, there is a finite subset $\{w_1,\dots,w_r\}$ of $D$ such that 
+    \begin{equation*}
+        K\subseteq\bigcup_{k = 1}^r B(w_k, \delta).
+    \end{equation*}
+    Since the sequence $(f_n(w_k))_{n\ge 1}$ converges for every $1\le k\le r$, there is a positive integer $N\ge 1$ such that for all $m,n\ge N$, $d(f_m(w_k), f_n(w_k)) < \frac{\varepsilon}{3}$ for all $1\le k\le r$. Let $z\in K$ and $m,n\ge N$. There is an index $1\le k\le r$ such that $z\in B(w_k, \delta)$, and hence 
+    \begin{equation*}
+        d(f_m(z), f_n(z))\le d(f_m(z), f_m(w_k)) + d(f_m(w_k), f_n(w_k)) + d(f_n(w_k), f_n(z)) < \frac{\varepsilon}{3} + \frac{\varepsilon}{3} + \frac{\varepsilon}{3} = \varepsilon.
+    \end{equation*}
+    This shows that the sequence $(f_n)_{n\ge 1}$ is Cauchy in $C(\Omega, X)$, and hence converges. In conclusion, we have shown that every sequence in $\scrF$ has a convergent subsequence in $C(\Omega, X)$, whence $\scrF$ is a normal family, thereby completing the proof.
 \end{proof}
 
 \subsection{Convergence of Holomorphic Functions and Montel's Theorem}
