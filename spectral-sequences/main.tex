@@ -1,0 +1,673 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+% \usepackage{lmodern}
+\usepackage{mathpazo}
+\usepackage{fouriernc}
+% \usepackage{euler}
+% \usepackage{sansmath}
+% \usepackage{sfmath}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd-Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{mdframed}
+\usepackage{titlesec}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{epigraph}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+% \renewcommand{\familydefault}{\sfdefault} % Do you want this font? 
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+	citecolor=blue
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{interlude}[theorem]{Interlude}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+\newcommand{\bbD}{\mathbb{D}} % Unit disk
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrM}{\mathscr{M}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrO}{\mathscr{O}} % sheaf
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\scrU}{\mathscr{U}}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+% \newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\Ass}{\operatorname{Ass}}
+\newcommand{\projdim}{\operatorname{proj~dim}}
+\newcommand{\injdim}{\operatorname{inj~dim}}
+\newcommand{\gldim}{\operatorname{gl~dim}}
+\newcommand{\embdim}{\operatorname{emb~dim}}
+\newcommand{\hght}{\operatorname{ht}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\CM}{\operatorname{CM}}
+\newcommand{\Irr}{\operatorname{Irr}}
+\newcommand{\scrC}{\mathscr{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\FV}{\operatorname{FV}}
+\newcommand{\Th}{\operatorname{Th}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\sffamily}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+\setlength\epigraphwidth{0.8\textwidth}
+
+\begin{document}
+\title{Spectral Sequences}
+\author{Swayam Chube}
+\date{Last Updated: \today}
+\maketitle
+\epigraph{``\emph{It has been suggested that the name `spectral' was given because, like spectres, spectral sequences are terrifying, evil, and dangerous. I have heard no one disagree with this interpretation, which is perhaps not surprising since I just made it up.}''}{Ravi Vakil}
+
+Throughout this article, we shall work with cohomological spectral sequences. The analogous statements for homological statements can be obtained by either negating the indices or simply reversing the arrows.
+
+\begin{definition}
+    A \define{differential bigraded module} over a ring $R$ is a collection of $R$-modules, $\{E^{p, q}\}_{p, q\in\Z}$, together with an $R$-linear map $d\colon E^{\bullet,\bullet}\to E^{\bullet,\bullet}$, called the \define{differential} of bidegree $(s, -s + 1)$ for some $s\in\Z$, and satisfying $d\circ d = 0$.
+\end{definition}
+
+We can take the \define{homology} of a differential bigraded module as 
+\begin{equation*}
+    H^{p, q}\left(E^{\bullet, \bullet}, d\right) = \frac{\ker\left(d\colon E^{p q}\to E^{p + s, q - s + 1}\right)}{\im\left(d\colon E^{p - s, q + s - 1}\to ^{p, q}\right)}.
+\end{equation*}
+
+\begin{definition}
+    A (cohomological) \define{spectral sequence} is a collection of differential bigraded $R$-modules $\{E_r^{\bullet,\bullet}, d_r\}_{r\ge 1}$ where the differential $d_r$ has degree $(r, -r + 1)$ for all $r\ge 1$ such that $E^{p, q}_{r + 1}\cong H^{p, q}\left(E^{\bullet,\bullet}_r, d_r\right)$.
+\end{definition}
+
+The differential bigraded module $(E^{\bullet,\bullet}_r, d_r)$ is called the \define{$r$-th page} of the spectral sequence. Note that the knowledge of the $r$-th page of a spectral sequene enables one to determine $E^{p, q}_{r + 1}$ for all $p, q\in\Z$ but not the differential $d_{r + 1}$.
+
+We shall now describe the construction of what is known as the \define{limiting page} $E^{\bullet,\bullet}_{\infty}$ of the spectral sequence. Henceforth, a submodule of a bigraded module $\{E^{\bullet,\bullet}\}$ is a collection $\wt E^{\bullet,\bullet}$ such that $\wt E^{p, q}$ is a submodule of $E^{p, q}$ for all $p,q\in\Z$. In order to construct the limiting page, we shall define a sequence of submodules of $E_2^{\bullet,\bullet}$:
+\begin{equation*}
+    B_2^{\bullet,\bullet}\subseteq B_3^{\bullet,\bullet}\subseteq\cdots B_n^{\bullet,\bullet}\subseteq\cdots\subseteq Z_n^{\bullet,\bullet}\subseteq\cdots\subseteq Z_3^{\bullet,\bullet}\subseteq Z_2^{\bullet,\bullet}
+\end{equation*}
+and set 
+\begin{equation*}
+    B_\infty^{\bullet,\bullet} = \bigcup_{n\ge 2} B_n^{\bullet,\bullet}\quad\text{ and }\quad Z_\infty^{\bullet,\bullet} = \bigcap_{n\ge 2} Z_n^{\bullet,\bullet}.
+\end{equation*}
+Begin by setting $Z_2 = \ker d_2$ and $B_2 = \im d_2$. Note that we can identify $E_3$ with $Z_2/B_2$, and under this identification, $\ker d_3 = Z_3/B_2$ and $\im d_3 = B_3/B_2$ for some submodules $Z_3$ and $B_3$ of $E_2$. Continuing this way, we obtain our desired chain of inclusions. Finally, define 
+\begin{equation}
+    E^{\bullet,\bullet}_\infty = \frac{Z^{\bullet,\bullet}_\infty}{B^{\bullet,\bullet}_\infty}.\label{limiting-sheet-construction} \tag{$\dagger$}
+\end{equation}
+
+\begin{definition}
+    Let $H^\bullet$ be a graded $R$-module. A (decreasing) filtration $F^\bullet$ on $H^\bullet$ is a sequence of graded submodules $\{F^p H^\bullet\}_{p\in\Z}$ such that $F^{p + 1}H^\bullet\subseteq F^p H^\bullet$ for all $p\in\Z$. There is an associated bigraded module $E_0^{\bullet,\bullet}(H^\bullet, F)$ given by 
+    \begin{equation*}
+        E^{p, q}_0(H^\bullet, F) = \frac{F^p H^{p + q}}{F^{p + 1}H^{p + q}}\qquad\forall p,q\in\Z.
+    \end{equation*}
+\end{definition}
+
+\begin{definition}
+    A spectral sequence $\{E^{\bullet,\bullet}_r, d_r\}_{r\ge 1}$ is said to \define{converge} to a graded $R$-module $H^\bullet$ if there is a (decreasing) filtration $F^\bullet$ of $H^\bullet$ such that 
+    \begin{equation*}
+        E^{p, q}_\infty \cong E^{p, q}_0(H^\bullet, F),
+    \end{equation*}
+    where $E^{\bullet, \bullet}_\infty$ is the limiting sheet of the spectral sequence as constructed in \eqref{limiting-sheet-construction}.
+\end{definition}
+
+\begin{definition}
+    An $R$-module $A$ is said to be a \define{filtered differential graded module} if 
+    \begin{itemize}
+        \item $A$ is an (internal) direct sum of submodules $\displaystyle A = \bigoplus_{n\in\Z} A^n$, 
+        \item there is an $R$-linear map $d\colon A\to A$ of degree $1$ satisfying $d\circ d = 0$, and 
+        \item $A$ has a (decreasing) filtration $F^\bullet$ and the differential $d$ respects the filtration, that is, $d(F^p A)\subseteq F^p A$.
+    \end{itemize}
+\end{definition}
+The above datum is equivalent to being given a cochain complex $A^\bullet$ with a (decreasing) filtration in the sense of subcomplexes, that is, $F^pA^\bullet$ is a subcomplex of $A^\bullet$ and $F^{p + 1}A^\bullet\subseteq F^pA^\bullet$. We shall identify these two notions of a filtered differential graded module henceforth.
+
+The graded homology object $\displaystyle H(A, d) = \bigoplus_{n\in\Z} H^n(A, d)$ inherits an \define{induced filtration}, that is, 
+\begin{equation*}
+    F^p H(A, d) = \im\left(H(F^p A, d)\to H(A, d)\right).
+\end{equation*}
+
+\begin{theorem}\thlabel{filtration-gives-rise-to-spectral-sequence}
+    Each filtered differential graded module $(A, d, F^\bullet)$ determines a spectral sequence $\{E^{\bullet, \bullet}_r, d_r\}_{r\ge 1}$ with $d_r$ of bidegree $(r, -r + 1)$ and 
+    \begin{equation*}
+        E^{p, q}_1\cong H^{p + q}\left(\frac{F^pA}{F^{p + 1}A}\right).
+    \end{equation*}
+    Suppse further that the filtration is \define{bounded}, that is, for each dimension $n$, there are values $s = s(n)$ and $t = t(n)$ so that 
+    \begin{equation*}
+        0 = F^s A^n\subseteq F^{s - 1}A^n\subseteq\dots \subseteq F^{t + 1} A^n\subseteq F^t A^n = A^n,
+    \end{equation*}
+    then the spectral sequence converges to $H(A, d)$ with the induced filtration, that is, 
+    \begin{equation*}
+        E^{p, q}_\infty\cong\frac{F^p H^{p + q}(A, d)}{F^{p + 1}H^{p + q}(A, d)}.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Define the following objects: 
+    \begin{align*}
+        Z^{p, q}_r &= F^p A^{p + q}\cap d^{-1}\left(F^{p + r}A^{p + q + 1}\right)\\
+        B^{p , q}_r &= F^p A^{p + q}\cap d\left(F^{p - r}A^{p + q - 1}\right)\\
+        Z^{p, q}_\infty &= \ker d\cap F^p A^{p + q}\\
+        B^{p, q}_\infty &= \im d\cap F^p A^{p + q}.
+    \end{align*}
+    The elements of $Z^{p, q}_r$ are precisely the elements of $F^pA^{p + q}$ that have boundaries in $F^{p + r}A^{p + q + 1}$, and similarly, the elements of $B^{p, q}_r$ are precisely the elements of $F^p A^{p + q}$ that are the boundaries of elements in $F^{p - r}A^{p + q - 1}$. Clearly, we have 
+    \begin{equation*}
+        B^{p, q}_0\subseteq B^{p, q}_1\subseteq\cdots B^{p, q}_\infty\subseteq Z^{p, q}_\infty\subseteq\cdots\subseteq Z^{p, q}_1\subset Z^{p, q}_0.
+    \end{equation*}
+    Furthermore, 
+    \begin{equation*}
+        d\left(Z^{p - r, q + r - 1}_r\right) = d\left(F^{p - r}A^{p + q - 1}\cap d^{-1}\left(F^p A^{p + q}\right)\right)\subseteq F^pA^{p + q}\cap d\left(F^{p - r}A^{p + q - 1}\right) = B^{p, q}_r.
+    \end{equation*}
+    Note that for $r > s(p + q + 1) - p$, we have $Z^{p, q}_r = Z^{p, q}_\infty$ and for $r > p - t(p + q - 1)$, we have $B^{p, q}_r = B^{p, q}_\infty$. Hence, 
+    \begin{equation*}
+        Z^{p, q}_\infty = \bigcap_{r\ge 0} Z^{p, q}_r \quad\text{ and }\quad B^{p, q}_\infty = \bigcup_{r\ge 0}B^{p, q}_r\qquad\text{ for all }p,q\in\Z.
+    \end{equation*}
+    For $0\le r\le\infty$, define 
+    \begin{equation*}
+        E^{p, q}_r = \frac{Z^{p, q}_r}{Z^{p + 1, q - 1}_{r - 1} + B^{p, q}_{r - 1}},
+    \end{equation*}
+    and let $\eta^{p, q}_r\colon Z^{p, q}_r \to E^{p, q}_r$ be the canonical surjection, where $\ker\eta^{p, q}_r = Z^{p + 1, q - 1}_{r - 1} + B^{p, q}_{r - 1}$. First, note that 
+    \begin{equation*}
+        d\left(Z^{p - r, q + r - 1}_r\right) = d\left(F^{p - r}A^{p + q - 1}\cap d^{-1}\left(F^p A^{p + q}\right)\right)\subseteq F^p A^{p + q}\cap d\left(F^{p - r}A^{p + q - 1}\right) = B^{p, q}_r,
+    \end{equation*}
+    so that 
+    \begin{equation*}
+        d\left(Z^{p + 1, q - 1}_{r - 1} + B^{p, q}_{r - 1}\right) = d\left(Z^{p + 1, q - 1}_{r - 1}\right) + d\left(B^{p, q}_{r - 1}\right)\subseteq B^{p + r, q - r + 1}_{r - 1}\subseteq \ker\eta^{p + r, q - r + 1}_r.
+    \end{equation*}
+    This induces a map $d_r\colon E^{p, q}_r\to E^{p + r, q - r + 1}_r$ for all $p,q\in\Z$ and $r\ge 0$:
+    \begin{equation*}
+        \xymatrix {
+            Z^{p, q}_r\ar[r]^-d\ar[d]_{\eta^{p, q}_r} & Z^{p + r, q - r + 1}_r\ar[d]^{\eta^{p + r, q - r + 1}_r}\\
+            E^{p, q}_r\ar[r]_-{d_r} & E^{p + r, q - r + 1}_r.
+        }
+    \end{equation*}
+    Moreover, since $d\circ d = 0$, it follows that $d_r\circ d_r = 0$. In order to complete the proof, there are three things that we must establish: 
+    \begin{enumerate}[label=(\Roman*)]
+        \item $H^{p, q}(E^{\bullet,\bullet}_r) = E^{p, q}_{r + 1}$, 
+        \item $E^{p, q}_1\cong H^{p + q}\left(F^pA/F^{p + 1}A\right)$, and 
+        \item $E^{p, q}_\infty\cong F^pH^{p + q}(A, d)/F^{p + 1}H^{p + q}(A, d)$.
+    \end{enumerate}
+
+    \begin{equation*}
+        \xymatrix {
+            Z^{p + 1, q - 1}_r + B^{p, q}_r \ar@{^{(}->}[r] & Z^{p, q}_{r + 1}\ar@{^{(}->}[r]\ar[d] & Z^{p, q}_r\ar[r]\ar[d]^{\eta^{p, q}_r} & Z^{p + r, q - r + 1}_r\ar[d]^{\eta^{p + r, q - r + 1}_r}\\
+            & \ker d_r\ar[r]\ar[d] &  E^{p, q}_r \ar[r]_-{d_r} & E^{p + r, q - r + 1}_r\\
+            & H^{p, q}(E^{\bullet, \bullet}_r, d_r)\ar[d]\\
+            & 0
+        }
+    \end{equation*}
+    % To justify the first inclusion, note that 
+    % \begin{align*}
+    %     Z^{p + 1, q - 1}_r = F^{p + 1}A^{p + q}\cap d^{-1}\left(F^{p + r + 1}A^{p + q + 1}\right)\quad B^{p, q}_r = F^p A^{p + q}\cap d\left(F^{p - r}A^{p + q - 1}\right)\\
+    %     Z^{p, q}_{r + 1} = F^p A^{p + q}\cap d^{-1}\left(F^{p + r + 1}A^{p + q + 1}\right).
+    % \end{align*}
+    % Therefore, the inclusion $Z^{p + 1, q - 1}_r\subseteq Z^{p, q}_{r + 1}$ is trivial. Similarly, the inclusion $B^{p, q}_r\subseteq Z^{p, q}_{r + 1}$ follows from the fact that $d\circ d = 0$. This justifies the first inclusion $Z^{p + 1, q - 1}_r + B^{p, q}_r\subseteq Z^{p, q}_{r + 1}$. The second inclusion $Z^{p, q}_{r + 1}\subseteq Z^{p, q}_r$ is trivial. 
+
+    % First, we show that $\eta_r^{p, q}\left(Z^{p, q}_{r + 1}\right) = \ker d_r$. Then, define $\gamma\colon Z^{p, q}_{r + 1}\to H^{p, q}(E^{\bullet,\bullet}_r, d_r)$ to be the composition of the two vertical maps. We shall later show that $\ker \gamma = Z^{p + 1, q - 1}_r + B^{p, q}_r$, so that the isomorphism $E^{p, q}_{r + 1}\cong H^{p, q}(E^{\bullet, \bullet}_r, d_r)$ would follow.
+
+    % We compute $\eta^{-1}(\ker d_r)$. Indeed, note that $z\in Z^{p, q}_r$ is in $\eta^{-1}(\ker d_r)$ if and only if $d_r\circ \eta(z) = 0$, equivalently $\eta\circ d(z) = 0$, equivalently $dz\in\ker\eta = Z^{p + r + 1, q - r}_{r - 1} + B^{p + r, q - r + 1}_{r - 1}$, which is equivalent to $z\in Z^{p, q}_{r + 1} + Z^{p + 1, q - 1}_{r + 1}$. % TODO: Give more details here
+    % So 
+    % \begin{equation*}
+    %     \ker d_r = \eta\left(Z^{p, q}_{r + 1} + Z^{p + 1, q - 1}_{r + 1}\right) = \eta\left(Z^{p, q}_{r + 1}\right),
+    % \end{equation*}
+    % since $Z^{p + 1, q - 1}_{r - 1}\subseteq\ker\eta^{p, q}_r$. This proves our first contention. The remaining are tedious diagram chases, which I leave out. The main point is the construction of the maps $d_r$.
+    These computations, although necessary, are not particularly enlightening. We take it on faith that a tenacious (under-)graduate student can verify them as and when required. 
+\end{proof}
+
+\subsection*{Exact Couples}
+
+\begin{definition}
+    A tuple $\langle D, E, i, j, k\rangle$ is said to be an \define{exact couple} if the diagram 
+    \begin{equation*}
+        \xymatrix {
+            D\ar[rr]^i &  & D\ar[ld]^j\\
+            & E\ar[lu]^k & 
+        }
+    \end{equation*}
+    is exact at each object, that is, $\im i = \ker j$, $\im j = \ker k$, and $\im k = \ker i$.
+\end{definition}
+
+Given an exact couple $\langle D, E, i, j, k\rangle$, define $d = j\circ k\colon E\to E$. Note that $d\circ d = 0$, and set 
+\begin{equation*}
+    D' = \im i\subseteq D\quad\text{ and }\quad E' = \frac{\ker d}{\im d}.
+\end{equation*}
+Note that $E'$ is a subquotient of $E$. Define $i'\colon D'\to D'$ to be the restriction of $i$ to $D'$. Next, set $j'\colon D'\to E'$ as 
+\begin{equation*}
+    j'(i(x)) = j(x)\mod{dE}\in E'.
+\end{equation*}
+We must verify that $j'$ is well-defined. Indeed, if $i(x) = i(y)$, then $x - y\in\ker i = \im k$, i.e., there is a $z\in E$ such that $x - y = k(z)$, consequently, $j(x - y) = d(z)\in dE$, whence $j'(i(x)) = j'(i(y))$, as desired. Finally, define $k'\colon E'\to D'$ by 
+\begin{equation*}
+    k'(e \mod{dE}) = k(e). 
+\end{equation*}
+To see that this is well-defined, suppose $e - f\in dE$, then $e - f = d(z)$ for some $z\in E$. Then $k(d(z)) = k(j(k(z))) = 0$, whence $k(e) = k(f)$, as desired.
+
+\begin{theorem}
+    The tuple $\langle D', E', i', j', k'\rangle$ is an exact couple. This is called the \define{derived couple} of $\langle D, E, i, j, k\rangle$.
+\end{theorem}
+\begin{proof}
+    Omitted.
+\end{proof}
+
+This process can be iterated, begin by setting 
+\begin{equation*}
+    \langle D^1, E^1, i^{(1)}, j^{(1)}, k^{(1)}\rangle = \langle D, E, i, j, k\rangle,
+\end{equation*}
+and set 
+\begin{equation*}
+    \langle D^{r + 1}, E^{r + 1}, i^{(r + 1)}, j^{(r + 1)}, k^{(r + 1)}\rangle = \langle D^{r}, E^r, i^{(r)}, j^{(r)}, k^{(r)}\rangle'
+\end{equation*}
+for all $r\ge 1$.
+
+The next theorem describes a procedure to obtain a spectral sequence from an exact couple of bigraded modules over a ring.
+
+\begin{theorem}
+    Suppose $D^{\bullet,\bullet} = \{D^{p, q}\}$ and $E^{\bullet, \bullet} = \{E^{p, q}\}$ are bigraded modules over $R$ equipped with homomorphisms 
+    \begin{equation*}
+        \xymatrix {
+            D^{\bullet, \bullet}\ar[rr]^i & & D^{\bullet,\bullet}\ar[ld]^j\\
+            & E^{\bullet, \bullet}\ar[lu]^k & 
+        }
+    \end{equation*}
+    where $\deg i = (-1, 1)$, $\deg j = (0, 0)$, and $\deg k = (1, 0)$. This data determines a cohomological spectral sequence with $E_r = (E^{\bullet,\bullet})^{r}$ and $d_r = j^{(r)}\circ k^{(r)}$.
+\end{theorem}
+\begin{proof}
+    Only the degree of the map $d_r$ must be verified, which is straightforward. 
+\end{proof}
+
+\subsection*{Double Complexes}
+
+\begin{definition}
+    A cohomological \define{double complex} is a triple $(\{M^{p, q}\}_{p, q\in\Z}, d^v, d^h)$, where $\{M^{p, q}\}_{p, q\in\Z}$ is a bigraded collection of $R$-modules, and for all $p, q\in\Z$, and there are maps 
+    \begin{equation*}
+        d^h\colon M^{p, q}\to M^{p + 1, q}\quad\text{ and }\quad d^v\colon M^{p, q}\to M^{p, q + 1}
+    \end{equation*}
+    \begin{equation*}
+        \xymatrix {
+            M^{p, q + 1}\ar[r]^{d^h} & M^{p + 1, q + 1}\\
+            M^{p, q}\ar[r]_{d^h}\ar[u]^{d^v} & M^{p + 1, q}\ar[u]_{d^v}
+        }
+    \end{equation*}
+    such that 
+    \begin{equation*}
+        d^h\circ d^h = 0,\quad d^v\circ d^v = 0,\quad\text{ and }\quad d^h\circ d^v + d^v\circ d^h = 0.
+    \end{equation*}
+
+    Every cohomological double complex has its associated \define{totalization}, which is a cochain complex $T^\bullet = \operatorname{Tot}^{\oplus}(M^{\bullet,\bullet}, d^h, d^v)$ with 
+    \begin{equation*}
+        T^n = \bigoplus_{i + j = n} T^{i, j}
+    \end{equation*}
+    and maps $d^h + d^v\colon T^n\to T^{n + 1}$.
+\end{definition}
+
+Associated to the category of double complexes are two natural (co)homology functors $H^{\bullet, \bullet}_I$ and $H^{\bullet, \bullet}_{II}$ given by
+\begin{equation*}
+    H^{p, q}_I(M) = \frac{\ker d^h\colon M^{p, q}\to M^{p + 1, q}}{\im d^h\colon M^{p - 1, q}\to M^{p, q}},
+\end{equation*}
+and 
+\begin{equation*}
+    H^{p, q}_{II}(M) = \frac{\ker d^v\colon M^{p, q}\to M^{p, q + 1}}{\im d^v\colon M^{p, q - 1}\to M^{p, q}}.
+\end{equation*}
+Note that $H^{\bullet,\bullet}_I(M)$ is a double complex with the vertical maps induced by $d^v$ (up to a sign), and all horizontal maps are zero. Similarly $H^{\bullet, \bullet}_{II}(M)$ is another double complex with zeros as vertical maps and the horizontal maps being induced by $d^h$. It is therefore possible to take homology once again, that is, 
+\begin{equation*}
+    H^{\bullet, \bullet}_{II}\left(H^{\bullet, \bullet}_{I}(M)\right)\quad\text{ and }\quad H^{\bullet, \bullet}_{I}\left(H^{\bullet, \bullet}_{II}(M)\right).
+\end{equation*}
+
+Next, we can associate two natural (decreasing) filtrations on the totalization of a double complex, namely: 
+\begin{equation*}
+    F^p_{\rm I} T^n = \bigoplus_{\substack{i + j = n\\i\ge p}} M^{i, j}\quad\text{ and } F^q_{\rm II} T^n = \bigoplus_{\substack{i + j = n\\ j\ge q}} M^{i, j}.
+\end{equation*}
+
+In light of \thref{filtration-gives-rise-to-spectral-sequence}, each of $F^\bullet_{\rm I}$ and $F^{\bullet}_{\rm II}$ has an associated spectral sequence which we denote by $_{\rm I} E^{\bullet,\bullet}_{\bullet}$ and $_{\rm II} E^{\bullet,\bullet}_{\bullet}$ respectively.
+
+\begin{theorem}\thlabel{two-spectral-sequences-associated-with-double-complexes}
+    With the above notation, we have 
+    \begin{equation*}
+        {}_{\rm I}E^{\bullet, \bullet}_2 \cong H^{\bullet,\bullet}_I(H^{\bullet,\bullet}_{II}(M))\quad\text{ and }\quad {}_{\rm II} E^{\bullet, \bullet}_2\cong H^{\bullet,\bullet}_{II}\left(H^{\bullet, \bullet}_{I}(M)\right).
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Omitted.
+\end{proof}
+
+\subsection*{The Ischebeck Spectral Sequences}
+
+\begin{lemma}
+    Let $M$ be a finite projective module over a commutative ring $A$. Then for any module $N$, the natural map 
+    \begin{equation*}
+        \Hom_A(M, A)\otimes_A N\to\Hom_A(M, N)\qquad \varphi\otimes x\longmapsto \left(z\mapsto\varphi(z)\cdot x\right).
+    \end{equation*}
+    is an isomorphism.
+\end{lemma}
+\begin{proof}
+    The map is clearly an isomorphism when $M$ is a finite free module. Since projective modules are direct summands of free modules, it is straightforward to conclude.
+\end{proof}
+
+\begin{theorem}[Ischebeck]\thlabel{ischebeck-spectral-sequence-I}
+    Let $A$ be a Noetherian ring and $M$ a finite $A$-module admitting a finite resolution by finite projective $A$-modules. Then for any $A$-module $N$, there is a spectral sequence 
+    \begin{equation*}
+        E^{p, q}_2 = \Tor_{-q}\left(\Ext^{p}(M, A), N\right)\Longrightarrow \Ext^{\bullet}(M, N).
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Let $P_\bullet$ and $Q_\bullet$ be projective resolutions of $M$ and $N$ respectively with $P_\bullet$ consisting of only finitely many non-zero elements and all modules in $P_\bullet$ are finitely generated. Consider the double complex $C^{p, q} = \Hom(P_p, Q_{-q})\cong \Hom(P_p, A)\otimes_A Q_{-q}$. There are two spectral sequences associated with this double complex in the sense of \thref{two-spectral-sequences-associated-with-double-complexes}, denote them by ${}_{\rm I}E^{\bullet,\bullet}_\bullet$ and ${}_{\rm II}E^{\bullet,\bullet}_{\bullet}$ following the statement of the theorem. 
+
+    Note that $H^{\bullet, \bullet}_{II}(M)$ is the double complex with $H^{p, q}_{II}(M) = \Tor_{-q}\left(\Hom_A(P_p, A), N\right)$. But since $\Hom_A(P_p, A)$ is a finite projective $A$-module, we note that 
+    \begin{equation*}
+        H^{p, q}_{II}(M) = 
+        \begin{cases}
+            \Hom(P_p, A)\otimes_A N &  q = 0\\
+            0 & \text{otherwise}.
+        \end{cases}
+    \end{equation*}
+    Taking $H^{\bullet, \bullet}_{I}$ of this, we obtain 
+    \begin{equation*}
+        {}_{\rm I}E^{p, q}_2 = 
+        \begin{cases}
+            \Ext^p(M, N) & q = 0\\
+            0  & \text{otherwise}.
+        \end{cases}
+    \end{equation*}
+    So this spectral sequence degenerates at the second page, and hence this page is also the limiting page. Since $P_\bullet$ is a finite resolution, in view of \thref{filtration-gives-rise-to-spectral-sequence}, this spectral sequence converges to the (associated graded of) the cohomology object $H^\bullet$ of $\operatorname{Tot}^{\oplus}(M)$. By definition, we have 
+    \begin{equation*}
+        {}_{\rm I}E^{p, q}_\infty = \frac{F_{\rm I}^p H^{p + q}}{F_{\rm I}^{p + 1}H^{p + q}}.
+    \end{equation*}
+    Fix $p + q = n$ and note that on the ``antidiagonal'' $p + q = n$ on the limiting sheet, there is exactly one non-zero term, namely ${}_{\rm I}E^{p, 0}_\infty$, and hence, it follows that $H^n\cong \Ext^n(M, N)$.
+
+    A similarly straightforward computation shows that 
+    \begin{equation*}
+        {}_{\rm II}E^{p, q}_2\cong\Tor_{-q}(\Ext^p(M, A), N),
+    \end{equation*}
+    thereby completing the proof.
+\end{proof}
+
+\begin{theorem}[Ischebeck]\thlabel{ischebeck-spectral-sequence-II}
+    Let $A$ be a Noetherian ring, $M$ a finite $A$-module, and $N$ any $A$-module. Assume that $M$ admits a finite projective resolution, or that $N$ admits a finite injective resolution. Then there is a spectral sequence 
+    \begin{equation*}
+        E^2_{p, q} = \Ext^{-q}\left(\Ext^p(M, A), N\right)\Longrightarrow\Tor_\bullet(M, N).
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    If you can read German, see \cite{ischebeck-tor-ext}, and if you understand it, please explain it to me.
+\end{proof}
+
+\subsection*{Foxby's Theorem}
+
+The goal of this section will be to prove the following theorem of Foxby:
+
+\begin{theorem}[Foxby]
+    Let $(A,\frakm, k)$ be a Noetherian local ring. If $A$ admits a non-zero finite module $M$ with finite injective and projective dimension, then $A$ is Gorenstein.
+\end{theorem}
+
+For a finite $A$-module $M$ and $s\in\Z$, set
+\begin{equation*}
+    i_M(s) = \dim_k \Ext^s(k, M)\quad\text{ and } p_M(s) = \dim_k \Tor_s(k, M).
+\end{equation*}
+These have associated power series: 
+\begin{equation*}
+    I_M(X) = \sum_{s\in\Z} i_M(s)X^s\quad\text{ and }\quad P_M(X) = \sum_{s\in\Z} p_M(s)X^s.
+\end{equation*}
+
+\begin{theorem}
+    Let $M$ be a finite module over a Noetherian local ring $(A,\frakm, k)$. Then 
+    \begin{enumerate}[label=(\arabic*)]
+        \item If $\projdim_A M < \infty$, then $I_M(X) = I_A(X)P_M(X^{-1})$.
+        \item If $\injdim_A M < \infty$, then $P_M(X) = I_A(X) I_M(X^{-1})$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    We shall prove (1). Consider take a minimal free resolutions of $k$ and $M$, and consider the Ischebeck spectral sequence as in \thref{ischebeck-spectral-sequence-I}. Note that on the page ${}_{\rm II}E_2^{\bullet,\bullet}$, the maps $d_2$ are in some sense restrictions of the maps in the totalization of the double complex considered. Since we began with a minimal free resolutions of $k$ and $M$, the horizontal and vertical differentials are given by matrices with entries in the maximal ideal $\frakm$, and recalling the construction of $d_2$ from the proof \thref{filtration-gives-rise-to-spectral-sequence} and using the fact that every element on the considered $E_2$-page is a $k$-vector space, it follows that all the maps there are identically zero. This means that the spectral sequence degenerates at the second page, whence this page is isomorphic to the limiting page ${}_{\rm II}E_\infty^{\bullet, \bullet}$. We can now read off the dimension of $\Ext^n(k, M)$ by summing over the diagonal: 
+    \begin{equation*}
+        \dim_k\Ext^n(k, M) = \sum_{p + q = n}\dim_k\Tor_{-q}\left(\Ext^p(k, A), M\right) = \sum_{p + q = n}\dim_k\Ext^p(k, A)\dim_k\Tor_{-q}(k, M),
+    \end{equation*}
+    which is precisely the content of (1). An analogous proof works for (2) using \thref{ischebeck-spectral-sequence-II}.
+\end{proof}
+
+\begin{proof}[Proof of Foxby's Theorem]
+    Let $d = \dim A$. Then due to the Auslander-Buchsbaum formula, we have that $\projdim_A M\le d$ and due to Ischebeck's formula (the one about injective dimension) $\injdim_A M = d$, that is, $\deg I_M = d$. We can expand the equality $I_M(X) = I_A(X) P_M(X^{-1})$ as 
+    \begin{equation*}
+        p_M(n) = i_A(n)i_M(0) + \dots + i_A(n + d)i_M(d).
+    \end{equation*}
+    The left hand side is zero for $n > \projdim_A M$ and hence all the terms on the right hand side are identically zero for $n > \projdim_A M$. In particular, $i_A(n + d)i_M(d) = 0$ for all $n > \projdim_A M$. Thus $i_A(n + d) = 0$ for all $n > \projdim_A M$ since $i_M(d)\ne 0$ (recall that this was an easy consequence of Bass' Lemma). In particular, this means that $I_A$ is a polynomial, so that $\injdim_A A < \infty$, equivalently, $A$ is Gorenstein.
+\end{proof}
+
+\bibliographystyle{alpha}
+\bibliography{references}
+
+\end{document}
