@@ -1,0 +1,3 @@
+\contentsline {section}{\numberline {1}Triangulation, Diagonalization, and Primary Decomposition}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Eigenvalues and Eigenvectors}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}The Minimal Polynomial}{2}{subsection.1.2}%

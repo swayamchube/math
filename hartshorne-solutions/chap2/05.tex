@@ -11,20 +11,30 @@ Choose a basis $\left\{\frac{m_1}{1},\dots,\frac{m_n}{1}\right\}$ of $M_\frakp$ 
 \begin{equation*}
     0\to K\to A^n\to M\to Q\to 0,
 \end{equation*}
-where the map $A^n\to M$ is the natural map sending $e_i\mapsto m_i$ for $1\le i\le n$. Localising, we see that $K_\frakp = Q_\frakp = 0$ and hence, there is an $f\in A\setminus\frakp$ such that $K_f = Q_f = 0$ (since both $K$ and $Q$ are finitely generated). Localising the above exact sequence at $f$, we obtain an isomorphism $A^n_f\xrightarrow{\sim} M_f$. It follows that $M_\frakq$ is a free $A_\frakq$ module for all $\frakq\in D(f)$.
+where the map $A^n\to M$ is the natural map sending $e_i\mapsto m_i$ for $1\le i\le n$. Localising, we see that $K_\frakp = Q_\frakp = 0$ and hence, there is an $f\in A\setminus\frakp$ such that $K_f = Q_f = 0$ (since both $K$ and $Q$ are finitely generated). Localising the above exact sequence at $f$, we obtain an isomorphism $A^n_f\xrightarrow{\sim} M_f$. It follows that $\scrF|_{D(f)}$ is a free sheaf.
 
 \item Follows immediately from (a). 
 
-\item Let $\scrF^\vee$ denote the dual sheaf. Recall that 
-\begin{equation*}
-    \scrF^\vee(U) = \Hom_{\scrO_X|_U}\left(\scrF|_U,\scrO_X|_U\right).
-\end{equation*}
-This gives a natural map $\scrF(U)\otimes\scrF^\vee(U) \to\scrO_X(U)$ given by 
-\begin{equation*}
-    s\otimes\varphi\mapsto\varphi_U(s).
-\end{equation*}
-It is easy to check that this is a morphism of presheaves $\scrF\otimes\scrF^\vee\to\scrO_X$ and since the latter is a sheaf, it factors through the sheafification inducing a map on the tensor sheaf.
+% \item Let $\scrF^\vee$ denote the dual sheaf. Recall that 
+% \begin{equation*}
+%     \scrF^\vee(U) = \Hom_{\scrO_X|_U}\left(\scrF|_U,\scrO_X|_U\right).
+% \end{equation*}
+% This gives a natural map $\scrF(U)\otimes\scrF^\vee(U) \to\scrO_X(U)$ given by 
+% \begin{equation*}
+%     s\otimes\varphi\mapsto\varphi_U(s).
+% \end{equation*}
+% It is easy to check that this is a morphism of presheaves $\scrF\otimes\scrF^\vee\to\scrO_X$ and since the latter is a sheaf, it factors through the sheafification inducing a map on the tensor sheaf.
 
-We contend that this induced map is an isomorphism. To this end, it suffices to show that the induced morphism on stalks is an isomorphism.
+% We contend that this induced map is an isomorphism. To this end, it suffices to show that the induced morphism on stalks is an isomorphism.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}\hfill 
+\begin{enumerate}[label=(\alph*)]
+    \item 
+    \item This is a topological property of connected spaces and has nothing to do with algebraic geometry.
+    \item We shall use \thref{exer:5.7} (b) to show that $\scrF$ is locally free. To this end, we need to show that $\scrF_x$ is a free $\scrO_{X, x}$-module for each $x\in X$. Let $U = \Spec A$ be an open affine neighborhood of $x$ in $X$ on which $\varphi$ is constant. Let $\frakp\in\Spec A$ be the prime corresponding to the point $x\in U$. Thus, we have a finite $A$-module $M$ such that $\scrF|_{U} = \wt M$. Using Nakayama's lemma, we can find a minimal generating set $m_1,\dots,m_r\in M_\frakp$, where $r = \varphi(x)$ , which gives a surjection $A_\frakp^r\onto M_\frakp$. This can be localized at each prime $\frakq\subseteq\frakp$, and hence $m_1,\dots,m_r\in M_\frakq$ generate it as an $A_\frakq$-module. But since $\varphi(\frakq) = r$, it follows that $m_1,\dots,m_r\in M_\frakq$ is a minimal generating set for each prime $\frakq\subseteq\frakp$.
+
+    Finally, we claim that $m_1,\dots,m_r$ freely generate $M_\frakp$. Indeed, suppose $a_1m_1 + \dots + a_rm_r = 0$ for $a_i\in A_\frakp$. This equality is true for $M_\frakq$ as an $A_\frakq$-module and hence, all the coefficients lie in $\frakq A_\frakq$, therefore, all the coefficients lie in $\frakq A_\frakp$ for all primes $\frakq\subseteq\frakp$. But since $A_\frakp$ is reduced, it follows that $a_i = 0$ for all $1\le i\le r$ in $A_\frakp$. Hence $M_\frakp = \scrF_x$ is a free $A_\frakp = \scrO_{X, x}$-module, as desired.
 \end{enumerate}
 \end{exercise}

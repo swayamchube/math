@@ -1,0 +1,478 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+% \usepackage{lmodern}
+\usepackage{mathpazo}
+\usepackage{fouriernc}
+% \usepackage{euler}
+% \usepackage{sansmath}
+% \usepackage{sfmath}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd-Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+% \renewcommand{\familydefault}{\sfdefault} % Do you want this font? 
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+	citecolor=blue
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{interlude}[theorem]{Interlude}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+\newcommand{\bbD}{\mathbb{D}} % Unit disk
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrM}{\mathscr{M}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrO}{\mathscr{O}} % sheaf
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\scrU}{\mathscr{U}}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calK}{\mathcal{K}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+% \newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\Ass}{\operatorname{Ass}}
+\newcommand{\projdim}{\operatorname{proj~dim}}
+\newcommand{\injdim}{\operatorname{inj~dim}}
+\newcommand{\gldim}{\operatorname{gl~dim}}
+\newcommand{\embdim}{\operatorname{emb~dim}}
+\newcommand{\hght}{\operatorname{ht}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\CM}{\operatorname{CM}}
+\newcommand{\Irr}{\operatorname{Irr}}
+\newcommand{\scrC}{\mathscr{C}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\FV}{\operatorname{FV}}
+\newcommand{\Th}{\operatorname{Th}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\bbM}{\mathbb{M}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\sffamily}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+\begin{document}
+\title{Determinants}
+\author{Swayam Chube}
+\date{Last Updated: \today}
+\maketitle
+\tableofcontents
+
+% \section{Determinants}
+
+% Throughout this section fix a commutative ring $R$ (with unity). Let $\bbM_n(R)$ denote the set (or monoid, or $R$-module) of $n\times n$ matrices with entries in $R$. Note that there is a natural bijection between the set $\bbM_n(R)$ and the set $M\coloneq \underbrace{R^n\times\cdots\times R^n}_{n\text{ times}}$. We shall tacitly make this identification for defining the determinant. Explicitly, the identification is: 
+% \begin{equation*}
+%     \begin{pmatrix}
+%         a_{11}  & \dots & a_{1n}\\
+%         \vdots  & \ddots & \vdots\\
+%         a_{n1}  & \cdots & a_{nn}
+%     \end{pmatrix}
+%     \longleftrightarrow
+%     \left(
+%         \begin{pmatrix}
+%             a_{11}\\\vdots\\ a_{n1}
+%         \end{pmatrix},
+%         \cdots,
+%         \begin{pmatrix}
+%             a_{1n}\\ \vdots \\ a_{nn}
+%         \end{pmatrix}
+%     \right).
+% \end{equation*}
+
+
+% \begin{definition}
+%     Let $n\ge 1$ be a positive integer. A map $T\colon M\to R$ is said to be \define{multilinear} if for each $1\le i\le n$ and $$v_1,\dots, v_{i - 1}, v_{i + 1}, \dots, v_n\in R^n,$$ the map 
+%     \begin{equation*}
+%         v\mapsto T(v_1,\dots, v_{i - 1}, v, v_{i + 1},\dots, v_n)
+%     \end{equation*}
+%     is $R$-linear.
+% \end{definition}
+
+% \begin{definition}
+%     Let $n\ge 1$ be a positive integer. Let $\omega\colon M\to R$ be a multilinear map. It is said to be \define{alternating} if $\omega(v_1,\dots, v_n) = 0$ whenever $v_i = v_j$ for some $1\le i < j \le n$.
+% \end{definition}
+
+% \begin{definition}
+%     Let $n\ge 1$ be a positive integer. A function $\omega\colon M\to R$ is said to be a \define{determinant function} if $\omega$ is multilinear, alternating, and $\omega(I_n) = 1$, where $I_n$ denotes the identity matrix.
+% \end{definition}
+
+% \begin{lemma}
+%     Let $\omega\colon M\to R$ be an alternating map. Then 
+%     \begin{equation*}
+%         \omega(v_1,\dots, v_i,\dots, v_j,\dots, v_n) = -\omega(v_1,\dots,v_j,\dots,v_i,\dots,v_n),
+%     \end{equation*}
+%     where on the right hand side, $v_j$ is in the $i$-th place, $v_i$ is in the $j$-th place, and all other entries remain unchanged.
+% \end{lemma}
+
+% \begin{lemma}
+%     Let $\omega\colon M\to R$ be a multilinear map. If $\omega(A) = 0$ whenever two adjacent entries (i.e. columns) of $A$ are equal, then $\omega$ is alternating.
+% \end{lemma}
+% \begin{proof}
+    
+% \end{proof}
+
+\section{Triangulation, Diagonalization, and Primary Decomposition}
+
+\subsection{Eigenvalues and Eigenvectors}
+
+\begin{definition}
+    Let $V$ be a vector space over the field $F$ and let $T\colon V\to V$ be a linear map. A \define{eigenvalue} of $T$ is a scalar $\lambda\in F$ such that there is a non-zero vector $\alpha\in V$ with $T\alpha = \lambda\alpha$. 
+
+    If $\lambda$ is an eigenvalue of $T$, then 
+    \begin{enumerate}[label=(\roman*)]
+        \item any $\alpha\in V$ such that $T\alpha = \lambda\alpha$ is called an eigenvector of $T$ associated to the eigenvalue $\lambda$.
+        \item the collection of all $\alpha\in V$ such that $T\alpha = \lambda\alpha$ is called the \define{eigenspace} of $T$ associated to the eigenvalue $\lambda$.
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}\thlabel{eigenvalues}
+    Let $T\colon V\to V$ be a linear map on a finite-dimensional space $V$ and let $\lambda\in F$. The following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\lambda$ is an eigenvalue of $T$. 
+        \item The operator $T - \lambda I$ is not invertible. 
+        \item $\det(T - \lambda I) = 0$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Trivial. 
+\end{proof}
+
+\begin{definition}
+    Let $n$ be a positive integer and $A$ an $n\times n$ matrix with entries in $F$. The \define{characteristic polynomial} of $A$ is defined to be $\chi_A(X) = \det(X\cdot I - A)\in F[X]$.
+
+    Given a linear map $T\colon V\to V$ where $V$ is a finite-dimensional vector space over $F$, define the characteristic polynomial of $T$ to be the characteristic polynomial of its matrix representation with respect to any basis of $V$.
+\end{definition}
+
+\begin{remark}
+    The definition and \thref{eigenvalues} immediately imply that $\lambda\in F$ is an eigenvalue if and only if $\chi_T(\lambda) = 0$.
+\end{remark}
+
+\begin{definition}
+    Let $T\colon V\to V$ be a linear map on a finite-dimensional vector space $V$. We say that $T$ is \define{diagonalizable} if there is a basis for $V$, each vector of which is an eigenvector of $T$.
+\end{definition}
+
+\begin{remark}
+    It is clear from the definition that $T$ is diagonalizable if and only if there is a basis of $V$ with respect to which $T$ is given by a diagonal matrix.
+\end{remark}
+
+\begin{lemma}\thlabel{eigenspaces-are-independent}
+    Let $T\colon V\to V$ be a linear map on a finite-dimensional vector space $V$ over $F$. Let $\lambda_1,\dots,\lambda_k\in F$ be the distinct eigenvalues of $T$ and let $W_i$ denote the eigenspace of $T$ associated with $\lambda_i$ for $1\le i\le k$. If $W = W_1 + \dots + W_k$, then 
+    \begin{equation*}
+        \dim W = \dim W_1 + \dots + \dim W_k.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    It suffices to show that the given sum is direct. Indeed, suppose $\beta_i\in W_i$ for $1\le i\le k$ are such that $\beta_1 + \dots + \beta_k = 0$. Using Lagrange's method of interpolation, choose a polynomial $h_i(X)\in F[X]$ such that 
+    \begin{equation*}
+        h_i(\lambda_j) = 
+        \begin{cases}
+            1 & i = j\\
+            0 & \text{otherwise}.
+        \end{cases}
+    \end{equation*}
+    Then 
+    \begin{equation*}
+        0 = h_i(T)\left(\beta_1 + \dots + \beta_k\right) = \beta_i
+    \end{equation*}
+    for $1\le i\le n$.
+\end{proof}
+
+As a result, we obtain: 
+
+\begin{theorem}
+    Let $T\colon V\to V$ be a linear operator on a finite-dimensional vector space $V$ over a field $F$. Let $\lambda_1,\dots,\lambda_k\in F$ be the distinct eigenvalues of $T$ and let $W_i$ be the eigenspace of $T$ associated with $\lambda_i$ for $1\le i\le k$. Then the following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $T$ is diagonalizable.
+        \item The characteristic polynomial for $T$ is 
+        \begin{equation*}
+            \chi(X) = (X - \lambda_1)^{d_1}\cdots(X - \lambda_k)^{d_k},
+        \end{equation*}
+        where $\dim W_i = d_i$ for $1\le i\le k$. 
+        \item $\dim W_1 + \dots + \dim W_k = \dim V$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    The implication $(1)\implies(2)$ is clear by considering the matrix representation of $T$ with respect to a suitable basis. Further, the implication $(2)\implies(3)$ is clear from the the fact that the degree of the characteristic polynomial is equal to the dimension of $V$. Finally, the implication $(3)\implies(1)$ follows from \thref{eigenspaces-are-independent}, since that would imply $V = W_1 + \dots + W_k$, that is, $V$ has a basis consisting of eigenvectors of $T$.
+\end{proof}
+
+\subsection{The Minimal Polynomial}
+
+\begin{definition}
+    Let $T\colon V\to V$ be a linear operator on a finite-dimensional vector space $V$ over a field $F$. Let $\frakA$ denote the set of all polynomials $f(X)\in F[X]$ such that $f(T) = 0$ as a linear operator. Clearly $\frakA$ is an ideal in $F[X]$. The unique\footnote{Because $(F[X])^\times = F^\times$.} monic generator of $\frakA$ is called the \define{minimal polynomial} for $T$.
+\end{definition}
+
+\begin{remark}
+    Since $F[X]$ is a Euclidean domain with the Euclidean function given by the degree map, the minimal polynomial is the unique monic polynomial in $\frakA$ having the smallest degree.
+\end{remark}
+
+\begin{proposition}
+    Let $T\colon V\to V$ be a linear operator on a finite-dimensional vector space $V$ over a field $F$. Then $\lambda\in F$ is a root of the characteristic polynomial of $T$ if and only if it is a root of the minimal polynomial of $T$.
+\end{proposition}
+\begin{proof}
+    Let $p(X)\in F[X]$ be the minimal polynomial for $T$ and let $\chi(X)\in F[X]$ denote the characteristic polynomial. Suppose first that $p(\lambda) = 0$. Then $p(X) = (X - \lambda)q(X)$ for some polynomial $q(X)\in F[X]$. Since $\deg q < \deg p$, we must have $q(T)\ne 0$. Choose a vector $\beta\in V$ such that $\alpha\coloneq q(T)\beta\ne 0$. Then 
+    \begin{equation*}
+        0 = p(T)\beta = (T - \lambda I)q(T)\beta = (T - \lambda I)\alpha,
+    \end{equation*}
+    so that $\lambda$ is an eigenvalue of $T$, whence $\chi(\lambda) = 0$.
+
+    Conversely, suppose $\chi(\lambda) = 0$, that is, $\lambda$ is an eigenvalue of $T$, so there exists a non-zero vector $\alpha\in V$ with $T\alpha = \lambda\alpha$. Then 
+    \begin{equation*}
+        0 = p(T)\alpha = p(\lambda)\alpha\implies p(\lambda) = 0,
+    \end{equation*}
+    thereby completing the proof.
+\end{proof}
+
+\begin{theorem}[Cayley-Hamilton]\thlabel{cayley-hamilton}
+    Let $T\colon V\to V$ be a linear operator on a finite-dimensional vector space $V$ over a field $F$. If $\chi(X)\in F[X]$ denotes the characteristic polynomial of $T$, then $\chi(T) = 0$.
+\end{theorem}
+\begin{proof}
+    % TODO: Add in later.
+\end{proof}
+
+ 
+\end{document}
