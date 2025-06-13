@@ -1,0 +1,787 @@
+\documentclass[10pt]{article}
+
+\title{Derivations and $I$-smoothness}
+\author{Swayam Chube}
+\date{Last Updated: \today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{fouriernc}
+\usepackage{mdframed}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd-Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+% \renewcommand{\familydefault}{\sfdefault} % Do you want this font? 
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Swayam Chube},
+    colorlinks=true,
+	citecolor=blue,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{interlude}[theorem]{Interlude}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrM}{\mathscr{M}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrO}{\mathscr{O}} % sheaf
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+% \newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\Ass}{\operatorname{Ass}}
+\newcommand{\projdim}{\operatorname{proj~dim}}
+\newcommand{\injdim}{\operatorname{inj~dim}}
+\newcommand{\gldim}{\operatorname{gl~dim}}
+\newcommand{\embdim}{\operatorname{emb~dim}}
+\newcommand{\hght}{\operatorname{ht}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\CM}{\operatorname{CM}}
+\newcommand{\cech}[1]{\mathbin{\check{#1}}}
+\newcommand{\cdim}{\operatorname{cdim}}
+\newcommand{\Der}{\operatorname{Der}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\sffamily}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+\begin{document}
+\maketitle
+
+\section{Derivations}
+
+\begin{definition}
+    Let $A$ be a ring and $M$ an $A$-module. A \define{derivation} from $A$ to $M$ is a map $D\colon A\to M$ satisfying 
+    \begin{enumerate}[label=(\roman*)]
+        \item $D(a + b) = Da + Db$, and 
+        \item $D(ab) = aDb + bDa$ for all $a,b\in A$.
+    \end{enumerate}
+    The set of all such derivations is denoted by $\Der(A, M)$ and is naturally an $A$-module through 
+    \begin{equation*}
+        (D + D')a = Da + D'a\quad\text{ and }\quad (aD)b = a(Db).
+    \end{equation*}
+    Further, if $A$ is a $k$-algebra\footnote{$k$ is any ring.} via a ring homomorphism $f\colon k\to A$, we say that $D\in\Der(A, M)$ is a \define{$k$-derivation} if $D\circ f = 0$. The set of all $k$-derivations is denoted by $\Der_k(A, M)$. 
+
+    For $D, D'\in\Der(A, M)$, define 
+    \begin{equation*}
+        [D, D'] = D\circ D' - D'\circ D\in\Der(A, M).
+    \end{equation*}
+    It is then easy to check that under the above bracket operation $\Der_k(A, M)$ forms a Lie algebra over $k$ when $k$ is a field.
+\end{definition}
+
+Inductively, it is easy to show that derivations satisfy a ``Leibnitz formula'': 
+\begin{equation*}
+    D^n(ab) = \sum_{i = 0}^n \binom{n}{i}D^ia\cdot D^{n - i}b.
+\end{equation*}
+If $A$ has characteristic $p > 0$, then we obtain 
+\begin{equation*}
+    D^p(ab) = D^pa\cdot b + a\cdot D^pb,
+\end{equation*}
+so that $D^p\in\Der(A, M)$.
+
+Note that the functor $\Der_k(A, -)\colon \mathfrak{Mod}_A\to\mathfrak{Mod}_A$ is covariant. We shall eventually show that it is ``representable''.
+
+\begin{remark}
+    We remark that the $k$-derivations are precisely the $k$-linear derivations. Indeed, if $D\in\Der_k(A, M)$, then for $x\in k$ and $a\in A$, we have 
+    \begin{equation*}
+        D(xa) = xDa + aDx = xDa.
+    \end{equation*}
+    On the other hand, if $D\in\Der(A, M)$ is $k$-linear, then for $x\in k$, we have 
+    \begin{equation*}
+        Dx = D(x\cdot 1) = xD1 + Dx = Dx,
+    \end{equation*}
+    since 
+    \begin{equation*}
+        D1 = D(1\cdot 1) = D1 + D1\implies D1 = 0.
+    \end{equation*}
+\end{remark}
+
+\begin{definition}
+    Let $A$ be a ring and $N$ an $A$-module. We define the \define{idealization} of $N$ in $A$ to be 
+    \begin{equation*}
+        A\rtimes N\coloneq\left\{\begin{pmatrix}
+        a & x\\ & a
+        \end{pmatrix}\colon a\in A,~x\in N\right\}.
+    \end{equation*}
+    This clearly forms a ring under matrix multiplication. There is a natural map $A\to A\rtimes N$ embedding $A$ as diagonal matrices and $N\into A\rtimes N$ sits as an ideal with $N^2 = 0$.
+\end{definition}
+
+Let $k$ be a ring and $k\to A$ a $k$-algebra. Let $\mu\colon A\otimes_k A\to A$ be given by $\mu(x\otimes y) = xy$, set $B\coloneq A\otimes_k A/I^2$ and $\Omega_{A/k}\coloneq I/I^2$. Since the annihilator of $\Omega_{A/k}$ as a $B$-module contains the ideal $I$, it is naturally an $A$-module. The action is explicitly given by 
+\begin{equation*}
+    a\cdot(x\otimes y + I^2) = ax\otimes y + I^2 = x\otimes ay + I^2,
+\end{equation*}
+which is precisely the $B$-action through either $a\otimes 1 + I^2$ or $1\otimes a + I^2$. Further, there is a natural map $d\colon A\to\Omega_{A/k}$ given by 
+\begin{equation*}
+    da = 1\otimes a - a\otimes 1.
+\end{equation*}
+It is easy to check that $d$ is a $k$-derivation. 
+
+\begin{theorem}\thlabel{thm:representability}
+    The pair $(\Omega_{A/k}, d)$ has the following universal property: If $M$ is an $A$-module and $D\in\Der_k(A, M)$, then there is a unique $A$-linear map $f\colon\Omega_{A/k}\to M$ such that $f\circ d = D$.
+
+    In particular, there is a natural isomorphism of functors $\Der_k(A, -)\cong\Hom_A(\Omega_{A/k}, -)$.
+\end{theorem}
+\begin{proof}
+    Let $D\in\Der_k(A, M)$ and let $\varphi\colon A\otimes_k A\to A\rtimes M$ be given by 
+    \begin{equation*}
+        \varphi(x\otimes y) = 
+        \begin{pmatrix}
+            xy & xDy\\
+            & xy
+        \end{pmatrix}.
+    \end{equation*}
+    It is easy to check that $\varphi$ is a homomorphism of $k$-algebras and $\varphi$ maps $I$ into $M$. Further, since $M^2 = 0$, it follows that $I^2\subseteq\ker\varphi$, so that $\varphi$ descends to a map $f\colon\Omega_{A/k}\to M$. This map is $A$-linear; indeed, if $\xi = \sum_i x_i\otimes y_i + I^2\in\Omega_{A/k}$, then for $a\in A$,
+    \begin{equation*}
+        f(a\xi) = \sum_{i} = ax_iy_i = af(\xi).
+    \end{equation*}
+    Moreover, for $a\in A$,
+    \begin{equation*}
+        f(da) = f(1\otimes a - a\otimes 1 + I^2) = Da,
+    \end{equation*}
+    so that $f\colon \Omega_{A/k}\to M$ is the desired map. To see that $f$ is unique, it suffices to prove: 
+    \begin{claim}
+        $\Omega_{A/k}$ is generated by $\{da\colon a\in A\}$ as an $A$-module.
+    \end{claim}
+    Indeed, let $\xi = \sum_{i} x_i\otimes y_i + I^2\in\Omega_{A/k}$. Then $\mu(\xi) = \sum_i x_iy_i = 0$, so that 
+    \begin{equation*}
+        \xi = \sum_{i} x_i\left(1\otimes y_i - y_i\otimes 1\right) + \sum_{i} x_iy_i\otimes 1 = \sum_{i} x_i dy_i. 
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    Let $A$ and $k$ be $k$-algebras and set $A' = A\otimes_k k'$. Then 
+    \begin{equation*}
+        \Omega_{A'/k'}\cong\Omega_{A/k}\otimes_k k'\cong\Omega_{A/k}\otimes_{A} A'.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Let $d\colon A\to\Omega_{A/k}$ be the universal derivation. This induces a map $d'\coloneq d\otimes\mathbbm 1\colon A\otimes_k k'\to \Omega_{A/k}\otimes_k k'$. We claim that the tuple $(A', d', \Omega_{A/k}\otimes_k k')$ has the desired universal property. First, we must argue that $d'$ is a $k'$-derivation. Indeed, 
+    \begin{equation*}
+        d'\left((a\otimes x)\cdot(a'\otimes x')\right) = d(aa')\otimes xx' = \left(ada' + a'da\right)\otimes xx' = (a\otimes x)d'(a'\otimes x') + (a'\otimes x')d'(a\otimes x),
+    \end{equation*}
+    and $d'(1\otimes x) = d1\otimes x = 0$ for all $x, x'\in k'$ and $a, a'\in A$. This shows that $d'$ is a $k'$-derivation.
+
+    It remains to verify the universal property. Let $D'\colon A'\to M'$ be a $k'$-derivation. The composition $D\colon A\to A'\to M'$ is clearly a $k$-derivation, and hence there is an $A$-linear map $f\colon \Omega_{A/k}\to M'$ making 
+    \begin{equation*}
+        \xymatrix {
+            A\ar[r]^D\ar[d]_d & M'\\
+            \Omega_{A/k}\ar[ru]_{f}
+        }
+    \end{equation*}
+    commute. The map $f$ induces $f\otimes\mathbbm 1\colon \Omega_{A/k}\otimes_k k'\to M'\otimes_k k'$. There is a natural ``multiplication'' map $M'\otimes_k k'\to M'$ given by $m'\otimes x\mapsto x\cdot m'$. Denote $g$ by the composition
+    \begin{equation*}
+        g\colon \Omega_{A/k}\otimes_k k'\xrightarrow{f\otimes\mathbbm{1}} M'\otimes_k k'\to M'.
+    \end{equation*}
+    We contend that $g$ is $A'$-linear. Any element of $A'$ is of the form $\sum_i a_i\otimes x_i$, so it suffices to check linearity for elements of the form $a\otimes x$ with $a\in A$ and $x\in k'$. Indeed, for $\omega\in\Omega_{A/k}$ and $x'\in k'$, we have 
+    \begin{equation*}
+        g\left((a\otimes x)\cdot(\omega\otimes x')\right) = f(a\omega)\otimes xx' = xx'\cdot f(a\omega) = (a\otimes x)\cdot (x'\cdot f(\omega)) = (a\otimes x)\cdot g(\omega\otimes x').
+    \end{equation*}
+    Finally, note that the diagram 
+    \begin{equation*}
+        \xymatrix {
+            A'\ar[d]_{d'}\ar[r]^{D'} & M'\\
+            \Omega_{A/k}\otimes_k k'\ar[ru]_{g}
+        }
+    \end{equation*}
+    commutes because for $a\in A$ and $x\in k'$, we have 
+    \begin{equation*}
+        (g\circ d')(a\otimes x) = g\left(da\otimes x\right) = x\cdot f(da) = x\cdot Da = x\cdot D'(a\otimes 1) = D'(a\otimes x),
+    \end{equation*}
+    as desired. The uniqueness of $g$ follows from the fact that $d'(A')$ generates $\Omega_{A/k}\otimes_k k'$ as an $A'$-module, and the commutativity of the diagram determines the value of $g$ on the set $d'(A')$. This completes the proof.
+\end{proof}
+
+Let $A$ be a $k$-algebra, and $S\subseteq A$ be a multiplicative subset. If $D\colon A\to M$ is a $k$-derivation, then it induces a $k$-derivation $D_S\colon S^{-1}A\to S^{-1}M$ by 
+\begin{equation*}
+    D\left(\frac{a}{s}\right) = \frac{s\cdot D(a) - a\cdot D(s)}{s^2}\in S^{-1}M.
+\end{equation*}
+It is an easy exercise to check that this is indeed a $k$-derivation.
+
+\begin{proposition}
+    Let $A$ be a $k$-algebra, and $S\subseteq A$ a multiplicative subset. Then 
+    \begin{equation*}
+        \Omega_{S^{-1}A/k}\cong\Omega_{A/k}\otimes_A S^{-1}A = S^{-1}\Omega_{A/k}.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Let $d\colon A\to \Omega_{A/k}$ be the ``universal derivation''. We contend that the derivation $d_S\colon S^{-1}A\to S^{-1}\Omega_{A/k}$ has the desired universal property of K\"ahler differentials. Let $M$ be an $S^{-1}A$-module and let $\partial\colon S^{-1}A\to M$ be a $k$-derivation. The composition $D\colon A\to S^{-1}A\to M$ is clearly a $k$-derivation, and hence induces an $A$-linear map $f\colon \Omega_{A/k}\to M$ making 
+    \begin{equation*}
+        \xymatrix {
+            A\ar[r]^D\ar[d]_d & M\\
+            \Omega_{A/k}\ar[ru]_f
+        }
+    \end{equation*}
+    commute. The map $f$ further induces an $S^{-1}A$-linear map $S^{-1}f\colon S^{-1}\Omega_{A/k}\to M$. We contend that the diagram 
+    \begin{equation*}
+        \xymatrix {
+            S^{-1}A\ar[r]^{\partial}\ar[d]_{d_S} & M\\
+            S^{-1}\Omega_{A/k}\ar[ru]_{S^{-1}f}
+        }
+    \end{equation*}
+    commutes. Indeed, 
+    \begin{equation*}
+        S^{-1}f\circ d_S\left(\frac{a}{s}\right) = S^{-1}f\left(\frac{s\cdot da - a\cdot ds}{s^2}\right) = \frac{s\cdot f(da) - a\cdot f(ds)}{s^2} = \frac{s\cdot\partial a - a\cdot\partial s}{s^2} = \partial\left(\frac{a}{s}\right),
+    \end{equation*}
+    as desired. Again, the uniqueness follows from the fact that the image of $d_S(S^{-1}A)$ generates $S^{-1}\Omega_{A/k}$ as an $S^{-1}A$-module, thereby completing the proof.
+\end{proof}
+
+\begin{definition}
+    Let $k$ be a ring. We say that a $k$-algebra $A$ is \define{$0$-smooth} if for any $k$-algebra $C$, any ideal $N\noreq C$ with $N^2 = 0$, and any $k$-algebra homomorphism $u\colon A\to C/N$, there exists a lift $v\colon A\to C$ making 
+    \begin{equation*}
+        \xymatrix {
+            k\ar[r]\ar[d] & C\ar[d]\\
+            A\ar[r]_-u\ar@{.>}[ru]^{\exists~v} & C/N
+        }
+    \end{equation*}
+    commute. Moreover, we say that $A$ is \define{$0$-unramified} over $k$ if there exists at most one such $v$. When $A$ is both $0$-smooth and $0$-unramified, we say that $A$ is \define{$0$-\'etale}.
+\end{definition}
+
+\begin{lemma}\thlabel{equivalent-0-unramified}
+    Let $k\to A$ be a homomorphism of rings. Then $A$ is $0$-unramified over $k$ if and only if $\Omega_{A/k} = 0$. 
+\end{lemma}
+\begin{proof}
+    Indeed, suppose $\Omega_{A/k} = 0$, and there are two lifts 
+    \begin{equation*}
+        \xymatrix {
+            k\ar[r]\ar[d] & C\ar[d]^\pi\\
+            A\ar[r]_-u\ar[ru]^{\lambda_1}_{\lambda_2} & C/N.
+        }
+    \end{equation*}
+    Let $D = \lambda_1 - \lambda_2\colon A\to N$. We note that $N$ is naturally an $A$-module, through the action $a\cdot n = \pi^{-1}u(a)\cdot n$, which is well-defined since $N^2 = 0$. We claim that $D\in\Der_k(A, N)$. Let $a, b\in A$, then 
+    \begin{align*}
+        aDb + bDa &= a\cdot\left(\lambda_1(b) - \lambda_2(b)\right) + b\cdot\left(\lambda_1(a) - \lambda_2(a)\right)\\
+        &= \lambda_1(a)\left(\lambda_1(b) - \lambda_2(b)\right) + \lambda_2(b)\left(\lambda_1(a) - \lambda_2(b)\right)\\
+        &= \lambda_1(ab) - \lambda_2(ab)\\
+        &= D(ab).
+    \end{align*}
+    But since $\Omega_{A/k} = 0$, we have $\Der_k(A, N)\cong\Hom_A(\Omega_{A/k}, N) = 0$, whence $D = 0$, and thus $\lambda_1 = \lambda_2$.
+
+    Conversely, suppose $A$ is $0$-unramified over $k$. Consider the commutative diagram 
+    \begin{equation*}
+        \xymatrix {
+            k\ar[r]\ar[d] & A\otimes_k A/I^2\ar[d]\\
+            A\ar[r] & A\otimes_k A/I
+        }
+    \end{equation*}
+    where $I = \ker\left(\mu\colon A\otimes_k A\to A\right)$ and the bottom map is $a\mapsto a\otimes 1$. Let $\lambda_1\colon A\to A\otimes_k A/I^2$ and $\lambda_2\colon A\to A\otimes_k A/I^2$ be given by 
+    \begin{equation*}
+        \lambda_1(a) = 1\otimes a + I^2\quad\text{ and }\lambda_2(a) = a\otimes 1 + I^2.
+    \end{equation*}
+    These are both lifts of the bottom map and hence must be equal. That is, $da = 1\otimes a - a\otimes 1\in I^2$. Since the $da$'s generate $\Omega_{A/k}$ as an $A$-module, we must have that $\Omega_{A/k} = 0$, as desired.
+\end{proof}
+
+\begin{theorem}[First Fundamental Exact Sequence]\thlabel{thm:first-fundamental-exact-sequence}
+    Let $k\xrightarrow{f} A\xrightarrow{g} B$ be ring homomorphisms. This gives rise to an exact sequence 
+    \begin{equation}
+        \Omega_{A/k}\otimes_A B\xrightarrow{\alpha} \Omega_{B/k}\xrightarrow{\beta}\Omega_{B/A}\to 0,\label{eq:first-right-exact-sequence}
+    \end{equation}
+    where the maps are given by 
+    \begin{equation*}
+        \alpha\left(d_{A/k}a\otimes b\right) = bd_{B/k}g(a)\quad\text{ and }\beta\left(d_{B/k}b\right) = d_{B/A}b.
+    \end{equation*}
+    If moreover $B$ is $0$-smooth over $A$, then the sequence 
+    \begin{equation}
+        0\to\Omega_{A/k}\otimes_A B\xrightarrow{\alpha} \Omega_{B/k}\xrightarrow{\beta}\Omega_{B/A}\to 0,\label{eq:first-exact-sequence}
+    \end{equation}
+    is split exact.
+\end{theorem}
+\begin{proof}
+    Let $T$ be a $B$-module. To show that \eqref{eq:first-right-exact-sequence} is exact, it suffices to show that 
+    \begin{equation*}
+        0\to\Hom_B(\Omega_{B/A}, T)\xrightarrow{\beta^\ast}\Hom_{B}(\Omega_{B/k}, T)\xrightarrow{\alpha^\ast}\Hom_B\left(\Omega_{A/k}\otimes_A B, T\right).
+    \end{equation*}
+    Using the Hom-Tensor adjunction, we have
+    \begin{equation*}
+        \Hom_B\left(\Omega_{A/k}\otimes_A B, T\right)\cong\Hom_B\left(B,\Hom_A(\Omega_{A/k}, T)\right)\cong \Hom_A(\Omega_{A/k}, T)\cong\Der_k(A, T).
+    \end{equation*}
+    Thus, it suffices to show that 
+    \begin{equation*}
+        0\to\Der_A(B, T)\xrightarrow{\text{inclusion}}\Der_k(B, T)\xrightarrow{-\circ g}\Der_k(A, T)
+    \end{equation*}
+    is exact. Indeed, if $D\in\Der_k(B, T)$ is such that $D\circ g = 0$, then $D$ is an $A$-derivation, i.e., it lies in $\Der_A(B, T)$.
+
+    Suppose now that $B$ is $0$-smooth over $A$ and let $D\in\Der_k(A, T)$. Consider the commutative diagram 
+    \begin{equation*}
+        \xymatrix {
+            A\ar[r]^-\varphi\ar[d]_g & B\rtimes T\ar[d]\\
+            B\ar@{=}[r] & B
+        }
+    \end{equation*}
+    where 
+    \begin{equation*}
+        \varphi(a) = 
+        \begin{pmatrix}
+            g(a) & Da\\
+            & g(a)
+        \end{pmatrix}.
+    \end{equation*}
+    Due to smoothness, there is a lift $\psi\colon B\to B\rtimes T$ which can be written as 
+    \begin{equation*}
+        \psi(b) = 
+        \begin{pmatrix}
+            b & D'b\\
+            & b
+        \end{pmatrix}.
+    \end{equation*}
+    It is clear that $D'\in\Der_k(B, T)$. Further, $D'\circ g = D$ since $\psi\circ g = \varphi$. This shows that $-\circ g$ is a surjective map. 
+    
+    Now note that $D'$ corresponds to a $B$-linear $\alpha'\colon\Omega_{B/k}\to T$. Take $T\coloneq\Omega_{A/k}\otimes B$ and define $D$ by $Da = d_{A/k}a\otimes 1$, so that $D = D'\circ g$ implies $\alpha'\circ\alpha = \id_{\Omega_{A/k}\otimes_A B}$, as desired.
+\end{proof}
+
+\begin{theorem}[Second Fumdamental Exact Sequence]\thlabel{thm:second-fundamental-exact-sequence}
+    Let $k\xrightarrow{f}A\xrightarrow{g} B$ be ring homomorphisms with $g$ surjective\footnote{Clearly, this implies that $\Omega_{B/A} = 0$, for if $D\in\Der_A(B, M)$, then $D\circ g = 0$, i.e., $D = 0$ due to the surjectivity of $g$. The point of \thref{thm:second-fundamental-exact-sequence} is to characterize the kernel of the map $\Omega_{A/k}\otimes_A B\to\Omega_{B/k}$.} and set $\fraka\coloneq \ker g$. There is an exact sequence 
+    \begin{equation}
+        \fraka/\fraka^2\xrightarrow{\delta}\Omega_{A/k}\otimes_A B\xrightarrow{\alpha}\Omega_{B/k}\to 0,\label{eq:second-right-exact-sequence}
+    \end{equation}
+    where $\delta(x + \frakm^2) = d_{A/k}x\otimes 1$. If moreover $B$ is $0$-smooth over $k$, then 
+    \begin{equation}
+        0\to\fraka/\fraka^2\xrightarrow{\delta}\Omega_{A/k}\otimes_A B\xrightarrow{\alpha} \Omega_{B/k}\to 0\label{eq:second-exact-sequence}
+    \end{equation}
+    is a split exact sequence.
+\end{theorem}
+\begin{proof}
+    The surjectivity of $\alpha$ has been argued in the footnote. We  shall show exactness at $\Omega_{A/k}\otimes_A B$. Again, let $T$ be a $B$-module. It suffices to show that the sequence 
+    \begin{equation*}
+        \Hom_B(\Omega_{B/k}, T)\xrightarrow{\alpha^\ast}\Hom_B\left(\Omega_{A/k}\otimes_A B, T\right)\xrightarrow{\delta^\ast}\Hom_B(\fraka/\fraka^2, T)
+    \end{equation*}
+    is exact. Using the Hom-Tensor adjunction and \thref{thm:representability}, the above is isomorphic to the sequence 
+    \begin{equation*}
+        \Der_k(B, T)\xrightarrow{-\circ g}\Der_k(A, T)\xrightarrow{\delta^\ast}\Hom_B(\fraka/\fraka^2, T).
+    \end{equation*}
+    Note that for $a, b\in\fraka$, $D(ab) = aD(b) + bD(a) = 0$ since $\fraka$ acts trivially on $T$ as the latter is a $B = A/\fraka$-module. This shows that every $D\in\Der_k(A, T)$ descends to a map $\delta^\ast D\colon \fraka/\fraka^2\to T$ given by 
+    \begin{equation*}
+        \delta^\ast D(a + \fraka^2) = Da.
+    \end{equation*}
+    To see that this map is $B$-linear, let $b + \fraka\in B$ and $a + \fraka^2\in\fraka/\fraka^2$. Then 
+    \begin{equation*}
+        \delta^\ast D\left(ab + \fraka^2\right) = aDb + bDa = bDa,
+    \end{equation*}
+    thereby proving that $\delta^\ast D$ is $B$-linear.
+
+    Now, $\delta^\ast D = 0$ if and only if $D(\frakm) = 0$, so that $D$ can be lifted to a $k$-derivation $B\to T$, whence \eqref{eq:second-right-exact-sequence} is exact.
+
+    Suppose now that $B$ is $0$-smooth over $k$. Then there is a lift 
+    \begin{equation*}
+        \xymatrix {
+            k\ar[d]\ar[r] & A/\frakm^2\ar[d]^g\\
+            B\ar@{=}[r]\ar@{.>}[ru]^\exists & B
+        }
+    \end{equation*}
+    so that the short exact sequence 
+    \begin{equation*}
+        0\to\frakm/\frakm^2\to A/\frakm^2\xrightarrow{g} B\to 0
+    \end{equation*}
+    splits, i.e., there exists a homomorphism of $k$-algebras $s\colon B\to A/\frakm^2$ such that $g\circ s = \id_B$. Now, $sg\colon A/\frakm^2\to A/\frakm^2$ is a homomorphism vanishing on $\frakm/\frakm^2$, and $g = \id_B\circ g = gsg$, i.e., $g(1 - sg) = 0$. Set $D = 1 - sg$, then $D\colon A/\frakm^2\to\ker g = \frakm/\frakm^2$ is a derivation. Indeed, if $a, b\in A$, then 
+    \begin{equation*}
+        D(ab + \frakm^2) = (ab + \frakm^2) - % TODO: Complete this
+    \end{equation*}
+\end{proof}
+
+\begin{theorem}
+    Suppose $L/K$ is a separable algebraic extension of fields. Then $L$ is $0$-\'etale over $K$. Moreover, for any subfield $k\subseteq K$, we have 
+    \begin{equation*}
+        \Omega_{L/k} = \Omega_{K/k}\otimes_K L.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Let $C$ be a $K$-algebra with an ideal $N\noreq C$ such that $N^2 = 0$, and let $u\colon L\to C/N$ be a $K$-algebra homomorphism. 
+    \begin{equation*}
+        \xymatrix {
+            K\ar[r]\ar[d] & C\ar[d]^\pi\\
+            L\ar[r]_-u & C/N
+        }
+    \end{equation*}
+    Let $L'$ be an intermediate field $K\subseteq L'\subseteq L$ with $L'$ finite over $K$. Using the Primitive Element Theorem, we can write $L' = K(\alpha)$ for some $\alpha\in L'$. Let $f(X)\in K[X]$ be the minimal polynomial of $\alpha$ over $K$, so that $L'\cong K[X]/(f(X))$ and $f'(\alpha)\ne 0$. We shall first lift $u|_{L'}\colon L'\to C/N$ to a map $L'\to C$. This is equivalent to finding an element $y\in C$ satisfying $f(y) = 0$, and $\pi(y) = u(\alpha)$.
+
+    Choose any inverse image $y\in C$ of $u(\alpha)$. Then $\pi(f(y)) = u(f(\alpha)) = 0$, so that $f(y) \in N$. Moreover, $N^2 = 0$, so for any $\eta\in N$, using Taylor's expansion, we get 
+    \begin{equation*}
+        f(y + \eta) = f(y) + f'(y)\eta.
+    \end{equation*}
+    Recall that $f'(\alpha)$ is a unit in $L$, so that $u(f'(\alpha)) = \pi(f'(y))$ is a unit in $C/N$, whence $f'(y)$ is a unit in $C$\footnote{In general, if $R$ is a ring and $I$ a nilpotent ideal, then any element congruent to a unit modulo $I$ is a unit in $R$. This follows from the fact that the nilradical is the intersection of all prime ideals, and that every non-unit in $R$ is contained in a (prime) maximal ideal.}. Set $\eta = -f(y)/f'(y)\in N$, and $f(y + \eta) = 0$. Let $v\colon L'\to C$ be obtained by sending $\alpha\mapsto y + \eta$. Clearly this is a lifting of $u|_{L'}\colon L'\to C/N$.
+    \begin{equation*}
+        \xymatrix {
+            K\ar[r]\ar[d] & C\ar[d]^\pi\\
+            L'\ar[r]_{u|_{L'}} & C/N
+        }
+    \end{equation*}
+    We claim that this lift is unique. Indeed, suppose there are two lifts $v\colon \alpha\mapsto y$ and $\wt v\colon\alpha\mapsto\wt y + \eta$. Then, using the formula $f(y + \eta) = f(y) + f'(y)\eta$, and the facts that $f(y + \eta) = f(y) = 0$, we note that $f'(y)\eta = 0$. But as we have argued previously, $f'(y)$ is a unit in $C$, whence $\eta = 0$, as desired.
+
+    Thus for every $\alpha\in L$, there is a uniquely determined lifting $v_\alpha\colon K(\alpha)\to C$ of $u|_{K(\alpha)}\colon K(\alpha)\to C$. Now define $v\colon L\to C$ by $v(\alpha) = v_\alpha(\alpha)$ for all $\alpha\in L$. To see that $v$ is a $K$-algebra homomorphism, note that for $\alpha,\beta\in L$, there is a $\gamma\in L$ such that $K(\alpha, \beta) = K(\gamma)$. Further, due to the uniqueness of intermediate lifts as argued in the preceding paragraph, we must have that $v_\gamma|_{K(\alpha)} = v_\alpha$ and $v_\gamma|_{K(\beta)} = v_\beta$, whence it follows that $v$ is a $K$-algebra homomorphism. That $v$ is a lift is clear since it is a lift when restricted to finite intermediate extensions.
+
+    The last assertion follows from \thref{thm:first-fundamental-exact-sequence} since we have a short exact sequence 
+    \begin{equation*}
+        0\to\Omega_{K/k}\otimes_K L\to\Omega_{L/k}\to\Omega_{L/K}\to 0,
+    \end{equation*}
+    and $\Omega_{L/K} = 0$ due to \thref{equivalent-0-unramified}.
+\end{proof}
+
+\section{Separability}
+
+\begin{definition}\thlabel{definition-separable}
+    Let $k$ be a field and $A$ a $k$-algebra. We say tht $A$ is \define{separable} over $k$ if for every field extension $k\subseteq k'$, the ring $A' = A\otimes_k k'$ is reduced. 
+\end{definition}
+
+From the definition, the following properties are evident: 
+\begin{enumerate}[label=(\roman*)]
+    \item A subalgebra of a separable $k$-algebra is separable. 
+    \item $A$ is separable over $k$ if and only if every finitely generated $k$-subalgebra of $A$ is separable over $k$. 
+    \item For $A$ to be separable over $k$, it is sufficient that $A\otimes_k k'$ is reduced for every finitely generated extension field $k'$ of $k$.
+    \item If $A$ is separable over $k$, and $k'$ is an extension field of $k$, then $A\otimes_k k'$ is separable over $k'$.
+\end{enumerate}
+
+Property (i) is trivial since for any subalgebra $B\subseteq A$, the map $B\otimes_k k'\to A\otimes_k k'$ is an injective ring homomorphism. To see (ii) and (iii), suppose $\xi = \sum_{i = 1}^n a_i\otimes b_i$ is nilpotent in $A\otimes_k k'$, then it is nilpotent in $B\otimes_k \ell$, where $B = k[a_1,\dots, a_n]$, and $\ell = k(b_1,\dots, b_n)$. Finally, to see (iv), note that for any field extension $k'\subseteq\ell$, 
+\begin{equation*}
+    \left(A\otimes_k k'\right)\otimes_{k'}\ell =  A\otimes_k\left(k'\otimes_{k'}\ell\right) = A\otimes_k \ell,
+\end{equation*}
+which is reduced since $A$ is separable over $k$.
+
+\begin{remark}\thlabel{separable-algebraic-is-separable}
+    We note that the above definition of separability is an extension of the usual definition encountered in field theory. Indeed, let $K\supseteq k$ be a separable algebraic extension. To verify that $K$ is a separable $k$-algebra, using property (ii) above, we may assume that $K$ is finitely generated over $k$. Using the Primitive Element Theorem, there is an isomorphism $K\cong k[X]/(f(X))$ for some irreducible separable polynomial $f(X)\in k[X]$. 
+
+    If $k'\supseteq k$ is a field extension, then due to the Chinese Remainder Theorem,
+    \begin{equation*}
+        K\otimes_k k'\cong k'[X]/(f(X))\cong\prod_{i = 1}^n k[X]/(f_i(X)),
+    \end{equation*}
+    where $f(X) = f_1(X)\cdots f_n(X)$ is the decomposition of $f(X)$ into irreducibles in $k[X]$. Note that $f_i\ne f_j$ for $1\le i < j\le n$ since $f(X)$ has no multiple roots in any algebraically closed field containing $k$, in particular, $\overline{k'}$. This shows that $K\otimes_k k'$ is reduced, as desired.
+\end{remark}
+
+\begin{definition}
+    A field extension $k\subseteq K$ is said to be \define{separably generated} if there is a transcendence basis $\Gamma$ of the extension such that $K/k(\Gamma)$ is a separable algebraic extension.
+\end{definition}
+
+\begin{theorem}\thlabel{separably-generated-is-separable}
+    If $k\subseteq K$ is a separably generated field extension, then $K$ is a separable algebra over $k$.
+\end{theorem}
+\begin{proof}
+    Let $\Gamma\subseteq K$ be a separating transcendence basis over $k$, that is, $K/k(\Gamma)$ is a separable algebraic extension. If $k'\supseteq k$ is an extension of fields, then $k(\Gamma)\otimes_k k'$ is a localization of $k[\Gamma]\otimes_k k'\cong k'[\Gamma]$, whence the former is an integral domain with field of fractions isomorphic to $k'(\Gamma)$ as a $k$-algebra. Therefore, 
+    \begin{equation*}
+        K\otimes_k k'\cong \left(K\otimes_{k(\Gamma)} k(\Gamma)\right)\otimes_k k'\cong K\otimes_{k(\Gamma)}\left(k(\Gamma)\otimes_k k'\right)\into K\otimes_{k(\Gamma)} k'(\Gamma).
+    \end{equation*}
+    Due to \thref{separable-algebraic-is-separable}, $K\otimes_{k(\Gamma)} k'(\Gamma)$ is reduced, and hence so is $K\otimes_k k'$, as desired.
+\end{proof}
+
+\begin{theorem}\thlabel{equivalent-conditions-for-finitely-generated-extension}
+    Let $k$ be a field of characteristic $p > 0$, and $K$ a finitely generated extension field of $k$. The following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $K$ is a separable algebra over $k$. 
+        \item $K\otimes_k k^{1/p}$ is reduced. 
+        \item $K$ is separably generated over $k$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    The implication $(1)\implies(2)$ is clear and $(3)\implies(1)$ is the content of \thref{separably-generated-is-separable}. We shall prove $(2)\implies(3)$. Let $K = k(x_1,\dots,x_n)$, we can further arrange that $x_1,\dots,x_r$ is a transcendence basis for $K$ over $k$. Suppose further that $x_{r + 1},\dots,x_q$ are separably algebraic over $k(x_1,\dots,x_r)$, and that $x_{q + 1}$ is not. Set $y = x_{q + 1}$ so that the minimal polynomial of $y$ over $k(x_1,\dots,x_r)$ is of the form $f(Y^p)$ for some $f(Y)\in k(x_1,\dots,x_r)[Y]$. Clearing denominators and using the fact that $x_1,\dots,x_r$ are algebraically independent, we obtain an irreducible polynomial $F(X_1,\dots,X_r, Y^p)\in k[X_1,\dots,X_r, Y]$ with $F(x_1,\dots,x_r, y^p) = 0$.
+
+    Now if all partial derivatives $\partial F/\partial X_i$ are identically zero, then $F(X_1,\dots,X_r, Y^p)$ is the $p$-th power of a polynomial $G(X_1,\dots,X_r, Y)\in k^{1/p}[X_1,\dots,X_r, Y]$. But then we would have 
+    \begin{equation*}
+        k[x_1,\dots,x_r, y]\otimes_k k^{1/p} = \left(\frac{k[X_1,\dots,X_r,Y]}{F(X, Y^p)}\right)\otimes_k k^{1/p} = \frac{k^{1/p}[X_1,\dots,X_r, Y]}{G(X, Y)^p},
+    \end{equation*}
+    which is a non-reduced subring of $K\otimes_k k^{1/p}$, a contradiction. Thus, we may suppose without loss of generality that $\partial F/\partial X_1\ne 0$. Then $x_1$ is separably algebraic over $k(x_2,\dots,x_r, y)$. Due to transitivity of (algebraic) separability, it follows that $x_{r + 1},\dots,x_q$ are separable over $k(x_2,\dots,x_r, y)$. Now set $\wt x_1 = y$ and $\wt x_{q + 1} = x_1$. Then $\wt x_1,x_2,\dots,x_r$ forms a transcendence basis of $K/k$ and $x_{r + 1},\dots,\wt x_{q + 1}$ are separably algebraic over $k(\wt x_1,x_2,\dots,x_r)$. Iterating this process, it is clear that we obtain a separating transcendence basis of $K/k$.
+\end{proof}
+
+\begin{porism}
+    It follows from the proof that if $K = k(x_1,\dots,x_n)$ is separable over $k$, then we can choose a separating transcendence basis contained in $\{x_1,\dots,x_n\}$.
+\end{porism}
+
+\begin{mdframed}
+\begin{interlude}[An Alternate Characterization of Separability for Fields]
+    The following definition can be found in \cite[Tag 030I]{stacks-project}: 
+    \begin{quotation}
+        An extension of fields $k\subseteq K$ is said to be \define{separable} if for every subextension $k\subseteq K'\subseteq K$ with $K'$ a finitely generated field extension of $k$, the extension $k\subseteq K'$ is separably generated, that is, there is a transcendence basis $\Gamma\subseteq K'$ such that $k(\Gamma)\subseteq K'$ is a separable algebraic extension.
+    \end{quotation}
+    We remark here that the above definition is equivalent to ours. Indeed, suppose $k\subseteq K$ is an extension of fields which is separable in the sense of \thref{definition-separable}. Suppose first that $\chr k = p > 0$. As we remarked earlier, $K$ is a separable $k$-algebra if and only if every finitely generated subextension $k\subseteq K'\subseteq K$ is a separable $k$-algebra, which in view of \thref{equivalent-conditions-for-finitely-generated-extension} happens if and only if it is separably generated over $k$, if and only if $k\subseteq K$ is a separable extension of fields in the sense of \cite[Tag 030I]{stacks-project}.
+
+    Next, if $\chr k = 0$, then every $k\subseteq K$ is clearly a separable extension in the sense of \cite[Tag 030I]{stacks-project}. On the other hand, $K$ is a separable $k$-algebra if and only if every finitely generated subextension $k\subseteq K'\subseteq K$ is a separable $k$-algebra, which is true in view of \thref{separably-generated-is-separable}. This establishes the equivalence of the two definitions in the case of field extensions.
+\end{interlude}
+\end{mdframed}
+
+\begin{theorem}
+    Let $k$ be a perfect field. 
+    \begin{enumerate}[label=(\arabic*)]
+        \item Every field extension of $k$ is separable. 
+        \item A $k$-algebra is separable if and only if it is reduced.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+    \item Let $K/k$ be an extension of fields. Note that in characteristic $0$ every extension is separably generated, and therefore, every extension is separable. Suppose now that $\chr k = p > 0$. In this case, $k$ being perfect is equivalent to $k = k^{1/p}$. In view of \thref{equivalent-conditions-for-finitely-generated-extension}, it follows that every finitely generated subextension of $K/k$ is a separable $k$-algebra, whence $K$ is a separable $k$-algebra. 
+    
+    \item Clearly every separable $k$-algebra must be reduced. Conversely, suppose $A$ is a reduced $k$-algebra. We may suppose without loss of generality that $A$ is finitely generated, and hence, Noetherian. Let $\mathfrak A$ denote the total ring of fractions of $A$. The map $A\to\mathfrak A$ is an inclusion of $k$-algebras, therefore it suffices to show that $\mathfrak A$ is reduced. Recall that the total ring of fractions of a Noetherian reduced ring is Artinian, whence is a (finite) product of Artinian local rings. Since a reduced Artinian ring is a field, it follows that $\mathfrak A$ is a finite product of fields, say $\frakA = K_1\times\dots K_n$. Since $k$ is perfect, each $K_i$ is a separable $k$-algebra, so that $\frakA$ is a separable $k$-algebra, whence so is $A$, being isomorphic to a subalgebra of $\frakA$. This completes the proof. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{lemma}\thlabel{equivalent-conditions-for-linear-disjointness}
+    Let $K$ and $K'$ be two subfields of a larger field $L$ and let $k$ be a common subfield contained in $K\cap K'$. The following conditions are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item if $\alpha_1,\dots,\alpha_n\in K$ are linearly independent over $k$, then they are also linearly independent over $K'$. 
+        \item if $\alpha_1,\dots,\alpha_n\in K'$ are linearly independent over $k$, then they are also linearly independent over $K$. 
+        \item The natural multiplication map $K\otimes_k K'\to K[K'] = K'[K]$ is an isomorphism of $k$-algebras.
+    \end{enumerate}
+    In this case $K$ and $K'$ are said to be \define{linearly disjoint} over $k$.
+\end{lemma}
+\begin{proof}
+    $(1)\implies(3)$ Let $\xi = \sum_i x_i\otimes y_i$ be an element in the kernel of the multiplication map. We may suppose that the $x_i$'s are linearly independent over $k$. Then $\sum_i y_ix_i = 0$, but according to (1), the $x_i$'s are linearly independent over $K'$, so that $y_i = 0$ for all $i$, i.e., $\xi = 0$. Thus the multiplication map is injective. Its surjectivity is clear, and hence it is an isomorphism.
+
+    $(3)\implies(1)$ Suppose $\lambda_1\alpha_1 + \dots + \lambda_n\alpha_n = 0$ for some $\lambda_1,\dots,\lambda_n\in K'$. Then $\sum_{i = 1}^n \alpha_i\otimes\lambda_i$ lies in the kernel of the multiplication map, which is zero, whence $\lambda_i = 0$ for each $1\le i\le n$.
+
+    Since the assertion $(3)$ is symmetric in $K$ and $K'$, the equivalence of the three statements follows.
+\end{proof}
+
+\begin{theorem}[MacLane]
+    Let $k$ be a field of characteristic $p > 0$, and let $K$ be a field extension of $k$. Fix an algebraic closure $\overline K$ containing $K$, and set 
+    \begin{equation*}
+        k^{p^{-n}} = \left\{\alpha\in\overline K\colon \alpha^{p^n}\in k\right\}\quad\text{ and } k^{p^{-\infty}} = \bigcup_{n\ge 1} k^{p^{-n}}.
+    \end{equation*}
+    \begin{enumerate}[label=(\arabic*)]
+        \item If $K$ is a separable $k$-algebra, then $K$ and $k^{p^{-\infty}}$ are linearly disjoint over $k$. 
+        \item If $K$ and $k^{p^{-n}}$ are linearly disjoint over $k$ for some $n\ge 1$, then $K$ is a separable $k$-algebra.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+    \item Let $\alpha_1,\dots,\alpha_n\in K$ be linearly independent over $k$. Suppose $\lambda_1,\dots,\lambda_n\in k^{p^{-\infty}}$ are such that $\lambda_1\alpha_1 + \dots + \lambda_n\alpha_n = 0$. There is a positive integer $m > 0$ such that $\lambda_i^{p^m}\in k$ for each $1\le i\le n$. Set $k_1 = k(\lambda_1,\dots,\lambda_n)$ and $A = K\otimes_k k_1$. Since $A$ is a finite-dimensional $K$-vector space, it must be Artinian. Further, for each $a\in A$, $a^{p^m}\in K$, consequently, $A$ must be a local ring. Since $A$ is reduced, it has to be a field. Thus the multiplication map $A\to K[k_1]$ must be injective, so an isomorphism. The conclusion follows. 
+    \item If $K$ and $k^{p^{-n}}$ are linearly disjoint over $k$, then since $k^{p^{-1}}\subseteq k^{p^{-n}}$, it follows that $K$ and $k^{p^{-1}}$ are linearly disjoint over $k$. Let $K'$ be a finitely generated subfield of $K$ over $k$. Note that $K'\otimes_k k^{p^{-1}}$ is a subring of $K\otimes k^{p^{-1}} = K[k^{p^{-1}}]$, so that the former is reduced. In view of \thref{equivalent-conditions-for-finitely-generated-extension}, $K'$ is a separable $k$-algebra, whence so is $K$. \qedhere
+\end{enumerate}
+\end{proof}
+
+\subsection{Differential Bases}
+
+\bibliographystyle{alpha}
+\bibliography{references}
+\end{document}
