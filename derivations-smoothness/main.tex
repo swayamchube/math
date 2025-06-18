@@ -769,7 +769,7 @@ which is reduced since $A$ is separable over $k$.
     Since the assertion $(3)$ is symmetric in $K$ and $K'$, the equivalence of the three statements follows.
 \end{proof}
 
-\begin{theorem}[MacLane]
+\begin{theorem}[MacLane]\thlabel{maclane-criterion}
     Let $k$ be a field of characteristic $p > 0$, and let $K$ be a field extension of $k$. Fix an algebraic closure $\overline K$ containing $K$, and set 
     \begin{equation*}
         k^{p^{-n}} = \left\{\alpha\in\overline K\colon \alpha^{p^n}\in k\right\}\quad\text{ and } k^{p^{-\infty}} = \bigcup_{n\ge 1} k^{p^{-n}}.
@@ -785,6 +785,22 @@ which is reduced since $A$ is separable over $k$.
     \item If $K$ and $k^{p^{-n}}$ are linearly disjoint over $k$, then since $k^{p^{-1}}\subseteq k^{p^{-n}}$, it follows that $K$ and $k^{p^{-1}}$ are linearly disjoint over $k$. Let $K'$ be a finitely generated subfield of $K$ over $k$. Note that $K'\otimes_k k^{p^{-1}}$ is a subring of $K\otimes k^{p^{-1}} = K[k^{p^{-1}}]$, so that the former is reduced. In view of \thref{equivalent-conditions-for-finitely-generated-extension}, $K'$ is a separable $k$-algebra, whence so is $K$. \qedhere
 \end{enumerate}
 \end{proof}
+
+Here's a lemma about ``base change'' and linear disjointness which we shall require later: 
+\begin{lemma}\thlabel{base-change-linear-disjointness}
+    Let $L$ be a large field containing subfields $k\subseteq k'\subseteq K$ and $k\subseteq K'$. Suppose $K$ and $K'$ are linearly disjoint over $k$. Then 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $K\cap K' = k$, and 
+        \item $K$ and $k'(K')$ are linearly disjoint over $k'$.
+    \end{enumerate}
+    \begin{equation*}
+        \xymatrix {
+            K & K'(k')\\
+            k'\ar@{-}[u]\ar@{-}[ru] & K'\ar@{-}[u]\\
+            k\ar@{-}[u]\ar@{-}[ru]
+        }
+    \end{equation*}
+\end{lemma}
 
 \subsection{Differential Bases}
 
@@ -850,6 +866,81 @@ It clear from the characterization of $p$-independence as in \eqref{gamma-B} and
         dx_1 = \sum_{i = 2}^n \frac{\partial f}{\partial X_i}(x_2,\dots,x_n) dx_i,
     \end{equation*}
     a contradiction to the fact that $B$ is a differential basis. Hence $B$ must be $p$-independent, and as such, is contained in a $p$-basis $\wt B$ of $K$ over $k$. As we have shown in the first paragraph, $\wt B$ must form a differential basis, therefore, $B = \wt B$, whence $B$ forms a $p$-basis of $K$ over $k$. This completes the proof.
+\end{proof}
+
+For a field $k$, let $\Pi\subseteq k$ denote the prime subfield. We use the shorthand $\Omega_k$ for the $k$-module $\Omega_{k/\Pi}$.
+
+\begin{theorem}\thlabel{separability-absolute-kahler-differentials}
+    For a field extension $K/k$, the following are equivalent:
+    \begin{enumerate}[label=(\arabic*)]
+        \item $K/k$ is separable. 
+        \item for any subfield $k'\subseteq k$, the map $\alpha\colon \Omega_{k/k'}\otimes_k K\to\Omega_{K/k'}$ is injective. 
+        \item for any subfield $k'\subseteq K$ and any differential basis of $k/k'$, there exists a differential basis of $K/k'$ containing $B$. 
+        \item $\Omega_{k}\otimes_k K\to \Omega_k$ is injective. 
+        \item any derivation of $k$ to an arbitrary $k$-module $M$ extends to a derivation from $K$ to $M$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    The equivalence of (2) and (3) is clear, for details try to mimic the argument in \thref{extending-derivations}, from which the implication $(2)\implies(4)\iff (5)$ is also clear. 
+
+    $(1)\implies(3)$ In characteristic $0$, since the notion of a differential basis corresponds with that of a transcendence basis, there's no implication to prove since both (1) and (3) are true. Suppow now that $\chr k = p > 0$. Due to \thref{maclane-criterion}, $K$ and $k^{1/p}$ are linearly disjoint over $k$. Since $x\mapsto x^p$ is a field homomorphism, it follows that $K^p$ and $k$ are linearly disjoint over $k^p$. Using \thref{base-change-linear-disjointness}, it follows that $K^p(k^p, k') = K^p(k')$ and $k$ are linearly disjoint over $k^p(k')$.
+    \begin{equation*}
+        \xymatrix {
+            k & K(k^p, k')\\
+            k^p(k')\ar@{-}[u]\ar@{-}[ru] & K\ar@{-}[u]\\
+            k^p\ar@{-}[u]\ar@{-}[ru]
+        }
+    \end{equation*}
+    Choose a $p$-basis $B$ of $k$ over $k'$, then the set $\Gamma_B$ is $k^p(k')$-linearly independent, whence due to linear disjointness, is also $K^p(k')$-linearly independent. Thus $B$ as a subset of $K$ is also $p$-independent over $k'$, whence it can be extended to a $p$-basis of $K$ over $k'$ and (3) follows.
+
+    $(4)\implies(1)$ Again, there's nothing to prove in characteristic zero. Suppose $\chr k = p > 0$. Take a $p$-basis $B$ of $k$ over $\Pi$, so that $\Gamma_B$ is linearly independent over $k^p(\Pi) = k^p$. Further, since $\{dx\colon x\in B\}$ is $k$-linearly independent in $\Omega_k$, according to our hypothesis, these must be $K$-linearly independnet in $\Omega_K$, as a result, $\Gamma_B$ is linearly independent over $K^p(\Pi) = K^p$. It follows then from the standard argument that the multiplication map $k\otimes_{k^p} K^p\to k[K^p]$ is injective, therefore, $k$ and $K^p$ are linearly disjoint over $k^p$. The fact that the Frobenius morphism exists then implies that $K$ and $k^{1/p}$ are linearly disjoint over $k$. In view of \thref{maclane-criterion}, $K/k$ is separable, as desired.
+\end{proof}
+
+
+\begin{definition}
+    Let $k$ be a field of characteristic $p > 0$ with $\Pi\subseteq k$ the prime subfield. An \define{absolute $p$-basis} of $k$ is a $p$-basis of the extension $k/\Pi$.
+\end{definition}
+Note that if $k_0\subseteq k$ is a perfect subfield, then an absolute $p$-basis of $k$ is also a $p$-basis for the extension $k/k_0$.
+
+\begin{theorem}
+    Let $k$ be a field of characteristic $p > 0$. If an absolute $p$-basis of $k$ is also an absolute $p$-basis of $K$, then $K$ is $0$-\'etale over $k$.
+\end{theorem}
+\begin{proof}
+    Let $C$ be a $k$-algebra with an ideal $N\noreq C$ such that $N^2 = 0$. Set $\overline C = C/N$ and consider a commutative diagram of $k$-algebra homomorphisms: 
+    \begin{equation*}
+        \xymatrix {
+            k\ar[r]^j\ar[d]_i & C\ar[d]^\pi\\
+            K\ar[r]_u & \overline{C}.
+        }
+    \end{equation*}
+    Let $B$ be an absolute $p$-basis of $k$ which is also an absolute $p$-basis of $K$. This would imply that the natural map $\alpha\colon\Omega_k\otimes_k K\to\Omega_K$ is an isomorphism, which, in view of \thref{separability-absolute-kahler-differentials} implies that $K/k$ is separable. Further, since $\Gamma_B$ is also a $K^p$-basis of $K$, it follows that $K = K^p[k]$, i.e., the natural multiplication map $K^p\otimes_{k^p} k\to K$ is an isomorphism. We shall use this isomorphism and the universal property of the pushout diagram: 
+    \begin{equation*}
+        \xymatrix {
+            k^p\ar[r]\ar[d] & K^p\ar[d]\\
+            k\ar[r] & K^p\otimes_{k^p} k
+        }
+    \end{equation*}
+    to construct a lifting $K\to C$. 
+
+    Our first goal is to define as $k^p$-homomorphism $K^p\to C$. For each $\alpha\in K$, choose an $a\in C$ with $\pi(a) = u(\alpha)$, and define $v_0\colon K^p\to C$ by $v_0(\alpha^p) = a^p$. We must show that this is independent of the choice of $a$. Indeed, if $a'\in C$ is such that $\pi(a) = \pi(a') = u(\alpha)$, then $a' = a + x$ for some $x\in N$, and hence, 
+    \begin{equation*}
+        a'^p = a^p + x^p = a^p,
+    \end{equation*}
+    since $p\ge 2$. Clearly $v_0$ is a $k^p$-homomorphism. The pushout of the maps $v_0\colon K^p\to C$ and $j\colon k\to C$ determines a morphism $v\colon K\to C$ lifting $u$ to $C$. The uniqueness of this lifting follows from the fact that $K^p[k] = K$.
+
+    Conversely, if $K/k$ is $0$-\'etale, then it is $0$-unramified so that \thref{equivalent-0-unramified} implies $\Omega_{K/k} = 0$. From $0$-smoothness and \thref{thm:first-fundamental-exact-sequence}, the map $\alpha\colon\Omega_k\otimes_k K\to\Omega_K$ is an isomorphism, so that an absolute $p$-basis of $k$ is also an absolute $p$-basis of $K$. This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $K/k$ be a separable extension of fields of characteristic $p > 0$, and let $B$ be a $p$-basis of $K/k$. Then $B$ is algebraically independent over $k$.
+\end{theorem}
+\begin{proof}
+\end{proof}
+
+\begin{theorem}
+    If $K/k$ is a separable field extension of a field $k$, then $K$ is $0$-smooth over $k$. Conversely, if $K$ is $0$-smooth over $k$, then $K/k$ is a separable field extension.
+\end{theorem}
+\begin{proof}
 \end{proof}
 
 \bibliographystyle{alpha}
