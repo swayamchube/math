@@ -164,6 +164,7 @@
 \newcommand{\frakt}{\mathfrak{t}}
 \newcommand{\frakz}{\mathfrak{z}}
 \newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakB}{\mathfrak{B}}
 \newcommand{\frakI}{\mathfrak{I}}
 \newcommand{\frakJ}{\mathfrak{J}}
 \newcommand{\frakK}{\mathfrak{K}}
@@ -614,7 +615,7 @@ It is an easy exercise to check that this is indeed a $k$-derivation.
     \end{equation*}
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\thlabel{separable-algebraic-0-etale}
     Suppose $L/K$ is a separable algebraic extension of fields. Then $L$ is $0$-\'etale over $K$. Moreover, for any subfield $k\subseteq K$, we have 
     \begin{equation*}
         \Omega_{L/k} = \Omega_{K/k}\otimes_K L.
@@ -810,7 +811,7 @@ Let $k\subseteq K$ be an extension of fields. Then $\Omega_{K/k}$ is a $K$-vecto
     A subset $B\subseteq K$ such that $\{dx\colon x\in B\}$ forms a $K$-basis of $\Omega_{K/k}$ is called a \define{differential basis} for the field extension $k\subseteq K$.
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}\thlabel{differential-basis-char-0}
     If $\chr k = 0$, then the notion of a differential basis for $k\subseteq K$ coincides with the notion of a transcendence basis.
 \end{theorem}
 \begin{proof}
@@ -902,8 +903,8 @@ For a field $k$, let $\Pi\subseteq k$ denote the prime subfield. We use the shor
 \end{definition}
 Note that if $k_0\subseteq k$ is a perfect subfield, then an absolute $p$-basis of $k$ is also a $p$-basis for the extension $k/k_0$.
 
-\begin{theorem}
-    Let $k$ be a field of characteristic $p > 0$. If an absolute $p$-basis of $k$ is also an absolute $p$-basis of $K$, then $K$ is $0$-\'etale over $k$.
+\begin{theorem}\thlabel{absolute-p-basis-0-etale}
+    Let $k$ be a field of characteristic $p > 0$. If an absolute $p$-basis of $k$ is also an absolute $p$-basis of $K$, then $K$ is $0$-\'etale over $k$. Conversely, if $K$ is $0$-\'etale over $k$, then any absolute $p$-basis of $k$ is an absolute $p$-basis of $K$.
 \end{theorem}
 \begin{proof}
     Let $C$ be a $k$-algebra with an ideal $N\noreq C$ such that $N^2 = 0$. Set $\overline C = C/N$ and consider a commutative diagram of $k$-algebra homomorphisms: 
@@ -931,17 +932,37 @@ Note that if $k_0\subseteq k$ is a perfect subfield, then an absolute $p$-basis 
     Conversely, if $K/k$ is $0$-\'etale, then it is $0$-unramified so that \thref{equivalent-0-unramified} implies $\Omega_{K/k} = 0$. From $0$-smoothness and \thref{thm:first-fundamental-exact-sequence}, the map $\alpha\colon\Omega_k\otimes_k K\to\Omega_K$ is an isomorphism, so that an absolute $p$-basis of $k$ is also an absolute $p$-basis of $K$. This completes the proof.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\thlabel{algebraic-independence-of-differential-basis}
     Let $K/k$ be a separable extension of fields of characteristic $p > 0$, and let $B$ be a $p$-basis of $K/k$. Then $B$ is algebraically independent over $k$.
 \end{theorem}
 \begin{proof}
+    Suppose not and $b_1,\dots,b_n\in B$ are algebraically dependent over $k$. Choose $0\ne f(X_1,\dots,X_n)\in k[X_1,\dots,X_n]$ is a polynomial of minimal degree with $f(b_1,\dots,b_n) = 0$, and let $d = \deg f$. We can group the monomials of $f$ together and write 
+    \begin{equation*}
+        f(X_1,\dots,X_n) = \sum_{0\le i_1,\dots, i_n < p} g_{i_1,\dots,i_n}(X_1^p,\dots,X_n^p) X_1^{i_1}\cdots X_n^{i_n}
+    \end{equation*}
+    for some $g_{i_1,\dots,i_n}\in k[X_1,\dots,X_n]$. Note that $b_1,\dots,b_n$ are $p$-independent over $k$, and hence, $g_{i_1,\dots,i_n}(b_1^p,\dots,b_n^p) = 0$ for all $0\le i_1,\dots,i_n < p$. The minimality of $\deg f$ then forces 
+    \begin{equation*}
+        f(X) = g_{0,\dots,0}(X_1^p,\dots,X_n^p) = h(X_1,\dots,X_n)^p
+    \end{equation*}
+    for some $h(X_1,\dots,X_n)\in k^{1/p}[X_1,\dots,X_n]$. Note that monomials of degree $< d$ are linearly independent over $k$, and since $K$ and $k^{1/p}$ are linearly disjoint over $k$, these monomials must be linearly independent over $k^{1/p}$. Thus $h(b_1,\dots,b_n)\ne 0$, a contradiction to the fact that $f(b_1,\dots,b_n) = 0$. Thus $B$ must be algebraically independent over $k$.
 \end{proof}
 
 \begin{theorem}
     If $K/k$ is a separable field extension of a field $k$, then $K$ is $0$-smooth over $k$. Conversely, if $K$ is $0$-smooth over $k$, then $K/k$ is a separable field extension.
 \end{theorem}
 \begin{proof}
+    Let $B$ be a differential basis of $K/k$. Since this extension is separable, in view of \thref{algebraic-independence-of-differential-basis} and \thref{differential-basis-char-0}, $k(B)$ is purely transcendental over $k$. Clearly $k(B)$ is $0$-smooth over $k$ due to the universal property of purely transcendental extensions. We contend that $K/k(B)$ is $0$-\'etale. In characteristic $0$, this is a consequence of \thref{separable-algebraic-0-etale}. In characteristic $p > 0$, due to \thref{separability-absolute-kahler-differentials} and \thref{thm:first-fundamental-exact-sequence}, the sequence 
+    \begin{equation*}
+        0\to \Omega_k\otimes_k K\xrightarrow{\alpha} \Omega_K\xrightarrow{\beta}\Omega_{K/k}\to 0
+    \end{equation*}
+    is exact. It follows hence that choosing a differential basis of $k/\Pi$ and putting it together with $B$, we obtain a differential basis $\frakB$ of $\Omega_K$, that is, an absolute $p$-basis of $K$. Note that here we are using the explicit description of the map $\beta$. \textcolor{red}{This is clearly an absolute $p$-basis of $k(B)$}, whence $K/k(B)$ is $0$-\'etale due to \thref{absolute-p-basis-0-etale}. A standard abstract nonsense argument shows that $K/k$ is $0$-smooth.
+
+    Conversely, if $K/k$ is $0$-smooth, then from \thref{thm:first-fundamental-exact-sequence}, the map $\Omega_k\otimes_k K\to\Omega_K$ is injective, so that by \thref{separability-absolute-kahler-differentials}, $K/k$ is separable.
 \end{proof}
+
+\begin{porism}
+    If $K/k$ is a separable extension of fields, and $B$ a differntial basis of $\Omega_{K/k}$, then $K$ is $0$-\'etale over $k(B)$.
+\end{porism}
 
 \bibliographystyle{alpha}
 \bibliography{references}
