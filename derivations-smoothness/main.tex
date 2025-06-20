@@ -258,6 +258,7 @@
 \newcommand{\cech}[1]{\mathbin{\check{#1}}}
 \newcommand{\cdim}{\operatorname{cdim}}
 \newcommand{\Der}{\operatorname{Der}}
+\newcommand{\trdeg}{\operatorname{trdeg}}
 
 \geometry {
     margin = 1in
@@ -947,7 +948,7 @@ Note that if $k_0\subseteq k$ is a perfect subfield, then an absolute $p$-basis 
     for some $h(X_1,\dots,X_n)\in k^{1/p}[X_1,\dots,X_n]$. Note that monomials of degree $< d$ are linearly independent over $k$, and since $K$ and $k^{1/p}$ are linearly disjoint over $k$, these monomials must be linearly independent over $k^{1/p}$. Thus $h(b_1,\dots,b_n)\ne 0$, a contradiction to the fact that $f(b_1,\dots,b_n) = 0$. Thus $B$ must be algebraically independent over $k$.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\thlabel{0-smooth-iff-separable}
     If $K/k$ is a separable field extension of a field $k$, then $K$ is $0$-smooth over $k$. Conversely, if $K$ is $0$-smooth over $k$, then $K/k$ is a separable field extension.
 \end{theorem}
 \begin{proof}
@@ -960,9 +961,34 @@ Note that if $k_0\subseteq k$ is a perfect subfield, then an absolute $p$-basis 
     Conversely, if $K/k$ is $0$-smooth, then from \thref{thm:first-fundamental-exact-sequence}, the map $\Omega_k\otimes_k K\to\Omega_K$ is injective, so that by \thref{separability-absolute-kahler-differentials}, $K/k$ is separable.
 \end{proof}
 
-\begin{porism}
+\begin{porism}\thlabel{0-etale-over-k(B)}
     If $K/k$ is a separable extension of fields, and $B$ a differntial basis of $\Omega_{K/k}$, then $K$ is $0$-\'etale over $k(B)$.
 \end{porism}
+
+\subsection{Imperfection Modules and the Cartier equality}
+
+\begin{definition}
+    Let $k\to A\to B$ be a sequence of ring homomorphisms. Define $\Gamma_{B/A/k}$ to be the kernel of the map $\alpha\colon\Omega_{A/k}\otimes_A B\to\Omega_{B/k}$. 
+\end{definition}
+
+\begin{lemma}
+    Let $k\to K\to L\to L'$ be a sequence of field extensions. Then there is a natural exact sequence: 
+    \begin{equation*}
+        0\to\Gamma_{L/K/k'}\otimes_L L'\to\Gamma_{L/K/k}\to\Gamma_{L'/L/k}\to\Omega_{L/k}\otimes_L L'\to\Omega_{L'/k}\to\Omega_{L'/L}\to 0
+    \end{equation*}
+\end{lemma}
+
+\begin{theorem}[Cartier Equality]\thlabel{cartier-equality}
+    Let $k$ be a perfect field, $K$ a field extension of $K$, and $L$ a finitely generated field extension of $K$. Then 
+    \begin{equation*}
+        \dim_L \Omega_{L/K} = \trdeg_K L + \dim_L\Gamma_{L/K/k}.
+    \end{equation*}
+\end{theorem}
+
+% TODO: Add proofs of the above results.
+
+\section{\texorpdfstring{$I$}{I}-smoothness}
+\input{sections/I-smoothness.tex}
 
 \bibliographystyle{alpha}
 \bibliography{references}

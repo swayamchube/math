@@ -1,0 +1,321 @@
+\begin{definition}
+    Let $A$ be a ring, $B$ an $A$-algebra, and $I$ an ideal of $B$. Endow $B$ with the $I$-adic topology. We say that $B$ is \define{$I$-smooth} over $A$ if given an $A$-algebra $C$, an ideal $N$ of $C$ satisfying $N^2 = 0$, and an $A$-algebra homomorphism $u\colon B\to C/N$ which is continuous when $C/N$ is given the discrete topology, then there exists an $A$-algebra homomorphism $v\colon B\to C$ making 
+    \begin{equation*}
+        \xymatrix {
+            A\ar[d]\ar[r] & C\ar[d]\\
+            B\ar[r]_-u\ar@{.>}[ru]^-v & C/N
+        }
+    \end{equation*}
+    commute. Similarly, we say that $B$ is \define{$I$-unramified} over $A$ if there is at most one such lift. Finally, $B$ is said to be \define{$I$-\'etale} over $A$ if it is both $I$-smooth and $I$-unramified.
+\end{definition}
+
+\begin{remark}
+    Recall that the $I$-adic topology on $B$ is given by the neighborhood base $\{I^n\colon n\ge 0\}$ at $0\in B$. The continuity of $u$ is therefore equivalent to the existence of an integer $\nu > 0$ such that $I^\nu\subseteq\ker u$.
+\end{remark}
+
+\begin{theorem}[Transitivity]\thlabel{transitivity}
+    Let $A\xrightarrow{g} B\xrightarrow{g'} B'$ be ring homomorphisms, and suppose that $g'$ is continuous for the $I$-adic topology on $B$ and the $I'$-adic topology on $B'$. If $B$ is $I$-smooth over $A$, and $B'$ is $I'$-smooth over $B$, then $B'$ is $I'$-smooth over $A$. 
+
+    The same statement holds with ``unramified'' replacing ``smooth'' everywhere.
+\end{theorem}
+\begin{proof}
+    Consider the diagram 
+    \begin{equation*}
+        \xymatrix {
+            A\ar[r]\ar[d]_g & C\ar[dd]\\
+            B\ar[d]_{g'} & \\
+            B'\ar[r]_-u & C/N
+        }
+    \end{equation*}
+    where we begin with a map $u\colon B'\to C/N$, which is continuous with respect to the $I'$-adic topology on $B'$. Thus the composition $u\circ g'\colon B\to C/N$ is continuous with respect to the $I$-adic topology on $B$. It follows that there exists a lift $v\colon B\to C$. Finally, using that $B'$ is $I'$-smooth over $B$, there is a lift $w\colon B'\to C$, so that $B'$ is $I'$-smooth over $A$.
+
+    Now, suppose we are working with unramified extensions and there are two lifts $w, w'\colon B'\to C$. Then setting $(v, v') = (w\circ g', w'\circ g')$, it follows that $v$ and $v'$ are lifts of $u\circ g'$, but since $B$ is $I$-unramified over $A$, $w\circ g' = w'\circ g'$. Finally, since $B'$ is $I'$-smooth over $B$, we have that $w = w'$, thereby completing the proof.
+\end{proof}
+
+\begin{theorem}[Base Change]
+    Let $A$ be a ring, $B$ and $A'$ two $A$-algebras, and set $B' = B\otimes_A A'$. If $B$ is $I$-smooth over $A$, then $B'$ is $IB'$-smooth over $A'$.
+
+    The same statement holds with ``unramified'' replacing ``smooth'' everywhere.
+\end{theorem}
+\begin{proof}
+    Suppose there is a commutative diagram of ring homomorphisms: 
+    \begin{equation*}
+        \xymatrix{
+            A\ar[r]\ar[d] & A'\ar[d]\ar[r] & C\ar[d]^\pi\\
+            B\ar[r] & B'\ar[r]_-{u} & C/N
+        }
+    \end{equation*}
+    where $u$ is an $A'$-algebra homomorphism continuous with respect to that $IB'$-adic topology on $B'$. The composition $B\to C/N$ is therefore continuous with respect to the $I$-adic topology on $B$. This gives an $A$-algebra lifting $v\colon B\to C$. The universal property of a pushout therefore furnishes a map $w\colon B'\to C$. We wish to show that $\pi\circ w = u$. Indeed, note that the composition 
+    \begin{equation*}
+        A'\to B'\xrightarrow{w} C\xrightarrow{\pi} C/N = A'\to C\xrightarrow{\pi} C/N = A'\to B'\xrightarrow{u} C/N
+    \end{equation*}
+    and 
+    \begin{equation*}
+        B\to B'\xrightarrow{w} C\xrightarrow{\pi} C/N = B\xrightarrow{v} C\xrightarrow{\pi} C/N = B\to B'\xrightarrow{u} C/N.
+    \end{equation*}
+    It follows from the universal property of a pushout that $\pi\circ w = u$, as desired. 
+
+    Next, suppose the extensions are unramified instead of smooth and that there are two lifts $w, w'\colon B'\to C$ of $u$. In this case, we see that the composition 
+    \begin{equation*}
+        B\to B'\xrightarrow{w} C = B\to B'\xrightarrow{w'} C.
+    \end{equation*}
+    But we also have 
+    \begin{equation*}
+        A'\to B'\xrightarrow{w} C = A'\to C = A'\to B'\xrightarrow{w'} C,
+    \end{equation*}
+    and hence, from the universal property of a pushout, we see that $w = w'$, thereby completing the proof.
+\end{proof}
+
+\begin{mdframed}
+Let $(A,\frakm, K)$ be a local ring. Recall that $\chr A$ is either $0$ or a prime power. Indeed, if $\chr A = n > 0$ and $n = ab$ with $a, b > 1$ coprime integers, then setting $\fraka = \Ann_A(a)$ and $\frakb = \Ann_A(b)$, we see that $\fraka\cap\frakb = (0)$ but $\fraka + \frakb = A$, a contradiction, since $A$ is connected. 
+
+If $\chr A = p > 0$, a rational prime, then we must have that $\chr K = p$. On the other hand, if $\chr K = 0$, then $\chr A = 0$, and there is an inclusion $\Z\subseteq A$ such that $\Z\cap\frakm = (0)$, whence every element of $\Z$ is a unit in $A$, i.e., $\Q\into A$.
+\end{mdframed}
+
+\begin{definition}
+    Let $(A,\frakm,K)$ be a local ring. We say that $A$ is \define{equicharacteristic} if $\chr A = p > 0$ a rational prime, or $\chr K = 0$.
+
+    If $A$ is not equicharacteristic, then it is said to be of \define{unequal characteristic}, that is, either $\chr A = 0$ and $\chr K > 0$, or $\chr A = p^n$ for some $n > 1$ and rational prime $p > 0$.
+\end{definition}
+
+\begin{definition}
+    Let $(A,\frakm, K)$ be an equicharacteristic local ring and let $K'$ be a subfield of $A$. We say that $K'$ is a \define{coefficient field} of $A$ if $K'$ maps onto $K$ under the natural map $A\onto A/\frakm = K$, or equivalently, if $A = K' + \frakm$ as abelian groups. 
+
+    We say that $K'$ is a \define{quasi-coefficient field} of $A$ if $K$ is $0$-\'etale over (the image of) $K'$.
+\end{definition}
+
+\begin{theorem}\thlabel{existence-of-quasi-coefficient-field}
+    Let $(A,\frakm, K)$ be an equicharacteristic local ring. 
+    \begin{enumerate}[label=(\arabic*)]
+        \item If $K$ is separable over (the image of) a subfield $k\subseteq A$, then $A$ has a quasi-coefficient field $K'$ containing $k$.
+        \item $A$ has a quasi-coefficient field. 
+        \item If $K'$ is a quasi-coefficient field of $A$, then there exists a unique coefficient field $K''$ of the completion $\wh A$ containing (the image of) $K'$.
+        \item If $A$ is complete, then it has a coefficient field. 
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+    \item Choose a differential basis $B = \{\xi_i\}$ for the extension $K/k$, and choose preimages $x_i\in A$ for each $\xi_i$. As we have seen in \thref{algebraic-independence-of-differential-basis}, $B$ is algebraically independent, and hence, $k[\{x_i\}]\cap\frakm = (0)$, so that each element in this subring is invertible. Set $K' = \operatorname{Frac}\left(k[\{x_i\}]\right)$. The image of $K'$ under $A\to K$ is precisely $k(B)$ and due to \thref{0-etale-over-k(B)}, $K$ is $0$-\'etale over $k(B)$, as desired.
+
+    \item Let $\Pi$ denote the prime subfield of $A$, which exists since $A$ is equicharacteristic. Since $\Pi$ is perfect, we can apply (1) to the inclusion $\Pi\subseteq A$ to obtain the desired conclusion.
+    
+    \item Consider the diagram 
+    \begin{equation*}
+        \xymatrix {
+            K'\ar[r]\ar[dddd] & \wh{A}\\
+            & \vdots\ar[d]\\
+            & \wh A/\wh\frakm^3\ar[d]\\
+            & \wh A/\wh\frakm^2\ar[d]\\
+            K\ar[r]_-{\sim}\ar[ru]\ar[ruu]\ar[ruuuu] & \wh{A}/\wh{\frakm}
+        }
+    \end{equation*}
+    Using the fact that $K/K'$ is $0$-\'etale, one can lift the isomorphism $K\xrightarrow{\sim}\wh A/\wh\frakm$ successively to the quotients $A/\frakm^n$. Taking the inverse limit over these quotients, one obtains a lift $K\to\wh A$. In particular, this means that the surjection $\wh A\to K$ splits, i.e., $\wh A$ admits a coefficient field. 
+
+    \item Immediate from (2) and (3). \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}\thlabel{replacing-by-completion}
+    Let $k$ be a ring, $(A,\frakm)$ a local ring, $(\wh A,\wh\frakm)$ its completion, and $k\to A$ a ring homomorphism. Then 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\wh A$ is $\wh\frakm$-\'etale over $A$. 
+        \item $A$ is $\frakm$-smooth (resp. $\frakm$-unramified) over $k$ if and only if $\wh A$ is $\wh\frakm$-smooth (resp. $\wh\frakm$-unramified) over $k$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+    \item Consider a commutative diagram: 
+    \begin{equation*}
+        \xymatrix {
+            A\ar[r]^-f\ar[d] & C\ar[d]^\pi\\
+            \wh A\ar[r]_-u & C/N
+        }
+    \end{equation*}
+    where $C$ is an $A$-algebra with an ideal $N$ such that $N^2 = 0$. Since $u(\wh\frakm^\nu) = 0$ for some $\nu > 0$, the map $u$ factors through $\wh A\to \wh A/\wh\frakm^\nu\cong A/\frakm^\nu$ as $A$-algebras. In particular, this means that $f$ sends $\frakm^\nu$ into $N$, therefore, $\frakm^{2\nu}\subseteq\ker f$. Factoring $u$ through $\wh A/\frakm^{2\nu}\cong A/\frakm^{2\nu}$, the construction of the lift is clear. The uniqueness of such a lift follows from the fact that $A/\frakm^{2\nu}$ is $0$-unramified over $A$, since the map is surjective\footnote{Recall that in \thref{equivalent-0-unramified}, we showed that being $0$-unramified is equivalent to the relative K\"ahler differentials being zero and later showed that the relative K\"ahler differentials $\Omega_{B/A}$ is zero whenever the map $A\to B$ is surjective}.
+
+    \item Suppose $A$ is $\frakm$-smooth (resp. $\frakm$-unramified) over $k$, then due to \thref{transitivity}, $\wh A$ is $\wh\frakm$-smooth (resp. $\wh\frakm$-unramified) over $k$. Conversely, suppose $\wh A$ is $\wh\frakm$-smooth over $k$ and consider a commutative diagram of $k$-algebra homomorphisms 
+    \begin{equation*}
+        \xymatrix {
+            k\ar[r]\ar[d] & C\ar[d]\\
+            A\ar[r] & C/N
+        }
+    \end{equation*}
+    satisfying the requirements. Then there is a positive integer $\nu > 0$ such that $u$ factors through $A/\frakm^\nu\cong\wh A/\wh\frakm^\nu$, resulting in a commutative diagram 
+    \begin{equation*}
+        \xymatrix {
+            k\ar[rr]\ar[d]\ar[rd] & & C\ar[d]\\
+            A\ar[r]\ar[d] & \wh A\ar[r]\ar[d]\ar@{.>}[ru] & C/N\\
+            A/\frakm^\nu\ar[r]_-{\sim} & \wh A/\wh\frakm^\nu\ar[ru] & 
+        }
+    \end{equation*}
+    Using the fact that $\wh A$ is $\wh\frakm$-smooth over $k$, there is a lift $\wh A\to C$, which gives a lift of $u$ after compositing with the morphism $A\to\wh A$. Argue similarly for ``unramified'' replacing ``smooth''. \qedhere
+\end{enumerate}
+\end{proof}
+
+Before proceeding, we recall a useful result from the theory of completions: 
+\begin{lemma}\thlabel{nak-type-completions}
+    Let $A$ be a ring, $I$ an ideal in $A$, and $M$ an $A$-module. Suppose $A$ is $I$-adically complete, and $M$ is separated for the $I$-adic topology. If $M/IM$ is generated over $A/I$ by $\overline\omega_1,\dots,\overline\omega_n$, and $\omega_i\in M$ are arbitrary preimages of $\overline\omega_i$, then $M$ is generated over $A$ by $\omega_1,\dots,\omega_n$.
+\end{lemma}
+
+\begin{lemma}
+    Let $(A,\frakm, K)$ be a Noetherian local ring containing a field $k$. If $A$ is $\frakm$-smooth over $k$, then $A$ is regular. 
+    Conversely, if $K$ is separable over (the image of) $k$ and $A$ is regular, then $A$ is $\frakm$-smooth over $k$.
+\end{lemma}
+\begin{proof}
+    Let $k_0$ denote the prime subfield of $k$, which is perfect, so that $k$ is $0$-smooth over $k_0$ in view of \thref{0-smooth-iff-separable}. Since $A$ is $\frakm$-smooth over $k$, by \thref{transitivity}, it is $\frakm$-smooth over $k_0$. Therefore, we may assume without loss of generality that $k$ is a perfect field. Further, in view of \thref{replacing-by-completion}, we may replace $A$ by $\wh A$ and assume that $A$ is a complete local ring. Due to \thref{existence-of-quasi-coefficient-field}, $A$ has a quasi-coefficient field containing $k$, which we identify with $K$. Let $\{x_1,\dots,x_n\}$ be a minimal $K$-basis of $\frakm/\frakm^2$. There is a natural $K$-algebra homomorphism 
+    \begin{equation*}
+        K[X_1,\dots,X_n]/(X_1,\dots,X_n)^2\to A/\frakm^2,
+    \end{equation*}
+    which is the identity on $K$ and sends $X_i\mapsto x_i$. Clearly, this is an isomorphism. Consider the composite 
+    \begin{equation*}
+        A\to A/\frakm^2\xrightarrow{\sim} K[X_1,\dots,X_n]/(X_1,\dots,X_n)^2\xrightarrow{\sim} K\llbracket X_1,\dots, X_n\rrbracket/(X_1,\dots,X_n)^2.
+    \end{equation*}
+    Since $A$ is $\frakm$-smooth over $k$, this lifts to a ring homomorphism $\varphi\colon A\to K\llbracket X_1,\dots, X_n\rrbracket$, which follows by lifting successively to the quotients $K\llbracket X_1,\dots,X_n\rrbracket/(X_1,\dots,X_n)^i$. We claim that this map is surjective. Indeed, the lift is identity on $K$, and $(X_1,\dots,X_n)/(X_1,\dots,X_n)^2$ is generated by the images of $x_1,\dots, x_n$ as a $K = A/\frakm$-module. Thus, due to \thref{nak-type-completions}, the map $\varphi$ is surjective.
+    Therefore, $\dim A\ge\dim K\llbracket X_1,\dots, X_n\rrbracket = n = \embdim A$, consequently $A$ is regular.
+
+    Conversely, suppose $K$ is separable over (the image of) $k$ and that $A$ is regular. Then $\wh A$ has a coefficient field $K$ containing $k$. Let $\{x_1,\dots,  x_n\}$ be a regular system of parameters of $\wh A$, and define a homomorphism of $K$-algebras $\psi\colon K\llbracket X_1,\dots, X_n\rrbracket \to \wh A$ sending $\psi(X_i) = x_i$. Then $\wh\frakm/\wh\frakm^2$ is generated as a $K = K\llbracket X_1,\dots, X_n\rrbracket/(X_1,\dots, X_n)$-module by $x_1,\dots,x_n$, whence by \thref{nak-type-completions}, $\wh\frakm$ is generated by $\{x_1,\dots,x_n\}$ as a $K\llbracket X_1,\dots,X_n\rrbracket$-module. Thus $\psi$ is surjective. Using the fact that $K\llbracket X_1,\dots,X_n\rrbracket$ is catenary and comparing dimensions, it follows that the map $\psi$ must be an isomorphism. Hence $\wh A$ is $\wh\frakm$-smooth over $K$, and since $K$ is $0$-smooth over $k$, we see that $\wh A$ is $\wh\frakm$-smooth over $k$, so that $A$ is $\frakm$-smooth over $k$, thereby completing the proof.
+\end{proof}
+
+% \begin{definition}
+%     Let $k\to A\to B$ be ring homomorphisms. We say that $B$ is \define{$I$-smooth over $A$ relative to $k$} if for any $A$-algebra $C$, and an ideal $N$ of $C$ with $N^2 = 0$, given an $A$-algebra homomorphism $u\colon B\to C/N$ continuous with respect to the $I$-adic topology on $B$, if $u$ has a lifting $B\to C$ as a $k$-algebra, then it also has a lifting as an $A$-algebra. 
+%     \begin{equation*}
+%         \xymatrix {
+%             k\ar[r] & A\ar[r]\ar[d] & C\ar[d]\\
+%             & B\ar[r]_-u\ar@{.>}[ru] & C/N.
+%         }
+%     \end{equation*}
+% \end{definition}
+
+% \begin{theorem}
+%     Let $k\xrightarrow{f} A\xrightarrow{g} B$ and $I$ an ideal of $B$. Then the following conditions are equivalent: 
+%     \begin{enumerate}[label=(\arabic*)]
+%         \item $B$ is $I$-smooth over $A$ relative to $k$. 
+%         \item if $N$ is a $B$-module such that $I^\nu N = 0$ for some $\nu\gg 0$, then the natural map $\Der_k(B, N)\to\Der_k(A, N)$ is surjective.
+%         \item for every $\nu > 0$, the map 
+%         \begin{equation*}
+%             \Omega_{A/k}\otimes_A\left(B/I^\nu\right)\to\Omega_{B/k}\otimes_B\left(B/I^\nu\right)
+%         \end{equation*}
+%         has a left inverse, i.e., it maps injectively onto a direct summand.
+%     \end{enumerate}
+% \end{theorem}
+
+\begin{definition}
+    Let $B$ be an $A$-algebra, $I$ an ideal of $B$, and equip $B$ with the $I$-adic topology. Let $N$ be a $B$-module such that $I^\nu N = 0$ for some $\nu > 0$. Such a $B$-module is said to be \define{discrete}, since it is discrete in the $I$-adic topology.
+
+    An $A$-bilinear map $f\colon B\times B\to N$ is called a \define{continuous symmetric $2$-cocycle} if 
+    \begin{enumerate}[label=(\roman*)]
+        \item $xf(y, z) - f(xy, z) + f(x, yz) - f(x, y)z = 0$ for all $x, y, z\in B$, \label{cocycle-condition}
+        \item $f(x, y) = f(y, x)$, \label{symmetry}
+        \item there exists $\mu\ge\nu$ such that $f(x, y) = 0$ if either $x\in I^\mu$ or $y\in I^\mu$.\label{continuity}
+    \end{enumerate}
+\end{definition}
+
+\begin{equation*}
+    \boxed{\text{\textcolor{red}{What we do henceforth is extremely technical and the reader is advised to skip to the next section.}}}
+\end{equation*}
+
+Note that if $f$ is a continuous symmetric $2$-cocycle, then setting $\tau = f(1, 1)$, and substituting $y = z = 1$ in \ref{cocycle-condition}, we obtain $f(x, 1) = x\tau$. Define a product on the $A$-module $C = (B/I^\mu)\oplus N$ by 
+\begin{equation*}
+    (\overline x, \xi)\cdot(\overline y, \eta) = \left(\overline{xy}, - f(x, y) + x\eta + y\xi\right)\quad\text{ for all } x, y\in B.
+\end{equation*}
+Then $C$ is a commutative ring with multiplicative identity $(1, \tau)$, and $N$ is an ideal of $C$ such that $N^2 = 0$. Next, define a map $A\to C$ sending $a\mapsto (\overline a, a\tau)$. Then this is a ring homomorphism, and the diagram 
+\begin{equation*}
+    \xymatrix {
+        A\ar[rr]\ar[d] & & C\ar[d]\\
+        B\ar[r] & B/I^\mu\ar@{=}[r] & C/N.
+    }
+\end{equation*}
+It can then be checked that a necessary and sufficient condition for $B\to C/N$ to have a lift is that there should exist an $A$-linear map $g\colon B\to N$ such that % TODO: check this
+\begin{equation*}
+    f(x, y) = xg(y) - g(xy) + g(x)y.\label{split}\tag{$\alpha'$}
+\end{equation*}
+We say that the $2$-cocycle $f$ \define{splits} if there is such an $A$-linear map $g$ satisfying \eqref{split}.  For any $A$-linear map $g\colon B\to N$, define $\delta g\colon B\times B\to N$ given by the right hand side of \eqref{split}. It is easy to check that $g$ satisfies the conditions \ref{cocycle-condition} and \ref{symmetry}. Further, if $g$ is continuous, i.e., there exists $\mu > 0$ such that $g(I^\mu) = 0$, then it also satisfies \ref{continuity}. % TODO: check this
+
+\begin{theorem}\thlabel{cocycle-conditions-for-smoothness}
+    Let $A$ be a ring, and $B$ an $A$-algebra equipped with an $I$-adic topology for some ideal $I$ of $B$. 
+    \begin{enumerate}[label=(\arabic*)]
+        \item If $B$ is $I$-smooth over $A$ then every continuous $2$-cocycle $f\colon B\times B\to N$ with values in a discrete $B$-module $N$ splits. 
+        \item If $B/I^n$ is projective for infinitely many positive integers $n$, and if every continuous symmetric $2$-cocycle with values in a discrete $B$-module splits, then $B$ is $I$-smooth over $A$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+    \item This is immediate from the discussion preceeding the statement of the Theorem. 
+    \item Consider a commutative diagram of $A$-algebra homomorphisms 
+    \begin{equation*}
+        \xymatrix {
+            A\ar[r]\ar[d] & C\ar[d]\\
+            B\ar[r]_-u & C/N
+        }
+    \end{equation*}
+    satisfying the usual requirements, i.e., $N^2 = 0$ and $u(I^\nu) = 0$ for some $\nu > 0$. One can view the $C$-module $N$ naturally as a $C/N$-module, and therefore, as a $B$-module through the map $u\colon B\to C/N$. As a result, $N$ is a discrete $B$-module. Take an integr $n > \nu$ such that $B/I^n$ is a projective $A$-module. Considering the following diagram of $A$-modules, 
+    \begin{equation*}
+        \xymatrix {
+            & B/I^n\ar[d]\ar@{.>}[ld]\\
+            C\ar@{->>}[r] & C/N
+        }
+    \end{equation*}
+    there is a lift $B/I^n\to C$, which gives an $A$-map $\lambda\colon B\to C$ after composing with the natural projection $B\to B/I^n$. Note that $\lambda(I^n) = 0$. For $x, y\in B$, set 
+    \begin{equation*}
+        f(x, y) = \lambda(xy) - \lambda(x)\lambda(y).
+    \end{equation*}
+    Since modulo $N$, $\lambda$ is a ring homomorphism, it follows that $f(x, y)\in N$ for all $x,y\in B$. Next, for some $\xi\in N$ and $x\in B$, we havve $\lambda(x)\cdot\xi = x\cdot\xi$, where the right hand side is the $B$-module structure on $N$ described above. This immediately implies that $f$ satisfies \ref{cocycle-condition} and \ref{symmetry}. Also, since $\lambda(I^n) = 0$, we obtain \ref{continuity} too. Thus $f$ is a continuous symmetric $2$-cocycle. Hence, by assumption, there is an $A$-linear map $g\colon B\to N$ satisfying 
+    \begin{equation*}
+        f(x, y) = xg(y) - g(xy) + g(x)y.
+    \end{equation*}
+    Set $v = \lambda + g\colon B\to C$. Then 
+    \begin{align*}
+        v(xy) &= \lambda(xy) + g(xy)\\
+        &= \lambda(x)\lambda(y) + f(x, y) + g(xy)\\
+        &= \lambda(x)\lambda(y) + \lambda(x)g(y) + g(x)\lambda(y)\\
+        &= v(x)v(y),
+    \end{align*}
+    since $g(x)g(y) = 0$. It follows that $v$ is an $A$-algebra homomorphism lifting $u$, thereby completing the proof.
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}\thlabel{easier-version-of-ega-theorem}
+    Let $(A,\frakm, k)$ be a local ring, and $B$ a flat $A$-algebra such that $\overline B = B/\frakm B = B\otimes_A k$ is $0$-smooth over $k$. Then $B$ is $\frakm B$-smooth over $A$.
+\end{theorem}
+\begin{proof}
+    First note that it suffices to show that $B/\frakm^\nu B$ is $0$-smooth over $A/\frakm^\nu$, indeed, given the standard diagram 
+    \begin{equation*}
+        \xymatrix {
+            A\ar[r]\ar[d] & C\ar[d]\\
+            B\ar[r] & C/N,
+        }
+    \end{equation*}
+    the map $u$ factors through $B/\frakm^\nu B$, whence the map $A\to C$ factors through $A/\frakm^{2\nu}$. Thus, if $B/\frakm^{2\nu} B$ were $0$-smooth over $A/\frakm^{2\nu}$, then we are done. 
+
+    Now, $B/\frakm^\nu B$ is flat over $A/\frakm^\nu$, so we can assume that $\frakm$ is nilpotent in $A$. Then every flat $A$-module is free due to \cite[Theorem 7.10]{matsumura-crt}\footnote{Note that this does NOT require the module to be finitely generated, as opposed to when $\frakm$ may not be nilpotent.}. Thus, $B/\frakm^n B$ is a projective $A$-module for infinitely many positive integers $n$. Therefore, in view of \thref{cocycle-conditions-for-smoothness}, it suffices to show that every continuous symmetric $2$-cocycle with values in a discrete $B$-module splits. But since $\frakm$ is nilpotent, all the topological considerations can be dropped. 
+
+    Let $f\colon B\times B\to N$ be a symmetric $2$-cocycle where $N$ is a $B$-module. Suppose first that $\frakm N = 0$. Since $f$ is $A$-bilinear, it descends to a $2$-cocycle $\overline f\colon\overline B\times\overline B\to N$ with $f(x, y) = \overline f(\overline x, \overline y)$. Now $\overline B$ is $0$-smooth over $k$, so that by \thref{cocycle-conditions-for-smoothness}, $\overline f$ splits, that is, there is a $k$-linear map $\overline g\colon\overline B\to N$ such that $\overline f = \delta\overline g$. Setting $g\colon B\to N$ by $g(x) = \overline g(\overline x)$, we have 
+    \begin{equation*}
+        f(x, y) = \overline f(\overline x, \overline y) = \overline x\overline g(\overline y) - \overline g(\overline x\overline y) + \overline g(\overline x)\overline y = xg(y) - g(xy) + g(x)y,
+    \end{equation*}
+    so that $f = \delta g$, i.e., the cocycle splits.
+
+    Next, in the general case, let $\varphi\colon N\to N/\frakm N$ be the natural projection, and consider $\varphi\circ f\colon B\times B\to N/\frakm N$, which splits as seen above, that is, there is an $A$-linear map $\overline g\colon B\to N/\frakm N$ such that $\varphi\circ f = \delta\overline g$. Next, since $B$ is a projective $A$-module, there is a lift $g\colon B\to N$ of the map $\overline g$. 
+    \begin{equation*}
+        \xymatrix {
+            & B\ar[d]^{\overline g}\ar@{.>}[ld]_{g}\\
+            N\ar@{->>}[r] & N/\frakm N.
+        }
+    \end{equation*}
+    Then $f - \delta g$ is a $2$-cocycle with values in $\frakm N$. Repeating the above argument, we find $h\colon B\to\frakm N$ such that $f - \delta(g + h)$ is a $2$-cocycle with values in $\frakm^2 N$. Continuing in this fashion, this process msut terminate since $\frakm$ is nilpotent. This completes the proof.
+\end{proof}
+
+\begin{remark}
+    We note here that the statement of \thref{easier-version-of-ega-theorem} is true if ``smooth'' is replaced by eihter ``unramified'' or ``\'etale''. To see this, note that it suffices to prove the ``unramified'' case since the ``\'etale'' case would then follow by putting the two together.
+
+    Consider the standard commutative diagram setup: 
+    \begin{equation*}
+        \xymatrix {
+            A\ar[r]\ar[d] & C\ar[d]\\
+            B\ar[r]_-u & C/N
+        }
+    \end{equation*}
+    where $u(\frakm^\nu B) = 0$. Note that $N$ is naturally a $C/N$-module and hence a $B$-module through $u$, and an $A$-module through $A\to B$. As an $A$-module, it is clear that $\frakm^\nu N = 0$. If there were two lifts of $u$, then their difference would give an $A$-derivation $D\colon B\to N$. We shall show that $D = 0$. 
+    
+    Note that $D$ induces a $k$-derivation $\overline D\colon \overline{B} = B/\frakm B\to N/\frakm N$. But since $\overline B$ is $0$-unramified over $k$, $\Omega_{\overline B/k} = 0$, so that $\overline D = 0$, i.e, $D$ takes values in $\frakm N$. Repeating this procedure with $\frakm N/\frakm^2 N$, it would follow that $D$ takes values in $\frakm^2 N$. Since $\frakm^\nu N = 0$, successive repetition shows that $D = 0$. Thus $B$ is $\frakm B$-unramified over $A$.
+\end{remark}
