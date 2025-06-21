@@ -75,7 +75,7 @@ If $\chr A = p > 0$, a rational prime, then we must have that $\chr K = p$. On t
 \begin{definition}
     Let $(A,\frakm,K)$ be a local ring. We say that $A$ is \define{equicharacteristic} if $\chr A = p > 0$ a rational prime, or $\chr K = 0$.
 
-    If $A$ is not equicharacteristic, then it is said to be of \define{unequal characteristic}, that is, either $\chr A = 0$ and $\chr K > 0$, or $\chr A = p^n$ for some $n > 1$ and rational prime $p > 0$.
+    If $A$ is not equicharacteristic, then it is said to be of \define{mixed characteristic}, that is, either $\chr A = 0$ and $\chr K > 0$, or $\chr A = p^n$ for some $n > 1$ and rational prime $p > 0$.
 \end{definition}
 
 \begin{definition}
@@ -318,4 +318,135 @@ We say that the $2$-cocycle $f$ \define{splits} if there is such an $A$-linear m
     where $u(\frakm^\nu B) = 0$. Note that $N$ is naturally a $C/N$-module and hence a $B$-module through $u$, and an $A$-module through $A\to B$. As an $A$-module, it is clear that $\frakm^\nu N = 0$. If there were two lifts of $u$, then their difference would give an $A$-derivation $D\colon B\to N$. We shall show that $D = 0$. 
     
     Note that $D$ induces a $k$-derivation $\overline D\colon \overline{B} = B/\frakm B\to N/\frakm N$. But since $\overline B$ is $0$-unramified over $k$, $\Omega_{\overline B/k} = 0$, so that $\overline D = 0$, i.e, $D$ takes values in $\frakm N$. Repeating this procedure with $\frakm N/\frakm^2 N$, it would follow that $D$ takes values in $\frakm^2 N$. Since $\frakm^\nu N = 0$, successive repetition shows that $D = 0$. Thus $B$ is $\frakm B$-unramified over $A$.
+\end{remark}
+
+\section{The Cohen Structure Theorems}
+
+
+% \begin{interlude}[Surjectivity of Inverse Limit]
+%     Consider a morphism between two inverse systems of abelian groups
+%     \begin{equation*}
+%         \xymatrix {
+%             \cdots\ar[r] & A_{n + 1}\ar[r]^-{\lambda_{n + 1}}\ar[d]_{f_{n + 1}} & A_n\ar[r]^-{\lambda_n}\ar[d]_{f_n} & A_{n - 1}\ar[r]^-{\lambda_{n - 1}}\ar[d]_{f_{n - 1}} & \cdots\ar[r] & A_1\ar[r]\ar[d]^{f_1} & 0\\
+%             \cdots\ar[r] & B_{n + 1}\ar[r]_{\mu_{n + 1}} & B_n\ar[r]_{\mu_n} & B_{n - 1}\ar[r]_{\mu_{n - 1}} & \cdots\ar[r] & B_1\ar[r] & 0
+%         }
+%     \end{equation*}
+%     such that each $\lambda_i$, $\mu_i$, and $f_i$ is surjective. We shall show that the induced map 
+%     \begin{equation*}
+%         f\colon\varprojlim A_n\to\varprojlim B_n
+%     \end{equation*}
+%     is surjective. Indeed, consider an element $\xi\in\varprojlim B_n$. This is represented by a ``coherent sequence'' $(b_i)_{i\in\N}$, where $b_i\in B_i$ for all $i$, and $\mu_i(b_i) = b_{i - 1}$ for all $i\ge 2$. Set $C_i = f_i^{-1}(b_i)\subseteq A_i$. Note that for any $i\ge 2$ and $c_i\in C_i$, we have $f_{i - 1}\circ\mu_i(c_i) = \mu_i\circ f_i(c_i) = b_{i - 1}$, so that $\mu_i(C_i)\subseteq C_{i - 1}$.
+
+%     $\mu^{-1}\circ f^{-1}$
+% \end{interlude}
+
+\begin{lemma}\thlabel{express-every-element-as-power-series}
+    Let $(A,\frakm, k)$ be a local ring with $\frakm$ a finitely generated ideal, say $\frakm = (x_1,\dots,x_n)$. If $R$ is a subring of $A$ such that $A = R + \frakm$, then there is a surjective $R$-algebra homomorphism 
+    \begin{equation*}
+        \varphi\colon R\llbracket X_1,\dots,X_n\rrbracket\to A \qquad X_i\mapsto x_i\quad\text{ for } 1\le i\le n.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Let us first establish the existence of such a map. Indeed, set $\varphi_j\colon R[X_1,\dots,X_n]/(X_1,\dots,X_n)^j\to A/\frakm^j$ sending $X_i\mapsto x_i$ for $1\le i\le n$. Clearly these maps form morphisms between two inverse systems, thereby inducing a map 
+    \begin{equation*}
+        \varphi\colon R\llbracket X_1,\dots,X_n\rrbracket = \varprojlim R[X_1,\dots,X_n]/(X_1,\dots,X_n)^j\to\varprojlim A/\frakm^j = A.
+    \end{equation*}
+    Let $a\in A$. Since $A = \varprojlim A/\frakm^n$, we can write $a = (a_n)_{n\ge 1}$ such that $a_{n + 1} - a_n\in\frakm^n$. We shall explicitly find an element in $R\llbracket X_1,\dots,X_n\rrbracket$ mapping to $a\in A$. First note that $a_1 = r_0 + m_1$ for some $m_1\in\frakm$. Any element of $\frakm$ can be written as a linear combination $p_1 x_1 + \dots + p_nx_n$ for some $p_1,\dots,p_n\in A$. Again, using the fact that $A = R + \frakm$, we  can write each $p_i = q_i + \wt m_i$. Substituting this in the expression for $m_1$, we can write 
+    \begin{equation*}
+        m_1 = (\text{$R$-linear combination of }x_1,\dots,x_n) + m_2,
+    \end{equation*}
+    where $m_2\in\frakm^2$. Next, any element in $\frakm^2$ can be written as an $A$-linear combination of the degree two monomials in $x_1,\dots,x_n$. Continuing in this fashion, we obtain power series in $R\llbracket X_1,\dots,X_n\rrbracket$ mapping onto $a$, as desired.
+\end{proof}
+
+As an immediate application of this observation, we have the following version of the Cohen Structure Theorem for equicharacteristic local rings: 
+
+\begin{theorem}
+    An equicharacteristic complete Noetherian local ring $(A,\frakm, K)$ is a quotient of some power series ring $K\llbracket X_1,\dots, X_n\rrbracket$.
+\end{theorem}
+\begin{proof}
+    Let $x_1,\dots,x_n$ be a set of minimal generators for the maximal ideal. Due to \thref{existence-of-quasi-coefficient-field}, $A$ admits a quasi-coefficient field $K\into A$, so that we can write $A = K\oplus\frakm$ as $K$-modules. In view of \thref{express-every-element-as-power-series}, there is a surjective $K$-algebra homomorphism $\varphi\colon K\llbracket X_1,\dots, X_n\rrbracket\to A$, as desired.
+\end{proof}
+
+Our next goal will be to extend the above result to local rings of mixed characteristic.
+
+\begin{definition}
+    A DVR of characteristic $0$ is said to be a \define{$p$-ring} if its (unique) maximal ideal is generated by the rational prime $p$.
+\end{definition}
+
+\begin{theorem}\thlabel{DVR-with-given-residue-field}
+    Let $(A, tA, k)$ be a DVR and $K$ an extension field of $k$, then there exists a DVR $(B, tB, K)$ containing $A$.
+\end{theorem}
+\begin{proof}
+    % TODO: Add in later
+\end{proof}
+
+\begin{theorem}\thlabel{lifting-map-on-residue-fields}
+    Let $(A,\frakm, K)$ be a complete local ring, $(R, pR, k)$ a $p$-ring, and $\varphi_0\colon k\to K$ a field homomorphism. Then there exists a local homomorphism $\varphi\colon R\to A$ which induces $\varphi_0$ on the residue fields.
+\end{theorem}
+\begin{proof}
+    Set $S = \Z_{p\Z}$, and let $\Pi\subseteq k$ denote the prime subfield, which in this case is just a copy of $\F_p$. Since $\varphi_0(\Pi)$ puts another copy of $\F_p$ in $K$, it follows that $p\in\frakm$ when viewed as the image of $p$ under the maop $\Z\to A$. Therefore, the unique homomorphism $\Z\to A$ sends every element not in $p\Z$ to an element not in $\frakm$, therefore it naturally extends to a ring homomorphism $S\to A$.
+
+    Next, we claim that $R$ is $pR$-smooth over $S$. Note that $R\otimes_S \Pi = R/pR = k$ is a separable extension of $\Pi$, and hence is $0$-smooth over $\Pi$ in view of \thref{0-smooth-iff-separable}. Further, since $R$ is a torsion free $S$-module, it is a flat $S$-module\footnote{This follows since $R$ is a direct limit of finitely generated $S$-submodules, and a finite torsion-free $S$-module is free, in particular, flat. More generally, it is true that a torsion-free module over a valuation ring is flat.}. Thus due to \thref{easier-version-of-ega-theorem}, $R$ is $pR$-smooth over $S$. We shall now lift the map $R\to k\xrightarrow{\varphi_0} K$ to an $S$-algebra homomorphism $R\to A$.
+    \begin{equation*}
+        \xymatrix {
+            S\ar[r]\ar[dddd] & {A}\\
+            & \vdots\ar[d]\\
+            &  A/\frakm^3\ar[d]\\
+            &  A/\frakm^2\ar[d]\\
+            R\ar[r]\ar[ru]\ar[ruu]\ar[ruuuu] & K
+        }
+    \end{equation*}
+    This is achieved by lifting successively to quotients $A/\frakm^i$ as before, and then taking the inverse limit of all such lifts. This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    A complete $p$-ring is determined up to isomorphism by its residue field.
+\end{corollary}
+\begin{proof}
+    Suppose $(R, pR, k)$ and $(R', pR', k)$ are complete $p$-rings with the same residue field $k$. Then the identity map $k\to k$ induces a local homomorphism $\varphi\colon R\to R'$ as in \thref{lifting-map-on-residue-fields}. In view of \thref{nak-type-completions}, since $R'/pR'$ is generated by $\{1\}$ as an $R/pR$-module, we must have that $R'$ is generated by $\{1\}$ as an $R$-module, so that $\varphi$ is surjective.
+
+    Next, note that the map must also be injective, since $ker\varphi$ is a prime ideal but not equal to the maximal ideal of $R$, therefore must be zero. This shows that $\varphi$ is an isomorphism.
+\end{proof}
+
+\begin{definition}
+    Let $(A,\frakm, k)$ be a complete local ring of mixed characteristic and let $\chr k = p > 0$. A subring $A_0\subseteq A$ is said to be a \define{coefficient ring} if $A_0$ is a complete Noetherian local ring with maximal ideal $pA_0$ and 
+    \begin{equation*}
+        A = A_0 + \frakm\quad\text{ that is }\quad k = A/\frakm = A_0/pA_0.
+    \end{equation*}
+\end{definition}
+
+\begin{remark}
+    We note that the above definition subsumes the notion of a coefficient field. Indeed, if $\chr k = 0$, then we have seen that $A$ admits a coefficient field, which is precisely a complete Noetherian subring $A_0\subseteq A$ whose maximal ideal is $(0)$ and $A = A_0 + \frakm$.
+\end{remark}
+
+\begin{theorem}\thlabel{coefficient-ring-exists}
+    If $(A,\frakm, k)$ is a complete local ring and $\chr k = p > 0$, then $A$ has a coefficient ring $A_0$. If $\chr A = 0$, then $A_0$ is a complete DVR, and if $\chr A > 0$, then $A_0$ is the quotient of a complete $p$-ring.
+\end{theorem}
+\begin{proof}
+    Due to \thref{DVR-with-given-residue-field}, there exists a $p$-ring $S$ such that $S/pS = k$. Write $R$ for the completion of $S$, so that $R$ is a complete $p$-ring with residue field $k$. By \thref{lifting-map-on-residue-fields}, there exists a local homomorphism $\varphi\colon R\to A$ inducing the identity map on the residue fields. Set $A_0 = \varphi(R)\subseteq A$. This is clearly a coefficient ring of $A$. If $A$ has characteristic $0$, then $\ker\varphi$ must be zero, for if it were non-zero, then it would be of the form $p^n R$ but the image of $p^n$ under $\varphi$ is a non-zero element of $A$ for all $n\ge 1$. Thus if $\chr A = 0$, then $A_0$ is a complete DVR.
+\end{proof}
+
+\begin{theorem}
+\begin{enumerate}[label=(\arabic*)]
+    \item If $(A,\frakm)$ is a complete local ring and $\frakm$ is finitely generated, then $A$ is Noetherian. 
+    \item A Noetherian complete local ring is a quotient of a regular local ring, and in particular, is universally catenary.
+    \item If $A$ is a Noetherian complete local ring (and in the case of mixed characteristic, $A$ is an integral domain), then there exists a subring $A'\subseteq A$ such that: 
+    \begin{enumerate}[label=(\roman*)]
+        \item $A'$ is a complete regular local ring with the same residue field as $A$, and 
+        \item $A$ is a finite $A'$-module, in particular, the extension $A'\subseteq A$ is integral.
+    \end{enumerate}
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+    \item Due to \thref{existence-of-quasi-coefficient-field} and \thref{coefficient-ring-exists}, $A$ admits a coefficient ring $A_0\subseteq A$, which is Noetherian in either case. By \thref{express-every-element-as-power-series}, $A$ is a quotient of some power-series ring $A\llbracket X_1,\dots,X_n\rrbracket$, so that $A$ is Noetherian. 
+    
+    \item Note that $A_0$ is either a field, a complete DVR, or the quotient of a complete $p$-ring. In either case, we can write $A$ as the quotient of a power-series ring $R\llbracket X_1,\dots, X_n\rrbracket$, where $R$ is either a field, or a complete DVR, in particular, is regular. Thus $A$ is the quotient of a regular local ring, so that it is universally catenary. 
+    
+    \item Let $n = \dim A$. If $A$ were equicharacteristic, then choose $\{y_1,\dots,y_n\}\subseteq A$ to be a system of parameters. On the other hand, if $A$ were of mixed characteristic, then $A$ is a domain so that $\chr A = 0$, so that one can choose a system of parameters $\{y_1 = p, y_2,\dots, y_n\}\subseteq A$. Let $A_0\subseteq A$ denote the coefficient ring $R$. In the equicharacteristic case, this is a subfield, while in the mixed characteristic case, this is a complete $p$-ring. In the former case, consider the homomorphism $\varphi\colon R\llbracket Y_1,\dots, Y_n\rrbracket\to A$ and in the latter case $\varphi\colon R\llbracket Y_2,\dots, Y_n\rrbracket\to A$ sending $Y_i\mapsto y_i$. Let $A' = \im\varphi$, and let $\frakm'$ denote the image of the maximal ideal of $R\llbracket \vec Y\rrbracket$. Clearly this is the (unique) maximal ideal of $A'$, and further $A/\frakm = A'/\frakm'$, so that every $A$-module of finite length has the same length as an $A'$-module. In particular, since $\frakm' A$ is $\frakm$-primary, it follows that $A/\frakm' A$ has finite length as an $A'$-module. Also, since $A$ is $\frakm'$-adically separated (again because $\frakm'A$ is $\frakm$-primary), it follows from \thref{nak-type-completions} that $A$ is a finite $A'$-module, and hence $A'\subseteq A$ is an integral extension which in turn implies $\dim A' = \dim A = n$. Finally, note that $R\llbracket\vec Y\rrbracket$ is an $n$-dimensional integral domain, and if $\ker\varphi\ne 0$, then we would have $\dim A' < n$, a contradiction. Hence $\varphi$ is injective, and $A'\cong R\llbracket\vec Y\rrbracket$. This completes the proof. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+    In some applications, it is important to know exactly how the subring $A'\subseteq A$ is constructed, i.e., that we are free to choose any system of parameters of our choice. 
 \end{remark}
