@@ -322,6 +322,8 @@ We say that the $2$-cocycle $f$ \define{splits} if there is such an $A$-linear m
 
 \section{The Cohen Structure Theorems}
 
+\epigraph{``\emph{Polynomials and power series\\May they forever rule the world.}''}{Shreeram S. Abhyankar}
+
 
 % \begin{interlude}[Surjectivity of Inverse Limit]
 %     Consider a morphism between two inverse systems of abelian groups
@@ -426,7 +428,7 @@ Our next goal will be to extend the above result to local rings of mixed charact
     Due to \thref{DVR-with-given-residue-field}, there exists a $p$-ring $S$ such that $S/pS = k$. Write $R$ for the completion of $S$, so that $R$ is a complete $p$-ring with residue field $k$. By \thref{lifting-map-on-residue-fields}, there exists a local homomorphism $\varphi\colon R\to A$ inducing the identity map on the residue fields. Set $A_0 = \varphi(R)\subseteq A$. This is clearly a coefficient ring of $A$. If $A$ has characteristic $0$, then $\ker\varphi$ must be zero, for if it were non-zero, then it would be of the form $p^n R$ but the image of $p^n$ under $\varphi$ is a non-zero element of $A$ for all $n\ge 1$. Thus if $\chr A = 0$, then $A_0$ is a complete DVR.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\thlabel{step-towards-cohen-structure-theorem}
 \begin{enumerate}[label=(\arabic*)]
     \item If $(A,\frakm)$ is a complete local ring and $\frakm$ is finitely generated, then $A$ is Noetherian. 
     \item A Noetherian complete local ring is a quotient of a regular local ring, and in particular, is universally catenary.
@@ -450,3 +452,84 @@ Our next goal will be to extend the above result to local rings of mixed charact
 \begin{remark}
     In some applications, it is important to know exactly how the subring $A'\subseteq A$ is constructed, i.e., that we are free to choose any system of parameters of our choice. 
 \end{remark}
+
+\begin{definition}
+    Let $(A,\frakm, K)$ be a local ring of mixed characteristic, and suppose $\chr K = p > 0$. The ring $A$ is said to be \define{ramified} if $p\in\frakm^2$ and said to be \define{unramified} otherwise. We shall also include equicharacteristic rings in the class of unramified local rings.
+\end{definition}
+
+\begin{theorem}
+    An unramified complete regular local ring is a formal power series ring over a field or over a complete $p$-ring.
+\end{theorem}
+\begin{proof}
+    Let $R$ be a coefficient ring of $A$. If $A$ is equicharacteristic, then $R$ is a field. Let $\{x_1,\dots,x_n\}$ be a regular system of parameters of $A$. Then just as argued in the proof of \thref{step-towards-cohen-structure-theorem}, one can show that the map $R\llbracket X_1,\dots, X_n\rrbracket\to A$ sending $X_i\mapsto x_i$ is an isomorphism. 
+
+    Next, if $A$ is of mixed characteristic, then $\chr A = 0$ since it is an integral domain and $R$ is a complete $p$-ring. Further since $p\in\frakm\setminus\frakm^2$, one can choose a regular system of parameters $\{x_1 = p, x_2,\dots,x_n\}$ of $A$. Again, arguing as in the proof of \thref{step-towards-cohen-structure-theorem}, the map $R\llbracket X_2,\dots,X_n\rrbracket\to A$ sending $X_i\mapsto x_i$ is an isomorphism, thereby completing the proof.
+\end{proof}
+
+It remains to take care of the ramified case. 
+
+\begin{lemma}[Eisenstein]
+    Let $A$ be a ring and $f(X)\in X^n + a_{n - 1}X^{n - 1} + \dots + a_0$ with $a_i\in A$. If there exists a prime ideal $\frakp$ of $A$ such that $a_1,\dots,a_n\in\frakp$ but $a_n\notin\frakp^2$, then $f(X)$ is irreducible in $A[X]$. Moreover, if $A$ is an integrally closed domain, then the principal ideal $(f)$ is a prime ideal of $A[X]$.
+\end{lemma}
+\begin{proof}
+    The first assretion is well-known and follows from taking a factorization of $f(X)$ and viewing it in $A/\frakp[X]$, which is an integral domain. Next, suppose $A$ is an integrally closed domain, and $K$ the fraction field of $A$. Then due to Gauss' lemma for normal domains, $f(X)$ remains irreducible in $K[X]$. Further since $f$ is monic, we have $f\cdot A[X] = f\cdot K[X]\cap A[X]$, which is the contraction of a prime ideal, and hence is prime.
+\end{proof}
+
+\begin{definition}
+    Let $(A,\frakm, k)$ be an integrally closed domain. Then an extension ring $B = A[X]/(f) = A[x]$ defined by an Eisenstein polynomial 
+    \begin{equation*}
+        f(X) = X^n + a_{n - 1}X^{n - 1} + \dots + a_0\quad\text{ with }a_i\in\frakm\text{ for all }0\le i\le n - 1\text{ and } a_n\notin\frakm^2
+    \end{equation*}
+    is called an \define{Eisenstein extension} of $A$.
+\end{definition}
+
+From Eisenstein's lemma, $B$ is an integral domain that is an integral extension of $A$. Further, note that 
+\begin{equation*}
+    B/\frakm B = A[x]/\frakm[x] = A[X]/(\frakm, f(X)) = k[X]/X^n,
+\end{equation*}
+which is a local ring. Thus there is exactly one maximal ideal of $B$ lying over $\frakm$, so that $B$ is a local domain with the same residue field as $A$.
+
+\begin{theorem}
+\begin{enumerate}[label=(\arabic*)]
+    \item If $(A,\frakm)$ is a regular local ring, then an Eisenstein extension of $A$ is again a regular local ring. 
+    \item If $A$ is a ramified complete regular local ring and $R$ is a coefficient ring of $A$, then there exists a subring $A_0\subseteq A$ such that: 
+    \begin{enumerate}[label=(\roman*)]
+        \item $A_0$ is an unramified complete regular local ring containing $R$.
+        \item $A$ is an Eisenstein extension of $A_0$.
+    \end{enumerate}
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+    \item Let $B = A[x]$ and $x^m + a_{m - 1}x^{m - 1} + \dots + a_0 = 0$ with $a_i\in\frakm$ for all $i$ but $a_0\notin\frakm^2$. There exists a regular system of parameters $\{y_1,\dots, y_n = a_0\}$ of $A$. The maximal ideal of $B$ is $\frakm B + xB$, but $a_0\in xB$ from the above relation, so that $\{y_1,\dots, y_{n - 1}, x\}$ is also a regular system of parameters of $B$, whence $B$ is also a regular local ring.
+
+    \item Our first goal will be to choose a regular system of parameters $\{x_1,\dots,x_n\}$ of $A$ such that $\{p, x_2,\dots, x_n\}$ is a system of parameters for $A$. This is achieved by induction on $n = \dim A$. To this end, we shall first choose a regular system of parameters $\{x_1,\dots,x_n\}$ of $A$ such that $p\notin (x_1,\dots,x_{n - 1})$ by induction on $n$. The base case $n = 1$ is trivial. Suppose now $n > 1$ and take any regular system of parameters $\{y_1,\dots,y_n\}$ of $A$. Let $\frakp_1,\dots,\frakp_r$ be those prime ideals in $A$ of height $1$ that contain $pA$. Note that none of the $\frakp_i$ can contain all the $y_j$'s since $\dim A > 1$. We can assume without loss of generality that $y_n\notin\frakp_1,\dots,\frakp_s$ but $y_n\in\frakp_{s + 1},\dots,\frakp_r$. Define 
+    \begin{equation*}
+        x_n = y_n + \sum_{j = s + 1}^r a_j z_j,
+    \end{equation*}
+    where $z_j$ is some element in $\{y_1,\dots,y_n\}\setminus\frakp_j$ and $a_i\in\bigcap\limits_{j\ne i}\frakp_j\setminus\frakp_i$. Then $x_n\notin\bigcup\limits_{j = 1}^r\frakp_j$. Further, the elements $y_1,\dots,y_{n - 1}, x_n$ generate $\frakm$ and form a regular sequence. Finally, note that $p\notin(x_n)$, lest $pA\subseteq (x_n)$, and hence $(x_n)$ would be a prime ideal of height $1$, so that $(x_n) = \frakp_i$\footnote{Recall that in a regular local ring, every element in a regular system of parameters must generate a prime ideal.} for some $1\le i\le r$, which is absurd. Moving to the ring $A/x_n A$, and arguing inductively, we have our desired regular sequence. 
+
+    Now that we have a regular system of parameters $\{x_1,\dots,x_n\}$ such that $p\notin (x_1,\dots,x_{n - 1})$, set $\overline A = A/(x_1,\dots,x_{n - 1})$ so that $\overline p\ne 0$ in $\overline A$ and $\overline p\in\overline\frakm^2$. Further note that $\overline A$ is a regular local ring of dimension $1$, i.e. a DVR, so that there is an invertible elemente $\overline a\in\overline A$ and an integer $t\ge 2$ such that $\overline{p} = \overline a\overline x_n^t$. This shows that $x_n^t\in (p,x_1,\dots,x_{n - 1})$, whence $\frakm^t\subseteq(p,x_1,\dots,x_{n - 1})$, therefore $\{p,x_1,\dots,x_{n - 1}\}$ is a system of parameters, as desired.
+
+    Coming back to the assertion at hand, we have that $A$ is a ramified complete regular local ring, in particular, an integral domain, so that $\chr A = 0$, and hence $R$ is a complete $p$-ring. 
+    Set $A_0 = R\llbracket x_2,\dots,x_n\rrbracket$; formally this is the image of the ring homomorphism $R\llbracket X_2,\dots, X_n\rrbracket\to A$ sending $X_i\mapsto x_i$ for $2\le i\le n$. Arguing as in \thref{step-towards-cohen-structure-theorem}, $A$ is a finite $A_0$-module, and $A_0$ is a regular local ring isomorphic to $R\llbracket X_2,\dots, X_n\rrbracket$. The latter is clearly an unramified complete regular local ring. Let $\frakm_0$ denote the (unique) maximal ideal of $A_0$ and note that $A = \frakm_0 A + A_0[x_1]$ whence due to Nakayama's lemma, $A = A_0[x_1]$. Let 
+    \begin{equation*}
+        f(X) = X^m + a_{m - 1}X^{m - 1} + \dots + a_0
+    \end{equation*}
+    with $a_i\in A_0$ be the minimal polynomial of $x_1$ over $A_0$. Then $a_0\in x_1 A\subseteq\frakm$ so that $a_0\in\frakm_0 = \frakm\cap A_0$. Using Hensel's lemma, we can conclude that all the $a_i$'s must lie in $\frakm_0$, for if not, then moving to $A_0/\frakm_0[X]$, one could factor $\overline f$ as the product of two coprime monic polynomials and lift the factorization to $A_0[X]$, which would contradict the minimality of $f(X)$. 
+    
+    With this established, it only remains to show that $a_0\notin\frakm^2$. Write 
+    \begin{equation*}
+        p = \sum_{i = 1}^n b_ix_i
+    \end{equation*}
+    with $b_i\in A$ and we can write $b_i = \varphi_i(x_1)$ with $\varphi_i(X)\in A_0[X]$. Then $x_1$ is a root of the polynomial 
+    \begin{equation*}
+        F(X) = \varphi_1(X)X + \sum_{i = 2}^d \varphi_i(X)x_i - p,
+    \end{equation*}
+    so that $F(X)$ is divisible by $f(X)$ in $A_0[X]$. Hence the constant term $F(0)$ of $F$ is divisible by $a_0$ in $A_0$. But note that 
+    \begin{equation*}
+        F(0) = \sum_{i = 2}^n\varphi_i(0)x_i - p,
+    \end{equation*}
+    and $p, x_2,\dots, x_n$ is a regular system of parameters for $A_0$, so that $F(0)\notin\frakm_0^2$, and hence we must have that $a_0\notin\frakm_0^2$, as desired. This completes the proof. \qedhere
+\end{enumerate}
+\end{proof}
