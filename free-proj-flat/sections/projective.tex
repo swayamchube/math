@@ -150,3 +150,118 @@ We begin by proving two lemmas.
 
     Let $\{\omega_1,\omega_2,\dots\}$ be a countable generating set for $M$. By \thref{free-direct-summand-exists}, there exists a free direct summand $F_1$ of $M$ containing $\omega_1$. Write $M = F_1\oplus M_1$ and let $\omega_2'$ denote the $M_1$ component of $\omega_2$. Since $M_1$ is projective, using \thref{free-direct-summand-exists}, there exists a free direct summand $F_2$ of $M_1$ containing $\omega_2$. Then $M_1 = F_2\oplus M_2$ so that $M = F_1\oplus F_2\oplus M_2$. Let $\omega_3'$ denote the $M_2$-component of $\omega_3$ and repeat the above process ad infinitum. That would yield $M = F_1\oplus F_2\oplus\cdots$, whence $M$ is free.
 \end{proof}
+
+\subsection{Projective Covers}
+
+\begin{definition}
+    Let $R$ be a ring and $M$ an $R$-module. A submodule $K$ of $M$ is said to be \define{small} if for any $R$-submodule $N$ of $M$ 
+    \begin{equation*}
+        K + N = M \implies N = M.
+    \end{equation*}
+    We denote this by $K\ll M$.
+\end{definition}
+
+We give two standard examples of small submodules.
+
+\begin{enumerate}[label=(\roman*)]
+    \item Let $(R,\frakm, k)$ be a local ring, $M$ a finite $R$-module, and $K = \frakm M$. Due to Nakayama's lemma, for any $R$-submodule $N$ of $M$, if $N + \frakm M = M$, then $N = M$. Thus $K\ll M$.
+    \item Similarly, let $(R,\frakm, k)$ be an Artinian local ring, $M$ any $R$-module, and $K = \frakm M$. If $N$ is an $R$-submodule of $M$ such that $N + \frakm M = M$, then $\frakm\left(M/N\right) = M/N$. But since $\frakm$ is nilpotent, we must have that $M/N = 0$, so that $M = N$. Thus $K\ll M$.\label{artinian-example}
+\end{enumerate}
+
+\begin{definition}
+    Let $R$ be a ring and $M$ an $R$-module. A \define{projective cover} of $M$ is a pair $(P, f)$, where $P$ is a projective $R$-module and $f\colon P\to M$ a surjective $R$-linear map such that $\ker f\ll M$.
+\end{definition}
+
+\begin{remark}
+    Unlike the situation for injective hulls, projective covers need not always exist. For example, consider the $\Z$-module $\Z/p\Z$, where $p > 0$ is a rational prime. Suppose $f\colon P\to\Z/p\Z$ is a projective cover. Since $P$ is a projective $\Z$-module, it must be free. Set $K = \ker f\ll P$. Since $P/K$ is a simple $\Z$-module, $K$ is a maximal submodule of $P$. On the other hand, since $K\ll P$, for any proper submodule $N$ of $K$, if $N$ were not contained in $K$, then $K + N = P$, whence $N = P$, a contradiction. Thus, $K$ must contain every proper submodule of $P$. This is absurd, since $P$ admits quotients of the form $\Z/q\Z$ for primes $q\ne p$.
+\end{remark}
+
+\begin{theorem}\thlabel{projective-cover-exists-over-artinian}
+    Every module over an Artinian ring admits a projective cover.
+\end{theorem}
+\begin{proof}
+    Let $A$ be an Artinian ring, so that we can write $A = A_1\times\dots\times A_n$ as a product of Artinian local rings $(A_i,\frakm_i, k_i)$ for $1\le i\le n$. Any $A$-module $M$ is of the form $M_1\times\dots\times M_n$ where each $M_i$ is an $A_i$-module. From this reduction, it is easy to see that it suffices to prove the theorem in the Artinian local case.
+
+    Therefore, let $(A,\frakm, k)$ be an Artinian local ring and $M$ an $A$-module. Choose a $k$-basis $\{\overline x_\lambda\colon\lambda\in\Lambda\}$ of $M/\frakm M$, where $x_\lambda\in M$ for all $\lambda\in\Lambda$. Let $F$ denote the free $A$-module on $\Lambda$, i.e., 
+    \begin{equation*}
+        F = \bigoplus_{\lambda\in\Lambda} Ae_\lambda,
+    \end{equation*}
+    and let $f\colon F\to M$ be the unique $A$-linear map sending $e_\lambda\mapsto\overline x_\lambda$ for all $\lambda\in\Lambda$. The $k$-linear independence of $\Lambda$ forces $\ker f = \frakm F\ll F$ due to \ref{artinian-example}. Using the projectivity of $F$ as an $R$-module, we can lift $f$ to a map $\wt f\colon F\to M$ making 
+    \begin{equation*}
+        \xymatrix {
+            & M\ar[d] \\
+            F\ar[ru]^{\wt f}\ar[r]_-f & M/\frakm M
+        }
+    \end{equation*}
+    commute. Since $f$ is surjective, we have $\frakm M + \im\wt f = M$, that is, $\frakm\left(M/\im\wt f\right) = M/\im\wt f$. Again, since $\frakm$ is nilpotent, we have $M/\im\wt f = 0$, that is, $\wt f$ is surjective. Finally, since $\ker \wt f\subseteq\ker f$, it is also a small submodule of $F$, and hence $(F, \wt f)$ is a projective cover of $M$.
+\end{proof}
+
+\begin{proposition}
+    Let $M$ be an $R$-module. Then 
+    \begin{equation*}
+        \bigcap\bigg\{\text{maximal proper submodules of }M\bigg\} = \sum\bigg\{\text{small submodules of }M\bigg\}.
+    \end{equation*}
+    This submodule is called the \define{radical} of $M$ and is denoted by $\rad(M)$.
+\end{proposition}
+\begin{proof}
+    If $K\ll M$ and $L$ is any maximal proper submodule of $M$, then $K$ must be contained in $L$, else $K + L = M$ which would impoly $L = M$, a contradiction. Thus every small submodule of $M$ is contained in every maximal proper submodule of $M$. Hence, the sum of all small submodules of $M$ is contained in the intersection of all maximal proper submodules of $M$.
+
+    Conversely, suppose $x\in M$ is contained in the intersection of all maximal proper submodules of $M$. We claim that $Rx\ll M$. Indeed, if $N$ is a proper submodule of $M$ such that $Rx + N = M$, then $M/N$ is a cyclic $R$-module, so that it admits a non-zero simple quotient. In particular, $N$ is contained in a maximal proper submodule $K$ of $M$. But $x\in K$ by assumption; and hence $Rx + N\subseteq K\subsetneq M$, a contradiction. This shows that $Rx\ll M$, thereby completing the proof.
+\end{proof}
+
+\begin{proposition}\thlabel{rad-commutes-with-direct-sum}
+    If $\{M_\lambda\}_{\lambda\in\Lambda}$ is a collection of $R$-module, then 
+    \begin{equation*}
+        \rad\left(\bigoplus_{\lambda\in\Lambda} M_\lambda\right) = \bigoplus_{\lambda\in\Lambda} \rad(M_\lambda).
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Straightforward.
+\end{proof}
+
+\begin{proposition}\thlabel{jacobson-contained-in-rad}
+    Let $\frakR$ denote the Jacobson radical of a ring $R$. Then for any $R$-module $M$, $\frakR M\subseteq\rad(M)$.
+\end{proposition}
+\begin{proof}
+    If $N\subsetneq M$ is a maximal proper submodule of $M$, then $M/N$ is isomorphic to $R/\frakm$ for some maximal ideal $\frakm$ of $R$. Since $\frakR\subseteq\frakm$, $\frakR M\subseteq N$. Thus $\frakR M\subseteq\rad (M)$.
+\end{proof}
+
+\begin{proposition}\thlabel{rad-of-projective}
+    Let $R$ be a ring and $P$ a projective $R$-module. Then $\rad(P) = \frakR P$, where $\frakR$ denotes the Jacobson radical of $R$.
+\end{proposition}
+\begin{proof}
+    There is an $R$-module $Q$ such that $F = P\oplus Q$ is a free module. In view of \thref{rad-commutes-with-direct-sum} and \thref{jacobson-contained-in-rad}
+    \begin{equation*}
+        \frakR P\oplus\frakR Q\subseteq\rad(P)\oplus\rad(Q) = \rad(F) = \frakR F = \frakR P\oplus\frakR Q.
+    \end{equation*}
+    Hence $\rad P = \frakR P$.
+\end{proof}
+
+\begin{theorem}\thlabel{flat-over-artin-is-projective}
+    A flat module over an Artinian ring is projective.
+\end{theorem}
+\begin{proof}
+    Let $R$ be an Artinian ring and $E$ a flat $R$-module. In view of \thref{projective-cover-exists-over-artinian}, there exists a projective cover $f\colon P\to E$. Set $K = \ker f\ll P$, and hence $\ker f\subseteq\frakR P$. Now since $P$ and $E$ are flat $R$-modules, the ``multiplication maps''
+    \begin{equation*}
+        \mu_1\colon\frakR\otimes_R P\to\frakR P\quad\text{ and }\quad\mu_2\colon\frakR\otimes_R E\to \frakR E
+    \end{equation*}
+    are isomorphisms, which can be seen either using the equational criterion of flatness of just invoking the $\Tor$ long exact sequence. Further note that the diagram 
+    \begin{equation*}
+        \xymatrix {
+            0\ar[r] & \frakR\otimes_R K\ar[r]^-{\mathbbm 1\otimes\iota} & \frakR\otimes_R P\ar[r]^-{\mathbbm 1\otimes f}\ar[d]_{\mu_1} & \frakR\otimes_R E\ar[d]^{\mu_2}\ar[r] & 0\\
+            & & \frakR P\ar[r]_-{g} & \frakR E
+        }
+    \end{equation*}
+    commutes where $g$ is the restriction of $f$ to $\frakR P$. Since $E$ is flat, the $\Tor$ long exact sequence gives that the top row is short exact. Using the fact that $\mu_1$ and $\mu_2$ are isomorphisms, we can write 
+    \begin{equation*}
+        K = \ker f = \ker g = \mu_1\left(\ker(\mathbbm{1}\otimes f)\right) = \mu_1\left(\im(\mathbbm{1}\otimes\iota)\right) = \frakR K.
+    \end{equation*}
+    But $\frakR$ is nilpotent in $R$, and hence $K = 0$, that is, $E\cong P$ is projective.
+\end{proof}
+
+\begin{corollary}
+    An arbitrary product of projective modules over an Artinian ring is projective.
+\end{corollary}
+\begin{proof}
+    This follows immediately from \thref{product-of-flat-noetherian} and \thref{flat-over-artin-is-projective}.
+\end{proof}

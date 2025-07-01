@@ -1,9 +1,10 @@
 \contentsline {section}{\numberline {1}Projective Modules}{1}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Kaplansky's Theorem}{1}{subsection.1.1}%
-\contentsline {section}{\numberline {2}Flat Modules}{5}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Cartier's Theorem}{6}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Finitely Presented Modules and Flatness}{8}{subsection.2.2}%
-\contentsline {section}{\numberline {3}Injective Modules}{11}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Injective Hulls}{11}{subsection.3.1}%
-\contentsline {section}{\numberline {4}Uncategorized}{14}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Eakin-Nagata Theorem}{14}{subsection.4.1}%
+\contentsline {subsection}{\numberline {1.2}Projective Covers}{5}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Flat Modules}{7}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Cartier's Theorem}{9}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Finitely Presented Modules and Flatness}{10}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Injective Modules}{13}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Injective Hulls}{13}{subsection.3.1}%
+\contentsline {section}{\numberline {4}Uncategorized}{16}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Eakin-Nagata Theorem}{16}{subsection.4.1}%
