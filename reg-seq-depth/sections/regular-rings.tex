@@ -134,5 +134,187 @@ Recall that the \define{embedding dimension} of a Noetherian local ring $(A,\fra
     Let $A$ be a regular local ring and $\frakp$ a prime ideal of $A$. Then $A_\frakp$ is a regular local ring.
 \end{theorem}
 \begin{proof}
+    If $\projdim_A k < \infty$, then localizing a finite projective resolution of $k$ at $\frakp$, we obtain the desired conclusion.
+\end{proof}
 
+\begin{definition}
+    A \define{regular ring} is a Noetherian ring such that the localization at every prime is a regular local ring.
+\end{definition}
+
+\subsection{Finite Free Resolutions}
+
+\begin{lemma}[Schanuel]\thlabel{schanuel}
+    Let $A$ be a ring and $M$ an $A$-module. Suppose that 
+    \begin{equation*}
+        0\to K\to P\to M\to 0\quad\text{ and }\quad 0\to K'\to P'\to M\to 0
+    \end{equation*}
+    are exact sequences with $P$ and $P'$ projective. Then $K\oplus P'\cong K'\oplus P$.
+\end{lemma}
+\begin{proof}
+    Since $P$ and $P'$ are projective, there are maps 
+    \begin{equation*}
+        \xymatrix {
+            0\ar[r] & K\ar[r] & P\ar[r]^\alpha\ar@<-.5ex>[d]_\lambda & M\ar[r]\ar@{=}[d] & 0\\
+            0\ar[r] & K'\ar[r] & P'\ar[r]_{\alpha'}\ar@<-.5ex>[u]_{\lambda'} & M\ar[r] & 0
+        }
+    \end{equation*}
+    $\lambda\colon P\to P'$ and $\lambda'\colon P'\to P$ making the square on the right commute. Adding in the summands $P'$ and $P$ to the respective rows, we obtain another commutative diagram 
+    \begin{equation*}
+        \xymatrix {
+            0\ar[r] & K\oplus P'\ar[r]\ar@{.>}[d]_\theta & P\oplus P'\ar[r]^-{(\alpha, 0)}\ar@<-.5ex>[d]_\varphi & M\ar[r]\ar@{=}[d] & 0\\
+            0\ar[r] & K'\oplus P\ar[r] & P\oplus P'\ar[r]_-{(0, \alpha')}\ar@<-.5ex>[u]_{\psi} & M\ar[r] & 0
+        }
+    \end{equation*}
+    where $\varphi\colon P\oplus P'\to P\oplus P'$ is defined by 
+    \begin{equation*}
+        \varphi\begin{pmatrix}x\\ x'\end{pmatrix} = 
+        \begin{pmatrix}
+            \id_P & -\lambda'\\
+            \lambda & \id_{P'} - \lambda\circ\lambda'
+        \end{pmatrix}
+        \begin{pmatrix}
+            x\\ x'
+        \end{pmatrix},
+    \end{equation*}
+    and 
+    \begin{equation*}
+        \psi\begin{pmatrix}
+            x\\x'
+        \end{pmatrix} = 
+        \begin{pmatrix}
+            \id_P - \lambda'\circ\lambda & \lambda'\\
+            -\lambda & \id_{P'}
+        \end{pmatrix}
+        \begin{pmatrix}
+            x\\x'
+        \end{pmatrix}.
+    \end{equation*}
+    One can check that $\varphi\circ\psi = \psi\circ\varphi = \id_{P\oplus P'}$, so that $\varphi$ and $\psi$ are isomorphisms. There is a map $\theta\colon K\oplus P'\to K'\oplus P$ making the entire diagram above commute. Using the five-lemma or otherwise on this diagram, one concludes that $\theta$ is an isomorphism.
+\end{proof}
+
+\begin{lemma}[Generalized Schanuel]\thlabel{generalized-schanuel}
+    Let $A$ be a ring and $M$ an $A$-module. Suppose 
+    \begin{equation*}
+        0\to P_n\to\cdots\to P_0\to M\to 0\quad\text{ and } 0\to Q_n\to\cdots\to Q_0\to M\to 0
+    \end{equation*}
+    are two exact sequences with $P_i$ and $Q_i$ projective for $0\le i\le n - 1$, then 
+    \begin{equation*}
+        P_0\oplus Q_1\oplus\cdots\cong Q_0\oplus P_1\oplus\cdots.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Induct on $n$. The base  case with $n = 0$ is precisely \thref{schanuel}. Let $K$ denote the kernel of $P_0\to M$ and $K'$ the kernel of $Q_0\to M$. Due to \thref{schanuel}, $K\oplus Q_0\cong K'\oplus P_0$. Add in the summands $Q_0$ and $P_0$ to the respective resolutions as follows: 
+    \begin{equation*}
+        \xymatrix {
+            0\ar[r] & P_n\ar[r] & \cdots\ar[r] & P_2\ar[r] & P_1\oplus Q_0\ar[r] & K\oplus Q_0\ar[r]\ar[d]^\wr & 0\\
+            0\ar[r] & Q_n\ar[r] & \cdots\ar[r] & Q_2\ar[r] & Q_1\oplus P_0\ar[r] & K'\oplus P_0\ar[r] & 0.
+        }
+    \end{equation*}
+    Using the inductive hypothesis, we have the desired isomorphism.
+\end{proof}
+
+\begin{definition}
+    A \define{finite free resolution} of an $A$-module $M$ is an exact sequence 
+    \begin{equation*}
+        0\to F_n\to\cdots \to F_1\to F_0\to M\to 0
+    \end{equation*}
+    such that each $F_i$ is a finite free $A$-module. If $M$ admits a finite free resolution as above, we define its \define{Euler number} to be 
+    \begin{equation*}
+        \chi_A(M) = \sum_{i = 0}^\infty (-1)^i \rank_A F_i.
+    \end{equation*}
+\end{definition}
+
+Clearly, due to \thref{generalized-schanuel}, $\chi(M)$ is independent of the chosen finite free resolution. Further, if $M$ admits an FFR over $A$, then for any prime ideal $\frakp\subseteq A$, $M_\frakp$ admits an FFR over $A_\frakp$ and $\chi_A(M) = \chi_{A_\frakp}(M_\frakp)$.
+
+\begin{proposition}\thlabel{maximal-ideal-associated}
+    Let $(A,\frakm)$ be a local ring such that for each finite subset $E\subseteq\frakm$ there exists $0\ne y\in A$ with $y E = 0$. Then the only $A$-modules having an FFR over $A$ are the (finite rank) free modules.
+\end{proposition}
+\begin{proof}
+    Let $0\to F_n\to F_{n - 1}\to\cdots\to F_0\to M\to 0$ be an FFR of $M$, and set $N = \coker\left(F_n\to F_{n - 1}\right)$. Our first goal will be to show that $N$ is a free module of finite rank. Clearly, $N$ is a finite $A$-module. If it were not free, then it would admit a minimal free resolution of the form $0\to L_1\to L_0\to N\to 0$, since it already admits a free resolution of length $1$. Using \thref{schanuel}, we have $L_1\oplus F_{n - 1} \cong L_0\oplus F_n$, so that $L_1$ is a finite rank free module. Treating $L_1$ as a submodule of $L_0$, we can write down a basis for $L_1$ in terms of a basis for $L_0$ with coefficients in $\frakm$ since the resolution is minimal. Thus, there would exist $0\ne y\in A$ annihilating all those coefficients, whence $y L_1 = 0$, a contradiction. Thus $N$ must be a finite rank free $A$-module.
+
+    Coming back to the proof at hand, workin backwards from the given free resolution and replacing the map $F_n\to F_{n - 1}$ by $\coker\left(F_n\to F_{n - 1}\right)$ at each stage, we reduce to the case $0\to F_1\to F_0\to M\to 0$, which we have handled above. Hence, $M$ is a finite rank free module over $A$. Conversely, it is clear that every finite rank free $A$-module has an FFR.
+\end{proof}
+
+\begin{theorem}\thlabel{euler-number-non-negative}
+    Let $A$ be a ring. If an $A$-module $M$ admits an FFR, then $\chi_A(M)\ge 0$.
+\end{theorem}
+\begin{proof}
+    Let $\frakp$ be a minimal prime of $A$. Since $\chi_A(M) = \chi_{A_\frakp}(M_\frakp)$, we can replace $A$ by $A_\frakp$ and $M$ by $M_\frakp$ and assume that $(A,\frakm)$ is a local ring whose maximal ideal is equal to the nilradical. We claim that the hypothesis of \thref{maximal-ideal-associated} is satisfied. Indeed, let $x_1,\dots,x_r\in\frakm$. We shall induct on $r$ to show that there exists $0\ne y\in A$ such that $yx_i = 0$ for all $1\le i\le r$. If $r = 1$, then the nilpotence of $x_1$ implies the existence of such a $y$. Suppose $r > 1$, then using the inductive hypothesis, there exists $0\ne z\in A$ such that $zx_1 = \dots = zx_{r - 1} = 0$. Let $j\ge 1$ be the minimal integer such that $zx_r^j = 0$, which exists since $x_r$ is nilpotent. Choosing $y = zx_r^{j - 1}\ne 0$, we have that $yx_i = 0$ for $1\le i\le r$. As a consequence of \thref{maximal-ideal-associated}, we see that $M$ is finite free, so that $\chi_A(M)\ge 0$.
+\end{proof}
+
+\begin{corollary}
+    Let $A$ be a ring and suppose there is an injective $A$-linear map $A^m\into A^n$, then $m\le n$.
+\end{corollary}
+\begin{proof}
+    Let $M = \coker\left(A^m\into A^n\right)$. Then $M$ has a finite free resolution and $\chi_A(M) = n - m\ge 0$ due to \thref{euler-number-non-negative}, thereby completing the proof.
+\end{proof}
+
+\begin{theorem}[Auslander-Buchsbaum]\thlabel{equivalent-conditions-euler-number-zero}
+    Let $A$ be a Noetherian ring and $M$ an $A$-module admitting an FFR. The following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\Ann_A(M)\ne 0$. 
+        \item $\chi_A(M) = 0$. 
+        \item $\Ann_A(M)$ contains an $A$-regular element.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    $(1)\implies(2)$ Let $I = \Ann_A(M)\ne 0$ and set $J = \Ann_A(I)$. Suppose $\chi_A(M) > 0$. Choose any $\frakp\in\Ass_A(A)$. Then $\chi_{A_\frakp}(M_\frakp) > 0$, and hence $M_\frakp\ne 0$. Further, since $\frakp A_\frakp\in\Ass_{A_\frakp}(A_\frakp)$, it follows from \thref{maximal-ideal-associated} that $M_\frakp$ is a free $A_\frakp$-module. Now note that $I A_\frakp = \Ann_{A_\frakp}(M_\frakp) = 0$, so that $J\not\subseteq\frakp$. Since this holds for every $\frakp\in\Ass_A(A)$, it follows from Prime Avoidance that $J$ must contain an $A$-regular element. But since $J\cdot I = 0$, we would have $I = 0$, a contradiction. Thus $\chi_A(M) = 0$.
+
+    $(2)\implies(3)$ If $\chi_A(M) = 0$, then as argued above, for every $\frakp\in\Ass_A(A)$, $M_\frakp$ is a free $A_\frakp$-module and $\chi_{A_\frakp}(M_\frakp) = 0$, whence $M_\frakp = 0$. Since $M$ is a finite $A$-module, this must imply that $\Ann_A(M)\not\subseteq\frakp$ for every $\frakp\in\Ass_A(A)$. This is equivalent to stating that $\Ann_A(M)$ contains an $A$-regular element. 
+
+    $(3)\implies(1)$ is clear. This completes the proof.
+\end{proof}
+% TODO: Add in the proof of Ferrand-Vasconcelos whenever you get time.
+
+\begin{definition}
+    An $A$-module $M$ is said to be \define{stably free} if there exist finite free $A$-modules $F$ and $F'$ such that $M\oplus F\cong F'$ as $A$-modules.
+\end{definition}
+
+Clearly, every stably free module is projective and has an FFR, $0\to F\to F'\to M\to 0$. Conversely, we also have: 
+
+\begin{lemma}
+    A finite projective module having an FFR is stably free.
+\end{lemma}
+\begin{proof}
+    We shall induct on the length of the FFR. The base cases of length $0$ and $1$ are trivial. Suppose now that 
+    \begin{equation*}
+        0\to F_n\to\cdots\to F_0\to P\to 0
+    \end{equation*}
+    is a finite free resolution of a projective $A$-module $M$ with $n\ge 2$. Let $K = \ker\left(F_0\to P\right)$. Then $0\to K\to F_0\to P\to 0$ splits, so that $K$ is a finite projective module admitting an FFR of length $n - 1$. Using the inductive hypothesis, $K$ is stably free, that is, there are finite free modules $F$ and $F'$ such that $K\oplus F\cong F'$. Hence, 
+    \begin{equation*}
+        P\oplus F'\cong P\oplus K\oplus F\cong F_0\oplus F,
+    \end{equation*}
+    so that $P$ is also stably free.
+\end{proof}
+
+\begin{lemma}\thlabel{ffr-implies-regular}
+    Let $A$ be a Noetherian ring. If every finite $A$-module admits an FFR, then $A$ is a regular ring.
+\end{lemma}
+\begin{proof}
+    Let $\frakp$ be a prime ideal in $A$. According to the hypothesis, the $A$-module $A/\frakp$ admits an FFR. Localizing this resolution at $\frakp$, one obtains an FFR of $\kappa(\frakp)$ over $A_\frakp$, whence $A_\frakp$ is a regular local ring. Thus $A$ is a regular ring.
+\end{proof}
+
+\subsection{Unique Factorization Domains}
+
+\begin{theorem}
+    Let $A$ be a Noetherian domain. Then $A$ is a UFD if and only if every height $1$ prime ideal in $A$ is principal.
+\end{theorem}
+\begin{proof}
+    Suppose $A$ is a UFD and $\frakp$ a height $1$ prime ideal in $A$. Choose any $0\ne a\in\frakp$ and factorize $a = \pi_1\cdots\pi_n$ into irreducibles, which are the same things as primes in this case. Since $\frakp$ is a prime ideal, there exists a $\pi_i\in\frakp$. This gives a chain of prime ideals $(0)\subseteq(\pi_i)\subseteq\frakp$. Since $\frakp$ is height $1$, it follows that $\frakp = (\pi_i)$, i.e., is principal. 
+
+    Conversely, suppose every height $1$ prime ideal in $A$ is principal. Every Noetherian domain is a factorization domain, therefore, it suffices to show that all irreducibles in $A$ are prime. Let $0\ne a\in A$ be an irreducible element and choose a prime ideal $\frakp$ minimal among those containing the ideal $(a)$. Due to the Hauptidealsatz, $\hght\frakp = 1$, so that $\frakp = (b)$ for some $0\ne b\in A$, whence there exists $0\ne c\in A$ such that $a = bc$. Since $A$ is irreducible, $c$ must be a unit, and hence $(a) = \frakp$, i.e., $a$ is a prime element in $A$, thereby completing the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $A$ be a Noetherian domain, $\Gamma$ a set of prime elements of $A$, and $S$ the multiplicative set generated by $\Gamma$. If $S^{-1}A$ is a UFD, then so is $A$.
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\begin{lemma}
+    Let $A$ be an integral domain, and $\fraka$ an ideal of $A$ such that $\fraka\oplus A^n\cong A^{n + 1}$ for some $n\ge 0$. Then $\fraka$ is a principal ideal.
+\end{lemma}
+\begin{proof}
+    % TODO: Add in later
 \end{proof}
