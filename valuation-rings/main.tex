@@ -1,0 +1,554 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{fouriernc}
+\usepackage{mdframed}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd-Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{epigraph}
+\setlength\epigraphwidth{0.4\textwidth}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+% \renewcommand{\familydefault}{\sfdefault} % Do you want this font? 
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Swayam Chube},
+    colorlinks=true,
+	citecolor=blue,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{interlude}[theorem]{Interlude}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\F}{\mathbb{F}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakB}{\mathfrak{B}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrM}{\mathscr{M}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrO}{\mathscr{O}} % sheaf
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+% \newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\Ass}{\operatorname{Ass}}
+\newcommand{\projdim}{\operatorname{proj~dim}}
+\newcommand{\injdim}{\operatorname{inj~dim}}
+\newcommand{\gldim}{\operatorname{gl~dim}}
+\newcommand{\embdim}{\operatorname{emb~dim}}
+\newcommand{\hght}{\operatorname{ht}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\CM}{\operatorname{CM}}
+\newcommand{\cech}[1]{\mathbin{\check{#1}}}
+\newcommand{\cdim}{\operatorname{cdim}}
+\newcommand{\Der}{\operatorname{Der}}
+\newcommand{\trdeg}{\operatorname{trdeg}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\sffamily}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+\begin{document}
+
+\title{Valuation Rings and Dedekind Domains}
+\author{Swayam Chube}
+\date{Last Updated: \today}
+
+\maketitle
+
+\section{General Valuation Rings}
+
+\begin{definition}
+    An integral domain $R$ with fraction field $K$ is said to be a \define{valuation ring} if for each $x\in K^\times$, either $x\in R$ or $x^{-1}\in R$.
+\end{definition}
+
+We remark that if $R$ is a valuation ring with fraction field $K$, then any subring of $K$ containing $R$ is also a valuation ring.
+
+\begin{proposition}\thlabel{ideals-totally-ordered}
+    The ideals in a valuation ring $R$ are totally ordered by inclusion.
+\end{proposition}
+\begin{proof}
+    Let $I$ and $J$ be ideals in a valuation ring. If either $I$ or $J$ is zero or $I = J$, then there is nothing to prove. Assume hence that both are non-zero and $I\ne J$. Without loss of generality, suppose $x\in I\setminus J$. Then for any $0\ne y\in J$, $\frac{x}{y}\notin R$ lest $x\in J$. But since $R$ is a valuation ring, $\frac{y}{x}\in R$, consequently, $y\in I$, so that $J\subseteq I$.
+\end{proof}
+
+\begin{corollary}
+    A valuation ring is a local domain.
+\end{corollary}
+\begin{proof}
+    Since the ideals are totally ordered, there must be a unique maximal ideal.
+\end{proof}
+
+\begin{corollary}
+    A finitely generated ideal in a valuation ring is principal, i.e., a valuation ring is a B\'ezout domain.
+\end{corollary}
+\begin{proof}
+    Suppose $I = (a_1,\dots,a_n)\noreq R$, a valuation ring. In view of \thref{ideals-totally-ordered} there exists an index $i$ such that $(a_j)\subseteq(a_i)$ for all $1\le j\le n$, and hence $I = (a_i)$ is principal.
+\end{proof}
+
+\begin{definition}
+    A ring is said to be B\'ezout if every finitely generated ideal is principal.
+\end{definition}
+
+\begin{proposition}
+    Let $R$ be a ring. Then $R$ is a valuation ring if and only if it is a local B\'ezout domain.
+\end{proposition}
+\begin{proof}
+    We have shown above that every valuation ring is a local B\'ezout domain. Conversely, suppose $(R,\frakm)$ is a local B\'ezout domain and let $0\ne x\in K$, the fraction field of $R$. Then there exist $f, g\in R\setminus\{0\}$ such that $x = \frac{f}{g}$. Since $R$ is a B\'ezout domain, there exists $h\in R$ such that $(f, g) = (h)$. Let $a, b\in R$ be such that $f = ah$ and $g = bh$. Then $(a, b) = (1)$, and hence, at least one of $a$ or $b$ must be a unit. In any case, either $\frac{f}{g}$ or $\frac{g}{h}$ is an element of $R$, that is, $R$ is a valuation ring.
+\end{proof}
+
+\begin{proposition}\thlabel{valuation-ring-integrally-closed}
+    A valuation ring is integrally closed in its field of fractions.
+\end{proposition}
+\begin{proof}
+    Let $(R,\frakm)$ be a valuation ring with field of fractions $K$. Suppose $R$ is not integrally closed in $K$, then there exists $0\ne x\in R$ such that $x^{-1}\in K\setminus R$ is integral over $R$, and hence, satisfies an equation of the form 
+    \begin{equation*}
+        x^{-n} + a_{1}x^{-n + 1} + \cdots + a_n = 0,
+    \end{equation*}
+    where $a_i\in R$ for $1\le i\le n$. Further, since $K$ is a field, we may assume that $a_n\ne 0$. Multiplying by $x^n$, we obtain 
+    \begin{equation*}
+        a_nx^n + \dots + a_1x + 1 = 0.
+    \end{equation*}
+    Since $x$ is not a unit in $R$, $x\in\frakm$, but the above equation would then imply that $1\in\frakm$, a contradiction. Thus $R$ is integrally closed in $K$.
+\end{proof}
+
+There is a very simple characterization of flat modules over valuation rings which we include here, although it will never be used throughout this article.
+
+\begin{theorem}
+    A module over a B\'ezout domain is flat if and only if it is torsion-free. In particular, this is true for valuation rings.
+\end{theorem}
+\begin{proof}
+    Let $R$ be a B\'ezout domain. It is well-known that a flat module over an integral domain is torsion-free; this follows by considering, for each $0\ne a\in R$, the injective map $0\to R\xrightarrow{\cdot a} R$ and tensoring it with $M$.
+
+    Conversely, let $M$ be a torsion-free $R$-module. It suffices to show that $\Tor^R_1(R/\fraka, M) = 0$ for every finitely generated ideal $\fraka$ of $R$. Disregarding the trivial case, we may assume that $\fraka\ne 0$. Since $R$ is a B\'ezout domain, $\fraka = (a)$ for some $0\ne a\in R$. Tensoring the short exact sequence 
+    \begin{equation*}
+        0\to R\xrightarrow{\cdot a} R\to R/aR\to 0
+    \end{equation*}
+    with $M$ and taking the induced long exact sequence, we get 
+    \begin{equation*}
+        \cdots\to 0 = \Tor^1_R(R, M)\to \Tor^1_R(R/aR, M)\to R\otimes_R M\xrightarrow{\cdot a} R\otimes_R M\to R/aR\otimes_R M\to 0.
+    \end{equation*}
+    But since $R\otimes_R M$ is canonically isomorphic to $M$, and $M$ is torsion-free, we have that $\Tor^1_R(R/aR, M) = 0$, whence $M$ is a flat $R$-module.
+\end{proof}
+
+\begin{theorem}
+    Let $R$ be a valuation ring with fraction field $K$, and let $R'$ be another subring of $K$ properly containing $R$. Let $\frakm$ denote the maximal ideal of $R$ and $\frakp$ the maximal ideal of $R'$. Then 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\frakp\subsetneq\frakm\subseteq R\subseteq R'$.
+        \item $\frakp$ is a prime ideal in $R$, and $R' = R_\frakp$. 
+        \item $R/\frakp$ is a valuation ring of the field $R'/\frakp$.
+        \item Given any valuation ring $\overline S$ of the field $R/\frakm$, let $S$ be its inverse image in $R$. Then $S$ is a valuation ring having the same fraction field $K$ as $R$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+    \item Let $x\in\frakp$ so that $x$ is not a unit in $R'$, i.e., $x^{-1}\notin R'$. Thus $x^{-1}\notin R$, equivalently, $x\in\frakm$. Next, to see that the inclusion $\frakp\subseteq\frakm$ is strict, choose some $y\in R'\setminus R$. Then $y^{-1}\in R$ and is not a unit in $R$, whence $y^{-1}\in\frakm$, but $y^{-1}\notin\frakp$, else $y\notin R'$. Thus the inclusion $\frakp\subseteq\frakm$ is strict. 
+    
+    \item Since $\frakp = \frakp\cap R$, it is a prime ideal in $R$. Clearly every element in $R\setminus\frakp$ is invertible in $R'$, so that $R\subseteq R_\frakp\subseteq R'$. But by construction, the maximal ideal $\frakp R_\frakp$ of $R_\frakp$ is contained in the maximal ideal $\frakp$ of $R'$; in view of (1), this means $R_\frakp = R'$. 
+    
+    \item Let $\pi\colon R'\to R'/\frakp$ denote the natural surjection. Let $0\ne \overline x\in R'/\frakp$ and choose some $x\in R'\setminus p$ such that $\overline x = \pi(x)$. If $x\in R$, then $\overline x\in R/\frakp$, else $x^{-1}\in R$ and $\overline x^{-1} = \pi(x^{-1})\in R/\frakp$, as desired. 
+    
+    \item Note that $S$ is a subring of $R$ containing $\frakm$ and $S/\frakm = \overline S\subseteq R/\frakm$. Let $0\ne x\in K$. Since $R$ is a valuation ring, either $x\in R$ or $x^{-1}\in R$. We may suppose without loss of generality that $x\in R$. Let $\overline x \in R/\frakm$ denote its image. If $\overline x = 0$, then $x\in\frakm\subseteq S$. Otherwise, either $\overline x\in\overline S$ or $\overline x^{-1}\in\overline S$. Hence, either $x\in S$ or $x^{-1}\in S$, i.e., $S$ is a valuation ring with fraction field $K$. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}\thlabel{existence-of-dominating-valuation-ring}
+    Let $K$ be a field, $A\subseteq K$ a subring, and $\frakp$ a prime ideal of $A$. Then there exists a valuation ring $(R, \frakm)$ of $K$ satisfying 
+    \begin{equation*}
+        A\subseteq R\quad\text{ and }\quad \frakm\cap A = \frakp.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Replacing $A$ by $A_\frakp$, we may assume that $A$ is a local ring with $\frakp = \frakm_A$ the maximal ideal of $A$. This can be done because $A\cap\frakp A_\frakp = \frakp$. Next, let $\scrF$ denote the subrings of $K$ containing $A$ such that $1\notin\frakp B$; and order $\scrF$ by inclusion of rings. Clearly every chain in $\scrF$ has an upper bound given by union of rings constituting the chain. In view of Zorn's lemma, $\scrF$ admits a maximal element, say $R$. Since $\frakp R\subsetneq R$, there exists a maximal ideal $\frakm$ of $R$ containing $\frakp R$. Then $R_\frakm\in\scrF$, since the extension of $\frakm$ to $R_\frakm$ is $\frakm R_\frakm$, which is a proper ideal. Thus $R_\frakm\in\scrF$ and by maximality of $R$, we have $R = R_\frakm$, that is, $(R,\frakm)$ is a local ring. 
+
+    Since $\frakm\cap A\supseteq\frakp$ and $\frakp$ is a maximal ideal, we have $\frakm\cap A = \frakp$. It remains to show that $R$ is a valuation ring. Let $0\ne x\in K$ and suppose that $x, x^{-1}\notin R$. Since $x\notin R$, $R\subsetneq R[x]$, so that $R[x]\notin\scrF$ and hence $\frakp$ generates the unit ideal in $R[x]$. Thus there exists a relation 
+    \begin{equation*}
+        1 = a_0 + a_1x + \dots + a_nx^n 
+    \end{equation*}
+    for some positive integer $n$ and $a_i\in\frakp R$ for $0\le i\le n$. Note that $n\ge 1$ since $1\notin\frakp R$. Since $1 - a_0$ is a unit in $R$, we can multiply by its inverse to get a relation of the form 
+    \begin{equation}
+        1 = b_1x + \dots + b_nx^n\quad\text{ where }b_i\in\frakm\text{ for }1\le i\le n.\label{first}\tag{$\star$}
+    \end{equation}
+    Choose such a relation that minimizes $n\ge 1$. Similarly, since $x^{-1}\notin R$, we can find another relation 
+    \begin{equation}
+        1 = c_1x^{-1} + \dots + c_mx^{-m}\quad\text{ where }c_i\in\frakm\text{ for }1\le i\le m.\label{second}\tag{$\star\star$}
+    \end{equation}
+    Again, choose such a relation that minimizes $n\ge 1$. If $n\ge m$, multiply \eqref{second} by $b_nx^n$ and substitute in \eqref{first} to obtain a relation of smaller $x$-degree, a contradiction. On the other hand, if $n < m$, then we obtain a similar contradiction by interchanging the roles of $x$ and $x^{-1}$. This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $K$ be a field, $A\subseteq K$ a subring, and $B$ the integral closure of $A$ in $K$. Then $B$ is the intersection of all the valuation rings of $K$ containing $A$.
+\end{theorem}
+\begin{proof}
+    Let $B'$ denote the intersection of all valuation rings of $K$ containing $A$. Due to \thref{valuation-ring-integrally-closed}, every such valuation ring contains $B$, that is, $B\subseteq B'$. Let $x\in K\setminus B$, that is, $x$ is not integral over $A$. It suffices to find a valuation ring of $K$ containing $A$ but not $x$. Set $y = x^{-1}$, and consider the ideal $yA[y]$ of the ring $A[y]$. Note that this ideal is proper, else, there would exist a relation 
+    \begin{equation*}
+        1 = a_1 y + \dots + a_n y^n
+    \end{equation*}
+    for some $a_1,\dots,a_n\in A$; which upon multiplying by $x^n$ forces $x$ to be integral over $A$, a contradiction. Let $\frakp$ be a maximal ideal of $A[y]$ containing $yA[y]$. In view of \thref{existence-of-dominating-valuation-ring}, there exists a valuation ring $(V,\frakm)$ of $K$ containing $A[y]$ such that $\frakm\cap A[y] = \frakp$, in particular, $y\in\frakm$, and hence $x = y^{-1}\notin V$, as desired.
+\end{proof}
+
+\begin{definition}
+    An abelian group $(H, +)$ together with a total ordering $(H, \leqq)$ is said to be an \define{ordered group} if 
+    \begin{equation*}
+        \forall~x,y,z,w\in H\quad x\geqq y\text{ and }z\geqq w\implies x + z\geqq y + w.
+    \end{equation*}
+\end{definition}
+Note that if $x > 0$ and $y\geqq 0$ in $H$, then 
+\begin{equation*}
+    x + y\geqq x > 0,
+\end{equation*}
+and if $x\geqq y$ in $H$, then adding $-(x + y)$ to both sides of the inequality, we obtain: $-y\geqq -x$.
+
+Given an ordered abliean group $(H,\leqq)$, we can extend the ordering to the set $H\cup\{\infty\}$ by setting $\infty\geqq x$ for all $x\in H$, $\infty + x = \infty$ for all $x\in H$, and $\infty + \infty = \infty$.
+
+\begin{definition}
+    A(n) (additive) \define{valuation} of a field $K$ is a map $v\colon K\to H\cup\{\infty\}$ where $(H, \leqq)$ is an ordered abelian group such that for all $x,y\in K$, 
+    \begin{enumerate}[label=(\roman*)]
+        \item $v(xy) = v(x) + v(y)$,
+        \item $v(x + y)\geqq\min\left\{v(x), v(y)\right\}$, and 
+        \item $v(x) = \infty$ if and only if $x = 0$.
+    \end{enumerate}
+\end{definition}
+Clearly, the restriction $v\colon K^\times\to H$ defines a group homomorphism. Set 
+\begin{equation*}
+    R_v = \left\{x\in K\colon v(x)\ge 0\right\}\quad\text{ and }\quad \frakm_v = \left\{x\in K\colon v(x) > 0\right\}.
+\end{equation*}
+It is easy to see that $(R_v, \frakm_v)$ is a valuation ring of the field $K$. The image of the group homomorphism $v\colon K^\times\to H$ is called the \define{value group} of the valuation $v$. Note that we may restrict the codomain of $v$ to its value group without changing the valuation ring. 
+
+Now, let $(R,\frakm)$ be a valuation ring with fraction field $K$. Let $G$ denote the set of non-zero principal $R$-submodules of $K$, that is, 
+\begin{equation*}
+    G = \left\{xR\colon x\in K^\times\right\}.
+\end{equation*}
+Note that $G$ is clearly an abelian group under the ``multiplication'' defined by 
+\begin{equation*}
+    xR\cdot yR = xy R.
+\end{equation*}
+The identity element is $R$ and the inverse of $xR$ is given by $x^{-1}R$. The canonical map $v\colon K^\times\to G$ given by $x\mapsto xR$ is a surjective group homomorphism with kernel $R^\times$. Thus $G\cong K^\times/R^\times$ as abelian groups. Note that the submodules in $G$ are totally ordered, indeed, if $x, y\in K^\times$, either $\frac{x}{y}$ or $\frac{y}{x}\in R$, and thus, one of $xR$ and $yR$ must be contained in the other. Define the relation 
+\begin{equation*}
+    xR\leqq yR\iff xR\supseteq yR
+\end{equation*}
+on $G$. Clearly $G$ forms an ordered abelian group under this relation. Extend the map $v\colon K^\times\to G\subseteq G\cup\{\infty\}$ by setting $v(0) = \infty$. We contend that $v$ is a valuation. To this end, it suffices to verify axiom (ii); for this, we may assume $x, y\in K^\times$. Now, 
+\begin{equation*}
+    v(x + y) = xR + yR = \min\{v(x), v(y)\},
+\end{equation*}
+since the submodules in $G$ are totally ordered. Thus $v$ is a valuation, and the corresponding valuation ring is $(R, \frakm)$ by construction. Call this the \define{canonical valuation} of the valuation ring $(R,\frakm)$. In essence, we have shown that there's no substantial difference between ``abstract'' valuation rings and those valuation rings that come from (additive) valuations of a field.
+
+\begin{proposition}
+    Let $v$ and $v'$ be two (additive) valuations of the field $K$ with value groups $H$ and $H'$ respectively. If both $v$ and $v'$ give rise to the same valuation ring, then there is an order isomorphism $\varphi\colon H\to H'$ such that $v' = \varphi\circ v$.
+
+    Thus, in some sense, the value group of a valuation ring is determined up to order-isomorphism, and in particular, is isomorphic to $K^\times/R^\times$.
+\end{proposition}
+\begin{proof}
+    Note that it sufficess to assume $v'$ is the canonical valuation with value group $G = \{xR\colon x\in K^\times\}$. Since $\ker v = R^\times$ and $\ker v' = R^\times$, there is an injective map $\varphi\colon G\to H$ such that $\varphi\circ v' = v$. Since $v$ is surjective, so is $\varphi$. That is, $v$ is an isomorphism. Finally, suppose $v'(x)\leqq v'(y)$, that is, $xR\supseteq yR$, equivalently, $\frac{y}{x}\in R$, whence $v\left(\frac{x}{y}\right)\geqq 0$, equivalently $v(x)\geqq v(y)$, as desired.
+\end{proof}
+
+\section{Discrete Valuation Rings and Dedekind Domains}
+
+\begin{definition}
+    A valuation ring whose value group is isomorphic to $\Z$ is called a \define{discrete valuation ring (DVR)}.
+\end{definition}
+
+\begin{theorem}
+    Let $R$ be a valuation ring. The following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $R$ is a DVR. 
+        \item $R$ is a PID. 
+        \item $R$ is Noetherian.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\begin{theorem}
+    Let $R$ be a ring. The following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $R$ is a DVR.
+        \item $R$ is a local PID which is not a field. 
+        \item $R$ is a Noetherian local ring of positive Krull dimension with principal maximal ideal. 
+        \item $R$ is a one-dimensional normal Noetherian local domain.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\subsection{Fractional Ideals and Dedekind Domains}
+
+\begin{definition}
+    Let $R$ be an integral domain with fraction field $K$. A \define{fractional ideal} of $R$ is an $R$-submodule $I$ of $K$ such that there exists $0\ne\alpha\in R$ such that $\alpha I\subseteq R$.
+\end{definition}
+
+Just like ordinary ideals of $R$, we can take the sum and product of $R$-submodules of $K$: 
+\begin{equation*}
+    I + J = \left\{x + y\colon x\in I,~y\in J\right\}\quad\text{ and } I\cdot J = \left\{xy\colon x\in I,~y\in J\right\}R.
+\end{equation*}
+Note that the sum and product of fractional ideals is again a fractional ideal. Indeed, suppose $\alpha, \beta\in R\setminus\{0\}$ such that $\alpha I, \beta J\subseteq R$. Then it is clear that $\alpha\beta(I + J)\subseteq R$ and $\alpha\beta(I\cdot J)\subseteq R$. 
+
+Next, we take a look at localization. Let $S\subseteq R$ be a multiplicative subset. Then 
+\begin{equation*}
+    S^{-1}I = \left\{\frac{x}{s}\colon x\in I,~s\in S\right\}
+\end{equation*}
+is an $S^{-1}R$ submodule of $K$ such that $\alpha(S^{-1}I)\subseteq S^{-1}R$, so that $S^{-1}I$ is a fractional ideal of $S^{-1}R$. The usual properties of localization for ideals carries over to the case of fractional ideals. Indeed, if $I$ and $J$ are $R$-submodules of $K$, then:
+\begin{enumerate}[label=(\roman*)]
+    \item $S^{-1}I\cdot S^{-1}J = S^{-1}(I\cdot J)$
+    \item $S^{-1}I\colon_{S^{-1}R} S^{-1}J = S^{-1}\left(I\colon_R J\right)$.
+\end{enumerate}
+The first one is clear. For the second one, the inclusion $S^{-1}(I\colon_R J)\subseteq S^{-1}I\colon_{S^{-1}R} S^{-1}J$ is also clear. Conversely, if $\frac{\alpha}{s}\in S^{-1}I\colon_{S^{-1}R} S^{-1}J$, then for any $\frac{y}{t}\in S^{-1}J$, we have $\frac{\alpha y}{st}\in S^{-1}I$, that is, $\alpha y\in I$, whence $\alpha\in I\colon_R J$. This establishes the equality.
+
+\begin{definition}
+    An $R$-submodule $I$ of $K$ is said to be \define{invertible} if there exists an $R$-submodule $J$ of $K$ such that $I\cdot J = R$.
+\end{definition}
+Clearly, if $I$ is an invertible $R$-submodule of $K$, then it must be a fractional ideal. Further, if $I\cdot J = R$, then 
+\begin{equation*}
+    J = \left\{\alpha\in K\colon\alpha I\subseteq R\right\} = R\colon_R I.
+\end{equation*}
+Indeed, we have the inclusion $J\subseteq R\colon_R I = (R\colon_R I)\cdot I\cdot J\subseteq J$, and hence, equality holds everywhere.
+
+\begin{theorem}
+    Let $R$ be an integral domain and $I$ a fractional ideal of $R$. The following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $I$ is invertible. 
+        \item $I$ is a projective $R$-module. 
+        \item $I$ is finitely generated, and for every maximal ideal $\frakm$ of $R$, the fractional ideal $I_\frakm$ of $R_\frakm$ is principal.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\end{document}
