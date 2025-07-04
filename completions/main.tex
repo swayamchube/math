@@ -1,0 +1,611 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{fouriernc}
+\usepackage{mdframed}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd-Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{epigraph}
+\setlength\epigraphwidth{0.4\textwidth}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+% \renewcommand{\familydefault}{\sfdefault} % Do you want this font? 
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Swayam Chube},
+    colorlinks=true,
+	citecolor=blue,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{interlude}[theorem]{Interlude}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\F}{\mathbb{F}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakB}{\mathfrak{B}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrM}{\mathscr{M}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrO}{\mathscr{O}} % sheaf
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+% \newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\Ass}{\operatorname{Ass}}
+\newcommand{\projdim}{\operatorname{proj~dim}}
+\newcommand{\injdim}{\operatorname{inj~dim}}
+\newcommand{\gldim}{\operatorname{gl~dim}}
+\newcommand{\embdim}{\operatorname{emb~dim}}
+\newcommand{\hght}{\operatorname{ht}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\CM}{\operatorname{CM}}
+\newcommand{\cech}[1]{\mathbin{\check{#1}}}
+\newcommand{\cdim}{\operatorname{cdim}}
+\newcommand{\Der}{\operatorname{Der}}
+\newcommand{\trdeg}{\operatorname{trdeg}}
+\newcommand{\gr}{\operatorname{gr}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\sffamily}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+\begin{document}
+\title{Completions}
+\author{Swayam Chube}
+\date{Last Updated: \today}
+
+\maketitle
+
+\section{Graded and Filtered Objects}
+
+\begin{definition}
+    Let $(G, +)$ be an Abelian monoid with identity element $0\in G$. A \define{$G$-graded} ring is a ring $R$ together with a direct sum decomposition 
+    \begin{equation*}
+        R = \bigoplus_{i\in G} R_i
+    \end{equation*}
+    into additive subgroups, such that $R_iR_j\subseteq R_{i + j}$ for all $i, j\in G$.
+
+    Similarly, a \define{graded $R$-module} is an $R$-module $M$ together with a direct sum decomposition 
+    \begin{equation*}
+        M = \bigoplus_{i\in G} M_i
+    \end{equation*}
+    into additive subgroups, such that $R_i M_j\subseteq M_{i + j}$ for all $i,j\in G$. An element $x\in M$ is said to be \define{homogeneous} if $x\in M_i$ for some $i\in G$. 
+    
+    Note that any element $x\in M$ can be written uniquely as a sum 
+    \begin{equation*}
+        x = \sum_{i\in G} x_i,
+    \end{equation*}
+    where $x_i\in M_i$ for all $i\in G$. The $x_i$'s are called the \define{homogeneous components} of $x$.
+    A submodule $N\subseteq M$ is said to be \define{homogeneous} if it can be generated by homogeneous elements in $M$.
+
+    A homomorphism $f\colon M\to N$ of graded $R$-modules is said to be \define{graded of degree $d\in G$} if $f(M_i)\subseteq N_{i + d}$ for all $i\in G$. A graded homomorphism of degree $0$ is said to be just \emph{graded}.
+\end{definition}
+
+\begin{proposition}
+    Let $\displaystyle M = \bigoplus_{i\in G} M_i$ be a $G$-graded $R$-module and $N\subseteq M$ a submodule. The following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $N$ is a homogeneous submodule of $M$.
+        \item For all $x\in N$, each homogeneous component of $x$ lies in $N$.
+        \item $\displaystyle N = \sum_{i\in G}(N\cap M_i)$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    $(1)\implies(2)$ Suppose $N$ is generated as an $R$-module by the homogeneous elements $\{z_j\}$. Then we can write 
+    \begin{equation*}
+        x = \sum_j r_j z_j = \sum_{j}\left(\sum_{g\in G} r_j^g z_j\right),
+    \end{equation*}
+    where we can decompose $r_j$ as
+    \begin{equation*}
+        r_j = \sum_{g\in G} r_j^g
+    \end{equation*}
+    into its homogeneous components in $R$. Grouping together components of the same degree shows that every homogeneous component of $x$ lies in $N$. 
+
+    $(2)\implies(3)$ Clearly, the right hand side is contained in the left hand side. Conversely, if $x\in N$, then we can write $x = \sum_{i\in G} x_i$ where the $x_i$'s are the homogeneous components of $x$. According to (2), $x_i\in N\cap M_i$ for each $i\in G$, whence $x$ is contained in the right hand side, as desired. 
+
+    $(3)\implies(1)$ Indeed, $N$ is generated as an $R$-module by the set 
+    \begin{equation*}
+        \bigcup_{i\in G} (N\cap M_i)
+    \end{equation*}
+    consisting only of homogeneous elements.
+\end{proof}
+
+\begin{proposition}
+    Let $\displaystyle R = \bigoplus_{i\in G} R_i$ be a $G$-graded ring. Then $R_0$ is a subring of $R$ and for every graded $R$-module $\displaystyle M = \bigoplus_{i\in G} M_i$, each $M_i$ is naturally an $R_0$-module.
+\end{proposition}
+\begin{proof}
+    $R_0$ is an additive subgroup of $R$ and $R_0 R_0\subseteq R_0$. Thus it suffices to show that $1\in R_0$. We can decompose $x$ into its homogeneous components as 
+    \begin{equation*}
+        1 = \sum_{i\in G} x_i.
+    \end{equation*}
+    For any $j\in G$, we then have 
+    \begin{equation*}
+        x_j = \sum_{i\in G} x_ix_j,
+    \end{equation*}
+    where $x_ix_j$ is homogeneous of degree $i + j$. Therefore, 
+    \begin{equation*}
+        x_ix_j = 
+        \begin{cases}
+            x_j & i = 0\\
+            0 & i\ne 0.
+        \end{cases}
+    \end{equation*}
+    Summing over all $j\in G$, we get 
+    \begin{equation*}
+        x_0 = \sum_{j\in G} x_0x_j = \sum_{j\in G} x_j = 1.
+    \end{equation*}
+    That is, $1\in R_0$, and hence $R_0$ is a subring of $R$. Finally, since $R_0 M_i\subseteq M_i$, it follows that each $M_i$ is naturally an $R_0$-module.
+\end{proof}
+
+\begin{remark}[Quotient of graded modules]
+    Let $M = \bigoplus_{i\in G} M_i$ be a graded module over a graded ring $R = \bigoplus_{i\in G} R_i$, and let $N\subseteq M$ be a graded submodule of $M$. We can endow the quotient module $M/N$ with a natural grading 
+    \begin{equation*}
+        \bigoplus_{i\in G} M_i/N_i,
+    \end{equation*}
+    where the $R$-module structure is the obvious one. To see that this is indeed isomorphic to $M/N$ as an $R$-module, consider the graded projection $\pi\colon M\to M/N$ given by 
+    \begin{equation*}
+        \pi\left(\sum_{i\in G} x_i\right) = \sum_{i\in G} x_i\mod N_i.
+    \end{equation*}
+    One can check that this is an $R$-linear surjective homomorphism with $\ker\pi = N$, which implies the desired conclusion.
+
+    Analogously, if $I\noreq R$ is a graded ideal, then $R/I$ is naturally a graded $R$-module as above, and has a ring structure given by 
+    \begin{equation*}
+        \left(r_i\mod I_i\right)\left(r_j\mod I_j\right) = r_ir_j \mod I_{i + j}.
+    \end{equation*}
+    Henceforth, $R/I$ shall always be thought of a graded ring with the above grading.
+\end{remark}
+
+Throughout this article, we shall mainly concern ourselves with the case $G = (\N, +, 0)$, and henceforth, a graded ring/module shall refer to an $\N$-graded ring/module. For an $\N$-graded ring $\displaystyle R = \bigoplus_{n\ge 0} R_n$, we set 
+\begin{equation*}
+    R_+ = \bigoplus_{n\ge 1} R_n,
+\end{equation*}
+which is clearly a homogeneous ideal in $R$ and is called the \define{irrelevant ideal} of $R$. Often when $R_0$ is a field, then the irrelevant ideal turns out to be the unique \emph{graded} maximal ideal and is denoted by $\frakm_+$ for empasis.
+
+\begin{theorem}[Graded Nakayama]\thlabel{graded-nak}
+    Let $\displaystyle R = \bigoplus_{n\ge 0} R_n$ be a graded ring, and $\displaystyle M = \bigoplus_{n\ge 0} M_n$ a graded $R$-module. If $R_+ M = M$, then $M = 0$.
+\end{theorem}
+\begin{proof}
+    Let $n\ge 0$ be the smallest non-negative integer such that $M_n\ne 0$. Let $0\ne x_n\in M_n$. Using the fact that $R_+ M = M$, we can write 
+    \begin{equation*}
+        x_n = \sum_\lambda r^\lambda y^\lambda,
+    \end{equation*}
+    for some finite set of $r^\lambda\in R_+$ and $y^\lambda\in M$. Writing out each $r^\lambda$ and $y^\lambda$ in its homogeneous components and isolating terms of degree $n$, we get 
+    \begin{equation*}
+        x_n = \sum_{\lambda}\left(\sum_{i + j = n} r^\lambda_i y^\lambda_j\right).
+    \end{equation*}
+    But since $r^\lambda\in R_+$, if $r^\lambda_i\ne 0$ then $i\ge 1$, so that $j\le n - 1$, and hence $y^\lambda_j = 0$. Thus $x_n = 0$, a contradiction. This completes the proof.
+\end{proof}
+
+\begin{definition}
+    A \define{filtered ring} is a ring $R$ together with a descending chain of additive subgroups 
+    \begin{equation*}
+        R = R_0\supseteq R_1\supseteq R_2\supseteq\cdots,
+    \end{equation*}
+    such that $R_nR_m\subseteq R_{n + m}$ for all $n, m\ge 0$. In particular, each $R_n$ is an ideal in the ring $R$.
+
+    Let $R$ be a filtered ring as above. A \define{filtered module} over $R$ is an $R$-module $M$ together with a descending chain of $R$-submodules of $M$ 
+    \begin{equation*}
+        M = M_0\supseteq M_1\supseteq M_2\supseteq\cdots
+    \end{equation*}
+    such that $R_m M_n\subseteq M_{m + n}$ for all $m,n\ge 0$.
+
+    A map $f\colon M\to N$ between filtered $R$-modules is said to be a filtered homomorphism if $f(M_n)\subseteq N_n$ for all $n\ge 0$.
+\end{definition}
+
+\begin{remark}
+    Let $M$ be a filtered module over a filtered ring $R$ as above. For an $R$-submodule $N\subseteq M$, we define the \define{induced filtration} on $N$ as $N_n = N\cap M_n$ for all $n\ge 0$. 
+    Similarly, we define the induced filtration on $M/N$ as 
+    \begin{equation*}
+        \left(\frac{M}{N}\right)_n = \frac{N + M_n}{N}.
+    \end{equation*}
+
+    Equipped with these filtrations, every map in the short exact sequence
+    \begin{equation*}
+        0\to N\into M\onto M/N\to 0
+    \end{equation*}
+    is a filtered homomorphism.
+\end{remark}
+
+\begin{definition}
+    Let $R$ be a filtered ring and $M$ a filtered $R$-module as above. Define the \define{associated graded ring}
+    \begin{equation*}
+        \gr(R) = \bigoplus_{n\ge 0} R_n/R_{n + 1}
+    \end{equation*}
+    with product structure given by 
+    \begin{equation*}
+        (x + R_{n + 1})(y + R_{m + 1}) = xy + R_{n + m + 1}
+    \end{equation*}
+    for all $n, m\ge 0$. It is easy to check that $\gr(R)$ is a graded ring.
+
+    We further define the \define{associated graded module}
+    \begin{equation*}
+        \gr(M) = \bigoplus_{n\ge 0} M_n/M_{n + 1}
+    \end{equation*}
+    which is a graded $\gr(R)$-module with the module structure given by 
+    \begin{equation*}
+        (a + R_{m + 1})\cdot(x + M_{n + 1}) = a\cdot x + M_{m + n + 1}.
+    \end{equation*}
+
+    If $N$ is another filtered $R$-module and $f\colon M\to N$ a filtered homomorphism, then there is an induced graded $\gr(R)$-homomorphism $\gr(f)\colon \gr(M)\to\gr(N)$ given by 
+    \begin{equation*}
+        \gr(f)\left(x + M_{n + 1}\right) = f(x) + N_{n + 1}.
+    \end{equation*}
+    We note that $\gr$, as defined above, is a functor from the category of filtered $R$-modules to the category of graded $\gr(R)$-modules. Indeed, it is trivial to check that $\gr(\id_M) = \id_{\gr(M)}$ and that $\gr(g\circ f) = \gr(g)\circ\gr(f)$.
+\end{definition}
+
+% TODO: Add stuff about gr preserving short exact sequences with induced filtrations
+
+\begin{proposition}
+    Let $R$ be a filtered ring, $M$ and $N$ filtered $R$-modules, and $f\colon M\to N$ a filtered homomorphism. If 
+    \begin{enumerate}[label=(\roman*)]
+        \item $\gr(f)\colon\gr(M)\to\gr(N)$ is injective, and 
+        \item $\displaystyle\bigcap_{n\ge 0} M_n = 0$, 
+    \end{enumerate}
+    then $f$ is injective.
+\end{proposition}
+\begin{proof}
+    Since $\gr(f)$ is injective, the map $\gr_n(f)\colon M_n/M_{n + 1}\to N_n/N_{n + 1}$ is injective for every $n\ge 0$. We shall first show by induction on $n\ge 0$ that $f^{-1}(N_n)\subseteq M_n$. Clearly $f^{-1}(N_0)\subseteq M_0$. As for the inductive step, note that 
+    \begin{equation*}
+        f^{-1}(N_{n + 1})\subseteq f^{-1}(N_n)\subseteq M_n.
+    \end{equation*}
+    Hence, 
+    \begin{equation*}
+        f^{-1}(N_{n + 1})\subseteq f^{-1}(N_{n + 1})\cap M_n\subseteq M_{n + 1},
+    \end{equation*}
+    where the last containment follows from the fact that $\gr_n(f)$ is injective. As a result, 
+    \begin{equation*}
+        f^{-1}(0)\subseteq f^{-1}\left(\bigcap_{n\ge 0} N_n\right)\subseteq\bigcap_{n\ge 0} M_n = 0,
+    \end{equation*}
+    thereby completing the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $\displaystyle R = \bigoplus_{n\ge 0} R_n$ be a graded ring. The following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $R$ is Noetherian. 
+        \item $R_0$ is Noetherian and $R$ is a finitely generated $R_0$-algebra.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Clearly $(2)\implies(1)$ due to the Hilbert Basis Theorem. Suppose now that $R$ is Noetherian. Since 
+    \begin{equation*}
+        R_0\cong R/R_+,
+    \end{equation*}
+    so is $R_0$. Now, $R_+$ is a finitely generated ideal in $R$ and we may assume that it is generated by homogeneous elements $x_1,\dots,x_r\in R_+$ of degrees $n_1,\dots,n_r$ respectively. Let $R' = R_0[x_1,\dots,x_n]\subseteq R$. We shall show by induction on $n\ge 0$ that $R_n\subseteq R'$. Trivially $R_0\subseteq R'$. Suppose it is known that $R_k\subseteq R'$ for all $k < n$. An element $x\in R_n$ can be written as an $R$-linear combination of $x_1,\dots,x_r$ as 
+    \begin{equation*}
+        x = a_1x_1 + \dots + a_r x_r.
+    \end{equation*}
+    Since $x$ is a homogeneous element, breaking each $a_i$ into its homogeneous components and grouping terms of the same degree, we may suppose that each $a_i$ is graded of degree $n - n_i$, with the convention that $R_d = 0$ for $d < 0$. Since $n_i\ge 1$ for all $1\le i\le r$, it follows that $a_i\in R'$ for all $1\le i\le r$. Hence $x\in R'$, thereby completing the proof.
+\end{proof}
+
+\begin{definition}
+    Let $M = (M_n)_{n\ge 0}$ be a filtered $R$-module and $I$ an ideal in $R$. The filtration is said to be an \define{$I$-filtration} if $IM_n\subseteq M_{n + 1}$ for all $n\ge 0$. Further, an $I$-filtration is said to be \define{$I$-stable} if $IM_{n} = M_{n + 1}$ for all $n\gg 0$.
+\end{definition}
+
+Let $M$ be a filtered $R$-module with an $I$-filtration. We define the \define{Rees algebra} of $R$ as a subring of the polynomial algebra
+\begin{equation*}
+    R^\ast = \bigoplus_{n\ge 0} I^n T^n\subseteq R[T].
+\end{equation*}
+That is, $R^\ast$ consists of all polynomials $a_0 + a_1T + \dots + a_nT^n\in R[T]$ such that $a_i\in I^i$ for all $i\ge 0$. Note that if $R$ is Noetherian, then $I$ is a finitely generated ideal, say $I = (a_1,\dots,a_r)$. Then $R^\ast$ is precisely the ring 
+\begin{equation*}
+    R^\ast = R[a_1T,\dots, a_rT]\subseteq R[T],
+\end{equation*}
+and in particular, is a Noetherian ring.
+
+Similarly, we define an $R^\ast$-module 
+\begin{equation*}
+    M^\ast = \bigoplus_{n\ge 0} M_nT^n
+\end{equation*}
+whose elements are formal sums 
+\begin{equation*}
+    \sum_{\substack{n\ge 0\\\text{finite}}} x_n T^n,
+\end{equation*}
+with the obvious module structure over $R^\ast$.
+
+\begin{theorem}\thlabel{equivalent-conditions-for-I-stable}
+    Let $R$ be a filtered Noetherian ring, $I$ an ideal of $R$, and $M$ a finitely generated filtered $R$-module equipped with an $I$-filtration. The following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item The filtration on $M$ is $I$-stable. 
+        \item $M^\ast$ is a finitely generated $R^\ast$-module.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Set 
+    \begin{equation*}
+        M_n^\ast = M_0\oplus M_1T\oplus\dots\oplus M_nT^n\oplus IM_nT^{n + 1}\oplus I^2 M_n T^{n + 2}\oplus\cdots,
+    \end{equation*}
+    which is clearly an $R^\ast$-module. Further, since each $M_n$ is a finite $R$-module, we can choose a finite $R$-generating set for the module $M_0\oplus \cdots\oplus M_n$, which would then be an $R^\ast$-generating set for $M_n^\ast$. That is, each $M_n^\ast$ is a finite $R^\ast$-module.
+
+    Note that the filtration on $M$ being $I$-stable is equivalent to the ascending chain $(M_n^\ast)_{n\ge 0}$. We also have 
+    \begin{equation*}
+        M^\ast = \bigcup_{n\ge 0} M_n^\ast.
+    \end{equation*}
+    Thus, if the chain stabilizes, then $M^\ast$ is a finite $R^\ast$-module. Conversely, if $M^\ast$ is a finite $R^\ast$-module, then $M^\ast$ is Noetherian, and hence the chain must stabilize. This completes the proof.
+\end{proof}
+
+\begin{lemma}[Artin-Rees]\thlabel{artin-rees}
+    Let $R$ be a filtered Noetherian ring, and $M$ a finitely generated filtered $R$-module equipped with an $I$-stabie flitration. If $N$ is a submodule of $M$, then the induced filtration on $N$ is $I$-stable.
+\end{lemma}
+\begin{proof}
+    Let $N_n = N\cap M_n$, which is the induced filtration on $N$. Clearly this filtration is $I$-stable. We shall treat $N^\ast$ as a natural $R^\ast$-submodule of $M^\ast$. Since the filtration on $M$ is $I$-stable, due to \thref{equivalent-conditions-for-I-stable}, $M^\ast$ is a finite $R^\ast$-module, but since $R^\ast$ is Noetherian, $N^\ast$ is also a finite $R^\ast$-module, so that by \thref{equivalent-conditions-for-I-stable}, the filtration on $N$ is $I$-stable.
+\end{proof}
+
+\begin{theorem}[Krull Intersection Theorem]
+    Let $R$ be a Noetherian ring, $I$ an ideal of $R$, and $M$ a finite $R$-module. Then the module 
+    \begin{equation*}
+        \bigcap_{n\ge 0} I^n M
+    \end{equation*}
+    consists of precisely those elements that are annihilated by some element in $1 + I$.
+\end{theorem}
+\begin{proof}
+    Let 
+    \begin{equation*}
+        N = \bigcap_{n\ge 0} I^n M,
+    \end{equation*}
+    which is a submodule of $M$. In view of \thref{artin-rees}, this filtration is $I$-stable. That is, for $n\gg 0$, 
+    \begin{equation*}
+        IN = I\left(N\cap I^n M\right) = N\cap I^{n + 1} M = N.
+    \end{equation*}
+    By Nakayama's lemma, $N$ is annihilated by an element of the form $1 + a$, where $a\in I$.
+
+    Conversely, suppose $x\in M$ is such that $(1 + a)x = 0$ for some $a\in I$. Then 
+    \begin{equation*}
+        x = -ax = a^2 x = -a^3 x = \cdots,
+    \end{equation*}
+    and hence $x\in\bigcap_{n\ge 0} I^n M = N$.
+\end{proof}
+
+\begin{corollary}
+    If $R$ is a Noetherian ring, $I$ an ideal of $R$ contained in the Jacobson radical, and $M$ a finite $R$-module, then 
+    \begin{equation*}
+        \bigcap_{n\ge 0} I^n M = 0.
+    \end{equation*}
+\end{corollary}
+\begin{proof}
+    This follows from the fact that every element in $1 + I$ is invertible.
+\end{proof}
+
+\begin{corollary}
+    Let $R$ be a Noetherian domain, and $I$ an ideal in $R$. Then 
+    \begin{equation*}
+        \bigcap_{n\ge 0} I^n = 0.
+    \end{equation*}
+\end{corollary}
+\begin{proof}
+    This follows from the fact that every element in $1 + I$ is a non-zerodivisor.
+\end{proof}
+\end{document}
