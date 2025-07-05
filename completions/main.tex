@@ -608,4 +608,341 @@ with the obvious module structure over $R^\ast$.
 \begin{proof}
     This follows from the fact that every element in $1 + I$ is a non-zerodivisor.
 \end{proof}
+
+\section{Completions}
+
+We first recall the theory of inverse limits. The category of $R$-modules is complete, that is, it admits all limits and colimits. Consequently, inverse limits\footnote{which are just limits in a category} always exist. We shall mainly concern ourselves with $\N$-indexed inverse systems.
+
+Consider an inverse system of the form 
+\begin{equation*}
+    \cdots\to M_n\xrightarrow{\theta_n} M_{n - 1}\to \cdots \to M_1\xrightarrow{\theta_1} M_0.
+\end{equation*}
+The \define{inverse limit} of this system is, by definition, an $R$-module $M$ together with $R$-linear maps $f_i\colon M\to M_i$ for all $i\ge 0$ such that $\theta_n\circ f_n = f_{n - 1}$ for all $n\ge 1$ having the following universal property: Given any $R$-module $N$ with $R$-linear maps $g_i\colon N\to M_i$ such that $\theta_n\circ g_n = g_{n - 1}$ for all $n\ge 1$, there exists a unique $R$-linear map $\varphi\colon N\to M$ such that $f_n\circ\varphi = g_n$ for all $n\ge 0$.
+
+The inverse limit of the above inverse system is often denoted by 
+\begin{equation*}
+    \varprojlim_n M_n.
+\end{equation*}
+
+\begin{proposition}
+    The inverse limit exists.
+\end{proposition}
+\begin{proof}
+    Set 
+    \begin{equation*}
+        M = \left\{(x_n)_{n\ge 0}\in\prod_{n\ge 0} M_n\colon \theta_n(x_n) = x_{n - 1}\text{ for all }n\ge 1\right\}.
+    \end{equation*}
+    It is straightforward to check that $M$ has the desired universal property.
+\end{proof}
+
+\begin{interlude}[Completion through Cauchy sequences]
+    Let $M$ be an $R$-module equipped with a filtration $(M_n)_{n\ge 0}$. Define the \define{completion} of $M$ to be the equivalence classes of Cauchy sequences $(x_n)_{n\ge 0}$ in $M$ with 
+    \begin{equation*}
+        (x_n)\sim(y_n)\iff \forall~m\ge 0,~\exists~n_0\ge 0\text{ such that } x_n - y_n\in M_m\quad~\forall~n\ge n_0.
+    \end{equation*}
+    That this is an equivalence relation is easy to check. Let $\wh M$ denote the set of equivalence classes. There is a natural $R$-module structure on $\wh M$ given by 
+    \begin{equation*}
+        r\cdot\left[(x_n)\right] = \left[(r\cdot x_n)\right].
+    \end{equation*}
+    This is clearly well-defined since each $M_n$ is an $R$-module, in particular if $x_n - y_n\in M_m$, then $rx_n - ry_n\in M_m$ for all $r\in R$.
+\end{interlude}
+
+Next, given an $R$-module $M$ equipped with a filtration $(M_n)_{n\ge 0}$, there is a natural inverse system 
+\begin{equation*}
+    \cdots\to\frac{M}{M_n}\xrightarrow{\theta_n}\frac{M}{M_{n - 1}}\to\cdots\to\frac{M}{M_1}\xrightarrow{\theta_1}\frac{M}{M_0} = 0.
+\end{equation*}
+For now, set $\displaystyle \wt M = \varprojlim_n M/M_n$. An element of $\wt M$ looks like $(x_n + M_n)_{n\ge 0}$ such that $x_n - x_{n - 1}\in M_{n - 1}$ for all $n\ge 1$. Therefore, $x_n - x_m\in M_m$ whenever $n\ge m$. Define a map $\alpha\colon\wt M\to\wh M$ which sends 
+\begin{equation*}
+    \left(x_n + M_n\right)_{n\ge 0}\longmapsto\left[(x_n)_{n\ge 0}\right].
+\end{equation*}
+This map is well-defined, indeed, if $x_n\equiv y_n\mod M_n$, then $x_n - y_n\in M_n$ for all $n\ge 0$, that is, $x_n - y_n\in M_m$ for all $m\ge n$, so that $(x_n)\sim (y_n)$. The map $\alpha$ is also clearly $R$-linear. We claim that $\alpha$ is an isomorphism.
+
+Let $[(y_n)]\in\wh M$. Set $x_0 = y_0$. Since this sequence is Cauchy, there exists an $n_1\ge 0$ such that $y_m - y_n\in M_1$ for all $m,n\ge n_1$. Set $x_1 = y_{n_1}$. Again, there exists an $n_2 > n_1$ such that $y_m - y_n\in M_2$ for all $m,n\ge n_2$. Set $x_2 = y_{n_2}$ and continue this process. Then the sequence $(x_n)_{n\ge 0}$ is such that $x_{n + 1} - x_n\in M_n$ for all $n\ge 0$. This is a subsequence of $(y_n)$ and is also Cauchy. Further, $(x_n)\sim (y_n)$. Indeed, for any $m\ge 0$, there exists an $\ell\ge 0$ such that $y_p - y_q\in M_m$ for all $p, q\ge\ell$. For some $r\gg0$, we have $n_s\ge\ell$, and hence, for all $s > \max\{r, \ell\}$,
+\begin{equation*}
+    x_s - y_s = y_{n_s} - y_s\in M_m.
+\end{equation*}
+This shows that $\alpha$ is surjective, since $\alpha$ maps $(x_n + M_n)$ to $\left[(y_n)\right]$. Next, to see that $\alpha$ is injective, suppose $\alpha$ sends $(x_n + M_n)_{n\ge 0}$ to $0$ in $\wt M$, that is, $(x_n)\sim(0)$, i.e., for all $m\ge 0$, $x_n\in M_m$ for all $n\gg 0$. But by construction, we have $x_n - x_m\in M_m$ for all $n\ge m\ge 0$, and hence $x_m\in M_m$ for all $m\ge 0$. This shows that $\alpha$ is injective, and hence $\alpha$ is an isomorphism.
+
+To summarize, we have proved: 
+\begin{theorem}
+    Let $M = (M_n)_{n\ge 0}$ be a filtered $R$-module. Then the natural map $\displaystyle\alpha\colon\varprojlim_n M/M_n\to\wh M$ defined above is an isomorphism of $R$-modules.
+\end{theorem}
+
+\begin{interlude}[Functorial Behavior of Completion]\thlabel{two-completion-functors}
+    Let $f\colon M\to N$ be an $R$-linear map between filtered $R$-modules $M = (M_n)_{n\ge 0}$ and $N = (N_n)_{n\ge 0}$. If $(x_n)_{n\ge 0}$ is a Cauchy sequence in $M$, then clearly $\left(f(x_n)\right)_{n\ge 0}$ is a Cauchy sequence in $N$. Further, if $(x_n)\sim (y_n)$ in $M$, then $(f(x_n))\sim (f(y_n))$ in $N$. This defines a map $\wh f\colon\wh M\to\wh N$ sending 
+    \begin{equation*}
+        \left[(x_n)_{n\ge 0}\right]\longmapsto\left[(f(x_n))_{n\ge 0}\right].
+    \end{equation*}
+    This determines a functor from the category of filtered $R$-modules to the category of $R$-modules.
+
+    Similarly, $f$ induces a morphism of inverse systems 
+    \begin{equation*}
+        \xymatrix {
+            \cdots\ar[r] & M/M_{n}\ar[r]^-{\theta_n}\ar[d]_{f_n} & M/M_{n - 1}\ar[r]\ar[d]^{f_{n - 1}} & \cdots\ar[r] & M/M_1\ar[r]^-{\theta_1}\ar[d]_{f_1} & M/M_0\ar[d]^{f_0}\\
+            \cdots\ar[r] & N/N_{n}\ar[r]^-{\theta_n} & N/N_{n - 1}\ar[r] & \cdots\ar[r] & N/N_1\ar[r]^-{\theta_1} & N/N_0
+        }
+    \end{equation*}
+    where $f_n\colon M/M_n\to N/N_n$ is the natural map taking $x + M_n\mapsto f(x) + N_n$ for all $n\ge 0$. The universal property furnishes a map 
+    \begin{equation*}
+        \wt f\colon \varprojlim_n M/M_n\to\varprojlim_n N/N_n
+    \end{equation*}
+    which sends $(x_n + M_n)_{n\ge 0}\longmapsto (f(x_n) + N_n)_{n\ge 0}$. This construction clearly defines a functor $\varprojlim$ from the category of filtered $R$-modules to the category of $R$-modules.
+
+    The isomorphism $\alpha\colon\varprojlim M/M_n\to\wh M$ defined above is a natural isomorphism between these functors. Indeed, it remains to verify that for every filtered homomorphism $f\colon M\to N$, the diagram 
+    \begin{equation*}
+        \xymatrix {
+            \wh M\ar[r]^-{\wh f}\ar[d]_{\alpha_M} & \wh N\ar[d]^{\alpha_N}\\
+            \displaystyle\varprojlim_n M/M_n\ar[r]_-{\wt f} & \displaystyle\varprojlim_n N/N_n
+        }
+    \end{equation*}
+    commutes, but that is clear. 
+\end{interlude}
+
+\begin{theorem}\thlabel{exact-sequence-of-inverse-limits}
+    Let $\{(M_n'), (\theta_n')\}$, $\{(M_n), (\theta_n)\}$, and $\{(M_n''), (\theta_n'')\}$ be inverse systems of $R$-modules. Suppose there are short exact sequences 
+    \begin{equation*}
+        0\to M_n'\xrightarrow{f_n} M_n\xrightarrow{g_n} M_n''\to 0
+    \end{equation*}
+    such that 
+    \begin{equation*}
+        \xymatrix {
+            0\ar[r] & M_{n + 1}'\ar[r]^-{f_{n + 1}}\ar[d]_{\theta_{n + 1}'} & M_{n + 1}\ar[r]^-{g_{n + 1}}\ar[d]^{\theta_{n + 1}} & M_{n + 1}''\ar[r]\ar[d]^{\theta_{n + 1}''} & 0\\
+            0\ar[r] & M_{n}'\ar[r]_-{f_n} & M_{n}\ar[r]_-{g_n} & M_{n}''\ar[r] & 0
+        }
+    \end{equation*}
+    commutes for each $n\ge 0$.
+    \begin{enumerate}[label=(\arabic*)]
+        \item The sequence 
+        \begin{equation*}
+            0\to\varprojlim_n M_n'\xrightarrow{\wt f}\varprojlim_n M_n\xrightarrow{\wt g}\varprojlim_n M_n''
+        \end{equation*}
+        is exact.
+        \item If $\theta_n'$ is surjective for all $n\ge 1$, then the sequence 
+        \begin{equation*}
+            0\to\varprojlim_n M_n'\xrightarrow{\wt f}\varprojlim_n M_n\xrightarrow{\wt g}\varprojlim_n M_n''\to 0
+        \end{equation*}
+        is exact.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    % TODO: Add in later
+\end{proof}
+
+\begin{corollary}\thlabel{completion-is-exact}
+    Let 
+    \begin{equation*}
+        0\to M'\xrightarrow{f} M\xrightarrow{g} M''\to 0
+    \end{equation*}
+    be a short exact sequence of $R$-modules, and let $\{M_n\}$ be a filtration on $M$, which induces natural filtrations on $M'$ and $M''$, which are $\{M'\cap f^{-1}(M_n)\}$ and $\{g(M_n)\}$ respectively. Let $\wh M'$, $\wh M$, and $\wh M''$ denote completions with respect to these filtrations. Then the sequence 
+    \begin{equation*}
+        0\to \wh M'\xrightarrow{\wh f}\wh M\xrightarrow{\wh g}\wh M''\to 0
+    \end{equation*}
+    is exact.
+\end{corollary}
+\begin{proof}
+    For each $n\ge 1$, the sequence of induced maps 
+    \begin{equation*}
+        0\to\frac{M'}{M'\cap f^{-1}(M_n)}\xrightarrow{f_n}\frac{M}{M_n}\xrightarrow{g_n}\frac{M''}{g(M_n)}\to 0
+    \end{equation*}
+    is exact. Further, these induced maps clearly commute with the canonical projections in the inverse systems. Taking inverse limits and using \thref{exact-sequence-of-inverse-limits} (2), it follows that 
+    \begin{equation*}
+        0\to\varprojlim_n \frac{M'}{M'\cap f^{-1}(M_n)}\xrightarrow{\wt f}\varprojlim_n\frac{M}{M_n}\xrightarrow{\wt g}\varprojlim_n\frac{M''}{g(M_n)}\to 0
+    \end{equation*}
+    is exact. Using the natural isomorphism between the two completion functors as in \thref{two-completion-functors}, the sequence 
+    \begin{equation*}
+        0\to \wh M'\xrightarrow{\wh f}\wh M\xrightarrow{\wh g}\wh M''\to 0
+    \end{equation*}
+    is exact.
+\end{proof}
+
+Let $M = (M_n)_{n\ge 0}$ be a filtered $R$-module. Let $n\ge 0$ and let $\wh M_n$ denote the completion of $M_n$ with respect to the filtration induced from $M$. In view of \thref{completion-is-exact}, the map $\iota\colon M_n\to M$ induces an injective map $\wh\iota\colon\colon\wh M_n\to \wh M$. The image of $\wh \iota$ is the set of all equivalence of Cauchy sequences containing one representative, all of whose elements lie in $M_n$. Identify this submodule of $\wh M$ with $\wh M_n$. Clearly $\wh M_0 = \wh M$, and therefore, we have obtained a filtration on $\wh M = (\wh M_n)_{n\ge 0}$. 
+
+\begin{claim}
+    There is a natural isomorphism $M/M_n\cong\wh M/\wh M_n$.
+\end{claim}
+Consider the map $M\to\wh M$ sending $x\in M$ to the (equivalence class of) the constant sequence $[(x)]$. This is clearly an $R$-module homomorphism and induces an $R$-linear map $\beta\colon M/M_n\to\wh M/\wh M_n$. We shall show that $\beta$ is an isomorphism. Indeed, in view of \thref{completion-is-exact}, there is a short exact sequence 
+\begin{equation*}
+    0\to\wh M_n\xrightarrow{\wh\iota}\wh M\xrightarrow{\wh\pi}\wh{\left(\frac{M}{M_n}\right)}\to 0
+\end{equation*}
+of $R$-modules where the completions are taken with respect to the induced filtrations. But note that the induced filtration on $M/M_n$ is ``trivial'', that is, $(M_n + M_m)/M_n = 0$ for all $m\ge n$. 
+
+Thus, the completion $\wh{M/M_n}$ is naturally isomorphic to $M/M_n$ where each element of $M/M_n$ is identified with the (equivalence class of) the constant Cauchy sequence corresponding to it. This proves the claim. $\square$
+
+It is important to note that the map $\beta\colon M/M_n\to\wh M/\wh M_n$ defined above is natural, that is, the diagram 
+\begin{equation*}
+    \xymatrix {
+        \frac{M}{M_{n + 1}}\ar[r]\ar[d]_{\beta_{n + 1}} & \frac{M}{M_n}\ar[d]^{\beta_n}\\
+        \frac{\wh M}{\wh M_{n + 1}}\ar[r] & \frac{\wh M}{\wh M_n}
+    }
+\end{equation*}
+commutes for all $n\ge 0$. This is trivial to verify. As a result, there is an induced isomorphism 
+\begin{equation*}
+    \wh{\wh M}\cong\wh M,
+\end{equation*}
+where the former completion is taken with respect to the induced filtration $(\wh M_n)_{n\ge 0}$. On must keep in mind that the isomorphism is induced by the $\beta_n$'s. That is, it sends a Cauchy sequence $(x_n)$ in $\wh M$ to the Cauchy sequence consisting of constant Cauchy sequences corresponding to each $x_n$.
+
+\section{\texorpdfstring{$I$}{I}-adic filtrations}
+
+\begin{definition}
+    Let $R$ be a ring, $I$ an ideal in $R$, and $M$ an $R$-module. The \define{$I$-adic filtration} on $M$ is defined as $M_n = I^n M$. Defining an analogous filtration $R_n = I^n$ on $R$, it follows that $M$ is a filtered $R$-module. The completion of $M$ with respect to this filtration is called the \define{$I$-adic filtration}.
+\end{definition}
+
+We note that the $I$-adic completion of $R$ as an $R$-module has a natural ring structure. Indeed, an element of $\wh R = \varprojlim_n R/I^n$ looks like $(x_n + I^n)_{n\ge 0}$. We define 
+\begin{equation*}
+    \left(x_n + I^n\right)_{n\ge 0}\cdot\left(y_n + I^n\right)_{n\ge 0} = \left(x_ny_n + I^n\right)_{n\ge 0}.
+\end{equation*}
+That this defines a valid ring structure is straightforward to check. Further, with this structure, the natural map $R\to \wh R$ defined above is a ring homomorphism.
+
+Next, if $M$ is an $R$-module, then $\wh M = \varprojlim_n M/I^n M$ is naturally a $\wh R$-module with the module structure given by 
+\begin{equation*}
+    \left(a_n + I^n\right)_{n\ge 0}\cdot\left(x_n + I^n M\right) = \left(a_n\cdot x_n + I^nM\right)_{n\ge 0}.
+\end{equation*}
+Note that although we have defined both ring and module structure above using inverse limits, we can make similar definitions using Cauchy sequences by moving back-and-forth through the isomorphism $\alpha\colon\varprojlim_n M/M_n\to\wh M$ defined in the preceding section. In this case, the ring structure is 
+\begin{equation*}
+    \left[(x_n)_{n\ge 0}\right]\cdot\left[(y_n)_{n\ge 0}\right] = \left[(x_ny_n)_{n\ge 0}\right],
+\end{equation*}
+and the module structure is 
+\begin{equation*}
+    \left[(a_n)_{n\ge 0}\right]\cdot\left[(y_n)_{n\ge 0}\right] = \left[(a_n\cdot y_n)_{n\ge 0}\right].
+\end{equation*}
+Further, if $f\colon M\to N$ is $R$-linear, then $f(I^nM)\subseteq I^n N$ and hence, there is an induced map $\wh f\colon\wh M\to\wh N$ between $I$-adic filtrations, and this map is easily checked to be $\wh R$-linear. It follows that $I$-adic completion defines a functor from the category of $R$-modules to the category of $\wh R$-modules.
+
+\begin{definition}
+    Let $M$ be an $R$-module. Two filtrations $(M_n)_{n\ge 0}$ and $(M_n')_{n\ge 0}$ are said to be \define{equivalent}, if there exists an integer $k\ge 0$ such that $M_{n + k}\subseteq M_n'$ and $M_{n + k}'\subseteq M_n$ for all $n\ge 0$.
+\end{definition}
+
+Equipped with these two filtrations, there are two completions $\wh M$ and $\wh M'$ respectively. Let $(x_n)_{n\ge 0}$ be a Cauchy sequence in $M$ with respect to the filtration $(M_n)$. We claim that this is a Cauchy sequence in $M$ with respect to the other filtration too. Indeed, let $r\ge 0$. Then there exists an $n_0\ge 0$ such that for all $m,n\ge n_0$, $x_m - x_n\in M_{r + k}\subseteq M'_r$. Furthermore, if $(x_n)\sim (y_n)$ are two equivalent Cauchy sequences with respect to the former filtration, then similarly it follows that they are equivalent under the latter filtration. Thus, we have defined a map $\wh M\to\wh M'$ which is ``identity'' on the Cauchy sequences. This is clearly $R$-linear. Analogously, there is a map $\wh M'\to\wh M$ which is again ``identity'' on the Cauchy sequences. Since both compositions of these maps are the identity maps, it follows that they are isomorphisms. We have proved: 
+\begin{proposition}
+    Completions of a module with respect to equivalent filtrations are naturally isomorphic.
+\end{proposition}
+As always, it is important to keep in mind what exactly the natural isomorphism is.
+
+\begin{proposition}\thlabel{I-adic-is-equivalent-to-induced}
+    Let $R$ be a Noetherian ring, $M$ a finite $R$-module, $I$ an ideal of $R$, and $N$ a submodule of $M$. Then the two filtrations $(I^n N)_{n\ge 0}$ and $(I^n M\cap N)_{n\ge 0}$ on $N$ are equivalent.
+\end{proposition}
+\begin{proof}
+    Clearly $I^n N\subseteq I^n M\cap N$. In view of \thref{artin-rees}, the $I$-filtration $(I^n M\cap N)_{n\ge 0}$ is $I$-stable. Thus, there exists an $n_0\ge 0$ such that for all $n\ge n_0$, 
+    \begin{equation*}
+        I^{n + k}M\cap N = I^k\left(I^n M\cap N\right)\subseteq I^k N,
+    \end{equation*}
+    for all $k\ge 0$. In particular, we have, for all $n\ge 0$, the inclusions 
+    \begin{equation*}
+        I^{n + n_0}M\cap N\subseteq I^n N,
+    \end{equation*}
+    and trivially, 
+    \begin{equation*}
+        I^{n + n_0}N\subseteq I^n M\cap N.
+    \end{equation*}
+    Thus, the two filtrations are equivalent.
+\end{proof}
+
+\begin{theorem}\thlabel{I-adic-completion-is-exact}
+    Let $0\to M'\xrightarrow{f} M\xrightarrow{g} M''\to 0$ be an exact sequence of $R$-modules, and let $I$ be an ideal in $R$. Then the induced sequence 
+    \begin{equation*}
+        0\to \wh M'\xrightarrow{\wh f}\wh M\xrightarrow{\wh g}\wh M''\to 0
+    \end{equation*}
+    between $I$-adic completions is exact.
+\end{theorem}
+\begin{proof}
+    Let $M$ be equipped with the $I$-adic filtration. In view of \thref{completion-is-exact}, there is an exact sequence of completed modules, when $M'$ and $M''$ are given the induced filtrations. Note that since $g$ is surjective, the induced filtration on $M''$ is precisely that $I$-adic filtration.
+
+    On the other hand, due to \thref{I-adic-is-equivalent-to-induced}, the induced filtration on $M'$ is equivalent to the $I$-adic filtration through the natural isomorphism defined above. Using the explicit description of this isomorphism, it follows that the sequence $0\to\wh M'\xrightarrow{\wh f}\wh M\xrightarrow{\wh g}\wh M''\to 0$ is exact, where all completions are taken with respect to the $I$-adic filtration.
+\end{proof}
+
+Let $M$ be an $R$-module and $I$ an ideal in $R$. Then there is a natural $R$-linear map 
+\begin{equation*}
+    \varphi_M\colon\wh R\otimes_R M\to\wh M
+\end{equation*}
+sending 
+\begin{equation*}
+    \left[(a_n)_{n\ge 0}\right]\cdot x\longmapsto \left[(a_n\cdot x)_{n\ge 0}\right].
+\end{equation*}
+Note that this is equivalently defined at the level of inverse systems as 
+\begin{equation*}
+    \left(a_n + I^n\right)_{n\ge0}\cdot x\longmapsto\left(a_n\cdot x + I^n M\right)_{n\ge 0}.
+\end{equation*}
+Clearly this map is $\wh R$-linear. Further, it is trivial to check that this map is a natural transformation between the functor $\wh R\otimes_R -$ and the completion functor.
+
+\begin{theorem}\thlabel{tensor-with-completion-is-iso}
+    Let $R$ be a ring, $M$ a finite $R$-module, and $I$ an ideal in $R$. 
+    \begin{enumerate}[label=(\arabic*)]
+        \item The map $\varphi_M$ defined above is surjective.
+        \item Further, if $R$ is Noetherian, then $\varphi_M$ is an isomorphism.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    First, we show that $\varphi_M$ is an isomorphism when $M$ is a finite free module. Since the $I$-adic filtration on a finite free module breaks up into filtrations on each of its components, it suffices to first prove this for $M = R$, where it is trivial that $\varphi_R$ is an isomorphism. 
+
+    Next, since $M$ is a finite $R$-module, there is a short exact sequence 
+    \begin{equation*}
+        0\to K\xrightarrow{f} F\xrightarrow{g} M\to 0,
+    \end{equation*}
+    where $F$ is a finite free $R$-module. In view of \thref{I-adic-completion-is-exact} and the fact that $\varphi_M$ is a natural transformation, there is a commutative diagram of $\wh R$-modules
+    \begin{equation*}
+        \xymatrix {
+            & \wh R\otimes_R N\ar[r]\ar[d]_{\varphi_N} & \wh R\otimes_R F\ar[r]\ar[d]^{\varphi_F}_{\wr} & \wh R\otimes_R M\ar[r]\ar[d]^{\varphi_M} & 0\\
+            0\ar[r] & \wh N\ar[r]^{\wh f} & \wh F\ar[r]^{\wh g}\ar[r] & \wh M\ar[r] & 0
+        }
+    \end{equation*}
+    with both rows exact since the tensor product is an exact functor. The Snake Lemma furnishes an exact sequence 
+    \begin{equation*}
+        \ker\varphi_N\to 0 \to\ker\varphi_M\to\coker\varphi_N\to 0\to\coker\varphi_M\to 0.
+    \end{equation*}
+    In particular $\coker\varphi_M = 0$, that is, $\varphi_M$ is surjective. Further, if $R$ is Noetherian, then $N$ is a finite $R$-module, whence $\varphi_N$ is surjective because of (1), as a result, $\ker\varphi_M = 0$, that is, $\varphi_M$ is an isomorphism.
+\end{proof}
+
+\begin{corollary}
+    Let $R$ be a Noetherian ring and $I$ an ideal in $R$. Then the $I$-adic completion $\wh R$ is a flat $R$-algebra.
+\end{corollary}
+
+\begin{theorem}\thlabel{ideals-in-completion}
+    Let $R$ be a Noetherian ring, $I$ an ideal in $R$, and $\wh R$ the $I$-adic completion. Then 
+    \begin{enumerate}[label=(\arabic*)]
+        \item The image of the inclusion $\wh J\into \wh R$ is the extension ideal $J\wh R$.
+        \item With the above identification, $\left(\wh I\right)^n = \wh{I^n}$ for all $n\ge 0$. 
+        \item $I^n/I^{n + 1}\cong \wh I^n/\wh I^{n + 1}$ as $R$-modules. In particular, $R/I\cong\wh R/\wh I$ as rings.
+        \item $\wh I$ is contained in the Jacobson radical of $\wh R$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof} % TODO: maybe need to do some more verification in (3)
+    There is a commutative diagram 
+    \begin{equation*}
+        \xymatrix {
+            \wh R\otimes_R J\ar[r]\ar[d]_{\wr} & \wh R\otimes_R R\ar[d]^\wr\\
+            \wh J\ar[r] & \wh R
+        }
+    \end{equation*}
+    where the vertical arrows are isomorphisms due to \thref{tensor-with-completion-is-iso}. The image of the bottom arrow is then the image of the composition of the top arrow and the right arrow, and this is immediately seen to be the extension of the ideal $J$ to $\wh R$. This proves (1). The assersion (2) follows immediately from (1), since 
+    \begin{equation*}
+        \wh{I^n} = I^n\wh R = \left(I\wh R\right)^n = \wh I^n
+    \end{equation*}
+    as ideals in $\wh R$.  Assersion (3) follows by taking $I$-adic completions in 
+    \begin{equation*}
+        0\to I^{n + 1}\to I^n\to\frac{I^n}{I^{n + 1}}\to 0,
+    \end{equation*}
+    we have the isomorphism 
+    \begin{equation*}
+        \frac{\wh I^n}{\wh I^{n + 1}}\cong\wh{\left(\frac{I^n}{I^{n + 1}}\right)} = \frac{I^n}{I^{n + 1}}.
+    \end{equation*}
+
+    As we have seen in the preceding section, the ring $\wh R$ is complete with respect to the $\wh I$-adic filtration. Hence, for any $a\in\wh I$, the sequence of partial sums 
+    \begin{equation*}
+        s_n = 1 + a + \dots + a^n
+    \end{equation*}
+    is Cauchy with respect to the $\wh I$-topology, and hence, is equivlaent to a constant sequence, that is, the sequence converges to some $s\in\wh R$. It is then easy to argue that $(1 - a)s = 1$, so that $1 - a$ is a unit in $\wh R$; consequently, $\wh I$ is contained in the Jacobson radical of $\wh R$.
+\end{proof}
+
+\begin{proposition}
+    Let $(R, \frakm, k)$ be a local ring. Then the $\frakm$-adic completion $\wh R$ is also local. Further if $R$ is Noetherian, then the maximal ideal of $\wh R$ is $\wh\frakm$.
+\end{proposition}
+\begin{proof}
+    Consider the ring homomorphism
+    \begin{equation*}
+        \wh R = \varprojlim_n R/\frakm^n\to R/\frakm,
+    \end{equation*}
+    which is clearly surjective. Set $\frakM$ to be the kernel, which is a maximal ideal in $\wh R$. We claim that this is the unique maximal ideal. Indeed, if $(x_n + \frakm^n)_{n\ge 0}\notin\frakM$, then each $x_n\notin\frakm$, thus is a unit in $R$, and thus, setting $y_n = x_n^{-1}$, we obtain an inverse $(y_n + \frakm^n)_{n\ge 0}$ for the above element in $\wh R$.
+
+    If $R$ is a Noetherian ring, then in view of \thref{ideals-in-completion} (3), $\wh R/\wh\frakm\cong R/\frakm$ so that $\wh\frakm$ is a maximal ideal, and as argued above, it must be the unique maximal ideal in $\wh R$.
+\end{proof}
+
 \end{document}
