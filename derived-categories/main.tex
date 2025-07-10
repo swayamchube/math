@@ -1,0 +1,920 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{fouriernc}
+\usepackage{mdframed}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd-Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{epigraph}
+\setlength\epigraphwidth{0.4\textwidth}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+% \renewcommand{\familydefault}{\sfdefault} % Do you want this font? 
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Swayam Chube},
+    colorlinks=true,
+	citecolor=blue,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{interlude}[theorem]{Interlude}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\F}{\mathbb{F}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakB}{\mathfrak{B}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrC}{\mathscr{C}}
+\newcommand{\scrD}{\mathscr{D}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrM}{\mathscr{M}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrO}{\mathscr{O}} % sheaf
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+% \newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\Ass}{\operatorname{Ass}}
+\newcommand{\projdim}{\operatorname{proj~dim}}
+\newcommand{\injdim}{\operatorname{inj~dim}}
+\newcommand{\gldim}{\operatorname{gl~dim}}
+\newcommand{\embdim}{\operatorname{emb~dim}}
+\newcommand{\hght}{\operatorname{ht}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\CM}{\operatorname{CM}}
+\newcommand{\cech}[1]{\mathbin{\check{#1}}}
+\newcommand{\cdim}{\operatorname{cdim}}
+\newcommand{\Der}{\operatorname{Der}}
+\newcommand{\trdeg}{\operatorname{trdeg}}
+\newcommand{\Kom}{\operatorname{Kom}}
+\newcommand{\scrK}{\mathscr{K}}
+\newcommand{\Mor}{\operatorname{Mor}}
+\newcommand{\op}{\mathrm{op}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\sffamily}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+\begin{document}
+\title{Derived and Triangulated Categories}
+\author{Swayam Chube}
+\date{Last Updated: \today}
+\maketitle
+\tableofcontents
+
+\hrulefill 
+
+We fix some notation before proceeding. Categories will usually denoted by calligraphic symbols such as $\scrA,\scrB,\scrC,\scrD$. The opposite category of a category $\scrA$ is denoted by $\scrA^{\op}$. Corresponding to each object $A\in\scrA$, there is an object $A^{\op}\in\scrA^{\op}$ and corresponding to each morphism $f\colon A\to B$ in $\scrA$, there is a morphism $f^{\op}\in\scrA^{\op}$. If $A\xrightarrow{f} B\xrightarrow{g} C$ are morphisms in $\scrA$, then $C^{\op}\xrightarrow{g^{\op}} B^{\op}\xrightarrow{f^{\op}} A^{\op}$ with $f^\op\circ g^\op = (g\circ f)^\op$.
+
+\section{Localization of Categories}
+\begin{theorem}
+	Let $\scrA$ be a category, and $S$ be a class of morphisms in $\scrA$. Then there is a category $\scrA[S^{-1}]$ and a functor $Q\colon\scrA\to\scrA[S^{-1}]$ such that for every functor $F\colon\scrA\to\scrB$ such that $F(s)$ is an isomorphism in $\scrB$ for each $s\in S$, there is a unique functor $G\colon\scrA[S^{-1}]\to\scrB$ making 
+	\begin{equation*}
+		\xymatrix {
+			\scrA\ar[r]^F\ar[d]_Q & \scrB\\
+			\scrA[S^{-1}]\ar@{.>}[ru]_-{\exists!~G}
+		}
+	\end{equation*}
+	commute. Further, the pair $(\scrA[S^{-1}], Q)$ is unique up to a unique isomorphism of categories and is called the \define{localization} of $\scrA$ by the class of morphisms $S$.
+\end{theorem}
+
+\subsection{Localizing Classes}
+
+Quite generally, the category $\scrA[S^{-1}]$ is quite ugly and difficult to work with. Therefore, we restrict ourselves to a more managable class $S$ of localizing morphisms.
+
+\begin{definition}
+	Let $\scrA$ be a category. A class of morphisms $S$ in $\scrA$ is said to be a \define{localizing class} if 
+	\begin{enumerate}[label=(\textbf{LC}\arabic*)]
+		\item For any object $M\in\scrA$, $\id_A\in S$.
+		\item If $s, t$ are composable morphisms in $S$, then so is their composition.
+		\item 
+		\begin{enumerate}
+			\item Every diagram of the form 
+			\begin{equation*}
+				\xymatrix {
+					& L\ar[d]^s\\
+					M\ar[r]_f & N
+				}
+			\end{equation*}
+			with $f\in\Mor(\scrA)$ and $s\in S$ can be enlarged to a commutative square 
+			\begin{equation*}
+				\xymatrix {
+					K\ar@{.>}[r]^g\ar@{.>}[d]_t & L\ar[d]^s\\
+					M\ar[r]_f & N
+				}
+			\end{equation*}
+			for some $K\in\scrA$, $g\in\Mor(\scrA)$, and $s\in S$. \label{pullback-type}
+			\item Every diagram of the form 
+			\begin{equation*}
+				\xymatrix {
+					N\ar[r]^f\ar[d]_s & M\\
+					L
+				}
+			\end{equation*}
+			with $f\in\Mor(\scrA)$ and $s\in S$ can be enlarged to a commutative square 
+			\begin{equation*}
+				\xymatrix {
+					N\ar[r]^f\ar[d]_s & M\ar@{.>}[d]^t\\
+					L\ar@{.>}[r]_g & K
+				}
+			\end{equation*}
+			with $K\in\scrA$, $g\in\Mor(\scrA)$, and $t\in S$.\label{pushout-type}
+		\end{enumerate}
+		\item Let $f,g\colon M\to N$ be two morphisms in $\scrA$. Then \label{annihilation-condition}
+		\begin{equation*}
+			\exists~s\in S\text{ such that }s\circ f = s\circ g\iff \exists~t\in S\text{ such that }f\circ t = g\circ t.
+		\end{equation*}
+	\end{enumerate}
+\end{definition}
+
+\begin{center}
+Clearly, if $S$ is a localizing class in $\scrA$, then $S^\op = \{s^\op\colon s\in S\}$ is a localizing class in $\scrA^\op$.
+\end{center}
+
+Our goal will now be to describe $\scrA[S^{-1}]$ given that $S$ is a localizing class of morphisms in $\scrA$. Define a \define{left roof} between two objects $M$ and $N$ in $\scrA$ to be a diagram of the form 
+\begin{equation*}
+	\xymatrix {
+		& L\ar[ld]_s\ar[rd]^f & \\
+		M & & N
+	}
+\end{equation*}
+where $s\in S$ and $f\in\Mor(\scrA)$. Two left roofs 
+\begin{equation*}
+	\xymatrix {
+		& L\ar[ld]_s\ar[rd]^f & \\
+		M & & N
+	}
+	\quad\text{and}\quad 
+	\xymatrix {
+		& K\ar[ld]_t\ar[rd]^g & \\
+		M & & N
+	}
+\end{equation*}
+are said to be \define{equivalent} if there exists an object $H\in\scrA$ and morphisms $p\colon H\to L$ and $q\colon H\to K$ making the diagram
+\begin{equation*}
+	\xymatrix {
+		& L\ar[ld]_s\ar[rd]^f & \\
+		M & H\ar[u]_{p}\ar[d]^{q} & N\\
+		& K\ar[lu]^t\ar[ru]_g & 
+	}
+\end{equation*}
+commute and $s\circ p = q\circ t\in S$. It can be checked that this is indeed an equivalence relation.
+
+Analogously a \define{right roof} between two objects $M$ and $N$ in $\scrA$ is defined to ba diagram of the form 
+\begin{equation*}
+	\xymatrix {
+		& L &\\
+		M\ar[ru]^f & & N\ar[lu]_s
+	}
+\end{equation*}
+where $s\in S$ and $f\in\Mor(\scrA)$. Clearly there is a natural bijection between the left roofs in $\scrA$ and the right roofs in $\scrA^\op$ with respect to $S$ and $S^\op$ respectively. Two right roofs 
+\begin{equation*}
+	\xymatrix {
+		& L &\\
+		M\ar[ru]^f & & N\ar[lu]_s
+	}\quad\text{and}\quad
+	\xymatrix {
+		& K &\\
+		M\ar[ru]^g & & N\ar[lu]_t
+	}
+\end{equation*}
+are said to be equivalent if there exists an object $H\in\scrA$ and morphisms $p\colon L\to H$ and $q\colon K\to H$ such that 
+\begin{equation*}
+	\xymatrix {
+		& L\ar[d]^p & \\
+		M\ar[ru]^f\ar[rd]_g & H & N\ar[lu]_s\ar[ld]^t\\
+		& K\ar[u]_q & 
+	}
+\end{equation*}
+commutes. Again, it can be checked that this is indeed an equivalence relation. In fact, a shorter way to conclude this is to move from $\scrA$ to $\scrA^\op$ since left roofs are mapped to right roofs. It is clear that two left roofs in $\scrA$ are equivalent if and only if the corresponding right roofs in $\scrA^\op$ are equivalent.
+
+Next, we show how to ``compose'' two equivalence classes of left roofs. Begin by considering two representatives 
+\begin{equation*}
+	\xymatrix {
+		& L\ar[ld]_s\ar[rd]^f & \\
+		M & & N
+	}
+	\quad\text{and}\quad 
+	\xymatrix {
+		& K\ar[ld]_t\ar[rd]^g & \\
+		N & & P.
+	}
+\end{equation*}
+According to \ref{pullback-type}, we obtain a commutative diagram 
+\begin{equation*}
+	\xymatrix {
+		& & U\ar[ld]_u\ar[rd]^h & & \\
+		& L\ar[ld]_s\ar[rd]^f & & K\ar[ld]_t\ar[rd]^g & \\
+		M & & N & & P
+	}
+\end{equation*}
+with $u\in S$. Define the composition of the aforementioned equivalence classes to be the left roof 
+\begin{equation*}
+	\xymatrix {
+		& U\ar[ld]_{s\circ u}\ar[rd]^{g\circ h} & \\
+		M & & N
+	}
+\end{equation*}
+since $s\circ u\in S$. It is a bit tedious, but it can be checked that this ``composition'' is well-defined. Once this is done, it is clear that the ``composition'' must be associative. That is, given three representatives 
+\begin{equation*}
+	\xymatrix {
+		& L\ar[ld]_s\ar[rd]^f & \\
+		M & & N
+	}
+	\quad
+	\xymatrix {
+		& K\ar[ld]_t\ar[rd]^g & \\
+		N & & P.
+	}
+	\quad\text{and}
+	\xymatrix { 
+		& U\ar[ld]_u\ar[rd]^h &\\
+		P & & R
+	}
+\end{equation*}
+using \thref{pullback-type} repeatedly, we can complete this to a commutative diagram
+\begin{equation*}
+	\xymatrix {
+		& & & C\ar[ld]_{u'}\ar[rd]^c & & &\\
+		& & A\ar[ld]_{s'}\ar[rd]^{a} & & B\ar[ld]_{t'}\ar[rd]^b & & \\
+		& L\ar[ld]_s\ar[rd]^f & & K\ar[ld]_t\ar[rd]^g & & U\ar[ld]_u\ar[rd]^h & \\
+		M & & N & & P & & R
+	}
+\end{equation*}
+and so it is clear that either composition 
+\begin{equation*}
+	\left(
+	\xymatrix {
+		& L\ar[ld]_s\ar[rd]^f & \\
+		M & & N
+	}
+	\circ
+	\xymatrix {
+		& K\ar[ld]_t\ar[rd]^g & \\
+		N & & P.
+	}
+	\right)
+	\circ
+	\xymatrix { 
+		& U\ar[ld]_u\ar[rd]^h &\\
+		P & & R
+	}
+\end{equation*}
+or 
+\begin{equation*}
+	\xymatrix {
+		& L\ar[ld]_s\ar[rd]^f & \\
+		M & & N
+	}
+	\circ
+	\left(
+	\xymatrix {
+		& K\ar[ld]_t\ar[rd]^g & \\
+		N & & P.
+	}
+	\circ
+	\xymatrix { 
+		& U\ar[ld]_u\ar[rd]^h &\\
+		P & & R
+	}
+	\right)
+\end{equation*}
+is equal to the equivalence class of the left roof 
+\begin{equation*}
+	\xymatrix {
+		& C\ar[ld]_{s\circ s'\circ u'}\ar[rd]^{h\circ b\circ c} & \\
+		M & & R.
+	}
+\end{equation*}
+Finally, for each $M\in\scrA$, consider the left roof 
+\begin{equation*}
+	\xymatrix {
+		& M\ar[ld]_{\id_M}\ar[rd]^{\id_M} & \\
+		M & & M.
+	}
+\end{equation*}
+For any left roof $\xymatrix { & L\ar[ld]_s\ar[rd]^f & \\ M & & N }$, one can compute their composition using the diagram 
+\begin{equation*}
+	\xymatrix {
+		& & L\ar[ld]_s\ar[rd]^f & & \\
+		& M\ar[ld]_{\id_M}\ar[rd]^{\id_M} & & L\ar[ld]_s\ar[rd]^f & \\
+		M & & M & & N
+	}
+\end{equation*}
+which yields the latter left roof.
+
+\begin{mdframed}
+Thus, we can define a category $\scrA_S$ where $\operatorname{ob}(\scrA_S) = \operatorname{ob}(\scrA)$, and $\Mor_{\scrA_S}(M, N)$ is the set of equivalence classes of left roofs equipped with composition and identity maps as defined above. 
+\end{mdframed}
+
+There is a natural functor $Q\colon\scrA\to\scrA_S$ which is the identity on objects and sends a morphism $f\colon M\to N$ in $\scrA$ to the equivalence class of the left roof 
+\begin{equation*}
+	\xymatrix {
+		& M\ar[ld]_{\id_M}\ar[rd]^f & \\
+		M & & N
+	}
+\end{equation*}
+in $\scrA_S$. Indeed, it clearly takes $\id_M$ to the roof representing the identity at $M$ in $\scrA_S$; further, if $M\xrightarrow{f} N\xrightarrow{g} P$ are two composable morphisms, then we have a commutative diagram 
+\begin{equation*}
+	\xymatrix {
+		&& M\ar[ld]_{\id_M}\ar[rd]^f && \\
+		& M\ar[ld]_{\id_M}\ar[rd]^f & & N\ar[ld]_{\id_N}\ar[rd]^g & \\
+		M & & N & & P
+	}
+\end{equation*}
+so that the composition of the bottom two left roofs is 
+\begin{equation*}
+	\xymatrix {
+		& M\ar[ld]_{\id_M}\ar[rd]^{g\circ f} & \\
+		M & & P
+	} = Q(g\circ f).
+\end{equation*}
+Thus $Q$ is indeed a functor. Finally, we claim that the pair $(Q,\scrA_S)$ has the universal property of localization. Indeed, let $F\colon\scrA\to\scrB$ be a functor sending every $s\in S$ to an isomorphism $F(s)$ in $\scrB$. Define a functor $G\colon\scrA_S\to\scrB$ such that 
+\begin{equation*}
+	G(A) = F(A) \quad\text{for every object }A\in\scrA,
+\end{equation*}
+and 
+\begin{equation*}
+	G\left(
+		\xymatrix{
+			& L\ar[ld]_{s}\ar[rd]^f & \\
+			M & & N
+		}
+	\right) = F(f)\circ F(s)^{-1}.
+\end{equation*}
+It is easily checked that this is well-defined on the equivalence class of left roofs. That $G$ is a functor is also a trivial verification, and by construction, $F = G\circ Q$.
+
+Finally, we must show that such a $G$ is unique. Indeed, if $F = G\circ Q$, for each object $A\in\scrA$, we must have $F(A) = G(Q(A)) = G(A)$. Now, a left roof 
+\begin{equation*}
+	\xymatrix { 
+		& L\ar[ld]_s\ar[rd]^f & \\
+		M & & N
+	}
+\end{equation*}
+can be decomposed as the composition 
+\begin{equation*}
+	\xymatrix {
+		& L\ar[ld]_s\ar[rd]^{\id_L} & & L\ar[ld]_{\id_L}\ar[rd]^f & \\
+		M & & L & & N
+	}
+\end{equation*}
+which is easy to see by completing the diagram above by putting an $L$ at the peak and identity morphisms from it to both the $L$'s below it. But note that 
+\begin{equation*}
+	\xymatrix {
+		& L\ar[ld]_{s}\ar[rd]^{\id_L} & \\
+		M & & L
+	}\text{ is the inverse of }
+	\xymatrix {
+		& L\ar[ld]_{\id_L}\ar[rd]^s & \\
+		L && M
+	}
+\end{equation*}
+so that 
+\begin{equation*}
+	G\left(
+		\xymatrix {
+			& L\ar[ld]_{s}\ar[rd]^{\id_L} & \\
+			M & & L
+		}
+	\right) = 
+	G\left(
+		\xymatrix {
+			& L\ar[ld]_{\id_L}\ar[rd]^s & \\
+			L && M
+		}
+	\right)^{-1} = F(s)^{-1},
+\end{equation*}
+and hence 
+\begin{equation*}
+	G\left(\xymatrix{
+		& L\ar[ld]_s\ar[rd]^f & \\
+		M & & N
+	}\right) = F(f)\circ F(s)^{-1},
+\end{equation*}
+which completes the proof of uniqueness. We have therefore shown: 
+\begin{theorem}
+	Let $\scrA$ be a category and $S$ be a localizing class of morphisms in $\scrA$. Then the functor $Q\colon\scrA\to\scrA_S$ as described above is the localization of the category $\scrA$ at $S$.
+\end{theorem}
+
+\subsection{Localization and Subcategories}
+
+\begin{theorem}
+	Let $\scrA$ be a category, $\scrB\subseteq\scrA$ a full subcategory, and $S$ a localizing class of morphisms in $\scrA$. Suppose 
+	\begin{enumerate}[label=(\textbf{LS}\arabic*)]
+		\item $S_{\scrB} = S\cap\Mor(\scrB)$ is a localizing class in $\scrB$, and \label{ls1}
+		\item for each morphism $s\colon N\to M$ in $S$ with $M\in\scrB$, there exists a morphism $u\colon P\to N$ with $P\in\scrB$ such that $s\circ u\in S$.\label{ls2}
+	\end{enumerate}
+	Then the induced functor $\scrB[S_{\scrB}^{-1}]\to\scrA[S^{-1}]$ is fully faithful.
+	\begin{equation*}
+		\xymatrix {
+			\scrB\ar@{^{(}->}[r]\ar[d]_{Q_B} & \scrA\ar[d]^{Q_A}\\
+			\scrB[S_\scrB^{-1}]\ar[r] & \scrA[S^{-1}]
+		}
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	Since $S_\scrB$ is a localizing class in $\scrB$, by tracing the arrows in the commutative diagram of functors above, the map $\scrB[S_\scrB^{-1}]\to\scrA[S^{-1}]$ explicitly sends a roof in $\scrB$ to the equivalence class of the same roof in $\scrA[S^{-1}]$. 
+
+	First, we show that the map is full. Let 
+	\begin{equation*}
+		\xymatrix {
+			& L\ar[ld]_s\ar[rd]^f & \\
+			M & & N
+		}
+	\end{equation*}
+	be a left roof in $\scrA[S^{-1}]$ with $M, N\in\scrB$. Then due to \ref{ls2}, there exists $U\in\scrB$ and a morphism $u\colon U\to L$ such that $s\circ u\in S$, and hence in $S_{\scrB}$.
+
+	To see that the map is faithful, suppose two left roofs 
+	\begin{equation*}
+		\xymatrix {
+			& L\ar[ld]_s\ar[rd]^f & \\
+			M & & N
+		}
+		\quad\text{and}\quad 
+		\xymatrix {
+			& K\ar[ld]_t\ar[rd]^g & \\
+			M && N
+		}
+	\end{equation*}
+	in $\scrB[S_{\scrB}^{-1}]$ are equivalent in $\scrA[S^{-1}]$, that is, there exists an object $H\in\scrA$, and morphisms $p\colon H\to L$ and $q\colon H\to K$ in $\scrA$ such that 
+	\begin{equation*}
+		\xymatrix {
+			& L\ar[ld]_s\ar[rd]^f & \\
+			M & H\ar[u]_p\ar[d]^q & N\\
+			& K\ar[lu]^t\ar[ru]_g & 
+		}
+	\end{equation*}
+	commutes and $s\circ p = t\circ q\in S$. Hence, there exists an object $U\in\scrB$ and a morphism $u\colon U\to H$ such that $s\circ p\circ u = t\circ q \circ u\in S$, and hence in $S_{\scrB}$. Thus, the diagram 
+	\begin{equation*}
+		\xymatrix {
+			& L\ar[ld]_s\ar[rd]^f & \\
+			M & U\ar[u]_{p\circ u}\ar[d]^{q\circ u} & N\\
+			& K\ar[lu]^t\ar[ru]_g & 
+		}
+	\end{equation*}
+	commutes and consists of morphisms in $\scrB$. Thus, the two roofs are equivalent in $\scrB[S_{\scrB}^{-1}]$.
+\end{proof}
+
+\subsection{Localizing Additive Categories}
+
+We begin by showing that one can ``take common demonimators'' for morphisms in $\scrA[S^{-1}]$.
+\begin{lemma}\thlabel{common-denominator}
+	Let $\scrA$ be a category (not necessarily additive) and $S$ a localizing class of morphisms in $\scrA$. Let 
+	\begin{equation*}
+		\xymatrix {
+			& L_i\ar[ld]_{s_i}\ar[rd]^{f_i} &\\
+			M && N
+		}
+	\end{equation*}
+	be left roofs in $\scrA$ representing morphisms $\varphi_i\colon M\to N$ in $\scrA[S^{-1}]$ for $1\le i\le n$ respectively. Then there exists an object $L\in\scrA$ and morphisms $L\xrightarrow{s} M\in S$, and $g_i\colon L\to N$ for $1\le i\le n$ such that 
+	\begin{equation*}
+		\xymatrix {
+			& L\ar[ld]_s\ar[rd]^{g_i} & \\
+			M && N
+		}
+	\end{equation*}
+	represents $\varphi_i$ for $1\le i\le n$.
+\end{lemma}
+\begin{proof}
+	We prove this by induction on $n$. The base case $n = 1$ is trivial. Suppose now that $n > 1$ and that the statement has been proven for $n - 1$. Hence, there exists an object $K$ and a morphism $K\xrightarrow{t} M\in S$ such that 
+	\begin{equation*}
+		\xymatrix {
+			& K\ar[rd]^{h_i}\ar[ld]_t & \\
+			M & & N
+		}
+	\end{equation*}
+	represents $\varphi_i$ for $1\le i\le n - 1$. Using \thref{pullback-type}, there exists a commutative diagram 
+	\begin{equation*}
+		\xymatrix {
+			U\ar[r]^{v}\ar[d]_{u} & L_n\ar[d]^{s_n}\\
+			K\ar[r]_{t} & M
+		}
+	\end{equation*}
+	with $u\in S$. Set $s = s_n\circ v = t\circ u\in S$. Then the diagram 
+	\begin{equation*}
+		\xymatrix {
+			& K\ar[ld]_t\ar[rd]^{h_i} & \\
+			M & U\ar[u]_u\ar@{=}[d] & N\\
+			& U\ar[lu]^s\ar[ru]_{h_i\circ u} & 
+		}
+	\end{equation*}
+	commutes for $1\le i\le n - 1$, and 
+	\begin{equation*}
+		\xymatrix {
+			& L_n\ar[rd]^{f_n}\ar[ld]_{s_n} & \\
+			M & U\ar[u]_{v}\ar@{=}[d] & N\\
+			& U\ar[lu]^{s_n\circ v}\ar[ru]_{f_n\circ v} & 
+		}
+	\end{equation*}
+	commutes with $s_n\circ v = s\in S$. Set $g_i = h_i\circ u$ for $1\le i\le n - 1$ and $g_n = f_n\circ v$; then 
+	\begin{equation*}
+		\xymatrix {
+			& U\ar[ld]_s\ar[rd]^{g_i} & \\
+			M && N
+		}
+	\end{equation*}
+	represents $\varphi_i$ for $1\le i\le n$, thereby completing the proof.
+\end{proof}
+
+Now let $\scrA$ be an \emph{additive category} and $S$ a localizing class of morphisms in $\scrA$. We shall show that $\scrA[S^{-1}]$ is naturally an additive category. For objects $M, N\in\scrA[S^{-1}]$ and morphisms 
+\begin{equation*}
+	\varphi = \xymatrix { 
+		& L\ar[ld]_s\ar[rd]^f & \\
+		M & & N
+	}
+	\quad\text{and}\quad 
+	\psi = \xymatrix {
+		& K\ar[ld]_t\ar[rd]^g & \\
+		M & & N
+	}
+\end{equation*}
+in $\scrA[S^{-1}]$; using \thref{common-denominator}, we can find an object $U$ and morphisms $U\xrightarrow{u} M\in S$ and $f', g'\colon U\to N$ such that 
+\begin{equation*}
+	\varphi = \xymatrix {
+		& U\ar[ld]_u\ar[rd]^{f'} & \\
+		M & & N
+	}\quad\text{and}\quad 
+	\psi = \xymatrix {
+		& U\ar[ld]_{u}\ar[rd]^{g'} & \\
+		M & & N.
+	}
+\end{equation*}
+Define 
+\begin{equation*}
+	\varphi + \psi = \xymatrix {
+		& U\ar[ld]_u\ar[rd]^{f' + g'} & \\
+		M & & N.
+	}
+\end{equation*}
+Note that there are three choices being made here: the choice of the representatives for $\varphi$ and $\psi$, and choice of ``common denominator'' for both morphisms. It follows that $\Mor_{\scrA[S^{-1}]}(M, N)$ has the structure of an abelian group. Further, it must be checked that 
+\begin{equation*}
+	\chi\circ(\varphi + \psi) = \chi\circ\varphi + \chi\circ\psi\quad\text{ and }\quad(\varphi + \psi)\circ\chi = \varphi\circ\chi + \psi\circ\chi
+\end{equation*}
+for suitably composable morphisms $\chi,\varphi,\psi$ in $\scrA[S^{-1}]$. The zero object in $\Mor_{\scrA[S^{-1}]}(M, N)$ is given by the morphism
+\begin{equation*}
+	\xymatrix {
+		& M\ar[ld]_{\id_M}\ar[rd]^0 & \\
+		M  && N
+	}.
+\end{equation*}
+Finally, given objects $M, N\in\scrA[S^{-1}]$, define their direct sum/direct product to be the object $M\oplus N$ where the direct sum is taken in $\scrA$, and the canonical projections and injections are the images of those in $\scrA$. Again, it is straightforward, but must be checked, that these have the desired universal properties. In this way, $\scrA[S^{-1}]$ has been given a natural additive structure.
+
+Finally, note that the localization functor $Q\colon\scrA\to\scrA[S^{-1}]$ is an additive functor. Indeed, if $f, g\colon M\to N$ are morphisms, then 
+\begin{equation*}
+	Q(f) = 
+	\xymatrix {
+		& M\ar[ld]_{\id_M}\ar[rd]^f & \\
+		M & & N
+	}\quad\text{ and }\quad 
+	Q(g) = 
+	\xymatrix {
+		& M\ar[ld]_{\id_M}\ar[rd]^g & \\
+		M & & N
+	}
+\end{equation*}
+so that by definition,
+\begin{equation*}
+	Q(f) + Q(g) = 
+	\xymatrix {
+		& M\ar[rd]^{f + g}\ar[ld]_{\id_M} & \\
+		M & & N
+	} = Q(f + g).
+\end{equation*}
+
+Finally, we have 
+\begin{theorem}
+	Let $\scrA$ be an additive category and $S$ a localizing class of morphisms in $\scrA$. Then the category $\scrA[S^{-1}]$ is naturally an additive category and the localizing functor $Q\colon\scrA\to\scrA[S^{-1}]$ is additive. 
+
+	Further, given any additive functor $F\colon\scrA\to\scrB$ such that $F(s)$ is an isomorphism in $\scrB$ for each $s\in S$, there exists a unique additive functor $G\colon\scrA[S^{-1}]\to B$ making 
+	\begin{equation*}
+	\xymatrix {
+		\scrA\ar[r]^F\ar[d]_Q & \scrB\\
+		\scrA[S^{-1}]\ar[ru]_G
+	}
+	\end{equation*}
+	commute.
+\end{theorem}
+\begin{proof}
+	We have already proved the first part of the theorem. As for the second part, suppose $\varphi,\psi\colon M\to N$ are two morphisms in $\scrA[S^{-1}]$. Using \thref{common-denominator}, we may suppose that they are represented by 
+	\begin{equation*}
+		\xymatrix {
+			& L\ar[ld]_s\ar[rd]^f & \\
+			M &  & N
+		}\quad\text{ and }\quad 
+		\xymatrix {
+			& L\ar[ld]_s\ar[rd]^g & \\
+			M & & N
+		}
+	\end{equation*}
+	respectively. As a result, 
+	\begin{equation*}
+		G(\varphi + \psi) = F(f + g)F(s)^{-1} = F(f)F(s)^{-1} + F(g)F(s)^{-1} = G(\varphi) + G(\psi),
+	\end{equation*}
+	so that $G$ is an additive functor. That $G$ is unique has already been argued.
+\end{proof}
+
+\begin{lemma}\thlabel{morphism-being-zero}
+	Let $\varphi\colon M\to N$ be a morphism in $\scrA[S^{-1}]$ represented by a left roof 
+	\begin{equation*}
+		\xymatrix {
+			& L\ar[ld]_s\ar[rd]^f & \\
+			M & & N
+		}.
+	\end{equation*}
+	Then the following are equivalent: 
+	\begin{enumerate}[label=(\arabic*)]
+		\item $\varphi = 0$.
+		\item There exists $t\in S$ such that $t\circ f = 0$.
+		\item There exists $t\in S$ such that $f\circ t = 0$.
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	Clearly (2) and (3) are equivalent due to \ref{annihilation-condition}. Now if $\varphi = 0$, then $Q(f)\circ Q(s)^{-1} = 0$, so that $Q(f) = 0$, i.e., 
+	\begin{equation*}
+		\xymatrix {
+			& L\ar[ld]_{\id_L}\ar[rd]^f &\\
+			L & & N
+		}
+	\end{equation*}
+	represents $0$. Hence, there exists an object $H$ and and morphisms $p, q\colon H\to L$ such that 
+	\begin{equation*}
+		\xymatrix {
+			& L\ar[ld]_{\id_L}\ar[rd]^f &\\
+			L & H\ar[u]_p\ar[d]^q & N\\
+			& L\ar[lu]^{\id_L}\ar[ru]_0 & 
+		}
+	\end{equation*}
+	commutes and $p = q\in S$. The commutativity implies $f\circ p = 0$, so that $(1)\implies(2)$.
+
+	Conversely, suppose $f\circ t = 0$ for some $t\colon H\to L\in S$. Then the diagram 
+	\begin{equation*}
+		\xymatrix {
+			& L\ar[ld]_s\ar[rd]^f & \\
+			M & H\ar[u]_t\ar[d]^{s\circ t} & N\\
+			& M\ar[lu]^{\id_M}\ar[ru]_0 & 
+		}
+	\end{equation*}
+	commutes with $s\circ t\in S$. This shows that $\varphi = 0$, thereby completing the proof.
+\end{proof}
+
+\begin{corollary}
+	Let $M$ be an object in $\scrA$. Then the following are equivalent: 
+	\begin{enumerate}[label=(\arabic*)]
+		\item $Q(M) = 0$. 
+		\item There exists an object $N\in\scrA$ such that the zero morphism $N\xrightarrow{0} M$ is in $S$.
+		\item There exists an object $N\in\scrA$ such that the zero morphism $M\xrightarrow{0} N$ is in $S$.
+	\end{enumerate}
+\end{corollary}
+\begin{proof}
+	The equivalence of (2) and (3) follows from an immediate application of \thref{pullback-type} and \thref{pushout-type}. Now if $Q(M) = 0$, then $Q(\id_M) = 0$, so that by \thref{morphism-being-zero} there exists $s\in S$ with $\id_M\circ s = 0$, and hence $s = 0$. This proves (2).
+	
+	Conversely, if there is an object $N\in\scrA$ with $N\xrightarrow{0} M \in S$, then the image of this map, which is the zero map $Q(N)\xrightarrow{0} Q(M)$ must be an isomorphism. Thus $Q(N) = Q(M) = 0$.
+\end{proof}
+
+\begin{lemma}
+	Let $f\colon M\to N$ be a morphism in $\scrA$. Then 
+	\begin{enumerate}[label=(\arabic*)]
+		\item If $f$ is monic, then so is $Q(f)$. 
+		\item If $f$ is epic, then so is $Q(f)$.
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	% TODO: Add in later
+\end{proof}
+
+\subsection{Localization of Abelian Categories}
+\end{document}

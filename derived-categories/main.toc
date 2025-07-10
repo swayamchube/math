@@ -1,0 +1,5 @@
+\contentsline {section}{\numberline {1}Localization of Categories}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Localizing Classes}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Localization and Subcategories}{7}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Localizing Additive Categories}{8}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Localization of Abelian Categories}{11}{subsection.1.4}%
