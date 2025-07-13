@@ -264,6 +264,9 @@
 \newcommand{\scrK}{\mathscr{K}}
 \newcommand{\Mor}{\operatorname{Mor}}
 \newcommand{\op}{\mathrm{op}}
+\newcommand{\cone}{\operatorname{cone}}
+\newcommand{\cyl}{\operatorname{cyl}}
+\newcommand{\bbone}{\mathbbm{1}}
 
 \geometry {
     margin = 1in
@@ -298,7 +301,16 @@
 
 \hrulefill 
 
-We fix some notation before proceeding. Categories will usually denoted by calligraphic symbols such as $\scrA,\scrB,\scrC,\scrD$. The opposite category of a category $\scrA$ is denoted by $\scrA^{\op}$. Corresponding to each object $A\in\scrA$, there is an object $A^{\op}\in\scrA^{\op}$ and corresponding to each morphism $f\colon A\to B$ in $\scrA$, there is a morphism $f^{\op}\in\scrA^{\op}$. If $A\xrightarrow{f} B\xrightarrow{g} C$ are morphisms in $\scrA$, then $C^{\op}\xrightarrow{g^{\op}} B^{\op}\xrightarrow{f^{\op}} A^{\op}$ with $f^\op\circ g^\op = (g\circ f)^\op$.
+We fix some notation before proceeding. Categories will usually denoted by calligraphic symbols such as $\scrA,\scrB,\scrC,\scrD$. The opposite category of a category $\scrA$ is denoted by $\scrA^{\op}$. Corresponding to each object $A\in\scrA$, there is an object $A^{\op}\in\scrA^{\op}$ and corresponding to each morphism $f\colon A\to B$ in $\scrA$, there is a morphism $f^{\op}\in\scrA^{\op}$. If $A\xrightarrow{f} B\xrightarrow{g} C$ are morphisms in $\scrA$, then $C^{\op}\xrightarrow{g^{\op}} B^{\op}\xrightarrow{f^{\op}} A^{\op}$ with $f^\op\circ g^\op = (g\circ f)^\op$. 
+
+Throughout this article, all chain complexes will be assumed to be cochain complexes, that is, the boundary maps have positive degree: 
+\begin{equation*}
+	\cdots\to X^n\xrightarrow{d_n} X^{n + 1}\xrightarrow{d_{n + 1}} X^{n + 2}\to\cdots,
+\end{equation*}
+and its cohomology is denoted by 
+\begin{equation*}
+	H^i\left(X^\bullet\right) = \frac{\ker d_i}{\im d_{i - 1}}.
+\end{equation*}
 
 \section{Localization of Categories}
 \begin{theorem}
@@ -319,8 +331,8 @@ Quite generally, the category $\scrA[S^{-1}]$ is quite ugly and difficult to wor
 \begin{definition}
 	Let $\scrA$ be a category. A class of morphisms $S$ in $\scrA$ is said to be a \define{localizing class} if 
 	\begin{enumerate}[label=(\textbf{LC}\arabic*)]
-		\item For any object $M\in\scrA$, $\id_A\in S$.
-		\item If $s, t$ are composable morphisms in $S$, then so is their composition.
+		\item For any object $M\in\scrA$, $\id_A\in S$.\label{lc1}
+		\item If $s, t$ are composable morphisms in $S$, then so is their composition.\label{lc2}
 		\item 
 		\begin{enumerate}
 			\item Every diagram of the form 
@@ -916,5 +928,498 @@ Finally, we have
 	% TODO: Add in later
 \end{proof}
 
-\subsection{Localization of Abelian Categories}
+\section{Derived Categories}
+
+Let $\scrA$ be an abelian category. Let $\Kom(\scrA)$, $\Kom^+(\scrA)$, $\Kom^-(\scrA)$, and $\Kom^b(\scrA)$ denote the categories of chain complexes, bounded below chain complexes, bounded above chain complexes, and bounded chain complexes respectively. The morphisms in each category are precisely the chain maps. Clearly, all these categories are abelian. 
+
+Identifying morphisms in each category up to homotopy, we obtain categories $\scrK(\scrA)$, $\scrK^+(\scrA)$, $\scrK^-(\scrA)$, and $\scrK^b(\scrA)$ respectively. We remark that these categories are generally \emph{not} abelian. 
+
+\begin{definition}
+	Let $\ast\in\{+, -, b, \emptyset\}$. Define the category $\wt\scrD^\ast(\scrA)$ to be the localization of $\Kom^\ast(\scrA)$ at the class of quasi-isomorphisms. For the time being, call this the \define{dirty derived category} with $\wt Q\colon\Kom^\ast(\scrA)\to\wt\scrD(\scrA)$ being the localizing functor.
+	
+	Similarly, define the category $\scrD^\ast(\scrA)$ to be the localization of $\scrK^\ast(\scrA)$ at the class of quasi-isomorphisms. For the time being, call this the \define{clean derived category} with $Q\colon\Kom^\ast(\scrA)\to\scrD(\scrA)$ being the localizing functor.
+\end{definition}
+
+\begin{mdframed}
+	Our first goal will be to show that the dirty and clean derived categories are infact isomorphic. The reason for making this distinction is that the quasi-isomorphisms in $\scrK^\ast(\scrA)$ form a localizing class, while in $\Kom^\ast(\scrA)$, they usually don't.
+\end{mdframed}
+
+\subsection{The Cone and The Cylinder}
+
+\begin{definition}
+	Let $(K^\bullet, d_K)$ be a chain complex. The \define{translation} is defined to be the complex $\left(K[1]^\bullet, d_{K[1]}\right)$, where $K[1]^i = K^{i + 1}$ and $d^i_{K[1]}\colon K^{i + 1}\to K^{i + 2}$ is equal to $-d^{i + 1}_K$ for all $i\in\Z$.
+
+	If $f\colon K^\bullet\to L^\bullet$ is a morphism of complexes, then define $f[1]\colon K[1]^\bullet\to L[1]^\bullet$ is given by $f[1]^i = f^{i + 1}$ for all $i\in\Z$. This is clearly a morphism of complexes.
+\end{definition}
+
+\begin{definition}
+	Let $f\colon K^\bullet\to L^\bullet$ be a morphism of complexes. The \define{cone} of $f$ is defined to be the complex 
+	\begin{equation*}
+		\cone(f)^i = K^{i + 1}\oplus L^i = K[1]^i\oplus L^i\quad\text{ and }\quad d_{\cone(f)}\left(k^{i + 1}, l^i\right) = \left(-d_K^{i + 1}k^{i + 1}, f\left(k^{i + 1}\right) + d^i_Ll^i\right).
+	\end{equation*}
+	Treating elements of $\cone(f)^i$ as column vectors, we can denote the boundary map as 
+	\begin{equation*}
+		d_{\cone(f)}^i = 
+		\begin{pmatrix}
+			d_{K[1]} & 0\\
+			f[1] & d_L
+		\end{pmatrix}.
+	\end{equation*}
+\end{definition}
+
+\begin{definition}
+	Let $f\colon K^\bullet\to L^\bullet$ be a morphism of complexes. The \define{cylinder} of $f$ is defined to be the complex 
+	\begin{equation*}
+		\cyl(f)^i = K^i\oplus K^{i + 1}\oplus L^i = K^i\oplus K[1]^i\oplus L^i
+	\end{equation*}
+	and 
+	\begin{equation*}
+		d_{\cyl(f)}^i\left(k^i, k^{i + 1}, l^i\right) = \left(d_K^i k^i - k^{i + 1}, -d_K^{i + 1}k^{i + 1}, f(k^{i + 1}) + d_L^i l^i\right).
+	\end{equation*}
+	Treating elements of $\cyl(f)^i$ fas column vectors, we can denote the boundary map as 
+	\begin{equation*}
+		d_{\cyl(f)} = 
+		\begin{pmatrix}
+			d_K & -\bbone & 0\\
+			& d_{K[1]} & 0\\
+			0 & f & d_L
+		\end{pmatrix}.
+	\end{equation*}
+\end{definition}
+
+There is a natural short exact sequence of complexes:
+\begin{equation*}
+	0\to L^\bullet\xrightarrow{\iota} \cone(f)\xrightarrow{\delta} K[1]^\bullet\to 0
+\end{equation*}
+where 
+\begin{equation*}
+	\iota^i(l^i) = \left(0, l^i\right)\quad\text{ and }\quad\delta^i\left(k^{i + 1}, l^i\right) = k^{i + 1}.
+\end{equation*}
+Clearly both $\iota$ and $\delta$ are morphisms of complexes and the above sequence is exact. Next, there is another short exact sequence of complexes: 
+\begin{equation*}
+	0\to K^\bullet\xrightarrow{\gamma}\cyl(f)\xrightarrow{\pi}\cone(f)\to 0
+\end{equation*}
+where 
+\begin{equation*}
+	\gamma(k^i) = \left(k^i, 0, 0\right)\quad\text{ and }\quad \pi(k^i, k^{i + 1}, l^i) = \left(k^{i + 1}, l^i\right).
+\end{equation*}
+Again, it is easily checked that both $\gamma$ and $\pi$ are morphisms of complexes, and that the above sequence is exact.
+
+Finally, define maps 
+\begin{equation*}
+	L^\bullet\xrightarrow{\alpha}\cyl(f)\xrightarrow{\beta} L^\bullet
+\end{equation*}
+as 
+\begin{equation*}
+	\alpha\left(l^i\right) = \left(0, 0, l^i\right)\quad\text{ and }\quad \beta\left(k^i, k^{i + 1}, l^i\right) = f(k^i) + l^i,
+\end{equation*}
+which are easily checked to be chain maps.
+
+\begin{theorem}\thlabel{diagram-cone-cylinder}
+	The diagram 
+	\begin{equation*}
+		\xymatrix {
+			& 0\ar[r] & L^\bullet\ar[r]^\iota\ar[d]_\alpha & \cone(f)\ar[r]^\delta\ar@{=}[d] & K[1]^\bullet\ar[r] & 0\\
+			0\ar[r] & K^\bullet\ar[r]^\gamma\ar@{=}[d] & \cyl(f)\ar[r]^\pi\ar[d]_\beta & \cone(f)\ar[r] & 0\\
+			& K^\bullet\ar[r]_f & L^\bullet
+		}
+	\end{equation*}
+	commutes in $\Kom(\scrA)$. Further, the maps $\alpha$ and $\beta$ are quasi-isomorphisms, $\beta\circ\alpha = \id_{L^\bullet}$, and $\alpha\circ\beta$ is homotopic to $\id_{\cyl(f)}$. As a result, $\wt Q(\alpha)$ and $\wt Q(\beta)$ are inverses in the dirty derived category.
+\end{theorem}
+\begin{proof}
+	From the above constructions, it is clear that the diagram commutes, and $\beta\circ\alpha = \id_{L^\bullet}$. Define $h^i\colon\cyl(f)^i\to\cyl(f)^{i - 1}$ by 
+	\begin{equation*}
+		h^i\left(k^i, k^{i + 1}, l^i\right) = \left(0, k^i, 0\right).
+	\end{equation*}
+	Then 
+	\begin{equation*}
+		d_{\cyl(f)}h^i\left(k^i, k^{i + 1}, l^i\right) = d_{\cyl(f)}\left(0, k^i, 0\right) =  \left(-k^i, -d_Kk^i, f(k^i)\right),
+	\end{equation*}
+	and 
+	\begin{equation*}
+		h^id_{\cyl(f)}\left(k^i, k^{i + 1}, l^i\right) = h^i\left(d_Kk^i - k^{i + 1}, -d_Kk^{i + 1}, f(k^{i + 1}) + d_Ll^i\right) = \left(0, d_Kk^i - k^{i + 1}, 0\right)
+	\end{equation*}
+	so that 
+	\begin{equation*}
+		\left(d_{\cyl(f)}\circ h^i + h^i\circ d_{\cyl(f)}\right)\left(k^i, k^{i + 1}, l^i\right) = \left(-k^i, -k^{i + 1}, f(k^i)\right) = \left(\alpha\circ\beta - \id_{\cyl(f)}\right)\left(k^i, k^{i + 1}, l^i\right).
+	\end{equation*}
+	Thus $h$ is the desired homotopy, whence $\alpha\circ\beta$ is homotopic to the identity. As a ressult, $\alpha$ and $\beta$ are quasi-isomorphisms so that they are isomorphisms in $\wt\scrD^\ast(\scrA)$. But since $\wt Q(\beta)\circ\wt Q(\alpha) = \id$, it follows that they are inverses in the dirty derived category.
+\end{proof}
+
+\begin{lemma}\thlabel{homotopic-maps-dirty-derived-category}
+	Let $f,g\colon K^\bullet\to L^\bullet$ be chain homotopic maps in $\Kom^\ast(\scrA)$. Then $\wt Q(f) = \wt Q(g)$.
+\end{lemma}
+\begin{proof}
+	Suppose $h$ is a homotopy between $f$ and $g$, that is, 
+	\begin{equation*}
+		f - g = d\circ h + h\circ d.
+	\end{equation*}
+	To avoid unnecessary clutter, we shall play fast and loose with indexing henceforth. Define a map $\wt h\colon\cone(f)\to\cone(g)$ as 
+	\begin{equation*}
+		\wt h\left(k^{i + 1}, l^i\right) = \left(k^{i + 1}, l^i + h(k^{i + 1})\right).
+	\end{equation*}
+	First, we verify that this is indeed a chain map. We have 
+	\begin{equation*}
+		\xymatrix {
+			\left(k^{i + 1}, l^i\right)\ar@{|->}[r]^-{d_{\cone(f)}}\ar@{|->}[dd]_{\wt h} & \left(-d_K k^{i + 1}, f(k^{i + 1}) + d_L l^i\right)\ar@{|->}[d]^{\wt h}\\
+			& \left(-d_K k^{i + 1}, f(k^{i + 1}) + d_L l^i - h(d_K k^{i + 1})\right)\ar@{=}[d]\\
+			\left(k^{i + 1}, l^i + h(k^{i + 1})\right)\ar@{|->}[r]_-{d_{\cone(g)}} & \left(-d_K k^{i + 1}, g(k^{i + 1}) + d_Ll^i + d_L h(k^{i + 1})\right)
+		}
+	\end{equation*}
+	where the bottom right is an equality since $d_L\circ h + h\circ d_K = f - g$. Next, it is clear that the diagram 
+	\begin{equation*}
+		\xymatrix {
+			0\ar[r] & L^\bullet\ar[r]^-\iota\ar@{=}[d] & \cone(f)\ar[d]^{\wt h}\ar[r]^\delta & K[1]^\bullet\ar[r]\ar@{=}[d] & 0\\
+			0\ar[r] & L^\bullet\ar[r]_-\iota\ar[r] & \cone(g)\ar[r]_\delta & K[1]^\bullet\ar[r] & 0
+		}
+	\end{equation*}
+	commutes in $\Kom^\ast(\scrA)$. Taking cohomologies and invoking the five lemma through the commutative diagram of long exact sequences: 
+	\begin{equation*}
+		\xymatrix {
+			\cdots\ar[r] & H^i(L^\bullet)\ar[r]\ar@{=}[d] & H^i(\cone(f))\ar[r]\ar[d]^{H^i(\wt h)} & H^i(K[1]^\bullet)\ar[r]\ar@{=}[d] & \cdots\\
+			\cdots\ar[r] & H^i(L^\bullet)\ar[r] & H^i(\cone(g))\ar[r] & H^i(K[1]^\bullet)\ar[r] & \cdots
+		}
+	\end{equation*}
+	it follows that $\wt h$ is a quasi-isomorphism.
+
+	Similarly, define the map $\wh h\colon\cyl(f)\to\cyl(g)$ by 
+	\begin{equation*}
+		\wh h\left(k^i, k^{i + 1}, l^i\right) = \left(k^i, k^{i + 1}, l^i + h(k^{i + 1})\right).
+	\end{equation*}
+	We first verify that this is indeed a chain map. 
+	\begin{equation*}
+		\xymatrix {
+			\left(k^i, k^{i + 1}, l^i\right)\ar@{|->}[r]^-{d_{\cyl(f)}}\ar@{|->}[dd]_{\wh h} & \left(d_Kk^i - k^{i + 1}, -d_Kk^{i + 1}, f(k^{i + 1}) + d_Ll^i\right)\ar@{|->}[d]^{\wh h}\\
+			& \left(d_Kk^i - k^{i + 1}, -d_Kk^{i + 1}, f(k^{i + 1}) + d_Ll^i - h(d_Kk^{i + 1})\right)\ar@{=}[d]\\ 
+			\left(k^i, k^{i + 1}, l^i + h(k^{i + 1})\right)\ar@{|->}[r]_-{d_{\cyl(g)}} & \left(d_Kk^i- k^{i + 1}, -d_Kk^{i + 1}, g(k^{i + 1}) + d_L l^i + d_Lh(k^{i + 1})\right)
+		}
+	\end{equation*}
+	where as last time, the bottom right equality follows from the fact that $f - g = d_L\circ h + h\circ d_K$. Further, note that we have a commutative diagram 
+	\begin{equation*}
+		\xymatrix {
+			0\ar[r] & K^\bullet\ar[r]^-\gamma\ar@{=}[d] & \cyl(f)\ar[r]^-\pi\ar[d]^{\wh h} & \cone(f)\ar[r]\ar[d]^{\wt h} & 0\\
+			0\ar[r] & K^\bullet\ar[r]_-\gamma & \cyl(g)\ar[r]_-\pi & \cone(g)\ar[r] & 0
+		}
+	\end{equation*}
+	so that moving to cohomology, using the five lemma and the fact that $\wt h$ is a quasi-isomorphism, it would follow that $\wh h$ is a quasi-isomorphism too.
+
+	Finally, consider the following diagram with notation as in \thref{diagram-cone-cylinder}:
+	\begin{equation*}
+		\xymatrix {
+			& L^\bullet\ar[d]^{\alpha_f}\\
+			K^\bullet\ar[r]^-\gamma\ar@{=}[d]\ar[ru]^-f & \cyl(f)\ar[d]^{\wh h}\\
+			K^\bullet\ar[r]_\gamma\ar[rd]_-g & \cyl(g)\ar[d]^{\beta_g}\\
+			& L^\bullet
+		}
+	\end{equation*}
+	where the middle square and the bottom triangle commute in $\Kom^\ast(\scrA)$. We contend that the diagram commutes in $\wt\scrD(\scrA)$. Indeed, as seen in \thref{diagram-cone-cylinder}, $\wt Q(\alpha_f)$ and $\wt Q(\beta_f)$ are inverses to one another in $\wt\scrD(\scrA)$, and by construction, $f = \beta_f\circ \gamma$, so that in $\wt\scrD(\scrA)$, 
+	\begin{equation*}
+		\wt Q(\alpha_f)\circ\wt Q(f) = \wt Q(\alpha_f)\circ\wt Q(\beta_f)\circ\wt Q(\gamma) = \wt Q(\gamma).
+	\end{equation*}
+	Thus the top triangle commutes in $\wt D(\scrA)$. Finally, since $\beta_g\circ\wh h\circ\alpha_f = \id_{L^\bullet}$, we obtain
+	\begin{equation*}
+		\wt Q(g) = \wt Q(\beta_g)\circ\wt Q(\wh h)\circ\wt Q(\alpha_f)\circ\wt Q(f) = \wt Q(f),
+	\end{equation*}
+	thereby completing the proof.
+\end{proof}
+
+\begin{theorem}
+	The clean and dirty derived categories are canonically isomorphic.
+\end{theorem}
+\begin{proof}
+	Let $\Pi\colon\Kom^\ast(\scrA)\to\scrK^\ast(\scrA)$ denote the natural full functor between the two categories. The universal property of localization furnishes a functor $G\colon\wt\scrD(\scrA)\to\scrD(\scrA)$ making the diagram of functors
+	\begin{equation*}
+		\xymatrix {
+			\Kom^\ast(\scrA)\ar[r]^-\Pi\ar[d]_{\wt Q} & \scrK^\ast(\scrA)\ar[d]^{Q}\\
+			\wt\scrD(\scrA)\ar[r]_{G} & \scrD(\scrA)
+		}
+	\end{equation*}
+	commute. Note that $G$ is the identity on objects, and since every morphism in $\scrK^\ast(\scrA)$ lifts to a morphism in $\Kom^\ast(\scrA)$, and quasi-isomorphisms lift to quasi-isomorphisms, it follows from the explicit construction of morphisms in the localization that $G$ is full. It remains to show that $G$ is faithful. 
+
+	In view of \thref{homotopic-maps-dirty-derived-category}, there exists a functor $\Phi\colon\scrK^\ast(\scrA)\to\wt\scrD(\scrA)$ such that $\Phi\circ\Pi = \wt Q$. Again, $\Phi$ sends quasi-isomorphisms in $\wt K^\ast(\scrA)$ to isomorphisms in $\wt\scrD(\scrA)$, and hence, $\Phi$ induces $H\colon\scrD(\scrA)\to\wt\scrD(\scrA)$ such that $\Phi = H\circ Q$. Consequently, 
+	\begin{equation*}
+		\wt Q = \Phi\circ\Pi = H\circ Q\circ\Pi = H\circ G\circ\wt Q.
+	\end{equation*}
+	The universal property would then force $H\circ G = \id_{\wt\scrD(\scrA)}$, and hence $G$ is faithful, thereby completing the proof.
+\end{proof}
+
+\subsection{Distinguished Triangles}
+
+\begin{definition}
+	For this definition, we work in a category of complexes, such as $\Kom^\ast(\scrA)$, $\scrK^\ast(\scrA)$, $\wt\scrD^\ast(\scrA)$, or $\scrD^\ast(\scrA)$ for $\ast\in\{+, -, b, \emptyset\}$.
+	\begin{enumerate}[label=(\arabic*)]
+		\item A \define{triangle} in the category is a diagram of the form 
+		\begin{equation*}
+			K^\bullet\to L^\bullet\to M^\bullet\to K[1]^\bullet.
+		\end{equation*}
+		\item A \define{morphism} of triangles is commutative diagram (in that category) of the form 
+		\begin{equation*}
+			\xymatrix {
+				0\ar[r] & K^\bullet\ar[r]\ar[d]_u & L^\bullet\ar[r]\ar[d]_v & M^\bullet\ar[r]\ar[d]_w & K[1]^\bullet\ar[d]^{u[1]}\\
+				0\ar[r] & K_1^\bullet\ar[r] & L_1^\bullet\ar[r] & M_1^\bullet\ar[r] & K_1[1]^\bullet\\
+			}
+		\end{equation*}
+		and further, such a morphism is said to be an \define{isomorphism} if $u$, $v$, and $w$ are isomorphisms in that category. 
+		\item A triangle is said to be \define{distinguished} if it is isomorphic to the \define{standard} triangle 
+		\begin{equation*}
+			K^\bullet\xrightarrow{\gamma}\cyl(f)\xrightarrow{\pi}\cone(f)\xrightarrow{\delta} K[1]^\bullet,
+		\end{equation*}
+		where the morphisms are as in \thref{diagram-cone-cylinder}.
+	\end{enumerate}
+\end{definition}
+
+\begin{proposition}
+	The triangle $K^\bullet\xrightarrow{f} L^\bullet\xrightarrow{\iota}\cone(f)\xrightarrow{\delta} K[1]^\bullet$ is isomorphic to the standard triangle $K^\bullet\xrightarrow{\gamma}\cyl(f)\xrightarrow{\pi}\cone(f)\xrightarrow{\delta} K[1]^\bullet$ in $\scrK^\ast(\scrA)$.
+\end{proposition}
+\begin{proof}
+	Consider the diagram 
+	\begin{equation*}
+		\xymatrix {
+			K^\bullet\ar[r]^-{\gamma}\ar@{=}[d] & \cyl(f)\ar[r]^-{\pi}\ar@<-0.5ex>[d]_\beta & \cone(f)\ar[r]^-{\delta}\ar@{=}[d] & K[1]^\bullet\ar@{=}[d]\\
+			K^\bullet\ar[r]_-{f} & L^\bullet\ar[r]_-{\iota}\ar@<-0.5ex>[u]_\alpha & \cone(f)\ar[r]_-{\delta} & K[1]^\bullet
+		}
+	\end{equation*}
+	where the top row is a distinguished triangle in $\scrK^\ast(\scrA)$. Further $\alpha$ and $\beta$ are isomorphisms and inverses to one another in $\scrK^\ast(\scrA)$. 
+
+	Now, $\beta\circ\gamma = f$ and $\pi\circ\alpha = \iota$ in $\Kom^\ast(\scrA)$. Using the fact that $\alpha$ and $\beta$ are inverses, it is immediate that the above diagram commutes in $\scrK^\ast(\scrA)$, thereby completing the proof.
+\end{proof}
+
+\begin{corollary}\thlabel{dist-triangles-homotopy-category}
+	A triangle in $\scrK^\ast(\scrA)$ is distinguished if and only if it is isomorphic to a triangle of the form $K^\bullet\xrightarrow{f} L^\bullet\xrightarrow{\iota}\cone(f)\xrightarrow{\delta} K[1]^\bullet$.
+\end{corollary}
+
+\begin{lemma}\thlabel{tr2-homotopy-category}
+	If $K^\bullet\xrightarrow{u} L^\bullet\xrightarrow{v} M^\bullet\xrightarrow{w} K[1]^\bullet$ is a distinguished triangle in $\scrK^\ast(\scrA)$, then so is 
+	\begin{equation*}
+		L^\bullet\xrightarrow{v} M^\bullet\xrightarrow{w} K[1]^\bullet\xrightarrow{-u[1]} L[1]^\bullet.
+	\end{equation*}
+\end{lemma}
+\begin{proof}
+	Since the triangle is distinguished, due to \thref{dist-triangles-homotopy-category}, there is an isomorphism of triangles 
+	\begin{equation*}
+		\xymatrix {
+			K^\bullet\ar[r]^-u\ar[d]_\wr & L^\bullet\ar[r]^-v\ar[d]_\wr & M^\bullet\ar[r]^-w\ar[d]_\wr & K[1]^\bullet\ar[d]_\wr\\
+			X^\bullet\ar[r]_f & Y^\bullet\ar[r]_-\iota & \cone(f)\ar[r]_-\delta & X[1]^\bullet
+		}
+	\end{equation*}
+	Using the commutativity of the left square, it is easy to argue that the bottom triangle (and hence the top triangle) is isomorphic to 
+	\begin{equation*}
+		K^\bullet\xrightarrow{u} L^\bullet\xrightarrow{\iota}\cone(u)\xrightarrow{\delta} K[1]^\bullet.
+	\end{equation*}
+	Therefore, it suffices to show that the triangle 
+	\begin{equation*}
+		L^\bullet\xrightarrow{\iota}\cone(u)\xrightarrow{\delta} K[1]^\bullet\xrightarrow{-u[1]} L[1]^\bullet
+	\end{equation*}
+	is distinguished. We shall do so by defining an explicit isomorphism with the distinguished triangle 
+	\begin{equation*}
+		L^\bullet\xrightarrow{\iota}\cone(u)\xrightarrow{j}\cone(\iota)\xrightarrow{\eta} L[1]^\bullet.
+	\end{equation*}
+	Let $\theta\colon K[1]^\bullet\to\cone(\iota)$ be given by 
+	\begin{equation*}
+		\theta^i\left(k^{i + 1}\right) = \left(-u^{i + 1}k^{i + 1}, k^{i + 1}, 0\right)\in\cone(\iota)^i = L^{i + 1}\oplus K^{i + 1}\oplus L^i.
+	\end{equation*}
+	First, we must verify that this is a chain map. Indeed, for $k^{i + 1}\in k[1]^i = k^{i + 1}$, 
+	\begin{equation*}
+		\xymatrix {
+			k^{i + 1}\ar@{|->}[r]^-{d_{K[1]}}\ar@{|->}[dd]_{\theta^i} & -d_K k^{i + 1}\ar@{|->}[d]^{\theta^{i + 1}}\\
+			& \left(u^{i + 2}d_K k^{i + 1}, -d_K k^{i + 1}, 0\right)\ar@{=}[d]\\
+			\left(-u^{i + 1}k^{i + 1}, k^{i + 1}, 0\right)\ar@{|->}[r]_-{d_{\cone(\iota)}} & \left(d_Ku^{i + 1}k^{i + 1}, -d_K k^{i + 1}, 0\right)
+		}
+	\end{equation*}
+	where the bottom right equality follows from the fact that $u$ is a chain map. Now, we shall show that the diagram 
+	\begin{equation*}
+		\xymatrix {
+			L^\bullet\ar[r]^-{\iota}\ar@{=}[d] & \cone(u)\ar[r]^-\delta\ar@{=}[d] & K[1]^\bullet\ar[r]^-{-u[1]}\ar[d]^\theta & L[1]^\bullet\ar@{=}[d]\\
+			L^\bullet\ar[r]_-{\iota} & \cone(u)\ar[r]_-j & \cone(\iota)\ar[r]_-{\eta} & L[1]^\bullet
+		}
+	\end{equation*}
+	is an isomorphism of triangles in $\scrK^\ast(\scrA)$. Before we proceed, note that 
+	\begin{equation*}
+		d_{\cone(\iota)} = 
+		\begin{pmatrix}
+			-d_L & 0 & 0\\
+			0 & -d_K & 0\\
+			\id_L & u[1] & d_L
+		\end{pmatrix}.
+	\end{equation*}
+	Clearly the first square commutes in $\Kom^\ast(\scrA)$. The square on the right commutes too: 
+	\begin{equation*}
+		\xymatrix {
+			k^{i + 1}\ar@{|->}[r]^-{-u[1]^i}\ar@{|->}[d]_{\theta^i} & -u^{i + 1}k^{i + 1}\ar@{|->}[d]^{\id}\\
+			\left(-u^{i + 1}k^{i + 1}, k^{i + 1}, 0\right)\ar[r]_-{\eta^i} & -u^{i + 1}k^{i + 1}.
+		}
+	\end{equation*}
+	We claim that $\theta\circ\delta$ and $j\colon\cone(u)\to\cone(\iota)$ are homotopic. Define $h^i\colon\cone(u)\to\cone(\iota)$ by 
+	\begin{equation*}
+		h^i\left(k^{i + 1}, l^i\right) = \left(l^i, 0, 0\right)\in \cone(\iota)^{i - 1} = L^i\oplus K^i\oplus L^{i - 1}.
+	\end{equation*}
+	Then 
+	\begin{equation*}
+		h^{i + 1}\circ d_{\cone(u)}\left(k^{i + 1}, l^i\right) = h^{i + 1}\left(-d_K k^{i + 1}, f(k^{i + 1}) + d_L l^i\right) = \left(f(k^{i + 1}) + d_Ll^i, 0, 0\right)\in\cone(\iota)^i,
+	\end{equation*}
+	and 
+	\begin{equation*}
+		d_{\cone(\iota)}\circ h^i\left(k^{i + 1}, l^i\right) = d_{\cone(\iota)}\left(l^i, 0, 0\right) = \left(-d_Ll^i, 0, l^i\right)\in\cone(\iota)^i = L^{i + 1}\oplus K^{i + 1}\oplus L^i.
+	\end{equation*}
+	So that 
+	\begin{equation*}
+		\left(h^{i + 1}\circ d_{\cone(u)} + d_{\cone(\iota)}\circ h^i\right)\left(k^{i + 1}, l^i\right) = \left(u(k^{i + 1}), 0, l^i\right).
+	\end{equation*}
+	Now note that 
+	\begin{equation*}
+		\theta\circ\delta\left(k^{i + 1}, l^i\right) = \theta\left(k^{i + 1}\right) = \left(-u^{i + 1}k^{i + 1}, k^{i + 1}, 0\right)
+	\end{equation*}
+	and 
+	\begin{equation*}
+		j\left(k^{i + 1}, l^i\right) = \left(0, k^{i + 1}, l^i\right).
+	\end{equation*}
+	Hence, $h\circ d + d\circ h = j - \theta\circ\delta$, that is, the diagram commutes in $\scrK^\ast(\scrA)$. It remains to show that $\theta$ is an isomorphism in $\scrK^\ast(\scrA)$. 
+
+	Let $\psi\colon\cone(\iota)\to K[1]^\bullet$ be the map 
+	\begin{equation*}
+		\psi^i\left(l^{i + 1}, k^{i + 1}, l^i\right) = k^{i + 1}\in K[1]^i.
+	\end{equation*}
+	Clearly $\psi\circ\theta = \id_{K[1]}$. On the other hand, 
+	\begin{equation*}
+		\left(\theta\circ\psi\right)^i\left(l^{i + 1}, k^{i + 1}, k^i\right) = \left(-u(k^{i + 1}), k^{i + 1}, 0\right).
+	\end{equation*}
+	Set $h^i\colon\cone(\iota)^i\to\cone(\iota)^{i - 1}$ to be 
+	\begin{equation*}
+		h^i\left(l^{i + 1}, k^{i + 1}, l^i\right) = \left(l^i, 0, 0\right).
+	\end{equation*}
+	Then 
+	\begin{equation*}
+		h\circ d_{\cone(\iota)}\left(l^{i + 1}, k^{i + 1}, l^i\right) = \left(l^{i + 1} + u(k^{i + 1}) + d_L l^i, 0, 0\right)
+	\end{equation*}
+	and 
+	\begin{equation*}
+		d_{\cone(\iota)}\circ h\left(l^{i + 1}, k^{i + 1}, l^i\right) = d_{\cone(\iota)}\left(l^i, 0, 0\right) = \left(-d_L l^i, 0, l^i\right),
+	\end{equation*}
+	so that 
+	\begin{equation*}
+		\left(h\circ d_{\cone(\iota)} + d_{\cone(\iota)}\circ h\right)\left(l^{i + 1}, k^{i + 1}, l^i\right) = \left(l^{i + 1} + u(k^{i + 1}), 0, l^i\right) = \left(\id_{\cone(\iota)} - \theta\circ\psi\right)\left(l^{i + 1}, k^{i + 1}, l^i\right).
+	\end{equation*}
+	This shows that $\theta$ is an isomorphism in $\scrK^\ast(\scrA)$, thereby completing the proof.
+\end{proof}
+
+\begin{corollary}
+	If $K^\bullet\xrightarrow{u} L^\bullet\xrightarrow{v} M^\bullet\xrightarrow{w} K[1]^\bullet$ is a distinguished triangle in $\scrK^\ast(\scrA)$, then so is
+	\begin{equation*}
+		M^\bullet[-1]\xrightarrow{-w[-1]} K^\bullet\xrightarrow{u} L^\bullet\xrightarrow{v} M^\bullet.
+	\end{equation*}
+\end{corollary}
+\begin{proof}
+	Apply \thref{tr2-homotopy-category} twice and translate by $X^\bullet\mapsto X[-1]^\bullet$.
+\end{proof}
+
+\begin{theorem}
+	The class of quasi-isomorphisms in $\scrK^\ast(\scrA)$ forms a localizing class of morphisms.
+\end{theorem}
+\begin{proof}
+	Clearly \ref{lc1} and \ref{lc2} are satisfied. Let us first verify \ref{pullback-type}. Consider a diagram of the form 
+	\begin{equation*}
+		\xymatrix {
+			& M^\bullet\ar[d]^g\\
+			K^\bullet\ar[r]^f_-{\rm quiso} & L^\bullet
+		}
+	\end{equation*}
+	where $f$ is a quasi-isomorphism. Then using the notation of \thref{diagram-cone-cylinder}, let $\iota\colon L^\bullet\to\cone(f)$ be the natural map, and consider the distinguished triangle 
+	\begin{equation*}
+		M^\bullet\xrightarrow{\iota g}\cone(f)\xrightarrow{\alpha}\cone(\iota g)\xrightarrow{\eta} M[1]^\bullet
+	\end{equation*}
+	in $\scrK^\ast(\scrA)$. Due to \thref{tr2-homotopy-category}, it follows that 
+	\begin{equation*}
+		\cone(\iota g)[-1]\xrightarrow{-\eta[-1]} M^\bullet\xrightarrow{\iota g}\cone(f)\xrightarrow{\alpha}\cone(\iota g)
+	\end{equation*}
+	is a distinguished triangle too. As we have seen earlier, this implies that 
+	\begin{equation*}
+		\cone\left(-\eta[-1]\right)\cong\cone(f)
+	\end{equation*}
+	as complexes. But since $f$ is a quasi-isomorphism, $\cone(f)$ is acyclic, therefore, so is $\cone\left(-\eta[-1]\right)$, and hence $-\eta[-1]$ is a quasi-isomorphism too. Let $s = -\eta[-1]$ for brevity. Note that explicitly, the map is given by 
+	\begin{equation*}
+		s\colon \left(m^i, k^i, l^{i - 1}\right)\longmapsto -m^i,
+	\end{equation*}
+	where $\left(m^i, k^i, l^{i - 1}\right)\in \cone(\iota g)[-1]^i = \cone(\iota g)^{i - 1} = M^i\oplus K^i\oplus L^{i - 1}$. Define $h\colon\cone(\iota g)[-1]\to K^\bullet$ by 
+	\begin{equation*}
+		h\left(m^i, k^i, l^{i - 1}\right) = -k^i.
+	\end{equation*}
+	We claim that the diagram 
+	\begin{equation*}
+		\xymatrix {
+			\cone(\iota g)[-1]\ar[r]^-{-s}\ar[d]_h & M^\bullet\ar[d]^g\\
+			K^\bullet\ar[r]_-f & L^\bullet
+		}
+	\end{equation*}
+	commutes in $\scrK^\ast(\scrA)$. Indeed, 
+	\begin{equation*}
+		\left(g\circ s\right)\left(m^i, k^i, l^{i - 1}\right) = -g\left(m^i\right)\quad\text{ and }\quad \left(f\circ h\right)\left(m^i, k^i, l^{i - 1}\right) = -f\left(k^i\right).
+	\end{equation*}
+	Define $\chi^i\colon\cone(\iota g)[-1]^i = \cone(\iota g)^{i - 1}\to L^{i - 1}$ by 
+	\begin{equation*}
+		\chi^i\left(m^i, k^i, l^{i - 1}\right) = -l^{i - 1}.
+	\end{equation*}
+	Note that 
+	\begin{equation*}
+		d_{\cone(\iota g)} = 
+		\begin{pmatrix}
+			-d_M & 0 & 0\\
+			0 & -d_K & 0\\
+			g & f & d_L
+		\end{pmatrix}
+	\end{equation*}
+	so that 
+	\begin{equation*}
+		d_{\cone(\iota g)[-1]}\left(m^i, k^i, l^{i - 1}\right) = \left(d_M m^i, d_K k^i, -d_Ll^{i - 1} - f(k^i) - g(m^i)\right).
+	\end{equation*}
+	Thus 
+	\begin{equation*}
+		\chi\circ d_{\cone(\iota g)[-1]}\left(m^i, k^i, l^{i - 1}\right) = d_Ll^{i - 1} + f(k^i) + g(m^i)\quad\text{ and }\quad d_L\circ\chi\left(m^i, k^i, l^{i - 1}\right) = -d_L l^{i - 1}.
+	\end{equation*}
+	It follows that 
+	\begin{equation*}
+		\left(\chi\circ d_{\cone(\iota g)} + d_L\circ\chi\right)\left(m^i, k^i, l^{i - 1}\right) = f(k^i) + g(m^i) = \left(g\circ(-s) - f\circ h\right)\left(m^i, k^i, l^{i - 1}\right),
+	\end{equation*}
+	which proves our claim, thereby verifying \ref{pullback-type}. The condition \ref{pushout-type} is proved in a similar manner; we omit the details.
+
+	Finally, we must verify \ref{annihilation-condition}. Let $f\colon K^\bullet\to L^\bullet$ be a morphism in $\scrK^\ast(\scrA)$ such that there exists a quasi-isomorphism $s\colon L^\bullet\to M^\bullet$ such that $s\circ f \simeq 0$ in $\scrK^\ast(\scrA)$\footnote{Since $\scrK^\ast(\scrA)$ is an additive category, it suffices to show that whenever $s\circ f = 0$, there exists a quasi-isomorphism $t$ such that $f\circ t = 0$.}. Let $h^i\colon K^i\to M^{i - 1}$ be a homotopy between $s\circ f$ and $0$, that is, $s\circ f = h\circ d + d\circ h$. Consider the following diagram 
+	\begin{equation*}
+		\xymatrix {
+			\cone(s)[-1]\ar[r]^-{\delta(s)[-1]}\ar@{=}[d] & L^\bullet\ar[r]^-s & M^\bullet\ar[r] & \cone(s)\\
+			\cone(s)[-1] & K^\bullet\ar[l]^-g\ar[u]_f & \cone(g)[-1]\ar[l]^-{\delta(g)[-1]}
+		}
+	\end{equation*}
+	Define $g^i\colon K^i\to\cone(s)[-1]^i = \cone(s)^{i - 1} = L^i\oplus M^{i - 1}$ by 
+	\begin{equation*}
+		g^i\left(k^i\right) = \left(f(k^i), -h(k^i)\right).
+	\end{equation*}
+	First, we must show that $g$ is a morphism of complexes. Indeed, 
+	\begin{equation*}
+		\xymatrix {
+			k^i\ar[r]\ar[dd] & d_K k^i\ar[d]\\
+			& \left(f d_k(k^i), -h d_K(k^i)\right)\ar@{=}[d]\\
+			\left(f(k^i), -h(k^i)\right)\ar[r]_-{d_{\cone(s)[-1]}} & \left(d_L f(k^i), -sf(k^i) + d_M h(k^i)\right)
+		}
+	\end{equation*}
+	where the bottom right equality follows from the fact that $h$ is a homotopy. Next, it is clear that the square commutes in $\Kom^\ast(\scrA)$. Let 
+	\begin{equation*}
+		t = \delta(g)[-1]\colon \cone(g)[-1]\to K^\bullet.
+	\end{equation*}
+	Then 
+	\begin{equation*}
+		f\circ t = \delta(s)[-1]\circ g\circ \delta(g)[-1] = 0.
+	\end{equation*}
+	Finally, we must argue that $t$ is a quasi-isomorphism. The triangle 
+	\begin{equation*}
+		K^\bullet\xrightarrow{g}\cone(s)[-1]\into\cone(g)\xrightarrow{\delta(g)} K[1]^\bullet
+	\end{equation*}
+	is distinguished, and due to \thref{tr2-homotopy-category}, so is 
+	\begin{equation*}
+		\cone(g)[-1]\xrightarrow{-\delta(g)[-1]} K^\bullet\xrightarrow{g}\cone(s)[-1]\into\cone(g).
+	\end{equation*}
+	But as we have argued time and again, this means 
+	\begin{equation*}
+		\cone(s)[-1]\cong\cone\left(-\delta(g)[-1]\right).
+	\end{equation*}
+	Now since $s$ is a quasi-isomorphism, $\cone(s)$ is acyclic, and hence so is $\cone(-t)$, that is, $-t$ is a quasi-isomorphism, consequently, so is $t$. This completes the proof.
+\end{proof}
 \end{document}
