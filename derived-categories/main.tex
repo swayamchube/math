@@ -262,6 +262,7 @@
 \newcommand{\trdeg}{\operatorname{trdeg}}
 \newcommand{\Kom}{\operatorname{Kom}}
 \newcommand{\scrK}{\mathscr{K}}
+\newcommand{\scrI}{\mathscr{I}}
 \newcommand{\Mor}{\operatorname{Mor}}
 \newcommand{\op}{\mathrm{op}}
 \newcommand{\cone}{\operatorname{cone}}
@@ -644,7 +645,7 @@ which completes the proof of uniqueness. We have therefore shown:
 
 \subsection{Localization and Subcategories}
 
-\begin{theorem}
+\begin{theorem}\thlabel{localizing-subcategories}
 	Let $\scrA$ be a category, $\scrB\subseteq\scrA$ a full subcategory, and $S$ a localizing class of morphisms in $\scrA$. Suppose 
 	\begin{enumerate}[label=(\textbf{LS}\arabic*)]
 		\item $S_{\scrB} = S\cap\Mor(\scrB)$ is a localizing class in $\scrB$, and \label{ls1}
@@ -1312,7 +1313,7 @@ which are easily checked to be chain maps.
 	Apply \thref{tr2-homotopy-category} twice and translate by $X^\bullet\mapsto X[-1]^\bullet$.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\thlabel{quasi-isomorphism-localizing-class}
 	The class of quasi-isomorphisms in $\scrK^\ast(\scrA)$ forms a localizing class of morphisms.
 \end{theorem}
 \begin{proof}
@@ -1422,4 +1423,127 @@ which are easily checked to be chain maps.
 	\end{equation*}
 	Now since $s$ is a quasi-isomorphism, $\cone(s)$ is acyclic, and hence so is $\cone(-t)$, that is, $-t$ is a quasi-isomorphism, consequently, so is $t$. This completes the proof.
 \end{proof}
+
+\subsection{The Subcategory of Injective Complexes}
+
+\begin{lemma}\thlabel{acyclic-to-injective-nulhomotopic}
+	Let $f\colon A^\bullet\to I^\bullet$ be a quasi-isomorphism of bounded below complexes with $A^\bullet$ an acyclic complex and $I^\bullet$ a complex of injectives. Then $f$ is homotopic to the zero map.
+\end{lemma}
+\begin{proof}
+	We may suppose without loss of generality that $A^i = I^i = 0$ for $i < 0$. We shall construct a homotopy between $f$ and $0$ by inductively defining $h^i\colon A^i\to I^{i - 1}$.
+	\begin{equation*}
+		\xymatrix {
+			\cdots\ar[r] & 0\ar[r] & A^0\ar[r]\ar[d]^{f^0}\ar@{.>}[ld]|-{h^0} & A^1\ar[r]\ar[d]^{f^1}\ar@{.>}[ld]|-{h^1} & A^2\ar[r]\ar[d]^{f^2}\ar@{.>}[ld]|-{h^2} & \cdots\\
+			\cdots\ar[r] & 0\ar[r] & I^0\ar[r] & I^1\ar[r] & I^2\ar[r] & \cdots\\
+		}
+	\end{equation*}
+	Begin by defining $h^i = 0$ for $i\le 0$. Since $d_A^0$ is injective, we can lift $f^0$ to a map $h^1\colon A^1\to I^0$ satisfying 
+	\begin{equation*}
+		f^0 = h^1\circ d_A^0.
+	\end{equation*}
+	Next, consider the diagram 
+	\begin{equation*}
+		\xymatrix {
+			A^0\ar[r]^-{d^0_A} & A^1\ar[d]^{f^1 - d^0_Ih^1}\ar[r]^-{d^1_A} & A^2\\
+			& I^1
+		}
+	\end{equation*}
+	where 
+	\begin{equation*}
+		\left(f^1 - d^0_I h^1\right)\circ d^0_A = f^1 d^0_A - d^0_I h^1 d^0_A = f^1d^0_A - d^0_If^1 = 0.
+	\end{equation*}
+	Therefore, the above diagram factors as 
+	\begin{equation*}
+		\xymatrix {
+			A^1\ar[r]\ar[d] & \coker d^0_A\ar[r]\ar[ld] & A^2\ar@{.>}[lld]^{h^2}\\
+			I^1
+		}
+	\end{equation*}
+	where, since $A^\bullet$ is acyclic, the map $\coker d^0_A\to A^2$ is injective, and hence, the map $\coker d^0_A\to I^1$ lifts to a map $h^2\colon A^2\to I^1$. Then clearly, 
+	\begin{equation*}
+		h^2\circ d^1_A = f^1 - d_I^0\circ h^1,
+	\end{equation*}
+	as desired. Continuing in this fashion and arguing similarly, we would have constructed the desired homotopy between $f$ and $0$.
+\end{proof}
+
+\begin{lemma}\thlabel{quasi-isomorphism-splits}
+	Let $s\colon I^\bullet\to A^\bullet$ be a quasi-isomorphism between bounded below complexes with $I^\bullet$ being a complex of injectives. Then there is a morphism of complexes $t\colon A^\bullet\to I^\bullet$ such that $t\circ s$ is homotopic to $\id_{I^\bullet}$.
+\end{lemma}
+\begin{proof}
+	Since $s$ is a quasi-isomorphism, $\cone(s)$ is a bounded below acyclic complex. Following in the notation of \thref{diagram-cone-cylinder}, consider the map $\delta\colon\cone(s)\to I[1]^\bullet$, which, in view of \thref{acyclic-to-injective-nulhomotopic} is homotopic to the zero morphism. Let 
+	\begin{equation*}
+		h^i\colon\cone(s)^i = I^{i + 1}\oplus A^i\to I[1]^{i - 1} = I^i
+	\end{equation*}
+	be the homotopy. This is given in components as $(\chi^i, \varphi^i)$, where 
+	\begin{equation*}
+		\chi^i\colon I^{i + 1}\to I^i\quad\text{ and }\quad \varphi^i\colon A^i\to I^i
+	\end{equation*}
+	are morphisms in $\scrA$. We claim that $\varphi\colon A^\bullet\to I^\bullet$ is the desired splitting in $\scrK^+(\scrA)$. Indeed, we have 
+	\begin{equation*}
+		\delta = d_{I[1]}\circ h + h\circ d_{\cone(s)}.
+	\end{equation*}
+	We compute: 
+	\begin{equation*}
+		d_{I[1]}\circ h^i\left(x^{i + 1}, k^i\right) = -d_I\left(\chi^i(x^{i + 1}) + \varphi^i(k^i)\right) = -d_I\chi^i(x^{i + 1}) - d_I\varphi^i(k^i),
+	\end{equation*}
+	and 
+	\begin{equation*}
+		h^{i + 1}\circ d_{\cone(s)}\left(x^{i + 1}, k^i\right) = h^{i + 1}\left(-d_I(x^{i + 1}), s(x^{i + 1}) + d_K k^i\right) = -\chi^{i + 1}d_I(x^{i + 1}) + \varphi^{i + 1} s(x^{i + 1}) + \varphi^{i + 1} d_K (k^i).
+	\end{equation*}
+	Putting these together, we get 
+	\begin{equation*}
+		x^{i + 1} = \delta(x^{i + 1}, k^i) = -d_I\chi^i(x^{i + 1}) - d_I\varphi^i(k^i) - \chi^{i + 1}d_I(x^{i + 1}) + \varphi^{i + 1} s(x^{i + 1}) + \varphi^{i + 1} d_K (k^i).
+	\end{equation*}
+	Since the left hand side is independent of $k^i\in K^i$, it follows that 
+	\begin{equation*}
+		\varphi^{i + 1}d_K (k^i) = d_I\varphi^i(k^i),
+	\end{equation*}
+	and hence, 
+	\begin{equation*}
+		\left(\varphi^{i + 1}\circ s^{i + 1} - \id_{I^\bullet}\right)(x^{i + 1}) = \left(d_I\circ\chi^i + \chi^{i + 1}\circ d_I\right)(x^{i + 1}).
+	\end{equation*}
+	Therefore, $\varphi\colon A^\bullet\to I^\bullet$ is a morphism of complexes and $\varphi\circ s$ is homotopic to $\id_{I^\bullet}$, thereby completing the proof.
+\end{proof}
+
+\begin{corollary}\thlabel{quasi-isomorphism-injectives}
+	A quasi-isomorphism between bounded below complexes of injectives is a homotopy equivalence.
+\end{corollary}
+\begin{proof}
+	Let $s\colon I^\bullet\to J^\bullet$ be a quasi-isomorphism between bounded below complexes of injectives. Due to \thref{quasi-isomorphism-splits}, there exists a morphism $t\colon J^\bullet\to I^\bullet$ such that $t\circ s$ is homotopic to $\id_{I^\bullet}$. Since $s$ is a quasi-isomorphism, so is $t$, and hence, there exists $u\colon I^\bullet\to J^\bullet$ such that $u\circ t$ is homotopic to $\id_{J^\bullet}$. Therefore, 
+	\begin{equation*}
+		s\simeq (u\circ t)\circ s \simeq u\circ(t\circ s)\simeq u.
+	\end{equation*}
+	Hence, $s$ and $t$ are homotopy equivalences, thereby completing the proof.
+\end{proof}
+
+The following theorem is a generalization of the fact that every object admits an injective resolution in an abelian category with enough injectives.
+
+\begin{theorem}\thlabel{injective-resolution-of-complexes}
+	Suppose $\scrA$ has enough injectives. Then for each bounded below complex $A^\bullet$, there exists a bounded below complex of injectives $I^\bullet$ and a quasi-isomorphism $s\colon A^\bullet\to I^\bullet$.
+\end{theorem}
+% \begin{proof}
+% 	% TODO: Add in later
+% \end{proof}
+
+Now let $\scrI$ denote the full subcategory of $\scrA$ consisting only of injective objects. Similarly, let $\scrK^+(\scrI)$ be the full subcategory of $\scrK^+(\scrA)$ consisting only of bounded below complexes of injectives. Consider the composition of functors 
+\begin{equation*}
+	\scrK^+(\scrI)\longrightarrow\scrK^+(\scrA)\longrightarrow\scrD^+(\scrA).
+\end{equation*}
+Let $S$ denote the class of quasi-isomorphisms in $\scrK^+(\scrA)$, which is a localizing class due to \thref{quasi-isomorphism-localizing-class}. Let $S_{\scrI} = S\cap\Mor\left(\scrK^+(\scrI)\right)$. Recall that in the proof of \thref{quasi-isomorphism-localizing-class} we only used the cone construction, and clearly the cone of a morphism between bounded below complexes of injectives is another bounded below complex of injectives. Therefore, $S_{\scrI}$ is a localizing class in $\scrK^+(\scrI)$. Finally, if $s\colon I^\bullet\to A^\bullet$ is a quasi-isomorphism in $\scrK^+(\scrA)$ with $I^\bullet\in\scrK^+(\scrI)$, due to \thref{quasi-isomorphism-splits}, there exists a morphism $t\colon A^\bullet\to I^\bullet$ such that $t\circ s\simeq \id_{I^\bullet}\in S_{\scrI}$. Hence, we have verified the conditions of \thref{localizing-subcategories}, and hence, the induced map 
+\begin{equation*}
+	\xymatrix {
+		\scrK^+(\scrI)\ar[r]\ar[d] & \scrK^+(\scrA)\ar[d]\\
+		\scrK^+(\scrI)\left[S_\scrI^{-1}\right]\ar[r] & \scrD^+(\scrA)
+	}
+\end{equation*}
+is fully faithful. Furthermore, due to \thref{injective-resolution-of-complexes}, the map is also essentially surjective on objects, consequently, it is an equivalence of categories. Finally, in view of \thref{quasi-isomorphism-injectives}, the functor $\id\colon\scrK^+(\scrI)\to\scrK^+(\scrI)$ is the localizing functor, and hence, the composition 
+\begin{equation*}
+	\scrK^+(\scrI)\to \scrK^+(\scrA)\to\scrD^+(\scrA)
+\end{equation*}
+is an equivalence of categories.
+
+We summarize our conclusions: 
+\begin{theorem}
+	The composition of functors $\scrK^+(\scrI)\to\scrK^+(\scrA)\to\scrD^+(\scrA)$ is fully faithful. Further, if $\scrA$ has enough injectives, then it is an equivalence of categories.
+\end{theorem}
 \end{document}
