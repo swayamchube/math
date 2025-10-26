@@ -1,0 +1,530 @@
+\documentclass[10pt]{article}
+
+\title{MATH 591 Homework 4}
+\author{Swayam Chube\\ \href{mailto:swayamc@umich.edu}{\texttt{swayamc@umich.edu}}}
+\date{Last Updated: \today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{fouriernc}
+\usepackage{mdframed}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd-Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{epigraph}
+\setlength\epigraphwidth{0.4\textwidth}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+% \renewcommand{\familydefault}{\sfdefault} % Do you want this font? 
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Swayam Chube},
+    colorlinks=true,
+	citecolor=blue,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{interlude}[theorem]{Interlude}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\F}{\mathbb{F}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakB}{\mathfrak{B}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrM}{\mathscr{M}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrO}{\mathscr{O}} % sheaf
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+% \newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\Ass}{\operatorname{Ass}}
+\newcommand{\projdim}{\operatorname{proj~dim}}
+\newcommand{\injdim}{\operatorname{inj~dim}}
+\newcommand{\gldim}{\operatorname{gl~dim}}
+\newcommand{\embdim}{\operatorname{emb~dim}}
+\newcommand{\hght}{\operatorname{ht}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\CM}{\operatorname{CM}}
+\newcommand{\cech}[1]{\mathbin{\check{#1}}}
+\newcommand{\cdim}{\operatorname{cdim}}
+\newcommand{\Der}{\operatorname{Der}}
+\newcommand{\trdeg}{\operatorname{trdeg}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calL}{\mathcal{L}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\pr}{\operatorname{pr}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\sffamily}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+\begin{document}
+\maketitle 
+
+\section{Problem 1}
+
+Using an easy first step from the proof of the Whitney embedding theorem, we may suppose that $M\subseteq\R^N$ is a submanifold. Let $F\colon M\to\R^N$ denote the inclusion, which has components $F = (F^1,\dots, F^N)$. If $N\le 2m$, then we are already done. Suppose henceforth that $N > 2m$.
+
+Since $T_p\R^N\cong\R^N$, and the latter has a standard Hermitian inner product on it, so does $T_pM\subseteq T_p\R^N$. We shall equip $T_pM$ with this inner product henceforth for all $p\in M$. In other words, we are now working with a Riemannian structure on $M$. 
+
+Let 
+\begin{equation*}
+    UM = \left\{(p, v)\in TM\subseteq M\times\R^N\colon \|v\| = 1\right\}
+\end{equation*}
+denote the unit bundle. We shall first show that this is a submanifold of the tangent bundle. This is an application of the regular value theorem. Consider the map $\Phi\colon TM\to\R$ given by the composite map 
+\begin{equation*}
+    TM\xrightarrow{\wt F} T\R^N\xrightarrow{(x, v)\mapsto\|v\|^2}\R.
+\end{equation*}
+
+We shall show that $1\in\R$ is a regular value of $\Phi$. Let $(p, v)\in \Phi^{-1}(1)$. Choose local coordinates $(x^1,\dots,x^m, r^1,\dots,r^m)$ on $TM$ around $(p, v)$. 
+First note that in this local coordinate system, the representation of $\wt F$ is given by 
+\begin{equation*}
+    \wt F(x^1,\dots,x^m, r^1,\dots, r^m) = \left(F^1(x),\dots, F^m(x), \sum_{i = 1}^m\frac{\partial F^1}{\partial x^i}r^i,\dots,\sum_{i = 1}^m\frac{\partial F^m}{\partial x^i}r^i\right).
+\end{equation*}
+Therefore, in these local coordinate system, $\Phi$ is represented by 
+\begin{equation*}
+    \Phi(x^1,\dots,x^m, r^1,\dots,r^m) = \sum_{k = 1}^m \left(\sum_{i = 1}^m\frac{\partial F^k}{\partial x^i} r^i\right)^2.
+\end{equation*}
+Taking partials with respect to $r^1,\dots,r^m$, we have 
+\begin{equation*}
+    \frac{\partial \Phi}{\partial r^j} = 2\sum_{k = 1}^m \frac{\partial F^k}{\partial x^j}\left(\sum_{i = 1}^m\frac{\partial F^k}{\partial x^i}r^i\right).
+\end{equation*}
+Then 
+\begin{equation*}
+    \sum_{j = 1}^m r^j\frac{\partial\Phi}{\partial r^j} = 2\sum_{j = 1}^m\sum_{k = 1}^m r^j\frac{\partial F^k}{\partial r^j}\left(\sum_{i = 1}^m\frac{\partial F^k}{\partial x^i}r^i\right) = 2\sum_{k = 1}^m\left(\sum_{i = 1}^m\frac{\partial F^k}{\partial r^i}r^i\right)^2.
+\end{equation*}
+Since $\Phi(p, v) = 1$, the above sum evaluated at $(p, v)$ is precisely $2$, which is easily seen from the local coordinate representation of $\wt F$ or $\Phi$ as computed above. In particular, this means that at last one of the partial derivatives $\frac{\partial\Phi}{\partial r^j}$ is non-zero. Thus the differential of $\Phi$ at $(p, v)$ is surjective, and $1$ is a regular value of $\Phi$. Hence, due to the Regular Value Theorem, $UM = \Phi^{-1}(1)$ is a submanifold of $M$.
+
+Now
+
+
+\section{Problem 2}
+
+We may suppose that $M\subseteq\R^N$ is a submanifold for some $N > 0$. Since $T_p\R^N\cong\R^N$ naturally, there is a natural Hermitian inner product structure on $T_p\R^N$ which we denote by $\langle\cdot,\cdot\rangle$ -- this inner product descends to $T_pM$.
+
+For any $p\in M$, there is a natural isomorphism $T_p\R^N\to T_p^\ast \R^N$ given by $v\mapsto\langle v, \cdot\rangle$. Let $\iota\colon M\to\R^N$ denote the smooth inclusion. Then there is a commutative diagram 
+\begin{equation*}
+    \xymatrix {
+        T_pM\ar[r]^{\iota_{\ast, p}}\ar[d] & T_p\R^N\ar[d]\\
+        T_p^\ast M & T_p^\ast\R^N\ar[l]^{\iota_{\ast, p}^\ast}
+    }
+\end{equation*}
+where the vertical arrows are the natural isomorphisms described above. The map $\iota_{\ast, p}$ splits canonically through the orthogonal projection $\pi_p\colon T_p\R^n\to T_pM$. We contend that the diagram 
+\begin{equation*}
+    \xymatrix {
+        T_pM\ar[d] & T_p\R^N\ar[d]\ar[l]_{\pi_p}\\
+        T_p^\ast M & T_p^\ast\R^N\ar[l]^{\iota_{\ast, p}^\ast}
+    }
+\end{equation*}
+commutes. Indeed, if $v\in T_p\R^N$, we can write $v = \pi_p(v) + v^\perp$, where $v^\perp$ is in the orthogonal complement of $T_pM$ in $T_p\R^N$. Under the vertical isomorphism $T_pM\to T_p^\ast M$, $\pi_p(v)$ maps to the linear functional $\langle \pi_p(v), \cdot\rangle$. On the other hand, $v\in T_p\R^n$ maps to the linear functional $\langle v,\cdot\rangle$ in $T_p^\ast\R^N$, which maps to $\langle \pi_p(v), \iota_{\ast, p}(\cdot)\rangle$ in $T_p^\ast M$. Now note that for any $u\in T_p^\ast M$, 
+\begin{equation*}
+    \langle v, u\rangle = \langle \pi_p(v) + v^\perp, u\rangle = \langle\pi_p(v), u\rangle = \langle\pi_p(v), \iota_{\ast, p}(u)\rangle,
+\end{equation*}
+whence the diagram commutes. Now, using the above diagram, note that $df_p\in T_p^\ast\R^N$ maps to $df_p\in T_p^\ast M$ under $\iota_{\ast, p}^\ast$. If $r^1,\dots,r^N$ denotes the standard coordinate system on $\R^N$, then the basis $\left\{dr^1_p,\dots, dr^N_p\right\}$ of $T_p^\ast\R^N$ is dual to the basis $\left\{\frac{\partial}{\partial r^1}\big\vert_p,\dots,\frac{\partial}{\partial r^N}\big\vert_p\right\}$ with respect to the inner product $\langle\cdot,\cdot\rangle$, where 
+\begin{equation*}
+    dr^i_p\left(\frac{\partial}{\partial r^j}\bigg\vert_p\right) = \delta_{ij}.
+\end{equation*}
+Therefore, $\left(df_{\mathbf a}\right)_p = a^1 dr^1_p + \dots + a^N dr^N_p\in T_p^\ast\R^N$ corresponds to 
+\begin{equation*}
+    a^1\frac{\partial}{\partial r^1}\bigg\vert_p + \dots + a^N\frac{\partial}{\partial r^N}\bigg\vert_p
+\end{equation*}
+in $T_p\R^N$ under the vertical isomorphism. When we identify $T_pM$ with the subspace $\iota_{\ast, p}(T_pM)$ of $T_p\R^N$, which in turn is identified with $\R^N$, we see that $\pi_p$ sends the above to $\pi_p(\mathbf a)\in T_pM$. By the commutativity of the diagram, $\pi_p(\mathbf a)$ corresponds to $\iota_{\ast, p}^\ast\left(\left(df_{\mathbf a}\right)_p\right) = \left(df_{\mathbf a}\right)_p\in T_p^\ast M$ under the vertical isomorphism.
+
+Thus, by identifying $T^\ast M$ with $TM$ through the Riemannian metric, the given map $F\colon\R^N\times M\to T^\ast M$ becomes the map $F\colon\R^N\times M\to TM$ given by 
+\begin{equation*}
+    F(\mathbf a, p) = \left(p, \pi_p(\mathbf a)\right)\in TM = \left\{(p, v)\colon p\in M,~v\in T_pM\subseteq T_p\R^N\cong\R^N\right\}.
+\end{equation*}
+We claim that $F$ is transversal to the zero section $Z\colon M\to TM$. Indeed, suppose $F(\mathbf a, p)\in Z$, so that $\pi_p(\mathbf a) = 0$, i.e., $\mathbf a$ is perpendicular to $T_pM\subseteq\R^N$.
+
+Choose local coordinates $(r^1,\dots, r^N)$ on $\R^N$ around $\mathbf a$ and $(x^1,\dots,x^m)$ on $M$ around $p$. These also give rise to local coordinates on $TM$ as a subspace of $M\times\R^N$, where we choose the ``same'' local coordinates. Then the differential of $F$ is given by 
+\begin{equation*}
+    \begin{pmatrix}
+        0 & 0 & \cdots & 0 & 1 & 0 & \cdots & 0\\
+        0 & 0 & \cdots & 0 & 0 & 1 & \cdots & 0\\
+        \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots\\
+        0 & 0 & \cdots & 0 & 0 & 0 & \cdots & 1\\
+        {}~\big| &{}~\big| &\cdots & {}~\big|\\
+        \pi_p(e_1) & \pi_p(e_2) & \cdots & \pi_p(e_N)\\
+        {}~\big| &{}~\big| &\cdots & {}~\big|\\
+    \end{pmatrix}_{2m\times(N + m)}
+\end{equation*}
+where $e_1,\dots,e_N$ are the standard basis vectors of $\R^N$, and the blank space in the matrix is irrelevant. The top right $m\times m$ block is an identity matrix, while the bottom left $N\times N$ block consists of the column vectors $\pi_p(e_1),\dots,\pi_p(e_N)$. Since $\pi_p$ is a surjective linear map and $e_1,\dots, e_N$ constitute a basis of $\R^N$, their images span $T_p M$, in particular, span an $m$-dimensional vector space. On the other hand, the right most $m$ column vectors constituting the identity matrix are linearly independent, from the first $m$ columns and linearly independent of each other. Therefore, the column rank of this matrix is $2m$. It follows that $F_{\ast, (\mathbf a, p)}$ is transversal to $Z$. 
+
+Hence, by Thom's parametric transversality theorem, for almost all $\mathbf a\in T_p M$, the specialization $F_{\mathbf a}$ is transverse to the zero section. Identifying back $T^\ast M$ with $TM$, we see that for almost all $\mathbf a\in\R^N$, the map $F_{\mathbf a}$, which is the section $s_{f_{\mathbf a}}\colon M\to T^\ast M$ is transverse to the zero section, so that $f_{\mathbf a}$ is a Morse function.
+
+\section{Problem 3}
+
+\subsection{Part (a)}
+
+For any $p = (p^1,\dots, p^n)\in\R^n$, 
+\begin{equation*}
+    X^A_p = 
+    \begin{pmatrix}
+        p^1 & \cdots & p^n
+    \end{pmatrix}
+    \begin{pmatrix}
+        a_{11} & \cdots & a_{1n}\\
+        \vdots & \ddots & \vdots\\
+        a_{n1} & \cdots & a_{nn}
+    \end{pmatrix}
+    \begin{pmatrix}
+        \frac{\partial}{\partial x^1}\bigg\vert_p\\
+        \vdots\\
+        \frac{\partial}{\partial x^n}\bigg\vert_p
+    \end{pmatrix},
+\end{equation*}
+therefore, for any $f\in C^\infty(\R^n)$, 
+\begin{equation*}
+    \left(X^Af\right)(p) = 
+    \begin{pmatrix}
+        p^1 & \cdots & p^n
+    \end{pmatrix}
+    \begin{pmatrix}
+        a_{11} & \cdots & a_{1n}\\
+        \vdots & \ddots & \vdots\\
+        a_{n1} & \cdots & a_{nn}
+    \end{pmatrix}
+    \begin{pmatrix}
+        \frac{\partial f}{\partial x^1}(p)\\
+        \vdots\\
+        \frac{\partial}{\partial x^n}(p)
+    \end{pmatrix} = \sum_{i, j = 1}^n p^i a_{ij}\frac{\partial f}{\partial x^j}(p).
+\end{equation*}
+
+Now suppose $b = (b_{ij})$ is another $n\times n$ matrix, then 
+\begin{align*}
+    \left(X^AX^Bf\right)(p) &= \sum_{i, j = 1}^n p^ia_{ij}\frac{\partial}{\partial x^j}\left(\sum_{k, l = 1}^n x^k b_{kl}\frac{\partial f}{\partial x^l}\right)(p)\\
+    &= \sum_{i, j, k, l = 1}^n p^i a_{ij}b_{kl}\left(\delta_{jk}\frac{\partial f}{\partial x^l}(p) + p^k\frac{\partial^2 f}{\partial x^j\partial x^l}(p)\right)\\
+    &= \sum_{i, j, k, l = 1}^n \delta_{jk}p^i a_{ij}b_{kl}\frac{\partial f}{\partial x^l}(p) + \sum_{i, j, k, l = 1}^n p^ip^k a_{ij}b_{kl}\frac{\partial^2f}{\partial x^i\partial x^l}(p).
+\end{align*}
+Similarly, 
+\begin{equation*}
+    \left(X^BX^Af\right)(p) = \sum_{i, j, k, l = 1}^n \delta_{jk}p^i b_{ij}a_{kl}\frac{\partial f}{\partial x^l}(p) + \sum_{i, j, k, l = 1}^n p^ip^k b_{ij}a_{kl}\frac{\partial^2f}{\partial x^i\partial x^l}(p).
+\end{equation*}
+Note that 
+\begin{equation*}
+    \sum_{i, j, k, l = 1}^n p^ip^k a_{ij}b_{kl}\frac{\partial^2f}{\partial x^i\partial x^l}(p) = \sum_{i, j, k, l = 1}^n p^ip^k b_{ij}a_{kl}\frac{\partial^2f}{\partial x^i\partial x^l}(p),
+\end{equation*}
+which can be seen by interchanging $i\leftrightarrow k$ and $j\leftrightarrow l$ in the indexing. Therefore, 
+\begin{equation*}
+    \left([X^A, X^B]f\right)(p) = \left(\sum_{i, j , l= 1}^n p^i a_{ij}b_{jl} - p^i b_{ij}a_{jl}\right)\frac{\partial f}{\partial x^l}(p) = \sum_{i, l = 1}^n p^i\left(\sum_{j = 1}^n a_{ij}b_{jl} - b_{ij}a_{jl}\right)\frac{\partial f}{\partial x^l}(p) = X^{[A, B]}f(p),
+\end{equation*}
+since the $(i, l)$-th entry of $[A, B]$ is 
+\begin{equation*}
+    \sum_{j = 1}^n a_{ij}b_{jl} - b_{ij}a_{jl}.
+\end{equation*}
+
+\subsection{Part (b)}
+
+Let $\gamma\colon\R\to\R^n$ be given by $\gamma(t) = e^{tA}$. Recall the power-series representation 
+\begin{equation*}
+    \gamma(t) = \sum_{k = 0}^\infty\frac{1}{k!}t^k A^k,
+\end{equation*}
+and since this converges uniformly on compacta, its derivative is given by 
+\begin{equation*}
+    \gamma'(t) = \sum_{k = 1}^\infty\frac{1}{(k - 1)!}t^{k - 1}A^k = Ae^{tA} = e^{tA}A.
+\end{equation*}
+
+
+Suppose now that $v$ is a vector in $\R^n$, and consider the curve $\gamma_v(t) = ve^{tA} = v\gamma(t)$. Then 
+\begin{equation*}
+    \gamma_v'(t) = v\gamma'(t) = ve^{tA}A = \gamma_v(t)A = X^A_{\gamma_v(t)},
+\end{equation*}
+which shows that $\gamma_v$ is an integral curve of $X^A$ for all vectors $v$.
+
+\section{Problem 4}
+
+We quote the following result from \cite[Lemma 5.34]{lee-sm}, which is a simple application of partitions of unity:
+\begin{lemma}\thlabel{extension-lemma-submanifolds}
+    Suppose $M$ is a smooth manifold, $S\subseteq M$ a smooth submanifold, and $f\in C^\infty(S)$.
+    \begin{enumerate}[label=(\alph*)]
+        \item If $S$ is embedded, then there exists a neighborhood $U$ of $S$ in $M$ and a smooth function $\wt f\in C^\infty(U)$ such that $\wt f|_S = f$. 
+        \item If $S$ is properly embedded, then the neighborhood $U$ in part (a) can be taken to be all of $M$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{lemma}\thlabel{restriction-of-tangent-vector-fields}
+    Let $\iota\colon S\to M$ denote the smooth embedding. For any $X\in\frakX_S(M)$, there is a unique $Y\in\frakX(M)$ such that $X$ is $\iota$-related to $Y$.
+\end{lemma}
+\begin{proof}
+    Let $Y$ denote the \emph{apriori} rough vector field on $S$ such that $\iota_{\ast, p}(X_p) = Y_p$ for all $p\in S$. Since each $\iota_{\ast, p}$ is injective, and $X$ is tangent to $S$, such a rough vector field $Y$ exists. It remains to show that $Y$ is smooth. To this end, it suffices to show that for every $f\in C^\infty(S)$, $Yf\in C^\infty(S)$. In view of \thref{extension-lemma-submanifolds}, there is a neighborhood $U$ of $S$ in $M$, and a smooth function $F\in C^\infty(U)$ such that $F|_S = f$. Since $U$ is an open subset of $M$, the restriction of the smooth vector field $X$ to $U$ is still a smooth vector field. By abuse of notation, we shall continue to denote this vector field by $X$.
+
+    Let $p\in S$, then there is a curve $\gamma\colon (-\varepsilon, \varepsilon)\to S\subseteq M$ such that $\gamma(0) = p$ and $\dot{\gamma}(0) = X_p$. Then, by definition, 
+    \begin{equation*}
+        Y_p([f]) = \frac{\mathrm d}{\mathrm dt}f(\gamma(t))\big\vert_{t = 0} = \frac{\mathrm d}{\mathrm dt}F(\gamma(t)) = X_p([F]),
+    \end{equation*}
+    where the first equality follows since $\gamma$ is completely contained in $S$. Therefore, $Yf = XF|_S$. Now since $\iota\colon S\to U$ is smooth, so is $Yf$. This shows that $Y$ is a smooth vector field on $S$.
+
+    Finally, the uniqueness of such a $Y$ follows from the fact that $\iota_{\ast, p}$ is injective, and $X_p\in\iota_{\ast, p}\left(T_p S\right)$ for all $p\in S$.
+\end{proof}
+
+\subsection{Part (a)}
+
+Let $X_1, X_2\in\frakX_S(M)$, then by \thref{restriction-of-tangent-vector-fields}, there are unique $Y_1, Y_2\in\frakX(S)$ such that $Y_i$ is $\iota$-related to $X_i$ for $i = 1, 2$. As we have seen in class, $[Y_1, Y_2]$ is $\iota$-related to $[X_1, X_2]$, and therefore, by definition, $[X_1, X_2]\in\frakX_S(M)$.
+
+\subsection{Part (b)}
+
+We note that for each $X\in\frakX_S(M)$, $\rho(X)$ is the \emph{unique} $Y\in \frakX(S)$ such that $Y$ is $\iota$-related to $X$. In our proof of part (a), we argued that if $X_1, X_2\in\frakX_S(M)$, and $Y_i = \rho(X_i)$ for $i = 1, 2$, then $[Y_1, Y_2]$ is $\iota$-related to $[X_1, X_2]$, so that $\rho\left([X_1, X_2]\right) = [Y_1, Y_2] = [\rho(X_1), \rho(X_2)]$, i.e., $\rho$ is a Lie algebra morphism.
+
+\subsection{Part (c)}
+
+Suppose there was a surface $S\subseteq \R^3$ such that $X, Y\in\frakX_S(\R^3)$. Then due to part (b), $[X, Y]\in\frakX_S(\R^3)$, now note that 
+\begin{align*}
+    Z\coloneq [X, Y] &= \left[\frac{\mathrm\partial}{\partial x} + y\frac{\partial}{\partial z}, \frac{\partial}{\partial y} - x\frac{\partial}{\partial z}\right]\\
+    &= \left[\frac{\partial}{\partial x}, \frac{\partial}{\partial y}\right] + \left[y\frac{\partial}{\partial z}, \frac{\partial}{\partial y}\right] - \left[\frac{\partial}{\partial x}, x\frac{\partial}{\partial z}\right] - \left[y\frac{\partial}{\partial z}, x\frac{\partial}{\partial z}\right]\\
+    &= 0 - \frac{\partial}{\partial z} - \frac{\partial}{\partial z} - 0\\
+    &= -2\frac{\partial}{\partial z}.
+\end{align*}
+
+For any $p\in S$, we have that 
+\begin{equation*}
+    \frac{\partial}{\partial x}\bigg\vert_p + y(p)\frac{\partial}{\partial z}\bigg\vert_p, \frac{\partial}{\partial y}\bigg\vert_p - x(p)\frac{\partial}{\partial z}\bigg\vert_p, -2\frac{\partial}{\partial z}\bigg\vert_p\in T_pS\subseteq T_p\R^3.
+\end{equation*}
+Since $x(p), y(p)\in\R$, taking $\R$-linear combinations, of $X_p$ and $Z_p$, and $Y_p$ and $Z_p$, we have that 
+\begin{equation*}
+    \frac{\partial}{\partial x}\bigg\vert_p,
+    \frac{\partial}{\partial y}\bigg\vert_p,
+    \frac{\partial}{\partial z}\bigg\vert_p\in T_pS\subseteq T_p\R^3.
+\end{equation*}
+Since these three tangent vectors constitute a basis of $T_p\R^3$, we have that $T_pS = T_p\R^3$, which is absurd, since $\dim T_p S = \dim S = 2$ and $\dim T_p\R^3 = 3$. Thus $X$ and $Y$ are not tangent to any surface in $\R^3$.
+
+\bibliographystyle{alpha}
+\bibliography{references.bib}
+\end{document}
