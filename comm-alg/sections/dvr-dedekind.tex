@@ -1,0 +1,259 @@
+\begin{definition}
+    A valuation ring with value group order-isomorphic to $\Z$ is called a \define{discrete valuation ring (DVR)}.
+\end{definition}
+
+\begin{theorem}
+    Let $R$ be a valuation ring. Then the following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $R$ is a DVR. 
+        \item $R$ is a PID. 
+        \item $R$ is Noetherian.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Let $K$ be the field of fractions of $R$ and $\frakm$ its maximal ideal.
+
+    \noindent $(1)\implies(2)$ Let $v\colon K^\times\to\Z$ be a surjective valuation corresponding to $R$. Let $t\in\frakm$ be such that $v(t) = 1$. For $0\ne x\in\frakm$, $v(x) = n > 0$ for some positive integer $n$. Then $v(x/t^n) = 0$, i.e., $x = ut^n$ for some unit $u\in R^\times$. In particular, this shows that $\frakm = tR$. Now let $0\ne I$ be a proper ideal in $R$, and let 
+    \begin{equation*}
+        n = \min\left\{v(a)\colon 0\ne a\in I\right\}.
+    \end{equation*}
+    Clearly $n$ is a positive integer since $I$ is proper. Let $x\in I$ with $v(x) = n$. Then $x R\subseteq I$, and for every $y\in I$, $v(y/x)\ge 0$, so that $y\in xR$. Thus $I = xR$, and $R$ is a PID.
+
+
+    \noindent$(2)\implies(3)$ is clear.
+
+    \noindent$(3)\implies(2)$ A Noetherian B\'ezout domain is a PID. 
+
+    \noindent$(2)\implies(1)$ Let $t\in\frakm$ be such that $\frakm = tR$. Recall that a PID is a UFD, and let $v$ denote the $t$-adic valuation on $K$. It is not hard to see that $R$ is the valuation ring corresponding to $v$.
+\end{proof}
+
+\begin{definition}
+    If $R$ is a DVR with maximal ideal $\frakm$, then any element $t\in\frakm$ such that $\frakm = t R$ is said to be a \define{uniformizer} or a \define{uniformizing element} of $R$.
+\end{definition}
+
+\begin{remark}
+    We note here that a valuation ring whose maximal ideal is principal need not necessarily be a DVR. Indeed, let $K$ be a field, $(R,\frakm_R)$ a DVR of $K$, set $k = R/\frakm_R$, and suppose $\mathfrak R$ is a DVR of $k$. Let $S$ denote the composite of $R$ and $\mathfrak R$. We contend that $S$ is our desired counterexample.
+
+    Let $f\in\frakm_R$ be a uniformizer of $R$, $g\in S$ such that $\overline g = g + \frakm_R$ is a uniformizer of $\mathfrak R$. Then $\frakm_S = \frakm_R + gS$. Further, since $g\notin\frakm_R$, it is a unit in $R$, so that $g^{-1}\in R$. Hence, for any element $h\in\frakm_R$, we can write $h = g\cdot\left(g^{-1}h\right)$, so that $\frakm_R\subseteq gS$. Hence $\frakm_S = gS$ is principal.
+
+    Next, we show that $S$ is not Noetherian. Indeed, consider the ascending chain of ideals in $S$: 
+    \begin{equation*}
+        (f)\subseteq (f, fg^{-1})\subseteq (f, fg^{-1}, fg^{-2})\subseteq\cdots.
+    \end{equation*}
+    We claim that all the above inclusions are proper. Indeed, if $fg^{-(n + 1)}\in (f, fg^{-1},\dots, fg^{-n})$ for some $n\ge 0$, then there exist $a_0,\dots a_n\in S$ such that 
+    \begin{equation*}
+        fg^{-(n + 1)} = a_0f + a_1 fg^{-1} + \dots + a_n fg^{-n}.
+    \end{equation*}
+    Multiplying out by $f^{-1}g^{n + 1}$, we obtain 
+    \begin{equation*}
+        a_0 g^{n + 1} + \dots + a_n g = 1,
+    \end{equation*}
+    which is absurd, since $1\notin\frakm_S = gS$, thereby completing the proof.
+\end{remark}
+
+\begin{theorem}\thlabel{equivalent-dvr-non-valuation}
+    Let $R$ be a ring. The following conditions are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $R$ is a DVR. 
+        \item $R$ is a local PID but not a field. 
+        \item $R$ is a Noetherian local ring, $\dim R > 0$, and the maximal ideal of $R$ is principal. 
+        \item $R$ is a one-dimensional normal Noetherian local domain.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    $(1)\implies(2)\implies(3)$ is clear. 
+
+    $(3)\implies(1)$ Let $\frakm = tR$ denote the maximal ideal of $R$. Due to Krull's intersection theorem, 
+    \begin{equation*}
+        \bigcap_{n = 1}^\infty\frakm^n = (0).
+    \end{equation*}
+    Hence, for every $0\ne x\in R$, there is a non-negative integer $n$ such that $x\in\frakm^n\setminus\frakm^{n + 1}$. Set $v(x) = n$. Now if $x, y\in R\setminus\{0\}$ are such that $v(x) = n$ and $v(y) = m$, then we can find units $u, v\in R^\times$ such that $x = t^n u$ and $y = t^m v$. This shows that $xy = t^{m + n}uv\ne 0$, so that $R$ is an integral domain and $v(xy) = v(x) + v(y)$. Let $K$ denote the fraction field of $R$, and set 
+    \begin{equation*}
+        v\left(\frac{a}{b}\right) = v(a) - v(b)
+    \end{equation*}
+    for all $a, b\in R\setminus\{0\}$. This is clearly well-defined, and defines a valuation on $K$ whose value group is $\Z$ and corresponding valuation ring is $R$. Hence $R$ is a DVR.
+
+    $(1)\implies(4)$ Recall that in a DVR the only ideals are $(0)$ and powers of the maximal ideal. Thus the only prime ideals are $(0)$ and $\frakm$, so that $\dim R = 1$. That $R$ is Noetherian follows from it being a PID, and finally recall that every valuation ring is normal.
+
+    $(4)\implies(3)$ Let $\frakm$ denote the maximal ideal of $R$. Due to Nakayama's lemma and the fact that $\dim R = 1$, $\frakm\ne\frakm^2$. Choose $x\in\frakm\setminus\frakm^2$. We shall show that $\frakm = xR$. Note that $\frakm\in\Ass_R\left(R/xR\right)$, so that there exists $y\in R\setminus xR$ such that $(xR : y) = \frakm$. Set $a = yx^{-1}\in K\coloneq\operatorname{Frac}(R)$. Note that $a\notin R$ lest $y\in xR$. Set 
+    \begin{equation*}
+        \frakm^{-1}\coloneq\left\{\alpha\in K\colon\alpha\frakm\subseteq R\right\}.
+    \end{equation*}
+    Note that $\frakm^{-1}$ is an $R$-submodule of $K$, and further, by construction, 
+    \begin{equation*}
+        \frakm\frakm^{-1}\coloneq\left\{\text{$R$-submodule of $K$ generated by } x_iy_i\colon x_i\in \frakm,~y_i\in\frakm^{-1}\right\}\subseteq R\quad\text{ and }\quad R\subseteq\frakm^{-1}.
+    \end{equation*}
+    In particular, we have the inclusions $\frakm\subseteq\frakm\frakm^{-1}\subseteq R$. Hence, $\frakm\frakm^{-1}\in\left\{\frakm, R\right\}$. If $\frakm^{-1}\frakm = \frakm$, then $a\frakm\subseteq\frakm$. Since $\frakm$ is a finite $R$-module, due to Nakayama's lemma, $a$ must be integral over $R$, but since $R$ is normal, $a\in R$, a contradiction. Thus $\frakm^{-1}\frakm = R$. Next, note that $x\frakm^{-1}\subseteq R$. If $x\frakm^{-1}\subseteq\frakm$, then 
+    \begin{equation*}
+        xR = x\frakm^{-1}\frakm \subseteq\frakm^2,
+    \end{equation*}
+    a contradiction. Hence, $x\frakm^{-1} = R$, so that 
+    \begin{equation*}
+        xR = x\frakm^{-1}\frakm = \frakm,
+    \end{equation*}
+    thereby completing the proof.
+\end{proof}
+
+\begin{definition}
+    Let $R$ be an integral domain with fraction field $K$. An $R$-submodule $I$ of $K$ is said to be a \define{fractional ideal} if there is a non-zero $\alpha\in R$ such that $\alpha I\subseteq R$. 
+\end{definition}
+
+The standard operations on ideals readily generalize to operations on fractional ideals. Indeed, if $I$ and $J$ are fractional ideals, define 
+\begin{align*}
+    I + J &= \left\{x + y \colon x\in I,~y\in J\right\}\\
+    IJ &= \left\{\text{$R$-submodule generated by }x_iy_i\colon x_i\in I,~y_i\in J\right\}.
+\end{align*}
+Clearly, both $I + J$ and $IJ$ are fractional ideals of $R$. Further, if $S\subseteq R$ is a multiplicative set, then 
+\begin{equation*}
+    S^{-1}I = \left\{\frac{x}{s}\colon x\in I,~s\in S\right\}
+\end{equation*}
+is a fractional ideal of $S^{-1}R$.
+
+\begin{lemma}\thlabel{localisation-commutes-with-colon}
+    Let $R$ be an integral domain, $M$ and $N$ $R$-submodules of $K = \operatorname{Frac}(R)$. If $N$ is finitely generated, then 
+    \begin{equation*}
+        S^{-1}\left(M : N\right) = \left(S^{-1}M : S^{-1}N\right).
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Clearly $S^{-1}\left(M : N\right)\subseteq\left(S^{-1}M : S^{-1} N\right)$. Since $N$ is finitely generated, we can write $N = a_1 R + \dots + a_n R$ for some $a_1, \dots, a_n\in K$. If $x\in \left(S^{-1}M : S^{-1}N\right)$, then for all $1\le i\le n$, $xa_i\in S^{-1}M$. Therefore, there exist $c_i\in S$ such that $c_ixa_i\in M$, whence $c_ix\in\left(M : N\right)$, so that $x\in S^{-1}\left(M : N\right)$.
+\end{proof}
+
+\begin{definition}
+    An $R$-submodule $I$ of $K$ is said to be \define{invertible} if there exists an $R$-submodule $J$ of $K$ such that $IJ = R$.
+\end{definition}
+
+\begin{proposition}\thlabel{invertible-is-finite}
+    An invertible $R$-submodule of $K$ must be a finite $R$-module.
+\end{proposition}
+\begin{proof}
+    Let $I$ be an invertible fractional ideal of $R$ and $J$ an $R$-submodule of $K$ such that $IJ = R$. Then we can find $a_1,\dots,a_n\in I$ and $b_1,\dots, b_n\in J$ such that 
+    \begin{equation*}
+        1 = a_1b_1 + \dots + a_n b_n.
+    \end{equation*}
+    For each $x\in I$, we can write 
+    \begin{equation*}
+        x = (xb_1)a_1 + \dots + (xb_n)a_n,
+    \end{equation*}
+    and note that $xb_i\in R$ for $1\le i\le n$. It follows that $I = a_1 R + \dots + a_n R$.
+\end{proof}
+\begin{corollary}
+    Every invertible $R$-submodule of $K$ is a fractional ideal.
+\end{corollary}
+
+\begin{remark}
+    Suppose $I$ is an invertible fractional ideal of $R$, and set 
+    \begin{equation*}
+        I^{-1}\coloneq\left\{\alpha\in K\colon \alpha I\subseteq R\right\}.
+    \end{equation*}
+    This is clearly an $R$-submodule of $K$. Further, note that $II^{-1}\subseteq R$, so that 
+    \begin{equation*}
+        I^{-1} = JII^{-1}\subseteq J.
+    \end{equation*}
+    But since $JI\subseteq R$, we clearly have $J\subseteq I^{-1}$. This shows that $J = I^{-1}$. 
+\end{remark}
+
+\begin{theorem}\thlabel{equivalent-invertible-ideal}
+    Let $R$ be an integral domain and $I$ an $R$-submodule of $K$. The following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $I$ is an invertible fractional ideal.
+        \item $I$ is a projective $R$-module. 
+        \item $I$ is a finite $R$-module, and for each maximal ideal $\frakm$ of $R$, the fractional ideal $I_\frakm \coloneq I R_\frakm$ of $R_\frakm$ is principal.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    $(1)\implies(2)$ Let $a_1,\dots,a_n\in I$ and $b_1,\dots,b_n\in I^{-1}$ be such that $1 = a_1 b_1 + \dots + a_nb_n$. As we have seen in the proof of \thref{invertible-is-finite}, $I = a_1 R + \dots + a_n R$. Let $\pi\colon F\coloneq\displaystyle\bigoplus_{i = 1}^n Re_i\to I$ be the map sending $e_i\mapsto a_i$. Define $\sigma\colon I\to F$ by
+    \begin{equation*}
+        \sigma(x) = (xb_1)e_1 + \dots + (xb_n)e_n.
+    \end{equation*}
+    It is then clear that $\pi\circ\sigma = \id_I$, so that $I$ is projective.
+
+    $(2)\implies(1)$ There is a free module $\displaystyle F = \bigoplus_i Re_i$ and an epimorphism $\pi\colon F\to I$ which splits through an $R$-linear map $\sigma\colon I\to F$. Let $a_i = \pi(e_i)$ and $\lambda_i = \pi_i\circ\sigma\colon I\to R$. Note that every $R$-linear map $I\to R$ is multiplication by some element of $K$. Say $\lambda_i(x) = b_i x$ for all $x\in I$. Note that $b_i\in I^{-1}$ for all $i$. Then 
+    \begin{equation*}
+        \pi(\sigma(x)) = \sum_{i}a_ib_i x\implies\sum_{i}a_ib_i = 1.
+    \end{equation*}
+    Set $J$ denote the $R$-submodule of $K$ generated by the $b_i$'s. Then $R\subseteq IJ\subseteq R$, and hence $I$ is an invertible fractional ideal.
+
+    $(1)\implies(3)$ That $I$ is a finite $R$-module is the content of \thref{invertible-is-finite}. Further, 
+    \begin{equation*}
+        R_\frakm = \left(II^{-1}\right)_\frakm = I_\frakm\left(I^{-1}\right)_\frakm,
+    \end{equation*}
+    so that $I_\frakm$ is an invertible fractional ideal of $R_\frakm$. Due to (2), $I_\frakm$ is a projective $R_\frakm$-module. But since any two elements of $K$ are $R_\frakm$-linearly dependent, $I_\frakm$ must be principal. 
+
+    $(3)\implies(1)$ Note that for every maximal ideal $\frakm$ of $R$,
+    \begin{equation*}
+        \left(I^{-1}\right)_\frakm = \left(R : I\right)_\frakm = \left(R_\frakm : I_\frakm\right) = \left(I_\frakm\right)^{-1}.
+    \end{equation*}
+    If $II^{-1}\subsetneq R$, then there is a maximal ideal $\frakm$ containing $II^{-1}$, so that 
+    \begin{equation*}
+        \frakm R_\frakm\supseteq\left(II^{-1}\right)_\frakm = I_\frakm\left(I^{-1}\right)_\frakm = I_\frakm I_\frakm^{-1} = R_\frakm,
+    \end{equation*}
+    a contradiction. This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $R$ be a Noetherian domain, and $\frakp$ a non-zero prime ideal of $R$. If $\frakp$ is invertible, then $\hght\frakp = 1$ and $R_\frakp$ is a DVR.
+\end{theorem}
+\begin{proof}
+    Since $\frakp$ is invertible, due to \thref{equivalent-invertible-ideal}, $\frakp R_\frakp$ is a principal ideal. Since $\dim R_\frakp = \hght\frakp > 0$, it follows from \thref{equivalent-dvr-non-valuation} that $R_\frakp$ is a DVR, and hence $\hght\frakp = \dim R_\frakp = 1$.
+\end{proof}
+
+\begin{theorem}\thlabel{intersection-of-localisations}
+    Let $R$ be a normal Noetherian domain. Then 
+    \begin{enumerate}[label=(\arabic*)]
+        \item all prime divisors of a non-zero principal ideal have height $1$. 
+        \item $\displaystyle R = \bigcap_{\hght\frakp = 1} R_\frakp$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+    \item This follows from Krull's Hauptidealsatz.
+    \item Suppose $\displaystyle\frac{a}{b}\in\bigcap_{\hght\frakp = 1}R_\frakp$ with $b\ne 0$. We shall show that $a\in bR$. If $b$ is a unit in $R$, then there is nothing to prove. If $b$ is not a unit in $R$, consider the primary decomposition 
+    \begin{equation*}
+        bR = \frakq_1 \cap\dots\cap\frakq_r
+    \end{equation*}
+    with corresponding associated primes $\frakp_1,\dots,\frakp_r$. Due to (1), we know that $\hght\frakp_i = 1$ for all $i$, so that there are no embedded associated primes. Localising at $\frakp_i$ and contracting back to $R$, we have 
+    \begin{equation*}
+        \frakq_i = bR_\frakp\cap R\ni a.
+    \end{equation*}
+    Therefore, 
+    \begin{equation*}
+        a\in\bigcap_{i = 1}^r \frakq_i = bR,
+    \end{equation*}
+    as desired. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{porism}\thlabel{porism-intersection-localisations}
+    Let $R$ be a Noetherian domain. If all associated primes of a non-zero principal ideal have height $1$, then 
+    \begin{equation*}
+        R = \bigcap_{\hght\frakp = 1} R_\frakp.
+    \end{equation*}
+\end{porism}
+
+\begin{corollary}
+    Let $R$ be a Noetherian domain. Then $R$ is normal if and only if the following two conditions are satisfied: 
+    \begin{enumerate}[label=(\roman*)]
+        \item for every height $1$ prime $\frakp$, $R_\frakp$ is a DVR; and 
+        \item all associated primes of a non-zero principal ideal of $R$ have height $1$.
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    Necessity is the content of \thref{intersection-of-localisations}. For sufficiency, note that due to \thref{porism-intersection-localisations}, $R = \displaystyle\bigcap_{\hght\frakp = 1} R_\frakp$. But since each $R_\frakp$ is a DVR, it is normal, so that $R$ is normal.
+\end{proof}
+
+\begin{definition}
+    An integral domain for which every ideal is invertible is called a \define{Dedekind domain}.
+\end{definition}
+
+\begin{theorem}
+    For an integral domain $R$, the following conditions are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $R$ is a Dedekind domain. 
+        \item $R$ is either a field of a one-dimensional Noetherian normal domain. 
+        \item every non-zero ideal of $R$ can be written as a product of a finite number of prime ideals.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    % TODO: Add in later. Very IMPORTANT
+\end{proof}

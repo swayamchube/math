@@ -1,0 +1,144 @@
+\begin{definition}
+    An integral domain $R$ with field of fractions $K$ is said to be a \define{valuation ring} if for every $x\in K^\times$, $x\in R$ or $x^{-1}\in R$. We also say that $R$ is a valuation ring of $K$.
+\end{definition}
+
+\begin{proposition}\thlabel{R-submodules-totally-ordered}
+    Let $R$ be a valuation ring of $K$. The $R$-submodules of $K$ are totally ordered with respect to inclusion.
+\end{proposition}
+\begin{proof}
+    Let $I$ and $J$ be distinct $R$-submodules of $K$. If $I\setminus J\ne\emptyset$, pick $x\in I\setminus J$. For any $0\ne y\in J$, one of $xy^{-1}$ or $x^{-1}y$ must belong to $R$. If $xy^{-1}\in R$, then $x = y\cdot(xy^{-1})\in J$, which is absurd. Thus $x^{-1}y\in R$, so that $y = x\cdot(x^{-1}y)\in I$, and hence, $J\subseteq I$. Argue similarly for the case $J\setminus I\ne\emptyset$.
+\end{proof}
+
+\begin{corollary}
+    A valuation ring is local.
+\end{corollary}
+
+\begin{proposition}
+    The following are equivalent for a ring $R$: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $R$ is a valuation ring. 
+        \item $R$ is a local B\'ezout domain.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    $(1)\implies(2)$ follows immediately from \thref{R-submodules-totally-ordered}, since any finitely generated ideal in $R$ can be written as $a_1 R + \dots + a_n R$ for some $a_1,\dots, a_n\in R$.
+
+    $(2)\implies(1)$: We must show that for every $x\in K^\times$, either $x\in R$ or $x^{-1}\in R$. Choose $f, g\in R$ such that $x = \frac{f}{g}$, and let $(h) = (f, g)$ as ideals in $R$. We can find $a, b\in R$ such that $f = ah$ and $g = bh$, and can find $c, d\in R$ such that $h = cf + dg$. Since $R$ is a domain and $h\ne 0$, it follows that $ac + bd = 1$. Therefore, either $a$ or $b$ must be a unit in $R$, so that either $x\in R$ or $x^{-1}\in R$, thereby completing the proof.
+\end{proof}
+
+\begin{proposition}\thlabel{valuation-rings-integrally-closed}
+    A valuation ring is integrally closed.
+\end{proposition}
+\begin{proof}
+    Let $(R,\frakm)$ be a valuation ring with fraction field $K$. If $x\in K\setminus R$ is integral over $R$, then there is a non-trivial relation of the form 
+    \begin{equation*}
+        x^n + a_{n - 1}x^{n - 1} + \dots + a_0 = 0
+    \end{equation*}
+    with $a_i\in R$ for $0\le i\le n - 1$. Multiplying out by $x^{-n}\in\frakm$, we have that $1\in\frakm$, a contradiction. Thus $R$ is integrally closed. 
+\end{proof}
+
+\begin{remark}\thlabel{maximal-ideal-determines-valuation-ring}
+    We note here that given a field $K$, a valuation ring of $K$ is determined by its maximal ideal. Indeed, if $(R,\frakm)$ is a valuation ring of $K$, then we can write 
+    \begin{equation*}
+        K\setminus R = \left\{x^{-1}\colon x\in\frakm\setminus\{0\}\right\}.
+    \end{equation*}
+
+    Further note that if $R$ is a valuation ring of $K$, then any subring of $K$ containing $R$ is also a valuationg ring of $K$.
+\end{remark}
+
+\begin{theorem}
+    Let $R$ be a valuation ring of $K$ and $R'$ a subring of $K$ containing $R$. Let $\frakm$ denote the maximal ideal of $R$, $\frakp$ the maximal ideal of $R'$, and suppose that $R\ne R'$. Then 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\frakp\subsetneq\frakm\subseteq R\subseteq R'$. 
+        \item $\frakp$ is a prime ideal of $R$ and $R' = R_\frakp$. 
+        \item $R/\frakp$ is a valuation ring of the field $R'/\frakp$. 
+        \item Given a valuation ring $\overline S$ of the field $R/\frakm$, let $S$ denote its preimage in $R$. Then $S$ is a valuation ring of $K$ and is called the \define{composite} of $R$ and $\overline S$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+    \item Let $0\ne x\in\frakp$. Then $x^{-1}\in K\setminus R'\subseteq K\setminus R$, so that $x\in\frakm$. Thus $\frakp\subseteq\frakm$. In light of \thref{maximal-ideal-determines-valuation-ring}, $\frakp\ne\frakm$.
+    \item Since $R/\frakp\into R'/\frakp$ as a subring, it is clear that $\frakp$ is a prime ideal in $R$. Further, since every element of $R\setminus\frakp$ is invertible in $R'$, $R\subseteq R_\frakp\subseteq R'$. Note that $\frakp$ is an ideal in $R_\frakp$, and hence, $\frakp R_\frakp = \frakp$, so that $R_\frakp = R'$ due to (1). 
+    \item Straightforward. 
+    \item Let $\pi\colon R\to R/\frakm$ denote the projection map. Note that $\frakm\subseteq S$ and $S/\frakm = \overline S$. If $x\in R\setminus S$, then $\pi(x)\notin\overline S$, and therefore, $\pi(x^{-1}) = \pi(x)^{-1}\in S$. Hence $x^{-1}\in S$. On the other hand, if $x\in K\setminus R$, then $x^{-1}\in\frakm\subseteq S$. This shows that $S$ is a valuation ring of $K$. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}\thlabel{dominated-by-valuation-ring}
+    Let $K$ be a field, $A\subseteq K$ a subring, and $\frakp$ a prime ideal of $A$. Then there exists a valuation ring $(R,\frakm)$ of $K$ such that $A\subseteq R$, and $\frakm\cap A = \frakp$.
+\end{theorem}
+\begin{proof}
+    First, replacing $A$ by $A_\frakp$, we may assume that $A$ is a local ring with maximal ideal $\frakp$. Let $\mathcal F$ denote the set of all subrings $B$ of $K$ containing $A$ such that $1\notin\frakp B$. Clearly, every ascending chain in $\mathcal F$ has an upper bound given by the union of all elements of the chain. Using Zorn's lemma, choose a maximal element $R$ in $\mathcal F$. First, we contend that $R$ is a local ring. Indeed, since $1\notin\frakp R$, there is a maximal ideal $\frakm$ of $R$ containing $\frakp R$. Note that $R_\frakm\in\mathcal F$, so that $R = R_\frakm$ in view of the maximality of $R$. Next, $\frakm\cap A$ is a proper ideal containing $\frakp$, which, due to the maximality of $\frakp$ must be equal to $\frakp$.
+
+    It remains to show that $R$ is a valuation ring of $K$. Suppose $x\in K$ is such that $x, x^{-1}\notin R$. Then $R\subsetneq R[x]$, and hence $1\in\frakp R[x]$, i.e., there is a polynomial relation 
+    \begin{equation*}
+        1 = a_0 + a_1 x + \dots + a_n x^n
+    \end{equation*}
+    with $a_i\in\frakp R\subseteq\frakm$ for $0\le i\le n$. Multiplying by $(1 - a_0)^{-1}\in R$, one obtains a relation of the form 
+    \begin{equation*}
+        1 = b_1 x + \dots + b_nx^n
+    \end{equation*}
+    with $b_i\in\frakp R$ for $1\le i\le n$. Choose one such relation with the smallest possible value of $n$. Arguing similarly for $x^{-1}$, choose a relation 
+    \begin{equation*}
+        1 = c_1x^{-1} + \dots + c_m x^{-m}
+    \end{equation*}
+    with the smallest possible value of $m$. If $n\ge m$, then multiply the second equation by $b_nx^n$ and subtract from the first to obtain a non-trivial relation of smaller degree than $n$, a contradiction. On the other hand, if $m > n$, then multiply the first relation by $c_m x^{-m}$ and subtract from the second to obtain a non-trivial relation of smaller degree than $m$, a contradiction again. Thus $x\in R$ or $x^{-1}\in R$, i.e., $R$ is a valuation ring of $K$.
+\end{proof}
+
+\begin{theorem}
+    Let $K$ be a field, $A\subseteq K$ a subring, and $B$ the integral closure of $A$ in $K$. Then $B$ is equal to the intersection of all valuation rings of $K$ containing $A$.
+\end{theorem}
+\begin{proof}
+    Let $C$ denote the intersection of all valuation rings of $R$ containing $A$. In view of \thref{valuation-rings-integrally-closed}, $B$ is contained in every such valuation ring, so that $B\subseteq C$. Now let $x\in K$ be non-integral over $A$ and set $y = x^{-1}$. Note that $1\notin y A[y]$, else $x$ would be integral over $A$. Let $\frakp$ be a maximal ideal of $A[y]$ containing $yA[y]$, and using \thref{dominated-by-valuation-ring}, choose a valuation ring $(R,\frakm)$ of $K$ containing $A[y]$ such that $\frakm\cap A[y] = \frakp$. In particular, $y\in\frakm$, so that $x\notin R$. Thus $x\notin C$, as desired.
+\end{proof}
+
+\subsection{Valuations}
+
+\begin{definition}
+    An abelian group $\Gamma$ together with a total order relation $\leqq$ is said to be \define{ordered} if for all $x, y\in\Gamma$ with $x\leqq y$, $x + z\leqq y + z$ for all $z\in\Gamma$. 
+
+    Let $K$ be a field. A \define{valuation} on $K$ is a map $v\colon K\to\Gamma\cup\{\infty\}$ satisfying: 
+    \begin{enumerate}[label=(\roman*)]
+        \item $v(x) = \infty$ if and only if $x = 0$, 
+        \item $v(xy) = v(x) + v(y)$\footnote{so that $v$ is a group homomorphism when restricted to $K^\times$}, and 
+        \item $v(x + y)\ge\min\{v(x), v(y)\}$
+    \end{enumerate}
+    for all $x, y\in K$.
+\end{definition}
+
+Corresponding to a valuation $v$ on $K$, we can define 
+\begin{equation*}
+    R_v = \left\{x\in K\colon v(x)\ge 0\right\}\quad\text{ and }\quad \frakm_v = \left\{x\in K\colon v(x) > 0\right\}.
+\end{equation*}
+It is not hard to see that $(R_v, \frakm_v)$ is a valuation ring of $K$. Conversely, we show that every valuation ring arises this way. Let 
+\begin{equation*}
+    \Gamma = \left\{x R\colon x\in K^\times\right\}.
+\end{equation*}
+This is a group under the operation 
+\begin{equation*}
+    (x R)\cdot(y R) = xy R
+\end{equation*}
+with neutral element $R$. Further, note that $\Gamma$ is an ordered abelian group when equipped with the total ordering
+\begin{equation*}
+    xR\leqq yR\iff xR\supseteq yR,
+\end{equation*}
+where we are implicitly invoking \thref{R-submodules-totally-ordered}. Define $v\colon K\to\Gamma\cup\{\infty\}$ sending 
+\begin{equation*}
+    v(x) = \begin{cases}
+        xR & x\ne 0\\
+        \infty & x = 0.
+    \end{cases}
+\end{equation*}
+Note that $xR\geqq R$ if and only if $xR\subseteq R$, that is, if $x\in R$. Hence, $R_v = R$ and $\frakm_v = \frakm$. This shows that every valuation ring arises from a valuation of $K$.
+
+\begin{definition}
+    The \define{value group} of a valuation ring $(R, \frakm)$ of $K$ is $v(K^\times)$, where $v$ is a valuation of $K$ such that $(R_v, \frakm_v) = (R,\frakm)$.
+\end{definition}
+
+To see that the value group is well-defined: 
+\begin{proposition}
+    If $v$ and $v'$ are two valuations of $K$ corresponding to the same valuation ring $R$ and having value groups $H$ and $H'$ respectively, then there is an order-isomorphism $\varphi\colon H\to H'$ such that $v' = \varphi\circ v$.
+\end{proposition}
+\begin{proof}
+    Let $v\colon K^\times\to\Gamma$ and $v'\colon K^\times\to\Gamma'$ be the two valuations. Define $\varphi\colon H\to H'$ by $\varphi(v(x)) = v'(x)$ for all $x\in K^\times$. We must show that $\varphi$ is well-defined. Indeed, if $x, y\in K^\times$ are such that $v(x) = v(y)$, then $x^{-1}y$ is a unit in $R$, so that $v'(x^{-1}y) = 0$, i.e., $v'(x) = v'(y)$. That $\varphi$ is a group homomorphism is clear. The surjectivity of $\varphi$ is immediate from the fact that $v' = \varphi\circ v$. As for injectivity, if $\varphi(v(x)) = 0$, then $v'(x) = 0$, and hence $x$ is a unit in $R$, so that $v(x) = 0$. Finally, if $v(x)\leqq v(y)$, then $v(x^{-1}y)\geqq 0$, so that $x^{-1}y\in R$, i.e., $v'(x^{-1}y)\geqq 0$, that is, $v'(y)\geqq v'(x)$. Thus $\varphi$ is an order-isomorphism.
+\end{proof}
