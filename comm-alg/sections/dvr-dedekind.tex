@@ -1,3 +1,5 @@
+\subsection{Discrete Valuation Rings}
+
 \begin{definition}
     A valuation ring with value group order-isomorphic to $\Z$ is called a \define{discrete valuation ring (DVR)}.
 \end{definition}
@@ -93,6 +95,8 @@
     \end{equation*}
     thereby completing the proof.
 \end{proof}
+
+\subsection{Fractional Ideals and Dedekind domains}
 
 \begin{definition}
     Let $R$ be an integral domain with fraction field $K$. An $R$-submodule $I$ of $K$ is said to be a \define{fractional ideal} if there is a non-zero $\alpha\in R$ such that $\alpha I\subseteq R$. 
@@ -250,10 +254,65 @@ is a fractional ideal of $S^{-1}R$.
     For an integral domain $R$, the following conditions are equivalent: 
     \begin{enumerate}[label=(\arabic*)]
         \item $R$ is a Dedekind domain. 
-        \item $R$ is either a field of a one-dimensional Noetherian normal domain. 
+        \item $R$ is either a field or a one-dimensional Noetherian normal domain. 
         \item every non-zero ideal of $R$ can be written as a product of a finite number of prime ideals.
     \end{enumerate}
 \end{theorem}
 \begin{proof}
-    % TODO: Add in later. Very IMPORTANT
+    $(1)\implies(2)$ Suppose $R$ is a field. Since every ideal is invertible, it is finitely generated, so that $R$ is Noetherian. If $\frakp$ is a non-zero prime ideal of $R$, then due to \thref{equivalent-invertible-ideal}, $\frakp R_\frakp$ is a principal ideal. Due to \thref{equivalent-dvr-non-valuation}, $R_\frakp$ is a DVR and $\hght\frakp = 1$. Since $R$ is not a field, every prime ideal is a maximal ideal, and hence, we can write 
+    \begin{equation*}
+        R = \bigcap_{0\ne \frakp\in\Spec R} R_\frakp.
+    \end{equation*}
+    Being the intersection of normal domains, $R$ is also a normal domain. 
+
+    $(2)\implies(1)$ Let $I$ be an ideal of $R$. We shall show that $I$ is invertible. For a maximal ideal $\frakm$ of $R$, note that $R_\frakm$ is a one-dimensional Noetherian normal local ring, which, due to \thref{equivalent-dvr-non-valuation}, is a DVR. In particular, $I R_\frakm$ is a principal ideal. Thus, due to \thref{equivalent-invertible-ideal}, $I$ is invertible.
+
+    $(1)\implies(3)$ That $R$ is Noetherian follows from (2). We prove (3) by Noetherian induction. Let $\scrF$ denote the set of all non-zero proper ideals in $R$ that are not products of prime ideals. If $\scrF$ is non-empty, using the Noetherian-ness of $R$, choose a maximal elmeent $I\in\scrF$. Note that every proper ideal of $R$ properly containing $I$ can be expressed as a product of prime ideals. Let $\frakm$ be a maximal ideal containing $I$. Clearly $I\ne\frakm$ else it has a trivial expression as a product of prime ideals. Since $R\subseteq\frakm^{-1}$, we have $I\subseteq I\frakm^{-1}\subseteq\frakm\frakm^{-1} = R$. If $I\frakm^{-1} = I$, then due to Nakayama's lemma, every element of $\frakm^{-1}$ would be integral over $R$, and therefore must be an element of $R$ due to (2), a contradiction. Thus $I\frakm^{-1}\supsetneq I$, so that it can be expressed as a product of prime ideals. Multiplying this expression by $\frakp$, we see that $I$ can be expressed as a product of prime ideals too, a contradiction. Thus $\scrF$ is empty, as desired.
+
+    $(3)\implies(1)$ We shall show that every prime ideal in $R$ is invertible. The factorization property would then imply the same for all non-zero ideals of $R$. 
+
+    \noindent\underline{Step 1.} Suppose $I$ and $J$ are fractional ideals of $R$ such that $B = IJ$ is an invertible fractional ideal. We shall show that $I$ and $J$ are invertible. First, note that 
+    \begin{equation*}
+        I^{-1}J^{-1}B = I^{-1}J^{-1}JI\subseteq R\implies I^{-1}J^{-1} = I^{-1}J^{-1}BB^{-1}\subseteq B^{-1}.
+    \end{equation*}
+    Also, since $B^{-1}IJ = R$, we have the two obvious inclusions $B^{-1}I\subseteq J^{-1}$ and $B^{-1}J\subseteq I^{-1}$. Multiplying these two inclusions, we obtain 
+    \begin{equation*}
+        B^{-1}\subseteq I^{-1}J^{-1}\implies I^{-1}J^{-1} = B^{-1}.
+    \end{equation*}
+    Finally, note that 
+    \begin{equation*}
+        R = BB^{-1} = (II^{-1})(JJ^{-1}),
+    \end{equation*}
+    so that $II^{-1} = JJ^{-1} = R$, i.e., $I$ and $J$ are invertible. 
+
+    \noindent\underline{Step 2.} Let $\frakp$ be a non-zero prime ideal in $R$. We shall show that for any ideal $I$ of $R$ properly containing $\frakp$, $\frakp = I\frakp$. To this end, it suffices to show that $\frakp\subseteq I\frakp$. Let $a\in I\setminus\frakp$ and set $J = aR + \frakp$. It suffices to show that $\frakp\subseteq J\frakp$ so that we may replace $I$ by $J$ and continue our analysis. Consider prime decompositions of the two ideals 
+    \begin{equation*}
+        I^2 = \frakp_1\cdots\frakp_r\quad\text{ and }\quad a^2 R + \frakp = \frakq_1 \cdots \frakq_s.
+    \end{equation*}
+    Clearly each of the $\frakq_i$'s contain $\frakp$. Since $I^2\subseteq\frakp_i$, we have $I\subseteq\frakp_i$, so that $\frakp\subseteq\frakp_i$. Let $\overline R \coloneq R/\frakp$, and for each $x\in R$, let $\overline x$ denote its image in $\overline R$. Note that $\overline R$ is an integral domain with the factorization property (3), and in $\overline R$, we have the decompositions 
+    \begin{equation*}
+        \overline\frakp_1\cdots\overline\frakp_r = \overline a^2\overline R = \overline\frakq_1 \cdots \overline\frakq_s.
+    \end{equation*}
+    Since $\overline a^2\overline R$ is an invertible ideal of $\overline R$, due to Step 1, all the $\overline\frakp_i$'s and the $\overline\frakq_j$'s are invertible ideals of $\overline R$. 
+    Now let $\overline\frakp_1$ be a minimal element of the set $\{\overline\frakp_1,\dots,\overline\frakp_r\}$. Since $\overline\frakp_1\supseteq\overline\frakq_1\cdots\overline\frakq_s$, using Prime Avoidance, $\overline\frakp_1$ must contain one of the $\overline\frakq_i$'s, say without loss of generality, $\overline\frakq_1$. An analogous argument would give that $\overline\frakq_1$ must contain some $\overline\frakp_j$, which, due to the minimality of $\overline\frakp_1$ must be equal to $\overline\frakp_1$ -- that is, $\overline\frakp_1 = \overline\frakq_1$. Since these ideals are invertible, multiplying with their inverses, we are left with 
+    \begin{equation*}
+        \overline\frakp_2\cdots\overline\frakp_r = \overline\frakq_2\cdots\overline\frakq_s.
+    \end{equation*}
+    Continuing in this way, we obtain $r = s$ and $\overline\frakp_i = \overline\frakq_i$ for $1\le i\le r$. In particular, $\frakp_i = \frakq_i$ for $1\le i\le r$, so that 
+    \begin{equation*}
+        a^2 R + \frakp = \left(aR + \frakp\right)^2 = a^2 R + a\frakp + \frakp^2.
+    \end{equation*}
+    Hence, every $x\in\frakp$ can be written as 
+    \begin{equation*}
+        x = a^2 y + az + w\qquad\text{where}\quad y\in R,~z\in\frakp,~\text{ and }~w\in\frakp^2.
+    \end{equation*}
+    Thus $a^2y\in\frakp$ -- but since $a\notin\frakp$, $y\in\frakp$. This gives
+    \begin{equation*}
+        \frakp\subseteq a\frakp + \frakp^2 = I\frakp,
+    \end{equation*}
+    as desired. 
+
+    \noindent\underline{Step 3.} Let $0\ne a\in R$. Then in the factorization $bR = \frakp_1\cdots\frakp_r$, all the $\frakp_i$'s are maximal. Indeed, if $I$ is any ideal properly containing $\frakp_i$, then due to Step 2, $\frakp_i = I\frakp_i$. As we have already argued, every $\frakp_i$ is invertible, so that $I = R$. 
+
+    \noindent\underline{Step 4.} Let $\frakp$ be a non-zero prime ideal in $R$, and let $0\ne a\in R$. If $aR = \frakp_1\cdots\frakp_r$, then due to Step 3, each $\frakp_i$ is maximal. Since $\frakp\supseteq aR$, there is an index $i$ such that $\frakp_i\subseteq\frakp$. The maximality of $\frakp_i$ forces $\frakp_i = \frakp$. In particular, $\frakp$ is invertible, thereby completing the proof.
 \end{proof}
