@@ -1,0 +1,63 @@
+\subsection{The Koszul Complex}
+
+\begin{definition}
+    Let $A$ be a ring and $M$ an $A$-module. An element $a\in A$ is said to be \define{$M$-regular} if $a$ is a non-zero-divisor on $M$. A sequence $\ul a = a_1,\dots, a_n$ is said to be an \define{$M$-sequence} if the following two conditions hold: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $a_i$ is $M/(a_1,\dots,a_{i - 1})M$-regular for $1\le i\le n$. 
+        \item $M\ne (a_1,\dots, a_n)M$.
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    Note that the permutation of an $M$-sequence need not be an $M$-sequence.
+\end{remark}
+
+\begin{lemma}\thlabel{non-trivial-relation-regular-sequence}
+    If $a_1,\dots,a_n$ is an $M$-sequence, and if $a_1\xi_1 + \dots + a_n\xi_n = 0$ with $\xi_i\in M$ for $1\le i\le n$, then $\xi_i\in (a_1,\dots,a_n)M$ for all $1\le i\le n$.
+\end{lemma}
+\begin{proof}
+    Note that $a_n\xi_n = -a_1\xi_1 - \dots - a_{n - 1}\xi_{n - 1}\in (a_1,\dots,a_{n - 1})M$, so that $\xi_n\in (a_1,\dots,a_{n - 1})M$, and we can write 
+    \begin{equation*}
+        \xi_n = a_1\eta_1 + \dots + a_{n - 1}\eta_{n - 1}
+    \end{equation*}
+    for some $\eta_1,\dots,\eta_{n - 1}\in M$. Substituting this back, we have 
+    \begin{equation*}
+        a_1(\xi_1 + a_n\eta_1) + \dots + a_{n - 1}(\xi_{n - 1} + a_n\eta_{n - 1}) = 0.
+    \end{equation*}
+    Repeating our above argument, we have 
+    \begin{equation*}
+        \xi_{n - 1} + a_n\eta_{n - 1}\in (a_1,\dots,a_{n - 2}) M,
+    \end{equation*}
+    so that $\xi_{n - 1}\in (a_1,\dots,a_n) M$. Continuing this way, we have our desired conclusion.
+\end{proof}
+
+\begin{theorem}
+    If $a_1,\dots,a_n$ is an $M$-sequence, then so is $a_1^{m_1},\dots,a_n^{m_n}$ for any positive integers $m_1,\dots,m_n$.
+\end{theorem}
+\begin{proof}
+    Note that it suffices to show that for any positive integer $m$, $a_1^m, a_2,\dots, a_n$ is an $M$-sequence. We shall prove this statement by induction on $m\ge 1$. The base case with $m = 1$ is trivial. Since $a_1$ is $M$-regular, so is $a_1^m$. Suppose for $i > 1$, we have the relation 
+    \begin{equation*}
+        a_i\omega = a_1^m\xi_1 + \dots + a_{i - 1}\xi_{i - 1}\quad\text{ with }\quad \xi_j\in M.
+    \end{equation*}
+    Due to the induction hypothesis, we know that $a_1^{m - 1}, a_2,\dots,a_i$ is an $M$-sequence, so that by \thref{non-trivial-relation-regular-sequence}, there exist $\eta_1,\dots,\eta_{i - 1}\in M$ such that 
+    \begin{equation*}
+        \omega = a_1^{m - 1}\eta_1 + a_2\eta_2 + \dots + a_{i - 1}\eta_{i - 1}.
+    \end{equation*}
+    Hence, we obtain 
+    \begin{equation*}
+        0 = a_1^{m - 1}(a_1\xi_1 - a_i\eta_1) + a_2(\xi_2 - a_i\eta_2) + \dots + a_{i - 1}(\xi_{i - 1} - a_i\eta_{i - 1}).
+    \end{equation*}
+    Invoking \thref{non-trivial-relation-regular-sequence} again, 
+    \begin{equation*}
+        a_1\xi_1 - a_i\eta_1\in(a_1^{m - 1}, a_2,\dots,a_{i - 1})M,
+    \end{equation*}
+    and hence, 
+    \begin{equation*}
+        a_i\eta_1\in(a_1, \dots, a_{i - 1})M.
+    \end{equation*}
+    But since $a_1,\dots,a_i$ is an $M$-sequence, 
+    \begin{equation*}
+        \eta_1\in (a_1,\dots,a_{i - 1})M.
+    \end{equation*}
+    This shows that $\omega\in (a_1^m, a_2,\dots,a_{i - 1})M$, as desired.
+\end{proof}

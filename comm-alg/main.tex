@@ -294,9 +294,19 @@
 {\centering}
 []
 
+\titleformat
+{\part}
+[block]
+{\huge\scshape\bfseries}
+{\thepart. }
+{0.5em}
+{\centering}
+[]
 
 \begin{document}
 \maketitle
+
+\part{A First Course}
 
 \section{Valuation Rings}
 \input{sections/valuation-rings.tex}
@@ -306,4 +316,9 @@
 
 \section{Dimension Theory}
 \input{sections/dimension-theory.tex}
+
+\part{Homological Methods}
+
+\section{Regular Sequences}
+\input{sections/regular-sequences.tex}
 \end{document}
