@@ -617,6 +617,20 @@ In light of \thref{filtration-gives-rise-to-spectral-sequence}, each of $F^\bull
     thereby completing the proof.
 \end{proof}
 
+\begin{lemma}\thlabel{nice-isomorphism}
+    Let $M$ be a finitely generated projective $A$-module. There is a natural isomorphism: 
+    \begin{equation*}
+        N\otimes_A M\xrightarrow{\Phi_M}\Hom_A\left(\Hom_A(M, A), N\right)
+    \end{equation*}
+    induced by the $A$-bilinear pairing 
+    \begin{equation*}
+        N\otimes_A M\otimes_A \Hom_A(M, A)\to N\qquad x\otimes y\otimes \varphi\mapsto \varphi(y)\cdot x.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Prove for finite rank free modules first, and then using the naturality of $\Phi$, extend to direct summands of finite rank free modules, i.e., finite projective modules. The latter argument is purely formal.
+\end{proof}
+
 \begin{theorem}[Ischebeck]\thlabel{ischebeck-spectral-sequence-II}
     Let $A$ be a Noetherian ring, $M$ a finite $A$-module, and $N$ any $A$-module. Assume that $M$ admits a finite projective resolution, or that $N$ admits a finite injective resolution. Then there is a spectral sequence 
     \begin{equation*}
@@ -624,7 +638,43 @@ In light of \thref{filtration-gives-rise-to-spectral-sequence}, each of $F^\bull
     \end{equation*}
 \end{theorem}
 \begin{proof}
-    If you can read German, see \cite{ischebeck-tor-ext}, and if you understand it, please explain it to me.
+    Let $\cdots\to P^{-1}\to P^0\to M\to 0$ be a projective resolution of $M$ and $0\to N\to Q^1\to Q^2\to\cdots$ be an injective resolution of $N$. Consider the double complex: 
+    \begin{equation*}
+        C^{p, q}\coloneq\Hom_A(\Hom_A(P^p, A), Q^q).
+    \end{equation*}
+    This double complex is concentrated in the north-west quadrant, in particular, both spectral sequences it gives rise to must converge to the same object. In view of \thref{nice-isomorphism}, the above complex is isomorphic to $P^p\otimes_A Q^q$. 
+
+    Since projective modules are flat, all vertical chain complexes are exact except at $q = 0$. Therefore, 
+    \begin{equation*}
+        {}_{\mathrm I}E^{p, q}_1 = 
+        \begin{cases}
+            0 & q\ne 0\\
+            P^p\otimes_A N & p = 0
+        \end{cases}.
+    \end{equation*}
+    Next, taking horizontal homology, we compute: 
+    \begin{equation*}
+        {}_{\mathrm I}E^{p, q}_2 = 
+        \begin{cases}
+            0 & q\ne 0\\
+            \Tor^A_{-p}(M, N) & q = 0.
+        \end{cases}
+    \end{equation*}
+    This spectral sequence clearly degenerates at the second page. Therefore, we have found the $E_\infty^{\bullet,\bullet}$ page.
+
+    On the other hand, note that since $Q^q$ is injective, $\Hom_A(-, Q^q)$ commutes with taking homology, so that 
+    \begin{equation*}
+        {}_{\mathrm{II}} E^{p, q}_{1} = \Hom_A\left(\Ext^{-p}_A(M, A), Q^q\right).
+    \end{equation*}
+    Next, taking vertical homology, we have 
+    \begin{equation*}
+        {}_{\mathrm{II}}E^{p, q}_{2} = \Ext^q_A\left(\Ext^{-p}_A(M, A), N\right).
+    \end{equation*}
+    Negating all indices, we obtain a homological spectral sequence 
+    \begin{equation*}
+        E^2_{p, q} = \Ext^{-q}_A\left(\Ext^p_A(M, A), N\right)\Longrightarrow\Tor_{\bullet}(M, N),
+    \end{equation*}
+    thereby completing the proof. \qedhere
 \end{proof}
 
 \subsection*{Foxby's Theorem}
@@ -652,11 +702,31 @@ These have associated power series:
     \end{enumerate}
 \end{theorem}
 \begin{proof}
-    We shall prove (1). Consider take a minimal free resolutions of $k$ and $M$, and consider the Ischebeck spectral sequence as in \thref{ischebeck-spectral-sequence-I}. Note that on the page ${}_{\rm II}E_2^{\bullet,\bullet}$, the maps $d_2$ are in some sense restrictions of the maps in the totalization of the double complex considered. Since we began with a minimal free resolutions of $k$ and $M$, the horizontal and vertical differentials are given by matrices with entries in the maximal ideal $\frakm$, and recalling the construction of $d_2$ from the proof \thref{filtration-gives-rise-to-spectral-sequence} and using the fact that every element on the considered $E_2$-page is a $k$-vector space, it follows that all the maps there are identically zero. This means that the spectral sequence degenerates at the second page, whence this page is isomorphic to the limiting page ${}_{\rm II}E_\infty^{\bullet, \bullet}$. We can now read off the dimension of $\Ext^n(k, M)$ by summing over the diagonal: 
+    \begin{enumerate}[label=(\arabic*)]
+    \item Consider take a minimal free resolutions of $k$ and $M$, and consider the Ischebeck spectral sequence as in \thref{ischebeck-spectral-sequence-I}. Note that on the page ${}_{\rm II}E_2^{\bullet,\bullet}$, the maps $d_2$ are in some sense restrictions of the maps in the totalization of the double complex considered. Since we began with a minimal free resolutions of $k$ and $M$, the horizontal and vertical differentials are given by matrices with entries in the maximal ideal $\frakm$, and recalling the construction of $d_2$ from the proof \thref{filtration-gives-rise-to-spectral-sequence} and using the fact that every element on the considered $E_2$-page is a $k$-vector space, it follows that all the maps there are identically zero. This means that the spectral sequence degenerates at the second page, whence this page is isomorphic to the limiting page ${}_{\rm II}E_\infty^{\bullet, \bullet}$. We can now read off the dimension of $\Ext^n(k, M)$ by summing over the diagonal: 
     \begin{equation*}
         \dim_k\Ext^n(k, M) = \sum_{p + q = n}\dim_k\Tor_{-q}\left(\Ext^p(k, A), M\right) = \sum_{p + q = n}\dim_k\Ext^p(k, A)\dim_k\Tor_{-q}(k, M),
     \end{equation*}
-    which is precisely the content of (1). An analogous proof works for (2) using \thref{ischebeck-spectral-sequence-II}.
+    which is precisely the content of (1).
+
+    \item We use \thref{ischebeck-spectral-sequence-II} with $M = k$ and $N = M$. Let $\cdots\to P^{-1}\to P^0\to k$ be a minimal projective resolution, and let $0\to M\to Q^0\to Q^1\to\dots$ be a minimal injective resolution of $M$. On the ${}_{\mathrm{II}}E_1^{\bullet,\bullet}$ page, we have the induced maps 
+    \begin{equation*}
+        \Hom_{A}\left(\Ext^{-p}_A\left(k, A\right), Q^q\right)\to\Hom_A\left(\Ext^{-p}_A\left(k, A\right), Q^{q + 1}\right).
+    \end{equation*}
+    Since $A$ is a Noetherian ring, it follows that $\Ext^{-p}_A(k, A)$ is a finite-dimensional $k$-module for all $p\in\Z$. Therefore, the induced maps are basically direct sums of the induced maps: 
+    \begin{equation*}
+        \Hom_{A}\left(k, Q^q\right)\to\Hom_A\left(k, Q^{q + 1}\right).
+    \end{equation*}
+    Recall from the theory of minimal injective resolutions that these maps must be identically zero. Thus the $E^1$-page has identically zero maps, so that the spectral sequence degenerates at $E^1$ -- in particular, at $E^2$. Consequently, comparing dimensions, we have 
+    \begin{equation*}
+        \dim\Tor^A_n(k, M) = \sum_{p + q = n}\dim_k\Ext^{-q}_A\left(\Ext^{p}_A(k, A), M\right) = \sum_{p + q = n}\dim_k\Ext^{p}_A(k, A)\cdot\dim_k\Ext^{-q}_A(k, M),
+    \end{equation*}
+    whence, it follows that 
+    \begin{equation*}
+        p_M(n) = \sum_{q\in\Z}i_A(n + q)i_M(q),
+    \end{equation*}
+    so that $P_M(X) = I_A(X)I_M(X^{-1})$, where the sum is finite, since $M$ has finite injective-dimension.  \qedhere
+    \end{enumerate}
 \end{proof}
 
 \begin{proof}[Proof of Foxby's Theorem]
@@ -667,7 +737,7 @@ These have associated power series:
     The left hand side is zero for $n > \projdim_A M$ and hence all the terms on the right hand side are identically zero for $n > \projdim_A M$. In particular, $i_A(n + d)i_M(d) = 0$ for all $n > \projdim_A M$. Thus $i_A(n + d) = 0$ for all $n > \projdim_A M$ since $i_M(d)\ne 0$ (recall that this was an easy consequence of Bass' Lemma). In particular, this means that $I_A$ is a polynomial, so that $\injdim_A A < \infty$, equivalently, $A$ is Gorenstein.
 \end{proof}
 
-\bibliographystyle{alpha}
-\bibliography{references}
+% \bibliographystyle{alpha}
+% \bibliography{references}
 
 \end{document}
