@@ -242,17 +242,34 @@ Recall from \thref{corollary-hilbert-serre} that $\lambda_{A/q}\left(\frac{\frak
 \end{proof}
 
 \begin{definition}
-    A ring $A$ is said to be \define{catenary} if for any prime ideals $\frakp$ and $\frakq$ of $A$ with $\frakp\subseteq\frakq$, there exists a satuarted chain of prime ideals starting from $\frakp$ and ending at $\frakq$, and all such chains have the same (finite) length.
+    A ring $A$ is said to be \define{catenary} if for any prime ideals $\frakp$ and $\frakq$ of $A$ with $\frakp\subseteq\frakq$, there exists a saturated chain of prime ideals starting from $\frakp$ and ending at $\frakq$, and all such chains have the same (finite) length.
 
     A ring $A$ is said to be \define{universally catenary} if every finitely generated $A$-algebra is catenary.
 \end{definition}
 
-\begin{lemma}
+\begin{lemma}\thlabel{equivalent-catenary}
     A Noetherian ring $A$ is catenary if and only if for every pair of prime ideals $\frakp\subseteq\frakq$, 
     \begin{equation*}
         \hght\frakq = \hght\frakp + \hght\left(\frakq/\frakp\right).
     \end{equation*}
 \end{lemma}
+\begin{proof}
+    We prove the converse direction first. Let $\frakp = \frakp_0\subsetneq\cdots\subsetneq\frakp_n = \frakq$ be a saturated chain of prime ideals from $\frakp$ to $\frakq$. Clearly $\hght(\frakp_{i + 1}/\frakp_i) = 1$, so that 
+    \begin{equation*}
+        \hght\frakq = \hght\frakp + n\implies n = \hght\frakq - \hght\frakp,
+    \end{equation*}
+    that is, the length of every saturated chain of primes from $\frakp$ to $\frakq$ is the same. 
+
+    Conversely, suppose $A$ is catenary. Choosing a chain of prime ideals ending at $\frakp$ of length $\hght\frakp$ and appending to it a saturated chain of prime ideals from $\frakp$ to $\frakq$, we have the inequality: 
+    \begin{equation*}
+        \hght\frakq\ge\hght\frakp + \hght(\frakq/\frakp).
+    \end{equation*}
+    On the other hand, suppose $\frakp_0$ is a minimal prime such that there exists a saturated chain of prime ideals from $\frakp_0$ to $\frakq$ of length $\hght\frakq$. Choose a saturated chain of prime ideals from $\frakp_0$ to $\frakp$ (which has length at most $\hght\frakp$) and append to it a saturated chain of prime ideals from $\frakp$ to $\frakq$. Since $A$ is catenary, this chain must have the same length as the aforementioned chain of length $\hght\frakq$ from $\frakp_0$ to $\frakq$. This shows that 
+    \begin{equation*}
+        \hght\frakq\le\hght\frakp + \hght(\frakq/\frakp),
+    \end{equation*}
+    whence equality holds.
+\end{proof}
 
 \subsection{System of Parameters}
 
