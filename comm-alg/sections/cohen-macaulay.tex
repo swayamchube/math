@@ -1,0 +1,133 @@
+\begin{theorem}[Ischebeck]\thlabel{ischebeck-theorem}
+    Let $(A,\frakm)$ be a Noetherian local ring, $M$ and $N$ non-zero finite $A$-modules, and let $k = \depth M$ and $r = \dim N$. Then 
+    \begin{equation*}
+        \Ext^i_A(N, M) = 0 \quad\text{ for } i < k - r.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    We shall prove this statement by induction on $r\ge 0$. If $r = 0$, then $\Supp_A(N) = \{\frakm\}$, so that by \thref{rees-lemma}, $\Ext^i_A(N, M) = 0$ for all $i < \depth M$. 
+
+    Suppose now that $r > 0$. There is a filtration 
+    \begin{equation*}
+        0 = N_0\subseteq\dots\subseteq N_n = N,
+    \end{equation*}
+    such that $N_i/N_{i - 1} = A/\frakp_i$ for some prime ideal $\frakp_i$ in $A$. Since $N_i/N_{i - 1}$ is a subquotient of $N$, we have $\dim N_i/N_{i - 1}\le r$, so that it suffices to show $\Ext^j_A(A/\frakp_i, M) = 0$ for $j < k - r$ and for all $i$. 
+    
+    Let $N = A/\frakp_i$. Since $r > 0$, we may choose an element $x\in\frakm\setminus\frakp_i$ whence we have an exact sequence 
+    \begin{equation*}
+        0\to N\xrightarrow{x} N\to N/xN\to 0.
+    \end{equation*}
+    Note that $\dim N/xN\le r - 1$, so that by the inductive hypothesis, we know that $\Ext^j_A(N/xN, M) = 0$ for all $j < k - (r - 1)$. Thus for $j < k - r$, we have the exact sequence: 
+    \begin{equation*}
+        0 = \Ext^j_A(N/xN, M)\to\Ext^j_A(N, M)\xrightarrow{x}\Ext^j_A(N, M)\to\Ext^{j + 1}_A(N/xN, M) = 0,
+    \end{equation*}
+    so that multiplication by $x$ induces a surjective map on $\Ext^j_A(N, M)$; but since $x\in\frakm$, due to Nakayama's lemma, $\Ext^j_A(N, M) = 0$, as desired.
+\end{proof}
+
+\begin{corollary}\thlabel{dimension-ge-depth}
+    Let $A$ be a Noetherian local ring, $M$ a finite $A$-module, and $\frakp\in\Ass_A(M)$. Then $\dim A/\frakp\ge\depth M$.
+\end{corollary}
+\begin{proof}
+    If $\frakp\in\Ass_A(M)$, then $\Ext^0_A(A/\frakp, M) = \Hom_A(A/\frakp, 0)\ne 0$, so that by \thref{ischebeck-theorem}, we must have $\dim A/\frakp\ge\depth M$.
+\end{proof}
+
+\begin{theorem}
+    Let $(A,\frakm, k)$ be a Noetherian local ring, and $M$ a finite $A$-module. We say that $M$ is a \define{Cohen-Macaulay (CM) module} if $\depth M = \dim M$, or $M = 0$. If $A$ is a Cohen-Macaulay module over itself, then $A$ is said to be a \define{Cohen-Macaulay ring}.
+\end{theorem}
+
+\begin{theorem}\thlabel{properties-of-cm-modules}
+    Let $A$ be a Noetherian local ring and $M$ a finite $A$-module. 
+    \begin{enumerate}[label=(\arabic*)]
+        \item If $M$ is a CM $A$-module, then for any $\frakp\in\Ass_A(M)$, $\dim A/\frakp = \dim M = \depth M$. In particular, $M$ has no embedded associated primes.
+        \item Let $a_1,\dots,a_r\in\frakm$ be an $M$-sequence and set $M' = M/(a_1,\dots,a_r)M$. Then 
+        \begin{equation*}
+            M\text{ is a CM $A$-module}\iff M'\text{ is.}
+        \end{equation*}
+        \item If $M$ is a CM $A$-module, then $M_\frakp$ is a CM $A_\frakp$-module for every prime ideal $\frakp$ in $A$. Further, if $M_\frakp\ne 0$, then 
+        \begin{equation*}
+            \depth(\frakp, M) = \depth_{A_\frakp} M_\frakp.
+        \end{equation*}
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+    \item For $\frakp\in\Ass_A(M)$, using \thref{dimension-ge-depth}, we have the inequalities
+    \begin{equation*}
+        \dim M = \dim\Supp_A(M)\ge\dim A/\frakp\ge\depth M,
+    \end{equation*}
+    so that $\dim A/\frakp = \depth M$.
+    \item Clearly $\depth M' = \depth M - r$. Due to \thref{nzd-reduces-dimension-by-1}, we know that $\dim M' = \dim M - r$, whence the conclusion follows.
+    \item It suffices to prove the statement in the case $\frakp\in\Supp_A(M) = V\left(\Ann_A(M)\right)$. Note that we have the inequalities: 
+    \begin{equation*}
+        \dim_{A_\frakp} M_\frakp\ge\depth_{A_\frakp} M_\frakp\ge\depth(\frakp, M),
+    \end{equation*}
+    where the second inequality follows from the fact that the image of any $M$-sequence in $\frakp A_\frakp$ is an $M_\frakp$-sequence. Hence, it suffices to show that $\dim M_\frakp = \depth(\frakp, M)$.
+
+    We prove this by induction on $\depth(\frakp, M)$. If $\depth(\frakp, M) = 0$, then $\frakp$ is contained in one of the associated primes of $M$. But since $M$ has no associated primes, all elements of $\Ass_A(M)$ must be the minimal elements of $\Supp_A(M)$\footnote{Recall that the minimal elements of $\Ass_A(M)$ and $\Supp_A(M)$ are the same.}, and hence $\frakp$ must be an associated prime -- and in particular, a minimal prime containing $\Ann_A(M)$. Therefore, $\dim M_\frakp = 0$, since $\Supp_{A_\frakp}(M_\frakp) = \{\frakp A_\frakp\}$.
+
+    Next, suppose $\depth(\frakp, M) > 0$, choose an $M$-regular element $a\in\frakp$, and set $M' = M/aM$. Clearly 
+    \begin{equation*}
+        \depth(\frakp, M') = \depth(\frakp, M) - 1,
+    \end{equation*}
+    and due to \thref{nzd-reduces-dimension-by-1}, 
+    \begin{equation*}
+        \dim \left(M'\right)_\frakp = \dim M_\frakp/aM_\frakp = \dim M_\frakp - 1.
+    \end{equation*}
+    Using the inductive hypothesis, we conclude that $\dim M_\frakp = \depth(\frakp, M)$, thereby completing the proof. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}\thlabel{equivalent-conditions-for-regularity-cm-ring}
+    Let $(A,\frakm)$ be a CM local ring. For a sequence $\ul a = a_1,\dots,a_r\in\frakm$, the following are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\ul a$ is an $A$-sequence. 
+        \item $\hght (a_1,\dots,a_i) = i$ for all $1\le i\le r$.
+        \item $\hght(a_1,\dots,a_r) = r$.
+        \item $a_1,\dots,a_r$ is a part of a system of parameters for $A$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    $(1)\implies(2)$ We first show that 
+    \begin{equation*}
+        0 < \hght (a_1) < \hght (a_1, a_2) < \dots < \hght (a_1,\dots,a_r).
+    \end{equation*}
+    Indeed, suppose $\hght (a_1,\dots,a_{i - 1}) = \hght (a_1,\dots,a_i)$ for some $i\ge 1$. Let $\frakp_1,\dots,\frakp_s$ and $\frakq_1,\dots,\frakq_t$ denote the minimal primes containing $(a_1,\dots,a_{i - 1})$ and $(a_1,\dots,a_i)$ respectively. Then we have the inclusion: 
+    \begin{equation*}
+        \frakp_1\cap\dots\cap\frakp_s = \sqrt{(a_1,\dots,a_{i - 1})}\subseteq\sqrt{(a_1,\dots,a_i)}\subseteq\frakq_1\cap\dots\cap\frakq_t.
+    \end{equation*}
+    Since $a_i$ is a non-zero-divisor on $A/(a_1,\dots,a_{i - 1})$, it cannot be contained in any of the $\frakp_j$'s. Further, by Prime Avoidance, each $\frakq_k$ must contain some $\frakp_j$, so that 
+    \begin{equation*}
+        \hght\frakq_k\ge\hght\frakp_j + 1\ge\hght (a_1,\dots,a_{i - 1}) + 1.
+    \end{equation*}
+    This shows that $\hght (a_1,\dots,a_i)\ge\hght (a_1,\dots,a_{i - 1}) + 1$. Finally, due to the Hauptidealsatz (\thref{hauptidealsatz}), $\hght (a_1,\dots,a_i)\le i$, whence equality must hold.
+
+    $(2)\implies(3)$ is clear. 
+
+    $(3)\implies(4)$ If $\dim A = r$, then $\ul a$ is a system of parameters. If $\dim A > r$, then $\frakm$ is not an associated prime of $(a_1,\dots,a_r)$ due to the Hauptidealsatz (\thref{hauptidealsatz}). Hence, we may choose $a_{r + 1}\in\frakm$ that is not contained in any of the minimal primes (equiv. associated primes) of $(a_1,\dots,a_r)$. As we have argued above, $\hght(a_1,\dots,a_{r + 1}) = r + 1$. Continuing in this fashion, we may extend $\ul a$ to a system of parameters for $A$. 
+
+    $(4)\implies(1)$ It suffices to show that any system of parameters $\ul x = x_1,\dots,x_n$ for a CM local ring $A$ is also an $A$-sequence. We shall do so by inducting on $n = \dim A$. If $\frakp$ is a minimal prime in $A$ (equiv. an associated prime of $A$), then due to \thref{properties-of-cm-modules}, $\dim A/\frakp = n$. It follows hence that $x_1\notin\frakp$, else $A/\frakp$ would be a quotient of $A/x_1$, which is $(n - 1)$-dimensional. Thus, $x_1$ is $A$-regular. Set $A' = A/x_1$, which, due to \thref{properties-of-cm-modules} is also a CM local ring of dimension $n - 1$. Using the inductive hypothesis, we conclude that $\ul x$ is an $A$-sequence.
+\end{proof}
+
+\begin{theorem}
+    Let $(A,\frakm)$ be a CM local ring. 
+    \begin{enumerate}[label=(\arabic*)]
+        \item For a proper ideal $I$ of $A$, 
+        \begin{equation*}
+            \hght I = \depth(I, A)\quad\text{ and }\quad \hght I + \dim A/I = \dim A. 
+        \end{equation*}
+        \item $A$ is catenary.  
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+    \item Using \thref{height-r-ideal}, there is a sequence $\ul a = a_1,\dots,a_r\in I$ such that $\hght (a_1,\dots,a_r) = r$. In view of \thref{equivalent-conditions-for-regularity-cm-ring}, $\ul a$ is an $A$-sequence, so that $\depth(I, A)\ge r$. On the other hand, if $\ul b = b_1,\dots, b_s\in I$ is an $A$-sequence, then due to \thref{equivalent-conditions-for-regularity-cm-ring}, $\hght (b_1,\dots,b_s) = s\le \hght I = r$, so that $\depth(I, A)\le r$, whence $\hght I = \depth(I, A)$. 
+    
+    As for the second equality, let $\ul a = a_1,\dots,a_r\in I$ be an $A$-sequence with $r = \depth(I, A)$. Set $A' = A/(a_1,\dots,a_r)$ so that $A'$ is a CM local ring of dimension $n - r$. Let $I'$ denote the image of $I$ in $A'$. Clearly $\depth(I', A') = 0$, so that $\hght I' = 0$ -- in particular, $I'$ is contained in one of the minimal primes of $A$. Further, note that $A/I\cong A'/I'$. For any minimal prime $\frakp'$ in $A'$, due to \thref{properties-of-cm-modules}, $\dim A'/\frakp' = \dim A'$, so that $\dim A'/I' = \dim A'$. It follows that 
+    \begin{equation*}
+        \dim A/I = \dim A'/I' = \dim A' = \dim A - r = \dim A - \hght I,
+    \end{equation*}
+    as desired. 
+
+    \item % TODO: Add in later
+\end{enumerate}
+\end{proof}

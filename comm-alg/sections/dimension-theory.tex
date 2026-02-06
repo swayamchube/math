@@ -191,6 +191,17 @@ Recall from \thref{corollary-hilbert-serre} that $\lambda_{A/q}\left(\frac{\frak
     \noindent\underline{Step 3.} Finally, we show that $\dim M\ge \delta(M)$ by induction on $\dim M$. If $\dim M = 0$, then $\Supp_R(M) = \{\frakm\}$, so that $\lambda_R(M) < \infty$, i.e., $\delta(M) = 0$. Now suppose $\dim M > 0$ and let $\frakp_1,\dots,\frakp_r$ denote the associated primes of $M$. Since $\dim M > 0$, $\frakm$ is not an associated prime, so that by prime avoidance, there is an element $\displaystyle x_1\in\frakm\setminus\bigcup_{i = 1}^r\frakp_r$. Let $M_1 = M/x_1 M$, so that $\dim M_1\le\dim M - 1$, and clearly $\delta(M)\le\delta(M_1) + 1$, so that $\delta(M)\le\dim M$, as desired.
 \end{proof}
 
+\begin{corollary}\thlabel{nzd-reduces-dimension-by-1}
+    Let $(R,\frakm)$ be a Noetherian local ring, $M$ a finite $R$-module, and $a\in\frakm$ a non-zero-divisor on $M$. Then $\dim M/aM = \dim M - 1$.
+\end{corollary}
+\begin{proof}
+    Let $M' = M/aM$. Then $\delta(M)\le\delta(M') + 1$, so that $\dim M'\le\dim M + 1$. Further, since $a$ is not contained in the union of all associated primes of $M$, we have 
+    \begin{equation*}
+        \dim\Supp_A(M') = \dim\Supp_A(M)\cap V(a)\le\dim M - 1,
+    \end{equation*}
+    so that $\dim M' = \dim M - 1$.
+\end{proof}
+
 \begin{theorem}[Krull's Hauptidealsatz]\thlabel{hauptidealsatz}
     Let $R$ be a Noetherian ring and $I = (a_1,\dots,a_r)$ a proper ideal in $R$. If $\frakp$ is a minimal prime ideal containing $I$, then $\hght\frakp\le r$.
 \end{theorem}
@@ -216,6 +227,32 @@ Recall from \thref{corollary-hilbert-serre} that $\lambda_{A/q}\left(\frac{\frak
     \item Note that $\overline\frakp = \frakp/(a_1,\dots,a_i)$ is a minimal prime containing $(\overline a_{i + 1},\dots,\overline a_r)$. Thus, due to \thref{hauptidealsatz}, $\hght\overline\frakp\le r - i$. But due to (2), $\hght\overline\frakp\ge r - i$ whence the equality follows. \qedhere
 \end{enumerate}
 \end{proof}
+
+\begin{lemma}\thlabel{height-r-ideal}
+    Let $(A,\frakm)$ be a Noetherian local ring and $I\subseteq\frakm$ an ideal of height $r\ge 0$. Then there exists a sequence $\ul a = a_1,\dots,a_r\in I$ such that $\hght (a_1,\dots,a_i) = i$ for $1\le i\le r$.
+\end{lemma}
+\begin{proof}
+    For each $0\le i\le n = \dim A$, let $\calP_i$ denote the set of height $i$ primes in $A$. Using Prime Avoidance, note that $I$ cannot be contained in a finite union of primes in $\displaystyle\bigcup_{i = 0}^{r - 1}\calP_i$. Using this fact, choose $x_1\in I$ but not contained in any of the primes in $\calP_0$ (note that this set is finite). Clearly any prime containing $(x_1)$ must have height at least $1$. 
+
+    Inductively suppose the sequence $x_1,\dots,x_i$ has been constructed. Choose $x_{i + 1}\in I$ but not in 
+    \begin{equation*}
+        \Ass_A\left(A/(x_1,\dots,x_i)\right)\cap\left(\calP_0\cup\dots\cup\calP_i\right).
+    \end{equation*}
+    If $\frakp$ is a minimal prime over $(x_1,\dots,x_{i + 1})$, due to Prime Avoidance, it must contain some minimal prime $\frakq$ over $(x_1,\dots,x_i)$. If $\hght\frakq = i$, then $x_{i + 1}\in\frakp\setminus\frakq$ by construction, and therefore, $\hght\frakp\ge i + 1$. Thus due to the Hauptidealsatz (\thref{hauptidealsatz}), $\hght (x_1,\dots,x_{i + 1}) = i + 1$, thereby completing the proof.
+\end{proof}
+
+\begin{definition}
+    A ring $A$ is said to be \define{catenary} if for any prime ideals $\frakp$ and $\frakq$ of $A$ with $\frakp\subseteq\frakq$, there exists a satuarted chain of prime ideals starting from $\frakp$ and ending at $\frakq$, and all such chains have the same (finite) length.
+
+    A ring $A$ is said to be \define{universally catenary} if every finitely generated $A$-algebra is catenary.
+\end{definition}
+
+\begin{lemma}
+    A Noetherian ring $A$ is catenary if and only if for every pair of prime ideals $\frakp\subseteq\frakq$, 
+    \begin{equation*}
+        \hght\frakq = \hght\frakp + \hght\left(\frakq/\frakp\right).
+    \end{equation*}
+\end{lemma}
 
 \subsection{System of Parameters}
 

@@ -1,5 +1,3 @@
-\subsection{The Koszul Complex}
-
 \begin{definition}
     Let $A$ be a ring and $M$ an $A$-module. An element $a\in A$ is said to be \define{$M$-regular} if $a$ is a non-zero-divisor on $M$. A sequence $\ul a = a_1,\dots, a_n$ is said to be an \define{$M$-sequence} if the following two conditions hold: 
     \begin{enumerate}[label=(\arabic*)]
@@ -107,6 +105,24 @@ It is straightforward to see that
     H_0(\ul x, M)\cong M/(x_1,\dots,x_n)M\quad\text{ and }\quad H_n(\ul x, M) = \left(0 :_M \ul x\right) = \left\{\xi\in M\colon x_1\xi = \dots = x_n\xi = 0\right\}.
 \end{equation*}
 
+\begin{interlude}[Long Exact Sequence]\thlabel{ses-to-les-koszul}
+    Let $0\to M'\to M\to M''\to 0$ be a short exact sequence of $A$-modules, and $\ul x = x_1,\dots,x_n\in A$ a sequence. Then there is an associated long exact sequence in homology: 
+    \begin{equation*}
+        \cdots\to H_i(\ul x, M')\to H_i(\ul x, M)\to H_i(\ul x, M'')\to H_{i + 1}(\ul x, M')\to \cdots.
+    \end{equation*}
+    Indeed, consider the following commutative diagram of $A$-modules: 
+    \begin{equation*}
+        \xymatrix {
+            & 0\ar[d] & 0\ar[d] & \\
+            \cdots\ar[r] & K_p\otimes_A M'\ar[r]\ar[d] & K_{p - 1}\otimes_A M'\ar[r]\ar[d] & \cdots\\
+            \cdots\ar[r] & K_p\otimes_A M\ar[r]\ar[d] & K_{p - 1}\otimes_A M\ar[r]\ar[d] & \cdots\\
+            \cdots\ar[r] & K_p\otimes_A M''\ar[r]\ar[d] & K_{p - 1}\otimes_A M''\ar[r]\ar[d] & \cdots\\
+            & 0 & 0 &
+        }.
+    \end{equation*}
+    Since each $K_p$ is a free $A$-module, it is $A$-flat, so that all vertical columns are exact. This short exact sequence of complexes induces the desired long exact sequence of homology modules.
+\end{interlude}
+
 For a complex $C_\bullet$ and $x\in A$, let $C(x)_\bullet$ denote the complex $C_\bullet\otimes K(x)_\bullet$.
 
 \begin{theorem}\thlabel{koszul-long-exact-sequence}
@@ -195,7 +211,7 @@ We prove both statements by induction on $n\ge 1$.
 \end{enumerate}
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\thlabel{rees-lemma}
     Let $A$ be a Noetherian ring, $M$ a finite $A$-module, and $I$ an ideal in $A$ with $IM\ne M$. For a positive integer $n > 0$, the following are equivalent: 
     \begin{enumerate}[label=(\arabic*)]
         \item $\Ext^i_A(N, M) = 0$ for all $i < n$ and for any finite $A$-module $N$ with $\Supp_A(N)\subseteq V(I)$. 
@@ -243,3 +259,96 @@ We prove both statements by induction on $n\ge 1$.
     \end{equation*}
     Since $I$ contains an $M_1$-sequence of length $n - 1$, due to the inductive hypothesis, $\Ext^{n - 2}_A(N, M) = 0$, that is, multiplication by $x_1$ induces an injective map on $\Ext^{n - 1}_A(N, M)$. Now, as we have observed above, $I\subseteq\sqrt{\Ann_A(N)}$, so that there is a positive integer $r > 0$ such that $x_1^r$ annihilates $N$, and hence must annihilate $\Ext^{n - 1}_A(N, M)$. This is possible if and only if $\Ext^{n - 1}_A(N, M) = 0$, as desired.
 \end{proof}
+
+\begin{lemma}\thlabel{boundary-map}
+    Let $I$ be an ideal in a ring $A$, $M$ an $A$-module, and $\ul a = a_1,\dots,a_n\in I$ an $M$-sequence. Set $M_i = M/(a_1,\dots,a_i)M$. Then we have the isomorphisms 
+    \begin{equation*}
+        \Hom_A(A/I, M_n) = \Ext^0_A(A/I, M_n)\cong\Ext^1_A(A/I, M_{n - 1})\cong\cdots\cong\Ext^n_A(A/I, M).
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    More generally, we shall show that if $a\in I$ is $M$-regular and $M_1 = M/aM$, then $\Ext^i_A(A/I, M)\cong\Ext^{i - 1}(A/I, M_1)$ for all $i$. Clearly our desired statement would follow immediately. Indeed, consider the long exact sequence corresponding to the short exact sequence $0\to M\xrightarrow{a} M\to M_1\to 0$: 
+    \begin{equation*}
+        \cdots\to\Ext^i_A(A/I, M)\xrightarrow{a}\Ext^i_A(A/I, M)\to\Ext^i_A(A/I, M_1)\xrightarrow{\delta}\Ext^{i + 1}_A(A/I, M)\xrightarrow{a}\Ext^{i + 1}_A(A/I, M)\to\cdots.
+    \end{equation*}
+    Since $a\in I$, it annihilates $A/I$, and therefore annihilates $\Ext^j_A(A/I, M)$ for all $j$. As a result, the connecting morphism $\delta$ is both injective and surjective, whence an isomorphism. 
+\end{proof}
+
+\begin{theorem}[Rees]
+    Let $A$ be a Noetherian ring, $I$ an ideal of $A$, and $M$ a finite $A$-module such that $IM\ne M$. Then the length of any maximal $M$-sequence contained in $I$ is a well-determined integer given by 
+    \begin{equation*}
+        \Ext^i_A(A/I, M) = 0\quad\text{ for } i < n\quad\text{ and }\quad\Ext^n_A(A/I, M)\ne 0.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    First, since $A$ is Noetherian, clearly the length of any maximal $M$-sequence contained in $I$ is finite. Thus, due to \thref{rees-lemma}, there must exist an index $j$ with $\Ext^j_A(A/I, M)\ne 0$. Let $n$ be the smallest such index. Then due to \thref{rees-lemma}, the length of any $M$-sequence contained in $I$ is at most $n$. Conversely, let $a_1,\dots,a_s$ be a maximal $M$-sequence contained in $I$. Clearly $s\le n$. Since this sequence is maximal, every element of $I$ is a non-zero-divisor on $M_s = {M}/{(a_1,\dots,a_s)M}$, whence 
+    \begin{equation*}
+        I\subseteq\bigcup_{\frakp\in\Ass_A(M_s)}\frakp,
+    \end{equation*}
+    so that by Prime Avoidance, $I\subseteq\frakp$ for some $\frakp\in\Ass_A(M_s)$.
+
+    Further, due to \thref{boundary-map},
+    \begin{equation*}
+        \Ext^s_A(A/I, M) = \Hom_A\left(A/I, \frac{M}{(a_1,\dots,a_s)M}\right)\ne 0,
+    \end{equation*}
+    since we may obtain the non-zero composite map
+    \begin{equation*}
+        A/I\onto A/\frakp\into M.
+    \end{equation*}
+    This shows that $n\le s$, and the conclusion follows.
+\end{proof}
+
+\begin{definition}
+    Let $A$ be a Noetherian ring, $M$ a finite $A$-module, and $I$ an ideal of $A$ with $IM\ne M$. We define $\depth(I, M)$ to be the length of a maximal $M$-sequence contained in $I$ and call it the \define{$I$-depth of $M$}. If $IM = M$, we set $\depth(I, M) = \infty$.
+\end{definition}
+
+\begin{remark}
+\begin{enumerate}[label=(\roman*)]
+    \item Using \thref{rees-lemma}, it is clear that if $I$ and $J$ are two ideal in $A$ with $IM\ne M$, $JM\ne M$, and $V(I) = V(J)$, then $\depth(I, M) = \depth(J, M)$.
+    \item Suppose $\fraka\subseteq\Ann_A(M)$ is an ideal, and set $\overline A = A/\fraka$. Clearly, $a_1,\dots,a_r$ is an $M$-sequence if and only if the image sequence $\overline a_1,\dots,\overline a_r$ in $\overline A$ is an $M$-sequence. Therefore, if $I$ is an ideal of $I$ and $\overline I$ its image in $\overline A$, then $\depth_A(I, M) = \depth_{\overline A}(\overline I, M)$. In particular, this also shows that $\depth_A(I, M) = \depth_A(I + \fraka, M)$.
+\end{enumerate}
+\end{remark}
+
+\begin{theorem}[Depth Sensitivity of Koszul Complex]\thlabel{depth-sensitivity-koszul}
+    Let $A$ be a Noetherian ring, $I = (y_1,\dots,y_n) = (\ul y)$ an ideal in $A$, and $M$ a finite $A$-module such that $IM\ne M$. Set 
+    \begin{equation*}
+        q = \left\{i\colon H_i(\ul y, M)\ne 0\right\}.
+    \end{equation*}
+    Then $\depth(I, M) = n - q$.
+\end{theorem}
+\begin{proof}
+    Let $s = \depth(I, M)$. We shall prove this statement by induction on $s\ge 0$. Suppose first that $s = 0$. As we have argued multiple times above, $I$ must be contained in an associated prime $\frakp\in\Ass_A(M)$. Hence, there exists $0\ne\xi\in M$ such that $\frakp = \Ann_A(\xi)$. Hence, 
+    \begin{equation*}
+        H_n\left(\ul y, M\right) \cong (0 :_M I)\supseteq(0 :_M \frakp)\ne 0,
+    \end{equation*}
+    i.e., $q = n$ in this case.
+
+    Suppose now that $s > 0$, and let $\ul x = x_1,\dots,x_s\in I$ be a maximal $M$-sequnce contained in $I$. Set $M_1 = M/x_1 M$, so that $\depth(I, M_1) = s - 1$ and there is a short exact sequence 
+    \begin{equation*}
+        0\to M\xrightarrow{x_1} M\to M_1\to 0.
+    \end{equation*}
+    This induces a long exact sequence of Koszul homology as seen in \thref{ses-to-les-koszul}: 
+    \begin{equation*}
+        \cdots\to H_i(\ul x, M)\xrightarrow{x_1} H_i(\ul x, M)\to H_i(\ul x, M_1)\to H_{i - 1}(\ul x, M)\xrightarrow{x_1} H_{i - 1}(\ul x, M)\to\cdots.
+    \end{equation*}
+    Since $x_1$ annihilates all Koszul homology groups above, we see that the above long exact sequence breaks up into short exact sequences of the form 
+    \begin{equation*}
+        0\to H_i(\ul x, M)\to H_i(\ul x, M_1)\to H_{i - 1}(\ul x, M)\to 0.
+    \end{equation*}
+    We note that $H_q(\ul x, M)\ne 0$, whence due to the above short exact sequence, we must have that $H_{q + 1}(\ul x, M_1)\ne 0$. But similarly, if $i > q + 1$, then $H_{i - 1}(\ul x, M) = 0$, so that $H_i(\ul x, M_1) = H_i(\ul x, M) = 0$. Thus 
+    \begin{equation*}
+        \sup\left\{i\colon H_i(\ul y, M_1)\ne 0\right\} = q + 1,
+    \end{equation*}
+    so that by the inductive hypothesis, 
+    \begin{equation*}
+        n = (q + 1) + (s - 1) = q + s,
+    \end{equation*}
+    as desired.
+\end{proof}
+
+\begin{remark}
+    In other words, $\depth(I, M)$ is precisely the number of successive zero terms from the left in the sequence of modules: 
+    \begin{equation*}
+        H_n(\ul y, M),~H_{n - 1}(\ul y, M),~\cdots,~H_0(\ul y, M) = M/IM\ne 0.
+    \end{equation*}
+\end{remark}
