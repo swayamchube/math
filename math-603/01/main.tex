@@ -1,0 +1,637 @@
+\documentclass[11pt]{article}
+
+\title{Math 603: Homework 1}
+\author{Swayam Chube}
+\date{Last Updated: \today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{fouriernc}
+\usepackage{mdframed}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd-Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{epigraph}
+\setlength\epigraphwidth{0.4\textwidth}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+% \renewcommand{\familydefault}{\sfdefault} % Do you want this font? 
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Swayam Chube},
+    colorlinks=true,
+	citecolor=blue,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{interlude}[theorem]{Interlude}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\F}{\mathbb{F}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakB}{\mathfrak{B}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrM}{\mathscr{M}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrO}{\mathscr{O}} % sheaf
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+% \newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\Ass}{\operatorname{Ass}}
+\newcommand{\projdim}{\operatorname{proj~dim}}
+\newcommand{\injdim}{\operatorname{inj~dim}}
+\newcommand{\gldim}{\operatorname{gl~dim}}
+\newcommand{\embdim}{\operatorname{emb~dim}}
+\newcommand{\hght}{\operatorname{ht}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\CM}{\operatorname{CM}}
+\newcommand{\cech}[1]{\mathbin{\check{#1}}}
+\newcommand{\cdim}{\operatorname{cdim}}
+\newcommand{\Der}{\operatorname{Der}}
+\newcommand{\trdeg}{\operatorname{trdeg}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calL}{\mathcal{L}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\gr}{\operatorname{gr}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\calH}{\mathcal{H}}
+
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\sffamily}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+\begin{document}
+\maketitle
+
+\section{Problem 1}
+
+\subsection{Part (a)}
+
+For the sake of brevity, I write $\|\cdot\|$ instead of $\|\cdot\|_{X\to X}$. Since $X$ is a Banach space, as we have seen in class, $\calL(X, X)$ is also a Banach space when equipped with the norm $\|\cdot\|_{X\to X}$. Thus, to show that the series $\displaystyle\sum_{n = 1}^\infty T^n$ converges in $\calL(X, X)$, it suffices to show that the partial sums of this series form a Cauchy sequence. Indeed, for $n\ge 1$, define
+\begin{equation*}
+    S_n = \sum_{k = 1}^n T^k.
+\end{equation*}
+Then for $m > n\ge 1$, we have 
+\begin{equation*}
+    \|S_m - S_n\| = \left\|\sum_{k = n + 1}^m T^k\right\|\le\sum_{k = n + 1}^m \|T^k\|\le\sum_{k = n + 1}^m \|T\|^k.
+\end{equation*}
+If $m > n\ge N$ for some positive integer $N$, then we can write 
+\begin{equation*}
+    \|S_m - S_n\|\le\sum_{k = N + 1}^m \|T^k\|\le\sum_{k = N + 1}^\infty\|T\|^k = \frac{\|T\|^{N + 1}}{1 - \|T\|},
+\end{equation*}
+since $\|T\| < 1$. Further, note that the right hand side goes to $0$ as $N\to\infty$. Thus, given $\varepsilon > 0$, there is a positive integer $N$ such that $\|T\|^{N + 1} < \varepsilon\left(1 - \|T\|\right)$, and hence for all $m > n\ge N$, we have 
+\begin{equation*}
+    \|S_m - S_n\| < \varepsilon.
+\end{equation*}
+Thus $(S_n)_{n\ge 1}$ forms a Cauchy sequence in $\calL(X, X)$, and consequently, converges to some $S\in\calL(X, X)$. In other words,
+\begin{equation*}
+    S = \lim_{n\to\infty} S_n = \sum_{n = 1}^\infty T^n.
+\end{equation*}
+
+\subsection{Part (b)}
+
+Note that $R = I + S$, so that $R = \displaystyle\lim_{n\to\infty} I + S_n$. Set $\wt S_n = I + S_n$. Before we proceed, note that 
+\begin{equation*}
+    (I - T)\wt S_n = (I - T)\left(I + T + \dots + T^n\right) = I - T^{n + 1} = \left(I + T + \dots + T^n\right)(I - T) = \wt S_n(I - T).
+\end{equation*}
+We can write
+\begin{align*}
+    \|(I - T)R - I\| &= \|(I - T)(R - \wt S_n) + (I - T)\wt S_n - I\|\\
+    &\le \|(I - T)(R - \wt S_n)\| + \|(I - T)\wt S_n - I\|\\
+    &\le\|I - T\|\|R - \wt S_n\| + \left\|I - T^{n + 1} - I\right\|\\
+    &\le \|I - T\|\|R - \wt S_n\| + \|T\|^{n + 1}.
+\end{align*}
+Since $\wt S_n\to R$ in $\calL(X, X)$, we have $\displaystyle\lim_{n\to\infty} \|R - \wt S_n\| = 0$, and since $\|T\| < 1$, $\displaystyle\lim_{n\to\infty}\|T\|^{n + 1} = 0$. This gives us
+\begin{equation*}
+    \|(I - T)R - I\|\le \lim_{n\to\infty}\|I - T\|\|R - \wt S_n\| + \lim_{n\to\infty}\|T\|^{n + 1} = 0.
+\end{equation*}
+As a result, $(I - T)R = I$. Similarly, 
+\begin{align*}
+    \|R(I - T) - I\| &= \|(R - \wt S_n) (I - T) + \wt S_n(I - T) - I\|\\
+    &\le \|(R - \wt S_n)(I - T)\| + \|\wt S_n(I - T) - I\|\\
+    &\le\|I - T\|\|R - \wt S_n\| + \left\|I - T^{n + 1} - I\right\|\\
+    &\le \|I - T\|\|R - \wt S_n\| + \|T\|^{n + 1}\to 0
+\end{align*}
+as $n\to\infty$. Hence, $R(I - T) = I$.
+
+\section{Problem 2}
+
+\subsection{Part (a)}
+
+That $K$ is linear follows from the linearity of the integral. Indeed, if $\alpha,\beta\in\bbC$ and $f, g\in L^p(B)$, then for all $x\in A$, 
+\begin{align*}
+    K(\alpha f + \beta g)(x) &= \int_B k(x, y)\left(\alpha f(y) + \beta g(y)\right)~\mathrm d\nu(y)\\ &= \alpha\int_B k(x, y) f(y)~\mathrm d\nu(y) + \beta\int_A k(x, y)f(y)~\mathrm d\nu(y)\\ &= \alpha (Kf)(x) + \beta (Kf)(x).
+\end{align*}
+
+
+Note that 
+\begin{equation*}
+    |(Kf)(x)|\le\int_B |k(x, y)| |f(y)|~\mathrm d\nu(y) = \int_B |k(x, y)|^\frac{1}{q} |k(x, y)|^\frac{1}{p}|f(y)|~\mathrm d\nu(y).
+\end{equation*}
+Using H\"older's inequality, we obtain 
+\begin{equation*}
+    |(Kf)(x)|\le\left(\int_B |k(x, y)|~\mathrm d\nu(y)\right)^{\frac{1}{q}}\left(\int_B |k(x, y)||f(y)|^p~\mathrm d\nu(y)\right)^{\frac{1}{p}}\le C_1^{\frac{1}{q}}\left(\int_B |k(x, y)||f(y)|^p~\mathrm{d}\nu(y)\right)^{\frac{1}{p}},
+\end{equation*}
+$\mu$-almost everywhere, so that 
+\begin{equation*}
+    |(Kf)(x)|^p\le C_1^{\frac{p}{q}}\int_B |k(x, y)||f(y)|^p~\mathrm d\nu(y),
+\end{equation*}
+$\mu$-almost everywhere. Hence, 
+\begin{align*}
+    \|Kf\|_p^p = \int_A |(Kf)(x)|^p~\mathrm d\mu(x) &\le C_1^{\frac{p}{q}}\int_A\left(\int_B |k(x, y)||f(y)|^p~\mathrm d\nu(y)\right)~\mathrm d\mu(x) \\
+    &= C_1^{\frac{p}{q}}\int_B\int_A |k(x, y)||f(y)|^p~\mathrm d\mu(x)~\mathrm d\nu(y)\\
+    &= C_1^{\frac{p}{q}}\int_B|f(y)|^p\int_A |k(x, y)|~\mathrm d\mu(x)~\mathrm d\nu(y)\\
+    &\le C_1^{\frac{p}{q}}\int_{B}C_2 |f(y)|^p~\mathrm d\nu(y)\\
+    &= C_1^{\frac{p}{q}}C_2\|f\|_p^p.
+\end{align*}
+Thus $Kf\in L^p(A)$ and $\|Kf\|_p\le C_1^{\frac{1}{q}} C_2^{\frac{1}{p}}\|f\|_p$, so that $\|K\|\le C_1^{\frac{1}{q}}C_2^{\frac{1}{p}}$ is a bounded linear functional $L^p(B)\to L^p(A)$. In particular the above analysis also shows that $Kf$ is defined $\mu$-almost everywhere.
+
+\subsection{Part (b)}
+
+For $t > 0$, define $k_t\colon\R\times\R\to\R$ by 
+\begin{equation*}
+    k_t(x, y)  = \frac{1}{\sqrt{2\pi t}}e^{-\frac{(x - y)^2}{2t}}.
+\end{equation*}
+Then 
+\begin{equation*}
+    T_t(x) = \int_{\R} k_t(x, y)f(y)~\mathrm dy. % TODO: Add in later
+\end{equation*}
+Note that for any $x\in\R$, we have (making the substitution $u = \frac{y - x}{\sqrt{2t}}$)
+\begin{equation*}
+    \int_\R k_t(x, y)~\mathrm dy = \frac{1}{\sqrt{2\pi t}}\int_\R e^{-\frac{(x - y)^2}{2t}}~\mathrm dy = \frac{1}{\sqrt{\pi}}\int_{\R} e^{-u^2}~\mathrm du = 1.
+\end{equation*}
+Similarly for any $y\in\R$, we have (making the substitution $u = \frac{x - y}{\sqrt{2t}}$)
+\begin{equation*}
+    \int_\R k_t(x, y)~\mathrm dx  = \frac{1}{\sqrt{2\pi t}} \int_\R e^{-\frac{(x - y)^2}{2t}}~\mathrm dx = \frac{1}{\sqrt{\pi}}\int_{\R} e^{-u^2}~\mathrm du = 1.
+\end{equation*}
+Using the result of part (a), we see that $T_t\in\calL\left(L^p(\R), L^p(\R)\right)$ for $1 < p < \infty$, and 
+\begin{equation*}
+    \|T_t\|\le 1^{\frac{1}{p}}1^{\frac{1}{q}} = 1,
+\end{equation*}
+as desired.
+
+\section{Problem 3}
+
+Let $X, Y, Z$ be normed linear spaces over the field $\K\in\{\R, \bbC\}$. Before we begin, note that due to the density of $Z$ in $X$, for any $x\in X$, there is a sequence $(z_n)_{n\ge 1}$ in $Z$ converging to $x$ in $X$.
+
+If $T = 0$, then set $\wh T = 0$ as well. Suppose now that $T\ne 0$, so that $\|T\|\ne 0$. Let $x\in X$ and $(z_n)_{n\ge 1}$ be a sequence of points in $Z$ converging to $X$. Note that $(z_n)_{n\ge 1}$ is a Cauchy sequence in $X$. For $m,n\ge 1$, 
+\begin{equation*}
+    \|T(z_n) - T(z_m)\| = \|T(z_n - z_m)\|\le\|T\|\|z_n - z_m\|.
+\end{equation*}
+Given $\varepsilon > 0$, one can find a positive integer $N$ such that whenever $m,n\ge N$, $\|z_n - z_m\| < \frac{\varepsilon}{\|T\|}$. Then for $m,n\ge N$, $\|T(z_n) - T(z_m)\| < \varepsilon$. Thus $\left(T(z_n)\right)_{n\ge 1}$ is a Cauchy sequence in $Y$, and due to the completeness of $Y$, this converges. Define 
+\begin{equation*}
+    \wh T(x)\coloneq\lim_{n\to\infty} T(z_n).
+\end{equation*}
+We show that this is well-defined and a bounded linear map. Indeed, if $(z_n')_{n\ge 1}$ is another sequence in $Z$ converging to $x$ in $X$, then 
+\begin{align*}
+    \|\wh T(x) - T(z_n')\| &= \|\wh T(x) - T(z_n) + T(z_n) - T(z_n')\|\\
+    &\le\|\wh T(x) - T(z_n)\| + \|T(z_n - z_n')\|\\
+    &\le\|\wh T(x) - T(z_n)\| + \|T\|\|z_n - z_n'\|.
+\end{align*}
+Since both $(z_n)_{n\ge 1}$ and $(z_n')_{n\ge 1}$ converge to $x$, given $\varepsilon > 0$, there is an $N > 0$ such that whenever $n\ge N$, $\|x - z_n\| < \frac{\varepsilon}{4\|T\|}$ and $\|x - z_n'\| < \frac{\varepsilon}{4\|T\|}$, so that 
+\begin{equation*}
+    \|z_n - z_n'\| < \|x - z_n'\| + \|z_n - x\| < \frac{\varepsilon}{2\|T\|}.
+\end{equation*}
+Therefore, 
+\begin{equation*}
+    \|\wh T(x) - T(z_n')\|\le\|\wh T(z_n) - T(z_n)\| + \frac{\varepsilon}{2}\quad\text{ for all }n\ge N.
+\end{equation*}
+Next, since $T(z_n)\to\wh T(x)$, there is an $N' > 0$ such that whenever $n\ge N'$, $\|\wh T(x) - T(z_n)\| < \frac{\varepsilon}{2}$. Then for $n\ge\max\{N, N'\}$, we have 
+\begin{equation*}
+    \|\wh T(x) - T(z_n')\| < \varepsilon,
+\end{equation*}
+and hence $\wh T(x) = \displaystyle\lim_{n\to\infty} T(z_n')$, i.e., $\wh T$ is well-defined. Further, note that $\wh T$ extends $T$. Indeed, for $z\in Z$, choose the constant sequence $z_n = z$ for all $n\ge 1$, so that 
+\begin{equation*}
+    \wh T(z) = \lim_{n\to\infty} T(z) = T(z).
+\end{equation*}
+
+Next, we show that $\wh T$ is linear. Indeed, let $x, y\in X$ and $\alpha, \beta\in\K$. Choose sequences $(z_n)_{n\ge 1}$ and $(z_n')_{n\ge 1}$ in $Z$ converging to $x$ and $y$ respectively. Since $Z$ is linear, the sequence $(\alpha z_n + \beta z_n')_{n\ge 1}$ is contained in $Z$ and further, converges to $\alpha x + \beta y$ due to the inequality 
+\begin{equation*}
+    \|\alpha x + \beta y -(\alpha z_n + \beta z_n')\|\le |\alpha|\|x - z_n\| + |\beta|\|y - z_n'\|.
+\end{equation*}
+Therefore, 
+\begin{equation*}
+    \wh T(\alpha x + \beta y) = \lim_{n\to\infty} T\left(\alpha z_n + \beta z_n'\right) = \lim_{n\to\infty}\alpha T(z_n) + \beta T(z_n') = \alpha\wh T(x) + \beta\wh T(y).
+\end{equation*}
+It remains to show that $\wh T$ is a bounded linear functional. Indeed, for $x\in X$, choosing a sequence $(z_n)_{n\ge 1}$ in $Z$ converging to $x$ in $X$, we have 
+\begin{equation*}
+    \|\wh T(x)\| = \left\|\lim_{n\to\infty} T(z_n)\right\| = \lim_{n\to\infty}\|T(z_n)\|\le\lim_{n\to\infty}\|T\|\|z_n\|\le \|T\|\|x\|,
+\end{equation*}
+where we have repeatedly used the fact that the norm function on a normed linear space is continuous. Thus $\|\wh T\|\le \|T\|$, i.e., $\wh T\colon X\to Y$ is a bounded linear functional. Further, note that 
+\begin{equation*}
+    \|\wh T\| = \sup_{\substack{\|x\| = 1\\ x\in X}}\|T(x)\|\ge\sup_{\substack{\|z\| = 1\\ z\in Z}}\|T(z)\| = \|T\|,
+\end{equation*}
+whence it follows that $\|\wh T\|_{X\to Y} = \|T\|_{Z\to Y}$. This completes the proof of the Bounded Extension Theorem.
+
+\section{Problem 4}
+
+\subsection{Part (a)}
+
+For $x, y\in\calH$, we have
+\begin{align*}
+    \|x + y\|^2 + \|x - y\|^2 &= \langle x + y, x + y\rangle + \langle x - y, x - y\rangle\\
+    &= \langle x, x\rangle + \langle x, y\rangle + \langle y, x\rangle + \langle y, y\rangle + \langle x, x\rangle + \langle x, -y\rangle + \langle -y, x\rangle + \langle -y, -y\rangle\\
+    &= 2\|x\|^2 + 2\|y\|^2 + \langle x, y\rangle + \langle y, x\rangle - \langle x, y\rangle - \langle y, x\rangle\\
+    &= 2\left(\|x\|^2 + \|y\|^2\right).
+\end{align*}
+In the above computation we have used the fact that $\langle\alpha x, y\rangle = \alpha\langle x, y\rangle$ and $\langle x, \alpha y\rangle = \overline\alpha\langle x, y\rangle$. This completes the proof.
+
+\subsection{Part (b)}
+
+Define 
+\begin{equation*}
+    \langle x, y\rangle = \frac{1}{4}\left(\|x + y\|^2 - \|x - y\|^2\right)\qquad\text{ for all } x, y\in X.
+\end{equation*}
+We shall show that this is an inner produt on $X$. First, we prove the Cauchy-Schwarz inequality. Indeed, for $x, y\in X$, we have the inequalities: 
+\begin{equation*}
+    \|x + y\|\le \|x\| + \|y\|\quad\text{ and }\quad \|x - y\|\ge\left|\|x\| - \|y\|\right|,
+\end{equation*}
+so that 
+\begin{equation*}
+    \left|\langle x, y\rangle\right|\le\left|\frac{1}{4}\left(\left(\|x\| + \|y\|\right)^2 - \left(\|x\| - \|y\|\right)^2\right)\right| = \|x\|\|y\|.
+\end{equation*}
+Next, note that $\langle x, x\rangle = \frac{1}{4}\|2x\|^2 = \|x\|^2$. Thus $\langle x, x\rangle\ge 0$ and $\langle x,x\rangle = 0$ if and only if $\|x\| = 0$ if and only if $x = 0$. Further, 
+\begin{equation*}
+    \langle y, x\rangle = \frac{1}{4}\left(\|y + x\|^2 + \|y - x\|^2\right) = \frac{1}{4}\left(\|x + y\|^2 - \|x - y\|^2\right) = \langle x, y\rangle.
+\end{equation*}
+Further, if $z\in X$, then 
+\begin{equation*}
+    \langle x + z, y\rangle = \frac{1}{4}\left(\|(x + z) + y\|^2 - \|(x + z) - y\|^2\right).
+\end{equation*}
+Using the Parallelogram Law, which the norm on $X$ satisfies, we have 
+\begin{equation*}
+    \|x + y + z\|^2 = \left\|\left(x + \frac{y}{2}\right) + \left(z + \frac{y}{2}\right)\right\|^2 = 2\left\|x + \frac{y}{2}\right\|^2 + 2\left\|z + \frac{y}{2}\right\| - \|x - z\|^2,
+\end{equation*}
+and 
+\begin{equation*}
+    \|x - y + z\|^2 = \left\|\left(x - \frac{y}{2}\right) + \left(z - \frac{y}{2}\right)\right\|^2 = 2\left\|x - \frac{y}{2}\right\|^2 + 2\left\|z - \frac{y}{2}\right\|^2 - \|x - z\|^2,
+\end{equation*}
+so that 
+\begin{equation}\tag{$\dagger$}\label{equation}
+    \langle x + z, y\rangle = \frac{1}{4}\left(2\left\|x + \frac{y}{2}\right\|^2 - 2\left\|x - \frac{y}{2}\right\|^2\right) + \frac{1}{4}\left(2\left\|z + \frac{y}{2}\right\|^2 - 2\left\|z - \frac{y}{2}\right\|^2\right) = 2\left\langle x, \frac{y}{2}\right\rangle + 2\left\langle z, \frac{y}{2}\right\rangle
+\end{equation}
+Now, we show that for $u, v\in X$, $\langle u, 2v\rangle = 2\langle u, v\rangle$. Indeed, 
+\begin{equation*}
+    \langle u, 2v\rangle = \frac{1}{4}\left(\|u + 2v\|^2 - \|u - 2v\|^2\right).
+\end{equation*}
+But using the Parallelogram Law, we have 
+\begin{equation*}
+    \|u + 2v\|^2 = \|(u + v) + v\|^2 = 2\|u + v\|^2 + 2\|v\|^2 - \|u\|^2,
+\end{equation*}
+and 
+\begin{equation*}
+    \|u - 2v\|^2 = \|(u - v) - v\|^2 = 2\|u - v\|^2 + 2\|v\|^2 - \|u\|^2,
+\end{equation*}
+so that 
+\begin{equation*}
+    \langle u, 2v\rangle = \frac{1}{4}\left(2\|u + v\|^2 - \|u - v\|^2\right) = 2\langle u, v\rangle.
+\end{equation*}
+Using this in \eqref{equation}, we have 
+\begin{equation*}
+    \langle x + z, y\rangle = \langle x, y\rangle + \langle z, y\rangle,
+\end{equation*}
+so that $\langle\cdot,\cdot\rangle$ is linear in the first variable. 
+
+Finally, let $\lambda\in\R$. We shall show that $\langle\lambda x, y\rangle = \lambda\langle x, y\rangle$. First, if $\lambda\in\N$, then using linearity, we have 
+\begin{equation*}
+    \langle\lambda x, y\rangle = \langle \underbrace{x + \dots + x}_{\lambda\text{ times}}, y\rangle = \underbrace{\langle x, y\rangle + \dots + \langle x, y\rangle}_{\lambda\text{ times}} = \lambda\langle x, y\rangle.
+\end{equation*}
+Next, if $\lambda = -n$ for some $n\in\N$, then 
+\begin{equation*}
+    0 = \langle 0, y\rangle = \langle nx - nx, y\rangle = \langle nx, y\rangle + \langle -nx, y\rangle,
+\end{equation*}
+so that $\langle -nx, y\rangle = -\langle nx, y\rangle = -n\langle x, y\rangle$. Thus $\langle\lambda x, y\rangle = \lambda\langle x, y\rangle$ for all $\lambda\in\Z$. Next, let $\lambda\in\Q$. We can choose $p\in\Z$ and $q\in\N$, $q > 0$ such that $\lambda = \frac{p}{q}$. Then 
+\begin{equation*}
+    q\langle\lambda x, y\rangle = \langle q\lambda x, y\rangle = \langle px, y\rangle = p\langle x, y\rangle,
+\end{equation*}
+so that $\langle\lambda x, y\rangle = \lambda\langle x, y\rangle$ for all $\lambda\in\Q$. It remains to show the equality for $\lambda\in\R$. Let $\mu\in\Q$ be a rational number. Then 
+\begin{align*}
+    \left|\langle\lambda x , y\rangle - \lambda\langle x, y\rangle\right| &= \left|\langle\lambda x, y\rangle - \langle \mu x, y\rangle + \mu\langle x, y\rangle - \lambda\langle x, y\rangle \right|\\
+    &\le\left|\langle (\lambda - \mu)x, y\rangle\right| + \left|(\lambda - \mu)\langle x - y\rangle\right|\\
+    &\le\|(\lambda - \mu)x\|\|y\| + |\lambda - \mu|\|x\|\|y\|\\
+    &= 2|\lambda - \mu|\|x\|\|y\|,
+\end{align*}
+where we have used the Cauchy-Schwarz inequality in the final step, which we have proved above. Since we can find rational numbers $\mu$ making $|\lambda - \mu|$ arbitrarily small, the right hand side of the above inequality can be made arbitrarily small. Thus $\langle\lambda x, y\rangle = \lambda\langle x, y\rangle$. Thus $\langle\cdot,\cdot\rangle$ is an inner product on $X$. Finally, 
+\begin{equation*}
+    \langle x, x\rangle = \frac{1}{4}\|2x\|^2 = \|x\|^2,
+\end{equation*}
+so that the above inner product induces the norm on $X$, as desired.
+
+\section{Problem 5}
+
+\subsection{Part (a)}
+
+Since $\dist(x, C) = \inf\{\|x - y\|\colon y\in C\}$, we can choose a sequence $(u_n)_{n = 1}^\infty$ of points in $C$ such that $\|u_n - x\|\to r\coloneq\dist(x, C)$. We shall show that $(u_n)_{n = 1}^\infty$ is a Cauchy sequence in $\calH$. Indeed, for $m,n\ge 1$, using the Parallelogram Law, 
+\begin{equation*}
+    4\left\|\frac{u_n + u_m}{2} - x\right\|^2 + \|u_n - u_m\|^2 = \|(u_n - x) + (u_m - x)\|^2 + \|u_n - u_m\|^2 = 2\left(\|u_n - x\|^2 + \|u_m - x\|^2\right).
+\end{equation*}
+Since $C$ is a convex set, $\frac{u_n + u_m}{2}\in C$. Therefore, $\left\|\frac{u_n + u_m}{2} - x\right\|\ge r$, so that 
+\begin{equation*}
+    \|u_n - u_m\|^2\le 2\left(\|u_n - x\|^2 + \|u_m - x\|^2 - 2r^2\right).
+\end{equation*}
+Let $\varepsilon > 0$ be given. Then there is a positive integer $N > 0$ such that $\|u_n - x\|\le\sqrt{r^2 + \frac{\varepsilon^2}{4}}$. For $m,n\ge N$, 
+\begin{equation*}
+    \|u_n - u_m\|^2 < \varepsilon^2\implies\|u_n - u_m\| < \varepsilon.
+\end{equation*}
+Thus $(u_n)_{n = 1}^\infty$ is a Cauchy sequence. Since $\calH$ is complete, there exists $u\in\calH$ such that $u_n\to u$. Further, since $C$ is closed, $u\in C$. Finally, note that 
+\begin{equation*}
+    \|u - x\| = \lim_{n\to\infty}\|u_n - x\| = r = \dist(x, C),
+\end{equation*}
+as desired.
+
+\subsection{Part (b)}
+
+Suppose $x - y\notin Y^\perp$. Then there exists $z\in Y$ such that $\langle x - y, z\rangle\ne 0$. Let $w = \overline{\langle x - y, z\rangle}\in Y$, so that $\langle x - y, w\rangle = |\langle x - y, z\rangle|^2 > 0$. For $t\ge 0$, consider 
+\begin{equation*}
+    \|x - (y + t w)\|^2 = \|(x - y) - tw\|^2 = \|x - y\|^2 + t^2\|w\|^2 - 2t\Re\langle x - y, w\rangle = \|x - y\|^2 + t^2\|w\|^2 - 2t\langle x - y, w\rangle.
+\end{equation*}
+Note that $w\ne 0$, so setting $t = \frac{\langle x - y, w\rangle}{\|w\|^2}$, we have 
+\begin{equation*}
+    \|x - (y + tw)\|^2 = \|x - y\|^2 - \frac{\langle x - y, w\rangle^2}{\|w\|^2} < \|x - y\|^2,
+\end{equation*}
+a contradiction to the minimality of $\|x - y\|$, since $y + tw\in Y$. Thus $x - y\in Y^\perp$.
+
+\subsection{Part (c)}
+
+Let $x\in\calH$. Since $Y$ is a closed linear subsspace of $\calH$, it is a closed convex subset of $\calH$. Therefore, due to part (a), there exists $y\in Y$ such that $\|x - y\| = \dist(x, Y)$. Due to part (b), $z \coloneq x - y\in Y^\perp$, so that $x = y + z$ with $y\in Y$ and $z\in Y^\perp$.
+
+Next, we show that such a decomposition is unique. Indeed, suppose $x = y + z = y' + z'$ for some $y, y'\in Y$ and $z, z'\in Y^\perp$. Then $y - y' = z' - z = w$, say. We have $w\in Y\cap Y^\perp$, so that 
+\begin{equation*}
+    \|w\|^2 = \langle w, w\rangle = 0,
+\end{equation*}
+i.e., $w = 0$. Hence $y = y'$ and $z = z'$, thereby establishing uniqueness.
+
+\subsection{Part (d)}
+
+Choose $x\in\calH\setminus Y$. Due to the Projection Lemma (part (c)), $x = y + z$ with $y\in Y$ and $z\in Y^\perp$. Since $x\notin Y$, $z = x - y\ne 0$, and hence $Y^\perp\ne\{0\}$.
+
+\section{Problem 6}
+
+Let $\calH$ be a Hilbert space over the field $\K\in\{\R,\bbC\}$.
+If $\varphi = 0$, then $\varphi = \langle \cdot, 0\rangle$. Suppose now that $\varphi\ne 0$.
+Let $Y = \ker\varphi = \varphi^{-1}(0)$. Since $\varphi$ is continuous and a linear functional, $Y$ is a closed linear subspace of $\calH$. Using the Projection Lemma, $\calH = Y + Y^\perp$. Further, since $\varphi\ne0$, $Y$ is a proper subspace of $\calH$, and hence due to Problem 5(d), $Y^\perp\ne\{0\}$. Choose $0\ne z\in Y^\perp$, and set 
+\begin{equation*}
+    w = \frac{\overline{\varphi(z)}}{\|z\|^2}z.
+\end{equation*}
+Note that $w\ne 0$ since $\varphi(z)\ne 0$, since $z\in\calH\setminus Y$. We contend that $\varphi = \langle\cdot, w\rangle$. First, we must show that the latter is a continuous linear functional. Indeed, for any $x\in\calH$, using the Cauchy-Schwarz inequality, we have 
+\begin{equation*}
+    \langle x, w\rangle\le\|x\|\|w\|\implies\|\langle\cdot, w\rangle\|\le \|w\|,
+\end{equation*}
+i.e., $\langle\cdot ,w\rangle\|$ is a bounded linear functional. 
+
+Next, we show that $Y^\perp$ is spanned by $\{w\}$. Indeed, if $x\in Y^\perp$, then 
+\begin{equation*}
+    \varphi\left(\varphi(x)w - \varphi(w)x\right) = 0,
+\end{equation*}
+so that $\varphi(x)w - \varphi(w)x\in Y\cap Y^\perp = \{0\}$ as we have seen in the proof of the Projection Lemma. Thus, 
+\begin{equation*}
+    x = \frac{\varphi(x)}{\varphi(w)}w.
+\end{equation*}
+Thus, for any $x\in\calH$, we can find $y\in Y$ and $\lambda\in\K$ such that $x = y + \lambda w$. Then 
+\begin{equation*}
+    \varphi(x) = \varphi(y) + \lambda\varphi(w) = \lambda\varphi(w) = \lambda\frac{|\varphi(z)|^2}{\|z\|^2},
+\end{equation*}
+and 
+\begin{equation*}
+    \langle x, w\rangle = \langle y + \lambda w, w\rangle = \langle y, w\rangle + \lambda\langle w, w\rangle = \lambda\frac{|\varphi|^2}{\|z\|^2} = \varphi(x).
+\end{equation*}
+Thus $\varphi = \langle\cdot, w\rangle$, as desired.
+\end{document}

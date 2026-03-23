@@ -1,0 +1,671 @@
+\documentclass[11pt]{article}
+
+\title{Math 603: Homework 3}
+\author{Swayam Chube}
+\date{Last Updated: \today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{fouriernc}
+\usepackage{mdframed}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd-Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{epigraph}
+\setlength\epigraphwidth{0.4\textwidth}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+% \renewcommand{\familydefault}{\sfdefault} % Do you want this font? 
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Swayam Chube},
+    colorlinks=true,
+	citecolor=blue,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{interlude}[theorem]{Interlude}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\F}{\mathbb{F}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\calR}{\mathcal{R}} % range of an operator
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakB}{\mathfrak{B}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrM}{\mathscr{M}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrO}{\mathscr{O}} % sheaf
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+% \newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+\newcommand{\weakto}{\rightharpoonup}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+% \newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\Ass}{\operatorname{Ass}}
+\newcommand{\projdim}{\operatorname{proj~dim}}
+\newcommand{\injdim}{\operatorname{inj~dim}}
+\newcommand{\gldim}{\operatorname{gl~dim}}
+\newcommand{\embdim}{\operatorname{emb~dim}}
+\newcommand{\hght}{\operatorname{ht}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\CM}{\operatorname{CM}}
+\newcommand{\cech}[1]{\mathbin{\check{#1}}}
+\newcommand{\cdim}{\operatorname{cdim}}
+\newcommand{\Der}{\operatorname{Der}}
+\newcommand{\trdeg}{\operatorname{trdeg}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calL}{\mathcal{L}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\gr}{\operatorname{gr}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\calH}{\mathcal{H}}
+
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\sffamily}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+\begin{document}
+\maketitle 
+
+\section{Problem 1}
+
+\subsection{Part (a)}
+
+That $T$ is linear is clear. We must show that it is an isometric bijection. We have 
+\begin{equation*}
+    |Ty(x)| = \left|\sum_{n = 1}^\infty x_ny_n\right|\le\sum_{n = 1}^\infty |x_ny_n|\le \|y\|_\infty\sum_{n = 1}^\infty |x_n| = \|x\|_1\|y\|_\infty,
+\end{equation*}
+so that $\|Ty\|\le \|y\|_\infty$ for all $y\in\ell^\infty$. In particular, $T$ is a bounded linear functional with $\|T\|\le 1$.
+
+For each $n\ge 1$, let $e_n$ denote the sequence 
+\begin{equation*}
+    e_n(m) = \begin{cases}
+        1 & n = m\\
+        0 & \text{otherwise}.
+    \end{cases}
+\end{equation*}
+If $y = (y_n)_{n = 1}^\infty\in\ell^\infty$ is such that $Ty = 0$, then $y_n = Ty(e_n) = 0$ for all $n\ge 1$, so that $y = 0$. This shows that $T$ has trivial kernel, that is, $T$ is injective.
+
+Next, we show that $T$ is bijective. Let $\varphi\in\left(\ell^1\right)^\ast$ and set $a_n = \varphi(e_n)$ for all $n\ge 1$. Then 
+\begin{equation*}
+    |a_n| = |\varphi(e_n)|\le\|\varphi\|\|e_n\|_1 = \|\varphi\|,
+\end{equation*}
+so that $a = (a_n)_{n = 1}^\infty\in\ell^\infty$. We shall show that $\varphi = Ta$. Indeed, for any $x = (x_n)_{n = 1}^\infty\in\ell^1$ and $N\ge 1$, define $x^N\in\ell^1$ as 
+\begin{equation*}
+    x^N_n = \begin{cases}
+        x_n & n\le N\\
+        0 & n > N.
+    \end{cases}
+\end{equation*}
+Then 
+\begin{equation*}
+    \|x - x^N\|\le\sum_{n = N + 1}^\infty |x_n|,
+\end{equation*}
+so that $\|x - x^N\|\to 0$ as $N\to\infty$, since the tail sum of a convergent sequence goes to $0$. In other words, $x^N\to x$ as $N\to\infty$. Further, note that 
+\begin{equation*}
+    (Ta)(x^N) = \sum_{n = 1}^N a_n x_n = \sum_{n = 1}^N \varphi(x_n e_n) = \varphi\left(\sum_{n = 1}^N x_n e_n\right) = \varphi(x^N).
+\end{equation*}
+Since $\varphi$ and $Ta$ are continuous functions, we have 
+\begin{equation*}
+    \varphi(x) = \lim_{N\to\infty} \varphi(x^N) = \lim_{N\to\infty} (Ta)(x^N) = (Ta)(x),
+\end{equation*}
+so that $\varphi = Ta$, as desired. This shows that $T$ is a continuous linear bijection between Banach spaces, and hence, due to the Open Mapping Theorem (or the Bounded Inverse Theorem), $T$ is an isomorphism of Banach spaces.
+
+It remains to show that $T$ is an isometry, to which end, we must show that $\|Ty\| = \|y\|_\infty$ for all $y\in\ell^\infty$. Note that we have already shown that $\|Ty\|\le\|y\|_\infty$. Further, for $y = (y_n)_{n = 1}^\infty\in\ell^\infty$, note that $(Ty)(e_n) = y_n$ for all $n\ge 1$. Since $\|e_n\|_1 = 1$, we have that $\|Ty\|\ge |y_n|$ for all $n\ge 1$, consequently, $\|Ty\|\ge \|y\|_\infty$. This shows that $\|Ty\| = \|y\|_\infty$, thereby completing the proof.
+
+\subsection{Part (b)}
+
+That $S$ is linear is clear. We must show that it is an isometric bijection. We have 
+\begin{equation*}
+    |(Sy)(x)| = \left|\sum_{n = 1}^\infty x_ny_n\right|\le\sum_{n = 1}^\infty |x_ny_n|\le \|x\|_\infty\sum_{n = 1}^\infty |y_n| = \|x\|_\infty \|y\|_1,
+\end{equation*}
+so that $\|Sy\|\le \|y\|_1$. As in the preceding part, consider the ``standard basis vectors'' $e_n$ for $n\ge 1$. If $y\in\ell^1$ is such that $Sy = 0$, then for all $n\ge 1$, we have $y_n = (Sy)(e_n) = 0$, so that $y = 0$. This shows that $S$ is injective. 
+
+Next, we show that $S$ is surjective. Let $\varphi\in (c_0)^\ast$. Set $a_n = \varphi(e_n)$, and $a = (a_n)_{n =1 }^\infty$. First, we shall show that $a\in\ell^1$. To this end, define 
+\begin{equation*}
+    \zeta_n = 
+    \begin{cases}
+        \frac{\overline a_n}{|a_n|} & a_n\ne 0\\
+        0 & a_n = 0.
+    \end{cases}
+\end{equation*}
+Note that $\zeta_n a_n = |a_n|$ and $|\zeta_n|\le 1$. Further, for every positive integer $N$, $\displaystyle\sum_{n = 1}^N \zeta_n e_n\in c_0$, so that 
+\begin{equation*}
+    \sum_{n = 1}^N|a_n| = \sum_{n = 1}^N \zeta_n a_n = \sum_{n = 1}^N \zeta_n\varphi(e_n) = \varphi\left(\sum_{n = 1}^N \zeta_n e_n\right)\le \|\varphi\|,
+\end{equation*}
+since $\displaystyle\left\|\sum_{n = 1}^N \zeta_n e_n\right\|\le 1$. Taking the limit $N\to\infty$, we have 
+\begin{equation*}
+    \|a\|_1 = \sum_{n = 1}^\infty |a_n|\le\|\varphi\|.
+\end{equation*}
+We contend that $\varphi = Sa$. Indeed, for any $x = (x_n)_{n = 1}^\infty\in c_0$ and $N\ge 1$, define $x^N\in c_0$ as 
+\begin{equation*}
+    x^N_n = \begin{cases}
+        x_n & n\le N\\
+        0 & n > N.
+    \end{cases}
+\end{equation*}
+We have 
+\begin{equation*}
+    \|x - x^N\| = \sup_{n\ge N + 1} |x_n|.
+\end{equation*}
+But since $x\in c_0$, by definition, we have that the right hand side above goes to $0$ as $N\to\infty$. This means $x^N\to x$ in $c_0$.
+
+Clearly, we have 
+\begin{equation*}
+    (Sa)(x^N) = \sum_{n = 1}^N a_n x_n = \sum_{n = 1}^N x_n\varphi(e_n) = \varphi\left(\sum_{n = 1}^N x_n e_n\right) = \varphi(x^N).
+\end{equation*}
+Since $Sa$ and $\varphi$ are continuous, taking the limit of the above equality as $N\to\infty$ and using that $x^N\to x$, we have 
+\begin{equation*}
+    (Sa)(x) = \lim_{N\to\infty} (Sa)(x^N) = \lim_{N\to\infty}\varphi(x^N) = \varphi(x),
+\end{equation*}
+and hence $\varphi = Sa$, as desired. 
+
+Thus $S$ is a bijective bounded linear map between Banach spaces, and due to the Open Mapping Theorem (or the Bounded Inverse Theorem), $S$ must be an isomorphism.
+
+It remains to show that $S$ is an isometry. We have already shown that $\|Sy\|\le \|y\|_1$ for all $y\in\ell^1$. To see that the reverse inequality is also true, for $y = (y_n)_{n = 1}^\infty\in\ell^1$, define 
+\begin{equation*}
+    \zeta_n = 
+    \begin{cases}
+        \frac{y_n}{|y_n|} & y_n\ne 0\\
+        0 & y_n = 0.
+    \end{cases}
+\end{equation*}
+Note that $|\zeta_n|\le 1$ and $\zeta_ny_n = |y_n|$. As a result, 
+\begin{equation*}
+    \sum_{n = 1}^N |y_n| = \sum_{n = 1}^N \zeta_n y_n = \sum_{n = 1}^N \zeta_n (Sy)(e_n) = (Sy)\left(\sum_{n = 1}^N\zeta_n e_n\right).
+\end{equation*}
+But using the fact that $\left\|\displaystyle\sum_{n = 1}^N \zeta_n e_n\right\|_\infty\le 1$, we have 
+\begin{equation*}
+    \sum_{n = 1}^N |y_n|\le \|Sy\|,
+\end{equation*}
+and hence, in the limit $N\to\infty$, we obtain $\|Sy\|\ge \|y\|_1$, which shows that $\|Sy\| = \|y\|_1$ for all $y\in\ell^1$, thereby completing the proof that $S$ is an isometric bijection. 
+
+\subsection{Part (c)}
+
+The sequence $(1, 1, 1, \dots)$ is clearly an element of $\ell^\infty$ but not an element of $c_0$. Therefore, it only remains to show that $c_0$ is closed in the $\ell^\infty$-norm. Indeed, suppose $(x^N)_{N\ge 1}$ is a convergent sequence in $\ell^\infty$ with $x^N\in c_0$ for all $N\ge 1$ and let $x^N\to x = (x_n)_{n = 1}^\infty$ in $\ell^\infty$. We shall show that $x\in c_0$.
+
+Let $\varepsilon > 0$. Then there is a positive integer $M\ge 1$ such that for all $N\ge M$, $\|x - x^N\|_\infty < \frac{\varepsilon}{2}$. Consider $x^M = (x^M_n)_{n = 1}^\infty$. Since this is an element of $c_0$, there is a positive integer $\wt M\ge 1$ such that for all $n\ge\wt M$, $|x^M_n| < \frac{\varepsilon}{2}$. Now, for $n\ge\wt M$, using the triangle inequality, we can write 
+\begin{equation*}
+    \frac{\varepsilon}{2} > \|x - x^M\|\ge |x_n - x^M_n|\ge|x_n| - |x^M_n|,
+\end{equation*}
+so that 
+\begin{equation*}
+    |x_n| < \frac{\varepsilon}{2} + |x^M_n| < \varepsilon.
+\end{equation*}
+Thus $x\in c_0$, as desired, and $c_0$ is a proper closed subspace of $\ell^\infty$.
+
+\subsection{Part (d)}
+
+We have seen in part (c) that $c_0\subsetneq \ell^\infty$ is a proper closed subspace. Thus, as we have seen in class, there is a bounded linear functional $0\ne\varphi\in\left(\ell^\infty\right)^\ast$ such that $\varphi|_{c_0} = 0$. Suppose now that $\ell^1$ is reflexive, that is, the canonical evaluation map $J\colon\ell^1\to\left(\ell^1\right)^{\ast\ast}$ is an isometric isomorphism (to which end, it suffices for $J$ to be surjective since it is always an isometry). 
+Note that through the isometric isomorphism $T\colon\ell^\infty\to\left(\ell^1\right)^\ast$, the bounded linear map $\varphi\circ T^{-1}$ is a bounded linear functional on $\left(\ell^1\right)^\ast$. 
+
+Since we have assumed $J$ to be surjective, there exists an $x\in\ell^1$ such that $\varphi\circ T^{-1} = J(x)$. Note that for every $y = (y_n)_{n = 1}^\infty\in c_0\subseteq\ell^\infty$, we have 
+\begin{equation*}
+    \sum_{n = 1}^\infty x_ny_n = (Ty)(x) = J(x)\left(T(y)\right) = \left(\varphi\circ T^{-1}\right)\left(T(y)\right) = \varphi(y) = 0.
+\end{equation*}
+Since $e_n\in c_0$ for all $n\ge 1$, we have that 
+\begin{equation*}
+    x_n = (Te_n)(x) = 0
+\end{equation*}
+for all $n\ge 1$, so that $x = 0$, i.e., $\varphi = J(x) = 0$, a contradiction. Hence, $\ell^1$ is not reflexive, as desired.
+
+\section{Problem 2}
+
+\subsection{Part (a)}
+
+The sequence $e_n$ never converges strongly for any $1\le p < \infty$. Indeed, for $m\ne n$, we have 
+\begin{equation*}
+    \|e_m - e_n\| = \left(1^p + 1^p\right)^{\frac{1}{p}} = 2^{\frac{1}{p}}.
+\end{equation*}
+Since all convergent sequences are Cauchy, it follows from the above equality that $(e_n)_{n = 1}^\infty$ cannot be Cauchy, and therefore, cannot be convergent. 
+
+\subsection{Part (b)}
+
+We shall show that $(e_n)_{n = 1}^\infty$ converges weakly for $1 < p < \infty$ but not for $p = 1$.
+
+First, we show that $(e_n)_{n = 1}^\infty$ does not converge weakly in $\ell^1$. Recall from Problem 1 (a) that the map $T\colon \ell^\infty\to\left(\ell^1\right)^\ast$ is an isometric isomorphism of Banach spaces. Let $z\in\ell^\infty$ denote the sequence $z_n = 1$ for all $n\ge 1$. Suppose $e_n\weakto x$ for some $x = (x_n)_{n = 1}^\infty\in\ell^1$. Then, since $e_n\in\ell^\infty$, we must have that for all $n\ge 1$, 
+\begin{equation*}
+    x_n = (Te_n)(x) = \lim_{m\to\infty} (Te_n)(e_m) = 0,
+\end{equation*}
+since $(Te_n)(e_m) = 0$ for $n > m$. Hence, $x = 0$. But then we must have that 
+\begin{equation*}
+    0 = (Tz)(x) = \lim_{m\to\infty} (Tz)(e_m) = 1,
+\end{equation*}
+a contradiction. Thus $(e_n)_{n = 1}^\infty$ does not converge weakly in $\ell^1$.
+
+Suppose now that $1 < p < \infty$. We shall show that $(e_n)_{n = 1}^\infty$ converges weakly in $\ell^p$. In particular, we shall show that $e_n\weakto 0$. Let $\varphi\in\left(\ell^p\right)^\ast$ be a bounded linear functional, and set $a_n = \varphi(e_n)$. Let $q$ denote the conjugate exponent to $p$, that is, $q = \frac{p}{p - 1}$, and set 
+\begin{equation*}
+    b_n = \begin{cases}
+        |a_n|^{q - 2}\overline a_n & a_n\ne 0\\
+        0 & a_n = 0,
+    \end{cases}
+\end{equation*}
+so that $a_nb_n = |a_n|^{q}$ for all $n\ge 1$.
+We shall show that $\displaystyle\sum_{n = 1}^\infty |a_n|^{q} < \infty$. Indeed, for any positive integer $N$, we have 
+\begin{align*}
+    \sum_{n = 1}^N |a_n|^q &= \sum_{n = 1}^N a_nb_n\\ &= \sum_{n = 1}^N b_n\varphi(e_n)\\ &= \varphi\left(\sum_{n = 1}^N b_ne_n\right)\\ &= \left|\varphi\left(\sum_{n = 1}^N b_ne_n\right)\right|\\ &\le\|\varphi\|\left(\sum_{n = 1}^N |b_n|^p\right)^{\frac{1}{p}}\\ &= \|\varphi\|\left(\sum_{n = 1}^N |a_n|^{p(q - 1)}\right)^{\frac{1}{p}}\\
+    &= \|\varphi\|\left(\sum_{n = 1}^N |a_n|^q\right),
+\end{align*}
+so that 
+\begin{equation*}
+    \left(\sum_{n = 1}^N |a_n|^q\right)^{\frac{1}{p}}\le\|\varphi\|.
+\end{equation*}
+Taking the limit $N\to\infty$, it follows that $\displaystyle\sum-{n = 1}^\infty |a_n|^q$ converges, so that $a_n\to 0$ as $n\to\infty$. In other words, $e_n\weakto 0$, as desired.
+
+\section{Problem 3}
+
+First note that due to the Parallelogram Law, we have 
+\begin{equation*}
+    2\left(\left\|\frac{x + y}{2}\right\|^2 + \left\|\frac{x - y}{2}\right\|^2\right) = \|x\|^2 + \|y\|^2.
+\end{equation*}
+Now let $\|x\|\le 1$ and $\|y\|\le 1$ and $2 \ge \varepsilon > 0$ be such that $\|x - y\|\ge\varepsilon$. Then, we have the inequalities
+\begin{equation*}
+    2\ge\|x\|^2 + \|y\|^2 = 2\left(\left\|\frac{x + y}{2}\right\|^2 + \left\|\frac{x - y}{2}\right\|^2\right) > 2\left(\left\|\frac{x + y}{2}\right\|^2 + \frac{\varepsilon^2}{4}\right),
+\end{equation*}
+so that 
+\begin{equation*}
+    \left\|\frac{x + y}{2}\right\|\le\sqrt{1 - \frac{\varepsilon^2}{4}} < 1 - \frac{\varepsilon^2}{8},
+\end{equation*}
+where the inequality on the right is evident from squaring both side of the inequality. Thus, taking $\delta = \frac{\varepsilon^2}{\delta}$, we see that the Hilbert space is uniformly convex.
+
+\section{Problem 4}
+
+\begin{lemma}
+    Let $\calH$ be a Hilbert space, and $A\in\calL(\calH)$. Then 
+    \begin{equation*}
+        \|A\| = \sup_{\|x\| = \|y\| = 1}|\langle Ax, y\rangle|.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Let $B$ denote the right hand side of the above equality. Due to the Cauchy-Schwarz inequality, for any $\|x\| = \|y\| = 1$, we have 
+    \begin{equation*}
+        |\langle Ax, y\rangle|\le \|Ax\|\|y\|\le \|A\|\|x\|\|y\| = \|A\|,
+    \end{equation*}
+    so that $B\le \|A\|$. On the other hand, we have 
+    \begin{equation*}
+        B\ge\sup_{\substack{\|x\| = 1\\ Ax\ne 0}}\left|\left\langle Ax, \frac{Ax}{\|Ax\|}\right\rangle\right| = \sup_{\substack{\|x\| = 1\\ Ax\ne 0}}\|Ax\| = \sup_{\|x\| = 1}\|Ax\| = \|A\|,
+    \end{equation*}
+    so that $B = \|A\|$, as desired.
+\end{proof}
+
+Coming back to our problem at hand, we have 
+\begin{equation*}
+    \|A^\ast A\| = \sup_{\|x\| = \|y\| = 1}|\langle A^\ast A x, y\rangle| = \sup_{\|x\| = \|y\| = 1}|\langle Ax, Ay\rangle|\ge\sup_{\|x\| = 1}|\langle Ax, Ax\rangle| = \sup_{\|x\| = 1}\|Ax\|^2 = \|A\|^2.
+\end{equation*}
+Conversely, again, using the Cauchy-Schwarz Inequality, we have 
+\begin{equation*}
+    \|A^\ast A\| = \sup_{\|x\| = \|y\| = 1}|\langle A^\ast A x, y\rangle| = \sup_{\|x\| = \|y\| = 1}|\langle Ax, Ay\rangle|\le\sup_{\|x\| = \|y\| = 1}\|Ax\|\|Ay\|\le\sup_{\|x\| = \|y\| = 1}\|A\|^2 = \|A\|^2.
+\end{equation*}
+Thus $\|A^\ast A\| = \|A\|^2$.
+
+\section{Problem 5}
+
+First, we show that for any projection operator $P$, $\ker P = \calR(I - P)$. Since $P^2 = P$, we have $P(I - P) = 0$, so that $\calR(I - P)\subseteq\ker P$. Conversely, suppose $x\in\ker P$. Due to the Projection Theorem (or corollary thereof), there is a decomposition $\calH = \ker(I - P)\oplus\ker(I - P)^\perp$, so that we can write $x = y + z$ where $y\in\ker (I - P)$ and $z\in\ker(I - P)^\perp$. We can write 
+\begin{equation*}
+    x = x - Px = (I - P)x = (I - P)y + (I - P)z = (I - P)z,
+\end{equation*}
+i.e., $x\in\calR(I - P)$, so that $\calR(I - P) = \ker P$. Similarly, since $I - P$ is a projection, we also have $\calR(P) = \ker(I - P)$.
+
+In view of the above discussion, (c) is equivalent to the statement ``$\ker P$ and $\calR(P)$ are orthogonal''. We shall use this equivalent formulation in proving the proposition.
+
+\begin{proof}[Proof of Proposition]
+    $\boxed{(a)\implies(c)}$ Suppose $P$ is self-adjoint. Then any element of $\calR(P)$ is of the form $Px$ for some $x\in\calH$ and every element of $\calR(I - P)$ is of the form $(I - P)x$ for some $y\in\calH$. Note that 
+    \begin{equation*}
+        \langle Px, (I - P)y\rangle = \langle(I - P^\ast)Px, y\rangle = \langle (I - P)Px, y\rangle = 0,
+    \end{equation*}
+    since $P - P^2 = 0$.
+
+    $\boxed{(c)\implies(a)}$ Since $\calR(P)$ and $\calR(I - P)$ are orthogonal, we have that for every $x, y\in\calH$, 
+    \begin{equation*}
+        \langle Px, (I - P)y\rangle = 0.
+    \end{equation*}
+    We may rewrite the above as 
+    \begin{equation*}
+        \langle (I - P^\ast)Px, y\rangle = 0\qquad\text{for all }x, y\in\calH.
+    \end{equation*}
+    In particular, taking $y = (I - P^\ast)Px$, we see that $(I - P^\ast)Px = 0$ for all $x\in\calH$, that is, $(I - P^\ast)P = 0$, equivalently, $P = P^\ast P$.
+
+    On the other hand, we can write 
+    \begin{equation*}
+        0 = \overline{\langle Px, (I - P)y\rangle} = \langle (I - P)y, Px\rangle = \langle P^\ast(I - P)y, x\rangle\qquad\text{for all } x, y\in\calH.
+    \end{equation*}
+    In particular, taking $x = P^\ast(I - P)y$, we see that $P^\ast(I - P)y = 0$ for all $y\in\calH$, that is, $P^\ast(I - P) = 0$, equivalently, $P^\ast = P^\ast P$. This shows that $P = P^\ast$, i.e., $P$ is self-adjoint.
+
+    $\boxed{(a)\implies(b)}$ Suppose $P$ is self-adjoint. Using Problem 4, we have 
+    \begin{equation*}
+        \|P\| = \|P^2\| = \|P^\ast P\| = \|P\|^2,
+    \end{equation*}
+    so $\|P\| = 0$ or $\|P\| = 1$. But since $P$ is a non-zero projection operator, it follows that $\|P\| = 1$. 
+
+    $\boxed{(b)\implies(c)}$ We shall use the equivalent formulation of (c) in the discussion preceding the proof. As such, it suffices to show that $\calR(P)\perp\ker P$. Suppose $\|P\| = 1$, and let $x\in\calR(P)$ and $y\in\ker P$. Note that since $P^2 = P$, we have $P(x) = x$. Thus for any $\lambda\in\K$, we have 
+    \begin{equation*}
+        \|x\|^2 = \|P(x)\|^2 = \|P(x + \lambda y)\|^2\le \|x + \lambda y\|^2 = \|x\|^2 + |\lambda|^2\|y\|^2 + \langle x, \lambda y\rangle + \langle \lambda y, x\rangle,
+    \end{equation*}
+    therefore, 
+    \begin{equation*}
+        0\le |\lambda|^2\|y\|^2 + \langle x, \lambda y\rangle + \langle \lambda y, x\rangle = |\lambda|^2\|y\|^2 + 2\Re\left(\langle x, \lambda y\rangle\right) = |\lambda|^2\|y\|^2 + 2\Re\left(\overline\lambda\langle x, y\rangle\right).
+    \end{equation*}
+    If $y = 0$, then $\langle x, y\rangle = 0$ trivially, and there is nothing to prove. Suppose $y\ne 0$. Setting $\lambda = -\frac{\overline{\langle x, y\rangle}}{\|y\|^2}$, we obtain 
+    \begin{equation*}
+        0\le - \frac{|\langle x, y\rangle|^2}{\|y\|^2},
+    \end{equation*}
+    which is possible if and only if $\langle x, y\rangle = 0$. Thus $\calR(P)\perp\ker P$, thereby completing the proof.
+\end{proof}
+
+\section{Problem 6}
+
+We recall from class that $x_n\to x$ in a topology induced by functions $\{f_\alpha\colon X\to Y_\alpha\}_{\alpha\in\scrA}$ on $X$ if and only if $f_\alpha(x_n)\to f_\alpha(x)$ In $Y_\alpha$ for each $\alpha\in\scrA$. We shall use this observation repeatedly in the following analysis.
+
+\subsection{Part (a)}
+
+Note that convergence in the strong operator topology is the same as pointwise convergence of these bounded linear operators. Suppose $A_n\to A$ in the operator topology, that is, $\|A - A_n\|\to 0$ as $n\to\infty$. Then for any $x\in X$, we have the inequality: 
+\begin{equation*}
+    \|Ax - A_n x\| = \|(A - A_n)x\|\le \|A - A_n\|\|x\|.
+\end{equation*}
+Since the right hand side of the above inequality goes to $0$ as $n\to\infty$, we have that $\|Ax - A_n x\|\to 0$ as $n\to\infty$, i.e., $A_n x\to Ax$ as $n\to\infty$. In other words, $A_n\to A$ in the strong operator topology of $\calL(X)$.
+
+The converse is not true. Let $\tau\colon\ell^2\to\ell^2$ denote the ``left-shift operator'', that is, 
+\begin{equation*}
+    \tau(x_1, x_2, \dots) = \left(x_2, x_3,  \dots\right).
+\end{equation*}
+This is clearly a bounded linear operator with $\|\tau\| = 1$. Define $A_n = \tau^{\circ n}$ for each positive integer $n\ge 1$. Note that 
+\begin{equation*}
+    A_n\left(x_1, x_2, \dots\right) = \left(x_{n + 1}, x_{n + 2},\dots\right).
+\end{equation*}
+We note that $\|A_n\| = 1$ for every $n\ge 1$. Indeed, since $\displaystyle\sum_{k = n + 1}^\infty |x_k|^2\le\sum_{k = 1}^\infty |x_k|^2$, we have that $\|A_n\|\le 1$, and since 
+\begin{equation*}
+    A_n(\underbrace{0, \dots, 0}_{n\text{ times}}, 1, 0, 0, \dots) = \left(1, 0, 0, \dots\right),
+\end{equation*}
+so that $\|A_n\| = 1$. On the other hand, for any $x = (x_n)_{n = 1}^\infty\in\ell^2$, we claim that $A_n x\to 0$. Indeed, 
+\begin{equation*}
+    \|A_n x\|^2 = \sum_{k = n + 1}^\infty |x_k|^2,
+\end{equation*}
+which is the tail-sum of an (absolutely) convergent infinite sum, and therefore, it must go to $0$ as $n\to\infty$. Hence, $A_n\to 0$ in the strong operator topology. But since $\|A_n\| = 1$ for all $n\ge 1$, we cannot have $A_n\to 0$ in the operator topology.
+
+\subsection{Part (b)}
+
+Note that $A_n\to A$ in the weak operator topology if and only if for every $x\in X$ and $\varphi\in X^\ast$, $\varphi(A_n x)\to \varphi(Ax)$. Since $A_n\to A$ in the strong operator topology, we have that $A_nx\to Ax$ in $X$. Further since $\varphi$ is a continuous function, we must have that $\varphi(A_n x)\to \varphi(Ax)$ in $\K$, as desired. Thus $A_n\to A$ in the weak operator topology.
+
+The converse is not true, let $\sigma\colon \ell^2\to\ell^2$ denote the ``right-shift operator'', that is, 
+\begin{equation*}
+\sigma(x_1, x_2, \dots) = (0, x_1, x_2, \dots).
+\end{equation*}
+Note that $\sigma$ is a bounded-linear operator with $\|\sigma\| = 1$. Define $A_n = \sigma^{\circ n}$ for every positive integer $n\ge 1$. We have 
+\begin{equation*}
+    A_n(x_1, x_2,\dots) = (\underbrace{0, \dots, 0}_{n\text{ times}}, x_1, x_2, \dots).
+\end{equation*}
+Clearly $\|A_n(x)\| = \|x\|$ for all $x\in\ell^2$, so that $\|A_n\| = 1$ for all $n\ge 1$. In particular, each $A_n$ is a bounded linear functional. 
+
+We claim that $A_n\to 0$ in the weak operator topology. To this end, we must show that for every $x = (x_n)_{n = 1}^\infty\in\ell^2$ and $\varphi\in\left(\ell^2\right)^\ast$, $\varphi(A_n x)\to 0$. Indeed, due to the Riesz Representation Theorem, there is a $y = (y_n)_{n = 1}^\infty\in\ell^2$ such that $\varphi = \langle\cdot, y\rangle$. We have 
+\begin{align*}
+    |\varphi(A_n x)| &= \big|\big\langle (\underbrace{0, \dots, 0}_{n\text{ times}}, x_1, x_2, \dots), (y_1, y_2, \dots)\big\rangle\big|\\
+    &= \big|\big\langle(0,\dots, 0, x_1, x_2, \dots), (0, \dots, 0, y_{n + 1}, y_{n + 2}, \dots)\big\rangle\big|\\
+    &\le\|x\|_2\left(\sum_{k = n + 1}^\infty |y_k|^2\right)^{\frac{1}{2}}.
+\end{align*}
+Since the sum $\displaystyle\sum_{k = 1}^\infty |y_k|^2$ converges, the tail-sum goes to $0$ as $n\to\infty$, and hence, $|\varphi(A_n x)|\to 0$, i.e., $\varphi(A_n x)\to 0$ as $n\to\infty$. Thus $A_n\to 0$ in the weak operator topology.
+
+On the other hand, we claim that $A_n$ does not converge to $0$ in the strong operator topology. Indeed, consider $x = (1, 0, 0, \dots)$, so that 
+\begin{equation*}
+    A_n x = (\underbrace{0, \dots, 0}_{n\text{ times}}, 1, 0, 0, \dots),
+\end{equation*}
+in particular, $A_n x\not\to0$ as $n\to\infty$, since $\|A_n x\| = 1$ for all $n\ge 1$. Hence $A_n$ does not converge to $0$ in the strong operator topology.
+
+\subsection{Part (c)}
+
+Note that $A_n^t\to A^t$ in the weak operator topology if and only if for every $x^\ast\in X^\ast$ and $\varphi\in X^{\ast\ast}$, the sequence $\varphi(A_n^t x^\ast)$ converges to $\varphi(A^t x^\ast)$ in $\K$. Since $X$ is reflexive, the natural map $J\colon X\to X^{\ast\ast}$ is surjective. Therefore, there exists a $y\in X$ such that $\varphi = J(x)$, so that 
+\begin{equation*}
+    \varphi\left(A_n^t x^\ast\right) = J(y)\left(A_n^t x^\ast\right) = \left(A_n^t x^\ast\right)(y) = x^\ast\left(A_n y\right),
+\end{equation*}
+and similarly, $\varphi\left(A^t x^\ast\right) = x^\ast(A y)$.
+
+Since $A_n\to A$ in the weak operator topology of $\calL(X)$, the sequence $x^\ast(A_n y)$ converges to $x^\ast(Ay)$ in $\K$ because $x^\ast\in X^\ast$ and $y\in X$. This shows that $A_n^t\to A^t$ in the weak operator topology of $\calL(X^\ast)$.
+
+\subsection{Part (d)}
+
+First we show that $A_n\to 0$ in the strong operator topology. Let $x\in\ell^2$. We have seen in Problem 2 (b) that $e_n\to 0$ in the weak topology of $\ell^2$. Since $\langle \cdot, x\rangle$ is a bounded linear functional on $\ell^2$, this means, in particular, that $\langle e_n, x\rangle\to 0$ as $n\to\infty$. Therefore, $\langle x, e_n\rangle = \overline{\langle e_n, x\rangle}\to 0$ as $n\to\infty$. Hence, $A_nx = \langle x, e_n\rangle e_1\to 0$ as $n\to\infty$, i.e., $A_n\to 0$ in the strong operator topology.
+
+Next, suppose for the sake of contradiction that $A_n^t\to 0$ in $\calL((\ell^2)^\ast)$ in the strong operator topology. Then, for every $x^\ast\in\left(\ell^2\right)^\ast$, we must have $A_n^t x^\ast\to 0$ in $\left(\ell^2\right)^\ast$. Due to the Riesz Representation Theorem, every linear functional on $\ell^2$ is of the form $\langle\cdot, x\rangle$, so that $x^\ast = \langle\cdot, x\rangle$ for some $x\in \ell^2$. Therefore, $A_n^t x^\ast = \langle A_n\cdot, x\rangle = \langle \cdot, A_n^\ast x\rangle$. In particular, this means $\|A_n^t x^\ast\| = \|\langle\cdot, A_n^\ast x\rangle\| = \|A_n^\ast x\|$.
+
+Next, we claim that $A_n^\ast x = \langle x, e_1\rangle e_n$. Indeed, for any $x = (x_n)_{n\ge 1}, y = (y_n)_{n\ge 1}\in\ell^2$, we have 
+\begin{equation*}
+    \langle A_n x, y\rangle = \langle \langle x, e_n\rangle e_1, y\rangle = \langle x_n e_1, y\rangle = x_n\overline y_1 = \langle x, y_1 e_n\rangle = \langle x, \langle y, e_1\rangle e_n\rangle = \langle x, A_n^\ast y\rangle,
+\end{equation*}
+as desired. Therefore, $\|A_n^\ast x\| = \|\langle x, e_1\rangle e_n\| = |\langle x, e_1\rangle|$.
+
+Choosing $x = e_1$, that is, choosing $x^\ast = \langle\cdot, e_1\rangle$, we note that $\|A_n^t x^\ast\| = |\langle e_1, e_1\rangle| = 1$ for all $n\ge1$, and hence, $A_n^t x^\ast\not\to 0$ in $\left(\ell^2\right)^\ast$. Hence, $A_n^t\not\to0$ in the strong operator topology, as desired.
+\end{document}

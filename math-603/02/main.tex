@@ -1,0 +1,517 @@
+\documentclass[11pt]{article}
+
+\title{Math 603: Homework 2}
+\author{Swayam Chube}
+\date{Last Updated: \today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{fouriernc}
+\usepackage{mdframed}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd-Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{epigraph}
+\setlength\epigraphwidth{0.4\textwidth}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+% \renewcommand{\familydefault}{\sfdefault} % Do you want this font? 
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Swayam Chube},
+    colorlinks=true,
+	citecolor=blue,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{interlude}[theorem]{Interlude}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\F}{\mathbb{F}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakB}{\mathfrak{B}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrM}{\mathscr{M}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrO}{\mathscr{O}} % sheaf
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+% \newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\Ass}{\operatorname{Ass}}
+\newcommand{\projdim}{\operatorname{proj~dim}}
+\newcommand{\injdim}{\operatorname{inj~dim}}
+\newcommand{\gldim}{\operatorname{gl~dim}}
+\newcommand{\embdim}{\operatorname{emb~dim}}
+\newcommand{\hght}{\operatorname{ht}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\CM}{\operatorname{CM}}
+\newcommand{\cech}[1]{\mathbin{\check{#1}}}
+\newcommand{\cdim}{\operatorname{cdim}}
+\newcommand{\Der}{\operatorname{Der}}
+\newcommand{\trdeg}{\operatorname{trdeg}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calL}{\mathcal{L}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\gr}{\operatorname{gr}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\calH}{\mathcal{H}}
+
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\sffamily}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+
+\begin{document}
+\maketitle
+
+In all the solutions, $\K$ denotes either $\R$ or $\bbC$. We shall work over $\K$ whenever possible and specialize to either field only when mentioned explicitly.
+
+\section{Problem 1}
+
+\subsection{Part (a)}
+
+This is not true for $\bbC$-linear Hilbert spaces, indeed, let $T\colon\bbC\to\bbC$ denote the complex conjugation. Then clearly $T$ is an isometry but is not linear. Henceforth, I assume $\calH$ is an $\R$-linear Hilbert space and $T(0) = 0$. Note that without the second condition, any translation would be an ``isometry''. We have that $\|Tx - Ty\| = \|x - y\|$ and $T(0) = 0$, so that 
+\begin{equation*}
+    \|Tx\| = \|Tx - T(0)\| = \|x - 0\| = \|x\|\qquad\text{for all }~x\in\calH.
+\end{equation*}
+
+For $x, y\in\calH$, we have 
+\begin{align*}
+    \|x\|^2 - 2\langle x, y\rangle + \|y\|^2 &= \|x -  y\|^2\\
+    &= \|Tx - Ty\|^2 \\
+    &= \|Tx\|^2 - 2\langle Tx, Ty\rangle + \|Ty\|^2\\
+    &= \|x\|^2 - 2\langle Tx, Ty\rangle + \|y\|^2,
+\end{align*}
+so that $\langle Tx, Ty\rangle = \langle x, y\rangle$ for all $x, y\in\calH$. Using this, for $x, y\in\calH$ and $\lambda\in\R$, we have 
+\begin{align*}
+    &~~~\|T(x + \lambda y) - Tx - \lambda Ty\|^2 \\
+    &= \langle T(x + \lambda y) - Tx - \lambda Ty, T(x + \lambda y) - Tx - \lambda Ty\rangle\\
+    &= \|T(x + \lambda y)\|^2 + \|Tx\|^2 + \|\lambda Ty\|^2 - 2\langle T(x + \lambda y), Tx\rangle - 2\langle T(x + \lambda y), \lambda T(y)\rangle + 2\langle Tx, \lambda Ty\rangle\\
+    &= \|T(x + \lambda y)\|^2 + \|Tx\|^2 + \lambda^2\|Ty\|^2 - 2\langle T(x + \lambda y), Tx\rangle - 2\lambda\langle T(x + \lambda y), T(y)\rangle + 2\lambda\langle Tx, Ty\rangle\\
+    &= \|x + \lambda y\|^2 + \|x\|^2 + \lambda^2\|y\|^2 - 2\langle x + \lambda y, x\rangle - 2\lambda\langle x + \lambda y, y\rangle + 2\lambda\langle x, y\rangle\\
+    &= \|x + \lambda y - (x + \lambda y)\|^2 = 0,
+\end{align*}
+so that $T(x + \lambda y) = Tx + \lambda Ty$. Thus $T$ is a linear map from $\calH$ to $\calH$. Finally, since $\|Tx\| = \|x\|$ for all $x\in\calH$, $T$ is a bounded linear map with $\|T\| = 1$, as desired. 
+
+\subsection{Part (b)}
+
+Consider the map $F\colon\R\to\R^2$ given by $F(t) = (t, |t|)$. Note that $F(0) = (0, 0)$, and for $s, t\in\R$, we have 
+\begin{equation*}
+    \|F(t) - F(s)\|_{\R^2} = \left\|\left(t - s, |t| - |s|\right)\right\|_{\R^2} = \max\left\{|t - s|, \left||t| - |s|\right|\right\} = |t - s| = \|t - s\|_{\R},
+\end{equation*}
+where the third inequality follows from the fact that $|t - s|\ge\left||t| - |s|\right|$. This shows that $F$ is an isometry. But $F$ is not additive, since 
+\begin{equation*}
+    F(1) + F(-1) = (1, 1) + (-1, 1) = (0, 2)\ne (0, 0) = F(0).
+\end{equation*}
+Thus $F$ is an isometry but not a linear map.
+
+\section{Problem 2}
+
+Let $\K\in\{\R,\bbC\}$ and suppose $X$ is an NLS over $\K$. Fix $x\in X$. If $x\in Y$, then for all $\varphi\in X^\ast$ such that $\varphi|_Y = 0$, we have $\varphi(x) = 0$, so that $m(x) = 0 = \dist(x, Y)$. Suppose now that $x\notin Y$. If $\varphi\in X^\ast$ with $\|\varphi\|\le 1$ and $\varphi|_Y = 0$, then for all $y\in Y$, using the fact that $\varphi(y) = 0$, we have the inequality: 
+\begin{equation*}
+    |\varphi(x)| = |\varphi(x - y) + \varphi(y)| = |\varphi(x - y)|\le \|x - y\|,
+\end{equation*}
+so that taking infimums over $y\in Y$, we have 
+\begin{equation*}
+    |\varphi(x)|\le\inf_{y\in Y} \|x - y\| = \dist(x, Y).
+\end{equation*}
+This shows that $m(x)\le \dist(x, Y)$.
+
+Define $\varphi\colon\K x + Y\to\K$ as $\varphi(\lambda x + y) = \lambda\dist(x, Y)$. This is clearly a linear map -- to see that this is bounded, note that for $\lambda\ne 0$, 
+\begin{equation*}
+    \left|\varphi(\lambda x + y)\right| = |\lambda|\dist(x, Y)\le |\lambda|\left\|x + \frac{1}{\lambda}y\right\|\le\|\lambda x + y\|,
+\end{equation*}
+and the above inequality clearly holds when $\lambda = 0$, since the left hand side is zero in that case. Therefore, $\|\varphi\|\le 1$ and is a bounded linear functional. Due to the Hahn-Banach Theorem, there is a norm-preserving extension of $\varphi$ to $X$, say $\wt\varphi\in X^\ast$. Then 
+\begin{equation*}
+    |\wt\varphi(x)| = \dist(x, Y)\implies m(x)\ge\dist(x, Y),
+\end{equation*}
+thereby implying the desired conclusion.
+
+\section{Problem 3}
+
+\subsection{Part (a)}
+
+For each $x\in X\setminus\{0\}$, let $T_x\colon Y\to Z$ denote the bounded linear functional given by 
+\begin{equation*}
+    T_x(y) = \frac{f(x, y)}{\|x\|}.
+\end{equation*}
+For a fixed $y\in Y$, we have 
+\begin{equation*}
+    \sup_{x\in X\setminus\{0\}}\|T_x(y)\| = \sup_{x\in X\setminus\{0\}}\frac{\|f(x, y)\|}{\|x\|}.
+\end{equation*}
+Since $f(\cdot, y)$ is a bounded linear functional on $X$, there is a constant $C_y > 0$ such that $\|f(x, y)\|\le C_y\|x\|$ for all $x\in X$, so that 
+\begin{equation*}
+    \sup_{x\in X\sminus\{0\}}\|T_x(y)\|\le C_y.
+\end{equation*}
+Therefore, due to the Banach-Steinhaus Theorem, there is a constant $C > 0$ such that $\|T_x\|\le C$ for all $x\in X\setminus\{0\}$. In other words, for all $x\in X\setminus\{0\}$ and $y\in Y$, 
+\begin{equation*}
+    \frac{\|f(x, y)\|}{\|x\|}\le C\|y\|\implies \|f(x, y)\|\le C\|x\|\|y\|.
+\end{equation*}
+Finally, since $f(0, y) = 0$ for all $y\in Y$, we note that the above inequality holds for all $x\in X$ and $y\in Y$, as desired. 
+
+\subsection{Part (b)}
+
+Let $(x_0, y_0)\in X\times Y$, and let $\varepsilon > 0$. For $(x, y)\in X\times Y$, we have 
+\begin{align*}
+    \|f(x, y) - f(x_0, y_0)\| &= \left\|f(x, y) - f(x_0, y) + f(x_0, y) - f(x_0, y_0)\right\|\\ 
+    &= \left\|f(x - x_0, y) + f(x_0, y - y_0)\right\|\\
+    &\le \|f(x - x_0, y)\| + \|f(x_0, y - y_0)\|\\
+    &\le C\|x - x_0\|\|y\| + C\|x_0\|\|y - y_0\|.
+\end{align*}
+Let $M > 0$ be a positive real number such that $\|x_0\|\le M$ and $\|y_0\|\le M$. Then, for $\|x - x_0\|\le 1$ and $\|y - y_0\|\le 1$, we have $\|x\|\le M + 1$ and $\|y\|\le M + 1$, so that 
+\begin{equation*}
+    \left\|f(x, y) - f(x_0, y_0)\right\|\le C(M + 1)\left(\|x - x_0\| + \|y - y_0\|\right).
+\end{equation*}
+Choose $\delta > 0$ such that 
+\begin{equation*}
+    \delta < \min\left\{1, \frac{\varepsilon}{2C(M + 1)}\right\}.
+\end{equation*}
+Then, for $\|x - x_0\| < \delta$ and $\|y - y_0\| < \delta$, we have $\|x\|\le M + \delta\le M + 1$ and $\|y\|\le M + \delta\le M + 1$, so that 
+\begin{equation*}
+    \|f(x, y) - f(x_0, y_0)\| < C(M + 1)\left(\frac{\varepsilon}{2C(M + 1)} + \frac{\varepsilon}{2C(M + 1)}\right) < \varepsilon.
+\end{equation*}
+Since $B_X(x_0, \delta)\times B_Y(y_0, \delta)$ forms a basic open set in $X\times Y$, it follows that $f\colon X\times Y\to Z$ is a continuous function.
+
+\section{Problem 4}
+
+To show that $A$ is continuous, we shall use the Closed Graph Theorem. To this end, we only need to show that $\operatorname{Graph}(A) = \left\{(x, Ax)\colon x\in\calH\right\}$ is closed in $\calH\times\calH$. Since $\calH\times\calH$ is a metric space, it suffices to show that every sequence in $\operatorname{Graph}(A)$ that converges in $\calH\times\calH$ must converge in $\operatorname{Graph}(A)$.
+
+Let $(x_n, Ax_n)$ be a sequence in $\operatorname{Graph}(A)$ which converges to $(x, y)\in\calH\times\calH$. Since the projection operators $\operatorname{pr}_1,\operatorname{pr}_2\colon\calH\times\calH\to\calH$ are continuous, it follows that $x_n\to x$ and $Ax_n\to y$ in $\calH$. We shall show that $y = Ax$. Indeed, for any $z\in\calH$, using the fact that the linear functional $\langle\cdot, z\rangle\colon\calH\to\K$ is continuous,
+\begin{equation*}
+    \langle y, z\rangle = \lim_{n\to\infty}\langle Ax_n, z\rangle = \lim_{n\to\infty}\langle x_n, Az\rangle = \langle x, Az\rangle = \langle Ax, z\rangle.
+\end{equation*}
+That is, 
+\begin{equation*}
+    \langle Ax - y, z\rangle = 0\qquad\text{ for all } z\in\calH.
+\end{equation*}
+Set $z = Ax - y$ to obtain $\|Ax - y\| = 0$, so that $Ax = y$, as desired. Thus $\operatorname{Graph}(A)$ is closed in $\calH\times\calH$, and hence $A$ is continuous.
+
+\section{Problem 5}
+
+For each $y\in\calH$, consider the linear functional $\psi_x = B(\cdot, y)\colon\calH\to\K$. This is a bounded linear functional, since for all $x\in\calH$, 
+\begin{equation*}
+    \left|\psi_y(x)\right| = \left|B(x, y)\right|\le c\|x\|\|y\|,
+\end{equation*}
+so that $\|\psi_y\|\le c\|y\|$. Therefore, due to the Riesz Representation Theorem, there is a unique element $A(y)\in\calH$ such that $\langle x, Ay\rangle = B(x, y)$ for all $x\in\calH$. This defines a map $A\colon\calH\to\calH$. 
+
+We contend that $A$ is a bounded linear functional. First to see that $A$ is linear, let $\alpha_1, \alpha_2\in\K$ and $y_1, y_2\in\calH$. Then for all $x\in\calH$, 
+\begin{align*}
+    \langle x, A(\alpha_1 y_1 + \alpha_2 y_2)\rangle &= B(x, \alpha_1y_1 + \alpha_2y_2)\\
+    &= \overline\alpha_1 B(x, y_1) + \overline\alpha_2 B(x, y_2)\\
+    &= \overline\alpha_1\langle x, Ay_1\rangle + \overline\alpha_2\langle x, Ay_2\rangle\\
+    &= \langle x, \alpha_1 Ay_1\rangle + \langle x, \alpha_2 Ay_2\rangle\\
+    &= \langle x, \alpha_1 Ay_1 + \alpha_2 Ay_2\rangle,
+\end{align*}
+so that $\langle x, \alpha_1 Ay_1 + \alpha_2 Ay_2 - A(\alpha_1 y_1 + \alpha_2 y_2)\rangle = 0$ for all $x\in\calH$. Setting $x = \alpha_1 Ay_1 + \alpha_2 Ay_2 - A(\alpha_1 y_1 + \alpha_2 y_2)$, it follows that 
+\begin{equation*}
+    A(\alpha_1y_1 + \alpha_2y_2) = \alpha_1 Ay_1 + \alpha_2 Ay_2.
+\end{equation*}
+To see that $A$ is bounded, note that for any $y\in\calH$, 
+\begin{equation*}
+    \|Ay\|^2 = \left|\langle Ay, Ay\rangle\right| = \left|B(Ay, y)\right|\le c\|y\|\|Ay\|.
+\end{equation*}
+If $Ay = 0$, then there is nothing to prove, but if $Ay\ne 0$, then $\|Ay\|\le c\|y\|$, whence $A$ is a bounded linear operator.
+
+Now we show that the range $\mathcal R(A)$ of $A$ is closed. Indeed, suppose $(y_n)_{n = 1}^\infty$ is a sequence in $\calH$ such that $Ay_n\to z$ for some $z\in\calH$. We must show that $z\in\mathcal R(A)$. First, note that for any $u\in\calH$, 
+\begin{equation*}
+    b\|u\|^2\le\left|B(u, u)\right| = \left|\langle u, Au\rangle\right|\le \|u\|\|Au\|.
+\end{equation*}
+If $u\ne 0$, then dividing throughout by $\|u\|$, we obtain $\|Au\|\ge b\|u\|$. This inequality is trivially true if $u = 0$, and hence, it holds for all $u\in\calH$. This shows, in particular, that 
+\begin{equation*}
+    \|y_n - y_m\|\le \frac{1}{b}\|Ay_n - Ay_m\|.
+\end{equation*}
+Since $\left(Ay_n\right)_{n =1 }^\infty$ constitutes a convergent sequence in $\calH$, it is a Cauchy sequence, and in particular, for every $\varepsilon > 0$, there is a positive integer $N > 0$ such that whenever $m, n\ge N$, 
+\begin{equation*}
+    \|Ay_n - Ay_m\| < b\varepsilon\implies\|y_n - y_m\| < \varepsilon.
+\end{equation*}
+Hence, $(y_n)_{n = 1}^\infty$ forms a Cauchy sequence in $\calH$. Since $\calH$ is complete, there is a $y\in\calH$ with $y_n\to y$ as $n\to\infty$. Further, since $A$ is a continuous map, we must have that 
+\begin{equation*}
+    z = \lim_{n\to\infty} Ay_n = A\left(\lim_{n\to\infty}y_n\right) = Ay,
+\end{equation*}
+so that $z\in\mathcal R(A)$. This shows that $\mathcal R(A)$ is closed in $\calH$.
+
+Since $\calH$ is a Hilbert space, there is a decomposition $\calH = \mathcal R(A) + \mathcal R(A)^\perp$. We shall show that $\mathcal R(A)^\perp = 0$, so that $\calH = \mathcal R(A)$. Let $\wt y\in\mathcal R(A)^\perp$. Then, 
+\begin{equation*}
+    0 = \left|\langle \wt y, A\wt y\rangle\right| = \left|B(\wt y, \wt y)\right|\ge b\|\wt y\|^2,
+\end{equation*}
+so that $\wt y = 0$, i.e., $\mathcal R(A)^\perp = 0$, equivalently, $\mathcal R(A) = \calH$, so that $A$ is surjective.
+
+Finally, let $\varphi\in\calH^\ast$ be a bounded linear functional. Due to the Riesz Representation Theorem, there is a unique $u\in\calH$ such that for all $x\in\calH$, $\varphi(x) = \langle x, u\rangle$. Since $A$ is surjective, there is a $v\in\calH$ such that $u = Av$. Hence, for all $x\in\calH$, 
+\begin{equation*}
+    \varphi(x) = \langle x, u\rangle = \langle x, Av\rangle = B(x, v).
+\end{equation*}
+It remains to show that $v$ is unique. Suppose there is a $v'\in\calH$ with $\varphi(x) = B(x, v')$ for all $x\in\calH$. Then 
+\begin{equation*}
+    b\|v - v'\|^2\le \left|B(v - v', v - v')\right| = \left|B(v - v', v) - B(v - v', v')\right| = \left|\varphi(v - v') - \varphi(v - v')\right| = 0,
+\end{equation*}
+and hence, $\|v - v'\| = 0$, i.e., $v = v'$. This completes the proof.
+
+\section{Problem 6}
+
+Suppose $T$ has a right inverse, $S\colon Y\to X$ a bounded linear functional. Since $T\circ S = \id_Y$, for every $y\in Y$, we have 
+\begin{equation*}
+    T(S(y)) = \id_Y(y) = y,
+\end{equation*}
+so that $T$ is surjective. Further, for any $x\in X$, note that 
+\begin{equation*}
+    T\left(x - S(T(x))\right) = T(x) - T\left(S(T(x))\right) = T(x) - T(x) = 0,
+\end{equation*}
+so that $x - S(T(x))\in\calN(T)$, and we have a decomposition 
+\begin{equation*}
+    x = \left(x - S(T(x))\right) + S(T(x)).
+\end{equation*}
+Thus $X = \mathcal R(S) + \calN(T)$. Suppose now that $x\in\mathcal R(S)\cap\calN(T)$. Then there exists $y\in Y$ such that $x = S(y)$. But then $y = T(S(y)) = T(x) = 0$, so that $x = S(y) = 0$. Hence $\mathcal R(S)\cap\calN(T) = \{0\}$. 
+
+It remains to show that $\mathcal R(S)$ is closed in $X$. Indeed, let $(x_n)_{n = 1}^\infty$ be a sequence in $\mathcal R(S)$ that converges to $x\in X$. We shall show that $x\in\mathcal R(S)$. For each $n\ge 1$, there exists a unique $y_n\in Y$ such that $x_n = S(y_n)$. Note that $y_n = T(S(y_n)) = T(x_n)$, and since $T$ is a continuous map, it must map convergent sequences to convergent sequences. Therefore, $y_n = T(x_n)\to y$ for some $y\in Y$. Moreover, since $S$ is continuous,
+\begin{equation*}
+    S(y) = S\left(\lim_{n\to\infty} y_n\right) = \lim_{n\to\infty} S(y_n) = \lim_{n\to\infty} x_n = x,
+\end{equation*}
+so that $x\in\mathcal R(S)$, i.e., $\mathcal R(S)$ is closed in $X$. This shows that $\calN(T)$ is complemented in $X$ by $\mathcal R(S)$.
+
+Conversely, suppose $T$ is surjective and $\calN(T)$ is complemented in $X$ by a closed subspace $Z$. We shall show that $T$ has a right-inverse. Let $P\colon X\to Z$ denote the projection onto the closed subspace $Z$ and $Q\colon X\to\calN(T)$ that onto the closed subspace $\calN(T)$, which exist and is are bounded linear maps as we have seen in class. Let $\iota\colon Z\to X$ denote the inclusion. We contend that the map $U = T\circ\iota\colon Z\to Y$ is an isomorphism of Banach spaces. Being the composition of two bounded linear functionals, $U$ is a bounded linear functional. Further, if $U(z) = 0$, then $z\in\calN(T)$, but since $\calN(T)\cap Z = \{0\}$, it follows that $z = 0$. Hence, $U$ is injective. Further, since $T$ is surjective, for any $y\in Y$, there exists an $x\in X$ with $T(x) = y$. Let $z = P(x)$ and $w = Q(x)$. We have 
+\begin{equation*}
+    y = T(x) = T(P(x) + Q(x)) = T(P(x)) + T(Q(x)) = T(P(x)) = U(z).
+\end{equation*}
+Hence, $U$ is a bijective bounded linear map between Banach spaces, and due to the Open Mapping Theorem (or the Bounded Inverse Theorem), $U$ must be an isomorphism, and must admit a bounded linear inverse $U^{-1}\colon Y\to Z$. Set $S = \iota\circ U^{-1}$. We claim that $S$ is the desired right-inverse for $T$. Indeed, for any $y\in Y$, 
+\begin{equation*}
+    T(S(y)) = T(\iota(U^{-1}(y))).
+\end{equation*}
+Let $z\in Z$ be such that $U(z) = y$, therefore, $T(z) = y$, by construction. Hence, $T(S(y)) = T(z) = y$, as desired. This completes the proof.
+\end{document}

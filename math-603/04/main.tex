@@ -1,0 +1,463 @@
+\documentclass[11pt]{article}
+
+\title{Math 603: Homework 3}
+\author{Swayam Chube}
+\date{Last Updated: \today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{fouriernc}
+\usepackage{mdframed}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd-Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{epigraph}
+\setlength\epigraphwidth{0.4\textwidth}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+% \renewcommand{\familydefault}{\sfdefault} % Do you want this font? 
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Swayam Chube},
+    colorlinks=true,
+	citecolor=blue,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{interlude}[theorem]{Interlude}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\F}{\mathbb{F}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\calR}{\mathcal{R}} % range of an operator
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakB}{\mathfrak{B}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrM}{\mathscr{M}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrO}{\mathscr{O}} % sheaf
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+% \newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+\newcommand{\weakto}{\rightharpoonup}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+% \newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\Ass}{\operatorname{Ass}}
+\newcommand{\projdim}{\operatorname{proj~dim}}
+\newcommand{\injdim}{\operatorname{inj~dim}}
+\newcommand{\gldim}{\operatorname{gl~dim}}
+\newcommand{\embdim}{\operatorname{emb~dim}}
+\newcommand{\hght}{\operatorname{ht}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\CM}{\operatorname{CM}}
+\newcommand{\cech}[1]{\mathbin{\check{#1}}}
+\newcommand{\cdim}{\operatorname{cdim}}
+\newcommand{\Der}{\operatorname{Der}}
+\newcommand{\trdeg}{\operatorname{trdeg}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calL}{\mathcal{L}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\gr}{\operatorname{gr}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\spr}{\operatorname{spr}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\sffamily}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+\begin{document}
+\maketitle 
+
+\section{Problem 1}
+
+\section{Problem 2}
+
+\section{Problem 3}
+
+Suppose first that $f$ is weakly analytic. Fix $z_0\in\Omega$. We shall show that the limit 
+\begin{equation*}
+    \lim_{z\to z_0}\frac{f(z) - f(z_0)}{z - z_0}
+\end{equation*}
+exists in $X$. Let $R > 0$ be such that the closed ball $\overline B_R(z_0)$ is contained in $\Omega$, and let $\Gamma\colon [0, 2\pi]\to\Omega$ denote the positively oriented circle $\Gamma(t) = z_0 + Re^{\iota t}$. Let $\varphi\in X^\ast$. Since $\varphi \circ f\colon\Omega\to\bbC$ is holomorphic, using Cauchy's Integral Formula, we have 
+\begin{equation*}
+    \varphi(f(z)) = \frac{1}{2\pi\iota}\oint_\Gamma \frac{\varphi(f(\zeta))}{\zeta - z}~\mathrm d\zeta
+\end{equation*}
+for every $z\in B_R(z_0)$, so that 
+\begin{align*}
+    \frac{\varphi(f(z)) - \varphi(f(z_0))}{z - z_0} &= \frac{1}{2\pi\iota(z - z_0)}\oint_\Gamma\frac{\varphi(f(\zeta))}{\zeta - z} - \frac{\varphi(f(\zeta))}{\zeta - z_0}~\mathrm d\zeta\\
+    &= \frac{1}{2\pi\iota(z - z_0)}\oint_\Gamma\varphi(f(\zeta))\frac{z - z_0}{(\zeta - z)(\zeta - z_0)}~\mathrm d\zeta\\
+    &= \frac{1}{2\pi\iota}\oint_\Gamma\frac{\varphi(f(\zeta))}{(\zeta - z)(\zeta - z_0)}~\mathrm d\zeta.
+\end{align*}
+Therefore, for $z, z'\in B_{\frac{R}{2}}(z_0)$, we have 
+\begin{align*}
+    \frac{\varphi(f(z')) - \varphi(f(z_0))}{z' - z_0} - \frac{\varphi(f(z)) - \varphi(f(z_0))}{z - z_0} &= \frac{1}{2\pi\iota}\oint_{\Gamma}\frac{\varphi(f(\zeta))}{(\zeta - z')(\zeta - z_0)} - \frac{\varphi(f(\zeta))}{(\zeta - z)(\zeta - z_0)}~\mathrm d\zeta \\
+    &= \frac{1}{2\pi\iota}\int_\Gamma\frac{\varphi(f(\zeta))\left(\zeta - z - (\zeta - z')\right)}{(\zeta - z')(\zeta - z_0)(\zeta - z)}~\mathrm d\zeta\\
+    &= \frac{1}{2\pi\iota}\oint_\Gamma\frac{\varphi(f(\zeta))(z' - z)}{(\zeta - z')(\zeta - z)(\zeta - z_0)}~\mathrm d\zeta.
+\end{align*}
+Rewriting the left hand side,
+\begin{equation}\label{cauchy-esque}\tag{$\dagger$}
+    \varphi\left(\frac{f(z') - f(z_0)}{z' - z_0} - \frac{f(z) - f(z_0)}{z - z_0}\right) = \frac{1}{2\pi\iota}\oint_\Gamma\frac{\varphi(f(\zeta))(z' - z)}{(\zeta - z')(\zeta - z)(\zeta - z_0)}~\mathrm d\zeta
+\end{equation}
+for all $z, z'\in B_{\frac{R}{2}}(z_0)$.
+
+\begin{claim}
+    The set $\left\{f(\zeta)\colon\zeta\in\Gamma\right\}$ is bounded.
+\end{claim}
+\begin{proof}
+    We shall show this using the Banach-Steinhaus Theorem (i.e., the Uniform Boundedness Principle). Indeed, for every $\varphi\in X^\ast$, the function $\varphi\circ f$ is continuous and since $\Gamma$ is compact, there is a constant $B_\varphi > 0$ such that $|\varphi(f(\zeta))|\le B_\varphi$ for every $\zeta\in\Gamma$. Let $\Phi\colon X\to X^{\ast\ast}$ denote the canonical isometric map (called the ``evaluation map'' sometimes). Note that $\varphi(f(\zeta)) = \Phi(f(\zeta))(\varphi)$. We have shown that the bounded linear functionals $\Phi(f(\zeta))\in X^{\ast\ast}$ for $\zeta\in\Gamma$ are pointwise bounded on $X^\ast$, and hence, due to the Banach-Steinhaus Theorem, there is a constant $C > 0$ such that $\|\Phi(f(\zeta))\|\le C$ for every $\zeta\in\Gamma$. Using the fact that $\Phi$ is an isometry, we see that $\|f(\zeta)\|\le C$ for every $\zeta\in\Gamma$, as desired.
+\end{proof}
+
+Using the above in \eqref{cauchy-esque}, we have 
+\begin{align*}
+    \left|\varphi\left(\frac{f(z') - f(z_0)}{z' - z_0} - \frac{f(z) - f(z_0)}{z - z_0}\right)\right| &= \frac{1}{2\pi}\left|\oint_{\Gamma}\frac{\varphi(f(\zeta))(z' - z)}{(\zeta - z')(\zeta - z)(\zeta - z_0)}~\mathrm d\zeta\right|\\
+    &= \frac{1}{2\pi}\oint_\Gamma\frac{|\varphi(f(\zeta))| |z' - z|}{|\zeta - z'||\zeta - z||\zeta - z_0|}~\mathrm d|\zeta|\\
+    &\le \frac{1}{2\pi}\oint_\Gamma\frac{\|\varphi\|\|f(\zeta)\| |z' - z|}{|\zeta - z'||\zeta - z||\zeta - z_0|}~\mathrm d|\zeta|\\
+    &\le\frac{1}{2\pi}\oint_\Gamma\frac{\|\varphi\|\cdot C\cdot |z' - z|}{\frac{R^3}{4}}~\mathrm d|\zeta|\\
+    &=\frac{4C\|\varphi\|}{R^2}|z' - z|,
+\end{align*}
+for all $\varphi\in X^\ast$.
+Let
+\begin{equation*}
+    x = \frac{f(z') - f(z_0)}{z' - z_0} - \frac{f(z) - f(z_0)}{z - z_0}\in X.
+\end{equation*}
+Then the above can be rewritten as: 
+\begin{equation*}
+    \left|\Phi(x)(\varphi)\right|\le\frac{4C|z' - z|}{R^2}\|\varphi\|
+\end{equation*}
+for all $\varphi\in X^\ast$. It follows that 
+\begin{equation*}
+    \left\|\frac{f(z') - f(z_0)}{z' - z_0} - \frac{f(z) - f(z_0)}{z - z_0}\right\| = \|x\| = \|\Phi(x)\|\le\frac{4C}{R^2}|z' - z|,
+\end{equation*}
+for all $z, z'\in B_{\frac{R}{2}}(z_0)$. Let $g\colon \Omega\setminus\{z_0\}\to X$ denote the mapping 
+\begin{equation*}
+    g(z) = \frac{f(z) - f(z_0)}{z - z_0}.
+\end{equation*}
+For any sequence $(z_n)_{n = 1}^\infty$ in $B_{\frac{R}{2}}(z_0)\setminus\{z_0\}$, we have 
+\begin{equation*}
+    \|g(z_n) - g(z_m)\|\le\frac{4C}{R^2}|z_n - z_m|,
+\end{equation*}
+so that the sequence $\left(g(z_n)\right)_{n = 1}^\infty$ is Cauchy, and hence, converges since $X$ is complete. Since this holds for every sequence $(z_n)_{n = 1}^\infty$ converging to $z_0$ (because any such sequence will eventually be contained in the $\frac R2$-ball centered at $z_0$), it follows that the limit 
+\begin{equation*}
+    \lim_{z\to z_0}\frac{f(z) - f(z_0)}{z - z_0}
+\end{equation*}
+exists. In the above analytis $z_0\in\Omega$ was arbitrary, and hence, $f$ is strongly analytic.
+
+Conversely, suppose $f$ is strongly analytic. Then for every $\varphi\in X^\ast$ and $z_0\in\Omega$, we have that for every $z\in\Omega$ with $z\ne z_0$, 
+\begin{equation*}
+    \lim_{z\to z_0}\frac{\varphi(f(z)) - \varphi(f(z_0))}{z - z_0} = \lim_{z\to z_0}\varphi\left(\frac{f(z) - f(z_0)}{z - z_0}\right) = \varphi\left(\lim_{z\to z_0}\frac{f(z) - f(z_0)}{z - z_0}\right) = \varphi(f'(z_0)),
+\end{equation*}
+where we may swap the limit with $\varphi$ because it is continuous. Further, $f'(z_0)$ is a shorthand for the limit $\lim_{z\to z_0}\frac{f(z) - f(z_0)}{z - z_0}$. This shows that $f$ is weakly analytic, as desired.
+
+\section{Problem 4}
+
+Let $\mathbf K$ denote the ``integral operator'', that is, 
+\begin{equation*}
+    \left(\mathbf K f\right)(t) = \int_0^t f(s)~\mathrm ds,
+\end{equation*}
+which is obtained by setting the kernel $K(s, t)$ to be identically $1$. We first prove the result for $\mathbf K$. To this end, we shall show that the spectral radius of $\mathbf K$ is zero. Using the spectral radius formula,
+\begin{equation*}
+    \spr(\mathbf K) = \lim_{n\to\infty}\|\mathbf K^n\|^\frac{1}{n}
+\end{equation*}
+We shall show by induction on $n\ge 1$ that 
+\begin{equation*}
+    \left(\mathbf K^n f\right)(t)  = \int_0^t \frac{(t - s)^{n - 1}}{(n - 1)!}f(s)~\mathrm ds.
+\end{equation*}
+The base case with $n = 1$ is clear. Suppose now that the claim holds for $n\ge 1$. Then for $f\in C([0, 1])$, 
+\begin{equation*}
+    \left(\mathbf K^{n + 1}f\right)(t) = \int_0^t\left(\mathbf K^n f\right)(s)~\mathrm ds = \int_0^t\int_0^s\frac{(s - u)^{n - 1}}{(n - 1)!}f(u)~\mathrm du~\mathrm ds.
+\end{equation*}
+By Fubini's Theorem, the rightmost integral is equal to 
+\begin{equation*}
+    \iint_E\frac{(s - u)^{n - 1}}{(n - 1)!}f(u)~\mathrm du~\mathrm ds,
+\end{equation*}
+where $E = \left\{(u, s)\in\R^2\colon 0\le u\le s\le t\right\}$. Using Fubini's Theorem again, the integral can be rewritten as 
+\begin{equation*}
+    \int_{0}^t\int_u^t\frac{(s - u)^{n - 1}}{(n - 1)!}f(u)~\mathrm ds~\mathrm du = \int_0^t\frac{(t - u)^n}{n!}f(u)~\mathrm du,
+\end{equation*}
+as desired. 
+
+Hence, for $f\in C([0, 1])$, we have 
+\begin{equation*}
+    \left|(\mathbf K^n f)(t)\right|\le\int_0^t\frac{(t - s)^{n - 1}}{(n - 1)!}|f(s)|~\mathrm ds\le\int_0^1\frac{1}{(n - 1)!}\|f\|~\mathrm ds = \frac{\|f\|}{(n - 1)!},
+\end{equation*}
+so that 
+\begin{equation*}
+    \|\mathbf K^n f\|\le\frac{\|f\|}{(n - 1)!}\implies\|\mathbf K^n\|\le\frac{1}{(n - 1)!}.
+\end{equation*}
+This shows that 
+\begin{equation*}
+    \lim_{n\to\infty}\|\mathbf K^n\|^{\frac{1}{n}}\le\lim_{n\to\infty}\frac{1}{\left((n - 1)!\right)^{\frac{1}{n}}} = 0.
+\end{equation*}
+With this in hand, we turn our attention to more general continuous kernels. Let $K\in C\left([0, 1]\times [0, 1]\right)$ be a continuous function. Since $K$ is continuous on a compact set, there is a constant $C > 0$ such that $|K(s, t)|\le C$ for all $s, t\in [0, 1]$. Let $V\colon C([0, 1])\to C([0, 1])$ denote the operator 
+\begin{equation*}
+    (Vf)(t) = \int_0^t K(t, s)f(s)~\mathrm ds.
+\end{equation*}
+Then for every $f\in C([0, 1])$ and $n\ge 1$, we have 
+\begin{equation*}
+    (V^nf)(t) = \int_0^t K(t, s_{n - 1})\int_0^{s_{n - 1}}K(s_{n - 1}, s_{n - 2})\int_0^{s_{n - 2}}\cdots\int_0^{s_1} K(s_1, s_0) f(s_0)~\mathrm ds_0\cdots\mathrm ds_{n - 1},
+\end{equation*}
+and hence, 
+\begin{align*}
+    \left|(V^n f)(t)\right|&\le\int_0^t |K(t, s_{n - 1})|\int_0^{s_{n - 1}} |K(s_{n - 1}, s_{n - 2})| \int_0^{s_{n - 2}}\cdots\int_0^{s_1} |K(s_1, s_0)||f(s_0)|~\mathrm ds_0\cdots\mathrm ds_{n - 1}\\
+    &\le C^n\int_0^t \int_0^{s_{n - 1}}\int_0^{s_{n - 2}}\cdots\int_0^{s_1}|f(s_0)|~\mathrm ds_0\cdots\mathrm ds_{n - 1}\\
+    &= C^n\left(\mathbf K^n|f|\right)(t)\\
+    &\le C^n\|\mathbf K^n f\|\le C^n\|\mathbf K^n\|\|f\|.
+\end{align*}
+Thus $\|V^n f\|\le C^n\|\mathbf K^n\|\|f\|$. Since this inequality holds for all $f\in C([0, 1])$, it follows that $\|V^n\|\le C^n\|\mathbf K^n\|$, consequently, 
+\begin{equation*}
+    \spr(V) = \lim_{n\to\infty}\|V^n\|^{\frac{1}{n}} = \lim_{n\to\infty} C\|\mathbf K^n\|^{\frac{1}{n}} = 0.
+\end{equation*}
+Due to Gelfand-Mazur, we know that the spectrum of $V$ is non-empty, and hence, must be a singleton. All that remains to be shown is that $0\in\sigma(V)$. To this end, it suffices to show that $V$ is a compact operator. Indeed, let $(f_n)_{n = 1}^\infty$ be a bounded sequence in $C([0, 1])$. We shall show that the sequence $\left(Vf_n\right)_{n = 1}^\infty$ admits a uniformly convergent subsequence by invoking the Arzel\`a-Ascoli Theorem, for which we must show that $(Vf_n)_{n = 1}^\infty$ is pointwise bounded and equicontinuous. 
+Suppose $B > 0$ is such that $\|f_n\|\le B$ for all $n\ge 1$. Then for all $n\ge 1$ and $t\in [0, 1]$, we have 
+\begin{equation*}
+    |(Vf)(t)|\le\left|\int_0^t K(t, s)f(s)~\mathrm ds\right|\le \int_0^t |K(t, s)| |f(s)|~\mathrm ds\le \int_0^1 C\cdot B~\mathrm ds = C\cdot B.
+\end{equation*}
+This shows that the $Vf_n$'s are pointwise bounded. We shall show equicontinuity next. Let $\varepsilon > 0$. Since $K$ is continuous on a compact set $[0, 1]\times[0, 1]$, it is uniformly continuous, so that there is a $\delta > 0$ such that whenever $|(x, x') - (y, y')| < \delta$, we have $\left|K(x, x') - K(y, y')\right| < \frac{\varepsilon}{4B}$. Further, we may choose $\delta < \frac{\varepsilon}{4BC}$. Now, for $|x - y| < \delta$ and $n\ge 1$, we have 
+\begin{align*}
+    \left|(Vf_n)(x) - (Vf_n)(y)\right| &= \left|\int_0^y K(y, s)f(s)~\mathrm ds - \int_0^x K(x, s)f(s)~\mathrm ds\right|\\
+    &= \left|\int_0^x K(y, s)f(s) - K(x, s)f(s)~\mathrm ds + \int_x^y K(y, s)f(s)~\mathrm ds\right|\\
+    &\le \int_0^x |K(y, s) - K(x, s)||f(s)|~\mathrm ds + \int_x^y |K(y, s)||f(s)|~\mathrm ds\\
+    &\le \int_0^1 |K(y, s) - K(x, s)||f(s)|~\mathrm ds + \int_x^y |K(y, s)||f(s)|~\mathrm ds\\
+    &\le\int_0^1\frac{\varepsilon}{4B}\cdot B~\mathrm ds + |x - y|\cdot C\cdot B\\
+    &\le \frac{\varepsilon}{2} < \varepsilon.
+\end{align*}
+This establishes equicontinuity, and hence, by the Arzel\`a-Ascoli Theorem, $\left(Vf_n\right)_{n\ge 1}$ admits a uniformly convergent subsequence, thereby showing that $V$ is compact. Since $0$ is in the spectrum of every compact operator, we have shown that $\sigma(V) = \{0\}$.
+
+\section{Problem 5}
+
+\section{Problem 6}
+\end{document}
