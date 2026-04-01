@@ -459,5 +459,75 @@ This establishes equicontinuity, and hence, by the Arzel\`a-Ascoli Theorem, $\le
 
 \section{Problem 5}
 
-\section{Problem 6}
+\subsection{Part (a)}
+
+Suppose $0\ne\lambda\notin \sigma(AB)$, that is, $\lambda I - AB$ is invertible. Set 
+\begin{equation*}
+    T = \frac{1}{\lambda}\left(I + B\left(\lambda I - AB\right)^{-1}A\right).
+\end{equation*}
+Then 
+\begin{align*}
+    T(\lambda I - BA) &= \frac{1}{\lambda}\left(I + B(\lambda I - AB)^{-1}A\right)(\lambda I - BA)\\
+    &= \frac{1}{\lambda}\left(\lambda I - BA + B(\lambda I - AB)^{-1}\left(\lambda A - ABA\right)\right)\\
+    &=\frac{1}{\lambda}\left(\lambda I - BA + B(\lambda I - AB)^{-1}\left(\lambda I - AB\right)A\right)\\
+    &= \frac{1}{\lambda}\left(\lambda I - BA + BA\right)\\
+    &= I,
+\end{align*}
+and 
+\begin{align*}
+    (\lambda I - BA)T &= \frac{1}{\lambda}(I - BA)\left(I + B(\lambda I - AB)^{-1}A\right)\\
+    &= \frac{1}{\lambda}\left(\lambda I - BA + (\lambda I - BA)B(\lambda I - AB)^{-1}A\right)\\
+    &= \frac{1}{\lambda}\left(\lambda I - BA + (\lambda B - BAB)(\lambda I - AB)^{-1}A\right)\\
+    &= \frac{1}{\lambda}\left(\lambda I - BA + B(\lambda I - AB)(\lambda I - AB)^{-1}A\right)\\
+    &= \frac{1}{\lambda}\left(\lambda I - BA + BA\right)\\
+    &= I.
+\end{align*}
+Thus $\lambda I - BA$ is invertible with inverse $T$. In other words, $\lambda\notin\sigma(BA)\setminus\{0\}$. Equivalently, we have shown that $\sigma(BA)\setminus\{0\}\subseteq\sigma(AB)\setminus\{0\}$. Interchanging the roles of $A$ and $B$ and repeating the above argument, we establish the reverse inclusion: $\sigma(AB)\setminus\{0\}\subseteq\sigma(BA)\setminus\{0\}$, whence we must have equality $\sigma(AB)\setminus\{0\} = \sigma(BA)\setminus\{0\}$.
+
+\subsection{Part (b)}
+
+Suppose $0\ne\lambda$ is an eigenvalue of $AB$, that is, there exists $0\ne x\in X$ such that $ABx = \lambda x$. Note that $Bx \ne 0$, else $\lambda x = 0$, which would force $\lambda = 0$, which is absurd. Set $y = Bx$. Then $BAy = BABx = \lambda Bx = \lambda y$, so that $\lambda$ is an eigenvalue of $BA$. Thus every non-zero eigenvalue of $AB$ is an eigenvalue of $BA$.
+
+Interchanging the roles of $A$ and $B$, we see that every non-zero eigenvalue of $BA$ is also an eigenvalue of $AB$. Hence, $AB$ and $BA$ have the same non-zero eigenvalues.
+
+\section{Problem 6} 
+
+Let $X$ be a Banach space and $T\in\mathscr L(X)$ be a surjective bounded linear map. We shall show that there exists an $\varepsilon > 0$ such that whenever $S\in\mathscr L(X)$ with $\|T - S\| < \varepsilon$, $S$ is surjective. This statement is equivalent to the statement of the theorem with $A = T - S$. 
+
+First, using the open mapping theorem, the image of the open unit ball of $X$ under $T$ is an open set containing $0$, and hence, there is an $r > 0$ such that the ball of radius $r$, $B_r(0)$ is contained in $T\left(B_1(0)\right)$. Now, given any $0\ne y\in X$, the element $\frac{r}{2\|y\|}y$ is contained in the ball $B_r(0)$, so that there exists $0\ne x\in B_1(0)$ with $Tx = \frac{r}{2\|y\|}y$. In particular, $T\left(\frac{2\|y\|}{r}x\right) = y$. Set $z = \frac{2\|y\|}{r}x$. In conclusion, we have shown that for every $y\in X$, there exists a $z\in X$ with $\|z\|\le\frac{2}{r}\|y\|$ such that $Tz = y$. Set $c = \frac{2}{r}$. We isolate our conclusion:
+\begin{equation*}\label{conclusion}\tag{$\star$}
+    \text{for every $y\in X$ there exists $x\in X$ with $\|x\|\le c\|y\|$ such that $Tx = y$}
+\end{equation*}
+
+Let $0 < \varepsilon < \frac{1}{2c}$ and let $S\in\mathscr L(X)$ with $\|T - S\| < \varepsilon$. We shall show that $S$ is surjective. Indeed, let $y\in X$ and set $y_0 = y$. Using \eqref{conclusion}, there exists $x_1\in X$ such that $Tx_1 = y_0$ and $\|x_1\|\le c\|y_0\| = c\|y\|$. Next, set $y_1 = y_0 - Sx_1$, so that 
+\begin{equation*}
+    \|y_1\| = \left\|Tx_1 - Sx_1\right\| = \left\|(T - S)(x_1)\right\|\le \varepsilon\|x_1\|\le c\varepsilon\|y\|.
+\end{equation*}
+Using \eqref{conclusion} again, there exists $x_2\in X$ with $Tx_2 = y_1$ and $\|x_2\|\le c\|y_1\|\le c^2\varepsilon \|y\|$. Set $y_2 = y_1 - Sx_2$, and using the same argument as above, we note that $\|y_2\|\le (c\varepsilon)^2 \|y\|$. Continuing this process \emph{ad infinitum}, we obtain two sequences $(x_n)_{n\ge 1}$ and $(y_n)_{n\ge 0}$ such that 
+\begin{enumerate}[label=(\roman*)]
+    \item $y_0 = y$,
+    \item $\|x_n\|\le c^n\varepsilon^{n - 1}\|y\|$ and $\|y_n\|\le (c\varepsilon)^n \|y\|$ for all $n\ge 1$, and 
+    \item $y_n = y_{n - 1} - Sx_n$ for all $n\ge 1$.
+\end{enumerate}
+Note that the sequence $(x_n)_{n\ge 1}$ is absolutely summable, since 
+\begin{equation*}
+    \sum_{n\ge 1}\|x_n\|\le \sum_{n\ge 1}c^n\varepsilon^{n - 1}\|y\| = c\sum_{n\ge 1}(c\varepsilon)^{n - 1} < \infty,
+\end{equation*}
+since $c\varepsilon < \frac{1}{2}$. Being absolutely summable, its partial sums 
+\begin{equation*}
+    z_N\coloneq\sum_{n = 1}^N x_n
+\end{equation*}
+must form a Cauchy sequence in $X$, owing to the inequality: 
+\begin{equation*}
+    \|z_N - z_M\|\le\sum_{n = M + 1}^N \|x_n\|.
+\end{equation*}
+Since $X$ is complete, the partial sums converge to some $x\in X$. We claim that $Sx = y$. Indeed, note that 
+\begin{equation*}
+    Sz_N = \sum_{n = 1}^N Sx_n = \sum_{n = 1}^N (y_{n - 1} - y_n) = y_0 - y_N = y - y_N.
+\end{equation*}
+But since $\|y_n\|\to 0$ as $n\to\infty$ (again using that $c\varepsilon < \frac{1}{2}$), we see that 
+\begin{equation*}
+    Sx = \lim_{N\to\infty} Sz_n = \lim_{N\to\infty} y - y_N = y,
+\end{equation*}
+and hence $S$ is surjective, as desired.
 \end{document}

@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 
 % \usepackage{./arxiv}
 
@@ -21,11 +21,13 @@
 \usepackage{bbm}
 \usepackage{amsthm}
 \usepackage{amsmath}
+\usepackage{mathtools}
 \usepackage{xcolor}
 \usepackage{theoremref}
 \usepackage{enumitem}
-\usepackage{mathpazo}
+% \usepackage{mathpazo}
 % \usepackage{euler}
+\usepackage{fouriernc}
 \usepackage{mathrsfs}
 \usepackage{todonotes}
 \usepackage{stmaryrd}
@@ -70,6 +72,7 @@
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
+\newtheorem*{claim}{Claim}
 
 \theoremstyle{defstyle}
 \newtheorem{definition}[theorem]{Definition}
@@ -194,7 +197,7 @@
 \newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
 
 \newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
-\newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+% \newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
 \renewcommand{\mod}{~\mathrm{mod}~}
 \renewcommand{\le}{\leqslant}
 \renewcommand{\leq}{\leqslant}
@@ -324,7 +327,7 @@
     thereby commpleting the proof.
 \end{proof}
 
-\begin{theorem}[Hahn-Banach Extension Theorem]
+\begin{theorem}[Hahn-Banach Extension Theorem]\thlabel{hahn-banach-extension}
     Let $M$ be a subspace of a vector space (real or complex) $X$, $p$ a semi-norm on $X$, and $f$ a linear functional on $M$ such that $|f(x)|\le p(x)$ for all $x\in M$. Then $f$ extends to a linear functional $\Lambda$ on $X$ satisfying $|\Lambda x|\le p(x)$ for all $x\in X$.
 \end{theorem}
 \begin{proof}
@@ -488,7 +491,7 @@ We now suppose that the field of scalars is $\bbC$; whence $X$ is also a topolog
     is a metric inducing the topology on $X$.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\thlabel{topology-induced-by-subspace-of-functionals}
     Let $X$ be a $\K$-vector space and $X'$ a vector space of linear functionals on $X$ that separates points. The $X'$-topology $\tau'$ on $X$ makes it a locally convex topological vector space whose dual is $X'$.
 \end{theorem}
 \begin{proof}
@@ -539,7 +542,7 @@ Obviously the weak topology is coarser than the original topology. A set $E\subs
     All three assertions are trivial.
 \end{proof}
 
-\begin{proposition}
+\begin{proposition}\thlabel{weak-closure-of-convex}
     Let $X$ be a locally convex topological vector space and $E\subseteq X$ a convex subset. Then the weak closure $\overline E_w$ is the same as the original closure $\overline E$.
 \end{proposition}
 \begin{proof}
@@ -581,7 +584,7 @@ Obviously the weak topology is coarser than the original topology. A set $E\subs
     Let $X$ be a topological vector space and $X^\ast$. The evaluation functionals induced by $X$ form a separating vector space of functionals. The $X$-topology induced on $X^\ast$ by these functionals is called the \define{weak* topology}.
 \end{definition}
 
-\begin{theorem}[Banach-Alaoglu]
+\begin{theorem}[Banach-Alaoglu]\thlabel{banach-alaoglu}
     Let $X$ be a topological vector space and $V$ a neighborhood of $0$. The \define{polar} of $V$: 
     \begin{equation*}
         K = \{\Lambda\in X^\ast\colon |\Lambda x|\le 1,~\forall x\in V\}\subseteq X^\ast
@@ -787,6 +790,271 @@ Obviously the weak topology is coarser than the original topology. A set $E\subs
     \end{equation*}
     Then, $K_\Lambda\in\scrP$ and is disjoint from $\overline\co(E(K))$, a contradiction. Thus, $\overline\co(E(K)) = K$, thereby completing the proof.
 \end{proof}
+
+\subsection{The \texorpdfstring{$BX$}{BX}-topology}
+
+\begin{definition}
+    Let $X$ be a Banach space. The \define{bounded $X$-topology} or \define{$BX$-topology} for $X^\ast$ is the strongest topology which coincides with the weak*-topology on each set $rS_{X^\ast} = \left\{x^\ast\in X^\ast\colon \|x^\ast\|\le r\right\}$.
+\end{definition}
+
+That is, a set $U\subseteq X^\ast$ is open if and only if $U\cap rS_{X^\ast}$ is (relatively) open in $rS_{X^\ast}$ for each $r\ge 0$.
+
+\begin{lemma}\thlabel{fundamental-system-neighborhoods-BX}
+    Let $X$ be a Banach space. A \emph{fundamental system of neighborhoods} of the origin for the $BX$-topology on $X^\ast$ consists of the sets 
+    \begin{equation*}
+        \left\{x^\ast\colon |x^\ast(x)| < 1\quad\text{for all }x\in A\right\},
+    \end{equation*}
+    where $A = (x_n)_{n\ge 1}$ is a sequence of elements of $X$ converging to $0$.
+\end{lemma}
+\begin{proof}
+    First, we show that every neighborhood of the above form is open in the $BX$-topology. Indeed, let $r > 0$ and consider the closed ball $rS_{X^\ast}$ and let $A = (x_n)_{n\ge 1}$ be a sequence of elements in $X$ converging to $0$. There is a finite subset $A_1\subseteq A$ consisting of those $x_n$'s with $\|x_n\|\ge \frac{1}{r}$. Then it is clear that 
+    \begin{equation*}
+        \left\{x^\ast\in X^\ast\colon |x^\ast(x)| < 1\quad\text{for all }x\in A\right\}\cap rS_{X^\ast} = 
+        \left\{x^\ast\in X^\ast\colon |x^\ast(x)| < 1\quad\text{for all }x\in A_1\right\}\cap rS_{X^\ast},
+    \end{equation*}
+    is open in the (relative) weak*-topology. Thus our desired set is open in the $BX$-topology.
+
+    Next, let $U\subseteq X^\ast$ be a neighborhood of $0$ in the $BX$-topology. We must show that $U$ contains a fundamental neighborhood of the above form. We establish some notation first: for a subset $A\subseteq X$, let $\wt A$ denote the set 
+    \begin{equation*}
+        \wt A = \left\{x^\ast\in X^\ast\colon |x^\ast(x)|\le 1\quad\text{for all }x\in A\right\}.
+    \end{equation*}
+    Note that $\wt A$ is closed in the weak*-topology (and hence the $BX$-topology) and 
+    \begin{equation*}
+        \wt{\bigcup_{i\in I}A_i} = \bigcap_{i\in I}\wt A_i.
+    \end{equation*}
+    Coming back to our proof, since $U$ is open in the $BX$-topology, the set $U\cap S_{X^\ast}$ is (relatively) open in the weak*-topology, and hence, there exists a finite set $A_1\subseteq X$ such that 
+    \begin{equation*}
+        \wt A_1\cap S_{X^\ast}\subseteq U\cap S_{X^\ast}\subseteq U.
+    \end{equation*}
+    We now proceed to inductively construct an ascending chain of finite sets $(A_n)_{n\ge 1}$ such that $\wt A_n\cap nS_{X^\ast}\subseteq U$. Suppose the chain has been constructed up to $A_n$ for some positive integer $n\ge 1$. We claim that there exists a finite set $B_n\subseteq X$ such that $B_n\subseteq\overline{B_X\left(0, \frac{1}{n}\right)}$ and 
+    \begin{equation*}
+        \wt{A_n\cup B_n}\cap(n + 1) S_{X^\ast}\subseteq U.
+    \end{equation*}
+    Suppose not, then the collection of sets 
+    \begin{equation*}
+        \scrF = \left\{\wt{A_n\cup B}\cap (n + 1)S_{X^\ast}\cap\left(X^\ast\setminus U\right)\colon B\subseteq\overline{B_X\left(0, \frac{1}{n}\right)}\text{ a finite set}\right\}
+    \end{equation*}
+    has the finite intersection property. Further, note that these sets are closed in the weak*-topology. Due to \thref{banach-alaoglu}, $(n + 1)S_{X^\ast}$ is compact, and hence, all the sets in $\scrF$ have a common element, say $x^\ast\in X^\ast$. By choice, we have that $|x^\ast(y)|\le 1$ for every $y\in\overline{B_X\left(0, \frac{1}{n}\right)}$, so that $\|x^\ast\|\le n$. But this would mean that $x^\ast\in\wt A_n\cap nS_{X^\ast}\cap\left(X^\ast\setminus U\right)$, which is absurd.
+
+    Thus, we have shown the existence of a finite set $B_n\subseteq\overline{B_X\left(0, \frac{1}{n}\right)}$ such that $\wt{A_n\cup B_n}\cap(n + 1)S_{X^\ast}\subseteq U$. Set $A_{n + 1}\coloneq A_n\cup B_n$ and continue inductively.
+
+    Finally, setting $\displaystyle A\coloneq\bigcup_{n = 1}^\infty A_n$, it is not hard to see that 
+    \begin{equation*}
+        \left\{x^\ast\in X^\ast\colon |x^\ast(x)| < 1\quad\text{ for all }x\in X\right\}\subseteq U,
+    \end{equation*}
+    and that by suitably enumerating $A$, it constitutes a sequence converging to $0$, thereby completing the proof.
+\end{proof}
+
+\begin{corollary}
+    Let $X$ be a Banach space. Then $X^\ast$ equipped with the $BX$-topology is a locally convex topological vector space.
+\end{corollary}
+
+\begin{theorem}\thlabel{linear-functionals-BX}
+    A linear functional on $X^\ast$ is continuous in the weak*-topology if and only if it is convergent in the $BX$-topology.
+\end{theorem}
+\begin{proof}
+    Since the $BX$-topology is finer than the weak*-topology, every linear functional that is continuous in the weak*-topology is automatically continuous in the $BX$-topology. We prove the converse.
+
+    Let $\theta\colon X^\ast\to\K$ be a continuous linear functional in the $BX$-topology. In view of \thref{fundamental-system-neighborhoods-BX}, there exists a fundamental neighborhood of the form 
+    \begin{equation*}
+        \left\{x^\ast\in X^\ast\colon |x^\ast(x_n)| < 1\quad\text{for all }n\ge 1\right\}\subseteq\theta^{-1}\left(B_{\K}\left(0, 1\right)\right),
+    \end{equation*}
+    where $(x_n)_{n\ge 1}$ is a sequence converging to $0$ (in the norm topology). Define $T\colon X^\ast\to c_0$ by 
+    \begin{equation*}
+        T(x^\ast) = \left(x^\ast(x_n)\right)_{n\ge 1}\in c_0.
+    \end{equation*}
+    We define $h\colon T\left(X^\ast\right)\to\K$ as 
+    \begin{equation*}
+        h\left(T(x^\ast)\right) = \theta(x^\ast).
+    \end{equation*}
+    We must first show that $\theta$ is well-defined. To this end, suppose $x^\ast\in X^\ast$ is such that $T x^\ast = 0$, that is, $x^\ast(x_n) = 0$ for all $n\ge 1$. As a result, $Nx^\ast\in\theta^{-1}\left(B_{\K}\left(0, 1\right)\right)$ for each positive integer $N$. As a result, $|N\theta(x^\ast)| < 1$ for all positive integers $N\ge 1$. Taking $N\to\infty$, we conclude that $\theta(x^\ast) = 0$. This shows that $h$ is well-defined. 
+
+    Further, we claim that $h$ is continuous. Indeed, consider $Tx^\ast = \left(x^\ast(x_n)\right)_{n\ge 1}$, and suppose $$\left\|\left(x^\ast(x_n)\right)_{n\ge 1}\right\| = M\ge 0.$$ Let $\varepsilon > 0$ and note that 
+    \begin{equation*}
+        \frac{1}{M + \varepsilon}x^\ast\in\left\{x^\ast\in X^\ast\colon |x^\ast(x_n)| < 1\quad\text{for all }n\ge 1\right\},
+    \end{equation*}
+    so that $|\theta(x^\ast)| < M + \varepsilon$. Since this inequality holds for all $\varepsilon > 0$, it follows that $|\theta(x^\ast)|\le M$, i.e., $h$ is continuous.
+
+    Using the Hahn-Banach Extension Theorem (\thref{hahn-banach-extension}), we may extend $h$ to a continuous linear functional on $c_0$. Recalling that there is an isometric isomorphism $\ell^1\cong\left(c_0\right)^\ast$, there exists a sequence $(a_n)_{n\ge 1}\in\ell^1$ such that 
+    \begin{equation*}
+        h\left((x_n)_{n\ge 1}\right) = \sum_{n = 1}^\infty a_n x_n\qquad\text{ for all }\left(x_n\right)_{n\ge 1}\in c_0.
+    \end{equation*}
+    Thus 
+    \begin{equation*}
+        \theta(x^\ast) = \sum_{n = 1}^\infty a_n x^\ast(x_n) = x^\ast\left(\sum_{n = 1}^\infty a_n x_n\right),
+    \end{equation*}
+    since the sum $\displaystyle\sum_{n = 1}^\infty a_nx_n\eqcolon x_0$ converges in $X$. We have therefore shown that $\theta = \ev_{x_0}$, which is a continuous linear functional with respect to the weak*-topology, as desired.
+\end{proof}
+
+\begin{theorem}[Krein-\v{S}mulian]\thlabel{krein-smulian}
+    A convex set in $X^\ast$ is closed in the weak*-topology if and only if it is closed in the $BX$-topology, that is, if and only if its intersection with every positive multiple of the closed unit ball of $X^\ast$ is weak*-closed.
+\end{theorem}
+\begin{proof}
+    Let $E\subseteq X^\ast$ be a convex set. Since the $BX$-topology is finer than the weak*-topology, it suffices to show that closure in the $BX$-topology implies closure in the weak*-topology. 
+
+    To this end, suppose $E$ is closed in the $BX$-topology, and let $x^\ast\in X^\ast\setminus E$. Using the Hahn-Banach separation theorem (\thref{thm:hahn-banach-separation}), there exists a bounded linear functional $\theta\colon X^\ast\to\K$ and reals $\gamma_1,\gamma_2$ such that 
+    \begin{equation*}
+        \Re\theta x^\ast < \gamma_1 < \gamma_2 < \Re\theta y^\ast\quad\text{ for all }y^\ast\in E.
+    \end{equation*}
+    In view of \thref{linear-functionals-BX}, $\theta$ is continuous in the weak*-topology, so that there is a weak*-open neighborhood of $x^\ast$ that is disjoint from $E$. This shows that $E$ is weak*-closed, as desired.
+\end{proof}
+
+\subsection{The Eberlein-\v{S}mulian Theorem}
+
+\begin{lemma}[Goldstine]\thlabel{goldstine}
+    Let $X$ be a Banach space. The canonical map $\Phi\colon X\to X^{\ast\ast}$ is a homeomorphism from $X$ with the weak topology onto a dense linear subspace of $X^{\ast\ast}$ with the weak*-topology.
+\end{lemma}
+\begin{proof}
+    The map $\Phi\colon X\to X^{\ast\ast}$ is linear and injective. To show that $\Phi$ is continuous, it suffices to show that it is continuous at $0$. Indeed, note that a basis element at $0$ in $X^{\ast\ast}$ is of the form 
+    \begin{equation*}
+        V\left(x_1^\ast, \dots, x_n^\ast; \varepsilon\right) = \left\{x^{\ast\ast}\in X^{\ast\ast}\colon \left|x^{\ast\ast}(x_i^\ast)\right| < \varepsilon\text{ for }1\le i\le n\right\}.
+    \end{equation*}
+    Then 
+    \begin{equation*}
+        \Phi^{-1}\left(V\left(x_1^\ast,\dots,x_n^\ast; \varepsilon\right)\right) = \left\{x\in X\colon \left|x_i^{\ast}(x)\right| < \varepsilon\text{ for }1\le i\le n\right\} = V\left(x_1^\ast, \dots, x_n^\ast, \varepsilon\right),
+    \end{equation*}
+    which is open in $X$. This shows that $\Phi$ is continuous. To see that $\Phi$ is a homeomorphism onto its image, it would suffice to show that $\Phi$ is an open map. Again, since $\Phi$ is linear, it suffices to show that the image of a basic open set at $0$ is open in $\Phi(X)$. Indeed, note that 
+    \begin{equation*}
+        \Phi\left(V\left(x_1^\ast,\dots,x_n^\ast; \varepsilon\right)\right) = \Phi(X)\cap V\left(x_1^\ast,\dots, x_n^\ast; \varepsilon\right).
+    \end{equation*}
+    This shows that $\Phi$ is a homeomorphism onto its image.
+
+    It remains to show that $\Phi(X)$ is weak*-dense in $X^{\ast\ast}$. Let $B_X$ denote the unit ball of $X$ and $B_{X^{\ast\ast}}$ the unit ball of $X^{\ast\ast}$. We shall show that $\Phi(B_X)$ is dense in $X^{\ast\ast}$ in the weak*-topology. Suppose not, and let $K$ denote the closure of $\Phi(B_X)$ in the weak*-topology, which is a convex set. Choose $x^{\ast\ast}\in B_{X^{\ast\ast}}\setminus K$. In view of \thref{thm:hahn-banach-separation}, there exists a bounded linear functional $\Lambda\colon X^{\ast\ast}\to\K$ and $\gamma_1,\gamma_2\in\R$ such that 
+    \begin{equation*}
+        \Re\Lambda x^{\ast\ast} < \gamma_1 < \gamma_2 < \Re\Lambda y^{\ast\ast}
+    \end{equation*}
+    for all $y^{\ast\ast}\in K$. Since $\Lambda$ is continuous with respect to the weak*-topology. $\Lambda = \ev_{x^\ast}$ for some $x^\ast\in X^{\ast}$. Further, since the inequality holds for all $y^{\ast\ast}\in K$, it holds, in particular for all $y^{\ast\ast} = \Phi(z)$ for some $z\in S_X$, that is, 
+    \begin{equation*}
+        \Re x^{\ast\ast}(x^\ast) < \gamma_1 < \gamma_2 < \Re x^{\ast}(z)
+    \end{equation*}
+    for all $z\in X$ with $\|z\|\le 1$. Taking the infimum over all such $z$, we have 
+    \begin{equation*}
+        \Re\Lambda x^{\ast\ast} < \gamma_1 < \gamma_2\le -\|x\|.
+    \end{equation*}
+    Therefore, $\left\|x^{\ast\ast}(x^\ast)\right\| > \|x\|$, which is absurd since $\|x^{\ast\ast}\| \le 1$. This shows that the image of $B_X$ is dense in $B_{X^{\ast\ast}}$ in the weak*-topology, thereby completing the proof.
+\end{proof}
+
+\begin{lemma}\thlabel{unit-sphere-metrizable-iff-separable}
+    Let $X$ be a Banach space. Then the closed unit ball $B_{X^\ast}$ of $X^{\ast}$ in the weak*-topology is metrizable if and only if $X$ is separable.
+\end{lemma}
+% TODO: Proof
+
+\begin{lemma}\thlabel{equivalent-total-linear-subspace}
+    Let $f$ be a linear functional on the linear space $X$, and let $\scrF$ be a total subspace of $X^{\vee}$. Then the following statements are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $f\in\scrF$, 
+        \item $f$ is continuous when $X$ is endowed with the $\scrF$-topology. 
+        \item $\mathfrak{Z}_f = \left\{x\in X\colon f(x) = 0\right\}$ is closed in the $\mathfrak{Z}_f$-topology.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    That (1) and (2) are equivalent and $(1)\implies(3)$ is clear from \thref{topology-induced-by-subspace-of-functionals}. We show that $(3)\implies(1)$. If $\mathfrak{Z}_f$ is all of $X$, then $f = 0$ and there is nothing to prove. Suppose now that $\mathfrak{Z}_f$ is a proper subspace of $X$ and let $x\in X\setminus\mathfrak Z_f$. Since $X$ with the $\scrF$-topology is a locally convex topological vector space, due to \thref{thm:hahn-banach-separation} and \thref{topology-induced-by-subspace-of-functionals}, there is a constant $\gamma\in\R$ and $g\in\scrF$ such that $\Re g(y) > \gamma$ for all $y\in\mathfrak{Z}_f$. This immediately implies that $g$ is identically zero on $\mathfrak{Z}_f$. In particular, we have shown that $g(y) = 0$ whenever $f(y) = 0$. Due to \thref{lem:linear-combination-functionals}, there is a constant $\alpha\in\K$ such that $g = \alpha f$, so that $f\in\scrF$, as desired.
+\end{proof}
+
+\begin{theorem}[Eberlein-\v{S}mulian]
+    Let $A$ be a subset of a Banach space $X$. Then the following statements are equivalent: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $A$ is weakly sequentially compact -- that is, any sequence in $A$ has a subsequence which converges weakly to an element of $X$. 
+        \item every countably infinite subset of $A$ has a weak limit point in $X$. 
+        \item the closure of $A$ in the weak topology is compact (in the weak topology).
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    First note that each of the three conditions implies the boundedness of $A$ in the norm topology on $X$. Indeed, since each condition implies the boundedness of the set $\left\{x^\ast(x)\colon x\in A\right\}$ for each $x^\ast\in X^\ast$, treating $A$ as a subset of $X^{\ast\ast}$ through the isometric map $\Phi\colon X\to X^{\ast\ast}$ and using the Banach-Steinhaus Theorem, we see that $A$ is a bounded subset of $X$. The implication $(3)\implies(2)$ is a straightforward topological result. We shall show that $(2)\implies(1)$ and $(1)\implies(3)$.
+
+    $\boxed{(2)\implies(1)}$ Let $(x_n)_{n = 1}^\infty$ be a sequence in $A$ and let $X_0 = \overline\Span\{x_n\colon n\ge 1\}$, so that $X_0$ is a separable Banach space. By \thref{unit-sphere-metrizable-iff-separable}, the closed unit ball in $X_0^\ast$ is metrizable in the weak*-topology, and further, due to \thref{banach-alaoglu}, the closed unit ball is also compact in this topology so that it is, in particular, separable in the weak*-topology. Since $X_0^\ast$ is a countable union of multiples of the closed unit ball of $X_0^\ast$, we see that $X_0^\ast$ is also separable in the weak*-topology.
+
+    Let $H_0$ be a countably dense set in $X_0^\ast$ with the weak*-topology. Due to \thref{hahn-banach-extension}, each element of $H_0$ can be extended to a continuous linear functional on all of $X$. Fixing one such extension for each element of $H_0$, we get a countable subset $H$ of $X^\ast$. 
+
+    We note that $H_0$ is a total set on $X_0$, that is, if $x_0\in X_0$ with $x^\ast(x_0) = 0$ for each $x^\ast\in H_0$, then $x_0 = 0$. Indeed, the evaluation map $\ev_{x_0}\colon X_0^\ast\to\K$ is continuous (by construction) when $X_0^\ast$ is equipped with the weak*-topology. Further, using the density of $H_0$ in $X_0^\ast$, we conclude that $\ev_{x_0}$ is identically zero, so that $x_0 = 0$.
+
+    Using a standard diagonal argument, we may extract a subsequence $(y_m)_{m\ge 1}$ of $(x_n)_{n\ge 1}$ such that $\displaystyle\lim_{m\to\infty} x^\ast y_m$ exists for each $x^\ast\in H$. By condition (2), there is a point $y_0\in X$ such that every deleted weak neighborhood of $y_0$ contains at least one $y_m$. Since $(y_m)_{m\ge 1}\subseteq X_0$ and due to \thref{weak-closure-of-convex}, $X_0$ is also weakly closed, we see that $y_0\in X_0$. 
+
+    We claim that 
+    \begin{equation*}
+        \lim_{m\to\infty} x^\ast y_m = x^\ast y_0\qquad\text{ for every }x^\ast\in H.
+    \end{equation*}
+    Indeed, let $x^\ast\in H$. By assumption, we already know that the limit $\displaystyle\lim_{m\to\infty} x^\ast y_m = L$ exists. For any $m\ge 1$, we may write 
+    \begin{equation*}
+        \left|x^\ast y_0 - L\right|\le \left|x^\ast y_0 - x^\ast y_m\right| + \left|x^\ast y_m - L\right|.
+    \end{equation*}
+    Let $\varepsilon > 0$ and consider the deleted (weak) neighborhood $U = \left\{y\in X\colon |x^\ast y - x^\ast y_0| < \frac{\varepsilon}{2}\right\}\setminus\{y_0\}$ in $X$. This contains infinitely many of the $y_m$'s. Choose $y_m$ with $m\gg 0$ so that $\left|x^\ast y_m - L\right| < \frac{\varepsilon}{2}$. Then, for such an $m$, we have 
+    \begin{equation*}
+        \left|x^\ast y_0 - L\right|\le\left|x^\ast y_0 - x^\ast y_m\right| + \left|x^\ast y_m - L\right| < \varepsilon.
+    \end{equation*}
+    This inequality holds for all $\varepsilon > 0$ and hence $x^\ast y_0 = L$, as contended.
+
+    Next, we shall show that $\displaystyle\lim_{m\to\infty} x^\ast y_m = x^\ast y_0$ for each $x^\ast\in X^\ast$. Suppose not, then there exists an $x_0^\ast\in X^\ast$, an $\varepsilon > 0$, and a subsequence $(y_{m_k})_{k\ge 1}$ such that $\left|x_0^\ast(y_{m_k} - y_0)\right| > \varepsilon$ for all $k\ge 1$. Using condition (2) again to the sequence $(y_{m_k})_{k\ge 1}$, there exists an element $y_0'\in X_0$ such that every (deleted) weak neighborhood of $y_0'$ contains at least one of the $y_{m_k}$'s. Arguing as above, we can show that 
+    \begin{equation*}
+        x^\ast y_0' = \lim_{k\to\infty} x^\ast y_{m_k}\qquad\text{ for all }x^\ast\in H.
+    \end{equation*}
+    Hence, we must have that $x^\ast y_0 = x^\ast y_0'$ for all $x^\ast\in H$, equivalently, $x^\ast(y_0 - y_0') = 0$ for all $x^\ast\in H$. Since $H_0$ is total on $X_0$, as we argued earlier, we must have that $y_0 = y_0'$, a fact that contradicts our choice of $x_0$. Thus $(y_m)_{m\ge 1}$ converges weakly to $y_0$, as desired.
+
+    $\boxed{(1)\implies(3)}$ Let $\overline A$ denote the closure of $A$ in the weak*-topology. In view of \thref{goldstine}, the map $\Phi\colon X\to X^{\ast\ast}$ is a homeomorphism onto a dense linear subspace when $X$ and $X^{\ast\ast}$ are equipped with the weak and weak*-topologies respectively. So we have $\Phi\left(\overline A\right) = \overline{\Phi(A)}\cap\Phi(X)$. Further, $\overline A$ is weakly compact if and only if $\Phi\left(\overline A\right)$ is weak*-compact. Recall that as a consequence of \thref{banach-alaoglu}, a subset of $X^{\ast\ast}$ is compact in the weak*-topology if and only if it is closed and bounded (in the weak*-topology). Since $\overline A$ is bounded, it suffices to show that $\Phi(\overline A)$ is a weak*-closed subset of $X^{\ast\ast}$. To this end, we shall show that $\overline{\Phi(A)}\subseteq\Phi(X)$, which is clearly sufficient. 
+
+    Let $x^{\ast\ast}\in X^{\ast\ast}$ be an element in the weak*-closure of $\Phi(A)$. We must show that $x^{\ast\ast}\in\Phi(X)$. This amounts to showing that ther exists an $x\in X$ such that $x^{\ast\ast} = \ev_{x}$ as linear functionals on $X^{\ast}$.
+
+    \begin{claim}
+        If $\{x_1^\ast,\dots,x_n^\ast\}$ is an arbitrary finite subset of $X^\ast$, then there exists a $z\in\overline A$ such that $x^{\ast\ast}x_i^\ast = x_i^\ast z$ for each $1\le i\le n$.
+    \end{claim}
+    Consider the following weak*-neighborhood of $x^{\ast\ast}$:
+    \begin{equation*}
+        x^{\ast\ast} + V\left(x_1^\ast,\dots, x_n^\ast; \frac{1}{m}\right),
+    \end{equation*}
+    where $m\ge 1$ is a positive integer. Since $x^{\ast\ast}$ is in the closure of $\Phi(A)$, there exists $z_m\in A$ such that $\Phi(z_m)$ is contained in the above neighborhood. That is, 
+    \begin{equation*}
+        \left|x_i^\ast(z_m) - x^{\ast\ast}(x_i^\ast)\right| < \frac{1}{m}\qquad\text{for each }1\le i\le n.
+    \end{equation*}
+    Since $A$ is sequentially compact, a subsequence of $(z_m)_{m\ge 1}$ will converge weakly to an element $z\in\overline A$. It is then clear that $x_i^\ast(z) = x^{\ast\ast}(x_i^\ast)$ for each $1\le i\le n$, thereby proving the claim.
+
+    In the remainder of the proof, we shall show that $x^{\ast\ast}\in\Phi(X)$. Recall that the linear subspace $\Phi(X)$ defines the weak*-topology on $X^\ast$, and hence, in view of \thref{equivalent-total-linear-subspace}, $x^{\ast\ast}\in\Phi(X)$ if and only if the ``zero-set'' $Y = \left\{x^{\ast}\in X^{\ast}\colon x^{\ast\ast}x^\ast = 0\right\}$ is weak*-closed in $X^\ast$. Let $S_{X^\ast}$ denote the closed unit ball of $X^{\ast}$. In view of \thref{krein-smulian}, $Y$ is closed in $X^{\ast}$ if and only if $Y\cap rS_{X^\ast}$ is weak*-closed for every $r > 0$. Since $Y$ is a subspace of $X^\ast$, this is equivalent to showing that $Y\cap S_{X^\ast}$ is closed in the weak*-topology on $X^\ast$.
+
+    Thus we must show that if $y_0^\ast$ is in the weak*-closure of $Y\cap S_{X^\ast}$, then $y_0^\ast\in Y\cap S_{X^\ast}$. In pursuit of this, we choose an arbitrary $\varepsilon > 0$ and construct three sequences $(x_n)_{n\ge 1}\subseteq A$, $(y_n^\ast)_{n\ge 0}\subseteq Y\cap S_{X^\ast}$, and $(z_n)_{n\ge 1}\subseteq\overline A$ as follows:
+
+    From what we remarked earlier, there exists a $z_1\in\overline A$ such that $y_0^\ast(z_1) = x^{\ast\ast}(y_0^\ast)$. Since $z_1$ is in the weak closure of $A$, there exists an $x_1\in A$ such that $|y_0^\ast(x_1) - y_0^\ast(z_1)| < \frac{\varepsilon}{4}$. Since $y_0^\ast$ is in the weak*-closure of $Y\cap S_{X^\ast}$, there exists a $y_1^\ast\in Y\cap S_{X^\ast}$ such that $|y_1^\ast(x_1) - y_0^\ast(x_1)| < \frac{\varepsilon}{4}$.
+
+    Inductively, if the elements with subscripts less than $n$ have been chosen, we select $z_n\in\overline A$, $x_n\in A$, and $y_n^\ast\in Y\cap S_{X^\ast}$ such that 
+    \begin{itemize}
+        \item $y_m^\ast(z_n) = x^{\ast\ast}(y_m^\ast)$ for $0\le m\le n - 1$, 
+        \item $|y_m^{\ast}(x_n) - y_m^{\ast}(z_n)| < \frac{\varepsilon}{4}$ for $0\le m\le n - 1$, and 
+        \item $|y_n^\ast(x_i) - y_0^{\ast}(x_i)| < \frac{\varepsilon}{4}$ for $1\le i\le n$.
+    \end{itemize}
+    The first is achieved by invoking our observation from a preceding paragraph. The second is obtained by considering the weak-neighborhood 
+    \begin{equation*}
+        z_n + V\left(y_1^\ast,\dots, y_{n - 1}^\ast; \frac{\varepsilon}{4}\right)
+    \end{equation*}
+    of $z_n$, and the third is obtained by considering the weak*-neighborhood
+    \begin{equation*}
+        y_0^\ast + V\left(x_1,\dots, x_n; \frac{\varepsilon}{4}\right).
+    \end{equation*}
+    By construction, we have: 
+    \begin{itemize}
+        \item $\|y_m^\ast\|\le 1$ for all $m\ge 1$, and 
+        \item $y_m^\ast(z_n) = 0$ for $1\le m\le n - 1$.
+    \end{itemize}
+    Further, for $1\le i\le n$, we have 
+    \begin{equation*}
+        |x^{\ast\ast}(y_0^\ast) - y_n^\ast(x_i)| = |y_0^{\ast}(z_n) - y_n^{\ast}(x_i)|\le |y_0^\ast(z_n) - y_0^\ast(x_n)| + |y_0^\ast(x_n) - y_n^\ast(x_i)| < \frac{\varepsilon}{2}.
+    \end{equation*}
+    Since $(x_n)_{n\ge 1}$ is a sequence contained in $A$, and $A$ is weakly sequentially compact, there is a subsequence $(x_{n_k})_{k\ge 1}$ which converges weakly to an element $x\in\overline A$. To maintain brevity, we shall replace $(x_n)_{n\ge 1}$ by this subsequence and tacitly do the same for the sequences $(y_n)_{n\ge 1}$ and $(z_n)_{n\ge 1}$. Therefore, we may assume that $(x_n)_{n\ge 1}$ converges weakly to some $x\in\overline A$. 
+
+    Note that for $n > m$, we have 
+    \begin{equation*}
+        |y_m^\ast(x_n)| = |y_m^\ast(x_n) - y_m^\ast(z_n)| < \frac{\varepsilon}{4},
+    \end{equation*}
+    so that in the weak limit, we have $y_m^\ast(x)|\le\frac{\varepsilon}{4}$. Due to \thref{weak-closure-of-convex}, there is a convex combination $w = \displaystyle\sum_{i = 1}^N a_i x_i$ such that $|x - w| < \frac{\varepsilon}{4}$. Therefore, 
+    \begin{equation*}
+        |x^{\ast\ast}(y_0^\ast) - y_N^\ast(w)|\le\sum_{i = 1}^N a_i|x^{\ast\ast}(y_0^\ast) - y_N^\ast(x_i)| < \frac{\varepsilon}{2}.
+    \end{equation*}
+    It follows that 
+    \begin{equation*}
+        |x^{\ast\ast}(y_0^\ast)|\le |x^{\ast\ast}(y_0^\ast) - y_N^\ast(w)| + |y_N^\ast(w) - y_N^\ast(x)| + |y_N(x)|.
+    \end{equation*}
+    Note that the first term on the right hand side is smaller than $\frac{\varepsilon}{2}$ as argued above. The second is less than $\frac{\varepsilon}{4}$ since $\|y_N^\ast\|\le 1$, and the final term is at most $\frac{\varepsilon}{4}$ as remarked above. In particular, the right hand side is smaller than $\varepsilon$. Since this choice of $\varepsilon > 0$ was arbitrary, it follows that $x^{\ast\ast}(y_0^\ast) = 0$, in other words, $y_0^\ast\in Y$, and hence, $y_0^\ast\in Y\cap S_{X^\ast}$, as desired.
+
+    This shows that $Y$ is weak*-closed, so that $x^{\ast\ast}\in\Phi(X)$, and the proof is now complete.
+\end{proof}
+
 
 \section{Duality in Banach Spaces}
 \input{sections/duality.tex}
@@ -1603,7 +1871,7 @@ We have the obvious inequality $\rho(x)\le\|x\|$.
 \end{enumerate}
 \end{proof}
 
-As a consequence, $\sigma(\calA)$ is contained in the closed unit ball of $\calA^\ast$. Equip the latter with the weak*-topology. Using nets, it is easy to see that $\sigma(\calA)$ is closed in $\calA^\ast$. Due to Banach-Alaoglu, the closed unit ball of $\calA^\ast$ is weak*-compact and hence, so is $\sigma(\calA)$ with the subspace topology from the weak*-topology on $\calA^\ast$. Thus, $\sigma(\calA)$ is a \emph{compact Hausdorff space}.
+As a consequence, $\sigma(\calA)$ is contained in the closed unit ball of $\calA^\ast$. Equip the latter with the weak*-topology. Using nets, it is easy to see that $\sigma(\calA)$ is closed in $\calA^\ast$. Due to \thref{banach-alaoglu}, the closed unit ball of $\calA^\ast$ is weak*-compact and hence, so is $\sigma(\calA)$ with the subspace topology from the weak*-topology on $\calA^\ast$. Thus, $\sigma(\calA)$ is a \emph{compact Hausdorff space}.
 
 \begin{proposition}
     Let $\calA$ be a commutative unital Banach algebra and $\calJ\subsetneq\calA$ be a proper ideal.

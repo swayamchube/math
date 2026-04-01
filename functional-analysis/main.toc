@@ -1,16 +1,18 @@
 \contentsline {section}{\numberline {1}Preliminaries on Topological Vector Spaces}{2}{section.1}%
 \contentsline {section}{\numberline {2}Completeness Arguments}{2}{section.2}%
-\contentsline {section}{\numberline {3}The Hahn-Banach Theorems}{3}{section.3}%
-\contentsline {section}{\numberline {4}Weak and Weak* Topologies}{6}{section.4}%
-\contentsline {subsection}{\numberline {4.1}The Krein-Milman Theorem}{11}{subsection.4.1}%
-\contentsline {section}{\numberline {5}Duality in Banach Spaces}{14}{section.5}%
-\contentsline {section}{\numberline {6}Compact Operators}{17}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Examples}{22}{subsection.6.1}%
-\contentsline {section}{\numberline {7}Reflexive Spaces}{23}{section.7}%
-\contentsline {section}{\numberline {8}Hilbert Spaces}{24}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Adjoints}{29}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Compact Self-Adjoint Operators}{29}{subsection.8.2}%
-\contentsline {section}{\numberline {9}Banach Algebras}{30}{section.9}%
-\contentsline {section}{\numberline {10}Distributions}{37}{section.10}%
-\contentsline {subsection}{\numberline {10.1}The topology on $\mathscr {D}_K$}{37}{subsection.10.1}%
-\contentsline {subsection}{\numberline {10.2}Distributions}{37}{subsection.10.2}%
+\contentsline {section}{\numberline {3}The Hahn-Banach Theorems}{2}{section.3}%
+\contentsline {section}{\numberline {4}Weak and Weak* Topologies}{5}{section.4}%
+\contentsline {subsection}{\numberline {4.1}The Krein-Milman Theorem}{9}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}The $BX$-topology}{12}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}The Eberlein-\v {S}mulian Theorem}{14}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Duality in Banach Spaces}{18}{section.5}%
+\contentsline {section}{\numberline {6}Compact Operators}{21}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Examples}{26}{subsection.6.1}%
+\contentsline {section}{\numberline {7}Reflexive Spaces}{26}{section.7}%
+\contentsline {section}{\numberline {8}Hilbert Spaces}{27}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Adjoints}{31}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Compact Self-Adjoint Operators}{32}{subsection.8.2}%
+\contentsline {section}{\numberline {9}Banach Algebras}{33}{section.9}%
+\contentsline {section}{\numberline {10}Distributions}{38}{section.10}%
+\contentsline {subsection}{\numberline {10.1}The topology on $\mathscr {D}_K$}{38}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Distributions}{39}{subsection.10.2}%
