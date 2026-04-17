@@ -1,0 +1,973 @@
+
+\documentclass[11pt]{article}
+
+\title{Schauder Bases and the James Space}
+\author{Swayam Chube}
+\date{Last Updated: \today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{fouriernc}
+\usepackage{mdframed}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd-Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{epigraph}
+\setlength\epigraphwidth{0.4\textwidth}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+% \renewcommand{\familydefault}{\sfdefault} % Do you want this font? 
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Swayam Chube},
+    colorlinks=true,
+	citecolor=blue,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{interlude}[theorem]{Interlude}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\F}{\mathbb{F}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakB}{\mathfrak{B}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrM}{\mathscr{M}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrO}{\mathscr{O}} % sheaf
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+% \newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\Ass}{\operatorname{Ass}}
+\newcommand{\projdim}{\operatorname{proj~dim}}
+\newcommand{\injdim}{\operatorname{inj~dim}}
+\newcommand{\gldim}{\operatorname{gl~dim}}
+\newcommand{\embdim}{\operatorname{emb~dim}}
+\newcommand{\hght}{\operatorname{ht}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\CM}{\operatorname{CM}}
+\newcommand{\cech}[1]{\mathbin{\check{#1}}}
+\newcommand{\cdim}{\operatorname{cdim}}
+\newcommand{\Der}{\operatorname{Der}}
+\newcommand{\trdeg}{\operatorname{trdeg}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calL}{\mathcal{L}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\gr}{\operatorname{gr}}
+\newcommand{\rmd}{\mathrm{d}}
+\newcommand{\bfJ}{\mathbf{J}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\sffamily}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+\titleformat
+{\part}
+[block]
+{\huge\scshape\bfseries}
+{\thepart. }
+{0.5em}
+{\centering}
+[]
+
+\begin{document}
+\maketitle 
+
+% This exposition will require all of Sec 4.1 and some parts of Sec. 4.4. Of course the core material is contained in Sec 4.5.
+
+\section{Schauder Bases}
+
+\begin{definition}
+  A \emph{sequence} $(x_n)_{n\ge 1}$ in a Banach space $X$ is a \define{Schauder basis} for $X$ if for each $x\in X$ there is a \emph{unique} sequence $(\alpha_n)_{n\ge 1}$ of scalars such that $\displaystyle x = \sum_{n\ge 1} \alpha_n x_n$.
+\end{definition}
+
+\begin{definition}
+	A sequence $(x_n)_{n\ge 1}$ in a Banach space $X$ is said to be \define{Schauder basic} if it is a Schauder basis for $\overline{\Span\{x_n\colon n\ge 1\}}$.
+\end{definition}
+
+Henceforth, a \emph{basis} shall refer to a Schauder basis and a \emph{basic sequence} shall refer to a Schauder basic sequence.
+
+\begin{definition}
+	A basic sequence $(x_n)_{n\ge 1}$ in a Banach space $X$ is said to be \define{bounded} if 
+	\begin{equation*}
+		0 < \inf_{n\ge 1} \|x_n\|\le\sup_{n\ge 1}\|x_n\| < \infty,
+	\end{equation*}
+	and is said to be \define{normalized} if each $x_n$ has norm $1$. 
+\end{definition}
+
+\begin{proposition}
+	If $(x_n)_{n\ge 1}$ is a basis for a Banach space $X$ and $(\lambda_n)_{n\ge 1}$ is a sequence of non-zero scalars. Then $\left(\lambda_n x_n\right)_{n\ge 1}$ is also a basis for $X$.
+\end{proposition}
+\begin{proof}
+	Clear. 
+\end{proof}
+
+\begin{corollary}
+	If $(x_n)_{n\ge 1}$ is a basis for a Banach space $X$, then $\left(\|x_n\|^{-1}x_n\right)_{n\ge 1}$ is a normalized basis for the space.
+\end{corollary}
+
+Here are a few more obvious consequences of the definition:
+\begin{proposition}
+	Every basic sequence in a Banach space is linearly independent.
+\end{proposition}
+
+\begin{corollary}
+	Every Banach space having a basis is infinite-dimensional and separable.
+\end{corollary}
+
+\begin{definition}
+	Suppose that a Banach space $X$ has a basis $(x_n)_{n\ge 1}$. For each positive integer $m$, the \define{$m^{\text{th}}$ coordinate functional} $x_m^\ast$ for $(x_n)_{n\ge 1}$ is the map 
+	\begin{equation*}
+		x_m^\ast\colon x = \sum_{n = 1}^\infty \alpha_n x_n\longmapsto \alpha_m
+	\end{equation*}
+	from $X$ to $\K$, and the \define{$m^{\text{th}}$ natural projection} $P_m$ for $(x_n)_{n\ge 1}$ is the map 
+	\begin{equation*}
+		P_m\colon \sum_{n = 1}^\infty \alpha_n x_n\longmapsto\sum_{n = 1}^m \alpha_n x_n
+	\end{equation*}
+	from $X$ to $X$.
+\end{definition}
+
+Clearly both $x_m^\ast$ and $P_m$ are linear maps for all $m\ge 1$. 
+
+\begin{definition}
+	Suppose that $\mathbf x = (x_n)_{n\ge 1}$ is a basis for a Banach space $X$. Then the \define{$\mathbf{x}$-norm} of $X$ is defined by the formula 
+	\begin{equation*}
+		\|x\|_{\mathbf x} = \sup_{m\ge 1}\left\|P_m x\right\|.
+	\end{equation*}
+\end{definition}
+
+Note that since $P_mx\to x$ in $X$, the sequence $\left(P_m x\right)_{m\ge 1}$ is a bounded sequence, so that $\|x\|_{\mathbf{x}}$ is finite.
+
+\begin{theorem}\thlabel{equivalence-of-norms}
+	Suppose that $\mathbf x = (x_n)_{n\ge 1}$ is a basis for a Banach space $X$. Then the $\mathbf x$-norm of $X$ is a Banach norm equivalent to the original norm of $X$ and $\|x\|_{\mathbf{x}}\ge\|x\|$ for each $x\in X$.
+\end{theorem}
+\begin{proof}
+	Note that 
+	\begin{equation*}
+		\|x\|_{\mathbf x} = \sup_{m\ge 1}\|P_m x\|\ge\limsup_{m\to\infty}\|P_m x\| = \lim_{m\to\infty}\|P_m x\| = \|x\|,
+	\end{equation*}
+	which establishes the desired inequality. Further, that $\|\cdot\|_{\mathbf x}$ is indeed a norm is clear. We shall show that $\|\cdot\|_{\mathbf x}$ is complete. 
+
+	Indeed, let $\left(y_j = \displaystyle\sum_{n = 1}^\infty \alpha_{n, j}x_n\right)_{j = 1}^\infty$ be a sequence in $X$ that is Cauchy with respect to $\|\cdot\|_{\mathbf x}$. For $j_1, j_2\ge 1$ and $k\ge 2$, we have 
+	\begin{align*}
+		\left|\alpha_{k, j_1} - \alpha_{k, j_2}\right|\|x_k\| &= \left\|\sum_{n = 1}^k (\alpha_{n, j_1} - \alpha_{n, j_2})x_n - \sum_{n = 1}^{k - 1}(\alpha_{n, j_1} - \alpha_{n, j_2})x_n\right\|\\
+		&\le\left\|\sum_{n = 1}^k (\alpha_{n, j_1} - \alpha_{n, j_2})x_n\right\| + \left\|\sum_{n = 1}^{k - 1}(\alpha_{n, j_1} - \alpha_{n, j_2})x_n\right\|\\
+		&\le 2\left\|\sum_{n\ge 1}(\alpha_{n, j_1} - \alpha_{n, j_2})x_n\right\|_{\mathbf x} = 2\|x_{j_1} - x_{j_2}\|_{\mathbf x}
+	\end{align*}
+	and for $k = 1$, we have the obvious inequality 
+	\begin{equation*}
+		|\alpha_{1, j_1} - \alpha_{1, j_2}|\|x_1\|\le\left\|\sum_{n\ge 1}(\alpha_{n, j_1} - \alpha_{n, j_2})x_n\right\|_{\mathbf x} = \|y_{j_1} - y_{j_2}\|_{\mathbf x}.
+	\end{equation*}
+	Thence it follows that for each $n\ge 1$, the sequence $\left(\alpha_{n, j}\right)_{j = 1}^\infty$ is Cauchy, and therefore convergent. Set
+	\begin{equation*}
+		\alpha_n \coloneq\lim_{j\to\infty}\alpha_{n, j}.
+	\end{equation*}
+	Fix $\varepsilon > 0$, and let $j_\varepsilon$ be a positive integer such that if $j, j'\ge j_{\varepsilon}$, then $\|y_{j'} - y_j\|_{\mathbf x} < \frac{\varepsilon}{3}$. Therefore, for every positive integer $m\ge 1$, we have 
+	\begin{equation*}
+		\left\|\sum_{n = 1}^m \alpha_{n, j'}x_n - \sum_{n = 1}^m \alpha_{n, j}x_n\right\|\le \|y_{j'} - y_j\|_{\mathbf x} < \frac{\varepsilon}{3}.
+	\end{equation*}
+	Taking $j\to\infty$, we have 
+	\begin{equation}\label{inequality}\tag{$\dagger$}
+		\left\|\sum_{n = 1}^m\alpha_n x_n - \sum_{n = 1}^m \alpha_{n, j'}x_n\right\|\le\frac{\varepsilon}{3},
+	\end{equation}
+	for all $m\ge 1$ and $j'\ge j_{\varepsilon}$ -- in particular, this holds for $j' = j_{\varepsilon}$. Now, for $1 < m_1 \le m_2$, we have 
+	\begin{align*}
+		\left\|\sum_{n = m_1}^{m_2} \alpha_n x_n - \sum_{n = m_1}^{m_2}\alpha_{n, j_\varepsilon} x_n\right\| &= \left\|\left(\sum_{n = 1}^{m_2} \alpha_n x_n - \sum_{n = 1}^{m_1}\alpha_n x_n\right) - \left(\sum_{n = 1}^{m_2}\alpha_{n, j_\varepsilon} x_n - \sum_{n = 1}^{m_1}\alpha_{n, j_\varepsilon} x_n\right)\right\|\\
+		&\le\left\|\sum_{n = 1}^{m_2}\alpha_n x_n - \sum_{n = 1}^{m_2}\alpha_{n, j_{\varepsilon}}x_n\right\| + \left\|\sum_{n = 1}^{m_1} \alpha_n x_n - \sum_{n = 1}^{m_1} \alpha_{n, j_{\varepsilon}}x_n\right\|\\
+		&\le\frac{2\varepsilon}{3}.
+	\end{align*}
+	Next, choose $m_\varepsilon\gg 0$ such that if $m_2\ge m_1 > m_\varepsilon$, then $\displaystyle\left\|\sum_{n = m_1}^{m_2}\alpha_{n, j_\varepsilon}x_n\right\| < \frac{\varepsilon}{3}$. It follows that 
+	\begin{equation*}
+		\left\|\sum_{n = m_1}^{m_2} \alpha_nx_n\right\|\le\left\|\sum_{n = m_1}^{m_2}\alpha_nx_n - \sum_{n = m_1}^{m_2} \alpha_nx_n\right\| + \left\|\sum_{n = m_1}^{m_2} \alpha_{n, j_\varepsilon}x_n\right\| < \varepsilon
+	\end{equation*}
+	whenever $m_2\ge m_1 > m_\varepsilon$. This shows that the series $\displaystyle\sum_{n\ge 1}\alpha_n x_n$ converges. Using \eqref{inequality} and taking supremum over all $m$, we have that 
+	\begin{equation*}
+		\lim_{j\to\infty}\left\|\sum_{n\ge 1}\alpha_n x_n - y_j\right\|_{\mathbf x} = 0,
+	\end{equation*}
+	which shows that $\|\cdot\|_{\mathbf x}$ is a Banach norm.
+
+	Finally, the inequality verified at the beginning of the proof implies that the identity map $\id_X\colon\left(X, \|\cdot\|_{\mathbf x}\right)\to\left(X, \|\cdot\|\right)$ is continuous, which, due to the bounded inverse theorem, shows that the two norms are equivalent.
+\end{proof}
+
+\begin{theorem}
+	Each natural projection associated with a basis for a Banach space is a bounded linear operator.
+\end{theorem}
+\begin{proof}
+	Suppose $\mathbf x = (x_n)_{n\ge 1}$ is a basis for a Banach space $X$, and let $P_m$ denote the $m^{\text{th}}$ natural projection. For $y = \displaystyle\sum_{n\ge 1}\alpha_n x_n\in X$, 
+	\begin{equation*}
+		\|P_m y\|_{\mathbf x} = \sup_{k\le m}\|P_k y\|\le\sup_{k\ge 1}\|P_k y\| = \|y\|_{\mathbf x},
+	\end{equation*}
+	so that $P_m$ is continuous with respect to the $\mathbf x$-norm. Using the equivalence of the two norms as established in \thref{equivalence-of-norms}, it follows that $P_m$ is continuous with respect to the original norm. 
+\end{proof}
+
+\begin{corollary}[Banach]
+	Each coordinate functional associated with a basis for a Banach space is bounded.
+\end{corollary}
+\begin{proof}
+	Set $P_0 = 0$, the zero functional. Then for $m\ge 1$, 
+	\begin{equation*}
+		(P_m - P_{m - 1})\left(\sum_{n\ge 1} \alpha_nx_n\right) = \alpha_m x_m,
+	\end{equation*}
+	so that the operator $\varphi_m\colon X\to X$ given by  $x = \displaystyle\sum_{n\ge 1}\alpha_n x_n\longmapsto \alpha_m x_m = x_m^\ast(x)x_m$ is continuous. Hence, 
+	\begin{equation*}
+		\left|x_m^\ast (x)\right|\le\frac{\|\varphi_m\|}{\|x_m\|}\|x\|,
+	\end{equation*}
+	so that each functional $x_m^\ast$ is continuous, as desired.
+\end{proof}
+
+\begin{corollary}
+	If $\left\{P_n\colon n\ge 1\right\}$ is the collection of natural projections assocaited with a basis for a Banach space, then $\displaystyle\sup_{n\ge 1}\|P_n\|$ is finite.
+\end{corollary}
+\begin{proof}
+	Indeed, for each $x\in X$, $P_n x\to x$ as $n\to\infty$, and hence $\left(P_n x\colon n\ge 1\right)_{n\ge 1}$ is a bounded sequence. The conclusion is immediate from the Banach-Steinhaus theorem.
+\end{proof}
+
+\begin{definition}
+	Let $\{P_n\colon n\ge 1\}$ be the collection of natural projections associated with a basis for a Banach space. Then $\displaystyle\sup_{n\ge 1} \|P_n\|$ is the \define{basis constant} for that basis. The basis is said to be \define{monotone} if its basis constant is $1$.
+\end{definition}
+
+\begin{remark}
+	Note that for any finite linear combination $y = \alpha_1x_1 + \dots + \alpha_n x_n\in X$, we have that $P_m y = y$ whenever $m\ge n$. Hence, it follows that $\|P_m\|\ge 1$ for all $m\ge 1$. In particular, the basis constant for any basis $(x_n)_{n\ge 1}$ is at least $1$.
+\end{remark}
+
+\begin{proposition}\thlabel{characterization-of-basis-constant}
+	Suppose that $(x_n)_{n\ge 1}$ is a basis for a Banach space $X$ and that $K$ is the basis constant for $(x_n)_{n\ge 1}$. Then $K$ is the smallest real number $M\ge 0$ such that 
+	\begin{equation*}
+		\left\|\sum_{n = 1}^m \alpha_n x_n\right\|\le M\left\|\sum_{n\ge 1} \alpha_n x_n\right\|
+	\end{equation*}
+	whenever $\displaystyle\sum_{n\ge 1}\alpha_n x_n\in X$ and $m\ge 1$. This, in turn, is the smallest real number $M$ such that 
+	\begin{equation*}
+		\left\|\sum_{n = 1}^{m_1}\alpha_n x_n\right\|\le M\left\|\sum_{n = 1}^{m_2} \alpha_n x_n\right\|
+	\end{equation*}
+	whenever $1\le m_1\le m_2$, and $\alpha_1,\dots,\alpha_{m_2}\in\K$.
+\end{proposition}
+\begin{proof}
+	Immediate from the definition and the fact that for $1\le m_1\le m_2$, we have $P_{m_1}\circ P_{m_2} = P_{m_1} = P_{m_2}\circ P_{m_1}$.
+\end{proof}
+
+\begin{proposition}\thlabel{equivalent-monotone-basis}
+	Suppose that $\mathbf x = (x_n)_{n\ge 1}$ is a basis for a Banach space $X$. Then the following are equivalent: 
+	\begin{enumerate}[label=(\arabic*)]
+		\item The basis $(x_n)_{n\ge 1}$ is monotone. 
+		\item $\displaystyle\left\|\sum_{n = 1}^m \alpha_n x_n\right\|\le\left\|\sum_{n\ge 1}\alpha_n x_n\right\|$ for each positive integer $m$ and each convergent series $\displaystyle\sum_{n\ge 1}\alpha_n x_n\in X$.
+		\item $\displaystyle\left\|\sum_{n = 1}^{m}\alpha_n x_n\right\|\le\left\|\sum_{n = 1}^{m + 1}\alpha_n x_n\right\|$ for each positive integer $m$ and $\alpha_1,\dots,\alpha_{m + 1}\in\K$.
+		\item The original norm of $X$ and the $\mathbf x$-norm of $X$ are the same.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	$(1)\implies(2)$ follows from the fact that $\|P_m\| = 1$ for all $m\ge 1$. $(2)\implies(3)$ follows from \thref{characterization-of-basis-constant}. $(3)\implies(4)$ First, note that (3) implies the inequality 
+	\begin{equation*}
+		\left\|\sum_{n = 1}^{m_1} \alpha_n x_n\right\|\le\left\|\sum_{n = 1}^{m_2} \alpha_n x_n\right\|
+	\end{equation*}
+	whenever $1\le m_1\le m_2$. In particular, letting $m_2\to \infty$, we obtain the inequality in $(2)$. Taking the supremum over all $m_1$, we obtain $\|x\|_{\mathbf x}\le \|x\|$ for all $x\in X$, so that $\|x\| = \|x\|_{\mathbf x}$ due to the inequality in \thref{equivalence-of-norms}. 
+
+	$(4)\implies(1)$ We have 
+	\begin{equation*}
+		\|x\|\le \sup_{m\ge 1} \|P_m x\| = \|x\|_{\mathbf x} = \|x\|,
+	\end{equation*}
+	so that $\|P_mx\|\le \|x\|$ for all $x\in X$, as desired.
+\end{proof}
+
+\begin{corollary}
+	If $\mathbf x = (x_n)_{n\ge 1}$ is a basis for a Banach space $X$, then $(x_n)_{n\ge 1}$ is monotone with respect to the $\mathbf x$-norm of $X$.
+\end{corollary}
+
+\begin{theorem}[Banach]\thlabel{banach-theorem}
+	A sequence $(x_n)_{n\ge 1}$ in a Banach space $X$ is a basis for $X$ if and only if 
+	\begin{enumerate}[label=(\roman*)]
+		\item each $x_n$ is non-zero, 
+		\item there is a real number $M\ge 0$ such that 
+		\begin{equation*}
+			\left\|\sum_{n = 1}^{m_1}\alpha_n x_n\right\|\le M\left\|\sum_{n = 1}^{m_2} \alpha_n x_n\right\|
+		\end{equation*}
+		whenever $1\le m_1\le m_2$ and $\alpha_1,\dots,\alpha_{m_2}\in\K$; and 
+		\item $\overline{\Span\left\{x_n\colon n\ge 1\right\}} = X$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	The forward direction is clear from all the above results. We shall prove the converse.
+
+	Suppose $(x_n)_{n\ge 1}$ is a sequence in $X$ having properties (i), (ii), and (iii). Suppose $(\beta_n)_{n\ge 1}$ and $(\gamma_n)_{n\ge 1}$ are two sequences of scalars such that $\displaystyle\sum_{n\ge 1}\beta_n x_n = \sum_{n\ge 1}\gamma_n x_n$, then in view of (ii), taking $m_2\to\infty$,
+	\begin{equation*}
+		|\beta_1 - \gamma_1|\|x_1\|\le M\left\|\sum_{n\ge 1}\beta_n x_n - \sum_{n\ge 1} \gamma_n x_n\right\| = 0.
+	\end{equation*}
+	Therefore, $\beta_1 = \gamma_1$. Hence, we have 
+	\begin{equation*}
+		\sum_{n\ge 2}\beta_n x_n = \sum_{n\ge 2} \gamma_n x_n,
+	\end{equation*}
+	so repeating the above argument furnishes $\beta_2 = \gamma_2$. Continuing this way, we obtain $\beta_n = \gamma_n$ for all $n\ge 1$.
+
+	It remains to show that every element in $X$ has a representation in terms of the ``basis'' $(x_n)_{n\ge 1}$. For each positive integer $m\ge 1$, define $p_m\colon\Span\{x_n\colon n\ge 1\}\to X$ by 
+	\begin{equation*}
+		p_m\left(\sum_{\text{finite}}\alpha_n x_n\right) = \sum_{n = 1}^{m}\alpha_n x_n.
+	\end{equation*}
+	From (ii), it follows that each $p_m$ is a bounded linear functional with $\|p_m\|\le M$. Since $X$ is a Banach space and $\Span\{x_n\colon n\ge 1\}$ is dense in $X$, there is a (unique) norm-preserving extension $P_m\colon X\to X$ of $p_m$. Now, for each $x\in X$ and $y\in\Span\{x_n\colon n\ge 1\}$, we have the inequality: 
+	\begin{equation*}
+		\|P_m x - x\|\le \|P_m x - P_m y\| + \|P_m y - y\| + \|x - y\|\le (M + 1)\|x - y\| + \|P_m y - y\|.
+	\end{equation*}
+	Taking the limit superior as $m\to\infty$, we have 
+	\begin{equation*}
+		\limsup_{m\to\infty} \|P_m x - x\|\le (M + 1)\|x - y\|.
+	\end{equation*}
+	Since $\Span\{x_n\colon n\ge 1\}$ is dense in $X$, the right hand side of the above inequality can be made arbitrarily small, so that 
+	\begin{equation*}
+		\lim_{m\to\infty} P_m x = x\qquad\text{for all }x\in X.
+	\end{equation*}
+	We shall use this to construct the desired representation for each $x\in X$. Before we proceed, note that for $m\le n$, we have the equality $p_m\circ p_n = p_m$. Using a density argument, this implies that $P_m\circ P_n = P_m$ on $X$. 
+	
+	Now, fix an $x\in X$ and let $\alpha_1\in\K$ be such that $P_1x = \alpha_1 x_1$. Suppose now that the sequence $\alpha_1,\dots,\alpha_m$ has been constructed. Using the equality 
+	\begin{equation*}
+		\left(P_n\circ P_{n + 1}\right)(x) = P_n x = \alpha_1 x_1 + \dots + \alpha_n x_n.
+	\end{equation*}
+	Therefore, there is an $\alpha_{n + 1}\in\K$ such that 
+	\begin{equation*}
+		P_{n + 1}x = \alpha_1x_1 + \dots + \alpha_{n + 1}x_{n + 1}.
+	\end{equation*}
+	Using the fact that $P_nx\to x$, it follows that 
+	\begin{equation*}
+		x = \sum_{n\ge 1}\alpha_n x_n,
+	\end{equation*}
+	as desired.
+\end{proof}
+
+\begin{corollary}\thlabel{equivalent-basic-sequence}
+	A sequence $(x_n)_{n\ge 1}$ in a Banach space $X$ is basic if and only if each $x_n$ is non-zero and there is a real number $M\ge 0$ such that 
+	\begin{equation*}
+		\left\|\sum_{n = 1}^{m_1}\alpha_n x_n\right\|\le M\left\|\sum_{n = 1}^{m_2} \alpha_n x_n\right\|
+	\end{equation*}
+	whenever $m_1\le m_2$ and $\alpha_1,\dots,\alpha_{m_2}\in\K$.
+\end{corollary}
+
+\begin{corollary}
+	Every infinite subsequence of a basic sequence in a Banach space is a basic sequence.
+\end{corollary}
+
+\begin{theorem}\thlabel{basis-constant-of-dual}
+	Suppose that $(x_n^\ast)_{n\ge 1}$ is the sequence of coordinate functionals associated to a basis $(x_n)_{n\ge 1}$ for a Banach space $X$. Then $(x_n^\ast)_{n\ge 1}$ is a basic sequence in $X^\ast$ whose basis constant is nom ore than that of $(x_n)_{n\ge 1}$.
+
+	Furthermore, if $\Phi\colon X\to X^{\ast\ast}$ is the natural map, then the sequence of coordinate functionals for $(x_n^\ast)_{n\ge 1}$ is formed by restricting the terms of $\left(\Phi x_n\right)_{n\ge 1}$ to $\overline{\Span\{x_n^\ast\colon n\ge 1\}}$.
+\end{theorem}
+\begin{proof}
+	Let $K$ be the basis constant for $(x_n)_{n\ge 1}$. Let $1\le m_1\le m_2$ and $\alpha_1,\dots,\alpha_{m_2}\in\K$. For $\delta > 0$, there exists a member $y = \displaystyle\sum_{n\ge 1} \beta_n x_n\in S_X$ such that 
+	\begin{equation*}
+		\left|\left(\sum_{n = 1}^{m_1}\alpha_n x_n^\ast\right)\left(\sum_{n\ge 1}\beta_n x_n\right)\right|\ge \left\|\sum_{n = 1}^{m_1}\alpha_n x_n^\ast\right\| - \delta.
+	\end{equation*}
+	Then 
+	\begin{align*}
+		\left\|\sum_{n = 1}^{m_1} \alpha_n x_n^\ast\right\| &\le\left|\left(\sum_{n = 1}^{m_1} \alpha_n x_n^\ast\right)\left(\sum_{n\ge 1} \beta_n x_n\right)\right| + \delta\\
+		&= \left|\left(\sum_{n = 1}^{m_2}\alpha_n x_n^\ast\right)\left(\sum_{n = 1}^{m_1}\beta_n x_n\right)\right| + \delta\\
+		&\le\left\|\sum_{n = 1}^{m_2}\alpha_n x_n^\ast\right\|\left\|\sum_{n = 1}^{m_1}\beta_n x_n\right\| + \delta\\
+		&\le K\left\|\sum_{n = 1}^{m_2}\alpha_n x_n^\ast\right\|\left\|\sum_{n\ge 1} \beta_n x_n\right\| + \delta\\
+		&= K\left\|\sum_{n = 1}^{m_2}\alpha_n x_n^\ast\right\| + \delta.
+	\end{align*}
+	Since $\delta > 0$ was chosen arbitrarily, it follows that 
+	\begin{equation*}
+		\left\|\sum_{n = 1}^{m_1}\alpha_n x_n^\ast\right\|\le K\left\|\sum_{n = 1}^{m_2}\alpha_n x_n^\ast\right\|.
+	\end{equation*}
+	Each $x_n^\ast$ is non-zero, so that by \thref{equivalent-basic-sequence}, it is a basic sequence with basis constant at most $K$. The last statement follows from the equality 
+	\begin{equation*}
+		\left(\Phi x_m\right)\left(\sum_{n\ge 1}\gamma_n x_n\right) = \gamma_m,
+	\end{equation*}
+	thereby completing the proof.
+\end{proof}
+
+\begin{definition}
+	Suppose that $(x_n)_{n\ge 1}$ is a basis for a Banach space $X$. For each $x^\ast\in X^\ast$ and each positive integer $m$, let $\|x^\ast\|_{(m)}$ be the norm of the restriction of $x^\ast$ to $\overline{\Span\{x_n\colon n > m\}}$. Then $(x_n)_{n\ge1}$ is said to be \define{shrinking} if $\displaystyle\lim_{m\to\infty} \|x^\ast\|_{(m)} = 0$ for each $x^\ast\in X^\ast$.
+\end{definition}
+
+\begin{proposition}\thlabel{dual-of-shrinking-basis-is-basis}
+	Suppose $(x_n)_{n\ge 1}$ is a basis for a Banach space $X$ and that $(x_n^\ast)_{n\ge 1}$ is the sequence of coordinate functionals for $(x_n)_{n\ge 1}$. Then $(x_n^\ast)_{n\ge 1}$ is a basis for $X^\ast$ if and only if $(x_n)_{n\ge 1}$ is shrinking.
+\end{proposition}
+\begin{proof}
+	Suppose first that $(x_n^\ast)_{n\ge 1}$ is a basis for $X^\ast$. If $\displaystyle\sum_{n\ge 1}\beta_n x_n^\ast\in X^\ast$, then for all $m\ge 1$, we have the equality: 
+	\begin{equation*}
+		\left\|\sum_{n\ge 1} \beta_n x_n\right\|_{(m)} = \left\|\sum_{n = m + 1}^\infty \beta_n x_n^\ast\right\|_{(m)}\le\left\|\sum_{n = m + 1}^\infty \beta_n x_n^\ast\right\|.
+	\end{equation*}
+	Since the right hand side goes to $0$ as $m\to\infty$, we have that the basis $(x_n)_{n\ge 1}$ is shrinking. 
+
+	Conversely, suppose that $(x_n)_{n\ge 1}$ is shrinking, and let $x^\ast\in X^\ast$. We shall show the equality 
+	\begin{equation*}
+		x^\ast = \sum_{n\ge 1} (x^\ast x_n) x_n^\ast.
+	\end{equation*}
+	Let $K$ be the basis constant of $(x_n)_{n\ge 1}$. Then for each positive integer $m\ge 1$ and each member $\displaystyle\sum_{n\ge 1} \alpha_n x_n\in X$, we have the inequality 
+	\begin{equation*}
+		\left\|\sum_{n = m + 1}^\infty \alpha_n x_n\right\|\le\left\|\sum_{n\ge 1}\alpha_n x_n\right\| + \left\|\sum_{n = 1}^m \alpha_n x_n\right\|\le (1 + K)\left\|\sum_{n\ge 1} \alpha_n x_n\right\|.
+	\end{equation*}
+	Therefore, 
+	\begin{align*}
+		\left|\left(x^\ast - \sum_{n = 1}^m (x^\ast x_n)x_n^\ast\right)\left(\sum_{n\ge 1}\alpha_n x_n\right)\right| &= \left|x^\ast\left(\sum_{n = m + 1}^\infty \alpha_n x_n\right)\right|\\&\le \|x^\ast\|_{(m)}\left\|\sum_{n = m + 1}^\infty \alpha_n x_n\right\|\le \|x^\ast\|_{(m)} (1 + K)\left\|\sum_{n\ge 1} \alpha_n x_n\right\|.
+	\end{align*}
+	This shows that 
+	\begin{equation*}
+		\left\|x^\ast - \sum_{n = 1}^m (x^\ast x_n)x_n^\ast\right\|\le \|x^\ast\|_{(m)}(1 + K),
+	\end{equation*}
+	which, in the limit $m\to\infty$ implies 
+	\begin{equation*}
+		\lim_{m\to\infty}\left\|x^\ast - \sum_{n = 1}^m (x^\ast x_n)x_n^\ast\right\| = 0,
+	\end{equation*}
+	that is, $x^\ast = \displaystyle\sum_{n\ge 1}(x^\ast x_n)x_n^\ast$. Hence, $(x_n^\ast)_{n\ge 1}$ is a basis for $X^\ast$, as desired.
+\end{proof}
+
+\section{The James Space \texorpdfstring{$\bfJ$}{J}}
+
+\begin{lemma}\thlabel{banach-space-corresponding-to-basis}
+	Suppose that $(x_n)_{n\ge 1}$ is a basis for a Banach space. Set 
+	\begin{equation*}
+		S = \left\{(\alpha_n)_{n\ge 1}\colon (\alpha_n)_{n\ge 1}\text{ is a sequence of scalars such that }\sup_{m\ge 1}\left\|\sum_{n = 1}^m \alpha_n x_n\right\| < \infty\right\}
+	\end{equation*}
+	and 
+	\begin{equation*}
+		\left\|(\alpha_n)_{n\ge 1}\right\|_S = \sup_{m\ge 1}\left\|\sum_{n = 1}^m \alpha_n x_n\right\|
+	\end{equation*}
+	for each member $(\alpha_n)_{n\ge 1}$ of $S$. Then $S$ with pointwise vector operations and the norm $\|\cdot\|_S$ is a Banach space.
+\end{lemma}
+\begin{proof}
+	That $S$ is a vector space and that $\|\cdot\|_S$ is a norm for $S$ is clear. It remains to show that $\|\cdot\|_S$ is a complete norm. Suppose that $\left((\alpha_{n, j})_{n\ge 1}\right)_{j = 1}^\infty$ is a Cauchy sequence in $S$. 
+
+	Note that for $m\ge 2$ and $j, j'\ge 1$, we have the inequality: 
+	\begin{equation*}
+		\left|\alpha_{m, j'} - \alpha_{m, j}\right| = \|x_m\|^{-1}\left\|\sum_{n = 1}^{m}\left(\alpha_{n, j'} - \alpha_{n, j}\right)x_n - \sum_{n = 1}^{m - 1}(\alpha_{n, j'} - \alpha_{n, j})x_n\right\|\le \|x_m\|^{-1}\left\|(\alpha_{n, j'})_{n\ge 1} - (\alpha_{n, j})_{n\ge 1}\right\|_S,
+	\end{equation*}
+	and clearly 
+	\begin{equation*}
+		\left|\alpha_{1, j'} - \alpha_{1, j}\right| = \|x_1\|^{-1}\left\|(\alpha_{1, j'} - \alpha_{1, j})x_1\right\|\le \|x_1\|^{-1}\left\|(\alpha_{n, j'})_{n\ge 1} - (\alpha_{n, j})_{n\ge 1}\right\|_S.
+	\end{equation*}
+	It follows thence that $(\alpha_{n, j})_{j = 1}^\infty$ is a Cauchy sequence in $\K$, and so admits a limit, say $\alpha_n\in\K$. We shall show that $(\alpha_{n, j})_{n\ge 1}\to (\alpha_n)_{n\ge 1}$ in $S$.
+
+	Let $\varepsilon > 0$ and let $j_{\varepsilon}\ge 1$ be a positive integer such that if $j, j'\ge j_{\varepsilon}$, then $\left\|(\alpha_{n, j'})_{n\ge 1} - (\alpha_{n, j})_{n\ge 1}\right\| < \varepsilon$. If $m\ge 1$ and $j, j'\ge j_{\varepsilon}$, then 
+	\begin{equation*}
+		\left\|\sum_{n = 1}^{m} (\alpha_{n, j'} - \alpha_{n, j})x_n\right\|\le \left\|(\alpha_{n, j'})_{n\ge 1} - (\alpha_{n, j})_{n\ge 1}\right\|_S < \varepsilon.
+	\end{equation*}
+	In the limit $j'\to\infty$, we have 
+	\begin{equation*}
+		\left\|\sum_{n = 1}^{m}(\alpha_n - \alpha_{n, j})x_n\right\|\le \varepsilon
+	\end{equation*}
+	for all $m\ge 1$. Therefore, taking a supremum over all such $m\ge 1$, we obtain the desired conclusion.
+\end{proof}
+
+\begin{proposition}
+	Suppose that $\mathbf x = (x_n)_{n\ge 1}$ is a shrinking basis for a Banach space $X$. Let $S$ be the Banach space corresponding to this basis as defined in \thref{banach-space-corresponding-to-basis}. Let $(x_n^\ast)_{n\ge 1}$ be the corresponding sequence of coordinate functionals. Define the map $\Psi\colon X^{\ast\ast}\to S$ by $\Psi(x^{\ast\ast}) = \left(x^{\ast\ast}x_n^\ast\right)_{n\ge 1}$ for all $x^{\ast\ast}\in X^{\ast\ast}$. 
+	\begin{enumerate}[label=(\arabic*)]
+		\item Then $\Psi$ is an isomorphism. 
+		\item If further $(x_n)_{n\ge 1}$ is monotone, then $\Psi$ is an isometric isomorphism, and so 
+		\begin{equation*}
+			\|x^{\ast\ast}\| = \lim_{m\to\infty}\left\|\sum_{n = 1}^m (x^{\ast\ast}x_n^\ast)x_n\right\|\quad\text{ for all }x^{\ast\ast}\in X^{\ast\ast}.
+		\end{equation*}
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	Since the $\mathbf x$-norm on $X$ is equivalent to the original norm, we may assume that $X$ is equipped with the $\mathbf x$-norm. Note that equivalent norms induce equivalent norms on the dual space and so we are not losing out on information. Furthermore, if $(x_n)_{n\ge 1}$ was monotone, then the $\mathbf x$-norm on $X$ is the same as the original norm. Therefore, it suffices to prove the statement of the lemma assuming $\mathbf x$ is monotone, so that the $\mathbf x$-norm is the same as the original norm. 
+
+	In view of \thref{basis-constant-of-dual} and \thref{dual-of-shrinking-basis-is-basis}, $(x_n^\ast)_{n\ge 1}$ is a monotone basis for $X^\ast$. For each $x^{\ast\ast}\in X^{\ast\ast}$, $x^{\ast}\in X^{\ast}$, and each $m\ge 1$, 
+	\begin{align*}
+		\left|x^\ast\left(\sum_{n = 1}^m (x^{\ast\ast}x_n^\ast)x_n\right)\right| &= \left|\sum_{n = 1}^m (x^{\ast\ast}x_n^\ast)(x^\ast x_n)\right|\\
+		&= \left|x^{\ast\ast}\left(\sum_{n = 1}^{m}(x^\ast x_n)x_n^\ast\right)\right|\\
+		&\le \|x^{\ast\ast}\|\left\|\sum_{n = 1}^m (x^\ast x_n)x_n^\ast\right\|\\
+		&\le \|x^{\ast\ast}\|\|x^\ast\|,
+	\end{align*}
+	where the last inequality follows from the fact that $x^\ast = \displaystyle \sum_{n = 1}^\infty (x^\ast x_n)x_n^\ast$ and that $(x_n^\ast)_{n\ge 1}$ is a monotone basis for $X^\ast$. Since the above inequality holds for all $x^{\ast}\in X^\ast$, we have 
+	\begin{equation*}
+		\left\|\sum_{n = 1}^m (x^{\ast\ast}x_n^\ast)x_n\right\|\le \|x^{\ast\ast}\|\qquad\text{for all }x^{\ast\ast}\in X^{\ast\ast}. 
+	\end{equation*}
+	Taking supremum over $m$, we note that $\Psi(x^{\ast\ast})\in S$, i.e., $\Psi$ is well-defined. Further note that we have shown $\|\Psi x^{\ast\ast}\|_S\le \|x^{\ast\ast}\|$ for all $x^{\ast\ast}\in X^{\ast\ast}$. Thus $\Psi$ is a bounded linear map from $X^{\ast\ast}$ to $S$.
+
+	Next, we show that $\Psi$ is injective. Indeed, if $x^{\ast\ast}\in X^{\ast\ast}$ is such that $\Psi x^{\ast\ast} = 0$, then for each $x^\ast\in X^\ast$, we have 
+	\begin{equation*}
+		x^{\ast\ast} x^{\ast} = x^{\ast\ast}\left(\sum_{n\ge 1} (x^{\ast} x_n)x_n^\ast\right) = \sum_{n\ge 1} (x^\ast x_n)(x^{\ast\ast} x_n^\ast) = 0,
+	\end{equation*}
+	since each $x^{\ast\ast} x_n^\ast = 0$. This shows that $x^{\ast\ast} = 0$ and $\Psi$ is injective.
+
+	Finally, we argue surjectivity. Suppose that $(\alpha_n)_{n\ge 1}\in S$. If $x^{\ast}\in X^\ast$ and $1\le m_1 < m_2$, then 
+	\begin{equation*}
+		\left|\sum_{n = m_1 + 1}^{m_2}\alpha_n x^\ast x_n\right|\le \|x^\ast\|_{(m_1)}\left\|\sum_{n = m_1 + 1}^{m_2} \alpha_n x_n\right\| = \|x^\ast\|_{(m_1)}\left\|\sum_{n = 1}^{m_2} \alpha_n x_n - \sum_{n = 1}^{m_1} \alpha_n x_n\right\|\le 2\|x^\ast\|_{(m_1)}\left\|(\alpha_n)_{n\ge 1}\right\|_S.
+	\end{equation*}
+	Using the fact that $\|x\|_{(m)}\to\infty$ as $m\to\infty$, we see that the partial sums $\displaystyle\sum_{n = 1}^m\alpha_n x^\ast x_n$ are Cauchy, and hence, converge. Define $x_0^{\ast\ast}\colon X^\ast\to\K$ by 
+	\begin{equation*}
+		x_0^{\ast\ast}x^\ast = \sum_{n\ge 1} \alpha_n x^\ast x_n.
+	\end{equation*}
+	Clearly $x_0^{\ast\ast}$ is linear, and if $x^\ast\in X^\ast$, and $m\ge 1$, then 
+	\begin{equation*}
+		\left|\sum_{n = 1}^m \alpha_n x^\ast x_n\right|\le \|x^\ast\|\left\|\sum_{n = 1}^m\alpha_n x_n\right\|\le \|x^\ast\|\|(\alpha_n)_{n\ge 1}\|_S,
+	\end{equation*}
+	so that $|x_0^{\ast\ast} x^\ast|\le \|x^\ast\|\|(\alpha_n)_{n\ge 1}\|_S$, whence $\|x_0^{\ast\ast}\in X^{\ast\ast}$ and $\|x_0^{\ast\ast}\|\le \|(\alpha_n)_{n\ge 1}\|_S$. Furthermore, it is clear that $\Psi x_0^{\ast\ast} = (\alpha_n)_{n\ge 1}$, and hence $\Psi$ is an isometric isomorphism, as desired.
+\end{proof}
+
+The above proposition gives us a series of identifications in the case that the Banach space $X$ admits a \underline{monotone shrinking basis} $(x_n)_{n\ge 1}$ summarized in following table: 
+
+\renewcommand{\arraystretch}{3}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+	\hline
+	Space & \shortstack{Identified with the space \\of sequences $(\alpha_n)_{n\ge 1}$ such that} &  Norm\\
+	\hline 
+	$X$ & $\left(\displaystyle\sum_{n = 1}^{m}\alpha_n x_n\right)_{m = 1}^\infty$ & $\displaystyle\|(\alpha_n)_{n\ge 1}\| = \lim_{m\to\infty}\left\|\sum_{n = 1}^m \alpha_n x_n\right\| = \sup_{m\ge 1}\left\|\sum_{n = 1}^m \alpha_n x_n\right\|$\\
+	\hline
+	$X^\ast$ & $\left(\displaystyle\sum_{n = 1}^{m}\alpha_n x_n\right)_{m = 1}^\infty$ & $\displaystyle\|(\alpha_n)_{n\ge 1}\| = \lim_{m\to\infty}\left\|\sum_{n = 1}^m \alpha_n x_n\right\| = \sup_{m\ge 1}\left\|\sum_{n = 1}^m \alpha_n x_n\right\|$\\
+	\hline 
+	$X^{\ast\ast}$ & $\left(\displaystyle\sum_{n = 1}^{m}\alpha_n x_n\right)_{m = 1}^\infty$ & $\displaystyle\|(\alpha_n)_{n\ge 1}\| = \lim_{m\to\infty}\left\|\sum_{n = 1}^m \alpha_n x_n\right\| = \sup_{m\ge 1}\left\|\sum_{n = 1}^m \alpha_n x_n\right\|$\\
+	\hline 
+\end{tabular}
+\end{center}
+
+Consider the natural map $\Phi\colon X\into X^{\ast\ast}$. Recall that this is an isometry and so we have a commutative diagram of isometries: 
+\begin{equation*}
+	\xymatrix {
+		X\ar@{^{(}->}[r]\ar[rd]_{\Psi\circ\Phi} & X^{\ast\ast}\ar[d]^\Psi\\
+		& S
+	}
+\end{equation*}
+where 
+\begin{equation*}
+	\left(\Psi\circ\Phi\right)(x) = \left(x_n^\ast x\right)_{n\ge 1}.
+\end{equation*}
+Henceforth, we shall treat $X\subseteq X^{\ast\ast}$ using the above identifications --- usually without comment. 
+
+\subsection*{The James Space}
+
+\begin{definition}
+	Let $V$ denote the $\R$-vector space underlying real $c_0$. For each $(\alpha_n)_{n\ge 1}\in V$, set 
+	\begin{equation*}
+		\|(\alpha_n)_{n\ge 1}\|_a = \frac{1}{\sqrt 2}\sup\left\{\left(\sum_{n = 1}^{m - 1}(\alpha_{p_n} - \alpha_{p_{n + 1}})^2 + (\alpha_{p_m} - \alpha_{p_1})^2\colon m\ge 2,~p_1 < \dots < p_m\right)\right\},
+	\end{equation*}
+	and 
+	\begin{equation*}
+		\|(\alpha_n)_{n\ge 1}\|_a = \frac{1}{\sqrt 2}\sup\left\{\left(\sum_{n = 1}^{m - 1}(\alpha_{p_n} - \alpha_{p_{n + 1}})^2 + \colon m\ge 2,~p_1 < \dots < p_m\right)\right\}.
+	\end{equation*}
+	Define the \define{James space} $\bfJ$ to be the real vector space consisting of all elements $(\alpha_n)_{n\ge 1}\in V$ such that $\|(\alpha_n)_{n\ge 1}\|_a < \infty$. Equip this space with the norm $\|\cdot\|_a$.
+\end{definition}
+
+\begin{theorem}
+	The space $\bfJ$ is a real Banach space and $\|\cdot\|_b$ is a norm for this space equivalent to $\|\cdot\|_a$.
+\end{theorem}
+\begin{proof}
+	The triangle inequality for $\|\cdot\|_a$ follows immediately from that for $\ell^2$; this in turn also shows that $\bfJ$ is a real vector space. It therefore follows that $\|\cdot\|_a$ is a norm on $\bfJ$. Similarly, it can be shown that $\|\cdot\|_b$ is also a norm on $\bfJ$. Clearly, for each element in $\bfJ$, $\|\cdot\|_b$ is finite. FUrthermore, note that 
+	\begin{equation*}
+		\left(\sum_{n = 1}^{m - 1}(\alpha_{p_n} - \alpha_{p_{n + 1}})^2 + (\alpha_{p_m} - \alpha_{p_1})^2\right)^{\frac{1}{2}}\le \left(\sum_{n = 1}^{m - 1}(\alpha_{p_n} - \alpha_{p_{n + 1}})^2\right)^{\frac{1}{2}} + |\alpha_{p_1} - \alpha_{p_m}|^{\frac{1}{2}}\le 2\|(\alpha_n)_{n\ge 1}\|_b.
+	\end{equation*}
+	This establishes the inequalities $\|(\alpha_n)_{n\ge 1}\|_b\le \|(\alpha_n)_{n\ge 1}\|_a\le 2\|(\alpha_n)_{n\ge 1}\|_b$, and so $\|\cdot\|_b$ is equivalent to $\|\cdot\|_a$.
+
+	It remains to show that $\|\cdot\|_a$ is a Banach norm. Before proceeding, note that for any $(\alpha_n)_{n\ge 1}\in\bfJ$ and $1\le n < n'$, 
+	\begin{equation*}
+		|\alpha_{n'} - \alpha_{n}| = \frac{1}{\sqrt 2}\left((\alpha_{n} - \alpha_{n'})^2 + (\alpha_{n'} - \alpha_{n})^2\right)\le \|(\alpha_n)_{n\ge 1}\|_a.
+	\end{equation*}
+	Finally, since $(\alpha_n)_{n\ge 1}\in c_0$, in the limit $n'\to\infty$, we obtain the inequality 
+	\begin{equation*}
+		|\alpha_n|\le \|(\alpha_n)_{n\ge 1}\|_a\quad\text{ for all }n\ge 1.
+	\end{equation*}
+	Now let $\left((\beta_{n, j})_{n\ge 1}\right)_{j = 1}^\infty$ be a Cauchy sequence in $\bfJ$. We shall show that this converges. Given $\varepsilon > 0$, there is an index $j_{\varepsilon} > 0$ such that whenever $j, j'\ge j_{\varepsilon}$, we have $\left\|(\beta_{n, j'})_{n\ge 1} - (\beta_{n, j})_{n\ge 1}\right\| < \varepsilon$, and hence, due to our observation above, $|\beta_{n, j'} - \beta_{n, j}| < \varepsilon$ for all $j, j'\ge j_{\varepsilon}$. Define 
+	\begin{equation*}
+		\beta_n = \lim_{j\to\infty}\beta_{n, j}\quad\text{ for all }n\ge 1.
+	\end{equation*}
+	We shall show that $(\beta_{n, j})_{n\ge 1}\to (\beta_n)_{n\ge 1}$. Indeed, for $1\le p_1 < \dots < p_m$ with $m\ge 2$, and $j, j'\ge j_{\varepsilon}$, we have 
+	\begin{equation*}
+		\frac{1}{\sqrt 2}\left(\sum_{n = 1}^{m - 1}\left((\beta_{n, j'} - \beta_{n, j}) - (\beta_{n + 1, j'} - \beta_{n + 1, j})\right)^2 + \left((\beta_{m, j'} - \beta_{m, j}) - (\beta_{1, j'} - \beta_{1, j})^2\right)\right)\le \|(\beta_{n, j'})_{n\ge 1} - (\beta_{n, j})_{n\ge 1}\|_a < \varepsilon.
+	\end{equation*}
+	Taking the limit $j'\to\infty$, we have 
+	\begin{equation*}
+		\frac{1}{\sqrt 2}\left(\sum_{n = 1}^{m - 1}\left((\beta_{n} - \beta_{n, j}) - (\beta_{n + 1} - \beta_{n + 1, j})\right)^2 + \left((\beta_{m} - \beta_{m, j}) - (\beta_{1} - \beta_{1, j})^2\right)\right)\le\varepsilon.
+	\end{equation*}
+	Taking the supremum over all such sequences $1\le p_1 < \dots < p_m$ with $m\ge 2$, we have the inequality $\|(\beta_n)_{n\ge 1} - (\beta_{n, j})_{n\ge 1}\|_a\le\varepsilon$ for all $j\ge j_\varepsilon$. This implies the desired conclusion.
+\end{proof}
+
+Now let $e_n\in\bfJ$ denote the sequence 
+\begin{equation*}
+	e_n(i) = \begin{cases}
+		1 & i = n\\
+		0 & \text{otherwise}.
+	\end{cases}
+\end{equation*}
+
+\begin{theorem}
+	The sequence of elements $(e_n)_{n = 1}^\infty$ in $\bfJ$ is a monotone shrinking basis for $\bfJ$, and $(\alpha_n)_{n\ge 1} = \displaystyle\sum_{n = 1}^\infty \alpha_n e_n$. 
+\end{theorem}
+\begin{proof}
+	Let $(\alpha_n)_{n\ge 1}\in\bfJ$. Note that we have 
+	\begin{equation*}
+		\|(\alpha_1, 0, 0, \dots)\|_a\le \|(\alpha_1, \alpha_2, 0, 0, \dots)\|_a\le \|(\alpha_1, \alpha_2, \alpha_3, 0, 0, \dots)\|_a\le\cdots,
+	\end{equation*}
+	so that $(e_n)_{n = 1}^\infty$ is a monotone basic sequence by \thref{equivalent-basic-sequence} and \thref{equivalent-monotone-basis}. Now let $(\beta_n)_{n\ge 1}\in\bfJ$. We shall show that $\displaystyle\left\|(\beta_n)_{n\ge 1} - \sum_{n = 1}^m \beta_n e_n\right\|_a\to 0$ as $m\to\infty$. Suppose not --- then for each positive integer $j$, we can find a positive $\varepsilon > 0$ and a collection $\{p_{1, j}, \dots, p_{m(j), j}\}$ such that 
+	\begin{equation*}
+		\cdots < p_{m(j - 1), j - 1} < p_{1, j} < p_{2, j} < \dots < p_{m(j), j} < p_{1, j + 1} < \cdots,
+	\end{equation*}
+	and 
+	\begin{equation*}
+		\sum_{n = 1}^{m(j) - 1} \left(\beta_{p_{n, j}} - \beta_{p_{n + 1, j}}\right)^2 + \left(\beta_{p_{m(j), j}} - \beta_{p_{1, j}}\right)^2\ge \varepsilon^2.
+	\end{equation*}
+	Since $\beta_n\to 0$ as $n\to\infty$, and $p_{1, j}\ge j$, we conclude that there is a positive integer $j_0 > 0$ such that whenever $j\ge j_0$: 
+	\begin{equation*}
+		\sum_{n = 1}^{m(j) - 1}\left(\beta_{p_{n, j}} - \beta_{p_{n + 1}, j}\right)^2\ge\frac{\varepsilon}{2}.
+	\end{equation*}
+	Using the fact that the $p_{n, j}$'s form a strictly increasing chain, as remarked above, it follows that $\|(\beta_n)_{n\ge 1}\|_a = \infty$, a contradiction. This shows that $(e_n)_{n = 1}^\infty$ is a monotone basis for $\bfJ$. It remains to show that this basis is shrinking.
+
+	% TODO: Maybe add in a few more details?
+	Suppose not, then (after a bit of fudging about), one can find $x^\ast\in \bfJ^\ast$, extract a sequence $(u_n)_{n = 1}^\infty$ in $\bfJ$ and find a $\delta > 0$ such that 
+	\begin{enumerate}[label=(\roman*)]
+		\item $\|u_n\| = 1$ for each $n\ge 1$, 
+		\item $x^\ast u_n\ge\delta$ for each $n\ge 1$, and 
+		\item there is a sequence $1 = q_1 < q_2 < q_3 < \cdots$ and scalars $\zeta_1, \zeta_2, \zeta_3,\dots$ such that 
+		\begin{equation*}
+			u_j = \sum_{n = q_j}^{q_{j + 1} - 1}\zeta_n e_n
+		\end{equation*}
+		for each $n\ge 1$.
+	\end{enumerate}
+	Note that the sum $\displaystyle\sum_{n = 1}^\infty x^\ast\left(\frac{1}{n}u_n\right)$ does not converge, and therefore, the series $\displaystyle\sum_{n = 1}^\infty\frac{1}{n}x_n$ cannot converge. We shall derive a contradiction by showing that there exists a constant $c > 0$ such that 
+	\begin{equation*}
+		\left\|\sum_{n = m_1}^{m_2}\frac{1}{n}u_n\right\|_b\le c\left(\sum_{n = m_1}^{m_2}\frac{1}{n^2}\right)^{\frac{1}{2}}
+	\end{equation*}
+	whenever $m_1\le m_2$. We shall say that an integer $p$ \define{belongs to} an element $u_j$ of the sequence $(u_n)_{n = 1}^\infty$ if $q_j\le p < q_{j + 1}$. Note that $|\zeta_n|\le \|u_j\|_a = 1$, where $j$ is such that $n$ belongs to $u_j$. 
+
+	Let $1\le m_1\le m_2$ be positive integers and let 
+	\begin{equation*}
+		(\gamma_n)_{n\ge 1} = \sum_{n = m_1}^{m_2}\frac{1}{n}u_n\in\bfJ.
+	\end{equation*}
+	Let $1\le p_1 < p_2 < \dots < p_m$ be positive integers and set 
+	\begin{equation*}
+		s = \sum_{n = 1}^{m - 1}\left(\gamma_{p_n} - \gamma_{p_{n + 1}}\right)^2.
+	\end{equation*}
+	Let $\mathfrak{C}_1$ be the collection of summands $(\gamma_{p_k} - \gamma_{p_{k + 1}})^2$ of $s$ such that $p_k$ and $p_{k + 1}$ both belong to the same $u_n$ (for some $n$), and let $\mathfrak{C}_2$ be the collection of the remaining summands. Let $s_1$ denote the sum of all the summands in $\mathfrak{C}_1$ and let $s_2$ denote the sum of all the summmands in $\mathfrak{C}_2$.
+
+	Now if $(\gamma_{p_k} - \gamma_{p_{k + 1}})^2\in\mathfrak{C}_1$, then both $p_k$ and $p_{k + 1}$ belong to the same $u_j$ for some $j\ge 1$. If $m_1\le j\le m_2$, then 
+	\begin{equation*}
+		\left(\gamma_{p_k} - \gamma_{p_{k + 1}}\right)^2 = \left(\frac{1}{j}\zeta_{p_k} - \frac{1}{j}\zeta_{p_{k + 1}}\right)^2 = \frac{1}{j^2}\left(\zeta_{p_k} - \zeta_{p_{k + 1}}\right)^2
+	\end{equation*}
+	and otherwise, $\left(\gamma_{p_k} - \gamma_{p_{k + 1}}\right)^2 = 0$. Adding these together, it is easy to see that we have the inequality: 
+	\begin{equation*}
+		s_1\le 2\sum_{n = m_1}^{m_2}\frac{1}{n^2}\|u_n\|_b^2 = 2\sum_{n = m_1}^{m_2}\frac{1}{n^2}.
+	\end{equation*}
+	Next, we estimate $s_2$. Suppose the summand $(\gamma_{p_k} - \gamma_{p_{k + 1}})^2\in\mathfrak{C}_2$ and let $u_{j_1}$ and $u_{j_2}$ be such that $p_k$ belongs to $u_{j_1}$ and $p_{k + 1}$ belongs to $u_{j_2}$. Then, $\gamma_{p_k}$ is either $j_1^{-1}\zeta_{p_k}$ or $0$ and $\gamma_{p_{k + 1}}$ is either $j_1^{-1}\zeta_{p_{k + 1}}$ or $0$. Therefore, if $m_1\le j_1, j_2\le m_2$, then 
+	\begin{align*}
+		\left(\gamma_{p_k} - \gamma_{p_{k + 1}}\right)^2\le \left(\frac{1}{j_1}\zeta_{p_k}\right)^2 + \left(\frac{1}{j_2}\zeta_{p_{k + 1}}\right)^2 + 2\frac{1}{j_1j_2}|\zeta_{p_{k}}\zeta_{p_{k + 1}}|\le 2\left(\frac{1}{j_1^2} + \frac{1}{j_2^2}\right).
+	\end{align*}
+	If $j_1 < m_1$ or $j_2 > m_2$, then we replace them by $0$ in the above inequality. Note in the sum $s_2$, each integer between $m_1$ and $m_2$ can occur at most twice --- at most once as $j_1$ and at most once as $j_2$. Hence, we have the inequality 
+	\begin{equation*}
+		s_2\le 4\sum_{n = m_1}^{m_2}\frac{1}{n^2},
+	\end{equation*}
+	so that 
+	\begin{equation*}
+		\frac{1}{\sqrt 2}\left(\sum_{n = m_1}^{m - 1}(\gamma_{p_n} - \gamma_{p_{n + 1}})^2\right)^{\frac{1}{2}} = \left(\frac{s_1 + s_2}{2}\right)^{\frac{1}{2}}\le \sqrt 3\left(\sum_{n = m_1}^{m_2}\frac{1}{n^2}\right)^{\frac{1}{2}},
+	\end{equation*}
+	and taking the supremum over all such sequences $p_1 < \dots < p_m$, we obtain the inequality 
+	\begin{equation*}
+		\left\|\sum_{n = m_1}^{m_2}\frac{1}{n}u_n\right\|_b\le \sqrt{3}\left(\sum_{n = m_1}^{m_2}\frac{1}{n^2}\right)^{\frac{1}{2},}
+	\end{equation*}
+	as desired. Hence, we have shown that $(e_n)_{n =1 }^\infty$ is a monotone shrinking basis for $\bfJ$.
+\end{proof}
+
+Our goal in the remainder of this section will be to show that $\bfJ$ is \emph{not reflexive} but is isometrically isomorphic to the Banach space $\bfJ^{\ast\ast}$. To this end, we shall first study the space $\bfJ^{\ast\ast}$ in some detail. We have shown above that $(e_n)_{n = 1}^\infty$ is a monotone shrinking bais for $\bfJ$. We have previously also seen that there is an isometric identification of $\bfJ^{\ast\ast}$ with the space of sequences $(\alpha_n)_{n\ge 1}$ such that $\displaystyle\left(\sum_{n = 1}^m \alpha_n e_n\right)_{m = 1}^\infty$ is bounded. Let $X_{\bfJ^{\ast\ast}}$ denote this space of sequences. Recall that the norm on this space is given by 
+\begin{equation*}
+	\left\|(\alpha_n)_{n\ge 1}\right\| = \sup_{m\ge 1}\left\|\sum_{n =1 }^m \alpha_n e_n\right\|_a.
+\end{equation*}
+Note that the composition $\Psi\circ\Phi\colon \bfJ\to X_{\bfJ^{\ast\ast}}$ clearly maps a sequence to ``itself'' in $X_{\bfJ^{\ast\ast}}$. 
+
+\begin{lemma}\thlabel{norm-on-double-dual}
+	With the above identification of $\bfJ^{\ast\ast}$ with $X_{\bfJ^{\ast\ast}}$, the norm of an element $(\alpha_n)_{n\ge 1}\in X_{\bfJ^{\ast\ast}}$ is the supremum over all real numbers $t$ such that $t$ equals either 
+	\begin{equation*}
+		\frac{1}{\sqrt 2}\left(\sum_{n = 1}^{m - 1}(\alpha_{p_n} - \alpha_{p_{n + 1}})^2 + (\alpha_{p_m} - \alpha_{p_1})^2\right)^{\frac{1}{2}}
+	\end{equation*}
+	or 
+	\begin{equation*}
+		\frac{1}{\sqrt 2}\left(\sum_{n = 1}^{m - 2}(\alpha_{p_n} - \alpha_{p_{n + 1}})^2 + \alpha_{p_{m - 1}}^2 + \alpha_{p_1}^2\right)^{\frac{1}{2}}
+	\end{equation*}
+	for some positive integers $m\ge 2$ and $1\le p_1 < \dots < p_m$.
+\end{lemma}
+\begin{proof}
+	We note that the norm of $(\alpha_n)_{n\ge 1}$ is the supremum over the $\|\cdot\|_a$ norms of the partial sums, which are basically the elements which look like 
+	\begin{equation*}
+		\left(\alpha_1, \dots, \alpha_N, 0, 0, \dots\right) = (\gamma_1, \gamma_2, \gamma_3,\dots),
+	\end{equation*}
+	where $\gamma_i = \alpha_i$ if $1\le i\le N$ and $\gamma_i = 0$ otherwise.  
+	
+	While computing the $\|\cdot\|_a$-norm of the above element, one first chooses a sequence $1\le p_1 < \dots < p_m$ and computes the sum 
+	\begin{equation*}
+		\sum_{n = 1}^{m - 1}(\gamma_{p_n} - \gamma_{p_{n + 1}})^2 + (\gamma_{p_m} - \gamma_{p_1})^2.
+	\end{equation*}
+	Now if we choose the sequence such that $p_m\le N$, then we get a sum of the first form, and on the other hand, if we choose the sequence such that $p_m > N$, then we get a sum of the second form. The conclusion follows.
+\end{proof}
+
+Henceforth we shall implicitly identify $\bfJ^{\ast\ast}$ with $X_{\bfJ^{\ast\ast}}$ and treat $\bfJ$ as being a subspace of $X_{\bfJ^{\ast\ast}}$.
+
+\begin{claim}
+	Let $(\alpha_n)_{n\ge 1}\in X_{\bfJ^{\ast\ast}}$. Then $\displaystyle\lim_{n\to\infty}\alpha_n$ exists.
+\end{claim}
+Suppose not. Then there is a $\varepsilon > 0$ such that for all $N\ge 1$, there exist $m, n\ge N$ such that $|\alpha_m - \alpha_n|\ge\varepsilon$. Hence, it is possible to find increasing sequences $(p_n)_{n = 1}^\infty$ and $(q_n)_{n = 1}^\infty$ such that 
+\begin{equation*}
+	p_1 < q_1 < p_2 < q_2 < p_3 < \cdots,
+\end{equation*}
+such that $|\alpha_{p_n} - \alpha_{q_n}|\ge\varepsilon$ for each $n\ge 1$. As a result, 
+\begin{equation*}
+	\|(\alpha_n)_{n\ge 1}\|_a^2\ge\frac{1}{2}\sum_{n = 1}^m |\alpha_{p_n} - \alpha_{q_n}|^2\ge\frac{m}{2}\varepsilon^2,
+\end{equation*}
+a contradiction, since $m$ can be made arbitrarily large. This proves our claim. \hfill$\square$
+
+\begin{claim}
+	If $(\alpha_n)_{n\ge 1}\in X_{\bfJ^{\ast\ast}}$, then $(\alpha_n)_{n\ge 1}\in\bfJ$ if and only if $\displaystyle\lim_{n\to\infty}\alpha_n = 0$.
+\end{claim}
+The forward direction is tautological. The converse follows from \thref{norm-on-double-dual}. \hfill$\square$
+
+Now let $e_0\in X_{\bfJ^{\ast\ast}}$ denote the sequence $(1, 1, 1, \dots)$.
+
+\begin{claim}
+	The sequence $(e_n)_{n = 0}^\infty$ constitutes a Schauder basis for $X_{\bfJ^{\ast\ast}}$.
+\end{claim}
+Indeed, let $(\alpha_n)_{n\ge 1}\in X_{\bfJ^{\ast\ast}}$, and set $\alpha_0 \coloneq\displaystyle\lim_{n\to\infty}\alpha_n$. Due to the preceding claim, $(\alpha_n)_{n\ge 1} - \alpha_0 e_0\in\bfJ$ wiht the identification, and therefore, has an expression of the form 
+\begin{equation*}
+	(\alpha_n)_{n\ge 1} - \alpha_0 e_0 = \sum_{n = 1}^\infty \alpha_n e_n,
+\end{equation*}
+so that $\displaystyle(\alpha_n)_{n\ge 1} = \sum_{n = 0}^\infty \alpha_n e_n$. That this representation is unique is clear. This proves our claim. \hfill$\square$.
+
+In conclusion, we have shown the following: 
+\begin{theorem}
+	If $\Phi\colon\bfJ\to\bfJ^{\ast\ast}$ denotes the canonical isometric inclusion, then $\Phi(\bfJ)$ embeds as a codimension $1$ subspace of $\bfJ^{\ast\ast}$. In particular, $\bfJ$ is \emph{not} reflexive.
+\end{theorem}
+
+Our next goal is to show that $\bfJ$ and $\bfJ^{\ast\ast}$ are isometrically isomorphic through a different map. 
+
+\begin{theorem}
+	Define the map $\Xi\colon X_{\bfJ^{\ast\ast}}\to\bfJ$ by 
+	\begin{equation*}
+		\Xi\left((\alpha_n)_{n\ge 1}\right) = \left(-\alpha_0, \alpha_1 - \alpha_0, \alpha_2 - \alpha_0 , \alpha_3 - \alpha_0, \dots\right),
+	\end{equation*}
+	where $\alpha_0 = \displaystyle\lim_{n\to\infty}\alpha_n$. Then $\Xi$ is an isometric isomorphism.
+\end{theorem}
+\begin{proof}
+	Using \thref{norm-on-double-dual}, it is clear that $\Xi$ is an isometry. To see that $\Xi$ is surjective, consider any element $(\beta_n)_{n\ge 1}\in\bfJ$. Then $(\beta_2, \beta_3, \dots)\in\bfJ$, so that $(\beta_2, \beta_3, \dots) - \beta_1 e_0\in\bfJ^{\ast\ast}$. Clearly $\Xi\left((\beta_2, \beta_3, \dots) - \beta_1 e_0\right) = (\beta_n)_{n\ge 1}$ so that $\Xi$ is an isometric isomorphism, as desired.
+\end{proof}
+
+Thus we have constructed an example of a Banach space $\bfJ$ that is not reflexive but is isometrically isomorphic to its double dual through an abstract map.
+\end{document}
