@@ -1,0 +1,771 @@
+\documentclass[11pt]{article}
+
+\title{The Riesz-Markov-Kakutani Representation Theorems}
+\author{Swayam Chube}
+\date{Last Updated: \today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{fouriernc}
+\usepackage{mdframed}
+\usepackage{mathrsfs}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd-Mitchell theorem 
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{epigraph}
+\setlength\epigraphwidth{0.4\textwidth}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+% \renewcommand{\familydefault}{\sfdefault} % Do you want this font? 
+
+% Uncomment to override  the `A preprint' in the header
+% \renewcommand{\headeright}{}
+% \renewcommand{\undertitle}{}
+% \renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Swayam Chube},
+    colorlinks=true,
+	citecolor=blue,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries\scshape}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{porism}[theorem]{Porism}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{interlude}[theorem]{Interlude}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}} 
+\newcommand{\K}{\mathbb{K}} % Base field which is either \R or \bbC
+\newcommand{\F}{\mathbb{F}} % Base field which is either \R or \bbC
+\newcommand{\calA}{\mathcal{A}} % Banach Algebras
+\newcommand{\calB}{\mathcal{B}} % Banach Algebras
+\newcommand{\calI}{\mathcal{I}} % ideal in a Banach algebra
+\newcommand{\calJ}{\mathcal{J}} % ideal in a Banach algebra
+\newcommand{\frakM}{\mathfrak{M}} % sigma-algebra
+\newcommand{\calO}{\mathcal{O}} % Ring of integers
+\newcommand{\bbA}{\mathbb{A}} % Adele (or ring thereof)
+\newcommand{\bbI}{\mathbb{I}} % Idele (or group thereof)
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak{a}} % ideal
+\newcommand{\frakb}{\mathfrak{b}} % ideal
+\newcommand{\frakc}{\mathfrak{c}} % ideal
+\newcommand{\frakf}{\mathfrak{f}} % face map
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakm}{\mathfrak{m}} % maximal ideal
+\newcommand{\frakn}{\mathfrak{n}} % naximal ideal
+\newcommand{\frakp}{\mathfrak{p}} % prime ideal
+\newcommand{\frakq}{\mathfrak{q}} % qrime ideal
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakB}{\mathfrak{B}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakN}{\mathfrak{N}} % nilradical 
+\newcommand{\frakO}{\mathfrak{O}} % dedekind domain
+\newcommand{\frakP}{\mathfrak{P}} % Prime ideal above
+\newcommand{\frakQ}{\mathfrak{Q}} % Qrime ideal above 
+\newcommand{\frakR}{\mathfrak{R}} % jacobson radical
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrM}{\mathscr{M}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrO}{\mathscr{O}} % sheaf
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\weakto}{\stackrel{w}{\longrightarrow}}
+
+\newcommand{\define}[1]{\textcolor{blue}{\textit{#1}}}
+% \newcommand{\caution}[1]{\textcolor{red}{\textit{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{\textit{#1}}}
+\renewcommand{\mod}{~\mathrm{mod}~}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\calo}{\mathcal{o}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\Cl}{\operatorname{Cl}}
+
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfF}{\mathbf{F}} % Fitting Subgroup
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\noreq}{\trianglelefteqslant}
+\newcommand{\subnor}{\nor\!\nor}
+\newcommand{\Soc}{\operatorname{Soc}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\mesh}{\operatorname{mesh}}
+\newcommand{\sminus}{\setminus}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\Ass}{\operatorname{Ass}}
+\newcommand{\projdim}{\operatorname{proj~dim}}
+\newcommand{\injdim}{\operatorname{inj~dim}}
+\newcommand{\gldim}{\operatorname{gl~dim}}
+\newcommand{\embdim}{\operatorname{emb~dim}}
+\newcommand{\hght}{\operatorname{ht}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\CM}{\operatorname{CM}}
+\newcommand{\cech}[1]{\mathbin{\check{#1}}}
+\newcommand{\cdim}{\operatorname{cdim}}
+\newcommand{\Der}{\operatorname{Der}}
+\newcommand{\trdeg}{\operatorname{trdeg}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calL}{\mathcal{L}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\gr}{\operatorname{gr}}
+\newcommand{\rmd}{\mathrm{d}}
+
+\geometry {
+    margin = 1in
+}
+
+\titleformat
+{\section}
+[block]
+{\Large\bfseries\sffamily}
+{\S\thesection}
+{0.5em}
+{\centering}
+[]
+
+
+\titleformat
+{\subsection}
+[block]
+{\normalfont\bfseries\sffamily}
+{\S\S}
+{0.5em}
+{\centering}
+[]
+
+\titleformat
+{\part}
+[block]
+{\huge\scshape\bfseries}
+{\thepart. }
+{0.5em}
+{\centering}
+[]
+
+\begin{document}
+\maketitle
+
+\epigraph{``A drunk man will find his way home, but a drunk bird may get lost forever.''}{Shizuo Kakutani}
+
+\begin{abstract}
+    We attempt to provide self-contained proofs of the two versions of the Riesz-Markov-Kakutani representation theorems. The first of the two is concerned with the ``positive'' dual of $C_c(X)$ for a locally compact Hausdorff space $X$. The latter of the two gives an isometric isomorphism between the Banach space of regular complex Borel measures on $X$ with the dual space of $C_0(X)$. We shall assume that the reader is familiar with basic topological notions, some elementary notions of measures, the language of Banach spaces and their continuous duals, and the theory of complex measures. When in doubt, it is always a good idea to consult of \cite[Chaper 6]{papa-rudin} for the latter.
+\end{abstract}
+
+\section{Topological Preliminaries}
+
+\begin{definition}
+    For a topological space $X$, let $C_c(X)$ denote the $\bbC$-linear space of all complex-valued continuous functions on $X$ with compact support. 
+
+    Throughout this article, the notation $K\prec f$ will mean that $K$ is a compact subset of $X$, $f\in C_c(X)$, $0\le f\le 1$, and that $f(x) = 1$ for all $x\in K$.
+
+    Similarly, the notation $f\prec V$ will mean that $V$ is open, $f\in C_c(X)$, $0\le f\le 1$, and that the support of $f$ is contained in $V$.
+
+    Finally, the notation $K\prec f\prec V$ will be used to indicate that $K\prec f$ and $f\prec V$.
+\end{definition}
+
+\begin{theorem}[Urysohn's Lemma]\thlabel{urysohn-lemma}
+    Suppose $X$ is a locally compact Hausdorff space, $V$ is open in $X$, and $K\subseteq V$ is a compact set. Then there existts an $f\in C_c(X)$ such that $K\prec f\prec V$.
+\end{theorem}
+\begin{proof}
+    See \cite[Theorem 2.12]{papa-rudin}
+\end{proof}
+
+\begin{theorem}\thlabel{finite-partition-of-unity}
+    Suppose $V_1,\dots, V_n$ are open subset of a locally compact Hausdorff space $X$, $K\subseteq X$ is compact, and 
+    \begin{equation*}
+        K\subseteq V_1\cup \cdots\cup V_n.
+    \end{equation*}
+    Then there exist functions $h_i\prec V_i$ for $1\le i\le n$ such that 
+    \begin{equation*}
+        h_1(x) + \cdots + h_n(x) = 1\qquad\text{ for all }x\in K.
+    \end{equation*}
+    This is called a \define{partition of unity on $K$} subortinate to the cover $\left\{V_1, \dots, V_n\right\}$.
+\end{theorem}
+\begin{proof}
+    Each $x\in K$ has a neighborhood $W_x$ with compact closure $\overline W_x\subseteq V_i$ for some index $1\le i\le n$ (depending on $x$). Thus there are points $x_1,\dots, x_m$ such that $K\subseteq W_{x_1}\cup\dots\cup W_{x_m}$. For $1\le i\le n$, let $Q_i$ be the union of those $\overline{W}_{x_j}$ which lie in $V_i$. By \thref{urysohn-lemma}, there are functions $g_i$ for $1\le i\le n$ such that $Q_i\prec g_i\prec V_i$. Define 
+    \begin{align*}
+        h_1 &= g_1\\
+        h_2 &= (1 - g_1)g_2\\
+        &\vdots\\
+        h_n &= (1 - g_1)(1 - g_2)\cdots(1 - g_{n - 1})g_n.
+    \end{align*}
+    Then $h_i\prec V_i$, and one can see that 
+    \begin{equation*}
+        h_1 + h_2 + \dots + h_n = 1 - (1 - g_1)(1 - g_2)\cdots(1 - g_n). 
+    \end{equation*}
+    Since $K\subseteq H_1\cup\dots\cup H_n$, at least one $g_i(x) = 1$ at each point $x\in K$, and hence $h_1 + \dots + h_n = 1$ on $K$, as desired.
+\end{proof}
+
+\section{The Theorem for \texorpdfstring{$C_c(X)$}{Cc(X)}}
+
+\begin{definition}
+    Let $X$ be a topological space. A linear functional $\Lambda\colon C_c(X)\to\bbC$ is said to be \define{positive} if for every $f\in C_c(X)$ with $f\ge 0$, $\Lambda f\ge 0$.
+\end{definition}
+
+\begin{theorem}
+    Let $X$ be a locally compact Hausdorff space, and let $\Lambda\colon C_c(X)\to\bbC$ be a positive linear functional. Then there exists a $\sigma$-algebra $\frakM$ on $X$ containing all the Borel sets, and there exists a unique positive measure $\mu$ on $\frakM$ representing $\Lambda$ in the sense that: 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\Lambda f = \int_X f~\mathrm d\mu$ for every $f\in C_c(X)$ \\and which has the following additional properties: \label{1}
+        \item $\mu(K) < \infty$ for every compact set $K\subseteq X$.\label{2}
+        \item For every $E\in\frakM$, we have \label{3}
+        \begin{equation*}
+            \mu(E) = \inf\left\{\mu(U)\colon E\subseteq U,~U\text{ is open}\right\}.
+        \end{equation*}
+        \item The relation \label{4}
+        \begin{equation*}
+            \mu(E) = \sup\left\{\mu(K)\colon K\subseteq E,~K\text{ is compact}\right\}
+        \end{equation*}
+        holds for every open set $E$, and for every $E\in\frakM$ with $\mu(E) < \infty$. 
+        \item If $E\in\frakM$, $A\subseteq E$, and $\mu(E) = 0$, then $A\in\frakM$, that is, $(X,\frakM, \mu)$ is a complete measure space.\label{5}
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    We begin by proving the uniqueness of $\mu$. If $\mu$ satisfies \ref{3} and \ref{4}, then $\mu$ is determined on $\frakM$ by its values on compact sets. Therefore, if suffices to show that $\mu_1(K) = \mu_2(K)$ for all compact sets $K$ whenever $\mu_1$ and $\mu_2$ are measures for which the theorem holds. So, fix a compact set $K$ and an $\varepsilon > 0$. By \ref{2} and \ref{3}, there exists an open set $V\supseteq K$ such that $\mu_2(V) < \mu_2(K) + \varepsilon$. Next, by Urysohn's lemma, there exists $f\in C_c(X)$ such that $K\prec f\prec V$, and hence 
+    \begin{equation*}
+        \mu_1(K) = \int_X\chi_K~\mathrm d\mu_1\le\int_X f~\mathrm d\mu_1 = \Lambda f = \int_X f~\mathrm d\mu_2\le\int_X\chi_V~\mathrm d\mu_2 = \mu_2(V) < \mu_2(K) + \varepsilon.
+    \end{equation*}
+    Since the choice of $\varepsilon > 0$ was arbitrary, we have the inequality $\mu_1(K)\le \mu_2(K)$. Interchanging the roles of $\mu_1$ and $\mu_2$, one obtains the reverse inequaity, and therefore the uniqueness of $\mu$ follows.
+
+    Our next goal is to prove the existence of a positive measure $\mu$ and a $\sigma$-algebra $\frakM$. We begin by defining, for each open set $V\subseteq X$, 
+    \begin{equation}\label{on-open-sets}\tag{$\star$}
+        \mu(V) = \sup\left\{\Lambda f\colon f\prec V\right\}.
+    \end{equation}
+    Clearly if $V_1\subseteq V_2$ are open sets, then due to \eqref{on-open-sets}, $\mu(V_1)\le\mu(V_2)$, that is, $\mu$ is monotone on open sets. Next, define 
+    \begin{equation*}
+        \mu(E) = \inf\left\{\mu(V)\colon E\subseteq V,~V\text{ is open}\right\}
+    \end{equation*}
+    for every $E\subseteq X$. Note that this definition is consistent with our original definition of $\mu$ on open sets since we have remarked above that $\mu$ is monotone on open sets.
+
+    Next, let $\frakM_F$ denote the class of all $E\subseteq X$ satisfying the two conditions: 
+    \begin{enumerate}[label=(\roman*)]
+        \item $\mu(E) < \infty$, and 
+        \item $\mu(E) = \sup\left\{\mu(K)\colon K\subseteq E,~K\text{ is compact}\right\}$.
+    \end{enumerate}
+    Finally, let $\frakM$ denote the class of all $E\subseteq X$ such that $E\cap K\in\frakM_F$ for every compact set $K\subseteq X$.
+
+    First, note that $\mu$ is monotone on \emph{all} sets. Indeed, if $A\subseteq B$, then the set of open sets containing $B$ is contained in the set of all open sets containing $A$, so that $\mu(A)\le\mu(B)$. 
+    
+    Further, suppose $E\in\frakM$ with $\mu(E) = 0$ and $A\subseteq E$. Using the monotonicity of $\mu$, we have $\mu(A) = 0$, and hence, for every compact set $K\subseteq X$, we similarly have $\mu(A\cap K) = 0$, i.e., $A\cap K\in\frakM_F$, thereby showing that $A\in\frakM$. This proves \ref{5}. Also note that \ref{3} holds by definition. So we have already verified two of the desired conditions.
+
+    \vspace{0.5cm}
+
+    \noindent\underline{\textbf{\textsc{Step I.}}} If $E_1, E_2, E_3,\dots$ are subsets of $X$, then 
+    \begin{equation}\label{countable-subadditivity}\tag{$\spadesuit$}
+        \mu\left(\bigcup_{n = 1}^\infty E_n\right) \le \sum_{n = 1}^\infty\mu(E_n).
+    \end{equation}
+
+    We first show that $\mu(V_1\cup V_2)\le \mu(V_1) + \mu(V_2)$ for open sets $V_1, V_2\subseteq X$. Choose some $g\prec V_1\cup V_2$. By \thref{finite-partition-of-unity}, there are functions $h_1, h_2\in C_c(X)$ such that $h_i\prec V_i$ for $i = 1, 2$ and $h_1(x) + h_2(x) = 1$ for each $x$ in the (compact) support of $g$. Hence, $h_i g\prec V_i$ for $i = 1, 2$ and $g = h_1g + h_2 g$. Therefore, 
+    \begin{equation*}
+        \Lambda g = \Lambda(h_1 g) + \Lambda(h_2 g)\le \mu(V_1) + \mu(V_2).
+    \end{equation*}
+    Since the above inequality holds for every $g\prec V_1\cup V_2$, taking a supremum over all such $g$, we obtain the inequality $\mu(V_1\cup V_2)\le \mu(V_1) + \mu(V_2)$. By induction, this shows that $\mu$ is finitely subadditive on open sets.
+
+    Now, if $\mu(E_i) = \infty$ for some $i\ge 1$, then \eqref{countable-subadditivity} is trivially true due to monotonicity. Suppose therefore that $\mu(E_i) < \infty$ for every $i\ge 1$ and choose $\varepsilon > 0$. By definition, there are open sets $V_i\supseteq E_i$ such that 
+    \begin{equation*}
+        \mu(V_i) < \mu(E_i) + \frac{\varepsilon}{2^i}\qquad\text{ for }i\ge 1.
+    \end{equation*}
+    Set $V\coloneq\bigcup_{i = 1}^\infty V_i$ and choose $f\prec V$. Since $f$ has compact support, we see that $f\prec V_1\cup\dots\cup V_n$ for some $n\ge 1$. Thus 
+    \begin{equation*}
+        \Lambda f\le \mu(V_1\cup\dots\cup V_n)\le \mu(V_1) + \dots + \mu(V_n)\le\sum_{i = 1}^\infty\mu(E_i) + \varepsilon.
+    \end{equation*}
+    Since the above inequality holds for every $f\prec V$, taking a supremum over all such $f$, we have 
+    \begin{equation*}
+        \mu\left(\bigcup_{i = 1}^\infty E_i\right)\le\mu(V)\le\sum_{i = 1}^\infty\mu(E_i) + \varepsilon.
+    \end{equation*}
+    Moreover, since the choice of $\varepsilon > 0$ was arbitrary, taking $\varepsilon\to 0^+$, we obtain the desired inequality.
+
+    \vspace{0.5 cm}
+
+    \noindent\underline{\textbf{\textsc{Step I.}}} If $K$ is compact, then $K\in\frakM_F$ and 
+    \begin{equation*}
+        \mu(K) = \inf\left\{\Lambda f\colon K\prec f\right\},
+    \end{equation*}
+    thereby proving \ref{2}.
+
+    If $K\prec f$ and $0 < \alpha < 1$, let $V_\alpha = \left\{x\colon f(x) > \alpha\right\}$. Then $K\subseteq V_\alpha$ and $\alpha g\le f$ whenever $g\prec V_\alpha$. Hence 
+    \begin{equation*}
+        \mu(K)\le \mu(V_\alpha) = \sup\left\{\Lambda g\colon g\prec V_\alpha\right\}\le\alpha^{-1}\Lambda f.
+    \end{equation*}
+    Let $\alpha\to 1^{-}$ to conclude that 
+    \begin{equation*}
+        \mu(K)\le\Lambda f.
+    \end{equation*}
+    Thus $\mu(K) < \infty$. Further, it is clear that 
+    \begin{equation*}
+        \mu(K) = \sup\left\{\mu(Q)\colon Q\subseteq K,~\text{Q is compact}\right\}.
+    \end{equation*}
+    Thus $K\in\frakM_F$.
+
+    Now if $\varepsilon > 0$, then there exists an open set $V\supseteq K$ with $\mu(V) < \mu(K) + \varepsilon$. Using \thref{urysohn-lemma}, choose $f\in C_c(X)$ such that $K\prec f\prec V$. Thus 
+    \begin{equation*}
+        \Lambda f\le \mu(V) < \mu(K) + \varepsilon,
+    \end{equation*}
+    which when combined with the inequality $\mu(K)\le\Lambda f$ gives the sequence of inequalities $\mu(K)\le\Lambda f < \mu(K) + \varepsilon$. This proves the desideratum.
+
+    \vspace{0.5cm}
+
+    \noindent\underline{\textbf{\textsc{Step III.}}} Every open set $U$ satisfies the equality 
+    \begin{equation*}
+        \mu(U) = \sup\left\{\mu(K)\colon K\subseteq U,~K\text{ is compact}\right\}.
+    \end{equation*}
+    Hence $\frakM_F$ contains every open set $U$ with $\mu(U) < \infty$. 
+
+
+    Indeed, let $\alpha < \mu(U)$. By definition, there exists $f\in C_c(X)$ with $f\prec U$ such that $\alpha < \Lambda f$. If $W$ is any open set containing $\Supp(f)\eqcolon K$, then $f\prec W$ and hence $\Lambda f\le\mu(W)$. Taking infimum over all such $W$, we have $\Lambda f\le\mu(K)$. This exhibits a compact set $K\subseteq U$ with $\alpha < \mu(K)\le\mu(U)$, as desired.
+
+    \vspace{0.5cm}
+
+    \noindent\underline{\textbf{\textsc{Step IV.}}} Suppose $E = \bigsqcup_{i = 1}^\infty E_i$ where $E_1, E_2, E_3,\dots$ are pairwise disjoint members of $\frakM_F$. Then 
+    \begin{equation*}
+        \mu(E) = \sum_{i = 1}^\infty\mu(E_i).
+    \end{equation*}
+    If, in addition, $\mu(E) < \infty$, then $E\in\frakM_F$.
+
+    First, we shall show that $\mu(K_1\cup K_2) = \mu(K_1) + \mu(K_2)$ if $K_1$ and $K_2$ are disjoint compact sets. Choose $\varepsilon > 0$. By \ref{urysohn-lemma}, there exists $f\in C_c(X)$ such that $K_1\prec f\prec(X\setminus K_2)$. In particular, this means that $f$ is identically $0$ on $K_2$. Using our conclusion in \textsc{Step II}, there exists $g\in C_c(X)$ such that
+    \begin{equation*}
+        K_1\cup K_2\prec g\quad\text{and}\quad\Lambda g < \mu(K_1\cup K_2) + \varepsilon.
+    \end{equation*}
+    We note that $K_1\prec fg$ and $K_2\prec (1 - f)g$. Since $\Lambda$ is linear using \textsc{Step III}, 
+    \begin{equation*}
+        \mu(K_1) + \mu(K_2)\le\Lambda(fg) + \Lambda((1 - f)g) = \Lambda g < \mu(K_1\cup K_2) + \varepsilon.
+    \end{equation*}
+    Letting $\varepsilon\to 0^+$ and using the conclusion of \textsc{Step I}, we have that $\mu(K_1\cup K_2) = \mu(K_1) + \mu(K_2)$. 
+
+    Next, if $\mu(E) = \infty$, then using the countable subadditivity of $\mu$, the desired equality follows. Suppose therefore that $\mu(E) < \infty$, and choose $\varepsilon > 0$. Since $E_i\in\frakM_F$, there are compact sets $Q_i\subseteq E_i$ with 
+    \begin{equation*}
+        \mu(Q_i) > \mu(E_i) - 2^{-i}\varepsilon.
+    \end{equation*}
+    Setting $K_n = Q_1\cup\dots\cup Q_n$, we have 
+    \begin{equation*}
+        \mu(E)\ge\mu(K_n) = \sum_{i = 1}^n\mu(Q_i) > \sum_{i = 1}^n\mu(E_i) - \varepsilon.
+    \end{equation*}
+    Since the above inequality holds for every $n$ and every $\varepsilon > 0$, we have 
+    \begin{equation*}
+        \mu(E)\ge\sum_{i = 1}^\infty\mu(E_i).
+    \end{equation*}
+    Combined with the countable subadditivity of $\mu$, we obtain the desired equality. Finally, if $\mu(E) < \infty$ and $\varepsilon > 0$, then for some positive integer $N$, we have 
+    \begin{equation*}
+        \mu(E) \le \sum_{i = 1}^N\mu(E_i) + \varepsilon.
+    \end{equation*}
+    Further, using the inequality $\mu(K_N) > \sum_{i = 1}^N \mu(E_i) - \varepsilon$, we have $\mu(E)\le\mu(K_N) + 2\varepsilon$, and this shows that $\mu(E) = \sup\{\mu(K)\colon K\subseteq E,~K\text{ is compact}\}$. Hence $E\in\frakM_F$.
+
+    \vspace{0.5cm}
+
+    \noindent\underline{\textbf{\textsc{Step  V.}}} If $E\in\frakM_F$ and $\varepsilon > 0$, then there is a compact set $K$ and an open set $V$ such that $K\subseteq E\subseteq V$ and $\mu(V\setminus K) < \varepsilon$.
+
+    By definition, there exists a compact set $K\subseteq E$ and an open set $V\supseteq E$ such that 
+    \begin{equation*}
+        \mu(V) - \frac{\varepsilon}{2} < \mu(E) < \mu(K) + \frac{\varepsilon}{2}.
+    \end{equation*}
+    Since $V\setminus K$ is open and $\mu(V) < \infty$, due to \textsc{Step III}, $V\setminus K\in\frakM_F$. Hence, by \textsc{Step IV}, 
+    \begin{equation*}
+        \mu(K) + \mu(V\setminus K) = \mu(V) < \mu(K) + \varepsilon\implies\mu(V\setminus K) < \varepsilon,
+    \end{equation*}
+    as desired.
+
+    \vspace{0.5cm}
+
+    \noindent\underline{\textbf{\textsc{Step VI.}}} If $A, B\in\frakM_F$, then $A\setminus B, A\cup B, A\cap B\in\frakM_F$. In particular, $\frakM_F$ is an algebra.
+
+    For $\varepsilon > 0$, using \textsc{Step V}, choose compact sets $K_i$ and open set $V_i$ such that $\mu(V_i\setminus K_i) < \varepsilon$ for $i = 1,2$. Since 
+    \begin{equation*}
+        A\setminus B\subseteq V_1\setminus K_2\subseteq (V_1\setminus K_1)\cup(K_1\setminus V_2)\cup(V_2\setminus K_2),
+    \end{equation*}
+    using \textsc{Step 1}, 
+    \begin{equation*}
+        \mu(A\setminus B)\le\varepsilon + \mu(K_1\setminus V_2) + \varepsilon.
+    \end{equation*}
+    Since $K_1\setminus V_2$ is a closed subset of a compact set, it is a compact subset of $A\setminus B$. Therefore, $\mu(A\setminus B) = \sup\left\{\mu(K)\colon K\subseteq A\setminus B,~K\text{ is compact}\right\}$, so that $A\setminus B\in\frakM_F$.
+
+    Next, note that $A\cup B = (A\setminus B)\cup B$, which is a disjoint union. Using \textsc{Step IV}, it is clear that $\mu(A\cup B) < \infty$. Given $\varepsilon > 0$, one can choose compact sets $K\subseteq A\setminus B$ and $K'\subseteq B$ such that $\mu(A\setminus B) < \mu(K) + \frac{\varepsilon}{2}$ and $\mu(A\setminus B) < \mu(K') + \frac{\varepsilon}{2}$. Set $\wt K = K\cup K'$ so that 
+    \begin{equation*}
+        \mu(A\cup B)\le\mu(A\setminus B) + \mu(B)\le\mu(K) + \mu(K') + \varepsilon = \mu(\wt K) + \varepsilon,
+    \end{equation*}
+    where the last equality follows from \textsc{Step IV}. This shows that $A\cup B\in\frakM_F$. Finally, using the fact that $A\cap B = A\setminus(A\setminus B)$, we also have that $A\cap B\in\frakM_F$, as desired.
+
+    \vspace{0.5cm}
+
+    \noindent\underline{\textbf{\textsc{Step VII.}}} $\frakM$ is a $\sigma$-algebra on $X$ containing all the Borel sets.
+
+    Let $K$ be a compact set in $X$, so that $K\in\frakM_F$ in particular. If $A\in\frakM$, then $(X\setminus A)\cap K = K\setminus(A\cap K)\in\frakM_F$, and hence $X\setminus A\in\frakM$.
+
+    Next, suppose $\displaystyle A = \bigcup_{i = 1}^\infty A_i$, where each $A_i\in\frakM$. Set $B_1 = A_1\cap K$, and 
+    \begin{equation*}
+        B_n = (A_n\cap K)\setminus (B_1\cup\dots\cup B_{n - 1})\qquad\text{for }n\ge 2.
+    \end{equation*}
+    Then due to \textsc{Step VI}, $\{B_n\colon n\ge 1\}$ is a pairwise disjoint sequence of members of $\frakM_F$; and further 
+    \begin{equation*}
+        A\cap K = \bigcup_{i = 1}^\infty B_i.
+    \end{equation*}
+    Using \textsc{Step IV}, due to the fact that $\mu(A\cap K) < \infty$, we have that $A\cap K\in\frakM_F$, so that $A\in\frakM$. Hence $\frakM$ is a $\sigma$-algebra.
+
+    Next, for any closed set $A\subseteq X$, $A\cap K$ is compact, and so is a member of $\frakM_F$. This shows that $\frakM$ contains all closed sets, and therefore, contains all the Borel sets.
+
+    \vspace{0.5cm}
+
+    \noindent\underline{\textbf{\textsc{Step VIII.}}} $\frakM_F$ contains of precisely those sets $E\in\frakM$ for which $\mu(E) < \infty$. This verifies \ref{4} of the theorem.
+
+    Let $E\in\frakM_F$. Since $\frakM_F$ forms an algebra, for any compact set $K\subseteq X$, we have that $E\cap K\in\frakM_F$, so that $E\in\frakM$.
+
+    Conversely, suppose $E\in\frakM$ and $\mu(E) < \infty$. Choose $\varepsilon > 0$. Using the definition of $\mu(E)$, there is an open set $V\supseteq E$ with $\mu(V) < \infty$ and by \textsc{Step III} and \textsc{Step V}, there is a compact set $K\subseteq V$ with $\mu(V\setminus K) < \varepsilon$. Since $E\cap K\in\frakM_F$, there is a compact set $Q\subseteq E\cap K$ with 
+    \begin{equation*}
+        \mu(E\cap K) < \mu(Q) + \varepsilon.
+    \end{equation*}
+    Since $E\subseteq (E\cap K)\cup (V\setminus K)$, it follows that 
+    \begin{equation*}
+        \mu(E) \le \mu(E\cap K) + \mu(V\setminus K) < \mu(Q) + 2\varepsilon,
+    \end{equation*}
+    so that $E\in\frakM_F$, as desired.
+
+    \vspace{0.5cm}
+
+    \noindent\underline{\textbf{\textsc{Step IX.}}} $\mu$ is a measure on $\frakM$.
+
+    This is immediate from \textsc{Step IV} and \textsc{Step VII}.
+
+    \vspace{0.5cm}
+
+    \noindent\underline{\textbf{\textsc{Step X.}}} For every $f\in C_c(X)$, $\displaystyle\Lambda f = \int_X f~\mathrm d\mu$. This verifies \ref{1} and completes the proof.
+
+    Clearly, it suffices to prove this for real $f$. Further, note that it suffices to prove the \emph{inequality} 
+    \begin{equation}\label{desired-inequality}\tag{$\dagger$}
+        \Lambda f\le\int_X f~\mathrm d\mu
+    \end{equation}
+    for every real $f\in C_c(X)$. Indeed, once \eqref{desired-inequality} is established, replacing $f$ with $-f$, we have 
+    \begin{equation*}
+        -\Lambda f = \Lambda(-f)\le\int_X (-f)~\mathrm d\mu = -\int_X f~\mathrm d\mu
+    \end{equation*}
+    so that $\displaystyle\int_X f~\mathrm d\mu\le\Lambda f$, whence equality follows.
+
+    Fix a real $f\in C_c(X)$ and let $K\coloneq\Supp(f)$. Let $[a, b]$ be an interval containing the range of $f$, choose $\varepsilon > 0$ and choose a sequence 
+    \begin{equation*}
+        y_0 < a < y_1 < \cdots < y_n = b
+    \end{equation*}
+    such that $y_i - y_{i - 1} < \varepsilon$ for $1\le i\le n$. Set 
+    \begin{equation*}
+        E_i = \left\{x\colon y_{i - 1} < f(x) \le y_i\right\}\cap K\qquad\text{ for }1\le i\le n.
+    \end{equation*}
+    Note that the sets $E_i$ are disjoint Borel sets whose union is $K$. There are open sets $V_i\supseteq E_i$ for $1\le i\le n$ such that 
+    \begin{equation*}
+        \mu(V_i) < \mu(E_i) + \frac{\varepsilon}{n},
+    \end{equation*}
+    and such that $f(x) < y_i + \varepsilon$ for all $x\in V_i$. By \thref{finite-partition-of-unity}, there are functions $h_i\prec V_i$ for $1\le i\le n$ such that $h_1 + \dots + h_n = 1$ on $K$. Hence $f = h_1f + \dots + h_n f$, and \textsc{Step II} shows that 
+    \begin{equation*}
+        \mu(K) \le\Lambda\left(\sum_{i = 1}^n h_i\right) = \sum_{i = 1}^n\Lambda h_i.
+    \end{equation*}
+    Since $h_if\le (y_i + \varepsilon h_i)$ and since $f(x) > y_i - \varepsilon$ on $E_i$, we have: 
+    \begin{align*}
+        \Lambda f &= \sum_{i = 1}^n\Lambda(h_i f)\\
+        &\le\sum_{i = 1}^n (y_i + \varepsilon)\Lambda h_i\\
+        &= \sum_{i = 1}^n (|a| + y_i + \varepsilon)\Lambda h_i - |a|\sum_{i = 1}^n \Lambda h_i\\
+        &\le\sum_{i =1}^n (|a| + y_i + \varepsilon)\left(\mu(E_i) + \frac{\varepsilon}{n}\right) - |a|\mu(K)\\
+        &= \sum_{i = 1}^n (y_i - \varepsilon)\mu(E_i) + 2\varepsilon\mu(K) + \frac{\varepsilon}{n}\sum_{i = 1}^n(|a| + y_i + \varepsilon)\\
+        &\le \int_X f~\mathrm d\mu + \varepsilon\left(2\mu(K) + |a| + b + \varepsilon\right).
+    \end{align*}
+    Since the choice of $\varepsilon > 0$ was arbitrary, taking $\varepsilon\to 0^+$, we have our desired inequality, which proves our claim.
+\end{proof}
+
+\section{The Theorem for \texorpdfstring{$C_0(X)$}{C0(X)}}
+
+\begin{definition}
+    Let $\mu$ be a (positive) Borel measure defined on a topological space $X$. A Borel set $E\subseteq X$ is said to be \define{outer regular} if 
+    \begin{equation*}
+        \mu(E) = \inf\left\{\mu(U)\colon U\supseteq E,~U\text{ is open}\right\}.
+    \end{equation*}
+    It is said to be \define{inner regular} if 
+    \begin{equation*}
+        \mu(E) = \sup\left\{\mu(K)\colon K\subseteq E,~K\text{ is compact}\right\}.
+    \end{equation*}
+    If every Borel set in $X$ is both outer and inner regular, then $\mu$ is said to be a \define{regular Borel measure}.
+\end{definition}
+
+\begin{definition}
+    Let $X$ be a locally compact Hausdorff space. If $\mu$ is a complex Borel measure on $X$, then using the ``polar decomposition'' of this measure, there is a Borel function $h$ with $|h| = 1$ on $X$ such that $\mathrm d\mu = h\mathrm d|\mu|$. We define \emph{integration with respect to a complex measure} $\mu$ by the formula 
+    \begin{equation*}
+        \int_X f~\mathrm d\mu = \int_X fh~\mathrm d|\mu|.
+    \end{equation*}
+\end{definition}
+
+Note that plugging $f = \chi_E$ in the above, one obtains 
+\begin{equation*}
+    \int_X \chi_E~\mathrm d\mu = \mu(E).
+\end{equation*}
+Thus 
+\begin{equation*}
+    \int_X \chi_E~\mathrm d(\mu + \lambda) = (\mu + \lambda)(E) = \mu(E) + \lambda(E) = \int_X \chi_E~\mathrm d\mu + \int_X \chi_E~\mathrm d\lambda,
+\end{equation*}
+whenever $\mu$ and $\lambda$ are complex measures on $\frakM$ and $E\in\frakM$. This immediately leads to the addition formula 
+\begin{equation*}
+    \int_X f~\mathrm d(\mu + \lambda) = \int_X f~\mathrm d\mu + \int_X f~\mathrm d\lambda,
+\end{equation*}
+which is valid for every bounded measurable function $f$. This can be seen by simply approximating every bounded measurable function by simple functions.
+
+\begin{definition}
+    A complex Borel measure $\mu$ on a locally compact Hausdorff space $X$ is said to be \define{regular} if $|\mu|$ is regular. 
+\end{definition}
+
+If $\mu$ is a complex Borel measure on $X$, it is clear that the mapping $\displaystyle f\mapsto\int_X f~\mathrm d\mu$ is a bounded linear functional on $C_0(X)$ whose norm is no larger than $\|\mu\|$. The other version of the Riesz-Markov-Kakutani representation theorem gives a quantitive converse to this observation: 
+
+\begin{theorem}
+    If $X$ is a locally compact Hausdorff space, then every bounded linear functional $\Phi$ on $C_0(X)$ is represented by a unique regular complex Borel measure $\mu$, in the sense that 
+    \begin{equation*}
+        \Phi f = \int_X f~\mathrm d\mu\quad\text{ for every }f\in C_0(X).
+    \end{equation*}
+    Moreover, the norm of $\|\Phi\| = \|\mu\|$.
+\end{theorem}
+\begin{proof}
+    We first settle the uniqueness question. uppose $\mu$ is a regular complex Borel measure on $X$ and $\displaystyle\int_X f~\mathrm d\mu = 0$ for all $f\in C_0(X)$. Using the polar decomposition, there is a Borel function $h$ with $|h| = 1$ such that $\mathrm d\mu = h~\mathrm d|\mu$. For any sequence $(f_n)_{n\ge 1}$ in $C_0(X)$ we then have 
+    \begin{equation*}
+        |\mu(X)| = \int_X |h|^2~\mathrm d|\mu| = \int_X (\overline h - f_n)h~\mathrm d|\mu|\le \int_X |\overline h - f_n|~\mathrm d|\mu|.
+    \end{equation*}
+    Now since $C_c(X)$ is dense in $L^1\left(|\mu|\right)$, the sequence $(f_n)_{n\ge 1}$ can be so chosen that the right hand side above tends to $0$ as $n\to\infty$. Thus $|\mu|(X) = 0$, i.e., $\mu = 0$. Hence, we have shown that at most one $\mu$ corresponds to each $\Phi$. Here we are implicitly using the fact that the regular complex Borel measures on $X$ form a Banach space.
+
+    We now prove existence. Consider a bounded linear functional $\Phi$ on $C_0(X)$. Suppose, without loss of generality that $\|\Phi\| = 1$. We shall construct a \emph{positive} linear functional $\Lambda$ on $C_c(X)$ such that 
+    \begin{equation*}
+        |\Phi(f)|\le \Lambda(|f|)\le \|f\|\qquad\text{for all }f\in C_c(X),
+    \end{equation*}
+    where $\|f\|$ denotes the supremum norm.
+
+    Once we have this $\Lambda$, we can associate with it a positive Borel measure $\lambda$ using the Riesz-Markov-Kakutani Representation Theorem for positive linear functionals. Note that the conclusion of the theorem shows that $\lambda$ is regular if $\lambda(X) < \infty$. Since 
+    \begin{equation*}
+        \lambda(X) = \sup\left\{\Lambda f\colon 0\le f\le 1,~f\in C_c(X)\right\},
+    \end{equation*}
+    and since $|\lambda f|\le 1$ if $\|f\|\le 1$, we have that $\lambda(X) \le 1$. We can further deduce that 
+    \begin{equation*}
+        |\Phi(f)|\le\Lambda(|f|) = \int_X |f|~\mathrm d\lambda = \|f\|_1\qquad\text{for all }f\in C_c(X).
+    \end{equation*}
+    Thus $\Phi$ is a linear functional on $C_c(X)$ of norm at most $1$ with respect to the $L^1(\lambda)$-norm on $C_c(X)$. Using the density of $C_c(X)$ in $L^1(\lambda)$, there is a (unique) norm-preserving extension of $\Phi$ to a linear functional on $L^1(\lambda)$, and therefore, there is a Borel function $g$ with $|g|\le 1$ such that 
+    \begin{equation*}
+        \Phi(f) = \int_X fg~\mathrm d\lambda \qquad\text{for all }f\in C_c(X).
+    \end{equation*}
+    Note that each side of the above equality is a continuous functional on $C_0(X)$ and that $C_c(X)$ is dense in $C_0(X)$. Thus the equality above holds for all $f\in C_0(X)$, and we obtain the desired representation of the theorem with $\mathrm d\mu = g~\mathrm d\lambda$.
+
+    Since $\|\Phi\| = 1$, for any $f\in C_0(X)$ with $\|f\|\le 1$, we have 
+    \begin{equation*}
+        |\Phi(f)|\le \int_X |f||g|~\mathrm d\lambda\le \int_X |g|~\mathrm d\lambda,
+    \end{equation*}
+    so that 
+    \begin{equation*}
+        \int_X |g|~\mathrm d\lambda\ge\sup\left\{|\Phi(f)|\colon f\in C_0(X),~\|f\|\le 1\right\} = 1,
+    \end{equation*}
+    by definition. We also know that $\lambda(X)\le 1$ and $|g|\le 1$. This is possible if and only if $\lambda(X) = 1$ and $|g| = 1$ a.e. with respect to $\lambda$. Thus $\mathrm d|\mu| = |g|~\mathrm d\lambda = \mathrm d\lambda$, and so 
+    \begin{equation*}
+        |\mu|(X) = \lambda(X) = 1 = \|\Phi\|,
+    \end{equation*}
+    which would finish our proof of the theorem.
+
+    So everything hinges on finding a positive linear functional $\Lambda$ such that 
+    \begin{equation*}
+        |\Phi(f)|\le \Lambda(|f|)\le \|f\|\qquad\text{for all }f\in C_c(X).
+    \end{equation*}
+    Let $C_c^+(X)$ denote the class of all nonnegative real members of $C_c(X)$. For $f\in C_c^+(X)$, define 
+    \begin{equation*}
+        \Lambda f = \sup\left\{|\Phi(h)|\colon h\in C_c(X),~|h|\le f\right\}.
+    \end{equation*}
+    Then $\Lambda f\ge 0$, $|\Phi(f)|\le\Lambda f\le \|f\|$, if $0\le f_1\le f_2$, then $\Lambda f_1\le \Lambda f_2$, and $\Lambda(cf) = c\Lambda f$ if $c$ is a positive constant. We shall show that 
+    \begin{equation*}
+        \Lambda(f + g) = \Lambda f + \Lambda g \qquad\text{for all } f,g \in C_c^+(X).
+    \end{equation*}
+    Fix $f, g\in C_c^+(X)$. If $\varepsilon > 0$, there exist $h_1, h_2\in C_c(X)$ such that $|h_1|\le f$ and $|h_2|\le g$ and 
+    \begin{equation*}
+        \Lambda f\le |\Phi(h_1)| + \varepsilon\quad\text{ and }\quad\Lambda g\le |\Phi(h_2)| + \varepsilon.
+    \end{equation*}
+    For $i = 1, 2$, there are complex numbers $\alpha_i$ with $|\alpha_i| = 1$ such that $\alpha_i\Phi(h_i) = |\Phi(h_i)|$. Then 
+    \begin{align*}
+        \Lambda f + \Lambda g &\le |\Phi(h_1)| + |\Phi(h_2)| + 2\varepsilon\\
+        &= \Phi(\alpha_1 h_1 + \alpha_2 h_2) + 2\varepsilon\\
+        &\le \Lambda(|h_1| + |h_2|) + 2\varepsilon\\
+        &\le \Lambda(f + g) + 2\varepsilon.
+    \end{align*}
+    Taking $\varepsilon\to 0^+$, we have the inequality $\Lambda f + \Lambda g\le \Lambda(f + g)$.
+
+    Next, choose $h\in C_c(X)$ such that $|h|\le f + g$, and let $V = \left\{x\colon f(x) + g(x) > 0\right\}$, and define 
+    \begin{equation*}
+        h_1(x) = \begin{cases}
+            \frac{f(x)h(x)}{f(x) + g(x)} & x\in V\\
+            0 & x\notin V
+        \end{cases}
+        \quad\text{ and }\quad 
+        h_2(x) = \begin{cases}
+            \frac{g(x)h(x)}{f(x) + g(x)} & x\in V\\
+            0 & x\notin V.
+        \end{cases}
+    \end{equation*}
+    It is easily verified that both $h_1$ and $h_2$ are members of $C_c(X)$. Since $h_1 + h_2 = h$ and $|h_1|\le f$ and $|h_2|\le g$, we have 
+    \begin{equation*}
+        |\Phi(h)| = \left|\Phi(h_1) + \Phi(h_2)\right|\le |\Phi(h_1)| + |\Phi(h_2)|\le\Lambda f + \Lambda g.
+    \end{equation*}
+    Taking supremum over all such $h$, we have the inequality $\Lambda(f + g)\le\Lambda f + \Lambda g$, which proves the desired equality.
+
+    Now, if $f$ is a real function in $C_c(X)$, then define $\Lambda f = \Lambda f^+ - \Lambda f^-$, and 
+    \begin{equation*}
+        \Lambda (u + \iota v) = \Lambda u + \iota\Lambda v.
+    \end{equation*}
+    Thereby we have extended $\Lambda$ to a positive linear functional on all of $C_c(X)$, thereby completing the proof.
+\end{proof}
+
+\bibliographystyle{alpha}
+\bibliography{references.bib}
+\end{document}
